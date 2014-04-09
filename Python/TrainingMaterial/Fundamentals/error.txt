@@ -1,0 +1,12 @@
+**********************************************************************
+File "./data_parsing.py", line 9, in __main__.parse_line
+Failed example:
+    parse_line('5 3 3')
+Expected:
+    (5, 3, 3)
+Got:
+    (5, 3, 3.0)
+**********************************************************************
+1 items had failures:
+   1 of   2 in __main__.parse_line
+***Test Failed*** 1 failures.

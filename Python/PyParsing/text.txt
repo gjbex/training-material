@@ -1,0 +1,2 @@
+This is a text with \upper{a function call}
+and \lower{ANOTHER ONE} by \author.

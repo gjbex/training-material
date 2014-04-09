@@ -1,0 +1,9 @@
+[host]
+name = login.vic3.cc.kuleuven.be
+username = u0065575
+
+[userlist]
+who = "/usr/bin/w | /usr/bin/cut -f 1 -d ' ' | /usr/bin/grep -v USER | /usr/bin/sort -u | /usr/bin/grep '[a-z]'"
+whois = "sudo ssh root@svcs1 'source /apps/leuven/etc/bash.bashrc; module load perl/5.10.0; /admin/sbin/show_all_users.pl'"
+institute = leuven
+

@@ -1,0 +1,50 @@
+doc_start:
+    '<?': in_doc_info
+start:
+    '</': in_closing_tag
+    '<?': error
+    '<': in_opening_tag | in_empty_tag
+    '>': opening_tag_right | closing_tag_right | empty_tag_right
+    '/>': empty_tag_right
+    .: in_text
+in_doc_info:
+    '?>': doc_info, start
+    .: in_doc_info
+in_empty_tag:
+    '/>': empty_tag, start
+    EOF: empty_tag_left, end
+    .: in_empty_tag
+in_opening_tag:
+    '>': xml_opening_tag, start
+    '/>': error
+    EOF: opening_tag_left, end
+    .: in_opening_tag
+in_closing_tag:
+    '>': xml_closing_tag, start
+    '/>': error
+    EOF: closing_tag_left, end
+    .: in_closing_tag
+in_text:
+    '>': opening_tag_right | closing_tag_right, start
+    '/>': empty_tag_right, start
+    '<': text_right, pushback, start
+    EOF: text_left, end
+    .: in_text
+end:
+error:
+
+Events:
+doc_info
+opening_tag_left
+opening_tag_right
+opening_tag
+closing_tag_left
+closing_tag_right
+closing_tag
+empty_tag_left
+empty_tag_right
+empty_tag
+text_left
+text_right
+text
+

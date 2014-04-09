@@ -1,0 +1,2 @@
+usage: generate_gaussians.py [-h] [-mu MU] [-sigma SIGMA] [-index] [n]
+generate_gaussians.py: error: argument n: invalid int value: '3.0'

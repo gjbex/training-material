@@ -1,0 +1,3 @@
+ start of an imcomplete sentence.  This is added to test the prefix
+feature of the counter.  There is a suffix too, again to test whether
+that works. Now let's see  

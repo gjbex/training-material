@@ -1,0 +1,31 @@
+begin item1
+    17
+    12
+    -23   # inline comment
+    12
+# comment
+    0
+    13
+end item2
+
+This is all text
+that will be ignored
+since it is not part
+of a block
+
+# this is a comment
+begin block2
+    0.29
+    0.5
+    -0.23
+    1.12e-03
+    begin block3
+        beta
+        gamma # inline comment
+        delta
+        alpha
+    end block3
+    12.13
+    17.4
+end block2
+

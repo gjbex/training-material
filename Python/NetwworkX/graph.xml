@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key attr.name="span" attr.type="double" for="edge" id="d0" />
+  <graph edgedefault="directed">
+    <node id="child1" />
+    <node id="child2" />
+    <node id="greatgrandchild1" />
+    <node id="grandchild3" />
+    <node id="grandchild2" />
+    <node id="grandchild1" />
+    <node id="root" />
+    <edge source="root" target="child1">
+      <data key="d0">1.3</data>
+    </edge>
+    <edge source="child1" target="grandchild1">
+      <data key="d0">0.4</data>
+    </edge>
+    <edge source="child2" target="grandchild3">
+      <data key="d0">0.2</data>
+    </edge>
+    <edge target="child2" source="root">
+      <data key="d0">0.7</data>
+    </edge>
+    <edge source="child2" target="grandchild2">
+      <data key="d0">0.8</data>
+    </edge>
+    <edge target="greatgrandchild1" source="grandchild3">
+      <data key="d0">0.1</data>
+    </edge>
+  </graph>
+</graphml>

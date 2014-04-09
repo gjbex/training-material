@@ -1,0 +1,8 @@
+This is a short text with a number of sentneces.  Each sentence should
+be counted, where sentence delimitors would be a dot, a question mark and
+and exclamation mark.  Sentences can span multiple lines as well.  Although
+this seems a simple task, it is nevertheless interesting because it can
+be parallelized using MPI.
+The sequential version should reflect the approach that will be taken
+by the parallel version as well.
+

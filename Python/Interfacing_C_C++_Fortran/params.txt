@@ -1,0 +1,3 @@
+double,x0,0.5
+double,r,3.2
+int,steps,10000

@@ -1,0 +1,12 @@
+usage: generate_gaussians.py [-h] [-mu MU] [-sigma SIGMA] [-index] [n]
+
+testing command line arguments
+
+positional arguments:
+  n             number to generate
+
+optional arguments:
+  -h, --help    show this help message and exit
+  -mu MU        mean of distribution
+  -sigma SIGMA  stddev of distribution
+  -index        print index

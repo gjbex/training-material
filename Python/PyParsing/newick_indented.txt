@@ -1,0 +1,8 @@
+node "node_007"
+  node "node_001": taxa1[0.1]
+  node "node_006"[0.12]
+    node "node_004"[0.11]
+      node "node_002": taxa2[0.2]
+      node "node_003": taxa3[0.3]
+    node "node_005": taxa4[0.4]
+

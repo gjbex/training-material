@@ -1,0 +1,10 @@
+This is a text with quite a number of sentences.  It is intended as input
+data for the parallel version of this program.  We are interested to see
+whether it works as expected.  The program should count the number of
+sentences in this text.  Although this is trivial, doing so in parallel
+presents some challenges.  For one thing, one has to split the text
+between processes.  This should be done without scanning the text
+first.  So each process gets a piece of text.  The latter can start with
+a part of a sentence that should be processed together with the previous
+piece.  Hence the start value of a process is the end value of the
+previous, and has to be communicated.
