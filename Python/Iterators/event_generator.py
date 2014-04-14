@@ -31,6 +31,7 @@ class Event(object):
 
 
 from datetime import datetime, timedelta
+import math
 from random import uniform
 
 class EventIter(object):
@@ -48,28 +49,61 @@ class EventIter(object):
         return self
 
     def next(self):
-        start = self._start + timedelta(seconds=uniform(self._min_delay,
-                                                        self._max_delay))
-        duration = timedelta(seconds=uniform(self._min_duration,
-                                             self._max_duration))
+        delta = int(uniform(self._min_delay, self._max_delay))
+        start = self._start + timedelta(seconds=delta)
+        delta = int(uniform(self._min_duration, self._max_duration))
+        duration = timedelta(seconds=delta)
         self._start = start + duration
         return Event(self._name, start, duration)
 
 
+def event_cmp(e1, e2):
+    if e1[0] < e2[0]:
+        return -1
+    elif e1[0] > e2[0]:
+        return 1
+    else:
+        if e1[1] < e2[1]:
+            return -1
+        elif e1[1] > e2[1]:
+            return 1
+        else:
+            if e1[2] < e2[2]:
+                return -1
+            elif e1[2] > e2[2]:
+                return 1
+            else:
+                return 0
+
 if __name__ == '__main__':
-    import argparse, sys
+    from argparse import ArgumentParser
+    import sys
 
     def main():
-        name = 'heater'
-        start = datetime.strptime('2014-01-01', '%Y-%m-%d')
-        stop = datetime.strptime('2014-01-03', '%Y-%m-%d')
-        for event in EventIter(name, start):
-            if event.start < stop:
-                print event.begin()
-                if event.stop < stop:
-                    print event.end()
-            else:
-                break
+        arg_parser = ArgumentParser(description='event log generator')
+        arg_parser.add_argument('--events', default='heating',
+                                help='event types')
+        arg_parser.add_argument('--start', default='2014-01-01',
+                                help='start date')
+        arg_parser.add_argument('--stop', default='2014-01-02',
+                                help='stop date')
+        options = arg_parser.parse_args()
+        names = options.events.split(',')
+        start = datetime.strptime(options.start, '%Y-%m-%d')
+        stop = datetime.strptime(options.stop, '%Y-%m-%d')
+        event_list = []
+        for name in names:
+            for event in EventIter(name, start):
+                if event.start < stop:
+                    event_list.append(event.begin())
+                    if event.stop < stop:
+                        event_list.append(event.end())
+                else:
+                    break
+        event_list.sort(cmp=event_cmp)
+        for event in event_list:
+            print '{0};{1} {2}'.format(str(event[0]), event[1], event[2])
 
     status = main()
     sys.exit(status)
+
