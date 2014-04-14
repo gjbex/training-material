@@ -81,19 +81,18 @@ if __name__ == '__main__':
 
     def main():
         arg_parser = ArgumentParser(description='event log generator')
-        arg_parser.add_argument('--events', default='heating',
+        arg_parser.add_argument('--events', default='heating', nargs='+',
                                 help='event types')
         arg_parser.add_argument('--start', default='2014-01-01',
                                 help='start date')
         arg_parser.add_argument('--stop', default='2014-01-02',
                                 help='stop date')
         options = arg_parser.parse_args()
-        names = options.events.split(',')
         start = datetime.strptime(options.start, '%Y-%m-%d')
         stop = datetime.strptime(options.stop, '%Y-%m-%d')
         event_list = []
-        for name in names:
-            for event in EventIter(name, start):
+        for event_types in options.events:
+            for event in EventIter(event_types, start):
                 if event.start < stop:
                     event_list.append(event.begin())
                     if event.stop < stop:
