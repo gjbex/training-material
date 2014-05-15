@@ -4,7 +4,7 @@ training-material
 What is it?
 -----------
 A collection of code examples for training purposes, mostly in the
-context of data processing and paralel prgramming.
+context of data processing and parallel prgramming.
 
 This material is made available as is, i.e., anyone is free to use it,
 and to contribute.  However, no support is guaranteed in any form.  It
