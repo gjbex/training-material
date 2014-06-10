@@ -10,6 +10,9 @@ class TooLargeArgError(Exception):
         super(TooLargeArgError, self).__init__()
         self.message = 'argument {0} for {1} too large'.format(n, name)
         
+def trace(f):
+    pass
+
 def check_min(f):
     def wrapped(n):
         if n < 0:
