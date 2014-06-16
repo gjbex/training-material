@@ -11,7 +11,7 @@ module math_func_mod
         procedure(math_func), pointer, nopass :: f => null()
         character(len=50) :: name
     end type func_record
-    type(func_record), dimension(3) :: functions
+    type(func_record), dimension(6) :: functions
 
 contains
 
