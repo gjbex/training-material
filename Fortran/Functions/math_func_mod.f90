@@ -11,24 +11,28 @@ module math_func_mod
         procedure(math_func), pointer, nopass :: f => null()
         character(len=50) :: name
     end type func_record
-    type(func_record), dimension(6) :: functions
+    type(func_record), public, dimension(7) :: functions
+    public :: setup
+    private :: f1, f2, f3, f4, f5, f6, f7
 
 contains
 
     subroutine setup()
         implicit none
-        functions(1)%f => f6
-        functions(1)%name = "x*x"
-        functions(2)%f => f1
-        functions(2)%name = "x**2"
-        functions(3)%f => f5
-        functions(3)%name = "x**2.1D00"
-        functions(4)%f => f2
-        functions(4)%name = "sqrt(x)"
-        functions(5)%f => f3
-        functions(5)%name = "exp(x)"
-        functions(6)%f => f4
-        functions(6)%name = "erf(x)"
+        functions(1)%f => f7
+        functions(1)%name = 'x + x'
+        functions(2)%f => f6
+        functions(2)%name = "x*x"
+        functions(3)%f => f1
+        functions(3)%name = "x**2"
+        functions(4)%f => f5
+        functions(4)%name = "x**2.1D00"
+        functions(5)%f => f2
+        functions(5)%name = "sqrt(x)"
+        functions(6)%f => f3
+        functions(6)%name = "exp(x)"
+        functions(7)%f => f4
+        functions(7)%name = "erf(x)"
     end subroutine setup
 
     function f1(x) result(r)
@@ -72,5 +76,12 @@ contains
         double precision :: r
         r = x*x
     end function f6
+    
+    function f7(x) result(r)
+        implicit none
+        double precision, intent(in) :: x
+        double precision :: r
+        r = x + x
+    end function f7
     
 end module math_func_mod
