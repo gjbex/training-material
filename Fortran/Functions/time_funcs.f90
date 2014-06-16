@@ -13,6 +13,14 @@ program time_funcs
                                              result%time, ";",       &
                                              result%result
     end do
+    write (*, "('# unrolled')")
+    do i = 1, size(functions)
+        print "('# starting ', A10)", functions(i)%name
+        result = time_func_unrolled(functions(i)%f)
+        print "(A10, A1, F12.6, A1, F20.6)", functions(i)%name, ";", &
+                                             result%time, ";",       &
+                                             result%result
+    end do
 
 end program time_funcs
 
