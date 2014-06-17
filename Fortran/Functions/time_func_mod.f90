@@ -1,10 +1,11 @@
 module time_func_mod
-    use math_func_mod
+    use, intrinsic :: iso_fortran_env
+    use math_func_interface
     implicit none
 
     type, public :: result_record
-        double precision :: result
-        real(kind=4) :: time
+        real(kind=REAL64) :: result
+        real(kind=REAL32) :: time
     end type result_record
     public :: time_func, time_func_unrolled
 
@@ -14,11 +15,11 @@ contains
         implicit none
         procedure(math_func) :: f
         type(result_record) :: r
-        real(kind=4) :: t_start, t_end
-        double precision, parameter :: x_delta = 1.0D-09, &
+        real(kind=REAL32) :: t_start, t_end
+        real(kind=REAL64), parameter :: x_delta = 1.0D-09, &
                                        x_min   = 1.0D-14, &
                                        x_max   = 1.0D00
-        double precision :: x, total
+        real(kind=REAL64) :: x, total
         x = x_min
         total = 0.0D00
         call cpu_time(t_start)
@@ -35,11 +36,11 @@ contains
         implicit none
         procedure(math_func) :: f
         type(result_record) :: r
-        real(kind=4) :: t_start, t_end
-        double precision, parameter :: x_delta = 1.0D-09, &
+        real(kind=REAL32) :: t_start, t_end
+        real(kind=REAL64), parameter :: x_delta = 1.0D-09, &
                                        x_min   = 1.0D-14, &
                                        x_max   = 1.0D00
-        double precision :: x1, x2, x3, x4, x_delta_unrolled, &
+        real(kind=REAL64) :: x1, x2, x3, x4, x_delta_unrolled, &
                             total1, total2, total3, total4
         x1 = x_min
         x2 = x1 + x_delta

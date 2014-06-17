@@ -1,19 +1,15 @@
 module math_func_mod
+    use, intrinsic :: iso_fortran_env
+    use math_func_interface
     implicit none
 
-    interface
-        function math_func(x) result(r)
-            double precision, intent(in) :: x
-            double precision :: r
-        end function math_func
-    end interface
+    private
     type, public :: func_record
         procedure(math_func), pointer, nopass :: f => null()
         character(len=50) :: name
     end type func_record
     type(func_record), public, dimension(9) :: functions
     public :: setup
-    private :: f1, f2, f3, f4, f5, f6, f7, f8, f9
 
 contains
 
@@ -41,64 +37,64 @@ contains
 
     function f1(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = x**2
     end function f1
 
     function f2(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = sqrt(x)
     end function f2
 
     function f3(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = exp(x)
     end function f3
     
     function f4(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = erf(x)
     end function f4
     
     function f5(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = x**2.1D00
     end function f5
     
     function f6(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = x*x
     end function f6
     
     function f7(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = x + x
     end function f7
 
     function f8(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = 2.13/x
     end function f8
 
     function f9(x) result(r)
         implicit none
-        double precision, intent(in) :: x
-        double precision :: r
+        real(kind=REAL64), intent(in) :: x
+        real(kind=REAL64) :: r
         r = x*x + x
     end function f9
 

@@ -3,7 +3,8 @@ FFLAGS = -O2 -g
 LDFLAGS = 
 LIBS = -lm
 
-TIME_FUNCS_OBJS = math_func_mod.o time_func_mod.o time_funcs.o
+TIME_FUNCS_OBJS = math_func_interface.o math_func_mod.o \
+                  time_func_mod.o time_funcs.o
 APPS = time_funcs
 
 all: $(APPS)
