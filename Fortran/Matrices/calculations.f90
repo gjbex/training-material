@@ -1,8 +1,9 @@
 program calculations
+    use, intrinsic :: iso_fortran_env
     use matrix_ops
     implicit none
     integer, parameter :: M = 5, N = 5
-    double precision, dimension(M, N) :: A, B, C
+    real(kind=REAL64), dimension(M, N) :: A, B, C
     character(len=:), allocatable :: label_str
 
     ! initialize matrix A

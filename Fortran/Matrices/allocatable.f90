@@ -1,8 +1,9 @@
-program alloc
+program alloc_test
+    use, intrinsic :: iso_fortran_env
     use matrix_ops
     implicit none
     integer :: M, N
-    double precision, allocatable, dimension(:,:) :: A
+    real(kind=REAL64), allocatable, dimension(:,:) :: A
     character(len=1024) :: buffer
     character(len=:), allocatable :: label_str
 
@@ -27,5 +28,5 @@ program alloc
     call print_matrix(A, label=label_str)
     deallocate(A)
 
-end program alloc
+end program alloc_test
 

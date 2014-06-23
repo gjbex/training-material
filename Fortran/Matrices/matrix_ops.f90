@@ -1,12 +1,15 @@
 module matrix_ops
+    use, intrinsic :: iso_fortran_env
     implicit none
+    private
+    integer, parameter :: dp = REAL64
     public :: init_matrix, print_matrix
 
 contains
 
     subroutine init_matrix(A)
         implicit none
-        double precision, dimension(:,:), intent(out) :: A
+        real(kind=dp), dimension(:,:), intent(out) :: A
         integer :: i, j
         integer, dimension(2) :: dims
         dims = shape(A)
@@ -19,7 +22,7 @@ contains
 
     subroutine print_matrix(A, label)
         implicit none
-        double precision, dimension(:,:), intent(in) :: A
+        real(kind=dp), dimension(:,:), intent(in) :: A
         character(len=:), allocatable, optional, intent(in) :: label
         integer :: i, j
         integer, dimension(2) :: dims
