@@ -2,3 +2,4 @@ time_funcs
 *.pbs
 *.pbs.o*
 *.pbs.e*
+gmon.out
