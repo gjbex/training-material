@@ -1,4 +1,4 @@
-program filtering
+program forall_test
 use, intrinsic :: iso_fortran_env
 implicit none
 integer, parameter :: N = 5, sp = REAL32
@@ -17,4 +17,4 @@ do i = 1, N
     print fmt_str, A(i, :)
 end do
 
-end program filtering
+end program forall_test
