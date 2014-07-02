@@ -3,7 +3,7 @@
 if __name__ == '__main__':
     
     from argparse import ArgumentParser
-    from math import exp, sqrt, sin, cos, atan, pi
+    from math import exp, sqrt, sin, cos, atan2, pi
     import numpy as np
 
     min_val = -1.0
@@ -24,9 +24,7 @@ if __name__ == '__main__':
             for y in np.linspace(min_val, max_val, num=options.y, endpoint=True):
                 d = sqrt(x**2 + y**2 + z**2)
                 v = (1.0 - exp(-d))*exp(-d)
-                theta = atan(y/x)
-                if x < 0.0:
-                    theta += pi
+                theta = atan2(y, x)
                 v_x = v*sin(-theta)
                 v_y = v*cos(theta)
                 v_z = 0.1*exp(-3.0*z)
