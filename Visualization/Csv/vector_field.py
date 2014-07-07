@@ -9,7 +9,7 @@ if __name__ == '__main__':
     min_val = -1.0
     max_val = 1.0
     default_points = 10
-    arg_parser = ArgumentParser(description='produce a 3D scalar field')
+    arg_parser = ArgumentParser(description='produce a 3D vector field')
     arg_parser.add_argument('-x', type=int, default=default_points,
                             help='number of x points')
     arg_parser.add_argument('-y', type=int, default=default_points,
