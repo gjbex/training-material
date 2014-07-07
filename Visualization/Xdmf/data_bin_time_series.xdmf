@@ -1,5 +1,4 @@
 <?xml version="1.0" ?>
-<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
 <Xdmf xmlns:xi="http://www.w3.org/2001/XInclude" Version="2.0">
     <Domain>
 
@@ -21,7 +20,7 @@
         <Grid Name="timeseries" GridType="Collection"
               CollectionType="Temporal">
             <Time TimeType="Hyperslab">
-                <DataItem Format="XML" NumberType="Float" Dimensions="6">
+                <DataItem Format="XML" NumberType="Float" Dimensions="3">
                     0.0 1.0 5
                 </DataItem>
             </Time>
