@@ -6,7 +6,7 @@ CPPFLAGS =
 LDFLAGS =
 LIBS = -lm
 
-all: creator reader text_creator h5_creator
+all: creator reader text_creator h5_creator time_series
 
 creator: data_creator.f90
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
@@ -20,6 +20,9 @@ h5_creator: h5_creator.c
 reader: data_reader.f90
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
+time_series: time_series.f90
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+
 clean:
-	rm -f text_creator creator reader h5_creator *.o *.mod
+	rm -f text_creator creator reader h5_creator time_series *.o *.mod
 

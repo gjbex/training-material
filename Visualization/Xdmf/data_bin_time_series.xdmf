@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf xmlns:xi="http://www.w3.org/2001/XInclude" Version="2.0">
+    <Domain>
+
+        <Topology name="topo" TopologyType="3DCoRectMesh"
+                  Dimensions="10 10 10">
+        </Topology>
+
+        <Geometry name="geo" Type="ORIGIN_DXDYDZ">
+            <!-- Origin -->
+            <DataItem Format="XML" Dimensions="3">
+                0.0 0.0 0.0
+            </DataItem>
+            <!-- DxDyDz -->
+            <DataItem Format="XML" Dimensions="3">
+                0.1 0.1 0.1
+            </DataItem>
+        </Geometry>
+
+        <Grid Name="timeseries" GridType="Collection"
+              CollectionType="Temporal">
+            <Time TimeType="Hyperslab">
+                <DataItem Format="XML" NumberType="Float" Dimensions="6">
+                    0.0 1.0 5
+                </DataItem>
+            </Time>
+
+            <Grid Name="grid1" GridType="Uniform">
+                <Topology Reference="/Xdmf/Domain/Topology[1]"/>
+                <Geometry Reference="/Xdmf/Domain/Geometry[1]"/>
+                <Attribute Name="temperature" Center="Node">
+                    <DataItem Format="Binary" DataType="Float"
+                              Precision="4" Endian="Little"
+                              Dimensions="10 10 10">
+                        time_series-001.bin
+                    </DataItem>
+                </Attribute>
+            </Grid>
+
+            <Grid Name="grid2" GridType="Uniform">
+                <Topology Reference="/Xdmf/Domain/Topology[1]"/>
+                <Geometry Reference="/Xdmf/Domain/Geometry[1]"/>
+                <Attribute Name="temperature" Center="Node">
+                    <DataItem Format="Binary" DataType="Float"
+                              Precision="4" Endian="Little"
+                              Dimensions="10 10 10">
+                        time_series-002.bin
+                    </DataItem>
+                </Attribute>
+            </Grid>
+
+            <Grid Name="grid3" GridType="Uniform">
+                <Topology Reference="/Xdmf/Domain/Topology[1]"/>
+                <Geometry Reference="/Xdmf/Domain/Geometry[1]"/>
+                <Attribute Name="temperature" Center="Node">
+                    <DataItem Format="Binary" DataType="Float"
+                              Precision="4" Endian="Little"
+                              Dimensions="10 10 10">
+                        time_series-003.bin
+                    </DataItem>
+                </Attribute>
+            </Grid>
+
+            <Grid Name="grid4" GridType="Uniform">
+                <Topology Reference="/Xdmf/Domain/Topology[1]"/>
+                <Geometry Reference="/Xdmf/Domain/Geometry[1]"/>
+                <Attribute Name="temperature" Center="Node">
+                    <DataItem Format="Binary" DataType="Float"
+                              Precision="4" Endian="Little"
+                              Dimensions="10 10 10">
+                        time_series-004.bin
+                    </DataItem>
+                </Attribute>
+            </Grid>
+
+            <Grid Name="grid5" GridType="Uniform">
+                <Topology Reference="/Xdmf/Domain/Topology[1]"/>
+                <Geometry Reference="/Xdmf/Domain/Geometry[1]"/>
+                <Attribute Name="temperature" Center="Node">
+                    <DataItem Format="Binary" DataType="Float"
+                              Precision="4" Endian="Little"
+                              Dimensions="10 10 10">
+                        time_series-005.bin
+                    </DataItem>
+                </Attribute>
+            </Grid>
+
+        </Grid>
+
+    </Domain>
+</Xdmf>
+
