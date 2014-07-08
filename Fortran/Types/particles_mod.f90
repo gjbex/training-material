@@ -1,11 +1,14 @@
 module particles_mod
     use, intrinsic :: iso_fortran_env
+    use random_mod
     implicit none
     
     private
     integer, parameter, public :: sp = REAL32, dp = REAL64
     type, public :: particles
-        real(kind=dp), dimension(:), allocatable :: x, y, z, mass
+        real(kind=dp), dimension(:), allocatable :: x, y, z, &
+                                                    v_x, v_y, v_z, &
+                                                    mass
         integer, dimension(:), allocatable :: charge
     end type particles
     public :: init_particles, print_particles, delete_particles
@@ -22,6 +25,9 @@ contains
         allocate(p%x(N))
         allocate(p%y(N))
         allocate(p%z(N))
+        allocate(p%v_x(N))
+        allocate(p%v_y(N))
+        allocate(p%v_z(N))
         allocate(p%mass(N))
         allocate(p%charge(N))
 
@@ -32,6 +38,12 @@ contains
             p%y(i) = r
             call random_number(r)
             p%z(i) = r
+            call random_number(r)
+            p%v_x(i) = r
+            call random_number(r)
+            p%v_y(i) = r
+            call random_number(r)
+            p%v_z(i) = r
             call random_number(r)
             p%mass(i) = r
             call random_number(r)
@@ -48,9 +60,11 @@ contains
         implicit none
         type(particles), intent(in) :: p
         integer, intent(in) :: i
-        character(len=80) :: fmt_str = "('(', E10.3, ',', E10.3, ',', E10.3 ')', ': ', E10.3, ',', I2)"
+        character(len=200) :: fmt_str = "(7(E10.3, ','), I2)"
 
-        print fmt_str, p%x(i), p%y(i), p%z(i), p%mass(i), p%charge(i)
+        print fmt_str, p%x(i), p%y(i), p%z(i), &
+                       p%v_x(i), p%v_y(i), p%v_z(i), &
+                       p%mass(i), p%charge(i)
 
     end subroutine print_particle
 
@@ -59,6 +73,8 @@ contains
         type(particles), intent(in) :: p
         integer :: i, N
 
+        print "(A, 7(',', A))", 'x', 'y', 'z', 'v_x', 'v_y', 'v_z', &
+                                'mass', 'charge'
         N = size(p%x)
         do i = 1, N
             call print_particle(p, i)
@@ -74,6 +90,9 @@ contains
         deallocate(p%x)
         deallocate(p%y)
         deallocate(p%z)
+        deallocate(p%v_x)
+        deallocate(p%v_y)
+        deallocate(p%v_z)
         deallocate(p%mass)
         deallocate(p%charge)
 
