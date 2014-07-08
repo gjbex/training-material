@@ -60,7 +60,7 @@ contains
         implicit none
         type(particles), intent(in) :: p
         integer, intent(in) :: i
-        character(len=200) :: fmt_str = "(7(E10.3, ','), ',', I2)"
+        character(len=200) :: fmt_str = "(7(E10.3, ','), I2)"
 
         print fmt_str, p%x(i), p%y(i), p%z(i), &
                        p%v_x(i), p%v_y(i), p%v_z(i), &
