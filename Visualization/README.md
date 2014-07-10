@@ -1,0 +1,18 @@
+Visualization
+=============
+
+These files (data, scripts, ParaView state files) are used during an
+information session (live demo) on visualization of scientific data
+using ParaView.
+
+CSV
+---
+Given the formats simplicity, it can be used as a first start for data
+sets tat are not too large or complex.
+
+Xdmf
+----
+XDMF is an XML exchange format for scientific data that can be used to
+describe data that is stored in binary or HDF5 format so that it can
+easily be imported in ParaView.
+
