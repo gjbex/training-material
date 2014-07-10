@@ -9,7 +9,6 @@ AnimationScene1 = GetAnimationScene()
 SpreadSheetView1 = CreateView( "SpreadSheetView" )
 
 DataRepresentation1 = Show()
-DataRepresentation1.FieldAssociation = 'Row Data'
 
 AnimationScene1.ViewModules = SpreadSheetView1
 
@@ -24,7 +23,6 @@ TableToStructuredGrid1.ZColumn = 'z'
 TableToStructuredGrid1.YColumn = 'y'
 
 DataRepresentation2 = Show()
-DataRepresentation2.FieldAssociation = 'Point Data'
 
 DataRepresentation1.Visibility = 0
 
@@ -138,7 +136,7 @@ RenderView2.CameraClippingRange = [2.513373899593252, 6.409392982448434]
 RenderView2.Background = [0.0, 0.0, 0.0]
 RenderView2.Background2 = [0.0, 0.0, 0.16470588235294117]
 
-WriteImage('test.pdf')
+WriteImage('scalar_field.jpeg')
 
 
 Render()
