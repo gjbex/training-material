@@ -16,3 +16,8 @@ XDMF is an XML exchange format for scientific data that can be used to
 describe data that is stored in binary or HDF5 format so that it can
 easily be imported in ParaView.
 
+NetCDF
+------
+Unlike for binary or HDF5 files, ParaView has better support for this
+format out of the box.
+
