@@ -6,17 +6,20 @@
 
 #include <netcdf.h>
 
+#include "grid.h"
+
 #define MAX_STR_LEN 1024
 #define N_DIMS 3
 
-float *create_data(int dims[N_DIMS]);
+float gauss(float x, float y, float z, void *params);
 
 int main(int argc, char *argv[]) {
     const int default_ooints = 10;
     int nr_points = default_ooints;
     int dims[N_DIMS];
+    float **grid = NULL;
     float *data = NULL;
-    int nc_id, dim_ids[N_DIMS], var_id;
+    int nc_id, dim_ids[N_DIMS], var_x_id, var_y_id, var_z_id, var_value_id;
     int ret_val;
     char file_name[MAX_STR_LEN];
     
@@ -48,9 +51,23 @@ int main(int argc, char *argv[]) {
         errx(ret_val, "z dimension definition failed");
     }
 
-/* define variable */
+/* define x, y, z grid variables */
+    if ((ret_val = nc_def_var(nc_id, "x", NC_FLOAT,
+                              1, &(dim_ids[0]), &var_x_id)) != 0) {
+        errx(ret_val, "variable x definition failed");
+    }
+    if ((ret_val = nc_def_var(nc_id, "y", NC_FLOAT,
+                              1, &(dim_ids[1]), &var_y_id)) != 0) {
+        errx(ret_val, "variable y definition failed");
+    }
+    if ((ret_val = nc_def_var(nc_id, "z", NC_FLOAT,
+                              1, &(dim_ids[2]), &var_z_id)) != 0) {
+        errx(ret_val, "variable z definition failed");
+    }
+
+/* define value variable */
     if ((ret_val = nc_def_var(nc_id, "value", NC_FLOAT,
-                              N_DIMS, dim_ids, &var_id)) != 0) {
+                              N_DIMS, dim_ids, &var_value_id)) != 0) {
         errx(ret_val, "variable value definition failed");
     }
 
@@ -59,16 +76,34 @@ int main(int argc, char *argv[]) {
         errx(ret_val, "end defintition mode failed");
     }
 
+/* create grid */
+    grid = create_quadratic_grid(dims, N_DIMS);
+
+/* write x, y, z grid to NetCDF file */
+    if ((ret_val = nc_put_var_float(nc_id, var_x_id, &(grid[0][0]))) != 0) {
+        errx(ret_val, "writing x grid variable failed");
+    }
+    if ((ret_val = nc_put_var_float(nc_id, var_y_id, &(grid[1][0]))) != 0) {
+        errx(ret_val, "writing y grid variable failed");
+    }
+    if ((ret_val = nc_put_var_float(nc_id, var_z_id, &(grid[2][0]))) != 0) {
+        errx(ret_val, "writing z grid variable failed");
+    }
+
 /* create data */
-    data = create_data(dims);
+    data = compute_3d_data(gauss, (void *) NULL, grid, dims);
 
 /* write data to NetCDF file */
-    if ((ret_val = nc_put_var_float(nc_id, var_id, &(data[0]))) != 0) {
-        errx(ret_val, "writing data failed");
+    if ((ret_val = nc_put_var_float(nc_id, var_value_id,
+                                    &(data[0]))) != 0) {
+        errx(ret_val, "writing value variable  failed");
     }
 
 /* free data */
     free(data);
+
+/* free grid */
+    free_grid(grid, N_DIMS);
 
 /* close file */
     if ((ret_val = nc_close(nc_id)) != 0) {
@@ -78,30 +113,7 @@ int main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-float *create_data(int dims[N_DIMS]) {
-    const int n = dims[0]*dims[1]*dims[2];
-    int i, j, k;
-    float *data;
-    const float min = -1.0, max = 1.0;
-    float delta = (max - min)/n;
-    float x, y, z;
-    if ((data = (float *) malloc(n*sizeof(float))) == NULL) {
-        errx(EXIT_FAILURE, "can not allocate data");
-    }
-    x = min;
-    for (i = 0; i < dims[0]; i++) {
-        y = min;
-        for (j = 0; j < dims[1]; j++) {
-            z = min;
-            for (k = 0; k < dims[2]; k++) {
-                int idx = i*dims[1]*dims[2] + j*dims[2] + k;
-                data[idx] = exp(-(x*x + y*y + z*z));
-                z += delta;
-            }
-            y += delta;
-        }
-        x += delta;
-    }
-    return data;
+float gauss(float x, float y, float z, void *params) {
+    return exp(-(x*x + y*y + z*z));
 }
 

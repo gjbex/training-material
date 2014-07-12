@@ -4,13 +4,18 @@ CPPFLAGS =
 LDFLAGS =
 LIBS = -lnetcdf -lm
 
+WRITE_OBJS = grid.o write_netcdf.o
+
 APPS = write_netcdf
 
 all: $(APPS)
 
-write_netcdf: write_netcdf.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+write_netcdf: $(WRITE_OBJS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(WRITE_OBJS) $(LDFLAGS) $(LIBS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
 
 clean:
-	rm -f *.o $(APPS)
+	rm -f $(WRITE_OBJS) $(APPS)
 
