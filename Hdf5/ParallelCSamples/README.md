@@ -3,7 +3,41 @@ HDF5 parallel I/O
 
 What is it?
 -----------
-Short program to illustrate using parallel HDF5 capabilities.
+1. `phdf5_test`: Short program to illustrate using parallel
+   HDF5 capabilities.  It will simply write a 2D 8 x 5 integer dataset
+   to 'my_data' in file 'test.h5'.  The processes are arranged in a
+   1D topology along the x-axis, so it can only be run correctly with
+   1, 2, 4, and 8 MPI processes.  Source code: `main_phdf5_test.c`.
+2. `checkpoint_test`: trivial but complete example of using
+   HDF5 parallel I/O for checkpointing.  The program can be started in
+   two modes: 'new' and 'restart'.  In the former case, a new HDF5 file
+   is created and initialized with the 2D grid information, and the
+   initial values of the "field".
+   ```
+   $ mpirun -np 6 ./checkpoint_test ckpt.h5 30 50
+   ```
+   The 2D field is computed on 30 x 50 grid points.  The values of the
+   latter are stored in datasets 'x' and 'y' respectively, while the
+   value of the field is stored in the 'field' data set. 
+   When restarted, the program reads the grid information from the HDF5
+   file, and initializes the field from the stored data set.  It then
+   computes new field values, and stores them in the same 'field' data
+   set, overwriting the original data in the HDF5 file.
+   ```
+   $ mpirun -np 4 ./checkpoint_test ckpt.h5
+   ```
+   Note that the number of processes for a restart need not be the same
+   as for a previous run.  The grid is distributed on the available
+   processes dynamically.
+   Dource files:
+  * `main_checkpoint_test.c`: main program.
+  * `consts.h`: some constants used throughout the code.
+  * `init.[ch]`: code to handle the command line arguments, and determine
+    the grid dimensions from the HDF5 file.
+  * `grid.[ch]`: code to partition the grid among processes, initialize
+    the grid, and initialize the field.
+  * `checkpoint.[ch]`: code that will save and read the grid and field
+    to and from the HDF5 file.
 
 Building the program
 --------------------

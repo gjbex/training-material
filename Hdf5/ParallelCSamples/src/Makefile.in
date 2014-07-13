@@ -32,7 +32,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = phdf5_test$(EXEEXT)
+bin_PROGRAMS = phdf5_test$(EXEEXT) checkpoint_test$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -44,9 +44,13 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
+am_checkpoint_test_OBJECTS = main_checkpoint_test.$(OBJEXT) \
+	grid.$(OBJEXT) checkpoint.$(OBJEXT) init.$(OBJEXT)
+checkpoint_test_OBJECTS = $(am_checkpoint_test_OBJECTS)
+am__DEPENDENCIES_1 =
+checkpoint_test_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_phdf5_test_OBJECTS = main_phdf5_test.$(OBJEXT)
 phdf5_test_OBJECTS = $(am_phdf5_test_OBJECTS)
-am__DEPENDENCIES_1 =
 phdf5_test_DEPENDENCIES = $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -56,8 +60,8 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(phdf5_test_SOURCES)
-DIST_SOURCES = $(phdf5_test_SOURCES)
+SOURCES = $(checkpoint_test_SOURCES) $(phdf5_test_SOURCES)
+DIST_SOURCES = $(checkpoint_test_SOURCES) $(phdf5_test_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -146,6 +150,8 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 phdf5_test_SOURCES = main_phdf5_test.c
 phdf5_test_LDADD = $(LDFLAGS) -lz -lhdf5 -lgpfs
+checkpoint_test_SOURCES = main_checkpoint_test.c grid.c checkpoint.c init.c
+checkpoint_test_LDADD = $(LDFLAGS) -lz -lhdf5 -lgpfs
 all: all-am
 
 .SUFFIXES:
@@ -217,6 +223,9 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+checkpoint_test$(EXEEXT): $(checkpoint_test_OBJECTS) $(checkpoint_test_DEPENDENCIES) 
+	@rm -f checkpoint_test$(EXEEXT)
+	$(LINK) $(checkpoint_test_OBJECTS) $(checkpoint_test_LDADD) $(LIBS)
 phdf5_test$(EXEEXT): $(phdf5_test_OBJECTS) $(phdf5_test_DEPENDENCIES) 
 	@rm -f phdf5_test$(EXEEXT)
 	$(LINK) $(phdf5_test_OBJECTS) $(phdf5_test_LDADD) $(LIBS)
@@ -227,6 +236,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/checkpoint.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grid.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/init.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main_checkpoint_test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main_phdf5_test.Po@am__quote@
 
 .c.o:
