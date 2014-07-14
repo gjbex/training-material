@@ -9,7 +9,8 @@ What is it?
 -----------
 1. `calculations`: illustrates mathematical operations with matrices such
    as addition, element-wise multiplication, division and exponentiation,
-   as well as matrix product.
+   as well as matrix product.  Adding a scalar to or multiplying a scalar
+   with all elements of a matrix can also be done in a single statement.
 2. `alloc_test`: illustrates how to dynamically allocate a matrix with
    dimensions that can be specified on the command line.  The matrix is
    allocated, initialized, printed, and deallocated.
