@@ -5,9 +5,9 @@ from xml.dom.minidom import Document
 
 def main():
     arg_parser = ArgumentParser('creates XML encoded block data')
-    arg_parser.add_argument('--blocks', type=int, action='store',
+    arg_parser.add_argument('--blocks', type=int, default=3,
                             dest='nr_blocks', help='number blocks to make')
-    arg_parser.add_argument('--items', type=int, action='store',
+    arg_parser.add_argument('--items', type=int, default=2,
                             dest='nr_items', help='number items to make')
     options = arg_parser.parse_args()
     doc = Document()

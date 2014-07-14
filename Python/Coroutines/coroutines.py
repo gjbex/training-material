@@ -2,13 +2,11 @@
 
 def my_printer():
     try:
-        buffer = ''
         counter = 0
         while True:
-            buffer += (yield)
+            buffer = (yield)
             counter += 1
             print '{0:03d}: {1}'.format(counter, buffer)
-            buffer = ''
     except GeneratorExit:
         pass
 
