@@ -13,9 +13,11 @@ What is it?
    two modes: 'new' and 'restart'.  In the former case, a new HDF5 file
    is created and initialized with the 2D grid information, and the
    initial values of the "field".
+
    ```bash
    $ mpirun -np 6 ./checkpoint_test new ckpt.h5 30 50
    ```
+
    The 2D field is computed on 30 x 50 grid points.  The values of the
    latter are stored in datasets 'x' and 'y' respectively, while the
    value of the field is stored in the 'field' data set. 
@@ -23,9 +25,11 @@ What is it?
    file, and initializes the field from the stored data set.  It then
    computes new field values, and stores them in the same 'field' data
    set, overwriting the original data in the HDF5 file.
+
    ```bash
    $ mpirun -np 4 ./checkpoint_test restart ckpt.h5
    ```
+
    Note that the number of processes for a restart need not be the same
    as for a previous run.  The grid is distributed on the available
    processes dynamically.
