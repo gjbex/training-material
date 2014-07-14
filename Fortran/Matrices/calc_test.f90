@@ -1,9 +1,10 @@
-program calculations
+program calc_test
     use, intrinsic :: iso_fortran_env
     use matrix_ops
     implicit none
+    integer, parameter :: dp = REAL64
     integer, parameter :: M = 5, N = 5
-    real(kind=REAL64), dimension(M, N) :: A, B, C
+    real(kind=dp), dimension(M, N) :: A, B, C
     character(len=:), allocatable :: label_str
 
     ! initialize matrix A
@@ -41,5 +42,15 @@ program calculations
     label_str = "A . B"
     call print_matrix(C, label=label_str)
 
-end program calculations
+    ! element-wise addition of constant
+    C = 2.0_dp + A
+    label_str = "2 + A"
+    call print_matrix(C, label=label_str)
+
+    ! element-wise addition of constant
+    C = 3.0_dp*A
+    label_str = "3*A"
+    call print_matrix(C, label=label_str)
+
+end program calc_test
 
