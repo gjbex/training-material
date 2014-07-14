@@ -16,4 +16,10 @@ What is it?
    script.
 3. `ConfigParser`: illustrates how to use the ConfigParser module to handle
    configuration files.
+4. `ContextManager`: illustrates the concept of a context manager, a
+   mechanism to deal with resource setup/teardown.
+5. `Coroutines`: illustrates coroutines, functions that preserve state
+   between invocations.
+6. `DataFormats`: illustrates how to deal with data formats such as CSV
+   files, binary data and XML.
 
