@@ -43,7 +43,7 @@ imported and vidualized in ParaView.
     visualization process.
   * `scalar_field_trace.py`: trace file generated during the visualization
     process that can be used with pvbatch to reproduce the rendering as a
-    JPEG file
+    JPEG file.  See notes below for details.
   * `scalar_field.jpeg`: image produced by running `scalar_field_trace.py`
     with pvbatch.
   * `scalar_field.py`: Python script to create the data set.  Options are
@@ -70,4 +70,12 @@ with other versions.
      style.
   2. Attributes 'Row format' and 'Point format' are unknown to Linux
      pvbatch, and the corresponding lines have simply been commented out.
+  3. For convenience, a command line optons parser (argparse) was added
+     to the trace file so that the input and output file name can be
+     specified on the command line using the `-i` and `-o` flags
+     respectively, .e.g.,
+
+     ```bash
+     $ pvbatch scalar_field_trace.py -i scalar_field.csv -o rendered.jpeg
+     ```
 
