@@ -9,6 +9,6 @@ What is it?
 1. `write_netcdf.py`: writes an NetCDF 3 file that has three dimensions
    x, y, and z.  The grid points are stored in variables 'x', 'y', and 'z'
    respectively, and the field is stored in a 3D variable 'field'.
-   NetCDF 3 was chosen because ParaView seems not to be able to deal
-   with NetCDF 4.
+   NetCDF 3 as well as NetCDF 4 can be generated since ParaView prior
+   to version 4.1.x seems not to be able to deal with NetCDF 4.
 
