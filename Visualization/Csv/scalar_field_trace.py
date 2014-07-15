@@ -1,8 +1,16 @@
+from argparse import ArgumentParser
+
 try: paraview.simple
 except: from paraview.simple import *
+
+arg_parser = ArgumentParser(description='script to render scalar field')
+arg_parser.add_argument('-i', dest='in_file', help='CSV input file')
+arg_parser.add_argument('-o', dest='out_file', help='output file')
+options = arg_parser.parse_args()
+
 paraview.simple._DisableFirstRenderCameraReset()
 
-scalar_field_csv = CSVReader( FileName=['scalar_field.csv'] )
+scalar_field_csv = CSVReader( FileName=[options.in_file] )
 
 AnimationScene1 = GetAnimationScene()
 
@@ -136,7 +144,7 @@ RenderView2.CameraClippingRange = [2.513373899593252, 6.409392982448434]
 RenderView2.Background = [0.0, 0.0, 0.0]
 RenderView2.Background2 = [0.0, 0.0, 0.16470588235294117]
 
-WriteImage('scalar_field.jpeg')
+WriteImage(options.out_file)
 
 
 Render()
