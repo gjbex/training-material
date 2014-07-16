@@ -14,8 +14,8 @@ is subject to the license included in this repository.
   and 2008 features.  This material is developed in preparation of a
   tutorial on modern Fortran featurs.
 * `HDF5`: sample code showing how to read/write HDF5 files from C and
-  using HDF5 for parallel I/O.  This material is part of a tutorial on
-  HDF5.
+  Python.  HDF5 can be used for parallel I/O, C sample code is provided.
+  This material is part of a tutorial on  HDF5.
 * `NetCDF`: sample code showing how to read/write NetCDF files for C,
   Fortran and Python.  This material is prepared in preparation of
   extending the HDF5 tutorial to other data formats using in scientific
