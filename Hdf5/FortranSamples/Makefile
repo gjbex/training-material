@@ -5,11 +5,14 @@ FPPFLAGS = -I$(HDF5)/include
 LDFlAGS = -L$(HDF5)/lib
 LIBS = -lhdf5_fortran -lm
 
-APPS = create_h5
+APPS = create_h5 compute_center_of_mass
 
 all: $(APPS)
 
 create_h5: create_h5.o
+	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $< $(LDFlAGS) $(LIBS)
+
+compute_center_of_mass: compute_center_of_mass.o
 	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $< $(LDFlAGS) $(LIBS)
 
 %.o: %.f90
