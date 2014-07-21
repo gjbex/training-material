@@ -21,7 +21,11 @@ integer :: i, j
 real(kind=sp) :: r
 
 ! compute data, i.e., particle masses and positions
-do i = 1, nr_particles
+mass(1) = 1.0_sp
+do j = 1, pos_space_rank
+    pos(j, 1) = 0.0_sp
+end do
+do i = 2, nr_particles
     call random_number(mass(i))
     do j = 1, pos_space_rank
         call random_number(r)
@@ -51,11 +55,13 @@ end if
 ! create a group at the root-level
 call h5gcreate_f(file_id, group_name, group_id, error)
 
-! create the mass and position dataspaces
+! create the mass and position dataspaces, specify data rank and
+! dimentions
 call h5screate_simple_f(mass_rank, mass_dim, mass_dspace_id, error)
 call h5screate_simple_f(pos_rank, pos_dim, pos_dspace_id, error)
 
-! create the mass and position datasets
+! create the mass and position datasets in the particle group, the
+! data type and and the dataspace ID
 call h5dcreate_f(group_id, mass_dset_name, H5T_NATIVE_REAL, &
                  mass_dspace_id, mass_dset_id, error)
 call h5dcreate_f(group_id, pos_dset_name, H5T_NATIVE_REAL, &

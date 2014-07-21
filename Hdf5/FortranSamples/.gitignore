@@ -1,3 +1,6 @@
 create_h5
+<<<<<<< HEAD
 compute_center_of_mass
 append_h5
+=======
+>>>>>>> feature/readme
