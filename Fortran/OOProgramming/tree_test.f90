@@ -2,20 +2,24 @@ program tree_test
 use, intrinsic :: iso_fortran_env
 use node_mod
 implicit none
-type(node_type) :: root
-class(node_type), pointer :: node1, node2
-integer :: status
+integer, parameter :: sp = REAL32
+class(node_type), pointer :: root => null(), node1, node2
+integer :: status, seed_dim, clock, i
+integer, dimension(:), allocatable :: seed
+character(len=10) :: buffer
 
-call root%set_value(.true.)
-node1 => root%new(.true.)
-call root%set_left(node1)
-node2 => node1%new(.false.)
-call node1%set_left(node2)
-node2 => node1%new(.true.)
-call node1%set_right(node2)
-node1 => root%new(.false.)
-call root%set_right(node1)
+call random_seed(size=seed_dim)
+allocate(seed(seed_dim))
+call system_clock(count=clock)
+seed = clock + 37*[ (i - 1, i = 1, seed_dim) ]
+call random_seed(put=seed)
+deallocate(seed)
+
+root => root%new()
+call root%init_random(1.0, 0.75, 0.0)
 
 call root%show()
+
+write (unit=output_unit, fmt="(A, I3)") "node count = ", root%count_nodes()
 
 end program tree_test

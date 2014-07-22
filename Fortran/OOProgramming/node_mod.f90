@@ -3,44 +3,46 @@ module node_mod
     implicit none
 
     private
-
+    integer, parameter :: sp = REAL32
     type, public :: node_type
         private
-        logical :: value = .false.
+        real(kind=sp) :: value = 0.0_sp
         class(node_type), pointer :: left => null(), right => null()
     contains
         procedure, nopass, public :: new
         procedure, public :: set_left, get_left, &
                              set_right, get_right, &
                              set_value, get_value, &
-                             show
+                             show, init_random, count_nodes
         procedure :: show_level
     end type node_type
     
 contains
 
-    function new(value) result(node)
+    function new() result(node)
         implicit none
-        logical, intent(in) :: value
         class(node_type), pointer :: node
         integer :: status
-        allocate(node, source=node_type(value, null(), null()), stat=status)
+        allocate(node, source=node_type(0.0_sp, null(), null()), &
+                 stat=status)
         if (status /= 0) then
-            write (unit=error_unit, fmt="(A)") "# error: can not allocate node"
+            write (unit=error_unit, fmt="(A)") &
+                    "# error: can not allocate node"
+            stop
         end if
     end function new
 
     function get_value(node) result(value)
         implicit none
         class(node_type), intent(in) :: node
-        logical :: value
+        real(kind=sp) :: value
         value = node%value
     end function get_value
 
     subroutine set_value(node, value)
         implicit none
         class(node_type), intent(inout) :: node
-        logical, intent(in) :: value
+        real(kind=sp), intent(in) :: value
         node%value = value
     end subroutine set_value
 
@@ -84,11 +86,54 @@ contains
         class(node_type), intent(in) :: node
         character(len=*), intent(in) :: indent
         class(node_type), pointer :: child
-        write (unit=output_unit, fmt="(A, L)") indent, node%get_value()
+        write (unit=output_unit, fmt="(A, F5.3)") indent, node%get_value()
         child => node%get_left()
-        if (associated(child)) call child%show_level(indent // '  ')
+        if (associated(child)) &
+            call child%show_level(indent // '  ')
         child => node%get_right()
-        if (associated(child)) call child%show_level(indent // '  ')
+        if (associated(child)) &
+            call child%show_level(indent // '  ')
     end subroutine show_level
+
+    recursive subroutine init_random(node, prob, factor, value)
+        implicit none
+        class(node_type), intent(inout) :: node
+        real(kind=sp), intent(in) :: prob, factor
+        real(kind=sp), optional, intent(in) :: value
+        class(node_type), pointer :: child
+        real(kind=sp) :: r
+        if (present(value)) then
+            r = value
+        else
+            call random_number(r)
+        end if
+        call node%set_value(r)
+        call random_number(r)
+        if (r < prob) then
+            child => node%new()
+            call node%set_left(child)
+            call child%init_random(prob*factor, factor)
+        end if
+        call random_number(r)
+        if (r < prob) then
+            child => node%new()
+            call node%set_right(child)
+            call child%init_random(prob*factor, factor)
+        end if
+    end subroutine init_random
+
+    recursive function count_nodes(node) result(count)
+        implicit none
+        class(node_type), intent(in) :: node
+        class(node_type), pointer :: child
+        integer :: count
+        count = 1
+        child => node%get_left()
+        if (associated(child)) &
+            count = count + child%count_nodes()
+        child => node%get_right()
+        if (associated(child)) &
+            count = count + child%count_nodes()
+    end function count_nodes
 
 end module node_mod
