@@ -3,20 +3,18 @@ use, intrinsic :: iso_fortran_env
 use node_mod
 implicit none
 type(node_type) :: root
-type(node_type), pointer :: node
+class(node_type), pointer :: node1, node2
 integer :: status
 
-call root%set(.false.)
-allocate(node, source=node_type(.true.), stat=status)
-if (status /= 0) then
-    write (unit=error_unit, fmt="(A)") "# error: can not allocate node"
-end if
-call root%add_left(node)
-allocate(node, source=node_type(.false.), stat=status)
-if (status /= 0) then
-    write (unit=error_unit, fmt="(A)") "# error: can not allocate node"
-end if
-call root%add_right(node)
+call root%set_value(.true.)
+node1 => root%new(.true.)
+call root%set_left(node1)
+node2 => node1%new(.false.)
+call node1%set_left(node2)
+node2 => node1%new(.true.)
+call node1%set_right(node2)
+node1 => root%new(.false.)
+call root%set_right(node1)
 
 call root%show()
 
