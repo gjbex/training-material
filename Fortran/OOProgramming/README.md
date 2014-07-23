@@ -27,6 +27,14 @@ What is it?
    any leaf.
 4. `avg_path_test.f90`: creates a given number of trees, and computes
    the average node count and leaf distance.
+5. `id_node_mod.f90`: class dervied from `node_type` that adds an ID
+   atribute to nodes.  Upon calling `new` it is automatically incremented.
+   A getter is available, but no setter so that the ID can not be modified.
+   An apropriate implementation of the `show` method is added.
+6. `id_tree_test.f90`: creates a random tree, prints it to the screen,
+   computes the number of nodes, and the longest distance from root to
+   any leaf.  This program uses `id_node_type` rather tha `node_type`.
+
 
 How to build?
 -------------
