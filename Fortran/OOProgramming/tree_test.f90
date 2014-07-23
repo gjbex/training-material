@@ -6,7 +6,7 @@ implicit none
 integer, parameter :: sp = REAL32
 real(kind=sp), parameter :: init_prob = 1.0_sp, factor = 0.75_sp, &
                             root_dist = 0.0_sp
-class(node_type), pointer :: root => null()
+type(node_type) :: root
 integer :: status
 
 ! initialize the random number generator to get a unique sequence per run
@@ -14,7 +14,6 @@ call init_random_seed()
 
 ! initialize root node, and create a tree where each node value
 ! denotes a distance between it, and its parent
-root => root%new()
 call root%init_random(init_prob, factor, root_dist)
 
 ! print the tree

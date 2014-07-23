@@ -10,11 +10,17 @@ module node_mod
         class(node_type), pointer :: left => null(), right => null()
     contains
         procedure, nopass, public :: new
-        procedure, public :: set_left, get_left, &
-                             set_right, get_right, &
-                             set_value, get_value, &
-                             show, init_random, count_nodes, &
-                             leaf_distance
+        procedure, public :: set_left
+        procedure, public :: get_left
+        procedure, public :: set_right
+        procedure, public :: get_right
+        procedure, public :: set_value
+        procedure, public :: get_value
+        procedure, public :: show
+        procedure, public :: init_random
+        procedure, public :: count_nodes
+        procedure, public :: leaf_distance
+        procedure, public :: finalize
         procedure :: show_level
     end type node_type
     
@@ -61,7 +67,7 @@ contains
         node%left => child
     end subroutine set_left
 
-    subroutine set_right(node, child)
+     subroutine set_right(node, child)
         implicit none
         class(node_type), intent(inout) :: node
         class(node_type), target, intent(in) :: child
@@ -87,7 +93,7 @@ contains
         class(node_type), intent(in) :: node
         character(len=*), intent(in) :: indent
         class(node_type), pointer :: child
-        write (unit=output_unit, fmt="(A, F5.3)") indent, node%get_value()
+        write (unit=output_unit, fmt="(A, F6.3)") indent, node%get_value()
         child => node%get_left()
         if (associated(child)) &
             call child%show_level(indent // '  ')
@@ -153,5 +159,21 @@ contains
             path2 = path2 + child%leaf_distance()
         dist = max(path1, path2)
     end function leaf_distance
+
+    recursive subroutine finalize(node)
+        implicit none
+        class(node_type), intent(inout) :: node
+        class(node_type), pointer :: child
+        child => node%get_left()
+        if (associated(child)) then
+            call child%finalize()
+            deallocate(child)
+        end if
+        child => node%get_right()
+        if (associated(child)) then
+            call child%finalize()
+            deallocate(child)
+        end if
+    end subroutine finalize
 
 end module node_mod
