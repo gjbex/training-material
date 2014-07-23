@@ -4,7 +4,7 @@ FPPFLAGS =
 LDFLAGS =
 LIBS = -lm
 
-TREE_TESTS_OBJS = node_mod.o tree_test.o
+TREE_TESTS_OBJS = node_mod.o random_mod.o tree_test.o
 APPS = tree_test
 
 all: $(APPS)
