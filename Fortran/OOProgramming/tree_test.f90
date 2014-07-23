@@ -20,6 +20,8 @@ call root%init_random(1.0, 0.75, 0.0)
 
 call root%show()
 
-write (unit=output_unit, fmt="(A, I3)") "node count = ", root%count_nodes()
-
+write (unit=output_unit, fmt="(A, I3)") "node count = ", &
+        root%count_nodes()
+write (unit=output_unit, fmt="(A, F6.3)") "max. distance =", &
+        root%leaf_distance()
 end program tree_test

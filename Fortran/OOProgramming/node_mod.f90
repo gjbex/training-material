@@ -13,7 +13,8 @@ module node_mod
         procedure, public :: set_left, get_left, &
                              set_right, get_right, &
                              set_value, get_value, &
-                             show, init_random, count_nodes
+                             show, init_random, count_nodes, &
+                             leaf_distance
         procedure :: show_level
     end type node_type
     
@@ -125,8 +126,8 @@ contains
     recursive function count_nodes(node) result(count)
         implicit none
         class(node_type), intent(in) :: node
-        class(node_type), pointer :: child
         integer :: count
+        class(node_type), pointer :: child
         count = 1
         child => node%get_left()
         if (associated(child)) &
@@ -135,5 +136,22 @@ contains
         if (associated(child)) &
             count = count + child%count_nodes()
     end function count_nodes
+
+    recursive function leaf_distance(node) result(dist)
+        implicit none
+        class(node_type), intent(in) :: node
+        real(kind=sp) :: dist
+        class(node_type), pointer :: child
+        real(kind=sp) :: path1, path2
+        path1 = node%get_value()
+        path2 = node%get_value()
+        child => node%get_left()
+        if (associated(child)) &
+            path1 = path1 + child%leaf_distance()
+        child => node%get_right()
+        if (associated(child)) &
+            path2 = path2 + child%leaf_distance()
+        dist = max(path1, path2)
+    end function leaf_distance
 
 end module node_mod
