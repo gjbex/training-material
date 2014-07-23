@@ -20,7 +20,7 @@ call root%init_random(init_prob, factor, root_dist)
 ! print the tree
 call root%show()
 
-! copmute the number of nodes in the tree
+! compute the number of nodes in the tree
 write (unit=output_unit, fmt="(A, I3)") "node count = ", &
         root%count_nodes()
 
