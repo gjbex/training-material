@@ -32,3 +32,4 @@ What is it?
 11. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
     from Python using `f2py`, C code by using `ctype`, and C/C++ code
     using SWIG.
+12. `Matplotlib`: a few illustrations of how to use the `pyplot` module.
