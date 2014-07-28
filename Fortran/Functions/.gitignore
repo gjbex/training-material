@@ -3,3 +3,5 @@ time_funcs
 *.pbs.o*
 *.pbs.e*
 gmon.out
+recursion_test
+internals_test

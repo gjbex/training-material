@@ -19,7 +19,7 @@ contains
 
 end module funcs_mod
 
-program recursion
+program recursion_test
     use funcs_mod
     implicit none
     integer, parameter :: n_min = 0, n_max = 6
@@ -29,4 +29,4 @@ program recursion
         print *, i, factorial(i)
     end do
 
-end program recursion
+end program recursion_test
