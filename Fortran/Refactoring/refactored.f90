@@ -16,16 +16,16 @@ program refactored
     do i = 1, m
         alpha = computationally_heavy(i)
         do j = 1, n
-            call matrix%set_element(i, j, alpha + whatever(j))
+            call matrix%set(i, j, alpha + whatever(j))
         end do
     end do
-    call matrix%set_row(2, row)
+    call matrix%set(2, row)
     call print_matrix(matrix)
     total = 0.0_sp
     do i = 1, m
         alpha = computationally_heavy(i)
         do j = 1, n
-            total = total + matrix%get_element(i, j)/alpha - whatever(j)
+            total = total + matrix%get(i, j)/alpha - whatever(j)
         end do
     end do
     print "(E12.5)", total
@@ -55,7 +55,7 @@ contains
         write (fmt_str, "('(', I2, 'E13.5)')") dims(2)
         write (unit=output_unit, fmt="(A)") "matrix"
         do i = 1, dims(1)
-            write (unit=output_unit, fmt=fmt_str) m%get_row(i)
+            write (unit=output_unit, fmt=fmt_str) m%get(i)
         end do
     end subroutine print_matrix
 

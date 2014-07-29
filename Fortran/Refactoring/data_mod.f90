@@ -10,10 +10,12 @@ module data_mod
         procedure, public :: allocate_data
         procedure, public :: deallocate_data
         procedure, public :: dshape
-        procedure, public :: get_element
-        procedure, public :: get_row
-        procedure, public :: set_element
-        procedure, public :: set_row
+        generic, public :: get => get_element, get_row
+        procedure :: get_element
+        procedure :: get_row
+        generic, public :: set => set_element, set_row
+        procedure :: set_element
+        procedure :: set_row
     end type data_type
 
 contains
