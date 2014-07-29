@@ -1,4 +1,4 @@
-program legacy
+program fixed
     use, intrinsic :: iso_fortran_env
     implicit none
     integer, parameter :: sp = REAL32
@@ -23,18 +23,18 @@ program legacy
     do j = 1, n
         row(j) = 2.0_sp*j
     end do
-    do i = 1, m
-        alpha = computationally_heavy(i)
-        do j = 1, n
+    do j = 1, n
+        do i = 1, m
+            alpha = computationally_heavy(i)
             matrix(i, j) = alpha + whatever(j)
         end do
     end do
     matrix(2, :) = row
     if (m <= 5 .and. n <= 5) call print_matrix(matrix)
     total = 0.0_sp
-    do i = 1, m
-        alpha = computationally_heavy(i)
-        do j = 1, n
+    do j = 1, n
+        do i = 1, m
+            alpha = computationally_heavy(i)
             total = total + matrix(i, j)/alpha - whatever(j)
         end do
     end do
@@ -70,4 +70,5 @@ contains
         end do
     end subroutine print_matrix
 
-end program legacy
+end program fixed
+
