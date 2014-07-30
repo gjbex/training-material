@@ -5,7 +5,8 @@ program refactored
     integer :: m, n, i, j
     type(data_type) :: matrix
     real(kind=sp), allocatable, dimension(:) :: row
-    real(kind=sp) :: alpha, total
+    real(kind=sp) :: alpha, x
+    integer :: total_large, total_small
     character(len=40) :: buffer
     
     if (command_argument_count() == 2) then
@@ -22,7 +23,7 @@ program refactored
     call matrix%allocate_data(m, n)
     allocate(row(n))
     do j = 1, n
-        row(j) = 2.0_sp*j
+        row(j) = row_func(j)
     end do
     do i = 1, m
         alpha = computationally_heavy(i)
@@ -32,29 +33,22 @@ program refactored
     end do
     call matrix%set_row(2, row)
     if (m <= 5 .and. n <= 5) call print_matrix(matrix)
-    total = 0.0_sp
+    total_small = 0
+    total_large = 0
     do i = 1, m
-        alpha = computationally_heavy(i)
         do j = 1, n
-            total = total + matrix%get_element(i, j)/alpha - whatever(j)
+            x = matrix%get_element(i, j)
+            if (x < 0.1_sp) total_small = total_small + 1
+            if (x > 0.9_sp) total_large = total_large + 1
         end do
     end do
-    print "(E12.5)", total
+    print "(A, I10)", "small: ", total_small
+    print "(A, I10)", "large: ", total_large
     call matrix%deallocate_data()
 
 contains
 
-    real(kind=sp) function computationally_heavy(n)
-        implicit none
-        integer, intent(in) :: n
-        computationally_heavy = 0.34_sp*n
-    end function computationally_heavy
-
-    real(kind=sp) function whatever(n)
-        implicit none
-        integer, intent(in) :: n
-        whatever = 1.23_sp*n
-    end function whatever
+    include "functions.f90"
 
     subroutine print_matrix(m)
         implicit none
