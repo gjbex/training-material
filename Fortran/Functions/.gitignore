@@ -5,3 +5,5 @@ time_funcs
 gmon.out
 recursion_test
 internals_test
+precision_test
+vectorization_test
