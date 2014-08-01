@@ -33,7 +33,7 @@ y += noise_ampl*np.random.randn(len(t))
 
 # plot signal
 # plt.subplot(2, 1, 1)
-plt.axes([0.1, 0.55, 0.8, 0.4])
+plt.subplot(2, 1, 1)
 plt.axis([0.0, 4000, -3.0, 3.0])
 plt.plot(t, y)
 plt.xlabel(r'$t$')
@@ -49,11 +49,14 @@ ty = ty/rnorm
 
 # plot normalized frequency spectrum
 max_freq = ceil(max(freq))
-plt.axes([0.1, 0.1, 0.8, 0.35])
+plt.subplot(2, 1, 2)
 plt.axis([0.0, max_freq, 0.0, 1.0])
 plt.plot(f[:n], np.abs(ty[:n]))
 plt.xlabel(r'$f$')
 plt.ylabel(r'spectrum')
+
+# fix layout problems caused by default axes of subplot
+plt.tight_layout()
 
 # show plot, or save it to a file, if specified
 if options.output:
