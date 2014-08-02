@@ -10,7 +10,7 @@ moviefile_fmt = '{0:s}.gif'
 
 def create_sigmoid(beta):
     def f(x):
-        return np.tanh(beta*x)
+        return np.tanh(4*beta*x)
     return f
         
 def find_roots(f, x_low=-5.0, x_high=5.0):
@@ -20,14 +20,14 @@ def find_roots(f, x_low=-5.0, x_high=5.0):
     r2 = opt.root(f_opt, np.array([x_high]))
     return np.array([r1.x[0], 0.0, r2.x[0]])
 
-def create_plot(beta, i, options):
+def create_plot(beta, i, betas, magnetization, options):
     sigmoid = create_sigmoid(beta)
     x = np.linspace(-options.x_max, options.x_max, options.points)
     y = sigmoid(x)
     plt.plot(x, y)
     plt.plot(x, x)
-    plt.xlabel(r'$M$')
-    plt.ylabel(r'$\tanh(\beta M)$')
+    plt.xlabel(r'$m$')
+    plt.ylabel(r'$\tanh(4\beta m)$')
     plt.axis([-options.x_max, options.x_max, -1.1, 1.1])
     plt.text(-options.x_max + 0.5, 0.5, r'$\beta = {0:.5f}$'.format(beta),
              fontsize=16)
@@ -35,6 +35,17 @@ def create_plot(beta, i, options):
     roots = find_roots(sigmoid)
     values = sigmoid(roots)
     plt.plot(roots, values, 'ro')
+# plot magnetization
+    betas.append(beta)
+    for k, root in enumerate(roots):
+        magnetization[k].append(root)
+    plt.axes([0.6, 0.2, 0.35, 0.35])
+    T = 1.0/np.array(betas)
+    plt.axis([0.0, 6.0, -1.1, 1.1])
+    for magn in magnetization:
+        plt.plot(T, np.array(magn), 'b-')
+    plt.xlabel(r'$T$')
+    plt.ylabel(r'$m$')
     plt.savefig(imgfile_fmt.format(options.file_base, i))
     plt.clf()
 
@@ -44,29 +55,38 @@ if __name__ == '__main__':
 
     arg_parser = ArgumentParser(description='create movie for Ising mean '
                                             'field equation')
-    arg_parser.add_argument('--x_max', type=float, default=2.0,
+    arg_parser.add_argument('--x_max', type=float, default=1.5,
                             help='x-value range')
     arg_parser.add_argument('--points', type=int, default=200,
                             help='number of plot points to use')
-    arg_parser.add_argument('--beta_max', type=float, default=5.0,
+    arg_parser.add_argument('--beta_max', type=float, default=3.0,
                             help='maximum beta value')
     arg_parser.add_argument('--alpha', type=float, default=2.0,
                             help='value in beta(i+1) = 1 + (1 - beta(i))/alpha')
-    arg_parser.add_argument('--file_base', default='sigmoid',
+    arg_parser.add_argument('--file_base', default='ising_magnetization',
                             help='base name to use for file')
     arg_parser.add_argument('--steps', type=int, default=10,
                             help='number of plot points to use')
     options = arg_parser.parse_args()
 
-    i = 0
+    betas = []
+    magnetization = [[], [], []]
+    i = 1
     beta = options.beta_max
-    while beta >= 1.00001 and i <= options.steps:
-        i += 1
+    while beta >= 0.25001 and i <= options.steps:
         msg_str = 'creating plot {0:d} for beta = {1:.5f}\n'.format(i, beta)
         sys.stderr.write(msg_str)
-        create_plot(beta, i, options)
-        beta = 1.0 + (beta - 1.0)/2.0
-    total_figures = i
+        create_plot(beta, i, betas, magnetization, options)
+        i += 1
+        beta = 0.25 + (beta - 0.25)/options.alpha
+    beta = 0.25
+    while beta >= 1.0/6.0 and i <= options.steps:
+        msg_str = 'creating plot {0:d} for beta = {1:.5f}\n'.format(i, beta)
+        sys.stderr.write(msg_str)
+        create_plot(beta, i, betas, magnetization, options)
+        i += 1
+        beta -= 0.025
+    total_figures = i - 1
     sys.stderr.write('creating movie GIF\n')
     try:
         status = subprocess.call(['convert', '-set', 'delay', '100',
@@ -75,6 +95,6 @@ if __name__ == '__main__':
     except subprocess.CalledProcessError as e:
         sys.stderr.write('# error: {0}\n'.format(e.message))
         sys.exit(status)
-    for i in xrange(1, total_figures + 1):
+    for i in xrange(1, total_figures):
         os.remove(imgfile_fmt.format(options.file_base, i))
 
