@@ -41,7 +41,7 @@ def create_plot(beta, i, betas, magnetization, options):
         magnetization[k].append(root)
     plt.axes([0.6, 0.2, 0.35, 0.35])
     T = 1.0/np.array(betas)
-    plt.axis([0.0, 6.0, -1.1, 1.1])
+    plt.axis([0.0, 1.0/options.beta_min, -1.1, 1.1])
     for magn in magnetization:
         plt.plot(T, np.array(magn), 'b-')
     plt.xlabel(r'$T$')
@@ -59,14 +59,21 @@ if __name__ == '__main__':
                             help='x-value range')
     arg_parser.add_argument('--points', type=int, default=200,
                             help='number of plot points to use')
+    arg_parser.add_argument('--beta_min', type=float, default=1.0/6.0,
+                            help='minimum beta value')
     arg_parser.add_argument('--beta_max', type=float, default=3.0,
                             help='maximum beta value')
     arg_parser.add_argument('--alpha', type=float, default=2.0,
-                            help='value in beta(i+1) = 1 + (1 - beta(i))/alpha')
+                            help='value in beta(i+1) = 1/4 '
+                                 '+ (1/4 - beta(i))/alpha')
     arg_parser.add_argument('--file_base', default='ising_magnetization',
                             help='base name to use for file')
     arg_parser.add_argument('--steps', type=int, default=10,
                             help='number of plot points to use')
+    arg_parser.add_argument('--keep_last', action='store_true',
+                            help='keep last image')
+    arg_parser.add_argument('--keep_all', action='store_true',
+                            help='keep all images')
     options = arg_parser.parse_args()
 
     betas = []
@@ -80,7 +87,7 @@ if __name__ == '__main__':
         i += 1
         beta = 0.25 + (beta - 0.25)/options.alpha
     beta = 0.25
-    while beta >= 1.0/6.0 and i <= options.steps:
+    while beta >= options.beta_min and i <= options.steps:
         msg_str = 'creating plot {0:d} for beta = {1:.5f}\n'.format(i, beta)
         sys.stderr.write(msg_str)
         create_plot(beta, i, betas, magnetization, options)
@@ -95,6 +102,9 @@ if __name__ == '__main__':
     except subprocess.CalledProcessError as e:
         sys.stderr.write('# error: {0}\n'.format(e.message))
         sys.exit(status)
-    for i in xrange(1, total_figures):
-        os.remove(imgfile_fmt.format(options.file_base, i))
+    if not options.keep_all:
+        for i in xrange(1, total_figures):
+            os.remove(imgfile_fmt.format(options.file_base, i))
+        if not options.keep_last:
+            os.remove(imgfile_fmt.format(options.file_base, total_figures))
 
