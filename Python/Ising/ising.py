@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 
 import numpy as np
+import scipy.stats
+
+def do_nothing(ising, options):
+    pass
+
+def step_do_nothing(step, ising, options):
+    pass
 
 class IsingSystem(object):
 
@@ -18,19 +25,30 @@ class IsingSystem(object):
         up = (i, j - 1)
         right = (i + 1 - self.N, j)
         down = (i, j + 1 - self.N)
-        return self.J*self._s[i][j]*(self._s[left] + self._s[up] +
-                                     self._s[right] + self._s[down] +
-                                     2.0*self.H)
+        return 2*self.J*self._s[i][j]*(self._s[left] + self._s[up] +
+                                       self._s[right] + self._s[down] +
+                                       self.H)
 
     def step(self):
         for i in xrange(self._N):
             for j in xrange(self._N):
                 delta = self._delta_E(i, j)
-                if delta < 0.0 or np.exp(-delta/self.T) > np.random.uniform():
+                if (delta < 0.0 or
+                    np.exp(-delta/self.T) > np.random.uniform()):
                     self._s[i, j] = -self._s[i, j]
                     self._M += 2*self._s[i, j]
                     self._E += delta
     
+    def run(self, t_max, prologue=do_nothing, epilogue=do_nothing,
+            pre_step=step_do_nothing, post_step=step_do_nothing,
+            options={}):
+        prologue(self, options)
+        for t in xrange(1, t_max + 1):
+            pre_step(t, self, options)
+            ising.step()
+            post_step(t, self, options)
+        epilogue(self, options)
+
     @property
     def T(self):
         return self._T
@@ -48,12 +66,48 @@ class IsingSystem(object):
         return self._H
 
     @property
-    def magentization(self):
+    def magnetization(self):
         return self._M/self._N**2
 
     @property
     def energy(self):
         return self._E/self.N**2
+
+
+def print_header(ising, options):
+    print 't,M,E'
+    print '# T = {0:.3f}'.format(ising.T)
+    print '# N = {0:d}'.format(ising.N)
+    print '# J = {0:.3f}'.format(ising.J)
+    print '# H = {0:.3f}'.format(ising.H)
+    print '{0:d},{1:.4f},{2:.4f}'.format(0, ising.magnetization,
+                                         ising.energy)
+
+def print_data(t, ising, options):
+    print '{0:d},{1:.4f},{2:.4f}'.format(t, ising.magnetization,
+                                         ising.energy)
+
+def init_average(ising, options):
+    options['t'] = []
+    options['M'] = []
+    options['E'] = []
+
+def update_average(t, ising, options):
+    if t > 100 and t % 10 == 0:
+        options['t'].append(float(t))
+        options['M'].append(ising.magnetization)
+
+def compute_average(ising, options):
+    slope, intercept, r, _, _ = scipy.stats.linregress(options['t'],
+                                                       options['M'])
+    options['M_mean'] = intercept
+    options['M_slope'] = slope
+    options['M_r^2'] = r**2
+    
+def show_progress(t, ising, options):
+    if t % 100 == 0:
+        print '# processing step {0:d}'.format(t)
+
 
 if __name__ == '__main__':
 
@@ -72,16 +126,11 @@ if __name__ == '__main__':
     arg_parser.add_argument('--steps', type=int, default=10,
                             help='number of simulation steps')
     options = arg_parser.parse_args()
-    print '# T = {0:.3f}'.format(options.T)
-    print '# N = {0:d}'.format(options.N)
-    print '# J = {0:.3f}'.format(options.J)
-    print '# H = {0:.3f}'.format(options.H)
     ising = IsingSystem(options.N, J=options.J, H=options.H, T=options.T)
-    print 't,M,E'
-    print '{0:d},{1:.4f},{2:.4f}'.format(0, ising.magentization,
-                                         ising.energy)
-    for t in xrange(1, options.steps + 1):
-        ising.step()
-        print '{0:d},{1:.4f},{2:.4f}'.format(t, ising.magentization,
-                                             ising.energy)
+#    ising.run(options.steps, prologue=print_header, pre_step=print_data)
+    run_options = {}
+    ising.run(options.steps, prologue=init_average,
+              pre_step=show_progress, post_step=update_average,
+              epilogue=compute_average, options=run_options)
+    print 'M = {M_mean:.4f}, slope M = {M_slope:.4f}, R^2 = {M_r^2:.4f}'.format(**run_options)
 
