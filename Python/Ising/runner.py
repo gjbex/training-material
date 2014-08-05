@@ -15,13 +15,31 @@ class NoConvergenceError(Exception):
         super(NoConvergenceError, self).__init__()
         self.message = 'no convergence reached'
 
+class NoRunnerStepsError(Exception):
+
+    def __init__(self):
+        super(NoConvergenceError, self).__init__()
+        self.message = 'no number of steps specified for Runner'
+
+
+class NoRunnerSystemError(Exception):
+
+    def __init__(self):
+        super(NoConvergenceError, self).__init__()
+        self.message = 'no Ising system specified for Runner'
+
 
 class BaseRunner(object):
 
-    def __init__(self, ising, is_verbose=True):
+    def __init__(self, ising=None, steps=None, is_verbose=True):
+        super(BaseRunner, self).__init__()
         self._ising = ising
+        self._steps = steps
         self._is_verbose = is_verbose
-        self._quantities = {}
+        self.reset()
+
+    def set_system(self, ising):
+        self._ising = ising
 
     def get(self, quantity):
         if quantity in self._quantities:
@@ -32,9 +50,19 @@ class BaseRunner(object):
     def quantities(self):
         return self._quantities.keys()
 
-    def run(self, t_max):
+    def reset(self):
+        self._quantities = {}
+
+    def run(self, steps=None):
+        if not steps:
+            if self._steps:
+                steps = self._steps
+            else:
+                raise NoRunnerStepsError()
+        if not self._ising:
+            raise NoRunnerSystemError()
         self._prologue()
-        for t in xrange(1, t_max + 1):
+        for t in xrange(1, steps + 1):
             if not self._pre_step(t):
                 break
             self._ising.step()
@@ -63,8 +91,9 @@ import scipy.stats
 class SingleRunner(BaseRunner):
 
 
-    def __init__(self, ising, file_name=None, is_verbose=True):
-        super(SingleRunner, self).__init__(ising, is_verbose)
+    def __init__(self, ising=None, steps=None, file_name=None,
+                 is_verbose=True):
+        super(SingleRunner, self).__init__(ising, steps, is_verbose)
         self._file_name = file_name
         self._data_fmt = '{0:d},{1:.4f},{2:.4f}\n'
 
@@ -92,9 +121,9 @@ class SingleRunner(BaseRunner):
 
 class SingleAverageRunner(BaseRunner):
         
-    def __init__(self, ising, is_verbose=True, burn_in=100,
-                 sample_period=10):
-        super(SingleAverageRunner, self).__init__(ising, is_verbose)
+    def __init__(self, ising=None, steps=None, is_verbose=True,
+                 burn_in=100, sample_period=10):
+        super(SingleAverageRunner, self).__init__(ising, steps, is_verbose)
         self._burn_in = burn_in
         self._sample_period = sample_period
 
@@ -116,12 +145,13 @@ class SingleAverageRunner(BaseRunner):
         self._quantities['M stderr'] = result[4]
 
 
-class EquilibriumRunner(SingleAverageRunner):
+class EquilibriumRunner(BaseRunner):
         
-    def __init__(self, ising, is_verbose=True, burn_in=100,
-                 sample_period=10, window=20, max_slope=1e-4):
-        super(EquilibriumRunner, self).__init__(ising, is_verbose,
-                                                burn_in, sample_period)
+    def __init__(self, ising=None, steps=None, is_verbose=True,
+                 burn_in=100, sample_period=10, window=20, max_slope=1e-4):
+        super(EquilibriumRunner, self).__init__(ising, steps, is_verbose)
+        self._burn_in = burn_in
+        self._sample_period = sample_period
         self._window = window
         self._max_slope = max_slope
     

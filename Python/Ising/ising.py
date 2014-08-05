@@ -13,6 +13,9 @@ class IsingSystem(object):
         self._M = float(N*N)
         self._E = -J*N**2/2.0 - H*N
 
+    def clone(self):
+        return IsingSystem(self.N, self.J, self.H, self.T)
+
     def _delta_E(self, i, j):
         left = (i - 1, j)
         up = (i, j - 1)

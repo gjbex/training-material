@@ -7,8 +7,8 @@ if __name__ == '__main__':
     import sys
 
     from ising import IsingSystem
-    from runner import (SingleRunner, SingleAverageRunner,
-                        EquilibriumRunner, UnknownQuantityError)
+    from runner import EquilibriumRunner
+    from averager import Averager
 
     arg_parser = ArgumentParser(description='2D ising system simulaation')
     arg_parser.add_argument('--N', type=int, default=10,
@@ -29,28 +29,21 @@ if __name__ == '__main__':
                             help='window size for convergence test')
     arg_parser.add_argument('--max_slope', type=float, default=1e-4,
                             help='maximum slope as convergence criterion')
-    arg_parser.add_argument('--mode', choices=['single_run', 'single_avg',
-                                               'equilibrium'],
-                            required=True, help='run mode')
+    arg_parser.add_argument('--runs', type=int, default=10,
+                            help='number of independent runs')
     arg_parser.add_argument('--verbose', action='store_true',
                             help='show progress information')
     options = arg_parser.parse_args()
     ising = IsingSystem(options.N, J=options.J, H=options.H, T=options.T)
-    if options.mode == 'single_run':
-        runner = SingleRunner(ising, is_verbose=options.verbose)
-    elif options.mode == 'single_avg':
-        runner = SingleAverageRunner(ising, is_verbose=options.verbose,
-                                     burn_in=options.burn_in,
-                                     sample_period=options.sample_period)
-    elif options.mode == 'equilibrium':
-        runner = EquilibriumRunner(ising, is_verbose=options.verbose,
-                                   burn_in=options.burn_in,
-                                   sample_period=options.sample_period,
-                                   window=options.window)
-    else:
-        sys.stderr.write('# error: unknown mode\n')
-        sys.exit(1)
-    runner.run(options.steps)
-    for quantity in runner.quantities():
-        print '{0:s} = {1:.4e}'.format(quantity, runner.get(quantity))
+    runner = EquilibriumRunner(ising=None, steps=options.steps,
+                               is_verbose=options.verbose,
+                               burn_in=options.burn_in,
+                               sample_period=options.sample_period,
+                               window=options.window)
+    averager = Averager(runner, ising, is_verbose=options.verbose)
+    averager.average(options.runs)
+    M_values = averager.get('M mean')
+    M_fmt = '{T:.2f},{mean:.3f},{std:.3e},{min:.3f},{max:.3f}'
+    print 'T,M,M_std,M_min,M_max'
+    print M_fmt.format(T=options.T, **M_values)
 
