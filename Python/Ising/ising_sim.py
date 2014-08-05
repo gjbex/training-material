@@ -17,8 +17,9 @@ if __name__ == '__main__':
                             help='spin-spin interactino energy')
     arg_parser.add_argument('--H', type=float, default=0.0,
                             help='magnetic field')
-    arg_parser.add_argument('--T', type=float, default=1.5,
-                            help='temerature in units k_b')
+    arg_parser.add_argument('--T', default='1.5',
+                            help='temerature in units k_b, can be '
+                                 'a comma-separated list')
     arg_parser.add_argument('--steps', type=int, default=10,
                             help='number of simulation steps')
     arg_parser.add_argument('--burn_in', type=int, default=100,
@@ -34,16 +35,20 @@ if __name__ == '__main__':
     arg_parser.add_argument('--verbose', action='store_true',
                             help='show progress information')
     options = arg_parser.parse_args()
-    ising = IsingSystem(options.N, J=options.J, H=options.H, T=options.T)
-    runner = EquilibriumRunner(ising=None, steps=options.steps,
-                               is_verbose=options.verbose,
-                               burn_in=options.burn_in,
-                               sample_period=options.sample_period,
-                               window=options.window)
-    averager = Averager(runner, ising, is_verbose=options.verbose)
-    averager.average(options.runs)
-    M_values = averager.get('M mean')
-    M_fmt = '{T:.2f},{mean:.3f},{std:.3e},{min:.3f},{max:.3f}'
     print 'T,M,M_std,M_min,M_max'
-    print M_fmt.format(T=options.T, **M_values)
+    for T in (float(T_str) for T_str in options.T.split(',')):
+        if options.verbose:
+            sys.stderr.write('# computing T = {0:.4f}\n'.format(T))
+        ising = IsingSystem(options.N, J=options.J, H=options.H, T=T)
+        runner = EquilibriumRunner(ising=None, steps=options.steps,
+                                   is_verbose=options.verbose,
+                                   burn_in=options.burn_in,
+                                   sample_period=options.sample_period,
+                                   window=options.window)
+        averager = Averager(runner, ising, is_verbose=options.verbose)
+        averager.average(options.runs)
+        M_values = averager.get('M mean')
+        M_fmt = '{T:.2f},{mean:.3f},{std:.3e},{min:.3f},{max:.3f}'
+        print M_fmt.format(T=T, **M_values)
+        sys.stdout.flush()
 
