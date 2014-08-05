@@ -21,9 +21,9 @@ class IsingSystem(object):
         up = (i, j - 1)
         right = (i + 1 - self.N, j)
         down = (i, j + 1 - self.N)
-        return 2*self.J*self._s[i][j]*(self._s[left] + self._s[up] +
-                                       self._s[right] + self._s[down] +
-                                       self.H)
+        return 2.0*self._s[i][j]*(self.J*(self._s[left] + self._s[up] +
+                                          self._s[right] + self._s[down]) +
+                                  self.H)
 
     def step(self):
         for i in xrange(self._N):
