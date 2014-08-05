@@ -8,14 +8,18 @@ OBJS = ising_cxx_wrap.o ising.o
 
 all: _ising_cxx.so
 
+deploy: _ising_cxx.so
+	cp _ising_cxx.so ..
+	cp ising_cxx.py ..
+
 _ising_cxx.so: $(OBJS)
 	$(CXX) -shared $(CXXFLAGS) $(CPPFLAGS) -o $@ $(OBJS)
 
 ising_cxx_wrap.o: ising_cxx_wrap.cxx
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $<
 
-ising.o: ising.cxx
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $<
+ising.o: ising.cxx ising.h
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c ising.cxx
 
 ising_cxx_wrap.cxx: ising_cxx.i
 	swig -python -c++ $<

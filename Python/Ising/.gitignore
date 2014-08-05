@@ -1,1 +1,3 @@
 *.pyc
+_ising_cxx.so
+ising_cxx.py

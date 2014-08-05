@@ -3,6 +3,8 @@
 import sys
 import numpy as np
 
+from ising_cxx import IsingSystem
+
 class Averager(object):
 
     def __init__(self, runner, ising, is_verbose=True):

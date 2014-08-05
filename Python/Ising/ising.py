@@ -11,7 +11,7 @@ class IsingSystem(object):
         self._T = T
         self._s = np.ones((N, N), dtype=np.int32)
         self._M = float(N*N)
-        self._E = -J*N**2/2.0 - H*N
+        self._E = -J*N**2 - H*N
 
     def clone(self):
         return IsingSystem(self.N, self.J, self.H, self.T)
@@ -51,11 +51,9 @@ class IsingSystem(object):
     def H(self):
         return self._H
 
-    @property
     def magnetization(self):
         return self._M/self._N**2
 
-    @property
     def energy(self):
         return self._E/self.N**2
 

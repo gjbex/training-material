@@ -107,16 +107,18 @@ class SingleRunner(BaseRunner):
         self._file.write('# N = {0:d}\n'.format(self._ising.N))
         self._file.write('# J = {0:.3f}\n'.format(self._ising.J))
         self._file.write('# H = {0:.3f}\n'.format(self._ising.H))
-        self._file.write(self._data_fmt.format(0, self._ising.magnetization,
-                                               self._ising.energy))
+        self._file.write(self._data_fmt.format(0, self.
+                                              _ising.magnetization(),
+                                               self._ising.energy()))
 
     def _epilogue(self):
         if self._file_name:
             self._file.close()
 
     def _post_step(self, t):
-        self._file.write(self._data_fmt.format(t, self._ising.magnetization,
-                                               self._ising.energy))
+        self._file.write(self._data_fmt.format(t, self.
+                                              _ising.magnetization(),
+                                               self._ising.energy()))
         return True
 
 class SingleAverageRunner(BaseRunner):
@@ -134,7 +136,7 @@ class SingleAverageRunner(BaseRunner):
     def _post_step(self, t):
         if t > self._burn_in and t % self._sample_period == 0:
             self._t.append(float(t))
-            self._M.append(self._ising.magnetization)
+            self._M.append(self._ising.magnetization())
         return True
 
     def _epilogue(self):
@@ -165,7 +167,7 @@ class EquilibriumRunner(BaseRunner):
                 self._t.pop(0)
                 self._M.pop(0)
             self._t.append(float(t))
-            self._M.append(self._ising.magnetization)
+            self._M.append(self._ising.magnetization())
             if len(self._t) == self._window:
                 result = scipy.stats.linregress(self._t, self._M)
                 self._quantities['M mean'] = result[1]

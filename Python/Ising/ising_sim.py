@@ -6,7 +6,7 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     import sys
 
-    from ising import IsingSystem
+    from ising_cxx import IsingSystem
     from runner import EquilibriumRunner
     from averager import Averager
 
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     for T in (float(T_str) for T_str in options.T.split(',')):
         if options.verbose:
             sys.stderr.write('# computing T = {0:.4f}\n'.format(T))
-        ising = IsingSystem(options.N, J=options.J, H=options.H, T=T)
+        ising = IsingSystem(options.N, options.J, options.H, T)
         runner = EquilibriumRunner(ising=None, steps=options.steps,
                                    is_verbose=options.verbose,
                                    burn_in=options.burn_in,

@@ -10,6 +10,7 @@ class IsingSystem {
     public:
         IsingSystem(int N, double J, double H, double T);
         ~IsingSystem();
+        IsingSystem *clone(void);
         int N() const;
         double J() const;
         double H() const;
