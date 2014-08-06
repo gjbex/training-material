@@ -4,9 +4,9 @@
 if __name__ == '__main__':
 
     from argparse import ArgumentParser
-    import random, sys
+    import importlib, random, sys
 
-    from ising_cxx import IsingSystem
+    from ising import IsingSystem
     from runner import EquilibriumRunner
     from averager import Averager
 
@@ -34,13 +34,26 @@ if __name__ == '__main__':
                             help='number of independent runs')
     arg_parser.add_argument('--verbose', action='store_true',
                             help='show progress information')
+    arg_parser.add_argument('--seed', type=int,
+                            help='seed for random number generator, '
+                                 'only needed for development')
+    arg_parser.add_argument('--python', action='store_true',
+                            help='use pure Python implementation')
     options = arg_parser.parse_args()
+    if options.seed is None:
+        seed = random.randint(0, 1000000000)
+    else:
+        seed = options.seed
+    if options.python:
+        ising_module = importlib.import_module('ising')
+    else:
+        ising_module = importlib.import_module('ising_cxx')
     print 'T,M,M_std,M_min,M_max'
     for T in (float(T_str) for T_str in options.T.split(',')):
         if options.verbose:
             sys.stderr.write('# computing T = {0:.4f}\n'.format(T))
-        ising = IsingSystem(options.N, options.J, options.H, T)
-        ising.init_random(random.randint(0, 1000000000))
+        ising = ising_module.IsingSystem(options.N, options.J, options.H, T)
+        ising.init_random(seed)
         runner = EquilibriumRunner(ising=None, steps=options.steps,
                                    is_verbose=options.verbose,
                                    burn_in=options.burn_in,

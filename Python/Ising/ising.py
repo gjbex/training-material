@@ -58,5 +58,5 @@ class IsingSystem(object):
         return self._E/self.N**2
 
     def init_random(self, seed):
-        pass
+        np.random.seed(seed)
 
