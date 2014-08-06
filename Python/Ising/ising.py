@@ -57,3 +57,6 @@ class IsingSystem(object):
     def energy(self):
         return self._E/self.N**2
 
+    def init_random(self, seed):
+        pass
+

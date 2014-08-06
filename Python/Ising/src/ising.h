@@ -1,6 +1,8 @@
 #ifndef ISING_HDR
 #define ISING_HDR
 
+#include <stdlib.h>
+
 class IsingSystem {
     private:
         int _N;
@@ -18,6 +20,7 @@ class IsingSystem {
         double magnetization() const;
         double energy() const;
         void step();
+        void init_random(int seed);
 };
 
 inline int IsingSystem::N() const {
@@ -42,6 +45,10 @@ inline double IsingSystem::magnetization() const {
 
 inline double IsingSystem::energy() const {
     return _E/(_N*_N);
+}
+
+inline void IsingSystem::init_random(int seed) {
+    srand(seed);
 }
 
 #endif

@@ -4,7 +4,7 @@
 if __name__ == '__main__':
 
     from argparse import ArgumentParser
-    import sys
+    import random, sys
 
     from ising_cxx import IsingSystem
     from runner import EquilibriumRunner
@@ -40,6 +40,7 @@ if __name__ == '__main__':
         if options.verbose:
             sys.stderr.write('# computing T = {0:.4f}\n'.format(T))
         ising = IsingSystem(options.N, options.J, options.H, T)
+        ising.init_random(random.randint(0, 1000000000))
         runner = EquilibriumRunner(ising=None, steps=options.steps,
                                    is_verbose=options.verbose,
                                    burn_in=options.burn_in,
@@ -48,7 +49,7 @@ if __name__ == '__main__':
         averager = Averager(runner, ising, is_verbose=options.verbose)
         averager.average(options.runs)
         M_values = averager.get('M mean')
-        M_fmt = '{T:.2f},{mean:.3f},{std:.3e},{min:.3f},{max:.3f}'
+        M_fmt = '{T:.4f},{mean:.3f},{std:.3e},{min:.3f},{max:.3f}'
         print M_fmt.format(T=T, **M_values)
         sys.stdout.flush()
 
