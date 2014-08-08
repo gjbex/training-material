@@ -121,30 +121,26 @@ class SingleRunner(BaseRunner):
                                                self._ising.energy()))
         return True
 
-class SingleAverageRunner(BaseRunner):
-        
+
+class ActivityHeatmapRunner(BaseRunner):
+
     def __init__(self, ising=None, steps=None, is_verbose=True,
-                 burn_in=100, sample_period=10):
-        super(SingleAverageRunner, self).__init__(ising, steps, is_verbose)
+                 burn_in=100):
+        super(ActivityHeatmapRunner, self).__init__(ising, steps,
+                                                    is_verbose)
         self._burn_in = burn_in
-        self._sample_period = sample_period
 
     def _prologue(self):
-        self._t = []
-        self._M = []
+        self._quantities['heatmap'] = np.zeros((self._ising.N(),
+                                                self._ising.N()),
+                                               dtype=np.float32)
 
     def _post_step(self, t):
-        if t > self._burn_in and t % self._sample_period == 0:
-            self._t.append(float(t))
-            self._M.append(self._ising.magnetization())
+        if t > self._burn_in:
+            for i in xrange(self._ising.N()):
+                for j in xrange(self._ising.N()):
+                    self._quantities['heatmap'][i, j] += self._ising.s(i, j)
         return True
-
-    def _epilogue(self):
-        result = scipy.stats.linregress(self._t, self._M)
-        self._quantities['M mean'] = result[1]
-        self._quantities['M slope'] = result[0]
-        self._quantities['M R^2'] = result[2]**2
-        self._quantities['M stderr'] = result[4]
 
 
 class EquilibriumRunner(BaseRunner):

@@ -51,6 +51,9 @@ class IsingSystem(object):
     def H(self):
         return self._H
 
+    def s(self, i, j):
+        return self._s[i, j]
+
     def magnetization(self):
         return self._M/self._N**2
 

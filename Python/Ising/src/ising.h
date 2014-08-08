@@ -17,6 +17,7 @@ class IsingSystem {
         double J() const;
         double H() const;
         double T() const;
+        int s(int i, int j) const;
         double magnetization() const;
         double energy() const;
         void step();
@@ -37,6 +38,10 @@ inline double IsingSystem::H() const {
 
 inline double IsingSystem::T() const {
     return _T;
+}
+
+inline int IsingSystem::s(int i, int j) const {
+    return _s[i*_N + j];
 }
 
 inline double IsingSystem::magnetization() const {

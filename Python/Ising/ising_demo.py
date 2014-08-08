@@ -6,8 +6,10 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     import sys
 
-    from ising import IsingSystem
-    from runner import (SingleRunner, SingleAverageRunner,
+    import numpy as np
+
+    from ising_cxx import IsingSystem
+    from runner import (SingleRunner, ActivityHeatmapRunner,
                         EquilibriumRunner, UnknownQuantityError)
 
     arg_parser = ArgumentParser(description='2D ising system simulaation')
@@ -29,19 +31,19 @@ if __name__ == '__main__':
                             help='window size for convergence test')
     arg_parser.add_argument('--max_slope', type=float, default=1e-4,
                             help='maximum slope as convergence criterion')
-    arg_parser.add_argument('--mode', choices=['single_run', 'single_avg',
-                                               'equilibrium'],
+    arg_parser.add_argument('--mode', choices=['single_run',
+                                               'equilibrium',
+                                               'heatmap'],
                             required=True, help='run mode')
     arg_parser.add_argument('--verbose', action='store_true',
                             help='show progress information')
     options = arg_parser.parse_args()
-    ising = IsingSystem(options.N, J=options.J, H=options.H, T=options.T)
+    ising = IsingSystem(options.N, options.J, options.H, options.T)
     if options.mode == 'single_run':
         runner = SingleRunner(ising, is_verbose=options.verbose)
-    elif options.mode == 'single_avg':
-        runner = SingleAverageRunner(ising, is_verbose=options.verbose,
-                                     burn_in=options.burn_in,
-                                     sample_period=options.sample_period)
+    elif options.mode == 'heatmap':
+        runner = ActivityHeatmapRunner(ising, is_verbose=options.verbose,
+                                       burn_in=options.burn_in)
     elif options.mode == 'equilibrium':
         runner = EquilibriumRunner(ising, is_verbose=options.verbose,
                                    burn_in=options.burn_in,
@@ -51,6 +53,9 @@ if __name__ == '__main__':
         sys.stderr.write('# error: unknown mode\n')
         sys.exit(1)
     runner.run(options.steps)
-    for quantity in runner.quantities():
-        print '{0:s} = {1:.4e}'.format(quantity, runner.get(quantity))
+    if options.mode == 'heatmap':
+        np.savetxt(sys.stdout, runner.get('heatmap'))
+    elif options.mode == 'equilibrium':
+        for quantity in runner.quantities():
+            print '{0:s} = {1:.4e}'.format(quantity, runner.get(quantity))
 
