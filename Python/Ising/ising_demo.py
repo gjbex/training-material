@@ -4,12 +4,12 @@
 if __name__ == '__main__':
 
     from argparse import ArgumentParser
-    import sys
+    import random, sys
 
     import numpy as np
 
     from ising_cxx import IsingSystem
-    from runner import (SingleRunner, ActivityHeatmapRunner,
+    from runner import (SingleRunner, MovieRunner, ActivityHeatmapRunner,
                         EquilibriumRunner, UnknownQuantityError)
 
     arg_parser = ArgumentParser(description='2D ising system simulaation')
@@ -29,18 +29,26 @@ if __name__ == '__main__':
                             help='sample period for averages')
     arg_parser.add_argument('--window', type=int, default=20,
                             help='window size for convergence test')
-    arg_parser.add_argument('--max_slope', type=float, default=1e-4,
-                            help='maximum slope as convergence criterion')
     arg_parser.add_argument('--mode', choices=['single_run',
+                                               'movie',
                                                'equilibrium',
                                                'heatmap'],
                             required=True, help='run mode')
+    arg_parser.add_argument('--seed', type=int,
+                            help='random number generator seed')
     arg_parser.add_argument('--verbose', action='store_true',
                             help='show progress information')
     options = arg_parser.parse_args()
     ising = IsingSystem(options.N, options.J, options.H, options.T)
+    if options.seed:
+        seed = options.seed
+    else:
+        seed = random.randint(0, 1000000000)
+    ising.init_random(seed)
     if options.mode == 'single_run':
         runner = SingleRunner(ising, is_verbose=options.verbose)
+    elif options.mode == 'movie':
+        runner = MovieRunner(ising)
     elif options.mode == 'heatmap':
         runner = ActivityHeatmapRunner(ising, is_verbose=options.verbose,
                                        burn_in=options.burn_in)
