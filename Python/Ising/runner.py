@@ -3,35 +3,59 @@
 import sys
 
 class UnknownQuantityError(Exception):
-
+    '''
+    Exception thrown when a Runner is queried for a non-existing quantiy.
+    '''
     def __init__(self, quantity):
         super(UnknownQuantityError, self).__init__()
         self.message = "unknown quantity '{0}'".format(quantity)
 
 
 class NoConvergenceError(Exception):
-
+    '''
+    Exception thrown when no convergence is reached in the specified amount
+    of steps.
+    '''
     def __init__(self):
         super(NoConvergenceError, self).__init__()
         self.message = 'no convergence reached'
 
-class NoRunnerStepsError(Exception):
 
+class NoRunnerStepsError(Exception):
+    '''
+    Since the number of steps to take can be specified either on
+    construction of the object, or as argument of the run options, it
+    may well be forgotten twice.
+    '''
     def __init__(self):
         super(NoConvergenceError, self).__init__()
         self.message = 'no number of steps specified for Runner'
 
 
 class NoRunnerSystemError(Exception):
-
+    '''
+    Since the Ising system can be set either on construction of the Runner,
+    or by calling the set_system() method, it may be forgotten twice.
+    '''
     def __init__(self):
         super(NoConvergenceError, self).__init__()
         self.message = 'no Ising system specified for Runner'
 
 
 class BaseRunner(object):
-
-    def __init__(self, ising=None, steps=None, is_verbose=True):
+    '''
+    Base class that more useful Runners extend.  It defines the base
+    constructor, the mechanism to keep track of quantities to be evaluated
+    at each step, and the base functions that are exectued befor a run
+    starts, before a step is computed, after a step is computed, and at
+    the end of a run.
+    '''
+    def __init__(self, ising=None, steps=None, is_verbose=1):
+        '''
+        Constructor, optionally set the Ising system to run (can also be
+        done via set_system() method, and the number of steps (can also be
+        done as argument to the run() method.
+        '''
         super(BaseRunner, self).__init__()
         self._ising = ising
         self._steps = steps
@@ -77,7 +101,7 @@ class BaseRunner(object):
         pass
 
     def _pre_step(self, t):
-        if self._is_verbose and t % 100 == 0:
+        if self._is_verbose > 0 and t % 100 == 0:
             sys.stderr.write('# computing step {0:d}\n'.format(t))
         return True
 
@@ -91,7 +115,7 @@ import scipy.stats
 class SingleRunner(BaseRunner):
 
     def __init__(self, ising=None, steps=None, file_name=None,
-                 is_verbose=True):
+                 is_verbose=1):
         super(SingleRunner, self).__init__(ising, steps, is_verbose)
         self._file_name = file_name
         self._data_fmt = '{0:d} {1:.4f} {2:.4f}\n'
@@ -127,7 +151,7 @@ import matplotlib.pyplot as plt
 class MovieRunner(BaseRunner):
 
     def __init__(self, ising=None, steps=None, dir_name='Movie',
-                 file_fmt='spins_{0:06d}.png', is_verbose=True):
+                 file_fmt='spins_{0:06d}.png', is_verbose=1):
         super(MovieRunner, self).__init__(ising, steps, is_verbose)
         self._dir_name = dir_name
         self._file_fmt = file_fmt
@@ -147,7 +171,7 @@ class MovieRunner(BaseRunner):
 
 class ActivityHeatmapRunner(BaseRunner):
 
-    def __init__(self, ising=None, steps=None, is_verbose=True,
+    def __init__(self, ising=None, steps=None, is_verbose=1,
                  burn_in=100):
         super(ActivityHeatmapRunner, self).__init__(ising, steps,
                                                     is_verbose)
@@ -168,7 +192,7 @@ class ActivityHeatmapRunner(BaseRunner):
 
 class EquilibriumRunner(BaseRunner):
         
-    def __init__(self, ising=None, steps=None, is_verbose=True,
+    def __init__(self, ising=None, steps=None, is_verbose=1,
                  burn_in=100, sample_period=10, window=20, max_slope=1e-4):
         super(EquilibriumRunner, self).__init__(ising, steps, is_verbose)
         self._burn_in = burn_in
@@ -180,23 +204,22 @@ class EquilibriumRunner(BaseRunner):
         self._t = []
         self._M = []
 
+    def _collect(self, t):
+        if len(self._t) >= self._window:
+            self._t.pop(0)
+            self._M.pop(0)
+        self._t.append(float(t))
+        self._M.append(self._ising.magnetization())
+
     def _post_step(self, t):
         if t > self._burn_in and t % self._sample_period == 0:
-            if len(self._t) >= self._window:
-                self._t.pop(0)
-                self._M.pop(0)
-            self._t.append(float(t))
-            self._M.append(self._ising.magnetization())
+            self._collect(t)
             if len(self._t) == self._window:
                 result = scipy.stats.linregress(self._t, self._M)
-                self._quantities['M mean'] = result[1]
-                self._quantities['M slope'] = result[0]
-                self._quantities['M R^2'] = result[2]**2
-                self._quantities['M stderr'] = result[4]
-                if self._is_verbose:
-                    msg = '# M slope = {0:.4e}\n'
-                    sys.stderr.write(msg.format(self.get('M slope')))
-                if np.abs(self.get('M slope')) <= self._max_slope:
+                slope = result[0]
+                if self._is_verbose > 0:
+                    sys.stderr.write('# M slope = {0:.4e}\n'.format(slope))
+                if np.abs(slope) <= self._max_slope:
                     self._quantities['steps'] = t
                     return False
         return True
@@ -209,4 +232,41 @@ class EquilibriumRunner(BaseRunner):
         self._quantities['M stderr'] = result[4]
         if np.abs(self.get('M slope')) > self._max_slope:
             raise NoConvergenceError()
+
+
+from domain_counter import compute_domain_sizes
+
+class DomainSizeRunner(EquilibriumRunner):
+    '''
+    Collect information no domain size distribution.
+    '''
+
+    def __init__(self, ising=None, steps=None, is_verbose=1,
+                 burn_in=100, sample_period=10, window=20, max_slope=1e-4):
+        super(DomainSizeRunner, self).__init__(ising, steps, is_verbose,
+                                               burn_in, sample_period,
+                                               window, max_slope)
+
+    def _prologue(self):
+        super(DomainSizeRunner, self)._prologue()
+        self._domains = []
+
+    def _collect(self, t):
+        super(DomainSizeRunner, self)._collect(t)
+        if len(self._domains) >= self._window:
+            self._domains.pop(0)
+        domains = compute_domain_sizes(self._ising)
+        self._domains.append(domains)
+        
+    def _epilogue(self):
+        super(DomainSizeRunner, self)._epilogue()
+        sizes = {}
+        for domains in self._domains:
+            for domain in domains:
+                if not domain in sizes:
+                    sizes[domain] = 0.0
+                sizes[domain] += 1.0
+        for size in sizes:
+            sizes[size] /= len(self._domains)
+        self._quantities['domains'] = sizes
 
