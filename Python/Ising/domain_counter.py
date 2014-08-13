@@ -36,7 +36,7 @@ def identify_domains(ising):
 
 def compute_domain_sizes(ising):
     domains, nr_domains = identify_domains(ising)
-    domain_sizes = np.zeros(nr_domains)
+    domain_sizes = [0] * nr_domains
     for i in xrange(domains.shape[0]):
         for j in xrange(domains.shape[1]):
             domain_sizes[domains[i, j]] += 1

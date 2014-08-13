@@ -7,7 +7,7 @@ if __name__ == '__main__':
     import importlib, random, sys
 
     from ising import IsingSystem
-    from runner import EquilibriumRunner
+    from runner import EquilibriumRunner, DomainSizeRunner
     from averager import Averager
 
     arg_parser = ArgumentParser(description='2D ising system simulaation')
@@ -32,14 +32,19 @@ if __name__ == '__main__':
                             help='maximum slope as convergence criterion')
     arg_parser.add_argument('--runs', type=int, default=10,
                             help='number of independent runs')
-    arg_parser.add_argument('--verbose', action='store_true',
-                            help='show progress information')
+    arg_parser.add_argument('--file', default='result',
+                            help='output file base name')
+    arg_parser.add_argument('--verbose', type=int, default=1,
+                            help='show progress information, the '
+                                 'higher the value, the more detail')
     arg_parser.add_argument('--seed', type=int,
                             help='seed for random number generator, '
                                  'only needed for development')
     arg_parser.add_argument('--python', action='store_true',
                             help='use pure Python implementation')
     options = arg_parser.parse_args()
+    magn_file = open('{0}-magn.txt'.format(options.file), 'w')
+    domain_file = open('{0}-domains.txt'.format(options.file), 'w')
     if options.seed is None:
         seed = random.randint(0, 1000000000)
     else:
@@ -48,21 +53,29 @@ if __name__ == '__main__':
         ising_module = importlib.import_module('ising')
     else:
         ising_module = importlib.import_module('ising_cxx')
-    print 'T,M,M_std,M_min,M_max'
+    magn_file.write('T M M_std M_min M_max\n')
+    domain_file.write('T domain_sizes\n')
     for T in (float(T_str) for T_str in options.T.split(',')):
-        if options.verbose:
+        if options.verbose > 0:
             sys.stderr.write('# computing T = {0:.4f}\n'.format(T))
         ising = ising_module.IsingSystem(options.N, options.J, options.H, T)
         ising.init_random(seed)
-        runner = EquilibriumRunner(ising=None, steps=options.steps,
-                                   is_verbose=options.verbose,
-                                   burn_in=options.burn_in,
-                                   sample_period=options.sample_period,
-                                   window=options.window)
-        averager = Averager(runner, ising, is_verbose=options.verbose)
+        runner = DomainSizeRunner(ising=None, steps=options.steps,
+                                  is_verbose=options.verbose - 2,
+                                  burn_in=options.burn_in,
+                                  sample_period=options.sample_period,
+                                  window=options.window)
+        averager = Averager(runner, ising, is_verbose=options.verbose - 1)
         averager.average(options.runs)
         M_values = averager.get('M mean')
-        M_fmt = '{T:.4f},{mean:.3f},{std:.3e},{min:.3f},{max:.3f}'
-        print M_fmt.format(T=T, **M_values)
-        sys.stdout.flush()
+        M_fmt = '{T:.4f} {mean:.3f} {std:.3e} {min:.3f} {max:.3f}'
+        magn_file.write(M_fmt.format(T=T, **M_values))
+        domains = averager.get('domains')
+        distrubtion = ','.join(['{0:d}:{1:.8e}'.format(k, v)
+                                    for k, v in domains.items()])
+        domain_file.write('{0:.4f} {1:s}'.format(T, distrubtion))
+        magn_file.flush()
+        domain_file.flush()
+    magn_file.close()
+    domain_file.close()
 
