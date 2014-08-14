@@ -199,15 +199,18 @@ class EquilibriumRunner(BaseRunner):
         self._t = []
         self._M = []
         self._E = []
+        self._E2 = []
 
     def _collect(self, t):
         if len(self._t) >= self._window:
             self._t.pop(0)
             self._M.pop(0)
             self._E.pop(0)
+            self._E2.pop(0)
         self._t.append(float(t))
         self._M.append(self._ising.magnetization())
         self._E.append(self._ising.energy())
+        self._E2.append(self._ising.energy()**2)
 
     def _post_step(self, t):
         if t > self._burn_in and t % self._sample_period == 0:
@@ -231,6 +234,8 @@ class EquilibriumRunner(BaseRunner):
         self._quantities['E slope'] = result[0]
         self._quantities['E R^2'] = result[2]**2
         self._quantities['E stderr'] = result[4]
+        self._quantities['deltaE^2'] = (np.mean(self._E2) -
+                                            np.mean(self._E)**2)
         if np.abs(self.get('M slope')) > self._max_slope:
             raise NoConvergenceError()
 
