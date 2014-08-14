@@ -14,40 +14,36 @@ class IsingSystem(object):
         self._E = -J*N**2 - H*N
 
     def clone(self):
-        return IsingSystem(self.N, self.J, self.H, self.T)
+        return IsingSystem(self.N(), self.J(), self.H(), self.T())
 
     def _delta_E(self, i, j):
         left = (i - 1, j)
         up = (i, j - 1)
-        right = (i + 1 - self.N, j)
-        down = (i, j + 1 - self.N)
-        return 2.0*self._s[i][j]*(self.J*(self._s[left] + self._s[up] +
+        right = (i + 1 - self._N, j)
+        down = (i, j + 1 - self._N)
+        return 2.0*self._s[i][j]*(self._J*(self._s[left] + self._s[up] +
                                           self._s[right] + self._s[down]) +
-                                  self.H)
+                                  self._H)
 
     def step(self):
         for i in xrange(self._N):
             for j in xrange(self._N):
                 delta = self._delta_E(i, j)
                 if (delta < 0.0 or
-                    np.exp(-delta/self.T) > np.random.uniform()):
+                    np.exp(-delta/self._T) > np.random.uniform()):
                     self._s[i, j] = -self._s[i, j]
                     self._M += 2*self._s[i, j]
                     self._E += delta
     
-    @property
     def T(self):
         return self._T
 
-    @property
     def N(self):
         return self._N
 
-    @property
     def J(self):
         return self._J
 
-    @property
     def H(self):
         return self._H
 
@@ -58,7 +54,7 @@ class IsingSystem(object):
         return self._M/self._N**2
 
     def energy(self):
-        return self._E/self.N**2
+        return self._E/self._N**2
 
     def init_random(self, seed):
         np.random.seed(seed)

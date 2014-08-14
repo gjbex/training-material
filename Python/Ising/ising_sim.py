@@ -6,7 +6,6 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     import importlib, random, sys
 
-    from ising import IsingSystem
     from runner import EquilibriumRunner, DomainSizeRunner
     from averager import Averager
 
@@ -53,7 +52,7 @@ if __name__ == '__main__':
         ising_module = importlib.import_module('ising')
     else:
         ising_module = importlib.import_module('ising_cxx')
-    magn_file.write('T M M_std M_min M_max\n')
+    magn_file.write('T M M_std M_min M_max E E_std E_min E_max\n')
     domain_file.write('T domain_sizes\n')
     for T in (float(T_str) for T_str in options.T.split(',')):
         if options.verbose > 0:
@@ -68,13 +67,18 @@ if __name__ == '__main__':
         averager = Averager(runner, ising, is_verbose=options.verbose - 1)
         averager.average(options.runs)
         M_values = averager.get('M mean')
-        M_fmt = '{T:.4f} {mean:.3f} {std:.3e} {min:.3f} {max:.3f}'
-        magn_file.write(M_fmt.format(T=T, **M_values))
+        M_fmt = '{mean:.3f} {std:.3e} {min:.3f} {max:.3f}'
+        M_str = M_fmt.format(**M_values)
+        E_values = averager.get('E mean')
+        E_fmt = '{mean:.3f} {std:.3e} {min:.3f} {max:.3f}'
+        E_str = E_fmt.format(**E_values)
+        magn_file.write('{T:.4f} {M:s} {E:s}\n'.format(T=T, M=M_str,
+                                                       E=E_str))
+        magn_file.flush()
         domains = averager.get('domains')
         distrubtion = ','.join(['{0:d}:{1:.8e}'.format(k, v)
                                     for k, v in domains.items()])
-        domain_file.write('{0:.4f} {1:s}'.format(T, distrubtion))
-        magn_file.flush()
+        domain_file.write('{0:.4f} {1:s}\n'.format(T, distrubtion))
         domain_file.flush()
     magn_file.close()
     domain_file.close()
