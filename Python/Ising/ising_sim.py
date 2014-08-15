@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
-
 if __name__ == '__main__':
 
     from argparse import ArgumentParser
     import importlib, random, sys
 
-    from ising import IsingSystem
     from runner import EquilibriumRunner, DomainSizeRunner
     from averager import Averager
+    from util import print_options
 
     arg_parser = ArgumentParser(description='2D ising system simulaation')
     arg_parser.add_argument('--N', type=int, default=10,
@@ -53,8 +52,18 @@ if __name__ == '__main__':
         ising_module = importlib.import_module('ising')
     else:
         ising_module = importlib.import_module('ising_cxx')
-    magn_file.write('T M M_std M_min M_max\n')
+    hdr_line_fmt = 'T {M:s} {E:s} {deltaE2:s}\n'
+    hdr_fmt = '{0:s} {0:s}_std {0:s}_min {0:s}_max'
+    val_line_fmt = '{T:.4f} {M:s} {E:s} {deltaE2:s}\n'
+    val_fmt = '{mean:.5e} {std:.5e} {min:.5e} {max:.5e}'
+    M_hdr = hdr_fmt.format('M')
+    E_hdr = hdr_fmt.format('E')
+    deltaE2_hdr = hdr_fmt.format('deltaE^2')
+    magn_file.write(hdr_line_fmt.format(M=M_hdr, E=E_hdr,
+                                        deltaE2=deltaE2_hdr))
+    print_options(magn_file, options)
     domain_file.write('T domain_sizes\n')
+    print_options(domain_file, options)
     for T in (float(T_str) for T_str in options.T.split(',')):
         if options.verbose > 0:
             sys.stderr.write('# computing T = {0:.4f}\n'.format(T))
@@ -68,13 +77,18 @@ if __name__ == '__main__':
         averager = Averager(runner, ising, is_verbose=options.verbose - 1)
         averager.average(options.runs)
         M_values = averager.get('M mean')
-        M_fmt = '{T:.4f} {mean:.3f} {std:.3e} {min:.3f} {max:.3f}'
-        magn_file.write(M_fmt.format(T=T, **M_values))
+        M_str = val_fmt.format(**M_values)
+        E_values = averager.get('E mean')
+        E_str = val_fmt.format(**E_values)
+        deltaE2_values = averager.get('deltaE^2')
+        deltaE2_str = val_fmt.format(**deltaE2_values)
+        magn_file.write(val_line_fmt.format(T=T, M=M_str, E=E_str,
+                                            deltaE2=deltaE2_str))
+        magn_file.flush()
         domains = averager.get('domains')
         distrubtion = ','.join(['{0:d}:{1:.8e}'.format(k, v)
                                     for k, v in domains.items()])
-        domain_file.write('{0:.4f} {1:s}'.format(T, distrubtion))
-        magn_file.flush()
+        domain_file.write('{0:.4f} {1:s}\n'.format(T, distrubtion))
         domain_file.flush()
     magn_file.close()
     domain_file.close()

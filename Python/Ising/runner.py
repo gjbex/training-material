@@ -3,53 +3,48 @@
 import sys
 
 class UnknownQuantityError(Exception):
-    '''
-    Exception thrown when a Runner is queried for a non-existing quantiy.
-    '''
+    '''Thrown when a Runner is queried for a non-existing quantiy'''
     def __init__(self, quantity):
         super(UnknownQuantityError, self).__init__()
         self.message = "unknown quantity '{0}'".format(quantity)
 
 
 class NoConvergenceError(Exception):
-    '''
-    Exception thrown when no convergence is reached in the specified amount
-    of steps.
-    '''
+    '''Thrown when no convergence is reached for the specified steps'''
     def __init__(self):
         super(NoConvergenceError, self).__init__()
         self.message = 'no convergence reached'
 
 
 class NoRunnerStepsError(Exception):
-    '''
+    '''Thrown when no number of steps was specified
+
     Since the number of steps to take can be specified either on
     construction of the object, or as argument of the run options, it
-    may well be forgotten twice.
-    '''
+    may well be forgotten twice.'''
     def __init__(self):
         super(NoConvergenceError, self).__init__()
         self.message = 'no number of steps specified for Runner'
 
 
 class NoRunnerSystemError(Exception):
-    '''
+    '''Thrown when no Ising model was specified
+
     Since the Ising system can be set either on construction of the Runner,
-    or by calling the set_system() method, it may be forgotten twice.
-    '''
+    or by calling the set_system() method, it may be forgotten twice.'''
     def __init__(self):
         super(NoConvergenceError, self).__init__()
         self.message = 'no Ising system specified for Runner'
 
 
 class BaseRunner(object):
-    '''
+    '''Runner base class
+
     Base class that more useful Runners extend.  It defines the base
     constructor, the mechanism to keep track of quantities to be evaluated
     at each step, and the base functions that are exectued befor a run
     starts, before a step is computed, after a step is computed, and at
-    the end of a run.
-    '''
+    the end of a run.'''
     def __init__(self, ising=None, steps=None, is_verbose=1):
         '''
         Constructor, optionally set the Ising system to run (can also be
@@ -203,13 +198,19 @@ class EquilibriumRunner(BaseRunner):
     def _prologue(self):
         self._t = []
         self._M = []
+        self._E = []
+        self._E2 = []
 
     def _collect(self, t):
         if len(self._t) >= self._window:
             self._t.pop(0)
             self._M.pop(0)
+            self._E.pop(0)
+            self._E2.pop(0)
         self._t.append(float(t))
         self._M.append(self._ising.magnetization())
+        self._E.append(self._ising.energy())
+        self._E2.append(self._ising.energy()**2)
 
     def _post_step(self, t):
         if t > self._burn_in and t % self._sample_period == 0:
@@ -217,8 +218,6 @@ class EquilibriumRunner(BaseRunner):
             if len(self._t) == self._window:
                 result = scipy.stats.linregress(self._t, self._M)
                 slope = result[0]
-                if self._is_verbose > 0:
-                    sys.stderr.write('# M slope = {0:.4e}\n'.format(slope))
                 if np.abs(slope) <= self._max_slope:
                     self._quantities['steps'] = t
                     return False
@@ -230,6 +229,13 @@ class EquilibriumRunner(BaseRunner):
         self._quantities['M slope'] = result[0]
         self._quantities['M R^2'] = result[2]**2
         self._quantities['M stderr'] = result[4]
+        result = scipy.stats.linregress(self._t, self._E)
+        self._quantities['E mean'] = result[1]
+        self._quantities['E slope'] = result[0]
+        self._quantities['E R^2'] = result[2]**2
+        self._quantities['E stderr'] = result[4]
+        self._quantities['deltaE^2'] = (np.mean(self._E2) -
+                                            np.mean(self._E)**2)
         if np.abs(self.get('M slope')) > self._max_slope:
             raise NoConvergenceError()
 
