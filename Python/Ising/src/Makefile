@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -O2 -g
-CPPFLAGS = -I/usr/include/python2.7
+CXXFLAGS = -O2 -g -fPIC
+CPPFLAGS = `pkg-config --cflags python`
 LDFLAGS =
 LIBS = -lm
 
