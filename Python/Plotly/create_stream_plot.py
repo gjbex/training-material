@@ -4,7 +4,7 @@ import plotly.plotly as py
 import plotly.tools as tls
 from plotly.graph_objs import Stream, Data, Figure, Scatter, Layout
 
-stream_id = tls.get_credentials_file()['stream_ids'][0]
+stream_id = tls.get_credentials_file()['stream_ids'][1]
 
 stream = Stream( token=stream_id, maxpoints=50)
 
