@@ -19,7 +19,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--T', default='1.5',
                             help='temerature in units k_b, can be '
                                  'a comma-separated list')
-    arg_parser.add_argument('--steps', type=int, default=10,
+    arg_parser.add_argument('--steps', type=int, default=1000,
                             help='number of simulation steps')
     arg_parser.add_argument('--burn_in', type=int, default=100,
                             help='burn in for averages')
