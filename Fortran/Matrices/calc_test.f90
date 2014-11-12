@@ -76,5 +76,12 @@ program calc_test
     label_str = 'number elements D > 0.5'
     print '(A, ": ", I0)', label_str, nr_large
 
+    ! check whether any element < 0.01
+    if (any(D < 0.01)) then
+        print *, 'Some elements < 0.01'
+    else
+        print *, 'no elements < 0.01'
+    end if
+
 end program calc_test
 
