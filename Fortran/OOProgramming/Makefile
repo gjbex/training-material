@@ -7,8 +7,9 @@ LIBS = -lm
 TREE_TEST_OBJS = node_mod.o random_mod.o tree_test.o
 ID_TREE_TEST_OBJS = node_mod.o id_node_mod.o random_mod.o id_tree_test.o
 AVG_PATH_TEST_OBJS = node_mod.o random_mod.o avg_path_test.o
+RAT_OBJS = rationals_mod.o rationals.o
 
-APPS = tree_test avg_path_test id_tree_test
+APPS = tree_test avg_path_test id_tree_test rationals
 
 all: $(APPS)
 
@@ -23,6 +24,9 @@ avg_path_test: $(AVG_PATH_TEST_OBJS)
 id_tree_test: $(ID_TREE_TEST_OBJS)
 	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $(ID_TREE_TEST_OBJS) \
            $(LDFLAGS) $(LIBS)
+
+rationals: $(RAT_OBJS)
+	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $(RAT_OBJS) $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
 	$(F90) $(FFLAGS) $(FPPFLAGS) -c $<
