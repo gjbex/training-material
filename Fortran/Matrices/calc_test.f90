@@ -9,6 +9,7 @@ program calc_test
     real(kind=dp), dimension(M) :: col_max
     real(kind=dp), dimension(P) :: row_sum
     character(len=:), allocatable :: label_str
+    integer :: nr_large
 
     ! initialize matrix A
     call init_matrix(A)
@@ -69,6 +70,11 @@ program calc_test
     col_max = maxval(D, dim=2)
     label_str = 'column max D'
     call print_vector(col_max, label=label_str)
+
+    ! number of elements larger than 0.5
+    nr_large = count(D > 0.5)
+    label_str = 'number elements D > 0.5'
+    print '(A, ": ", I0)', label_str, nr_large
 
 end program calc_test
 
