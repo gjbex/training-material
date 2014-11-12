@@ -24,7 +24,7 @@ contains
         implicit none
         real(kind=dp), dimension(:,:), intent(in) :: A
         character(len=:), allocatable, optional, intent(in) :: label
-        integer :: i, j
+        integer :: i
         integer, dimension(2) :: dims
         character(len=40) :: format_str
         if (present(label)) then
