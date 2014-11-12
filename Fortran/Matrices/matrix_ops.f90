@@ -3,7 +3,7 @@ module matrix_ops
     implicit none
     private
     integer, parameter :: dp = REAL64
-    public :: init_matrix, print_matrix
+    public :: init_matrix, print_matrix, print_vector
 
 contains
 
@@ -36,6 +36,18 @@ contains
             write (*, format_str) A(i, :)
         end do
     end subroutine print_matrix
+
+    subroutine print_vector(v, label)
+        implicit none
+        real(kind=dp), dimension(:), intent(in) :: v
+        character(len=:), allocatable, optional, intent(in) :: label
+        character(len=40) :: format_str
+        if (present(label)) then
+            write (*, "(2A)") label, ":"
+        end if
+        write (format_str, "(A,I3,A)") "(", size(v), "(F6.3))"
+        write (*, format_str) v(:)
+    end subroutine print_vector
 
 end module matrix_ops
 
