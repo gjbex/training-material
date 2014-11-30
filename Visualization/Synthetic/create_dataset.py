@@ -39,7 +39,7 @@ def store_particles(h5file, pos, vel, mass, table='particles'):
     particles = h5file.createTable(h5file.root, table, Particle,
                                    'particle data')
     particle = particles.row
-    for i in xrange(pos):
+    for i in xrange(len(pos)):
         particle['x_pos'] = pos[i, 0]
         particle['y_pos'] = pos[i, 1]
         particle['z_pos'] = pos[i, 2]
@@ -53,26 +53,16 @@ def store_particles(h5file, pos, vel, mass, table='particles'):
 def compute_grid(extent=750.0, points=1000):
     '''compute grid for scalar and vector field data'''
     x = np.linspace(-extent, extent, points + 1, endpoint=True)
-    y = np.linspace(-extent, extent, points + 1, endpoint=True)
-    z = np.linspace(-extent, extent, points + 1, endpoint=True)
+    y = np.linspace(-extent, extent, points + 2, endpoint=True)
+    z = np.linspace(-extent, extent, points + 3, endpoint=True)
     return x, y, z
 
-def store_gried(h5file, x, y, z, group):
+def store_grid(h5file, x, y, z, group='grid'):
     '''store grid coordinates in HDF5 file's group'''
-    grid = hrfile.createGroup(h5file.root, 'grid', 'grid coordinates')
-    x_coords = h5file.createTable(grid, 'x', Grid, 'x coordinates')
-    x_coord = x_coords.row
-    y_coords = h5file.createTable(grid, 'y', Grid, 'y coordinates')
-    y_coord = y_coords.row
-    z_coords = h5file.createTable(grid, 'z', Grid, 'z coordinates')
-    z_coord = z_coords.row
-    for i in xrange(len(x)):
-        x_coord['point'] = x[i]
-        x_coords.append()
-        y_coord['point'] = y[i]
-        y_coords.append()
-        z_coord['point'] = z[i]
-        z_coords.append()
+    grid = h5file.createGroup(h5file.root, group, 'grid coordinates')
+    h5file.create_array(grid, 'x', x, 'x coordinates')
+    h5file.create_array(grid, 'y', y, 'y coordinates')
+    h5file.create_array(grid, 'z', z, 'z coordinates')
     h5file.flush()
 
 def compute_scalar_field(centers, xs, ys, zs, max_temp=5000.0):
@@ -87,9 +77,10 @@ def compute_scalar_field(centers, xs, ys, zs, max_temp=5000.0):
                     field[i, j, k] = field_func(np.array([x, y, z]), center)
     return field
 
-def store_scalar_field(h5file, field, table='scalar'):
+def store_scalar_field(h5file, field, array='scalar'):
     '''store scalar field values in HDF5 file'''
-    pass
+    h5file.create_array(h5file.root, array, field, 'scalar field data')
+    h5file.flush()
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -121,22 +112,26 @@ if __name__ == '__main__':
                             help='maximum temperature')
     arg_parser.add_argument('--verbose', action='store_true',
                             help='verbose output for debugging')
+    arg_parser.add_argument('file', help='HDF5 file to store the data in')
     options = arg_parser.parse_args()
+    h5file = tables.openFile(options.file, mode='w', title='synthetic data set')
     centers = compute_centers(options.centers, options.avg_center_dist)
     if options.verbose:
         print 'center positions'
         print centers
     if options.particle_data:
-        part_pos, part_vel = compute_particles(centers,
-                                               options.particles,
-                                               options.avg_part_radial_vel,
-                                               options.avg_part_random_vel)
+        part_pos, part_vel, part_mass = compute_particles(centers,
+                                                          options.particles,
+                                                          options.avg_part_radial_vel,
+                                                          options.avg_part_random_vel)
         if options.verbose:
             print 'particle positions'
             print part_pos
             print 'particle velocities'
             print part_vel
+        store_particles(h5file, part_pos, part_vel, part_mass)
     x, y, z = compute_grid(options.extent, options.points)
+    store_grid(h5file, x, y, z)
     if options.verbose:
         print 'grid x'
         print x
@@ -145,8 +140,10 @@ if __name__ == '__main__':
         print 'grid z'
         print z
     if options.scalar_field_data:
-        temp = compute_scalar_field(centers, x, y, z, options.max_temp)
+        field = compute_scalar_field(centers, x, y, z, options.max_temp)
         if options.verbose:
             print 'scalar field'
-            print temp
+            print field
+        store_scalar_field(h5file, field)
+    h5file.close()
 
