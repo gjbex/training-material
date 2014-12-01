@@ -3,10 +3,13 @@
 import numpy as np
 import tables
 
-def compute_centers(nr_centers=5, avg_dist=100.0):
+def compute_centers(h5file, nr_centers=5, avg_dist=100.0):
     '''compute positions of nr_centers of gravity, at an average
        distance avg_dist from the origin'''
-    return avg_dist*np.random.randn(nr_centers, 3)    
+    centers = avg_dist*np.random.randn(nr_centers, 3)    
+    h5file.create_array(h5file.root, 'centers', centers,
+                        'center points for distributions')
+    return centers
 
 def compute_particles(hrfile, center, nr_particles=10, avg_dist=10.0,
                       avg_radial_vel=1.0, avg_rand_vel=0.1,
@@ -42,18 +45,17 @@ def compute_grid(h5file, group='grid', extent=750.0, points=1000):
     h5file.flush()
     return x, y, z
 
-def compute_scalar_field(h5file, centers, xs, ys, zs, max_temp=5000.0, array='scalar'):
-    '''compute the temperature field, that decreases quadratically
-       with the distance to the center'''
-    field_func = lambda x, y: max_temp/sum((x- y)**2)
+def compute_scalar_field(h5file, centers, xs, ys, zs, max_field=5000.0, array='scalar'):
+    '''compute scalar field, that decreases quadratically with the distance to
+       the center'''
     field = h5file.create_earray(h5file.root, array, tables.Float64Atom(),
                          (len(xs), len(ys), 0), 'scalar field data')
     for z in zs:
+        X, Y, Z = np.meshgrid(xs, ys, np.array(z))
         field_slice = np.zeros((len(xs), len(ys), 1))
-        for i, x in enumerate(xs):
-            for j, y in enumerate(ys):
-                for center in centers:
-                    field_slice[i, j, 0] = field_func(np.array([x, y, z]), center)
+        for center in centers:
+            field_slice += max_field/((X - center[0])**2 + (Y - center[1])**2 +
+                                      (Z - center[2])**2)
         field.append(field_slice)
     h5file.flush()
 
@@ -90,7 +92,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('file', help='HDF5 file to store the data in')
     options = arg_parser.parse_args()
     h5file = tables.openFile(options.file, mode='w', title='synthetic data set')
-    centers = compute_centers(options.centers, options.avg_center_dist)
+    centers = compute_centers(h5file, options.centers, options.avg_center_dist)
     if options.verbose:
         print 'center positions'
         print centers
