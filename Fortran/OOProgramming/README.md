@@ -34,7 +34,10 @@ What is it?
 6. `id_tree_test.f90`: creates a random tree, prints it to the screen,
    computes the number of nodes, and the longest distance from root to
    any leaf.  This program uses `id_node_type` rather tha `node_type`.
-
+7. `rationals_mod.f90`: simple implementation of rational numbers,
+   illstrates operator overloading, and default constrctor overriding.
+8. `rationals.f90`: main program to illustrate usage of `rationals_mod`,
+   computes sum of rational numbers.
 
 How to build?
 -------------
