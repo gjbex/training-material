@@ -35,11 +35,14 @@ What is it?
 12. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
     from Python using `f2py`, C code by using `ctype`, and C/C++ code
     using SWIG.
+13. `Joblib`: illustrates the use of this library for easy task parallelism
 13. `Logging`: illustration of Python's logging facilities.
 14. `Matplotlib`: a few illustrations of how to use the `pyplot` module.
 15. `Matrices`: a few timings of matrix-matrix multiplications using
    LoL in Python, the numpy.dot function, a Fortran matmul and DGEMM, and
    a straightforward C implementation.
+16. `Mixin`: illustrates the object-oriented programming technique of
+    mix-ins
 16. `python-intro.pptx`: Powerpoint presentation on Python as a data
    processing language, exercises for the corresponding training session
    can be found in the `Exercsises` directory.
