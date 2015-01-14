@@ -1,0 +1,9 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=4
+#PBS -l walltime=00:10:00
+
+module load Python/2.7.6-foss-2014a
+
+cd $PBS_O_WORKDIR
+
+mpirun ./count_sentences_par.py long-data.txt
