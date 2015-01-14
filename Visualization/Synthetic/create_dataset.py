@@ -54,8 +54,8 @@ def compute_scalar_field(h5file, centers, xs, ys, zs, max_field=5000.0, array='s
         X, Y, Z = np.meshgrid(xs, ys, np.array(z))
         field_slice = np.zeros((len(xs), len(ys), 1))
         for center in centers:
-            field_slice += max_field/((X - center[0])**2 + (Y - center[1])**2 +
-                                      (Z - center[2])**2)
+            field_slice += max_field/np.sqrt((X - center[0])**2 + (Y - center[1])**2 +
+                                             (Z - center[2])**2 + 1.0)
         field.append(field_slice)
     h5file.flush()
 
