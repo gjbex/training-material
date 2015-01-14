@@ -46,3 +46,5 @@ What is it?
 16. `python-intro.pptx`: Powerpoint presentation on Python as a data
    processing language, exercises for the corresponding training session
    can be found in the `Exercsises` directory.
+17. `Mpi4py`: illustration of writing distributed applicationns using MPI
+
