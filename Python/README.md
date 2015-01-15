@@ -44,6 +44,8 @@ What is it?
 1. `Mixin`: illustrates the object-oriented programming technique of
    mix-ins
 1. `Mpi4py`: illustration of writing distributed applicationns using MPI
+1. `Multiprocessing`: illustrates concurrent computations using the
+   `multiprocessing` library
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
    processing language, exercises for the corresponding training session
    can be found in the `Exercsises` directory.
