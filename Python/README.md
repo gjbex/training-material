@@ -42,13 +42,16 @@ What is it?
    LoL in Python, the numpy.dot function, a Fortran matmul and DGEMM, and
    a straightforward C implementation.
 1. `Mixin`: illustrates the object-oriented programming technique of
-   mix-ins
+   mix-ins.
 1. `Mpi4py`: illustration of writing distributed applicationns using MPI
 1. `Multiprocessing`: illustrates concurrent computations using the
-   `multiprocessing` library
+   `multiprocessing` library.
+1. `NetworkX`: illustration of the graph representation and algorithms
+   library.
 1. `Numpy`: a few illustratios of using numpy, scipy, and matplotlib
-   (linear regression, FFT)
+   (linear regression, FFT).
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
    processing language, exercises for the corresponding training session
    can be found in the `Exercsises` directory.
-
+1. `SentenceCounter`: scripts to (naively) count sentences in natural
+   language text, both serial and parallel implementations.
