@@ -42,4 +42,6 @@ What is it?
     as argument, and returns a structure, with corresponding SWIG
     declaration file.
   * `stats_swig.py`: uses `stats.c` generated module.
+  * `python-interfacing.pptx`: Powerpoint presentation introducing
+    interfacing with C, C++, and Fortran
   
