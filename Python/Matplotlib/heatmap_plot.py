@@ -10,6 +10,7 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     import matplotlib.pyplot as plt
 
+# command line argument handling
     arg_parser = ArgumentParser(description='plot heatmap of 2D Gaussians')
     arg_parser.add_argument('file', nargs='?', help='file name for plot')
     arg_parser.add_argument('--points', type=int, default=200,
@@ -31,13 +32,15 @@ if __name__ == '__main__':
     arg_parser.add_argument('--f_2', type=float, default=0.5,
                             help='frequency of second maximum')
     options = arg_parser.parse_args()
+
+# computations
     x = np.linspace(options.x_min, options.x_max, options.points)
     y = np.linspace(options.y_min, options.y_max, options.points)
     xx, yy = np.meshgrid(x, y)
-    v1 = f(xx, yy, x0=options.x0_1, freq=options.f_1)
-    v2 = f(xx, yy, x0=options.x0_2, freq=options.f_2)
-    plt.imshow(v1 + v2, extent=[options.x_min, options.x_max,
-                                options.y_min, options.y_max])
+    v = (f(xx, yy, x0=options.x0_1, freq=options.f_1) +
+             f(xx, yy, x0=options.x0_2, freq=options.f_2))
+    plt.imshow(v, extent=[options.x_min, options.x_max,
+                          options.y_min, options.y_max])
     plt.grid(True)
     if options.file:
         plt.savefig(options.file)
