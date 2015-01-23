@@ -3,20 +3,22 @@
 from math import gamma, ceil, floor
 import sys
 import numpy as np
+import scipy as sp
+import scipy.stats
 
 def gamma_distr(x, params):
     k = params['k']
     theta = params['theta']
-    return x**(k-1)*np.exp(-x/3.0)/(theta**k*gamma(k))
+    return sp.stats.gamma.pdf(x, k, scale=theta)
     
-def gaussian_distribution(x, params):
+def gauss_distr(x, params):
     mu = params['mu']
     sigma = params['sigma']
-    return np.exp(-(x - mu)**2/(2.0*sigma))
+    return sp.stats.norm.pdf(x - mu)/sigma
 
 distributions = {
     'gamma': gamma_distr,
-    'gaussian': gaussian_distribution,
+    'gauss': gauss_distr,
 }
 
 if __name__ == '__main__':
@@ -31,7 +33,8 @@ if __name__ == '__main__':
                             help='number of bins')
     arg_parser.add_argument('--distr',
                             help='distribution and parameters, '
-                                 'e.g., --params=gamma:k=2.0,theta=3.0')
+                                 'e.g., --distr=gamma:k=2.0,theta=3.0'
+                                 '      --distr=gauss:mu=1.0,sigma=0.5')
     options = arg_parser.parse_args()
 
 # read data from text file
