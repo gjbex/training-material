@@ -39,6 +39,8 @@ if __name__ == '__main__':
     xx, yy = np.meshgrid(x, y)
     v = (f(xx, yy, x0=options.x0_1, freq=options.f_1) +
              f(xx, yy, x0=options.x0_2, freq=options.f_2))
+
+# plot
     plt.imshow(v, extent=[options.x_min, options.x_max,
                           options.y_min, options.y_max])
     plt.grid(True)
