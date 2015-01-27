@@ -43,7 +43,7 @@ if __name__ == '__main__':
     x = np.linspace(options.x_min, options.x_max, options.points)
     y = np.linspace(options.y_min, options.y_max, options.points)
     xx, yy = np.meshgrid(x, y)
-    v = (f(xx, yy, x0=options.x0_1, freq=options.f_1) +
+    z = (f(xx, yy, x0=options.x0_1, freq=options.f_1) +
              f(xx, yy, x0=options.x0_2, freq=options.f_2))
 
 # plot
@@ -52,8 +52,9 @@ if __name__ == '__main__':
     axes.set_xlim(options.x_min, options.x_max)
     axes.set_ylim(options.y_min, options.y_max)
     axes.set_zlim(options.z_min, options.z_max)
-    surface = axes.plot_surface(xx, yy, v, rstride=4, cstride=4,
+    surface = axes.plot_surface(xx, yy, z, rstride=4, cstride=4,
                                 cmap=cm.coolwarm, linewidth=0)
+    countours = axes.contour(x, y, z)
     figure.colorbar(surface)
     if options.file:
         plt.savefig(options.file)
