@@ -47,8 +47,7 @@ def compute_stats(wc):
             wpl=float(wc.words)/wc.lines)
 
 from argparse import ArgumentParser
-from subprocess import (check_output, CalledProcessError,
-                        STDOUT)
+from subprocess import check_output, CalledProcessError, STDOUT
 
 def main():
     arg_parser = ArgumentParser(description='compute word count stats')
@@ -57,8 +56,7 @@ def main():
     args = arg_parser.parse_args()
     for f in args.files:
         try:
-            stats = check_output(['wc', f],
-                                 stderr=STDOUT)
+            stats = check_output(['wc', f], stderr=STDOUT)
             wc_info = WcInfo(stats)
             print wc_info
             print compute_stats(wc_info)
