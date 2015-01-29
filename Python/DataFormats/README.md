@@ -24,6 +24,12 @@ What is it?
     columns, `name` and `weight` and prints the values to standard output.
     It uses the CSV `sniffer()` function to detect the CSV dialect.
   * `data.csv`: example file to use with `read_csv.py`.
+  * `read_commented_csv.py`: illustrates some fiddling with files that
+    are not truly CSV snice they have a comment header
+  * `data_commented_tabs.csv`: tab separated CSV ile
+  * `data_commented_commas.csv`: comma separated CSV ile
+  * `data_commented_semicolon.csv`: semicolon separated CSV ile
+  * `read_csv_rows.py`: illustrates the default CSV reader
 3. XML files
   * `write_xml.py`: creates XML that has a root-level `blocks` element,
     containing `block` elements that are named (by attribue), and can
