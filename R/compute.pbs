@@ -1,0 +1,8 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=00:05:00
+
+module load R/3.1.1-foss-2014a-default
+cd $PBS_O_WORKDIR
+
+Rscript means.R 0.5 1.0 1000
