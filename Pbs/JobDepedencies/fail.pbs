@@ -1,0 +1,11 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=20,walltime=00:05:00
+#PBS -j oe
+
+if [ -n "${after}" ]
+then
+    echo "job depends on ${after} on ${state}"
+fi
+
+echo 'failure'
+exit 1

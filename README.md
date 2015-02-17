@@ -20,6 +20,7 @@ is subject to the license included in this repository.
     Fortran and Python.  This material is prepared in preparation of
     extending the HDF5 tutorial to other data formats using in scientific
     computing.
+* `PBS`: sample PBS torque batch scripts to illustrate features.
 * `Python`: sample code to explore various Python features, standard
     library packages and third party libraries.  Most of this material is
     used in a tutorial on using Python for scientific data processing.
