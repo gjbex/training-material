@@ -35,6 +35,17 @@ if x >= 10:
     total += x
 ```
 
+A construct such as:
+```python
+for i in xrange(len(x)):
+    f(x[i], y[i])
+```
+can be replaced by:
+```python
+for x_elem, y_elem in zip(x, y):
+    f(x_elem, y_elem)
+```
+
 
 Regular expressions
 -------------------
@@ -73,3 +84,27 @@ When a list as a data structure where the items have non-homogeneous
 types, especially lists or tuples, it is probably wise to consider
 introducing a class to make code more robust, and easier to read and
 hence maintain.
+
+
+Data structures
+---------------
+To add all eleemnt of a list `b` to list `a`, do not use:
+```python
+for x in b:
+    a.append(x)
+```
+but rather:
+```python
+a.extend(b)
+```
+Similarly, to add/update all key/value pair of a dictionary `b` to a
+dictionary `a`, don not use:
+```python
+for key in b:
+    a[k] = b[k]
+```
+but rater use:
+```python
+a.update(b)
+```
+The set data type has an `update` method with similar semantics.
