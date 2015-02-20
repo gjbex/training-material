@@ -108,3 +108,34 @@ but rater use:
 a.update(b)
 ```
 The set data type has an `update` method with similar semantics.
+
+
+String formatting
+-----------------
+It is always better to resist the temptation of using positional
+substitution when using `format`, i.e., better replace:
+```python
+file_name = '{0}.txt'.format(base_Name)
+```
+by:
+```python
+file_name = '{base}.txt'.format(base=base_Name)
+```
+
+It is of course possible to create format strings programmatically, e.g.,
+```python
+for suffix in ['txt', 'csv']:
+    file_tmpl = '{{base}}.{suffix}'.format(suffix=suffix)
+    for basename in basenames:
+        file_name = file_tmpl.format(base=basename)
+        ...
+```
+
+Instead of:
+```python
+data_str = '{0}\t{1}\t{2}\t{3}'.format(itme1, item2, item3, item4)
+```
+consider:
+```python
+data_str = '\t'.join([itme1, item2, item3, item4])
+```
