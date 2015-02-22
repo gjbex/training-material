@@ -21,3 +21,7 @@ What is it?
 1. `numba_test.py`: some timing tests for numpy constructs, including the
     use of numba.  Note that this requires installing numba, which is, due
     to its dependencies, perhaps non-trivial
+1. `optimization.py`: illustration of how to use the `scipy.optimize` for
+    unconstrained multivariate optimization
+1. `target_function_plot.py`: script that creates a surface plot of the
+    target function in `optimization.py`
