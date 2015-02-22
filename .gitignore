@@ -3,3 +3,4 @@
 *.mod
 a.out
 *.swp
+*.pyc
