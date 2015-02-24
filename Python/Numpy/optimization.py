@@ -7,22 +7,21 @@
 #    (f_xx*f__y - f_xy**2 < 0)
 #  * a maximum at [x == 0.02501565538380409, y == 0.0]
 #    (f_xx*f_yy - f_xy**2 > 0 and f_xx < 0)
-def func(x, y=None):
+def func(X, y=None):
     if y is None:
-        y = x[1]
-        x = x[0]
+        x, y = X
+    else:
+        x = X
     return (x**2 + y**2)**2 - 2*x**2 - 2*y**2 + 0.1*x
 
-def func_grad(x):
-    y = x[1]
-    x = x[0]
+def func_grad(X):
+    x, y = X
     func_x = 4*(x**2 + y**2)*x - 4*x + 0.1
     func_y = 4*(x**2 + y**2)*y - 4*y
     return np.array([func_x, func_y])
 
-def func_hess(x):
-    y = x[1]
-    x = x[0]
+def func_hess(X):
+    x, y = X
     func_x_x = 12*x**2 + 4*y**2 - 4
     func_x_y = 8*x*y
     func_y_x = 8*x*y
