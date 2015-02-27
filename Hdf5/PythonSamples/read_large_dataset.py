@@ -31,8 +31,8 @@ if __name__ == '__main__':
                 for col in options.col:
                     total += np.sum(data[:, col])
             delta = datetime.now() - start
-            print 'reading data {0:d}.{1:06d}'.format(delta.seconds,
-                                                      delta.microseconds)
+            print 'reading data {0:d}.{1:06d} s'.format(delta.seconds,
+                                                        delta.microseconds)
             print 'total = {0}'.format(total)
         elif options.row:
             start = datetime.now()
@@ -45,16 +45,16 @@ if __name__ == '__main__':
                 for row in options.row:
                     total += np.sum(data[row, :])
             delta = datetime.now() - start
-            print 'reading data {0:d}.{1:06d}'.format(delta.seconds,
-                                                      delta.microseconds)
+            print 'reading data {0:d}.{1:06d} s'.format(delta.seconds,
+                                                        delta.microseconds)
             print 'total = {0}'.format(total)
         else:
             start = datetime.now()
             a = np.array(data)
             delta = datetime.now() - start
             total = 0.0
-            print 'reading data {0:d}.{1:06d}'.format(delta.seconds,
-                                                      delta.microseconds)
+            print 'reading data {0:d}.{1:06d} s'.format(delta.seconds,
+                                                        delta.microseconds)
             for i in xrange(a.shape[0]):
                 total += np.sum(a[i, :])
             print 'total = {0}'.format(total)
