@@ -3,26 +3,37 @@
 import sys
 
 class Indexer(object):
+    '''An Indexer can parse a text file, using a phrase dictionary, and
+       record for each phrase the line number it occurs on in the
+       text'''
 
-    def __init__(self, phrases, window_size=10, read_length=1024,
+    def __init__(self, window_size=10, read_length=1024,
                  progress_line_nr=1000):
-        self._phrases = phrases
+        '''constructor, takes configuration options for the Indexer
+           the window size, i.e., the maximal length of phrases to
+           index, read_length, i.e., the buffer length for file read
+           operations, and progress line numbers, i.e., the number of
+           lines after which to report indexing progress'''
+        sefl._phrases = None
         self._window = []
         self._window_size = window_size
         self._line_nr = 0
         self._read_length = read_length
         self._progress_line_nr = progress_line_nr
 
-    def is_window_full(self):
-        return len(self._window) == self._window_size
-
-    def check_window(self):
+    def _check_window(self):
+        '''private method to check whether the current window contains
+           phrases that have to be indexed, if so, record line numbers'''
         for i in xrange(len(self._window)):
             phrase = ' '.join(self._window[i:])
             if phrase in self._phrases:
                 self._phrases[phrase].append(self._line_nr)
 
-    def parse(self, text_file_name, show_progress=False):
+    def parse(self, text_file_name, phrases, show_progress=False):
+        '''parse a text file, and store index in the provided phrase
+           dictionary, write progress information if show_progress is
+           True'''
+        self._phrases = phrases
         with open(text_file_name, 'rb') as text_file:
             word = ''
             buffer = text_file.read(self._read_length)
@@ -32,10 +43,10 @@ class Indexer(object):
                         word += character
                     else:
                         if word:
-                            if self.is_window_full():
+                            if len(self._window) == self._window_size:
                                 self._window.pop(0)
                             self._window.append(word)
-                            self.check_window()
+                            self._check_window()
                             word = ''
                         if character == '\n':
                             self._line_nr += 1
@@ -45,6 +56,7 @@ class Indexer(object):
                                 sys.stderr.write(msg.format(self._line_nr))
                 buffer = text_file.read(self._read_length)
         return self._phrases
+
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -74,8 +86,8 @@ if __name__ == '__main__':
         sys.stderr.write(msg.format(len(phrases), max_phrase_len))
 
 # create an Indexer, and parse the text file
-    indexer = Indexer(phrases, window_size=max_phrase_len)
-    indexer.parse(options.text, show_progress=options.verbose)
+    indexer = Indexer(window_size=max_phrase_len)
+    indexer.parse(options.text, phrases, show_progress=options.verbose)
 
 # print results
     for phrase in phrases:
