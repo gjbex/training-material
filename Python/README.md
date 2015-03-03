@@ -34,7 +34,7 @@ What is it?
     as a regular language.  A `pyparsing` example is also given.
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
     from Python using `f2py`, C code by using `ctype`, and C/C++ code
-   using SWIG.
+    using SWIG.
 1. `Joblib`: illustrates the use of this library for easy task parallelism
 1. `Logging`: illustration of Python's logging facilities.
 1. `Matplotlib`: a few illustrations of how to use the `pyplot` module.
@@ -50,6 +50,8 @@ What is it?
     library.
 1. `Numpy`: a few illustratios of using numpy, scipy, and matplotlib
     (linear regression, FFT).
+1. `PhraseIndexer`: parses a text file to find the line number on which a
+    given eet of phrases occurs.
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
     processing language, exercises for the corresponding training session
     can be found in the `Exercsises` directory.
