@@ -31,34 +31,42 @@ inquire(file=file_name, exist=file_exists)
 if (file_exists) then
     ! open HDF5 file
     call h5fopen_f(trim(file_name), H5F_ACC_RDWR_F, file_id, status)
-    ! open dataset
-    call h5dopen_f(file_id, dset_name, dset_id, status)
 else
     ! create new file
     call h5fcreate_f(trim(file_name), H5F_ACC_TRUNC_F, file_id, status)
-    ! set dimenions and create filespace
-    pos_dim(1) = pos_space_rank
-    pos_dim(2) = 0
-    max_pos_dim(1) = pos_space_rank
-    max_pos_dim(2) = H5S_UNLIMITED_F
-    call h5screate_simple_f(pos_rank, pos_dim, fspace_id, status, &
-                            max_pos_dim)
-    ! set chunk sizes and create dataset 
-    pos_chunk_dim(1) = pos_space_rank
-    pos_chunk_dim(2) = nr_pos
-    call h5pcreate_f(H5P_DATASET_CREATE_F, dset_prop_id, status)
-    call h5pset_chunk_f(dset_prop_id, pos_rank, pos_chunk_dim, status)
-    ! create dataset
-    call h5dcreate_f(file_id, dset_name, H5T_NATIVE_REAL, &
-                     fspace_id, dset_id, status, dset_prop_id)
-    if (status /= 0) then
-        write(unit=error_unit, fmt="(3A)") "#error: can not create '", &
-                                           trim(dset_name), "'"
+end if
+! open dataset
+call h5dopen_f(file_id, dset_name, dset_id, status)
+! if dataset doesn't exist, create it
+if (status < 0) then
+    if (.not. file_exists) then
+        ! set dimenions and create filespace
+        pos_dim(1) = pos_space_rank
+        pos_dim(2) = 0
+        max_pos_dim(1) = pos_space_rank
+        max_pos_dim(2) = H5S_UNLIMITED_F
+        call h5screate_simple_f(pos_rank, pos_dim, fspace_id, status, &
+                                max_pos_dim)
+        ! set chunk sizes and create dataset 
+        pos_chunk_dim(1) = pos_space_rank
+        pos_chunk_dim(2) = nr_pos
+        call h5pcreate_f(H5P_DATASET_CREATE_F, dset_prop_id, status)
+        call h5pset_chunk_f(dset_prop_id, pos_rank, pos_chunk_dim, status)
+        ! create dataset
+        call h5dcreate_f(file_id, dset_name, H5T_NATIVE_REAL, &
+                         fspace_id, dset_id, status, dset_prop_id)
+        if (status /= 0) then
+            write(unit=error_unit, fmt="(3A)") "#error: can not create '", &
+                                               trim(dset_name), "'"
+            stop
+        end if
+        ! close property and filespace
+        call h5pclose_f(dset_prop_id, status)
+        call h5sclose_f(fspace_id, status)
+    else
+        write(unit=error_unit, fmt="(A)") "#error: file was not created with append_h5"
         stop
     end if
-    ! close property and filespace
-    call h5pclose_f(dset_prop_id, status)
-    call h5sclose_f(fspace_id, status)
 end if
 ! get filespace, get current dimensions and close filespace
 call h5dget_space_f(dset_id, fspace_id, status)
