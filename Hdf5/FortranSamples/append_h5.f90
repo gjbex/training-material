@@ -7,7 +7,7 @@ integer, parameter :: pos_space_rank = 3, pos_rank = 2, nr_pos = 10
 character(len=3) :: dset_name = "pos"
 character(len=1024) :: file_name
 logical :: file_exists
-integer :: status
+integer :: status, ierr
 integer(hid_t) :: file_id, dset_id, dspace_id, all_dspace_id, &
                   dset_prop_id, fspace_id
 integer(hsize_t), dimension(pos_rank) :: pos_dim, max_pos_dim, &
@@ -36,10 +36,17 @@ else
     call h5fcreate_f(trim(file_name), H5F_ACC_TRUNC_F, file_id, status)
 end if
 ! open dataset
+call h5eset_auto_f(0, ierr)
 call h5dopen_f(file_id, dset_name, dset_id, status)
+call h5eset_auto_f(1, ierr)
+call h5eclear_f(ierr)
 ! if dataset doesn't exist, create it
 if (status < 0) then
-    if (.not. file_exists) then
+    if (file_exists) then
+        write(unit=error_unit, fmt="(3A)") "#error: file '", &
+              trim(file_name), "' was not created with append_h5"
+        stop
+    else
         ! set dimenions and create filespace
         pos_dim(1) = pos_space_rank
         pos_dim(2) = 0
@@ -63,9 +70,6 @@ if (status < 0) then
         ! close property and filespace
         call h5pclose_f(dset_prop_id, status)
         call h5sclose_f(fspace_id, status)
-    else
-        write(unit=error_unit, fmt="(A)") "#error: file was not created with append_h5"
-        stop
     end if
 end if
 ! get filespace, get current dimensions and close filespace
