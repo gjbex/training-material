@@ -25,6 +25,7 @@ What is it?
 1. `DbAccess`: illustrates how to insert data into a relational database
     and query it.
 1. `Decorators`: illustrates how to create decorators to wrap functions.
+1. `Descriptors`: illustrates the descriptor concept in Python
 1. `Exec`: illustrates executing a shell command from a Python script
     using the `subprocess` module.
 1. `Exercises`: example solutions to exercises to be found in the 
