@@ -1,4 +1,4 @@
-HDF5 = ${EBROOTHDF5}
+HDF5 = /usr
 F90 = gfortran
 FFLAGS = -O2 -g
 FPPFLAGS = -I$(HDF5)/include
