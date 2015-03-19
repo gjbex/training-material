@@ -67,6 +67,8 @@ if __name__ == '__main__':
                                  'one per line')
     arg_parser.add_argument('--text', required=True,
                             help='text file')
+    arg_parser.add_argument('--read_length', type=int, default=16*1024,
+                            help='size of the read buffer')
     arg_parser.add_argument('--verbose', action='store_true',
                             help='provide some feedback')
     options = arg_parser.parse_args()
@@ -86,7 +88,8 @@ if __name__ == '__main__':
         sys.stderr.write(msg.format(len(phrases), max_phrase_len))
 
 # create an Indexer, and parse the text file
-    indexer = Indexer(window_size=max_phrase_len)
+    indexer = Indexer(window_size=max_phrase_len,
+                      read_length=options.read_length)
     indexer.parse(options.text, phrases, show_progress=options.verbose)
 
 # print results
