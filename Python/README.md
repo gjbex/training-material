@@ -14,6 +14,8 @@ What is it?
     command line arguments.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
+1. `CodeTesting`: illustration of how to use the `unittest` framework for
+    setting up and executing unit tests
 1. `ConfigParser`: illustrates how to use the ConfigParser module to handle
     configuration files.
 1. `ContextManager`: illustrates the concept of a context manager, a
