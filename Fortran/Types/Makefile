@@ -6,7 +6,8 @@ LIBS = -lm
 PART_OBJS = random_mod.o particles_mod.o particle_sim.o
 RAND_TEST_OBJS = random_mod.o rand_test.o
 
-APPS = single double particle_sim rand_test precision_test
+APPS = single double particle_sim rand_test precision_test \
+       select_precision_test
 
 all: $(APPS)
 
@@ -17,6 +18,9 @@ double: types_test.f90
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 precision_test: precision_test.f90
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+
+select_precision_test: select_precision_test.f90
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 particle_sim: $(PART_OBJS)
