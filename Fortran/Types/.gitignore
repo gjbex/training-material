@@ -2,4 +2,5 @@ single
 double
 particle_sim
 rand_test
+precision_test
 select_precision_test
