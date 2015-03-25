@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import os
 import random
+
 
 def main():
     arg_parser = ArgumentParser(description='testing command line arguments')
@@ -24,7 +24,6 @@ def main():
             prefix = '{0}\t'.format(i + 1)
         number = random.gauss(args.mu, args.sigma)
         print '{0}{1}'.format(prefix, number)
-    
+
 if __name__ == '__main__':
     main()
-
