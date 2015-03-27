@@ -3,7 +3,7 @@ FFLAGS = -O2 -g
 LDFLAGS =
 LIBS = -lm
 
-APPL = forall_test where_test select_test do_test
+APPL = forall_test where_test select_test do_test do_while_test
 
 all: $(APPL)
 
@@ -17,6 +17,9 @@ select_test: select_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 do_test: do_test.o
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+
+do_while_test: do_while_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
