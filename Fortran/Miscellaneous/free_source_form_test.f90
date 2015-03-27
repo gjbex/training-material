@@ -1,4 +1,4 @@
-PROGRAM free_source_form
+PROGRAM free_source_form_test
     INTEGER :: i
     INTEGER, PARAMETER :: n = 10
 
@@ -8,4 +8,4 @@ PROGRAM free_source_form
                                  ' out of ', n
     END DO
 
-END PROGRAM free_source_form
+END PROGRAM free_source_form_test
