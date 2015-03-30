@@ -25,3 +25,5 @@ What is it?
 1. `fill_sqlalchemy_db.py`: adds data using SQLAlchemy's ORM mechanisms
 1. `query_sqlalchemy_db.py`: queries the RDBMS using SQLAlchemy's ORM
     mechanisms
+1. `update_sqlalchemy_db.py`: illustrates updating values using SQLAlchemy's
+   ORM mechanisms
