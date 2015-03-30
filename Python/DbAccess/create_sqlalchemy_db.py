@@ -12,6 +12,9 @@ class City(Base):
     city_id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Measurement(Base):
     __tablename__ = 'measurements'
@@ -23,6 +26,10 @@ class Measurement(Base):
     temperature = Column(Float, nullable=False)
     city_id = Column(Integer, ForeignKey('cities.city_id'))
     city = relationship(City)
+
+    def __str__(self):
+        fmt_str = '{time:s}\n\tT = {temp:.1f} Celcius'
+        return fmt_str.format(time=str(self.time), temp=self.temperature)
 
 
 if __name__ == '__main__':
