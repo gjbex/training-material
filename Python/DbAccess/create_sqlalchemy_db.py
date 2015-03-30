@@ -28,7 +28,7 @@ class Measurement(Base):
     city = relationship(City)
 
     def __str__(self):
-        fmt_str = '{time:s}\n\tT = {temp:.1f} Celcius'
+        fmt_str = '{time:s}\n\tT = {temp:.1f} Celsius'
         return fmt_str.format(time=str(self.time), temp=self.temperature)
 
 
