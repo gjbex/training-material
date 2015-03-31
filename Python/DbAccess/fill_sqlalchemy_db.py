@@ -18,11 +18,11 @@ if __name__ == '__main__':
     DBSession = sessionmaker(bind=engine)
     db_session = DBSession()
     city_names = ['New York', 'London', 'Paris']
-    city_map = {}
+    city_list = []
     for city_name in city_names:
         city = City(name=city_name)
-        city_map[city_name] = city
         db_session.add(city)
+        city_list.append(city)
     db_session.commit()
     year = 2015
     month = 1
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     minutes = 0
     for day in xrange(1, 16):
         date = datetime(year, month, day, hour, minutes)
-        for city in city_map.itervalues():
+        for city in city_list:
             temperature = random.uniform(0.0, 30.0)
             measurement = Measurement(time=date, temperature=temperature,
                                       city=city)
