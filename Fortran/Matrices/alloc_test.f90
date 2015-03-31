@@ -22,11 +22,13 @@ program alloc_test
             N = 5
     end select
 
+    if (.not. allocated(A)) print '(A)', '# A not allocated yet'
     allocate(A(M, N))
+    if (allocated(A)) print '(A)', '# A allocated'
     call init_matrix(A)
     label_str = "A"
     call print_matrix(A, label=label_str)
     deallocate(A)
+    if (.not. allocated(A)) print '(A)', '# A no longer allocated'
 
 end program alloc_test
-
