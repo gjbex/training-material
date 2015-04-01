@@ -23,7 +23,7 @@ contains
     subroutine print_matrix(A, label)
         implicit none
         real(kind=dp), dimension(:,:), intent(in) :: A
-        character(len=:), allocatable, optional, intent(in) :: label
+        character(len=*), optional, intent(in) :: label
         integer :: i
         integer, dimension(2) :: dims
         character(len=40) :: format_str
@@ -31,7 +31,7 @@ contains
             write (*, "(2A)") label, ":"
         end if
         dims = shape(A)
-        write (format_str, "(A,I3,A)") "(", dims(2), "(F6.3))"
+        write (format_str, "(A,I3,A)") "(", dims(2), "(F8.3))"
         do i = 1, dims(1)
             write (*, format_str) A(i, :)
         end do
@@ -40,14 +40,13 @@ contains
     subroutine print_vector(v, label)
         implicit none
         real(kind=dp), dimension(:), intent(in) :: v
-        character(len=:), allocatable, optional, intent(in) :: label
+        character(len=*), optional, intent(in) :: label
         character(len=40) :: format_str
         if (present(label)) then
             write (*, "(2A)") label, ":"
         end if
-        write (format_str, "(A,I3,A)") "(", size(v), "(F6.3))"
+        write (format_str, "(A,I3,A)") "(", size(v), "(F8.3))"
         write (*, format_str) v(:)
     end subroutine print_vector
 
 end module matrix_ops
-
