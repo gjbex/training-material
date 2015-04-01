@@ -7,8 +7,9 @@ OBJS_ALLOC = matrix_ops.o alloc_test.o
 OBJS_CALC = matrix_ops.o calc_test.o
 OBJS_CALC_ALLOC = matrix_ops.o calc_alloc_test.o
 OBJS_POINTER = matrix_ops.o pointer_test.o
+OBJS_SUBARRAY = matrix_ops.o subarray_test.o
 
-APPS = alloc_test calc_test calc_alloc_test pointer_test
+APPS = alloc_test calc_test calc_alloc_test pointer_test subarray_test
 
 all: $(APPS)
 
@@ -23,6 +24,9 @@ calc_alloc_test: $(OBJS_CALC_ALLOC)
 
 pointer_test: $(OBJS_POINTER)
 	$(F90) $(FFLAGS) -o $@ $(OBJS_POINTER) $(LDFLAGS) $(LIBS)
+
+subarray_test: $(OBJS_SUBARRAY)
+	$(F90) $(FFLAGS) -o $@ $(OBJS_SUBARRAY) $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
 	$(F90) $(FFLAGS) -c $<

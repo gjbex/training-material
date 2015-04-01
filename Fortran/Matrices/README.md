@@ -19,6 +19,8 @@ What is it?
     allocated, initialized, printed, and deallocated.
 1. `pointer_test.f90`: illustrates that procedures need not be aware
     that they work with a pointer to arrays, rather than the real thing.
+1. `subarray_test.f90`: illustrates that assumed shape array passing works
+    nicely with subarrays.
 
 Note: both programs use the `matrix_ops` module in `matrix_ops.f90` that
 defines two subroutines, `init_matrix` to initialize a matrix, and

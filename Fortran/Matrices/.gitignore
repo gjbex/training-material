@@ -2,3 +2,4 @@ alloc_test
 calc_test
 calc_alloc_test
 pointer_test
+subarray_test
