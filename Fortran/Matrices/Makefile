@@ -5,8 +5,9 @@ LIBS = -lm
 
 OBJS_ALLOC = matrix_ops.o alloc_test.o
 OBJS_CALC = matrix_ops.o calc_test.o
+OBJS_CALC_ALLOC = matrix_ops.o calc_alloc_test.o
 
-APPS = alloc_test calc_test
+APPS = alloc_test calc_test calc_alloc_test
 
 all: $(APPS)
 
@@ -15,6 +16,9 @@ alloc_test: $(OBJS_ALLOC)
 
 calc_test: $(OBJS_CALC)
 	$(F90) $(FFLAGS) -o $@ $(OBJS_CALC) $(LDFLAGS) $(LIBS)
+
+calc_alloc_test: $(OBJS_CALC_ALLOC)
+	$(F90) $(FFLAGS) -o $@ $(OBJS_CALC_ALLOC) $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
 	$(F90) $(FFLAGS) -c $<

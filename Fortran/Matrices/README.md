@@ -7,13 +7,16 @@ and even parallelization.
 
 What is it?
 -----------
-1. `calculations`: illustrates mathematical operations with matrices such
-   as addition, element-wise multiplication, division and exponentiation,
-   as well as matrix product.  Adding a scalar to or multiplying a scalar
-   with all elements of a matrix can also be done in a single statement.
-2. `alloc_test`: illustrates how to dynamically allocate a matrix with
-   dimensions that can be specified on the command line.  The matrix is
-   allocated, initialized, printed, and deallocated.
+1. `calc_test.f90`: illustrates mathematical operations with matrices such
+    as addition, element-wise multiplication, division and exponentiation,
+    as well as matrix product.  Adding a scalar to or multiplying a scalar
+    with all elements of a matrix can also be done in a single statement.
+1. `matrix_ops.f90`: module defining some procedure on matrices
+1. `calc_alloc_test.f90`: illustrates that procedures need not be aware
+    that they work with allcated arrays.
+1. `alloc_test.f90`: illustrates how to dynamically allocate a matrix with
+    dimensions that can be specified on the command line.  The matrix is
+    allocated, initialized, printed, and deallocated.
 
 Note: both programs use the `matrix_ops` module in `matrix_ops.f90` that
 defines two subroutines, `init_matrix` to initialize a matrix, and
@@ -25,4 +28,3 @@ using the `shape` function.
 How to build?
 -------------
 A make file is provided.
-
