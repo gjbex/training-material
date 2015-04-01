@@ -17,6 +17,8 @@ What is it?
 1. `alloc_test.f90`: illustrates how to dynamically allocate a matrix with
     dimensions that can be specified on the command line.  The matrix is
     allocated, initialized, printed, and deallocated.
+1. `pointer_test.f90`: illustrates that procedures need not be aware
+    that they work with a pointer to arrays, rather than the real thing.
 
 Note: both programs use the `matrix_ops` module in `matrix_ops.f90` that
 defines two subroutines, `init_matrix` to initialize a matrix, and

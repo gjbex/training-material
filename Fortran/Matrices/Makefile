@@ -6,8 +6,9 @@ LIBS = -lm
 OBJS_ALLOC = matrix_ops.o alloc_test.o
 OBJS_CALC = matrix_ops.o calc_test.o
 OBJS_CALC_ALLOC = matrix_ops.o calc_alloc_test.o
+OBJS_POINTER = matrix_ops.o pointer_test.o
 
-APPS = alloc_test calc_test calc_alloc_test
+APPS = alloc_test calc_test calc_alloc_test pointer_test
 
 all: $(APPS)
 
@@ -19,6 +20,9 @@ calc_test: $(OBJS_CALC)
 
 calc_alloc_test: $(OBJS_CALC_ALLOC)
 	$(F90) $(FFLAGS) -o $@ $(OBJS_CALC_ALLOC) $(LDFLAGS) $(LIBS)
+
+pointer_test: $(OBJS_POINTER)
+	$(F90) $(FFLAGS) -o $@ $(OBJS_POINTER) $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
 	$(F90) $(FFLAGS) -c $<
