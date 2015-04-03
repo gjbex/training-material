@@ -7,9 +7,18 @@ program pointer_test
     real(kind=REAL64), dimension(:, :), pointer :: p => null()
 
     allocate(A(m, n))
+    if (.not. associated(p)) &
+        print '(A)', '# p not associated'
     p => A
+    if (associated(p)) &
+        print '(A)', '# p associated'
     call init_matrix(p)
     call print_matrix(p, 'A')
     deallocate(A)
+    if (associated(p)) &
+        print '(A)', '# p still associated'
+    p => null()
+    if (.not. associated(p)) &
+        print '(A)', '# p not associated'
 
 end program pointer_test
