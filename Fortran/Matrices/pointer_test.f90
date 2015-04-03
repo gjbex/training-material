@@ -4,7 +4,7 @@ program pointer_test
     implicit none
     integer, parameter :: m = 5, n = 4
     real(kind=REAL64), dimension(:, :), allocatable, target :: a
-    real(kind=REAL64), dimension(:, :), pointer :: p
+    real(kind=REAL64), dimension(:, :), pointer :: p => null()
 
     allocate(A(m, n))
     p => A
