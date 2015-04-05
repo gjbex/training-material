@@ -7,7 +7,8 @@ TIME_FUNCS_OBJS = math_func_interface.o math_func_mod.o \
                   time_func_mod.o time_funcs.o
 INTERNALS_OBJS = internals_mod.o internals_test.o
 APPS = time_funcs recursion_test internals_test vectorization_test \
-       precision_test array_in_function_test
+       precision_test array_in_function_test compute_stats_test \
+       elemental_test
 
 all: $(APPS)
 
@@ -20,13 +21,19 @@ time_funcs: $(TIME_FUNCS_OBJS)
 internals_test: $(INTERNALS_OBJS)
 	$(F90) $(FFLAGS) -o $@ $(INTERNALS_OBJS) $(LDFLAGS) $(LIBS)
 
-vectorization_test: vectorization_test.f90
+vectorization_test: vectorization_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
-precision_test: precision_test.f90
+precision_test: precision_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
-array_in_function_test: array_in_function_test.f90
+array_in_function_test: array_in_function_test.o
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+
+compute_stats_test: compute_stats_test.o
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+
+elemental_test: elemental_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
@@ -34,4 +41,3 @@ array_in_function_test: array_in_function_test.f90
 
 clean:
 	rm -f *.o *.mod $(APPS)
-
