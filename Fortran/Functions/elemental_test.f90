@@ -7,9 +7,14 @@ program elemental_test
                                          output
 
     output = factorial(input)
-
     do i = 1, n
         print '(I2, I20)', input(i), output(i)
+    end do
+
+    print '(A)', '# in place factorial'
+    call in_place_factorial(input)
+    do i = 1, n
+        print '(I2, I20)', i, input(i)
     end do
 
 contains
@@ -24,5 +29,11 @@ contains
             fac = fac*i
         end do
     end function factorial
+
+    elemental subroutine in_place_factorial(i)
+        implicit none
+        integer(kind=int64), intent(inout) :: i
+        i = factorial(i)
+    end subroutine in_place_factorial
 
 end program elemental_test
