@@ -10,3 +10,4 @@ vectorization_test
 array_in_function_test
 elemental_test
 compute_stats_test
+intrinsic_test

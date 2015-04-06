@@ -20,6 +20,8 @@ What is it?
     it can be applied to arrays
 1. `compute_stats_test`: compute descriptive statistics (mean, standard
     deviation) in a subroutine to illistrate intent declarations.
+1. `intrinsic_test`: illustrates that many intrinsic procedures are
+    elemental
 
 How to build?
 -------------
