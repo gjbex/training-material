@@ -10,7 +10,7 @@ program internals_test
     call compute()
     print "(5F7.3)", values
     call compute_more(n, x)
-    print "(F15.7)", x
+    print "(A, F15.7)", 'program x = ', x
 
 contains
 
