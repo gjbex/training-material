@@ -16,16 +16,6 @@ program calc_test
     label_str = "A"
     call print_matrix(A, label=label_str)
 
-    ! scalar-matrix sum
-    C = 3.0_dp + A
-    label_str = '3.0 + A'
-    call print_matrix(C, label=label_str)
-
-    ! scalar-matrix product
-    C = 2.0_dp*A
-    label_str = '2.0*A'
-    call print_matrix(C, label=label_str)
-
     ! initialize matrix B
     call init_matrix(B)
     label_str = "B"
@@ -61,7 +51,7 @@ program calc_test
     label_str = "2 + A"
     call print_matrix(C, label=label_str)
 
-    ! element-wise addition of constant
+    ! element-wise multiplication of constant
     C = 3.0_dp*A
     label_str = "3*A"
     call print_matrix(C, label=label_str)
