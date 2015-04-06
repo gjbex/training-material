@@ -76,7 +76,7 @@ program calc_test
     label_str = 'row sum D'
     call print_vector(row_sum, label=label_str)
 
-    ! column sum
+    ! column maximum
     col_max = maxval(D, dim=2)
     label_str = 'column max D'
     call print_vector(col_max, label=label_str)
