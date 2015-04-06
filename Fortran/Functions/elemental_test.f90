@@ -1,11 +1,16 @@
 program elemental_test
     use, intrinsic :: iso_fortran_env
     implicit none
-    integer, parameter :: n = 16
+    integer, parameter :: n = 16, p = 6
     integer :: i
-    integer(kind=INT64), dimension(n) :: input = [ (i, i = 0, n - 1) ], &
+    integer(kind=INT64), dimension(n) :: input = [ (i - 1, i = 1, n) ], &
                                          output
+    real(kind=REAL64), dimension(p) :: x = [ (real(i - 1, kind=REAL64), &
+                                              i = 1, p) ], &
+                                       y
+    integer(kind=INT64), dimension(p) :: degree = [ (i - 1, i = 1, p) ]
 
+    print '(A)', '# factorial'
     output = factorial(input)
     do i = 1, n
         print '(I2, I20)', input(i), output(i)
@@ -15,6 +20,12 @@ program elemental_test
     call in_place_factorial(input)
     do i = 1, n
         print '(I2, I20)', i, input(i)
+    end do
+
+    print '(A)', '# powers'
+    y = power(x, degree)
+    do i = 1, p
+        print '(F8.2, I4, F20.2)', x(i), degree(i), y(i)
     end do
 
 contains
@@ -35,5 +46,13 @@ contains
         integer(kind=int64), intent(inout) :: i
         i = factorial(i)
     end subroutine in_place_factorial
+
+    elemental function power(x, n) result(y)
+        implicit none
+        real(kind=REAL64), intent(in) :: x
+        integer(kind=INT64), intent(in) :: n
+        real(kind=REAL64) :: y
+        y = x**n
+    end function power
 
 end program elemental_test
