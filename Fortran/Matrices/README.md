@@ -21,6 +21,8 @@ What is it?
     that they work with a pointer to arrays, rather than the real thing.
 1. `subarray_test.f90`: illustrates that assumed shape array passing works
     nicely with subarrays.
+1. `array_init_test.f90`: illustrates array initialization and reshape in
+    declaration, program, as well as transpose and reshape.
 
 Note: both programs use the `matrix_ops` module in `matrix_ops.f90` that
 defines two subroutines, `init_matrix` to initialize a matrix, and
