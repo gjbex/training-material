@@ -14,7 +14,7 @@ program array_init_test
     end do
 
     print '(A)', '# initialized in program'
-    b = reshape([ (1.0/i, i = 1, m*n) ], [m, n])
+    b = reshape([ ((1.0/(i*n + j), i = 1, m), j=1, n) ], [m, n])
     write (fmt_str, '(A, I1, A)') '(', n, 'F7.3)'
     do i = 1, size(b, 1)
         print fmt_str, b(i, :)
