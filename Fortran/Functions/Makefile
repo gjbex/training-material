@@ -8,7 +8,7 @@ TIME_FUNCS_OBJS = math_func_interface.o math_func_mod.o \
 INTERNALS_OBJS = internals_mod.o internals_test.o
 APPS = time_funcs recursion_test internals_test vectorization_test \
        precision_test array_in_function_test compute_stats_test \
-       elemental_test intrinsic_test
+       elemental_test intrinsic_test initialization_test
 
 all: $(APPS)
 
@@ -37,6 +37,9 @@ elemental_test: elemental_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 intrinsic_test: intrinsic_test.o
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+
+initialization_test: initialization_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %.o: %.f90

@@ -21,7 +21,10 @@ What is it?
 1. `compute_stats_test`: compute descriptive statistics (mean, standard
     deviation) in a subroutine to illistrate intent declarations.
 1. `intrinsic_test`: illustrates that many intrinsic procedures are
-    elemental
+    elemental.
+1. `initialization_test`: illustrates that procedure local variables
+    retain their value between procedure calls when initialized in
+    declaration.
 
 How to build?
 -------------
