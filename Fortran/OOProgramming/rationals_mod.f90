@@ -1,5 +1,6 @@
 module rationals_mod
-implicit none
+    use, intrinsic :: iso_fortran_env
+    implicit none
 
     private
     type, public :: rational
@@ -26,7 +27,8 @@ contains
         if (d > 0) then
             rat_create%denom = d
         else
-            print *, "denominator must be positive"
+            write (unit=error_unit, fmt='(A)') &
+                "# error: denominator must be positive"
             stop
         end if
     end function rat_create
