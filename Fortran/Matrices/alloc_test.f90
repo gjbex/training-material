@@ -1,9 +1,9 @@
 program alloc_test
-    use, intrinsic :: iso_fortran_env
-    use matrix_ops
+    use :: precision_defs
+    use :: matrix_ops
     implicit none
-    integer :: M, N
-    real(kind=REAL64), allocatable, dimension(:,:) :: A
+    integer :: M, N, i, j
+    real(kind=dp), allocatable, dimension(:,:) :: A
     character(len=1024) :: buffer
     character(len=:), allocatable :: label_str
 
@@ -28,6 +28,9 @@ program alloc_test
     call init_matrix(A)
     label_str = "A"
     call print_matrix(A, label=label_str)
+    A = reshape([ ((i*size(A, 2) + j, i = 0, size(A, 1) - 1), &
+                   j = 1, size(A, 2)) ], shape(A))
+    call print_matrix(A, "A'")
     deallocate(A)
     if (.not. allocated(A)) print '(A)', '# A no longer allocated'
 
