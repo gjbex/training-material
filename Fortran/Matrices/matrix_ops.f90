@@ -1,8 +1,7 @@
 module matrix_ops
-    use, intrinsic :: iso_fortran_env
+    use :: precision_defs
     implicit none
     private
-    integer, parameter :: dp = REAL64
     public :: init_matrix, print_matrix, print_vector
 
 contains

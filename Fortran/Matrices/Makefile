@@ -3,7 +3,7 @@ FFLAGS = -O2 -g
 LDFLAGS =
 LIBS = -lm
 
-OBJS_ALLOC = matrix_ops.o alloc_test.o
+OBJS_ALLOC = precision_defs_mod.o matrix_ops.o alloc_test.o
 OBJS_CALC = matrix_ops.o calc_test.o
 OBJS_CALC_ALLOC = matrix_ops.o calc_alloc_test.o
 OBJS_POINTER = matrix_ops.o pointer_test.o
