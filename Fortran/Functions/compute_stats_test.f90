@@ -2,11 +2,19 @@ program compute_stats_test
     use, intrinsic :: iso_fortran_env
     implicit none
     integer, parameter :: sp = REAL32
-    real(kind=sp), dimension(10) :: v
+    type stats_type
+        real(kind=sp) :: sum, mean, stddev
+        integer :: n
+    end type stats_type
+    type(stats_type) :: stats
+    integer, parameter :: data_size = 10
+    real(kind=sp), dimension(data_size) :: v
     real(kind=sp) :: mean, stddev
     call init_vector(v)
     call compute_stats(v, mean, stddev)
     print *, mean, stddev
+    stats = compute_stats_alt(v)
+    print *, stats%mean, stats%stddev
 
 contains
 
@@ -32,4 +40,16 @@ contains
         stddev = sqrt((s*s - s2)/(n - 1))
     end subroutine compute_stats
 
+    function compute_stats_alt(v) result(stats)
+        implicit none
+        real(kind=sp), dimension(:), intent(in) :: v
+        type(stats_type) :: stats
+        real(kind=sp) :: sum2
+        stats%n = size(v)
+        stats%sum = sum(v)
+        sum2 = sum(v**2)
+        stats%mean = stats%sum/stats%n
+        stats%stddev = sqrt((stats%sum**2 - sum2)/(stats%n - 1))
+    end function compute_stats_alt
+    
 end program compute_stats_test
