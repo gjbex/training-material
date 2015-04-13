@@ -68,15 +68,6 @@ contains
         end if
     end subroutine rat_print
 
-    subroutine rat_simplify(a)
-        implicit none
-        type(rational), intent(inout) :: a
-        integer :: n
-        n = gcd(a%num, a%denom)
-        a%num = a%num/n
-        a%denom = a%denom/n
-    end subroutine rat_simplify
-
     integer function gcd(x, y)
         implicit none
         integer, value :: x, y
