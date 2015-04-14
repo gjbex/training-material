@@ -30,8 +30,7 @@ d = a*b
 call rat_print(d)
 
 a = rational(2, -4)
-b = rational(3)
-d = a*b
+d = 3*a
 call rat_print(d)
 
 c = rational(3, 0)

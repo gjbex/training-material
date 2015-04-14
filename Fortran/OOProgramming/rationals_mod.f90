@@ -17,7 +17,7 @@ module rationals_mod
     end interface
 
     interface operator(*)
-        module procedure rat_mul
+        module procedure rat_mul, int_rat_mul
     end interface
 
     public :: rat_print, operator(+), operator(*)
@@ -26,10 +26,8 @@ contains
 
     type(rational) function rat_create(n, d)
         implicit none
-        integer, value :: n
-        integer, value, optional :: d
+        integer, value :: n, d
         integer :: n_act, d_act, g
-        if (.not. present(d)) d = 1
         if (d == 0) then
             write (unit=error_unit, fmt='(A)') &
                 "# error: denominator must be non-zero"
@@ -59,6 +57,13 @@ contains
         type(rational), intent(in) :: a, b
         rat_mul = rat_create(a%sign*a%num*b%sign*b%num, a%denom*b%denom)
     end function rat_mul
+
+    type(rational) function int_rat_mul(a, b)
+        implicit none
+        integer, intent(in) :: a
+        type(rational), intent(in) :: b
+        int_rat_mul = rat_create(a*b%sign*b%num, b%denom)
+    end function int_rat_mul
 
     subroutine rat_print(a)
         implicit none
