@@ -29,6 +29,11 @@ b = rational(1, 4)
 d = a*b
 call rat_print(d)
 
+a = rational(2, -4)
+b = rational(3)
+d = a*b
+call rat_print(d)
+
 c = rational(3, 0)
 call rat_print(c)
 
