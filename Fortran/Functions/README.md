@@ -25,6 +25,7 @@ What is it?
 1. `initialization_test`: illustrates that procedure local variables
     retain their value between procedure calls when initialized in
     declaration.
+1. `quad_test`: illustrates using a function as a procedure argument
 
 How to build?
 -------------
