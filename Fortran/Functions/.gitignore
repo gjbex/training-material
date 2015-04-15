@@ -12,3 +12,4 @@ elemental_test
 compute_stats_test
 intrinsic_test
 initialization_test
+quad_test

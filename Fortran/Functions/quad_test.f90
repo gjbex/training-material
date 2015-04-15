@@ -13,4 +13,5 @@ contains
         real(Kind=dp), intent(in) :: x
         f = exp(x)
     end function f
+
 end program quad_test
