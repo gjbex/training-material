@@ -26,6 +26,7 @@ What is it?
     retain their value between procedure calls when initialized in
     declaration.
 1. `quad_test`: illustrates using a function as a procedure argument
+1. `line_test`: extra, more sensible example of internal procedures
 
 How to build?
 -------------

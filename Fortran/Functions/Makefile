@@ -7,9 +7,11 @@ TIME_FUNCS_OBJS = math_func_interface.o math_func_mod.o \
                   time_func_mod.o time_funcs.o
 INTERNALS_OBJS = internals_mod.o internals_test.o
 QUAD_OBJS = types_mod.o quad_func_interface.o quad_mod.o quad_test.o
+LINE_OBJS = types_mod.o line_mod.o line_test.o
 APPS = time_funcs recursion_test internals_test vectorization_test \
        precision_test array_in_function_test compute_stats_test \
-       elemental_test intrinsic_test initialization_test quad_test
+       elemental_test intrinsic_test initialization_test quad_test \
+       line_test
 
 all: $(APPS)
 
@@ -45,6 +47,9 @@ initialization_test: initialization_test.o
 
 quad_test: $(QUAD_OBJS)
 	$(F90) $(FFLAGS) -o $@ $(QUAD_OBJS) $(LDFLAGS) $(LIBS)
+
+line_test: $(LINE_OBJS)
+	$(F90) $(FFLAGS) -o $@ $(LINE_OBJS) $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
 	$(F90) $(FFLAGS) -c $<
