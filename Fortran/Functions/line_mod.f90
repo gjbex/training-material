@@ -3,9 +3,22 @@ module line_mod
     implicit none
 
     private
-    public :: on_line, line
+    real(kind=sp) :: epsilon = 1.0e-4_sp
+    public :: on_line, line, set_epsilon, get_epsilon
 
 contains
+
+    subroutine set_epsilon(eps)
+        implicit none
+        real(kind=sp), intent(in) :: eps
+        epsilon = eps
+    end subroutine set_epsilon
+
+    function get_epsilon() result(eps)
+        implicit none
+        real(kind=sp) :: eps
+        eps = epsilon
+    end function get_epsilon
 
     elemental function line(x) result(y)
         implicit none
@@ -28,7 +41,7 @@ contains
             implicit none
             real(kind=sp), intent(in) :: a, b
             logical :: is_equal
-            is_equal = abs(a - b) < 1.0e-6
+            is_equal = abs(a - b) < epsilon
         end function equal
 
     end function on_line
