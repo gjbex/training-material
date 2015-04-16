@@ -4,10 +4,10 @@ LDFLAGS =
 LIBS = -lm
 
 OBJS_ALLOC = precision_defs_mod.o matrix_ops.o alloc_test.o
-OBJS_CALC = matrix_ops.o calc_test.o
-OBJS_CALC_ALLOC = matrix_ops.o calc_alloc_test.o
-OBJS_POINTER = matrix_ops.o pointer_test.o
-OBJS_SUBARRAY = matrix_ops.o subarray_test.o
+OBJS_CALC = precision_defs_mod.o matrix_ops.o calc_test.o
+OBJS_CALC_ALLOC = precision_defs_mod.o matrix_ops.o calc_alloc_test.o
+OBJS_POINTER = precision_defs_mod.o matrix_ops.o pointer_test.o
+OBJS_SUBARRAY = precision_defs_mod.o matrix_ops.o subarray_test.o
 
 APPS = alloc_test calc_test calc_alloc_test pointer_test subarray_test \
        array_init_test failed_allocate_test
