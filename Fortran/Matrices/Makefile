@@ -10,7 +10,7 @@ OBJS_POINTER = matrix_ops.o pointer_test.o
 OBJS_SUBARRAY = matrix_ops.o subarray_test.o
 
 APPS = alloc_test calc_test calc_alloc_test pointer_test subarray_test \
-       array_init_test
+       array_init_test failed_allocate_test
 
 all: $(APPS)
 
@@ -30,6 +30,9 @@ subarray_test: $(OBJS_SUBARRAY)
 	$(F90) $(FFLAGS) -o $@ $(OBJS_SUBARRAY) $(LDFLAGS) $(LIBS)
 
 array_init_test: array_init_test.o
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+
+failed_allocate_test: failed_allocate_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %.o: %.f90

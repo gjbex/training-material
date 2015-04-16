@@ -23,6 +23,8 @@ What is it?
     nicely with subarrays.
 1. `array_init_test.f90`: illustrates array initialization and reshape in
     declaration, program, as well as transpose and reshape.
+1. `failed_allocate_test`: illustrates using the stat argument in the
+    allocate call
 
 Note: both programs use the `matrix_ops` module in `matrix_ops.f90` that
 defines two subroutines, `init_matrix` to initialize a matrix, and
