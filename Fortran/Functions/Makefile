@@ -8,48 +8,28 @@ TIME_FUNCS_OBJS = math_func_interface.o math_func_mod.o \
 INTERNALS_OBJS = internals_mod.o internals_test.o
 QUAD_OBJS = types_mod.o quad_func_interface.o quad_mod.o quad_test.o
 LINE_OBJS = types_mod.o line_mod.o line_test.o
-APPS = time_funcs recursion_test internals_test vectorization_test \
-       precision_test array_in_function_test compute_stats_test \
-       elemental_test intrinsic_test initialization_test quad_test \
-       line_test
+APPS = time_funcs.exe recursion_test.exe internals_test.exe \
+       vectorization_test.exe precision_test.exe \
+       array_in_function_test.exe compute_stats_test.exe \
+       elemental_test.exe intrinsic_test.exe initialization_test.exe \
+       quad_test.exe line_test.exe
 
 all: $(APPS)
 
-recursion_test: recursion_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-time_funcs: $(TIME_FUNCS_OBJS)
+time_funcs.exe: $(TIME_FUNCS_OBJS)
 	$(F90) $(FFLAGS) -o $@ $(TIME_FUNCS_OBJS) $(LDFLAGS) $(LIBS)
 
-internals_test: $(INTERNALS_OBJS)
+internals_test.exe: $(INTERNALS_OBJS)
 	$(F90) $(FFLAGS) -o $@ $(INTERNALS_OBJS) $(LDFLAGS) $(LIBS)
 
-vectorization_test: vectorization_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-precision_test: precision_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-array_in_function_test: array_in_function_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-compute_stats_test: compute_stats_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-elemental_test: elemental_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-intrinsic_test: intrinsic_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-initialization_test: initialization_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-quad_test: $(QUAD_OBJS)
+quad_test.exe: $(QUAD_OBJS)
 	$(F90) $(FFLAGS) -o $@ $(QUAD_OBJS) $(LDFLAGS) $(LIBS)
 
-line_test: $(LINE_OBJS)
+line_test.exe: $(LINE_OBJS)
 	$(F90) $(FFLAGS) -o $@ $(LINE_OBJS) $(LDFLAGS) $(LIBS)
+
+%.exe: %.o
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
 	$(F90) $(FFLAGS) -c $<
