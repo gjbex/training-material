@@ -7,7 +7,7 @@ PART_OBJS = random_mod.o particles_mod.o particle_sim.o
 RAND_TEST_OBJS = random_mod.o rand_test.o
 
 APPS = single double particle_sim rand_test precision_test \
-       select_precision_test
+       select_precision_test, complex_test
 
 all: $(APPS)
 
@@ -28,6 +28,9 @@ particle_sim: $(PART_OBJS)
 
 rand_test: $(RAND_TEST_OBJS)
 	$(F90) $(FFLAGS) -o $@ $(RAND_TEST_OBJS) $(LDFLAGS) $(LIBS)
+
+complex_test: complex_test.f90
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
 	$(F90) $(FFLAGS) -c $<
