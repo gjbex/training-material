@@ -3,23 +3,12 @@ FFLAGS = -O2 -g
 LDFLAGS =
 LIBS = -lm
 
-APPL = forall_test where_test select_test do_test do_while_test
+APPL = forall_test.exe where_test.exe select_test.exe do_test.exe \
+       do_while_test.exe block_test.exe
 
 all: $(APPL)
 
-forall_test: forall_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-where_test: where_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-select_test: select_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-do_test: do_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-do_while_test: do_while_test.o
+%.exe: %.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
