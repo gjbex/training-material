@@ -28,6 +28,7 @@ What is it?
     approaches and compares the results with `REAL32` and `REAL64`.
 1. `complext_test`: shows single and double precision complex number
     declarations.
+1. `limits_test`: shows numerical model paraemters for integers and reals
 
 How to build?
 -------------
