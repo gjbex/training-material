@@ -5,17 +5,46 @@ program infinity_nan_test
     real(kind=REAL32) :: x_delta = 1e32_REAL32
 
     x = huge(real(0.0, kind=REAL32))
-    print "(E13.7, ' + ', E7.1, ' = ', F8.7)", x, x_delta, x + x_delta
+    y = x + x_delta
+    print "(E13.7, ' + ', E7.1, ' = ', F8.7)", x, x_delta, y
+    call check_ieee(y)
     x = -1.0e20_REAL32
-    y = 1.0e20_REAL32
-    print "(E8.1, '*', E7.1, ' = ', F9.1)", x, y, x*y
+    y = 1.0e20_REAL32*x
+    print "(E8.1, '*', E7.1, ' = ', F9.1)", x, y, y
+    call check_ieee(y)
     x = 1.0e6_REAL32
-    print "(A, '(', E7.1, ') = ', F8.1)", 'exp', x, exp(x)
+    y = exp(x)
+    print "(A, '(', E7.1, ') = ', F8.1)", 'exp', x, y
+    call check_ieee(y)
     x = 0.0_REAL32
-    print "(A, '(', F3.1, ') = ', F9.1)", 'log', x, log(x)
+    y = log(x)
+    print "(A, '(', F3.1, ') = ', F9.1)", 'log', x, y
+    call check_ieee(y)
     x = 0.0_REAL32
-    print "(F3.1, '/', F3.1, ' = ', F3.1)", x, x, x/x
+    y = x/x
+    print "(F3.1, '/', F3.1, ' = ', F3.1)", x, x, y
+    call check_ieee(y)
     x = -1.0_REAL32
-    print "(A, '(', F4.1, ') = ', F3.1)", 'sqrt', x, sqrt(x)
+    y = sqrt(x)
+    print "(A, '(', F4.1, ') = ', F3.1)", 'sqrt', x, y
+    call check_ieee(y)
+
+contains
+
+    subroutine check_ieee(x)
+#ifdef IEEE_STUFF
+        use, intrinsic :: ieee_arithmetic
+#endif
+        implicit none
+        real(kind=REAL32), intent(in) :: x
+#ifdef IEEE_STUFF
+        if (.not. ieee_is_finite(y)) &
+            print '(A)', "\tIEEE infinity"
+        if (ieee_is_nan(y)) &
+            print '(A)', "\tIEEE NaN"
+        if (.not. ieee_is_normal(y)) &
+            print '(A)', "\tIEEE not normal"
+#endif
+    end subroutine check_ieee
 
 end program infinity_nan_test
