@@ -41,7 +41,7 @@ contains
         tab = char(9)
 #ifdef IEEE_STUFF
         if (.not. ieee_is_finite(y)) &
-            print '(2A)', tab, "IEEE not infine"
+            print '(2A)', tab, "IEEE not finite"
         if (ieee_is_nan(y)) &
             print '(2A)', tab, "IEEE NaN"
         if (.not. ieee_is_normal(y)) &
