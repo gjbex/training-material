@@ -29,6 +29,8 @@ What is it?
 1. `complext_test`: shows single and double precision complex number
     declarations.
 1. `limits_test`: shows numerical model paraemters for integers and reals
+1. `infinity_nan_test`: illustrates infinity and NaN results of floating
+    point computations
 
 How to build?
 -------------

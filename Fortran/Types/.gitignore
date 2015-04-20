@@ -6,3 +6,4 @@ precision_test
 select_precision_test
 complext_test
 limits_test
+infinity_nan_test
