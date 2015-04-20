@@ -37,13 +37,15 @@ contains
 #endif
         implicit none
         real(kind=REAL32), intent(in) :: x
+        character :: tab
+        tab = char(9)
 #ifdef IEEE_STUFF
         if (.not. ieee_is_finite(y)) &
-            print '(A)', "\tIEEE infinity"
+            print '(2A)', tab, "IEEE not infine"
         if (ieee_is_nan(y)) &
-            print '(A)', "\tIEEE NaN"
+            print '(2A)', tab, "IEEE NaN"
         if (.not. ieee_is_normal(y)) &
-            print '(A)', "\tIEEE not normal"
+            print '(2A)', tab, "IEEE not normal"
 #endif
     end subroutine check_ieee
 
