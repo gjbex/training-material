@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     fileName = argv[1];
     if ((fp = fopen(fileName, "rb")) == NULL)
         err(EXIT_FAILURE, "can't open file '%s'", fileName);
-    while (fread(&number, 1, sizeof(double), fp))
+    while (fread(&number, sizeof(double), 1, fp))
         printf("%lf == %lf\n", number, sqrt((double) i++));
     fclose(fp);
     return EXIT_SUCCESS;
