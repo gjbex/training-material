@@ -13,6 +13,8 @@ What is it?
 1. `stream_read_write_test`: writes unformatted records to an
     external file, and reads the data back in for verification using the
     file position in stream mode.
+1. `read_test`: C program to illustrate that data written by a Fortran
+    program using unformatted stream I/O can be read correctly.
 
 How to build?
 -------------
