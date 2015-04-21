@@ -10,7 +10,8 @@ int main(int argc, char *argv[]) {
 
     if (argc < 2)
         errx(EXIT_FAILURE, "#error: no file name specified");
-    fp = fopen(argv[1], "rb");
+    if ((fp = fopen(argv[1], "rb")) == NULL)
+        err(EXIT_FAILURE, "#error:");
     if (!fread(&nr_data, sizeof(nr_data), 1, fp))
         errx(EXIT_FAILURE, "#error: read failed");
     printf("nr = %d\n", nr_data);
