@@ -1,4 +1,4 @@
-program formatted_read_write_test
+program unformatted_read_write_test
     use, intrinsic :: iso_fortran_env
     implicit none
     integer, parameter :: nr_data = 11, max_len=100
@@ -104,4 +104,4 @@ contains
         f = sqrt(x)
     end function f
 
-end program formatted_read_write_test
+end program unformatted_read_write_test
