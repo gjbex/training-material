@@ -3,7 +3,8 @@ FFLAGS = -O2 -g
 LDFLAGS =
 LIBS = -lm
 
-APPS = formatted_read_write_test.exe unformatted_read_write_test.exe
+APPS = formatted_read_write_test.exe unformatted_read_write_test.exe \
+       stream_read_write_test.exe
 
 all: $(APPS)
 
@@ -14,4 +15,4 @@ all: $(APPS)
 	$(F90) $(FFLAGS) -c -o $@ $<
 
 clean:
-	rm -f *.o *.mod $(APPS) text_file.txt bin_file.dat
+	rm -f *.o *.mod $(APPS) text_file.txt bin_file.dat stream_file.dat

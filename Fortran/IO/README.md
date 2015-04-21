@@ -10,6 +10,9 @@ What is it?
     file, reads the contents back in, and validates the input.
 1. `unformtatted_read_writes_test`: writes unformatted records to an
     external file, reads the contents back in, and validates te input.
+1. `stream_read_write_test`: writes unformatted records to an
+    external file, and reads the data back in for verification using the
+    file position in stream mode.
 
 How to build?
 -------------
