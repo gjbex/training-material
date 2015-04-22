@@ -2,7 +2,9 @@ Fortran
 =======
 
 This is work in progress for an information session on modern Fortran
-(95, 2003, 2008).  This part of the repository will be extended over time.
+(95, 2003, 2008).  Prior knowledge of Fortran 77/90 is assumed.
+
+This may grow over time to become a full-fledged Fortran course.
 
 Contents
 --------
@@ -19,6 +21,8 @@ Contents
     records.
 1. `Matrices`: illustrates array operations and intrinsic functions
     operating on arrays, indexing by slices,  as well as allocatable arrays.
+1. `Miscellaneous`: Dealing with command line arguments, environment
+    variables.
 1. ``modern_fortran.pptx`: Microsoft Powerpoint presentation of modern
     Fortran features intended for those not familiar with some of the
     features introduced in Fortran 95, 2003, and 2008, or for those who
