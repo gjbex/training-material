@@ -3,11 +3,11 @@ FFLAGS = -O2 -g
 LDFLAGS =
 LIBS = -lm
 
-APPL = free_source_form_test
+APPL = free_source_form_test.exe cli_test.exe
 
 all: $(APPL)
 
-free_source_form_test: free_source_form_test.o
+%.exe: %.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %.o: %.f90
