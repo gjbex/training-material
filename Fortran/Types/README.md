@@ -35,3 +35,10 @@ What is it?
 How to build?
 -------------
 A make file is provided.
+
+To build a `infinity_nan_test` that uses `ieee_arithmetic`, define
+`IEEE_STUFF`, i.e.,
+```
+make FFLAGS='-DIEEE_STUFF infinity_nan_test
+``` 
+Note: not all compiler version support this yet.
