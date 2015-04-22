@@ -1,4 +1,3 @@
 *.exe
+*.dat
 text_file.txt
-bin_file.dat
-stream_file.dat

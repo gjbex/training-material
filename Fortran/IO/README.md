@@ -15,6 +15,12 @@ What is it?
     file position in stream mode.
 1. `read_test`: C program to illustrate that data written by a Fortran
     program using unformatted stream I/O can be read correctly.
+1. `write_stream_test`: illustrates stream write of a complete array at
+    once.
+1. `read_stream_test`: illustrates how to stream read a file of unknown
+    length using the iostat value to detect end of file.
+1. `read_stream`: C program that reads the binary file produce by
+    `write_stream_test`.
 
 How to build?
 -------------
