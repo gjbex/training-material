@@ -16,11 +16,11 @@ int main(int argc, char *argv[]) {
         errx(EXIT_FAILURE, "#error: read failed");
     printf("nr = %d\n", nr_data);
     for (i = 0; i < nr_data; i++) {
-        if (!fread(&dummy, 1, sizeof(nr_data), fp))
+        if (!fread(&dummy, sizeof(nr_data), 1, fp))
             errx(EXIT_FAILURE, "#error: read failed");
-        if (!fread(&x, 1, sizeof(x), fp))
+        if (!fread(&x, sizeof(x), 1, fp))
             errx(EXIT_FAILURE, "#error: read failed");
-        if (!fread(&y, 1, sizeof(y), fp))
+        if (!fread(&y, sizeof(y), 1, fp))
             errx(EXIT_FAILURE, "#error: read failed");
         printf("%lf\t%lf\t%le\n", x, y, fabs(y - sqrt(x))/sqrt(x));
     }
