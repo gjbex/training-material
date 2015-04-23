@@ -23,6 +23,8 @@ What is it?
     `write_stream_test`.
 1. `inquire_test`: illustrates some uses of the inquire statement, as well
     as sequential, non-advancing I/).
+1. `append_test`: illustrates the rewind statement, and positioning for
+    stream I/O.
 
 How to build?
 -------------

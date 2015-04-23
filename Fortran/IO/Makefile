@@ -7,7 +7,8 @@ CFLAGS = -O2 -g
 
 APPS = formatted_read_write_test.exe unformatted_read_write_test.exe \
        stream_read_write_test.exe read_test.exe write_stream_test.exe \
-       read_stream_test.exe read_stream.exe inquire_test.exe
+       read_stream_test.exe read_stream.exe inquire_test.exe \
+       append_test.exe
 
 all: $(APPS)
 
@@ -25,4 +26,5 @@ read_stream.exe: read_stream.c
 
 clean:
 	rm -f *.o *.mod $(APPS) \
-          text_file.txt bin_file.dat stream_file.dat array_file.dat
+          text_file.txt bin_file.dat stream_file.dat array_file.dat \
+          data.txt
