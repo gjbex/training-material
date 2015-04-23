@@ -21,6 +21,8 @@ What is it?
     length using the iostat value to detect end of file.
 1. `read_stream`: C program that reads the binary file produce by
     `write_stream_test`.
+1. `inquire_test`: illustrates some uses of the inquire statement, as well
+    as sequential, non-advancing I/).
 
 How to build?
 -------------

@@ -7,7 +7,7 @@ CFLAGS = -O2 -g
 
 APPS = formatted_read_write_test.exe unformatted_read_write_test.exe \
        stream_read_write_test.exe read_test.exe write_stream_test.exe \
-       read_stream_test.exe read_stream.exe
+       read_stream_test.exe read_stream.exe inquire_test.exe
 
 all: $(APPS)
 
