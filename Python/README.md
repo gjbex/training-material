@@ -12,6 +12,9 @@ What is it?
 -----------
 1. `ArgParse`: illustration of how to use the argparse module to handle
     command line arguments.
+1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
+    implements a Monte Carlo algorithm, and allows to show evolution over
+    time, autocorrelation, and to compare with target distribution.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
