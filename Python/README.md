@@ -15,6 +15,8 @@ What is it?
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
     implements a Monte Carlo algorithm, and allows to show evolution over
     time, autocorrelation, and to compare with target distribution.
+1. `Birdsong`: implements a FFT of WAV files, and shows the original signal
+    (amplitude) and the frequency spectrum uinsg Pylab.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
