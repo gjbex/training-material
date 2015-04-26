@@ -24,37 +24,40 @@ if __name__ == '__main__':
                             help='base line amplitude')
     arg_parser.add_argument('--amplitude', type=float, default=30.0,
                             help='amplitued to normalize signal to')
-    arg_parser.add_argument('--freqs', type=float, nargs='+',
-                            required = True,
+    specs_group = arg_parser.add_argument_group()
+    specs_group.add_argument('--freqs', type=float, nargs='+',
                             help='frequencies of sinusiodal components')
-    arg_parser.add_argument('--ampls', type=float, nargs='+',
-                            required = True,
+    specs_group.add_argument('--ampls', type=float, nargs='+',
                             help='amplitudes of sinusiodal components')
-    arg_parser.add_argument('--phases', type=float, nargs='*',
+    specs_group.add_argument('--phases', type=float, nargs='*',
                             help='phases of sinusiodal components')
+    arg_parser.add_argument('--specs_file', help='Wave specification file')
     arg_parser.add_argument('--play', action='store_true',
                             help='play generated sound file')
-    arg_parser.add_argument('file', help='name of WAV file to write '
-                                         'the signal to')
+    arg_parser.add_argument('--wav', help='name of WAV file to write '
+                                          'the signal to')
     arg_parser.add_argument('--out', action='store_true',
                             help='print signal to standard output')
     options = arg_parser.parse_args()
-    if len(options.freqs) != len(options.ampls):
-        msg = '# error: {0:d} frequencies for {1:d} amplitudes\n'
-        sys.stderr.write(msg.format(len(options.freqs),
-                                   len(options.aompls)))
-        sys.exit(INPUT_ERROR)
-    freqs = np.array(options.freqs)
-    ampls = np.array(options.ampls)
-    if options.phases is not None:
-        if len(options.phase) != len(options.freqs):
-            msg = '# error: {0:d} frequencies for {1:d} phases\n'
+    if options.specs_file:
+        pass
+    else:
+        if len(options.freqs) != len(options.ampls):
+            msg = '# error: {0:d} frequencies for {1:d} amplitudes\n'
             sys.stderr.write(msg.format(len(options.freqs),
                                        len(options.aompls)))
             sys.exit(INPUT_ERROR)
-        phases = np.array(phases)
-    else:
-        phases = np.zeros(len(freqs))
+        freqs = np.array(options.freqs)
+        ampls = np.array(options.ampls)
+        if options.phases is not None:
+            if len(options.phase) != len(options.freqs):
+                msg = '# error: {0:d} frequencies for {1:d} phases\n'
+                sys.stderr.write(msg.format(len(options.freqs),
+                                           len(options.aompls)))
+                sys.exit(INPUT_ERROR)
+            phases = np.array(phases)
+        else:
+            phases = np.zeros(len(freqs))
     time = np.arange(options.rate*options.duration)/options.rate
     signal = np.zeros(len(time))
     for freq, ampl, phase in zip(freqs, ampls, phases):
@@ -63,7 +66,8 @@ if __name__ == '__main__':
     if options.out:
         for t, s in zip(time, signal):
             print '{0:.6f}\t{1:.6f}'.format(t, s)
-    wav_io.write(options.file, options.rate,
-                 np.array(signal, dtype='uint8'))
+    if options.wav:
+        wav_data = np.array(signal, dtype='uint8')
+        wav_io.write(options.wav, options.rate, wav_data)
     if options.play:
         subprocess.call(['play', options.file])

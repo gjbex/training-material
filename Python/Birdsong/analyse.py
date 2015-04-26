@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 
-import sys
 import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
 import scipy.io.wavfile as wav_io
 
-def compute_spectrum(y, Fs):
-    n = len(y) # lungime semnal
+def compute_spectrum(signal, rate):
+    n = len(signal)
     k = np.arange(n)
-    T = n/Fs
-    frq = k/T # two sides frequency range
-    Y = sp.fft(y)/n # fft computing and normalization
-    return frq, Y
+    T = n/rate
+    freq = k/T
+    Y = sp.fft(signal)/n
+    return freq, Y
 
 def filter_spectrum(frq, Y, level=0.001, window=5000):
     Y_filtered = np.array(Y)
@@ -21,41 +20,42 @@ def filter_spectrum(frq, Y, level=0.001, window=5000):
     Y_filtered[half - window:half + window] = 0.0
     return Y_filtered
 
-def compute_signal(frq, Y):
+def compute_signal(freq, Y):
     y = (len(Y)*np.real(sp.ifft(Y))).astype(np.uint8)
     return y
 
-def plot_spectrum(frq, Y, Fs, half_spectrum=True):
-    n = len(frq)
-    if half_spectrum:
-        frq_half = frq[range(n/2)] # one side frequency range
-        Y_half = Y[range(n/2)]
-        plt.plot(frq_half, abs(Y_half), 'r') # plotting the spectrum
-        plt.axis([0.0, Fs/2, 0.0, 0.15])
-    else:
-        plt.plot(frq, abs(Y), 'r') # plotting the spectrum
-        plt.axis([0.0, 2*Fs, 0.0, 0.15])
-    plt.xlabel('Freq (Hz)')
-    plt.ylabel('|Y(freq)|')
+if __name__ == '__main__':
+    from argparse import ArgumentParser
+    import sys
+    import sound_plot
+    arg_parser = ArgumentParser(description='analyse WAV file')
+    arg_parser.add_argument('wav_file', help='WAV file to analyse')
+    arg_parser.add_argument('--filter', action='store_true',
+                            help='perform filter operations')
+    arg_parser.add_argument('--filtered_wav_file',
+                            help='WAV file to write the filtered signal')
+    options = arg_parser.parse_args()
+    nr_cols = 2 if options.filter else 1
 
-Fs = 44100  # sampling rate
+    rate, signal = wav_io.read(options.wav_file)
+    n = len(signal)
+    time = np.linspace(0, float(n)/rate, n)
+    freq, Y = compute_spectrum(signal, rate)
+# plot signal and spectrum
+    plt.subplot(2, nr_cols, 1)
+    sound_plot.plot_signal(time, signal)
+    plt.subplot(2, nr_cols, 2)
+    sound_plot.plot_spectrum(freq, Y, rate)
 
-rate, y = wav_io.read(sys.argv[1])
-timp = len(y)/44100.
-t = np.linspace(0, timp, len(y))
-frq, Y = compute_spectrum(y, Fs)
-Y_filtered = filter_spectrum(frq, Y, level=0.01, window=10000)
-y_filtered = compute_signal(frq, Y_filtered)
-wav_io.write('new.wav', rate, y_filtered)
+    if options.filter:
+        Y_filtered = filter_spectrum(freq, Y, level=0.01, window=10000)
+        signal_filtered = compute_signal(freq, Y_filtered)
+        if options.filtered_wav_file:
+            wav_io.write(options.filtered_wav_file, rate, signal_filtered)
+# plot filtered signal and spectrum
+        plt.subplot(2, nr_cols, 4)
+        sound_plot.plot_spectrum(freq, Y_filtered, rate)
+        plt.subplot(2, nr_cols, 3)
+        sound_plot.plot_signal(time, signal_filtered)
 
-plt.subplot(2, 2, 1)
-plt.plot(t, y)
-plt.xlabel('Time')
-plt.ylabel('Amplitude')
-plt.subplot(2, 2, 2)
-plot_spectrum(frq, Y, Fs)
-plt.subplot(2, 2, 4)
-plot_spectrum(frq, Y_filtered, Fs)
-plt.subplot(2, 2, 3)
-plt.plot(t, y_filtered)
-plt.show()
+    plt.show()
