@@ -19,6 +19,8 @@ What is it?
     (amplitude) and the frequency spectrum uinsg Pylab.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
+1. `CodeEvaluation`: illustrates how to evaluate a string containing
+    Python code at runtime.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
     setting up and executing unit tests
 1. `ConfigParser`: illustrates how to use the ConfigParser module to handle
