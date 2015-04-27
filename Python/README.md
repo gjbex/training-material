@@ -16,7 +16,9 @@ What is it?
     implements a Monte Carlo algorithm, and allows to show evolution over
     time, autocorrelation, and to compare with target distribution.
 1. `Birdsong`: implements a FFT of WAV files, and shows the original signal
-    (amplitude) and the frequency spectrum uinsg Pylab.
+    (amplitude) and the frequency spectrum using Matplotlib.  Another
+    script illustrates elementary signal processing using a highpass
+    filter.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
 1. `CodeEvaluation`: illustrates how to evaluate a string containing
