@@ -5,7 +5,7 @@ from scipy.integrate import ode
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
-class Theta(object):
+class ThetaAnim(object):
 
     def __init__(self, figure, times, theta, skip):
         axes = figure.add_axes([0.1, 0.1, 0.8, 0.8])
@@ -30,13 +30,13 @@ class Theta(object):
         return animate
 
 
-def func(t, y, g, l, q):
+def func(t, y, g, l, q, F_d, omega_d):
     return [
         y[1],
-        -(g/l)*y[0] - q*y[1]
+        -(g/l)*y[0] - q*y[1] + F_d*np.sin(2.0*np.pi*omega_d*t)
     ]
 
-def jacobian(t, y, g, l, q):
+def jacobian(t, y, g, l, q, F_d, omega_d):
     return [
         [0.0, 1.0],
         [-g/l, -q]
@@ -50,7 +50,8 @@ def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
 # set initial values
     integrator.set_initial_value([theta0, omega0], t0)
 # set parameters
-    integrator.set_f_params(params['g'], params['l'], params['q'])
+    integrator.set_f_params(params['g'], params['l'], params['q'],
+                            params['F_d'], params['omega_d'])
     integrator.set_jac_params(params['g'], params['l'], params['q'])
 # solve equations
     times = [t0]
@@ -59,8 +60,8 @@ def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
     while integrator.successful() and integrator.t < t_max:
         integrator.integrate(integrator.t + delta_t)
         times.append(integrator.t)
-        thetas.append(integrator.y[0].real)
-        omegas.append(integrator.y[1].real)
+        thetas.append(integrator.y[0])
+        omegas.append(integrator.y[1])
     return times, thetas, omegas
 
 def plot_solution(times, thetas, omegas):
@@ -74,7 +75,7 @@ def plot_solution(times, thetas, omegas):
 
 def animate_solution(mp4_file, times, thetas, omegas, skip):
     figure = plt.figure()
-    thetaAnim = Theta(figure, times, thetas, skip)
+    thetaAnim = ThetaAnim(figure, times, thetas, skip)
     init_f = thetaAnim.create_init()
     anim_f = thetaAnim.create_animate()
     anim = animation.FuncAnimation(figure, anim_f, init_func=init_f,
@@ -86,12 +87,16 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     arg_parser = ArgumentParser(description='solve ODE for a harmonic '
                                             'damped pendulum')
-    arg_parser.add_argument('--l', type=float, default=9.91,
+    arg_parser.add_argument('--l', type=float, default=9.81,
                             help='length of pendulum [m]')
-    arg_parser.add_argument('--g', type=float, default=9.91,
+    arg_parser.add_argument('--g', type=float, default=9.81,
                             help='gravitational acceleration [rad/s**2]')
-    arg_parser.add_argument('--q', type=float, default=9.91,
+    arg_parser.add_argument('--q', type=float, default=0.05,
                             help='damping factor [1/s]')
+    arg_parser.add_argument('--F_d', type=float, default=0.0,
+                            help='amplitude of driving force')
+    arg_parser.add_argument('--omega_d', type=float, default=1.0,
+                            help='frquency of driving force')
     arg_parser.add_argument('--theta0', type=float, default=0.05,
                             help='initial theta value [rad]')
     arg_parser.add_argument('--omega0', type=float, default=0.0,
@@ -102,8 +107,8 @@ if __name__ == '__main__':
                             help='maximum time value [s]')
     arg_parser.add_argument('--delta_t', type=float, default=0.01,
                             help='time step [s]')
-    arg_parser.add_argument('--quiet', action='store_true',
-                            help='do not print values')
+    arg_parser.add_argument('--output', action='store_true',
+                            help='write solutions to standrad output')
     arg_parser.add_argument('--plot', action='store_true',
                             help='make plot')
     arg_parser.add_argument('--mp4', help='create MP4 animated plot')
@@ -114,12 +119,12 @@ if __name__ == '__main__':
             func=func, jac=jacobian,
             t0=options.t0, t_max=options.t_max, delta_t=options.delta_t,
             theta0=options.theta0, omega0=options.omega0,
-            params={'g': options.g, 'l': options.l, 'q': options.q}
+            params={'g': options.g, 'l': options.l, 'q': options.q,
+                    'F_d': options.F_d, 'omega_d': options.omega_d}
     )
-    if not options.quiet:
+    if options.output:
         for time, theta, omega in zip(times, thetas, omegas): 
-            # print '{0:.3f}\t{1:.8f}\t{2:.8f}'.format(time, theta, omega)
-            print time, theta, omega
+            print '{0:.3f}\t{1:.10f}\t{2:.10f}'.format(time, theta, omega)
     if options.plot:
         plot_solution(times, thetas, omegas)
     if options.mp4:
