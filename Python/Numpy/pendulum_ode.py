@@ -36,29 +36,44 @@ class PhaseSpaceAnim(object):
         return animate
 
 
-def func(t, y, g, l, q, F_d, omega_d):
-    return [
-        y[1],
-        -(g/l)*y[0] - q*y[1] + F_d*np.sin(2.0*np.pi*omega_d*t)
-    ]
+def func(t, y, g, l, q, F_d, omega_d, anharmonic):
+    if anharmonic:
+        return [
+            y[1],
+            -(g/l)*np.sin(y[0]) - q*y[1] + F_d*np.sin(omega_d*t)
+        ]
+    else:
+        return [
+            y[1],
+            -(g/l)*y[0] - q*y[1] + F_d*np.sin(omega_d*t)
+        ]
 
-def jacobian(t, y, g, l, q, F_d, omega_d):
-    return [
-        [0.0, 1.0],
-        [-g/l, -q]
-    ]
+def jacobian(t, y, g, l, q, F_d, omega_d, anharmonic):
+    if anharmonic:
+        return [
+            [0.0, 1.0],
+            [-(g/l)*np.cos(y[0]), -q]
+        ]
+    else:
+        return [
+            [0.0, 1.0],
+            [-g/l, -q]
+        ]
 
 def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
           theta0=0.1, omega0=0.0, params={'g': 9.81, 'l': 9.81,
-                                          'q': 0.05}):
+                                          'q': 0.05, 'anharmonic': False}):
 # select integrator
     integrator = ode(func, jac).set_integrator('dopri5')
 # set initial values
     integrator.set_initial_value([theta0, omega0], t0)
 # set parameters
     integrator.set_f_params(params['g'], params['l'], params['q'],
-                            params['F_d'], params['omega_d'])
-    integrator.set_jac_params(params['g'], params['l'], params['q'])
+                            params['F_d'], params['omega_d'],
+                            params['anharmonic'])
+    integrator.set_jac_params(params['g'], params['l'], params['q'],
+                            params['F_d'], params['omega_d'],
+                            params['anharmonic'])
 # solve equations
     times = [t0]
     thetas = [theta0]
@@ -103,6 +118,8 @@ if __name__ == '__main__':
                             help='amplitude of driving force')
     arg_parser.add_argument('--omega_d', type=float, default=1.0,
                             help='frquency of driving force')
+    arg_parser.add_argument('--anharmonic', action='store_true',
+                            help='do noet use harmonic approximation')
     arg_parser.add_argument('--theta0', type=float, default=0.05,
                             help='initial theta value [rad]')
     arg_parser.add_argument('--omega0', type=float, default=0.0,
@@ -126,7 +143,8 @@ if __name__ == '__main__':
             t0=options.t0, t_max=options.t_max, delta_t=options.delta_t,
             theta0=options.theta0, omega0=options.omega0,
             params={'g': options.g, 'l': options.l, 'q': options.q,
-                    'F_d': options.F_d, 'omega_d': options.omega_d}
+                    'F_d': options.F_d, 'omega_d': options.omega_d,
+                    'anharmonic': options.anharmonic}
     )
     if options.output:
         for time, theta, omega in zip(times, thetas, omegas): 
