@@ -5,27 +5,33 @@ from scipy.integrate import ode
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
-class ThetaAnim(object):
+class PhaseSpaceAnim(object):
 
-    def __init__(self, figure, times, theta, skip):
+    def __init__(self, figure, times, theta, omega, skip):
+        self._figure = figure
         axes = figure.add_axes([0.1, 0.1, 0.8, 0.8])
-        axes.set_xlim(np.min(times), np.max(times))
-        axes.set_ylim(np.min(thetas), np.max(thetas))
+        axes.set_xlim(np.min(thetas), np.max(thetas))
+        axes.set_ylim(np.min(omegas), np.max(omegas))
+        axes.set_xlabel(r'$\theta$')
+        axes.set_ylabel(r'$\omega$')
         self._line, = axes.plot([], [])
         self._times = times
         self._thetas = thetas
+        self._omegas = omegas
         self._skip = skip
 
     def create_init(self):
         def init():
             self._line.set_data([], [])
+            # self._figure.text(0.5, 0.9, r't = 0.000')
             return self._line
         return init
 
     def create_animate(self):
         def animate(i):
             t = i*self._skip
-            self._line.set_data(self._times[:t], self._thetas[:t])
+            self._line.set_data(self._thetas[:t], self._omegas[:t])
+            # self._figure.text(0.5, 0.9, r't = {0:.3f}'.format(t))
             return self._line
         return animate
 
@@ -75,7 +81,7 @@ def plot_solution(times, thetas, omegas):
 
 def animate_solution(mp4_file, times, thetas, omegas, skip):
     figure = plt.figure()
-    thetaAnim = ThetaAnim(figure, times, thetas, skip)
+    thetaAnim = PhaseSpaceAnim(figure, times, thetas, omegas, skip)
     init_f = thetaAnim.create_init()
     anim_f = thetaAnim.create_animate()
     anim = animation.FuncAnimation(figure, anim_f, init_func=init_f,
