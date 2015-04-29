@@ -46,7 +46,7 @@ def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
           theta0=0.1, omega0=0.0, params={'g': 9.81, 'l': 9.81,
                                           'q': 0.05}):
 # select integrator
-    integrator = ode(func, jac).set_integrator('zvode', method='bdf')
+    integrator = ode(func, jac).set_integrator('dopri5')
 # set initial values
     integrator.set_initial_value([theta0, omega0], t0)
 # set parameters
@@ -120,7 +120,6 @@ if __name__ == '__main__':
         for time, theta, omega in zip(times, thetas, omegas): 
             # print '{0:.3f}\t{1:.8f}\t{2:.8f}'.format(time, theta, omega)
             print time, theta, omega
-            print type(time), type(theta), type(omega)
     if options.plot:
         plot_solution(times, thetas, omegas)
     if options.mp4:
