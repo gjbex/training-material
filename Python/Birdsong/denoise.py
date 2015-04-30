@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import numpy as np
-from scipy import signal as signal_proc
+import scipy as sp
+import scipy.signal
 from scipy.io import wavfile
 
 if __name__ == '__main__':
@@ -15,12 +16,12 @@ if __name__ == '__main__':
     arg_parser.add_argument('input', help='WAV input signal')
     arg_parser.add_argument('output', help='WAV output signal')
     options = arg_parser.parse_args()
-    b, a = signal_proc.iirfilter(17, options.cutoff,
-                                 rs=options.min_attenuation,
-                                 btype='highpass', analog=False,
-                                 ftype='cheby2')
+    b, a = sp.signal.iirfilter(17, options.cutoff,
+                               rs=options.min_attenuation,
+                               btype='highpass', analog=False,
+                               ftype='cheby2')
     rate, signal = wavfile.read(options.input)
     base = np.uint8(np.mean(signal))
-    filtered_signal = signal_proc.filtfilt(b, a, np.array(signal))
+    filtered_signal = sp.signal.filtfilt(b, a, signal)
     wav_signal = base + np.array(filtered_signal, dtype=np.uint8)
     wavfile.write(options.output, rate, wav_signal)
