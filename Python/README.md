@@ -61,7 +61,7 @@ What is it?
 1. `NetworkX`: illustration of the graph representation and algorithms
     library.
 1. `Numpy`: a few illustratios of using numpy, scipy, and matplotlib
-    (linear regression, FFT).
+    (linear regression, optimization, solving ODEs, FFT).
 1. `PhraseIndexer`: parses a text file to find the line number on which a
     given eet of phrases occurs.
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
