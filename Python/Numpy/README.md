@@ -25,3 +25,18 @@ What is it?
     unconstrained multivariate optimization
 1. `target_function_plot.py`: script that creates a surface plot of the
     target function in `optimization.py`
+1. `pendulum_ode.py`: solves the ODE of a damped, driven pendulum that is
+    optionally anharmonic. Optionally plots results.
+
+Pendulum
+--------
+For chaotic regime, choose the following parameters:
+  * `l = 9.81`
+  * `q = 0.5`
+  * `F_d = 1.2`
+  * `omega_d = 0.66667` (2/3)
+  * `theta0 = 0.2`
+  * `anharmonic`
+
+To easily obtain as many points as possible for the Poicare section, choose
+`delta_t ~ 3pi`, e.g., `delta_t = 0.009424778`.
