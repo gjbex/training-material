@@ -64,7 +64,8 @@ def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
           theta0=0.1, omega0=0.0, params={'g': 9.81, 'l': 9.81,
                                           'q': 0.05, 'anharmonic': False}):
 # select integrator
-    integrator = ode(func, jac).set_integrator('dopri5')
+    integrator = ode(func, jac).set_integrator('dopri5', atol=1.0e-10,
+                                               rtol=0.0)
 # set initial values
     integrator.set_initial_value([theta0, omega0], t0)
 # set parameters
@@ -81,18 +82,35 @@ def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
     while integrator.successful() and integrator.t < t_max:
         integrator.integrate(integrator.t + delta_t)
         times.append(integrator.t)
-        thetas.append(integrator.y[0])
+        theta = integrator.y[0]
+        while theta > np.pi:
+            theta -= 2.0*np.pi
+        while theta < -np.pi:
+            theta += 2.0*np.pi
+        thetas.append(theta)
         omegas.append(integrator.y[1])
     return times, thetas, omegas
 
+def sample_poincare(times, thetas, omegas, omega_d, prec=1.0e-4):
+    p_times = []
+    p_thetas = []
+    p_omegas = []
+    cutoff = omega_d*prec/(4.0*np.pi)
+    for time, theta, omega in zip(times, thetas, omegas):
+        delta = omega_d*time/(2.0*np.pi)
+        if min(delta - np.floor(delta), np.ceil(delta) - delta) < cutoff:
+            p_times.append(time)
+            p_thetas.append(theta)
+            p_omegas.append(omega)
+    return np.array(p_times), np.array(p_thetas), np.array(p_omegas)
+
 def plot_solution(times, thetas, omegas):
     plt.subplot(3, 1, 1)
-    plt.plot(times, thetas)
+    plt.plot(times, thetas, ',')
     plt.subplot(3, 1, 2)
-    plt.plot(times, omegas)
+    plt.plot(times, omegas, ',')
     plt.subplot(3, 1, 3)
-    plt.plot(thetas, omegas)
-    plt.show()
+    plt.plot(thetas, omegas, ',')
 
 def animate_solution(mp4_file, times, thetas, omegas, skip):
     figure = plt.figure()
@@ -134,6 +152,10 @@ if __name__ == '__main__':
                             help='write solutions to standrad output')
     arg_parser.add_argument('--plot', action='store_true',
                             help='make plot')
+    arg_parser.add_argument('--poincare', action='store_true',
+                            help='plot or print Poincare section')
+    arg_parser.add_argument('--only', action='store_true',
+                            help='plot only Poincare section')
     arg_parser.add_argument('--mp4', help='create MP4 animated plot')
     arg_parser.add_argument('--skip', type=int, default=5,
                             help='number of skip points for animation')
@@ -146,10 +168,27 @@ if __name__ == '__main__':
                     'F_d': options.F_d, 'omega_d': options.omega_d,
                     'anharmonic': options.anharmonic}
     )
+    if options.poincare:
+        p_times, p_thetas, p_omegas = sample_poincare(
+            times=times, thetas=thetas, omegas=omegas,
+            omega_d=options.omega_d
+        )
     if options.output:
-        for time, theta, omega in zip(times, thetas, omegas): 
-            print '{0:.3f}\t{1:.10f}\t{2:.10f}'.format(time, theta, omega)
+        if options.poincare:
+            for time, theta, omega in zip(p_times, p_thetas, p_omegas): 
+                print '{0:.3f}\t{1:.10f}\t{2:.10f}'.format(time, theta,
+                                                           omega)
+        else:
+            for time, theta, omega in zip(times, thetas, omegas): 
+                print '{0:.3f}\t{1:.10f}\t{2:.10f}'.format(time, theta,
+                                                           omega)
     if options.plot:
-        plot_solution(times, thetas, omegas)
+        if options.only:
+            plt.plot(p_thetas, p_omegas, '.')
+        else:
+            plot_solution(times, thetas, omegas)
+            if options.poincare:
+                plt.plot(p_thetas, p_omegas, 'r.')
+        plt.show()
     if options.mp4:
         animate_solution(options.mp4, times, thetas, omegas, options.skip)
