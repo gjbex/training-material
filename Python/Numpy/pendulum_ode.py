@@ -36,19 +36,19 @@ class PhaseSpaceAnim(object):
         return animate
 
 
-def func(t, y, g, l, q, F_d, omega_d, anharmonic):
+def func(t, y, g, l, q, F_d, omega_d, phase_d, anharmonic):
     if anharmonic:
         return [
             y[1],
-            -(g/l)*np.sin(y[0]) - q*y[1] + F_d*np.sin(omega_d*t)
+            -(g/l)*np.sin(y[0]) - q*y[1] + F_d*np.sin(omega_d*t + phase_d)
         ]
     else:
         return [
             y[1],
-            -(g/l)*y[0] - q*y[1] + F_d*np.sin(omega_d*t)
+            -(g/l)*y[0] - q*y[1] + F_d*np.sin(omega_d*t + phase_d)
         ]
 
-def jacobian(t, y, g, l, q, F_d, omega_d, anharmonic):
+def jacobian(t, y, g, l, q, F_d, omega_d, phase_d, anharmonic):
     if anharmonic:
         return [
             [0.0, 1.0],
@@ -62,19 +62,22 @@ def jacobian(t, y, g, l, q, F_d, omega_d, anharmonic):
 
 def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
           theta0=0.1, omega0=0.0, params={'g': 9.81, 'l': 9.81,
-                                          'q': 0.05, 'anharmonic': False}):
+                                          'q': 0.05, 'F_d': 0.0,
+                                          'omega_d': 0.5, 'phase_d': 0.0,
+                                          'anharmonic': False},
+          atol=1.0e-6, rtol=0.0):
 # select integrator
-    integrator = ode(func, jac).set_integrator('dopri5', atol=1.0e-10,
-                                               rtol=0.0)
+    integrator = ode(func, jac).set_integrator('dopri5', atol=atol,
+                                               rtol=rtol)
 # set initial values
     integrator.set_initial_value([theta0, omega0], t0)
 # set parameters
     integrator.set_f_params(params['g'], params['l'], params['q'],
                             params['F_d'], params['omega_d'],
-                            params['anharmonic'])
+                            params['phase_d'], params['anharmonic'])
     integrator.set_jac_params(params['g'], params['l'], params['q'],
                             params['F_d'], params['omega_d'],
-                            params['anharmonic'])
+                            params['phase_d'], params['anharmonic'])
 # solve equations
     times = [t0]
     thetas = [theta0]
@@ -136,6 +139,8 @@ if __name__ == '__main__':
                             help='amplitude of driving force')
     arg_parser.add_argument('--omega_d', type=float, default=1.0,
                             help='frquency of driving force')
+    arg_parser.add_argument('--phase_d', type=float, default=0.0,
+                            help='phase of driving force')
     arg_parser.add_argument('--anharmonic', action='store_true',
                             help='do noet use harmonic approximation')
     arg_parser.add_argument('--theta0', type=float, default=0.05,
@@ -148,6 +153,10 @@ if __name__ == '__main__':
                             help='maximum time value [s]')
     arg_parser.add_argument('--delta_t', type=float, default=0.01,
                             help='time step [s]')
+    arg_parser.add_argument('--atol', type=float, default=1.0e-10,
+                            help='absolute tolerance of integrator')
+    arg_parser.add_argument('--rtol', type=float, default=0.0,
+                            help='relative tolerance of integrator')
     arg_parser.add_argument('--output', action='store_true',
                             help='write solutions to standrad output')
     arg_parser.add_argument('--plot', action='store_true',
@@ -166,7 +175,9 @@ if __name__ == '__main__':
             theta0=options.theta0, omega0=options.omega0,
             params={'g': options.g, 'l': options.l, 'q': options.q,
                     'F_d': options.F_d, 'omega_d': options.omega_d,
-                    'anharmonic': options.anharmonic}
+                    'phase_d': options.phase_d,
+                    'anharmonic': options.anharmonic},
+            atol=options.atol, rtol=options.rtol
     )
     if options.poincare:
         p_times, p_thetas, p_omegas = sample_poincare(
