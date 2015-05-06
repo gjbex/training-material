@@ -17,9 +17,11 @@ def compute_particles(hrfile, center, nr_particles=10, avg_dist=10.0,
     '''compute nr_particles around the given center of gravity,
        with average distane avg_dist and average velocity avg_vel'''
     particles = h5file.createGroup(h5file.root, 'particles')
-    position = h5file.create_earray(particles, 'position', tables.Float64Atom(),
+    position = h5file.create_earray(particles, 'position',
+                                    tables.Float64Atom(),
                                     (0, 3), 'particle positions')
-    velocity = h5file.create_earray(particles, 'velocity', tables.Float64Atom(),
+    velocity = h5file.create_earray(particles, 'velocity',
+                                    tables.Float64Atom(),
                                     (0, 3), 'particle velocities')
     mass = h5file.create_earray(particles, 'mass', tables.Float64Atom(),
                                     (0,), 'particle masses')
@@ -45,16 +47,18 @@ def compute_grid(h5file, group='grid', extent=750.0, points=1000):
     h5file.flush()
     return x, y, z
 
-def compute_scalar_field(h5file, centers, xs, ys, zs, max_field=5000.0, array='scalar'):
-    '''compute scalar field, that decreases quadratically with the distance to
-       the center'''
+def compute_scalar_field(h5file, centers, xs, ys, zs, max_field=5000.0,
+                         array='scalar'):
+    '''compute scalar field, that decreases quadratically with the
+       distance to the center'''
     field = h5file.create_earray(h5file.root, array, tables.Float64Atom(),
                          (len(xs), len(ys), 0), 'scalar field data')
     for z in zs:
         X, Y, Z = np.meshgrid(xs, ys, np.array(z))
         field_slice = np.zeros((len(xs), len(ys), 1))
         for center in centers:
-            field_slice += max_field/np.sqrt((X - center[0])**2 + (Y - center[1])**2 +
+            field_slice += max_field/np.sqrt((X - center[0])**2 +
+                                             (Y - center[1])**2 +
                                              (Z - center[2])**2 + 1.0)
         field.append(field_slice)
     h5file.flush()
@@ -91,15 +95,19 @@ if __name__ == '__main__':
                             help='verbose output for debugging')
     arg_parser.add_argument('file', help='HDF5 file to store the data in')
     options = arg_parser.parse_args()
-    h5file = tables.openFile(options.file, mode='w', title='synthetic data set')
-    centers = compute_centers(h5file, options.centers, options.avg_center_dist)
+    h5file = tables.openFile(options.file, mode='w',
+                             title='synthetic data set')
+    centers = compute_centers(h5file, options.centers,
+                              options.avg_center_dist)
     if options.verbose:
         print 'center positions'
         print centers
     if options.particle_data:
         compute_particles(h5file, centers, options.particles,
-                          options.avg_part_radial_vel, options.avg_part_random_vel)
-    x, y, z = compute_grid(h5file, extent=options.extent, points=options.points)
+                          options.avg_part_radial_vel,
+                          options.avg_part_random_vel)
+    x, y, z = compute_grid(h5file, extent=options.extent,
+                           points=options.points)
     if options.verbose:
         print 'grid x'
         print x
@@ -110,4 +118,3 @@ if __name__ == '__main__':
     if options.scalar_field_data:
         compute_scalar_field(h5file, centers, x, y, z, options.max_temp)
     h5file.close()
-
