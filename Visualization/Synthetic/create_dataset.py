@@ -70,7 +70,7 @@ def compute_vector_field(h5file, centers, xs, ys, zs, max_field=50.0,
     '''compute a vector field that decreases quadratically with the
        distance to the center'''
     vector = h5file.createGroup(h5file.root, group)
-    dims = ['{0}_{1}'.format(group, dim) for dim in ['x', 'y', 'z']]
+    dims = ['x', 'y', 'z']
     for i, dim in enumerate(dims):
         comp = h5file.create_earray(vector, dim, tables.Float64Atom(),
                                     (len(xs), len(ys), 0),
