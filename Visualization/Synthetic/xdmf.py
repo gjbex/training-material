@@ -28,7 +28,8 @@ class Xdmf(object):
         topology = self._doc.createElement('Topology')
         topology.setAttribute('Name', 'topology')
         topology.setAttribute('TopologyType', '3DRectMesh')
-        topology.setAttribute('Dimensions', '{0:d} {0:d} {0:d}'.format(points))
+        topology.setAttribute('Dimensions',
+                              '{0:d} {0:d} {0:d}'.format(points))
         self._domain.appendChild(topology)
         geometry = self._doc.createElement('Geometry')
         geometry.setAttribute('Name', 'geometry')
@@ -41,7 +42,9 @@ class Xdmf(object):
             item.setAttribute('DataType', 'Float')
             item.setAttribute('Precision', '8')
             item.setAttribute('Dimensions', str(points))
-            array = self._doc.createTextNode('{0}:/grid/{1}'.format(h5file_name, coord))
+            array = self._doc.createTextNode(
+                '{0}:/grid/{1}'.format(h5file_name, coord)
+            )
             item.appendChild(array)
             geometry.appendChild(item)
 
@@ -79,4 +82,3 @@ if __name__ == '__main__':
     options = arg_parser.parse_args()
     xdmf = Xdmf(options.points, options.h5)
     xdmf.to_xml(options.file)
-
