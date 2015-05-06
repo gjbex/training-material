@@ -127,6 +127,33 @@ class Xdmf(object):
         item.appendChild(data)
         attribute.appendChild(item)
 
+    def create_vector_field(self):
+        grid = self._doc.createElement('Grid')
+        grid.setAttribute('GridType', 'Uniform')
+        self._domain.appendChild(grid)
+        topology = self._doc.createElement('Topology')
+        topology.setAttribute('Reference', '/Xdmf/Domain/Topology[1]')
+        grid.appendChild(topology)
+        geometry = self._doc.createElement('Geometry')
+        geometry.setAttribute('Reference', '/Xdmf/Domain/Geometry[1]')
+        grid.appendChild(geometry)
+        for dim in ['x', 'y', 'z']:
+            attribute = self._doc.createElement('Attribute')
+            attribute.setAttribute('Name', '{0}-component'.format(dim))
+            attribute.setAttribute('Center', 'Node')
+            grid.appendChild(attribute)
+            item = self._doc.createElement('DataItem')
+            item.setAttribute('Format', 'HDF')
+            item.setAttribute('DataType', 'Float')
+            item.setAttribute('Precision', '8')
+            item.setAttribute('Dimensions',
+                              '{0:d} {0:d} {0:d}'.format(self._points))
+            data = self._doc.createTextNode(
+                '{0}:/vector/{1}'.format(self._h5, dim)
+            )
+            item.appendChild(data)
+            attribute.appendChild(item)
+
 if __name__ == '__main__':
     from argparse import ArgumentParser
 
@@ -144,4 +171,5 @@ if __name__ == '__main__':
     if options.points is not None:
         xdmf.create_field_geometry()
         xdmf.create_scalar_field()
+        xdmf.create_vector_field()
     xdmf.to_xml(options.file)
