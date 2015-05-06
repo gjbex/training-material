@@ -19,6 +19,7 @@ class Xdmf(object):
         xdmf.appendChild(self._domain)
         self._create_geometry(points, h5file_name)
         self._create_scalar_field(points, h5file_name)
+        self._create_vector_field(points, h5file_name)
 
     def to_xml(self, xml_file_name, indent='  '):
         with open(xml_file_name, 'w') as xml_file:
@@ -70,6 +71,33 @@ class Xdmf(object):
         data = self._doc.createTextNode('{0}:/scalar'.format(h5file_name))
         item.appendChild(data)
         attribute.appendChild(item)
+
+    def _create_vector_field(self, points, h5file_name):
+        grid = self._doc.createElement('Grid')
+        grid.setAttribute('GridType', 'Uniform')
+        self._domain.appendChild(grid)
+        topology = self._doc.createElement('Topology')
+        topology.setAttribute('Reference', '/Xdmf/Domain/Topology[1]')
+        grid.appendChild(topology)
+        geometry = self._doc.createElement('Geometry')
+        geometry.setAttribute('Reference', '/Xdmf/Domain/Geometry[1]')
+        grid.appendChild(geometry)
+        for dim in ['x', 'y', 'z']:
+            attribute = self._doc.createElement('Attribute')
+            attribute.setAttribute('Name', '{0}-component'.format(dim))
+            attribute.setAttribute('Center', 'Node')
+            grid.appendChild(attribute)
+            item = self._doc.createElement('DataItem')
+            item.setAttribute('Format', 'HDF')
+            item.setAttribute('DataType', 'Float')
+            item.setAttribute('Precision', '8')
+            item.setAttribute('Dimensions',
+                              '{0:d} {0:d} {0:d}'.format(points))
+            data = self._doc.createTextNode(
+                '{0}:/vector/{1}'.format(h5file_name, dim)
+            )
+            item.appendChild(data)
+            attribute.appendChild(item)
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
