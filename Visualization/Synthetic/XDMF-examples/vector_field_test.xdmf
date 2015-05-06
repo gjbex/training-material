@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<Xdmf Version="2.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Domain Name="domain">
+    <Topology Dimensions="251 251 251" Name="topology" TopologyType="3DRectMesh"/>
+    <Geometry GeometryType="VXVYVZ" Name="geometry">
+      <DataItem DataType="Float" Dimensions="251" Format="HDF" Name="x" Precision="8">test.h5:/grid/x</DataItem>
+      <DataItem DataType="Float" Dimensions="251" Format="HDF" Name="y" Precision="8">test.h5:/grid/y</DataItem>
+      <DataItem DataType="Float" Dimensions="251" Format="HDF" Name="z" Precision="8">test.h5:/grid/z</DataItem>
+    </Geometry>
+    <Grid GridType="Uniform">
+      <Topology Reference="/Xdmf/Domain/Topology[1]"/>
+      <Geometry Reference="/Xdmf/Domain/Geometry[1]"/>
+      <Attribute Center="Node" Name="x">
+        <DataItem DataType="Float" Dimensions="251 251 251" Format="HDF" Precision="8">test.h5:/vector/x</DataItem>
+      </Attribute>
+      <Attribute Center="Node" Name="y">
+        <DataItem DataType="Float" Dimensions="251 251 251" Format="HDF" Precision="8">test.h5:/vector/y</DataItem>
+      </Attribute>
+      <Attribute Center="Node" Name="z">
+        <DataItem DataType="Float" Dimensions="251 251 251" Format="HDF" Precision="8">test.h5:/vector/z</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>
