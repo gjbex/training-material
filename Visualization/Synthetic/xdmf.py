@@ -7,8 +7,9 @@ import sys
 class Xdmf(object):
     '''Class representing an XDMF data descriptor builder'''
 
-    def __init__(self, particles, points, h5file_name):
+    def __init__(self, centers,  particles, points, h5file_name):
         '''Constructor'''
+        self._centers = centers
         self._particles = particles
         self._points = points
         self._h5 = h5file_name
@@ -24,6 +25,43 @@ class Xdmf(object):
     def to_xml(self, xml_file_name, indent='  '):
         with open(xml_file_name, 'w') as xml_file:
             xml_file.write(self._doc.toprettyxml(indent=indent))
+
+    def create_centers(self):
+        grid = self._doc.createElement('Grid')
+        grid.setAttribute('Name', 'centers')
+        grid.setAttribute('GridType', 'Uniform')
+        self._domain.appendChild(grid)
+        topology = self._doc.createElement('Topology')
+        topology.setAttribute('Name', 'center_topology')
+        topology.setAttribute('TopologyType', 'Polyvertex')
+        grid.appendChild(topology)
+        geometry = self._doc.createElement('Geometry')
+        geometry.setAttribute('Name', 'center_geometry')
+        geometry.setAttribute('GeometryType', 'XYZ')
+        item = self._doc.createElement('DataItem')
+        item.setAttribute('Format', 'HDF')
+        item.setAttribute('DataType', 'Float')
+        item.setAttribute('Precision', '8')
+        item.setAttribute('Dimensions', '{0:d} 3'.format(self._centers))
+        ref = self._doc.createTextNode(
+            '{0}:/particles/centers'.format(self._h5)
+        )
+        item.appendChild(ref)
+        geometry.appendChild(item)
+        attribute = self._doc.createElement('Attribute')
+        attribute.setAttribute('Name', 'center weight')
+        attribute.setAttribute('Center', 'Node')
+        item = self._doc.createElement('DataItem')
+        item.setAttribute('Format', 'XML')
+        item.setAttribute('DataType', 'Float')
+        item.setAttribute('Precision', '8')
+        item.setAttribute('Dimensions', '{0:d}'.format(self._centers))
+        ref = self._doc.createTextNode(
+            ' '.join(['1.0']*self._centers)
+        )
+        item.appendChild(ref)
+        attribute.appendChild(item)
+        grid.appendChild(attribute)
 
     def create_particles(self):
         grid = self._doc.createElement('Grid')
@@ -159,17 +197,29 @@ if __name__ == '__main__':
 
     arg_parser = ArgumentParser(description='genearte XMDF file')
     arg_parser.add_argument('--h5', required=True, help='HDF5 data file')
-    arg_parser.add_argument('--particles', type=int,
+    arg_parser.add_argument('--centers', type=int, default=5,
+                            help='number of centers')
+    arg_parser.add_argument('--particle_data', action='store_true',
+                            help='generate XDMF for particle data')
+    arg_parser.add_argument('--particles', type=int, default=50,
                             help='number of particles')
-    arg_parser.add_argument('--points', type=int,
+    arg_parser.add_argument('--scalar_field_data', action='store_true',
+                            help='generate XDMF for scalar field data')
+    arg_parser.add_argument('--vector_field_data', action='store_true',
+                            help='generate XDMF for vector field data')
+    arg_parser.add_argument('--points', type=int, default=100,
                             help='number of grid points for grid')
     arg_parser.add_argument('file', help='XDMF file name')
     options = arg_parser.parse_args()
-    xdmf = Xdmf(options.particles, options.points, options.h5)
-    if options.particles is not None:
+    xdmf = Xdmf(options.centers, options.particles, options.points,
+                options.h5)
+    xdmf.create_centers()
+    if options.particle_data:
         xdmf.create_particles()
-    if options.points is not None:
+    if options.scalar_field_data or options.vector_field_data:
         xdmf.create_field_geometry()
+    if options.scalar_field_data:
         xdmf.create_scalar_field()
+    if options.vector_field_data:
         xdmf.create_vector_field()
     xdmf.to_xml(options.file)
