@@ -88,7 +88,8 @@ def compute_vector_field(h5file, centers, xs, ys, zs, max_field=50.0,
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    import sys
+    import os.path, sys
+    from xdmf import Xdmf
     arg_parser = ArgumentParser(description='data generator')
     arg_parser.add_argument('--centers', type=int, default=5,
                             help='number of centers')
@@ -106,8 +107,6 @@ if __name__ == '__main__':
     arg_parser.add_argument('--avg_part_random-vel', type=float,
                             default=0.1,
                             help='average random velocity of particles')
-    arg_parser.add_argument('--no_grid_data', action='store_true',
-                            help='do not include grid points')
     arg_parser.add_argument('--points', type=int, default=100,
                             help='number of points in each dimension')
     arg_parser.add_argument('--extent', type=float, default=750.0,
@@ -135,18 +134,33 @@ if __name__ == '__main__':
         compute_particles(h5file, centers, options.particles,
                           options.avg_part_radial_vel,
                           options.avg_part_random_vel)
-    x, y, z = compute_grid(h5file, extent=options.extent,
-                           points=options.points,
-                           add_grid=not options.no_grid_data)
-    if options.verbose:
-        print 'grid x'
-        print x
-        print 'grid y'
-        print y
-        print 'grid z'
-        print z
+    if options.scalar_field_data or options.vector_field_data:
+        x, y, z = compute_grid(h5file, extent=options.extent,
+                               points=options.points)
+        if options.verbose:
+            print 'grid x'
+            print x
+            print 'grid y'
+            print y
+            print 'grid z'
+            print z
     if options.scalar_field_data:
         compute_scalar_field(h5file, centers, x, y, z, options.max_scalar)
     if options.vector_field_data:
         compute_vector_field(h5file, centers, x, y, z, options.max_vector)
     h5file.close()
+    xdmf = Xdmf(options.centers, options.particles, options.points,
+                options.file)
+    xdmf.create_centers()
+    if options.particle_data:
+        xdmf.create_particles()
+    if options.scalar_field_data or options.vector_field_data:
+        xdmf.create_field_geometry()
+    if options.scalar_field_data:
+        xdmf.create_scalar_field()
+    if options.vector_field_data:
+        xdmf.create_vector_field()
+    base_name, _ = os.path.splitext(options.file)
+    xdmf_file_name = base_name + '.xdmf'
+    print xdmf_file_name
+    xdmf.to_xml(xdmf_file_name)
