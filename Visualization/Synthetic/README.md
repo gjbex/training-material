@@ -7,7 +7,7 @@ data can be adjusted.  This script is intended to generate precisely
 controlled datasets for benchmarking of visualization software such as
 Paraview.
 
-What is is?
+What is it?
 -----------
 1. `create_dataset.py`: script to generate the dataset and the
     corresponding XDMF file that contains the metadata.  The following
@@ -18,7 +18,8 @@ What is is?
   * `--scalar_field_data`: include a scalar field (will also ensure grid
     data is saved, the resolution of that 3D grid is controlled using the
     `--points` option).
-  * `--scalar_field_data`: include a scalar field (will also ensure grid
+  * `--vector_field_data`: include a vector field (will also ensure grid
     data is saved, the resolution of that 3D grid is controlled using the
     `--points` option).
+  The scalar and vector field are defined on the same grid.
 1. `xdmf.py`: class that implements an XDMF constructor.
