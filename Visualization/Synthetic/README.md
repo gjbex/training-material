@@ -23,3 +23,10 @@ What is it?
     `--points` option).
   The scalar and vector field are defined on the same grid.
 1. `xdmf.py`: class that implements an XDMF constructor.
+
+Requirements
+------------
+Depends on:
+  * Python 2.7.x
+  * Numpy
+  * pyTables 3.x
