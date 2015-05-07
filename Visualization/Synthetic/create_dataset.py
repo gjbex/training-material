@@ -162,5 +162,4 @@ if __name__ == '__main__':
         xdmf.create_vector_field()
     base_name, _ = os.path.splitext(options.file)
     xdmf_file_name = base_name + '.xdmf'
-    print xdmf_file_name
     xdmf.to_xml(xdmf_file_name)
