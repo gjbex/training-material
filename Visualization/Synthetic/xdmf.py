@@ -33,7 +33,7 @@ class Xdmf(object):
         topology = self._doc.createElement('Topology')
         topology.setAttribute('Name', 'particle_topology')
         topology.setAttribute('TopologyType', 'Polyvertex')
-        grid._domain.appendChild(topology)
+        grid.appendChild(topology)
         geometry = self._doc.createElement('Geometry')
         geometry.setAttribute('Name', 'particle_geometry')
         geometry.setAttribute('GeometryType', 'XYZ')
@@ -137,7 +137,7 @@ class Xdmf(object):
         geometry = self._doc.createElement('Geometry')
         geometry.setAttribute('Reference', '/Xdmf/Domain/Geometry[1]')
         grid.appendChild(geometry)
-        for dim in ['x', 'y', 'z']:
+        for dim in 'xyz':
             attribute = self._doc.createElement('Attribute')
             attribute.setAttribute('Name', '{0}-component'.format(dim))
             attribute.setAttribute('Center', 'Node')
@@ -165,8 +165,8 @@ if __name__ == '__main__':
                             help='number of grid points for grid')
     arg_parser.add_argument('file', help='XDMF file name')
     options = arg_parser.parse_args()
-    xdmf = Xdmf(options.points, options.particles, options.h5)
-    if options.particles is not NOne:
+    xdmf = Xdmf(options.particles, options.points, options.h5)
+    if options.particles is not None:
         xdmf.create_particles()
     if options.points is not None:
         xdmf.create_field_geometry()
