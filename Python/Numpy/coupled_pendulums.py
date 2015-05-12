@@ -3,29 +3,40 @@
 import numpy as np
 from scipy.integrate import ode
 
+#
+# f[0] = d theta1/dt = omega1
+# f[1] = d theata2/dt = omega2
+# f[2] = d omega1/dt = -(g/l1)*theta1 - k*(theta1 - theta2)
+# f[3] = d omega2/dt = -(g/l2)*theta2 - k*(theta2 - theta1)
+#
+# y[0] = theta1
+# y[1] = theta2
+# y[2] = omega1
+# y[3] = omega2
+#
 def functions(t, y, l1, l2, k):
     g = 9.81
     return [
-        y[1],
-        -(g/l1)*y[0] - k*(y[0] - y[2]),
+        y[2],
         y[3],
-        -(g/l2)*y[2] - k*(y[2] - y[0])
+        -(g/l1)*y[0] - k*(y[0] - y[1]),
+        -(g/l2)*y[1] - k*(y[1] - y[0])
     ]
 
 def jacobian(t, y, l1, l2, k):
     g = 9.81
     return [
-        [0.0,         1.0,  0.0,         0.0],
-        [-(g/l1) - k, 0.0,  k,           0.0],
-        [0.0,         0.0,  0.0,         1.0],
-        [k,           0.0,  -(g/l2) - k, 0.0]
+        [0.0,                  0.0,  1.0,   0.0],
+        [0.0,                  0.0,  0.0,   1.0],
+        [-(g/l1) - k,            k,  0.0,   0.0],
+        [k,            -(g/l2) - k,  0.0,   0.0]
     ]
 
 def init_integrator(theta0_1, theta0_2, t0=0.0, l1=1.0, l2=1.0, k=0.1):
     integrator = ode(functions, jacobian).set_integrator('dopri5',
                                                          atol=1.0e-6,
                                                          rtol=0.0)
-    integrator.set_initial_value([theta0_1, 0.0, theta0_2, 0.0], t0)
+    integrator.set_initial_value([theta0_1, theta0_2, 0.0, 0.0], t0)
     integrator.set_f_params(l1, l2, k)
     integrator.set_jac_params(l1, l2, k)
     return integrator
@@ -54,4 +65,4 @@ if __name__ == '__main__':
         integrator.integrate(integrator.t + options.delta_t)
         print '{0:.3f}\t{1:.5f}\t{2:.5f}'.format(integrator.t,
                                                  integrator.y[0],
-                                                 integrator.y[2])
+                                                 integrator.y[1])
