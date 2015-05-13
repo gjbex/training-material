@@ -28,10 +28,11 @@ module linked_list_mod
         procedure, public :: pop
         procedure, public :: is_empty
         procedure, public :: insert
-!        procedure, public :: remove
+        procedure, public :: remove
         procedure, public :: get_length
         procedure, public :: get
-!        procedure, public :: print_list
+        procedure, public :: clear
+        procedure, public :: print_list
     end type list_type
 
 contains
@@ -205,6 +206,35 @@ contains
         end if
     end subroutine insert
 
+    function remove(self, pos) result(value)
+        implicit none
+        class(list_type), intent(inout) :: self
+        integer, intent(in) :: pos
+        real(kind=dp) :: value
+        class(element_type), pointer :: tmp, pos_tmp
+        integer :: i
+        if (pos < 1 .or. pos > self%get_length()) then
+            write (unit=error_unit, fmt='(A)') &
+                '# error remove position out of bounds'
+            stop
+        end if
+        if (pos == 1) then
+            value = self%shift()
+        else if (pos == self%get_length()) then
+            value = self%pop()
+        else
+            pos_tmp => self%first
+            do i = 2, pos - 1
+                pos_tmp => pos_tmp%next
+            end do
+            tmp => pos_tmp%next
+            pos_tmp%next => tmp%next
+            value = tmp%get_value()
+            deallocate(tmp)
+            self%length = self%length - 1
+        end if
+    end function remove
+
     function get(self, pos) result(value)
         implicit none
         class(list_type), intent(in) :: self
@@ -235,5 +265,23 @@ contains
         class(list_type), intent(in) :: self
         is_empty = self%get_length() == 0
     end function is_empty
+
+    subroutine clear(self)
+        implicit none
+        class(list_type), intent(inout) :: self
+        real(kind=dp) :: value
+        do while (.not. self%is_empty())
+            value = self%shift()
+        end do
+    end subroutine clear
+
+    subroutine print_list(self)
+        implicit none
+        class(list_type), intent(in) :: self
+        integer :: i
+        do i = 1, self%get_length()
+            write (unit=output_unit, fmt='(F30.4)') self%get(i)
+        end do
+    end subroutine print_list
 
 end module linked_list_mod

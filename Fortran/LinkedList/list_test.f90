@@ -6,7 +6,7 @@ program list_test
     integer, parameter :: nr_values = 10
     integer :: i
     real(kind=dp), dimension(nr_values) :: values
-    real(kind=dp) :: value
+    real(kind=dp) :: value, value1
     
     values = [ (sqrt(real(i - 1, kind=dp)), i=1, nr_values) ]
 
@@ -59,5 +59,24 @@ program list_test
     do i = 1, list%get_length()
         print "('got ', F10.4, ' from ', I0)", list%get(i), i
     end do
+
+    ! remove values
+    do i = 1, list%get_length()/2
+        value = list%remove(i)
+        print "('removed ', F10.4, ' from ', I0)", value, i
+    end do
+
+    ! get values
+    do i = 1, list%get_length()
+        print "('got ', F10.4, ' from ', I0)", list%get(i), i
+    end do
+
+    print '(A)', 'list:'
+    call list%print_list()
+
+    ! clear list
+    call list%clear()
+    print '(A)', 'list:'
+    call list%print_list()
 
 end program list_test
