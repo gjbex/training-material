@@ -6,7 +6,7 @@ module linked_list_mod
 
     private
     type :: element_type
-        real(kind=dp) :: value = 0.0_dp
+        real(kind=dp) :: val = 0.0_dp
         class(element_type), pointer :: next => null()
     contains
         procedure, nopass, public :: new_element
@@ -32,12 +32,12 @@ module linked_list_mod
 
 contains
 
-    function new_element(value) result(element)
+    function new_element(val) result(element)
         implicit none
-        real(kind=dp), intent(in) :: value
+        real(kind=dp), intent(in) :: val
         class(element_type), pointer :: element
         integer :: istat
-        allocate(element, source=element_type(value, null()), stat=istat)
+        allocate(element, source=element_type(val, null()), stat=istat)
         if (istat /= 0) then
             write (unit=error_unit, fmt='(A)') &
                     '# error: can not allocate list element'
@@ -57,12 +57,12 @@ contains
         end if
     end function new_list
 
-    subroutine unshift(self, value)
+    subroutine unshift(self, val)
         implicit none
         class(list_type), intent(inout) :: self
-        real(kind=dp), intent(in) :: value
+        real(kind=dp), intent(in) :: val
         class(element_type), pointer :: element
-        element => new_element(value)
+        element => new_element(val)
         if (.not. associated(self%first)) then
             self%first => element
             self%last => element
@@ -73,12 +73,12 @@ contains
         self%length = self%length + 1
     end subroutine unshift
 
-    subroutine push(self, value)
+    subroutine push(self, val)
         implicit none
         class(list_type), intent(inout) :: self
-        real(kind=dp), intent(in) :: value
+        real(kind=dp), intent(in) :: val
         class(element_type), pointer :: element
-        element => new_element(value)
+        element => new_element(val)
         if (.not. associated(self%first)) then
             self%first => element
             self%last => element
@@ -89,17 +89,24 @@ contains
         self%length = self%length + 1
     end subroutine push
 
-    subroutine shift(self, value)
+    subroutine shift(self, val, stat)
         implicit none
         class(list_type), intent(inout) :: self
-        real(kind=dp), intent(out), optional :: value
+        real(kind=dp), intent(out), optional :: val
+        integer, intent(out), optional :: stat
         class(element_type), pointer :: tmp
+        if (present(stat)) stat = 0
         if (self%is_empty()) then
             write (unit=error_unit, fmt='(A)') &
                 '# error: can not shift from empty list'
-            stop
+            if (present(stat)) then
+                stat = 1
+                return
+            else
+                stop
+            end if
         end if
-        if (present(value)) value = self%first%value
+        if (present(val)) val = self%first%val
         if (self%get_length() == 1) then
             deallocate(self%first)
             self%first => null()
@@ -112,17 +119,24 @@ contains
         self%length = self%length - 1
     end subroutine shift
 
-    subroutine pop(self, value)
+    subroutine pop(self, val, stat)
         implicit none
         class(list_type), intent(inout) :: self
-        real(kind=dp), intent(out), optional :: value
+        real(kind=dp), intent(out), optional :: val
+        integer, intent(out), optional :: stat
         class(element_type), pointer :: tmp
+        if (present(stat)) stat = 0
         if (self%is_empty()) then
             write (unit=error_unit, fmt='(A)') &
                 '# error: can not shift from empty list'
-            stop
+            if (present(stat)) then
+                stat = 1
+                return
+            else
+                stop
+            end if
         end if
-        if (present(value)) value = self%last%value
+        if (present(val)) val = self%last%val
         if (self%get_length() == 1) then
             deallocate(self%last)
             self%first => null()
@@ -139,50 +153,64 @@ contains
         self%length = self%length - 1
     end subroutine pop
 
-    subroutine insert(self, pos, value)
+    subroutine insert(self, pos, val, stat)
         implicit none
         class(list_type), intent(inout) :: self
         integer, intent(in) :: pos
-        real(kind=dp), intent(in) :: value
+        real(kind=dp), intent(in) :: val
+        integer, intent(out), optional :: stat
         class(element_type), pointer :: tmp, pos_tmp
         integer :: i
+        if (present(stat)) stat = 0
         if (pos < 0 .or. pos > self%get_length() + 1) then
             write (unit=error_unit, fmt='(A)') &
                 '# error insert position out of bounds'
-            stop
+            if (present(stat)) then
+                stat = 1
+                return
+            else
+                stop
+            end if
         end if
         if (pos == 1) then
-            call self%unshift(value)
+            call self%unshift(val)
         else if (pos == self%get_length() + 1) then
-            call self%push(value)
+            call self%push(val)
         else
             pos_tmp => self%first
             do i = 2, pos - 1
                 pos_tmp => pos_tmp%next
             end do
-            tmp => new_element(value)
+            tmp => new_element(val)
             tmp%next => pos_tmp%next
             pos_tmp%next => tmp
             self%length = self%length + 1
         end if
     end subroutine insert
 
-    subroutine remove(self, pos, value)
+    subroutine remove(self, pos, val, stat)
         implicit none
         class(list_type), intent(inout) :: self
         integer, intent(in) :: pos
-        real(kind=dp), intent(out), optional :: value
+        real(kind=dp), intent(out), optional :: val
+        integer, intent(out), optional :: stat
         class(element_type), pointer :: tmp, pos_tmp
         integer :: i
+        if (present(stat)) stat = 0
         if (pos < 1 .or. pos > self%get_length()) then
             write (unit=error_unit, fmt='(A)') &
                 '# error remove position out of bounds'
-            stop
+            if (present(stat)) then
+                stat = 1
+                return
+            else
+                stop
+            end if
         end if
         if (pos == 1) then
-            call self%shift(value=value)
+            call self%shift(val=val)
         else if (pos == self%get_length()) then
-            call self%pop(value=value)
+            call self%pop(val=val)
         else
             pos_tmp => self%first
             do i = 2, pos - 1
@@ -190,29 +218,36 @@ contains
             end do
             tmp => pos_tmp%next
             pos_tmp%next => tmp%next
-            if (present(value)) value = tmp%value
+            if (present(val)) val = tmp%val
             deallocate(tmp)
             self%length = self%length - 1
         end if
     end subroutine remove
 
-    subroutine get(self, pos, value)
+    subroutine get(self, pos, val, stat)
         implicit none
         class(list_type), intent(in) :: self
         integer, intent(in) :: pos
-        real(kind=dp), intent(out) :: value
+        real(kind=dp), intent(out) :: val
+        integer, intent(out), optional :: stat
         class(element_type), pointer :: tmp
         integer :: i
+        if (present(stat)) stat = 0
         if (pos < 0 .or. pos > self%get_length()) then
             write (unit=error_unit, fmt='(A)') &
                 '# error get position out of bounds'
-            stop
+            if (present(stat)) then
+                stat = 1
+                return
+            else
+                stop
+            end if
         end if
         tmp => self%first
         do i = 2, pos
             tmp => tmp%next
         end do
-        value = tmp%value
+        val = tmp%val
     end subroutine get
 
     pure integer function get_length(self)
@@ -230,9 +265,9 @@ contains
     subroutine clear(self)
         implicit none
         class(list_type), intent(inout) :: self
-        real(kind=dp) :: value
+        real(kind=dp) :: val
         do while (.not. self%is_empty())
-            call self%shift(value=value)
+            call self%shift(val=val)
         end do
     end subroutine clear
 
@@ -240,10 +275,10 @@ contains
         implicit none
         class(list_type), intent(in) :: self
         integer :: i
-        real(kind=dp) :: value
+        real(kind=dp) :: val
         do i = 1, self%get_length()
-            call self%get(i, value)
-            write (unit=output_unit, fmt='(F30.4)') value
+            call self%get(i, val)
+            write (unit=output_unit, fmt='(F30.4)') val
         end do
     end subroutine print_list
 
