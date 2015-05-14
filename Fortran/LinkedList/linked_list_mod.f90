@@ -10,11 +10,6 @@ module linked_list_mod
         class(element_type), pointer :: next => null()
     contains
         procedure, nopass, public :: new_element
-        procedure, public :: get_value
-        procedure, public :: get_next
-        procedure, public :: set_value
-        procedure, public :: set_next
-        procedure, public :: print_element
     end type element_type
 
     type, public :: list_type
@@ -22,9 +17,9 @@ module linked_list_mod
         class(element_type), pointer :: first => null(), last => null()
         integer :: length
     contains
-        procedure, public :: prepend
+        procedure, public :: unshift
         procedure, public :: shift
-        procedure, public :: append
+        procedure, public :: push
         procedure, public :: pop
         procedure, public :: is_empty
         procedure, public :: insert
@@ -50,40 +45,6 @@ contains
         end if
     end function new_element
 
-    pure function get_value(self) result(value)
-        implicit none
-        class(element_type), intent(in) :: self
-        real(kind=dp) :: value
-        value = self%value
-    end function get_value
-
-    function get_next(self) result(next)
-        implicit none
-        class(element_type), intent(in) :: self
-        class(element_type), pointer :: next
-        next => self%next
-    end function get_next
-
-    subroutine set_value(self, value)
-        implicit none
-        class(element_type), intent(inout) :: self
-        real(kind=dp), intent(in) :: value
-        self%value = value
-    end subroutine set_value
-
-    subroutine set_next(self, next)
-        implicit none
-        class(element_type), intent(inout) :: self
-        class(element_type), pointer, intent(in) :: next
-        self%next => next
-    end subroutine set_next
-
-    subroutine print_element(self)
-        implicit none
-        class(element_type), intent(in) :: self
-        write (unit=output_unit, fmt='(F10.4)') self%value
-    end subroutine print_element
-
     function new_list() result(list)
         implicit none
         class(list_type), pointer :: list
@@ -96,7 +57,7 @@ contains
         end if
     end function new_list
 
-    subroutine prepend(self, value)
+    subroutine unshift(self, value)
         implicit none
         class(list_type), intent(inout) :: self
         real(kind=dp), intent(in) :: value
@@ -110,9 +71,9 @@ contains
             self%first => element
         end if
         self%length = self%length + 1
-    end subroutine prepend
+    end subroutine unshift
 
-    subroutine append(self, value)
+    subroutine push(self, value)
         implicit none
         class(list_type), intent(inout) :: self
         real(kind=dp), intent(in) :: value
@@ -126,19 +87,19 @@ contains
             self%last => element
         end if
         self%length = self%length + 1
-    end subroutine append
+    end subroutine push
 
-    function shift(self) result(value)
+    subroutine shift(self, value)
         implicit none
         class(list_type), intent(inout) :: self
-        real(kind=dp) :: value
+        real(kind=dp), intent(out), optional :: value
         class(element_type), pointer :: tmp
         if (self%is_empty()) then
             write (unit=error_unit, fmt='(A)') &
                 '# error: can not shift from empty list'
             stop
         end if
-        value = self%first%value
+        if (present(value)) value = self%first%value
         if (self%get_length() == 1) then
             deallocate(self%first)
             self%first => null()
@@ -149,19 +110,19 @@ contains
             deallocate(tmp)
         end if
         self%length = self%length - 1
-    end function shift
+    end subroutine shift
 
-    function pop(self) result(value)
+    subroutine pop(self, value)
         implicit none
         class(list_type), intent(inout) :: self
-        real(kind=dp) :: value
+        real(kind=dp), intent(out), optional :: value
         class(element_type), pointer :: tmp
         if (self%is_empty()) then
             write (unit=error_unit, fmt='(A)') &
                 '# error: can not shift from empty list'
             stop
         end if
-        value = self%last%value
+        if (present(value)) value = self%last%value
         if (self%get_length() == 1) then
             deallocate(self%last)
             self%first => null()
@@ -176,7 +137,7 @@ contains
             tmp%next => null()
         end if
         self%length = self%length - 1
-    end function pop
+    end subroutine pop
 
     subroutine insert(self, pos, value)
         implicit none
@@ -191,9 +152,9 @@ contains
             stop
         end if
         if (pos == 1) then
-            call self%prepend(value)
+            call self%unshift(value)
         else if (pos == self%get_length() + 1) then
-            call self%append(value)
+            call self%push(value)
         else
             pos_tmp => self%first
             do i = 2, pos - 1
@@ -206,11 +167,11 @@ contains
         end if
     end subroutine insert
 
-    function remove(self, pos) result(value)
+    subroutine remove(self, pos, value)
         implicit none
         class(list_type), intent(inout) :: self
         integer, intent(in) :: pos
-        real(kind=dp) :: value
+        real(kind=dp), intent(out), optional :: value
         class(element_type), pointer :: tmp, pos_tmp
         integer :: i
         if (pos < 1 .or. pos > self%get_length()) then
@@ -219,9 +180,9 @@ contains
             stop
         end if
         if (pos == 1) then
-            value = self%shift()
+            call self%shift(value=value)
         else if (pos == self%get_length()) then
-            value = self%pop()
+            call self%pop(value=value)
         else
             pos_tmp => self%first
             do i = 2, pos - 1
@@ -229,17 +190,17 @@ contains
             end do
             tmp => pos_tmp%next
             pos_tmp%next => tmp%next
-            value = tmp%get_value()
+            if (present(value)) value = tmp%value
             deallocate(tmp)
             self%length = self%length - 1
         end if
-    end function remove
+    end subroutine remove
 
-    function get(self, pos) result(value)
+    subroutine get(self, pos, value)
         implicit none
         class(list_type), intent(in) :: self
         integer, intent(in) :: pos
-        real(kind=dp) :: value
+        real(kind=dp), intent(out) :: value
         class(element_type), pointer :: tmp
         integer :: i
         if (pos < 0 .or. pos > self%get_length()) then
@@ -252,7 +213,7 @@ contains
             tmp => tmp%next
         end do
         value = tmp%value
-    end function get
+    end subroutine get
 
     pure integer function get_length(self)
         implicit none
@@ -271,7 +232,7 @@ contains
         class(list_type), intent(inout) :: self
         real(kind=dp) :: value
         do while (.not. self%is_empty())
-            value = self%shift()
+            call self%shift(value=value)
         end do
     end subroutine clear
 
@@ -279,8 +240,10 @@ contains
         implicit none
         class(list_type), intent(in) :: self
         integer :: i
+        real(kind=dp) :: value
         do i = 1, self%get_length()
-            write (unit=output_unit, fmt='(F30.4)') self%get(i)
+            call self%get(i, value)
+            write (unit=output_unit, fmt='(F30.4)') value
         end do
     end subroutine print_list
 

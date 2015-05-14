@@ -10,44 +10,45 @@ program list_test
     
     values = [ (sqrt(real(i - 1, kind=dp)), i=1, nr_values) ]
 
-    ! append to list
+    ! push to list
     do i = 1, size(values)
-        call list%append(values(i))
-        print "('appended ', F10.4, ', length ', I0)", &
+        call list%push(values(i))
+        print "('pushed ', F10.4, ', length ', I0)", &
             values(i), list%get_length()
     end do
 
     ! shift from list
     do while (.not. list%is_empty())
-        value = list%shift()
+        call list%shift(value=value)
         print "('shifted ', F10.4, ', length ', I0)", &
             value, list%get_length()
     end do
 
-    ! prepend to list
+    ! unshift to list
     do i = 1, size(values)
-        call list%prepend(values(i))
-        print "('prepended ', F10.4, ', length ', I0)", &
+        call list%unshift(values(i))
+        print "('unshifted ', F10.4, ', length ', I0)", &
             values(i), list%get_length()
     end do
 
     ! pop from list
     do while (.not. list%is_empty())
-        value = list%pop()
+        call list%pop(value=value)
         print "('popped ', F10.4, ', length ', I0)", &
             value, list%get_length()
     end do
 
-    ! append to list
+    ! push to list
     do i = 1, size(values)
-        call list%append(values(i))
-        print "('appended ', F10.4, ', length ', I0)", &
+        call list%push(values(i))
+        print "('pushed ', F10.4, ', length ', I0)", &
             values(i), list%get_length()
     end do
 
     ! get values
     do i = 1, list%get_length()
-        print "('got ', F10.4, ' from ', I0)", list%get(i), i
+        call list%get(i, value)
+        print "('got ', F10.4, ' from ', I0)", value, i
     end do
 
     ! insert values
@@ -57,18 +58,20 @@ program list_test
 
     ! get values
     do i = 1, list%get_length()
-        print "('got ', F10.4, ' from ', I0)", list%get(i), i
+        call list%get(i, value)
+        print "('got ', F10.4, ' from ', I0)", value, i
     end do
 
     ! remove values
     do i = 1, list%get_length()/2
-        value = list%remove(i)
+        call list%remove(i, value)
         print "('removed ', F10.4, ' from ', I0)", value, i
     end do
 
     ! get values
     do i = 1, list%get_length()
-        print "('got ', F10.4, ' from ', I0)", list%get(i), i
+        call list%get(i, value)
+        print "('got ', F10.4, ' from ', I0)", value, i
     end do
 
     print '(A)', 'list:'
