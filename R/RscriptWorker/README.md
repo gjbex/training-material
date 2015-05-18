@@ -1,8 +1,11 @@
-R
-=
+RscriptWorker
+=============
 
 This are some simple R scripts to illustrate using Rscript, and
-job scripts to run it in batch mode.
+job scripts to run it in batch mode.  Also an example of using R from
+the worker framework is provided.  For more information on worker,
+see:
+https://github.com/gjbex/worker
 
 Contents
 --------
