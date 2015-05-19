@@ -17,7 +17,7 @@ What is it?
   * `read_doubles.py`: reads sequences of 8 bytes, unpacks them into
     a Python variable, and prints them in ASCII to standard out.
   * `doubles.bin`: binary file.
-2. CSV files
+1. CSV files
   * `write_csv.py`: uses the standard library `csv` module to create
     a CSV file with four columns and five rows.
   * `read_csv.py`: reads a CSV file (e.g., `data.csv`) that has two
@@ -30,7 +30,7 @@ What is it?
   * `data_commented_commas.csv`: comma separated CSV ile
   * `data_commented_semicolon.csv`: semicolon separated CSV ile
   * `read_csv_rows.py`: illustrates the default CSV reader
-3. XML files
+1. XML files
   * `write_xml.py`: creates XML that has a root-level `blocks` element,
     containing `block` elements that are named (by attribue), and can
     have `item` elements, where the latter contain a text element.
@@ -47,4 +47,12 @@ What is it?
     data representation.
   * `blocks.xml`: example XML file.
   * `nested_blocks.xml`: example XML file containng nested block elements.
-
+1. Text as binary
+  * `line_indexer.py`: indexes a text file, i.e., it produces a CSV file
+    with two columns, the first the file position of the start of each line
+    in the text file, the second the length of that line, line endings
+    exclusive.  The text file is read in binary mode.
+  * `index.txt`: example file to index
+  * `read_line_index.py`: test script that takes a text file as input,
+    a file position and a line length, and prints the characters read
+    to standard output for verification, quoted by '|'.
