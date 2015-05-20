@@ -16,6 +16,8 @@ Contents
     interfaces for using higher order functions.  Also contains some
     code to time arithmetic operations and Fortran intrinsic math
     fucntions.
+1. `Integrate`: illustration of extension of abstract type, and
+    implementation of abstract interface.
 1. `IO`: illustrates Fortran's I/O mechanisms, sequential read/write of
     formatted and unformatted records, stream read/write of unformatted
     records.
