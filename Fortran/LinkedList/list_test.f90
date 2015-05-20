@@ -85,6 +85,6 @@ program list_test
     ! check for error
     i = 3
     call list%get(i, val=val, stat=istat)
-    if (istat /= 0) print "('get at ', I0, ' failed')", i
+    if (istat /= 0) print "('get at ', I0, ' failed as intended')", i
 
 end program list_test
