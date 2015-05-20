@@ -9,7 +9,7 @@ module linked_list_mod
         real(kind=dp) :: val = 0.0_dp
         class(element_type), pointer :: next => null()
     contains
-        procedure, nopass, public :: new_element
+        procedure, nopass :: new_element
     end type element_type
 
     type, public :: list_type
