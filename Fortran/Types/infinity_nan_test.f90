@@ -1,5 +1,5 @@
 program infinity_nan_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : REAL32
     implicit none
     real(kind=REAL32) :: x, y
     real(kind=REAL32) :: x_delta = 1e32_REAL32
