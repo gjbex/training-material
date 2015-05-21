@@ -20,7 +20,7 @@ contains
 end module funcs_mod
 
 program recursion_test
-    use funcs_mod
+    use :: funcs_mod, only : factorial
     implicit none
     integer, parameter :: n_min = 0, n_max = 6
     integer :: i

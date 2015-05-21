@@ -1,11 +1,11 @@
 module time_func_mod
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : sp => REAL32, dp => REAL64
     use math_func_interface
     implicit none
 
     type, public :: result_record
-        real(kind=REAL64) :: result
-        real(kind=REAL32) :: time
+        real(kind=dp) :: result
+        real(kind=sp) :: time
     end type result_record
     public :: time_func, time_func_unrolled
 
@@ -15,13 +15,13 @@ contains
         implicit none
         procedure(math_func) :: f
         type(result_record) :: r
-        real(kind=REAL32) :: t_start, t_end
-        real(kind=REAL64), parameter :: x_delta = 1.0D-09, &
-                                       x_min   = 1.0D-14, &
-                                       x_max   = 1.0D00
-        real(kind=REAL64) :: x, total
+        real(kind=sp) :: t_start, t_end
+        real(kind=dp), parameter :: x_delta = 1.0e-09_dp, &
+                                    x_min   = 1.0e-14_dp, &
+                                    x_max   = 1.0_dp
+        real(kind=dp) :: x, total
         x = x_min
-        total = 0.0D00
+        total = 0.0_dp
         call cpu_time(t_start)
         do while (x <= x_max)
             total = total + f(x)
@@ -36,21 +36,21 @@ contains
         implicit none
         procedure(math_func) :: f
         type(result_record) :: r
-        real(kind=REAL32) :: t_start, t_end
-        real(kind=REAL64), parameter :: x_delta = 1.0D-09, &
-                                       x_min   = 1.0D-14, &
-                                       x_max   = 1.0D00
-        real(kind=REAL64) :: x1, x2, x3, x4, x_delta_unrolled, &
-                            total1, total2, total3, total4
+        real(kind=sp) :: t_start, t_end
+        real(kind=dp), parameter :: x_delta = 1.0e-09_dp, &
+                                    x_min   = 1.0e-14_dp, &
+                                    x_max   = 1.0_dp
+        real(kind=dp) :: x1, x2, x3, x4, x_delta_unrolled, &
+                         total1, total2, total3, total4
         x1 = x_min
         x2 = x1 + x_delta
         x3 = x2 + x_delta
         x4 = x3 + x_delta
         x_delta_unrolled = 4*x_delta
-        total1 = 0.0D00
-        total2 = 0.0D00
-        total3 = 0.0D00
-        total4 = 0.0D00
+        total1 = 0.0_dp
+        total2 = 0.0_dp
+        total3 = 0.0_dp
+        total4 = 0.0_dp
         call cpu_time(t_start)
         do while (x4 <= x_max)
             total1 = total1 + f(x1)
@@ -68,4 +68,3 @@ contains
     end function time_func_unrolled
 
 end module time_func_mod
-
