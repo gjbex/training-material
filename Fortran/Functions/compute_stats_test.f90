@@ -1,7 +1,6 @@
 program compute_stats_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : sp => REAL32
     implicit none
-    integer, parameter :: sp = REAL32
     type stats_type
         real(kind=sp) :: sum, mean, stddev
         integer :: n
@@ -12,9 +11,9 @@ program compute_stats_test
     real(kind=sp) :: mean, stddev
     call init_vector(v)
     call compute_stats(v, mean, stddev)
-    print *, mean, stddev
+    print '(2(A14, F10.5))', 'mean = ', mean, 'stddev = ', stddev
     stats = compute_stats_alt(v)
-    print *, stats%mean, stats%stddev
+    print '(2(A14, F10.5))', 'mean = ', mean, 'stddev = ', stddev
 
 contains
 
@@ -22,9 +21,7 @@ contains
         implicit none
         real(kind=sp), dimension(:), intent(inout) :: v
         integer :: i
-        do i = 1, size(v)
-            v(i) = real(i, kind=sp)
-        end do
+        v = [ (real(i, kind=sp), i = 1, size(v)) ]
     end subroutine init_vector
 
     subroutine compute_stats(v, mean, stddev)
