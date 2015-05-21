@@ -1,5 +1,5 @@
 module math_func_mod
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : REAL64
     use math_func_interface
     implicit none
 
