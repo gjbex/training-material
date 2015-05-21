@@ -1,6 +1,7 @@
 program time_funcs
-    use math_func_mod
-    use time_func_mod
+    use :: math_func_mod, only : setup, functions
+    use :: time_func_mod, only : time_func, time_func_unrolled, &
+                                 result_record
     implicit none
     integer :: i
     type(result_record) :: result
