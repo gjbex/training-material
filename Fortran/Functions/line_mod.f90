@@ -1,10 +1,10 @@
 module line_mod
-    use types_mod
+    use :: types_mod, only : sp
     implicit none
 
     private
     real(kind=sp) :: epsilon = 1.0e-4_sp
-    public :: on_line, line, set_epsilon, get_epsilon
+    procedure, public :: on_line, line, set_epsilon, get_epsilon
 
 contains
 
