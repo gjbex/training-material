@@ -4,7 +4,7 @@ module line_mod
 
     private
     real(kind=sp) :: epsilon = 1.0e-4_sp
-    procedure, public :: on_line, line, set_epsilon, get_epsilon
+    public :: on_line, line, set_epsilon, get_epsilon
 
 contains
 
