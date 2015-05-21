@@ -1,6 +1,6 @@
 program pointer_test
-    use, intrinsic :: iso_fortran_env
-    use matrix_ops
+    use, intrinsic :: iso_fortran_env, only :REAL32, REAL64
+    use :: matrix_ops, only : init_matrix, print_matrix
     implicit none
     integer, parameter :: m = 5, n = 4
     real(kind=REAL64), dimension(:, :), allocatable, target :: a

@@ -1,8 +1,7 @@
 program calc_alloc_test
-    use, intrinsic :: iso_fortran_env
-    use matrix_ops
+    use, intrinsic :: iso_fortran_env, dp => REAL64
+    use :: matrix_ops, only : init_matrix, print_matrix, print_vector
     implicit none
-    integer, parameter :: dp = REAL64
     integer, parameter :: M = 5, N = 5, P = 3
     real(kind=dp), allocatable, dimension(:, :) :: A, B, C
     real(kind=dp), dimension(M, P) :: D

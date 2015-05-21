@@ -1,5 +1,5 @@
 module matrix_ops
-    use :: precision_defs
+    use :: precision_defs, only : dp
     implicit none
     private
     public :: init_matrix, print_matrix, print_vector
