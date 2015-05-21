@@ -1,7 +1,6 @@
 program precision_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : sp => REAL32, dp => REAL64
     implicit none
-    integer, parameter :: sp = REAL32, dp = REAL64
     integer, parameter :: rp = sp
     integer, parameter :: x_dim = 1000, nr_outer = 10
     real(kind=rp), dimension(x_dim) :: x1, x2, x3

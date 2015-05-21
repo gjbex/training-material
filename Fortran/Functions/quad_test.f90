@@ -1,6 +1,6 @@
 program quad_test
-    use types_mod
-    use quad_mod
+    use types_mod, only : dp
+    use quad_mod, only : quad
     implicit none
     real(kind=dp), parameter :: a = -1.0_dp, b = 1.0_dp
 

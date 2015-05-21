@@ -7,8 +7,8 @@ module quad_mod
 contains
 
     function quad(f, a, b) result(q_f)
-        use types_mod
-        use quad_func_interface
+        use :: types_mod, only : dp
+        use :: quad_func_interface
         implicit none
         procedure(quad_func_type) :: f
         real(kind=dp), intent(in) :: a, b
