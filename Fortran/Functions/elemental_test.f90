@@ -1,5 +1,5 @@
 program elemental_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : INT64, REAL64
     implicit none
     integer, parameter :: n = 16, p = 6
     integer :: i
