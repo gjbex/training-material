@@ -1,7 +1,8 @@
 program vectorization_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : sp => REAL32, &
+                                              dp => REAL64, &
+                                              ip => INT64
     implicit none
-    integer, parameter :: sp = REAL32, dp = REAL64, ip = INT64
     integer, parameter :: rp = dp
     integer(kind=ip), parameter :: nr_ops = 10000000000_ip
     real(kind=sp) :: t_start, t_end
