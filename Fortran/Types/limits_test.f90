@@ -1,13 +1,14 @@
 program limits_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : INT8, INT16, INT32, INT64, &
+                                              REAL32, REAL64, REAL128 
     implicit none
-    integer(kind=int8) :: i8
-    integer(kind=int16) :: i16
-    integer(kind=int32) :: i32
-    integer(kind=int64) :: i64
-    real(kind=real32) :: x32
-    real(kind=real64) :: x64
-    real(kind=real128) :: x128
+    integer(kind=INT8) :: i8
+    integer(kind=INT16) :: i16
+    integer(kind=INT32) :: i32
+    integer(kind=INT64) :: i64
+    real(kind=REAL32) :: x32
+    real(kind=REAL64) :: x64
+    real(kind=REAL128) :: x128
     
     print '(A)', 'integer:'
 

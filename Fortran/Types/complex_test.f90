@@ -1,5 +1,5 @@
 program complex_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : REAL32, REAL64
     implicit none
     complex :: z_default
     complex(kind=real32) :: z_32
