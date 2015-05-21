@@ -1,7 +1,7 @@
 program intrinsic_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : dp => REAL64
     implicit none
-    integer, parameter :: dp = REAL64, m = 2, n = 3
+    integer, parameter :: m = 2, n = 3
     real(kind=dp), dimension(m, n) :: r
 
     call random_number(r)
