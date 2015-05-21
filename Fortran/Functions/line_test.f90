@@ -1,5 +1,5 @@
 program line_test
-    use types_mod
+    use types_mod, only : sp
     use line_mod
     implicit none
     integer, parameter :: nr_points = 5
@@ -8,7 +8,7 @@ program line_test
     integer :: i
 
     x = [(real(i, kind=sp), i = -2, 2)]
-    y = [2.0, 2.5, 3.001, 3.5, 4.0]
+    y = [2.0_sp, 2.5_sp, 3.001_sp, 3.5_sp, 4.0_sp]
     y_exp = line(x)
     is_on_line = on_line(x, y)
     print '(A, E10.2)', 'epsilon = ', get_epsilon()
