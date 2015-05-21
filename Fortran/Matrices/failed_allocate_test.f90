@@ -1,5 +1,5 @@
 program failed_allocate_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : INT32, INT64
     implicit none
     integer(kind=INT64), parameter :: init_size = 5000, size_step = 5000
     integer(kind=INT32), dimension(:, :), allocatable :: A

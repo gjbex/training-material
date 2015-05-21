@@ -1,6 +1,6 @@
 program alloc_test
-    use :: precision_defs
-    use :: matrix_ops
+    use :: precision_defs, only : dp
+    use :: matrix_ops, only : init_matrix, print_matrix
     implicit none
     integer :: M, N, i, j
     real(kind=dp), allocatable, dimension(:,:) :: A
