@@ -1,5 +1,5 @@
 module math_funcs
-    use iso_fortran_env
+    use iso_fortran_env, only : REAL32, REAL64
     implicit none
 
     private
@@ -23,13 +23,13 @@ contains
 end module math_funcs
 
 program types_test
-    use math_funcs
+    use math_funcs, only : rp, linear
     implicit none
     real(kind=rp) :: x, y
     x = 1.0_rp
     y = 2.1_rp
     print *, x + y
+    print *, linear(x)
     print *, kind(x)
 
 end program types_test
-
