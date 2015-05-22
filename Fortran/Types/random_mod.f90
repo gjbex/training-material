@@ -1,9 +1,8 @@
 module random_mod
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : sp => REAL32, dp => REAL64
     implicit none
 
     private
-    integer, parameter :: sp = REAL32, dp = REAL64
     public :: random_normal_number
 
 contains
