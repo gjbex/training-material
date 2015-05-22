@@ -4,6 +4,6 @@ particle_sim
 rand_test
 precision_test
 select_precision_test
-complext_test
+complex_test
 limits_test
 infinity_nan_test
