@@ -1,23 +1,22 @@
 module particles_mod
-    use, intrinsic :: iso_fortran_env
-    use random_mod
+    use, intrinsic :: iso_fortran_env, only : sp => REAL32, dp => REAL64
+    use :: random_mod
     implicit none
     
     private
-    integer, parameter, public :: sp = REAL32, dp = REAL64
-    type, public :: particles
+    type, public :: particles_type
         real(kind=dp), dimension(:), allocatable :: x, y, z, &
                                                     v_x, v_y, v_z, &
                                                     mass
         integer, dimension(:), allocatable :: charge
-    end type particles
+    end type particles_type
     public :: init_particles, print_particles, delete_particles
 
 contains
 
     subroutine init_particles(p, N)
         implicit none
-        type(particles), intent(out) :: p
+        type(particles_type), intent(out) :: p
         integer, intent(in) :: N
         integer :: i
         real(kind=dp) :: r
@@ -53,24 +52,22 @@ contains
                 p%charge(i) = 1
             end if
         end do
-    
     end subroutine init_particles
 
     subroutine print_particle(p, i)
         implicit none
-        type(particles), intent(in) :: p
+        type(particles_type), intent(in) :: p
         integer, intent(in) :: i
         character(len=200) :: fmt_str = "(7(E10.3, ','), I2)"
 
         print fmt_str, p%x(i), p%y(i), p%z(i), &
                        p%v_x(i), p%v_y(i), p%v_z(i), &
                        p%mass(i), p%charge(i)
-
     end subroutine print_particle
 
     subroutine print_particles(p)
         implicit none
-        type(particles), intent(in) :: p
+        type(particles_type), intent(in) :: p
         integer :: i, N
 
         print "(A, 7(',', A))", 'x', 'y', 'z', 'v_x', 'v_y', 'v_z', &
@@ -79,12 +76,11 @@ contains
         do i = 1, N
             call print_particle(p, i)
         end do
-
     end subroutine print_particles
 
     subroutine delete_particles(p)
         implicit none
-        type(particles), intent(inout) :: p
+        type(particles_type), intent(inout) :: p
         integer :: i, N
 
         deallocate(p%x)
