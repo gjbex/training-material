@@ -83,16 +83,6 @@ contains
 
     end subroutine init
 
-    function integrate(self, f, a, b) result(r)
-        use :: quad_func_interface, only : quad_func_type
-        implicit none
-        class(gen_gauss_type), intent(in) :: self
-        procedure(quad_func_type) :: f
-        real(kind=dp), intent(in) :: a, b
-        real(kind=dp) :: r
-        r = -0.73
-    end function integrate
-
     subroutine print_params(self)
         implicit none
         class(gen_gauss_type), intent(in) :: self
@@ -101,5 +91,23 @@ contains
             print '(2F20.15)', self%xs(i), self%ws(i)
         end do
     end subroutine print_params
+
+    function integrate(self, f, a, b) result(r)
+        use :: quad_func_interface
+        implicit none
+        class(gen_gauss_type), intent(in) :: self
+        procedure(quad_func_type) :: f
+        real(kind=dp), intent(in) :: a, b
+        real(kind=dp) :: r
+        real(kind=dp) :: x, delta
+        integer :: i
+        x = 0.5*(a + b)
+        delta = 0.5*(b - a)
+        r = 0.0_dp
+        do i = 1, size(self%xs)
+            r = r + self%ws(i)*f(x + self%xs(i)*delta)
+        end do
+        r = r*delta
+    end function integrate
 
 end module gen_gauss_mod
