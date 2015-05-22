@@ -11,11 +11,11 @@ APPS = single double particle_sim rand_test precision_test \
 
 all: $(APPS)
 
-single: types_test.f90
-	$(F90) $(FFLAGS) -cpp -DSINGLE_PREC -o $@ $< $(LDFLAGS) $(LIBS)
+single: types_test.F90
+	$(F90) $(FFLAGS) -DSINGLE_PREC -o $@ $< $(LDFLAGS) $(LIBS)
 
-double: types_test.f90
-	$(F90) $(FFLAGS) -cpp -o $@ $< $(LDFLAGS) $(LIBS)
+double: types_test.F90
+	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 precision_test: precision_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
