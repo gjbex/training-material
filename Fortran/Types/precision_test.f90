@@ -1,5 +1,5 @@
 program precision_test
-    use, intrinsic :: iso_fortran_env
+    use, intrinsic :: iso_fortran_env, only : REAL32, REAL64
     implicit none
     integer, parameter :: sp = kind(1.0), &
                           dp = selected_real_kind(2*precision(1.0_sp))
