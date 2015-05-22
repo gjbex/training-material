@@ -30,21 +30,13 @@ contains
         allocate(p%mass(N))
         allocate(p%charge(N))
 
+        call random_number(p%x)
+        call random_number(p%y)
+        call random_number(p%z)
+        call random_number(p%v_x)
+        call random_number(p%v_y)
+        call random_number(p%v_z)
         do i = 1, N
-            call random_number(r)
-            p%x(i) = r
-            call random_number(r)
-            p%y(i) = r
-            call random_number(r)
-            p%z(i) = r
-            call random_number(r)
-            p%v_x(i) = r
-            call random_number(r)
-            p%v_y(i) = r
-            call random_number(r)
-            p%v_z(i) = r
-            call random_number(r)
-            p%mass(i) = r
             call random_number(r)
             if (r < 0.5) then
                 p%charge(i) = -1
