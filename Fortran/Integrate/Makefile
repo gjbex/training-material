@@ -5,7 +5,7 @@ LIBS =
 
 INT_OBJS = quad_func_interface.o quad_mod.o simpson_mod.o gauss_mod.o \
            integration_test.o
-XW_OBJS = quad_func_interface.o quad_mod.o gen_gauss_mod.o xw_test.o
+XW_OBJS = quad_func_interface.o quad_mod.o gauss_mod.o xw_test.o
 
 all: integration_test.exe xw_test.exe
 
