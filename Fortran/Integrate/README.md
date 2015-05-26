@@ -13,7 +13,7 @@ What is it?
     the integrate procedure.
 1. `simpson_mod.f90`: implementation of the `quad_type`, Simpson's method.
 1. `gauss_mod.f90`: implementation of the `quad_type`, Gauss-Legendre
-    quadrature (10 points).
+    quadrature (10 points), and a general method for any number of points.
 1. `integrate_test.f90`: main program, one can specify `gauss` or
     `simpson` to pick an algorithm for quadrature.
 1. `Makefile`
