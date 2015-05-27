@@ -1,4 +1,4 @@
-program nonblocking
+program bidirectional
     use, intrinsic :: iso_fortran_env, only : dp => REAL64
     use :: mpi
     implicit none
@@ -45,4 +45,4 @@ contains
         end if
     end subroutine neighbours
 
-end program nonblocking
+end program bidirectional
