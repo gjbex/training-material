@@ -7,7 +7,6 @@ program sendrecv
     logical, dimension(ndims) :: periods = [ .true. ]
     logical ,parameter :: reorder = .true.
     integer :: size, rank, ierr, tag = 11, left, right, comm_cart
-    integer, dimension(MPI_STATUS_SIZE) :: status
     real(kind=dp) :: send_msg, recv_msg
 
     call MPI_Init(ierr)
