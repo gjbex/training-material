@@ -3,7 +3,9 @@ FFLAGS = -O2 -g
 LDFLAGS =
 LIBS = -lm
 
-all: unidirectional.exe async.exe deadlock.exe
+all: unidirectional.exe nonblocking.exe deadlock.exe
+
+f08: nonblocking_f08.exe
 
 %.exe: %.o
 	$(F90) $(FFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)

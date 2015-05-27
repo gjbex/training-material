@@ -1,4 +1,4 @@
-program async
+program nonblocking
     use, intrinsic :: iso_fortran_env, only : dp => REAL64
     use :: mpi
     implicit none
@@ -16,6 +16,7 @@ program async
     call MPI_Recv(msg, 1, MPI_DOUBLE_PRECISION, left, tag, &
                   MPI_COMM_WORLD, status, ierr)
     print '(I0, A, F10.2)', rank, ' received ', msg
+    call MPI_Request_free(request, ierr)
     call MPI_Finalize(ierr)
 
 contains
@@ -36,4 +37,4 @@ contains
         end if
     end subroutine neighbours
 
-end program async
+end program nonblocking
