@@ -4,18 +4,19 @@ program nonblocking
     implicit none
     integer :: size, rank, ierr, tag = 11, left, right, request
     integer, dimension(MPI_STATUS_SIZE) :: status
-    real(kind=dp) :: msg
+    real(kind=dp) :: send_msg, recv_msg
 
     call MPI_Init(ierr)
     call MPI_Comm_rank(MPI_COMM_WORLD, rank, ierr)
     call MPI_Comm_size(MPI_COMM_WORLD, size, ierr)
     call neighbours(rank, size, left, right)
-    msg = rank*1.1_dp
-    call MPI_ISend(msg, 1, MPI_DOUBLE_PRECISION, right, tag, &
+    send_msg = rank*1.1_dp
+    call MPI_ISend(send_msg, 1, MPI_DOUBLE_PRECISION, right, tag, &
                    MPI_COMM_WORLD, request, ierr)
-    call MPI_Recv(msg, 1, MPI_DOUBLE_PRECISION, left, tag, &
+    call MPI_Recv(recv_msg, 1, MPI_DOUBLE_PRECISION, left, tag, &
                   MPI_COMM_WORLD, status, ierr)
-    print '(I0, A, F10.2)', rank, ' received ', msg
+    print '(I0, A, F10.2)', rank, ' received ', recv_msg
+    call MPI_Wait(request, MPI_STATUS_IGNORE, ierr)
     call MPI_Request_free(request, ierr)
     call MPI_Finalize(ierr)
 
