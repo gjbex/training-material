@@ -6,7 +6,7 @@ LIBS = -lm
 all: unidirectional.exe nonblocking.exe deadlock.exe bidirectional.exe \
      sendrecv.exe cart_sendrecv.exe
 
-f08: nonblocking_f08.exe
+f08: nonblocking_f08.exe cart_sendrecv_f08.exe
 
 %.exe: %.o
 	$(F90) $(FFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
