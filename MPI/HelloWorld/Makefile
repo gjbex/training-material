@@ -5,6 +5,8 @@ LIBS = -lm
 
 all: hello_world.exe
 
+f08: hello_world_f08.exe
+
 %.exe: %.o
 	$(F90) $(FFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
