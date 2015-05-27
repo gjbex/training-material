@@ -18,3 +18,6 @@ What is it?
     point-to-point communication.
 1. `sendrecv.f90': bidirectional "halo exchange" using send-receive
     point-to-point communication.
+1. `cart_sendrecv.f90': bidirectional "halo exchange" using send-receive
+    point-to-point communication, neighbours on 1D Carthesian grid, found
+    using shift operation.
