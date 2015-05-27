@@ -5,19 +5,19 @@ program nonblocking
     integer :: size, rank, tag = 11, left, right
     type(MPI_Request) :: request
     type(MPI_Status)  :: status
-    real(kind=dp) :: msg
+    real(kind=dp) :: send_msg, recv_msg
 
     call MPI_Init()
     call MPI_Comm_rank(MPI_COMM_WORLD, rank)
     call MPI_Comm_size(MPI_COMM_WORLD, size)
     call neighbours(rank, size, left, right)
-    msg = rank*1.1_dp
-    call MPI_ISend(msg, 1, MPI_DOUBLE_PRECISION, right, tag, &
+    send_msg = rank*1.1_dp
+    call MPI_ISend(send_msg, 1, MPI_DOUBLE_PRECISION, right, tag, &
                    MPI_COMM_WORLD, request)
-    call MPI_Recv(msg, 1, MPI_DOUBLE_PRECISION, left, tag, &
+    call MPI_Recv(recv_msg, 1, MPI_DOUBLE_PRECISION, left, tag, &
                   MPI_COMM_WORLD, status)
-    print '(I0, A, F10.2)', rank, ' received ', msg
-    call MPI_Request_free(request)
+    print '(I0, A, F10.2)', rank, ' received ', recv_msg
+    call MPI_Wait(request, MPI_STATUS_IGNORE)
     call MPI_Finalize()
 
 contains

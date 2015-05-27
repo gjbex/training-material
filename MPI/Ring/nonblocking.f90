@@ -17,7 +17,6 @@ program nonblocking
                   MPI_COMM_WORLD, status, ierr)
     print '(I0, A, F10.2)', rank, ' received ', recv_msg
     call MPI_Wait(request, MPI_STATUS_IGNORE, ierr)
-    call MPI_Request_free(request, ierr)
     call MPI_Finalize(ierr)
 
 contains
