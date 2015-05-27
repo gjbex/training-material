@@ -21,3 +21,6 @@ What is it?
 1. `cart_sendrecv.f90': bidirectional "halo exchange" using send-receive
     point-to-point communication, neighbours on 1D Carthesian grid, found
     using shift operation.
+1. `cart_sendrecv_f08.f90': bidirectional "halo exchange" using
+    send-receive point-to-point communication, neighbours on 1D Carthesian
+    grid, found using shift operation using Fortran 2008 interface.
