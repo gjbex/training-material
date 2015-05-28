@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
+import multiprocessing
 import sys
 import numpy as np
 
-from ising_cxx import IsingSystem
 from runner import UnknownQuantityError
 
 class Averager(object):
@@ -13,19 +13,30 @@ class Averager(object):
         self._runner = runner
         self._ising = ising
         self._quantities = {}
+        nr_cpus = multiprocessing.cpu_count()
+        if is_verbose > 0:
+            sys.stderr.write('# using {0:d} cores\n'.format(nr_cpus))
+        self._pool = multiprocessing.Pool(nr_cpus)
 
     def average(self, runs):
-        for r in xrange(1, runs + 1):
-            if self._is_verbose > 0:
-                msg = '# run {0:d}\n'.format(r)
+        def do_run(run_nr, averager):
+            if averager._is_verbose > 0:
+                msg = '# run {0:d}\n'.format(run_nr)
                 sys.stderr.write(msg)
-            self._runner.set_system(self._ising.clone())
-            self._runner.run()
-            for quantity in self._runner.quantities():
+            runner = averager._runner.clone()
+            runner.set_system(averager._ising.clone())
+            runner.run()
+            quantities = {}
+            for quantity in runner.quantities():
+                quantities[quantity] = runner.get(quantity)
+            return quantities
+        run_input = [(run, self) for run in xrange(1, runs + 1)]
+        results = self._pool.map(do_run, run_input)
+        for result in results:
+            for quantity in result:
                 if quantity not in self.quantities():
                     self._quantities[quantity] = []
-                self._quantities[quantity].append(self._runner.get(quantity))
-            self._runner.reset()
+                self._quantities[quantity].append(result[quantity])
 
     def quantities(self):
         return self._quantities.keys()

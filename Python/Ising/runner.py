@@ -23,7 +23,7 @@ class NoRunnerStepsError(Exception):
     construction of the object, or as argument of the run options, it
     may well be forgotten twice.'''
     def __init__(self):
-        super(NoConvergenceError, self).__init__()
+        super(NoRunnerStepsError, self).__init__()
         self.message = 'no number of steps specified for Runner'
 
 
@@ -33,7 +33,7 @@ class NoRunnerSystemError(Exception):
     Since the Ising system can be set either on construction of the Runner,
     or by calling the set_system() method, it may be forgotten twice.'''
     def __init__(self):
-        super(NoConvergenceError, self).__init__()
+        super(NoRunnerSystemError, self).__init__()
         self.message = 'no Ising system specified for Runner'
 
 
@@ -56,6 +56,9 @@ class BaseRunner(object):
         self._steps = steps
         self._is_verbose = is_verbose
         self.reset()
+
+    def clone(self):
+        return BaseRunner(self._ising, self._steps, self._is_verbose)
 
     def set_system(self, ising):
         self._ising = ising
@@ -115,9 +118,13 @@ class SingleRunner(BaseRunner):
         self._file_name = file_name
         self._data_fmt = '{0:d} {1:.4f} {2:.4f}\n'
 
+    def clone(self):
+        return SingleRunner(self._ising, self._steps, self._file_name,
+                            self._is_verbose)
+
     def _prologue(self):
         if self._file_name:
-            self._file = open(file_name, 'w')
+            self._file = open(self._file_name, 'w')
         else:
             self._file = sys.stdout
         self._file.write('t M E\n')
@@ -126,7 +133,7 @@ class SingleRunner(BaseRunner):
         self._file.write('# J = {0:.3f}\n'.format(self._ising.J()))
         self._file.write('# H = {0:.3f}\n'.format(self._ising.H()))
         self._file.write(self._data_fmt.format(0, self.
-                                              _ising.magnetization(),
+                                               _ising.magnetization(),
                                                self._ising.energy()))
 
     def _epilogue(self):
@@ -135,7 +142,7 @@ class SingleRunner(BaseRunner):
 
     def _post_step(self, t):
         self._file.write(self._data_fmt.format(t, self.
-                                              _ising.magnetization(),
+                                               _ising.magnetization(),
                                                self._ising.energy()))
         return True
 
@@ -151,9 +158,13 @@ class MovieRunner(BaseRunner):
         self._dir_name = dir_name
         self._file_fmt = file_fmt
 
+    def clone(self):
+        return MovieRunner(self._ising, self._steps, self._dir_name,
+                           self._file_fmt, self._is_verbose)
+
     def _prologue(self):
         if not os.path.exists(self._dir_name):
-            os.makedirs(self._dir_name)        
+            os.makedirs(self._dir_name)
 
     def _post_step(self, t):
         file_name = os.path.join(self._dir_name, self._file_fmt.format(t))
@@ -172,6 +183,10 @@ class ActivityHeatmapRunner(BaseRunner):
                                                     is_verbose)
         self._burn_in = burn_in
 
+    def clone(self):
+        return ActivityHeatmapRunner(self._ising, self._steps,
+                                     self._is_verbose)
+
     def _prologue(self):
         self._quantities['heatmap'] = np.zeros((self._ising.N(),
                                                 self._ising.N()),
@@ -186,7 +201,7 @@ class ActivityHeatmapRunner(BaseRunner):
 
 
 class EquilibriumRunner(BaseRunner):
-        
+
     def __init__(self, ising=None, steps=None, is_verbose=1,
                  burn_in=100, sample_period=10, window=20, max_slope=1e-4):
         super(EquilibriumRunner, self).__init__(ising, steps, is_verbose)
@@ -194,7 +209,12 @@ class EquilibriumRunner(BaseRunner):
         self._sample_period = sample_period
         self._window = window
         self._max_slope = max_slope
-    
+
+    def clone(self):
+        return EquilibriumRunner(self._ising, self._steps, self._is_verbose,
+                                 self._burn_in, self._sample_period,
+                                 self._window, self._max_slope)
+
     def _prologue(self):
         self._t = []
         self._M = []
@@ -253,6 +273,11 @@ class DomainSizeRunner(EquilibriumRunner):
                                                burn_in, sample_period,
                                                window, max_slope)
 
+    def clone(self):
+        return DomainSizeRunner(self._ising, self._steps, self._is_verbose,
+                                self._burn_in, self._sample_period,
+                                self._window, self._max_slope)
+
     def _prologue(self):
         super(DomainSizeRunner, self)._prologue()
         self._domains = []
@@ -263,7 +288,7 @@ class DomainSizeRunner(EquilibriumRunner):
             self._domains.pop(0)
         domains = compute_domain_sizes(self._ising)
         self._domains.append(domains)
-        
+
     def _epilogue(self):
         super(DomainSizeRunner, self)._epilogue()
         sizes = {}
