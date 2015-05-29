@@ -24,3 +24,5 @@ What is it?
 1. `cart_sendrecv_f08.f90': bidirectional "halo exchange" using
     send-receive point-to-point communication, neighbours on 1D Carthesian
     grid, found using shift operation using Fortran 2008 interface.
+1. `torus.f90`: 2D torus topology using a Carthesian communicator and
+    `MPI_Sendrecv' for halo exchange.
