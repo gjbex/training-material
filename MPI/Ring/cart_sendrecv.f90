@@ -15,7 +15,7 @@ program sendrecv
     call MPI_Cart_create(MPI_COMM_WORLD, ndims, dims, periods, reorder, &
                          comm_cart, ierr)
     call MPI_Comm_rank(comm_cart, rank, ierr)
-    call MPI_Cart_shift(comm_cart, 1, 1, left, right, ierr)
+    call MPI_Cart_shift(comm_cart, 0, 1, left, right, ierr)
     send_msg = rank*1.1_dp
     call MPI_Sendrecv(send_msg, 1, MPI_DOUBLE_PRECISION, left, tag, &
                       recv_msg, 1, MPI_DOUBLE_PRECISION, right, tag, &
