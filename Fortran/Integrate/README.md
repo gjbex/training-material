@@ -16,4 +16,6 @@ What is it?
     quadrature (10 points), and a general method for any number of points.
 1. `integrate_test.f90`: main program, one can specify `gauss` or
     `simpson` to pick an algorithm for quadrature.
+1. `gauss_test.f90`: computes quadrature using general Gauss-Legendre
+    method.
 1. `Makefile`
