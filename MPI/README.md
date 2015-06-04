@@ -9,4 +9,7 @@ What is it?
 -----------
 1. `HelloWorld`: most basic MPI program to show initialization, rank, size,
     and finalization.
-1. `Ring`: a few examples of point-to-point communication.
+1. `Pi`: sample of a hybrid MPI/OpenMP code, illustrating use of re-entrant
+    `rand_r` function.
+1. `Ring`: a few examples of point-to-point communication for "halo
+    exchange".
