@@ -27,6 +27,8 @@ What is it?
     declaration.
 1. `quad_test`: illustrates using a function as a procedure argument
 1. `line_test`: extra, more sensible example of internal procedures
+1. `root.f90`: compute root of a function using bisection method,
+    illustrates use of an interface.
 
 How to build?
 -------------

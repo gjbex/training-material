@@ -12,7 +12,7 @@ APPS = time_funcs.exe recursion_test.exe internals_test.exe \
        vectorization_test.exe precision_test.exe \
        array_in_function_test.exe compute_stats_test.exe \
        elemental_test.exe intrinsic_test.exe initialization_test.exe \
-       quad_test.exe line_test.exe
+       quad_test.exe line_test.exe root.exe
 
 all: $(APPS)
 
