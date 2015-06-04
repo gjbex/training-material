@@ -3,3 +3,8 @@
 *.pbs.o*
 *.pbs.e*
 gmon.out
+internals_test
+precision_test
+recursion_test
+vectorization_test
+time_funcs
