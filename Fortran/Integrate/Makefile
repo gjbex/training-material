@@ -1,7 +1,7 @@
-F90 = gfortran
-FFLAGS = -O2 -g
-LDFLAGS =
-LIBS =
+F90 ?= gfortran
+FFLAGS ?= -O2 -g
+LDFLAGS ?=
+LIBS ?=
 
 INT_OBJS = quad_func_interface.o quad_mod.o simpson_mod.o gauss_mod.o \
            integration_test.o
