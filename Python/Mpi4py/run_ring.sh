@@ -1,7 +1,6 @@
 #!/bin/bash
 
-source /apps/leuven/etc/bash.bashrc
-module load openmpi/1.4.3_intel python/2.7.1
+module purge
+module load Python/2.7.6-foss-2014a
 
 mpirun -np 4 ./ring.py
-
