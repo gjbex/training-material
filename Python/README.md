@@ -71,3 +71,4 @@ What is it?
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
     the field
+1. `Vtk`: examples of using the KitWare VTK library.
