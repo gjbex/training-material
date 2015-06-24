@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 
+import os
 import sys
+import numpy as np
+import scipy.stats
+import matplotlib.pyplot as plt
+from domain_counter import compute_domain_sizes
+
 
 class UnknownQuantityError(Exception):
     '''Thrown when a Runner is queried for a non-existing quantiy'''
@@ -107,9 +113,6 @@ class BaseRunner(object):
         return True
 
 
-import numpy as np
-import scipy.stats
-
 class SingleRunner(BaseRunner):
 
     def __init__(self, ising=None, steps=None, file_name=None,
@@ -147,9 +150,6 @@ class SingleRunner(BaseRunner):
         return True
 
 
-import os
-import matplotlib.pyplot as plt
-
 class MovieRunner(BaseRunner):
 
     def __init__(self, ising=None, steps=None, dir_name='Movie',
@@ -173,6 +173,55 @@ class MovieRunner(BaseRunner):
                                     for i in xrange(self._ising.N())])
         plt.imsave(file_name, spins)
         return True
+
+
+class Visualize3DRunner(BaseRunner):
+
+    header = '''<?xml version="1.0" ?>
+<Xdmf Version="2.0">
+  <Domain Name="domain">
+    <Grid GridType="Uniform" Name="mesh">
+      <Topology Dimensions="{N:d} {N:d} {steps:d}"
+                Name="topology" TopologyType="3DCoRectMesh"/>
+      <Geometry GeometryType="ORIGIN_DxDyDz" Name="geometry">
+        <DataItem Dimensions="3" Format="XML">
+          0.0 0.0 0.0
+        </DataItem>
+        <DataItem Dimensions="3" Format="XML">
+          {XY:.1f} {XY:.1f} {Z:.1f}
+        </DataItem>
+      </Geometry>
+      <Attribute Center="Node" Name="temperature">
+        <DataItem Dimensions="{N:d} {N:d} {steps:d}" Format="XML">
+'''
+    footer = '''       </DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>'''
+
+    def __init__(self, ising=None, steps=None, file_name='ising_run.xmdf',
+                 is_verbose=1):
+        super(Visualize3DRunner, self).__init__(ising, steps, is_verbose)
+        self._file_name = open(file_name, 'w')
+
+    def _prologue(self):
+        self._file = open(self._file_name, 'w')
+        self._file.write(Visualize3DRunner.header.format(
+            N=self._ising.N(), steps=self._steps,
+            XY=np.log10(self._ising.N()),
+            Z=np.log10(self._steps))
+        )
+
+    def _post_step(self, t):
+        for i in xrange(self._ising.N()):
+            for j in xrange(self._ising.N()):
+                self._file.write('{0:d}\n'.format(self._ising.s(i, j)))
+        return True
+
+    def _epilogue(self):
+        self._file.write(Visualize3DRunner.footer)
+        self._file.close()
 
 
 class ActivityHeatmapRunner(BaseRunner):
@@ -260,8 +309,6 @@ class EquilibriumRunner(BaseRunner):
             raise NoConvergenceError()
 
 
-from domain_counter import compute_domain_sizes
-
 class DomainSizeRunner(EquilibriumRunner):
     '''
     Collect information no domain size distribution.
@@ -294,10 +341,9 @@ class DomainSizeRunner(EquilibriumRunner):
         sizes = {}
         for domains in self._domains:
             for domain in domains:
-                if not domain in sizes:
+                if domain not in sizes:
                     sizes[domain] = 0.0
                 sizes[domain] += 1.0
         for size in sizes:
             sizes[size] /= len(self._domains)
         self._quantities['domains'] = sizes
-
