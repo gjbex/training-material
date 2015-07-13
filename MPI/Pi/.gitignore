@@ -1,1 +1,3 @@
 *.exe
+*.pbs.o*
+*.pbs.e*
