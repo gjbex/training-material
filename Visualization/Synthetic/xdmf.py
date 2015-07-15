@@ -2,7 +2,7 @@
 '''XDMF generation for syntehtic data generator'''
 
 from xml.dom.minidom import Document
-import sys
+
 
 class Xdmf(object):
     '''Class representing an XDMF data descriptor builder'''
@@ -44,10 +44,11 @@ class Xdmf(object):
         item.setAttribute('Precision', '8')
         item.setAttribute('Dimensions', '{0:d} 3'.format(self._centers))
         ref = self._doc.createTextNode(
-            '{0}:/particles/centers'.format(self._h5)
+            '{0}:/centers'.format(self._h5)
         )
         item.appendChild(ref)
         geometry.appendChild(item)
+        grid.appendChild(geometry)
         attribute = self._doc.createElement('Attribute')
         attribute.setAttribute('Name', 'center weight')
         attribute.setAttribute('Center', 'Node')
@@ -115,7 +116,7 @@ class Xdmf(object):
         item.appendChild(ref)
         attribute.appendChild(item)
         grid.appendChild(attribute)
-        
+
     def create_field_geometry(self):
         topology = self._doc.createElement('Topology')
         topology.setAttribute('Name', 'field_topology')
@@ -191,6 +192,7 @@ class Xdmf(object):
             )
             item.appendChild(data)
             attribute.appendChild(item)
+
 
 if __name__ == '__main__':
     from argparse import ArgumentParser

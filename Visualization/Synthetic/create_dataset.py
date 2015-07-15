@@ -3,15 +3,17 @@
 import numpy as np
 import tables
 
+
 def compute_centers(h5file, nr_centers=5, avg_dist=100.0):
     '''compute positions of nr_centers of gravity, at an average
        distance avg_dist from the origin'''
-    centers = avg_dist*np.random.randn(nr_centers, 3)    
+    centers = avg_dist*np.random.randn(nr_centers, 3)
     h5file.create_array(h5file.root, 'centers', centers,
                         'center points for distributions')
     return centers
 
-def compute_particles(hrfile, center, nr_particles=10, avg_dist=10.0,
+
+def compute_particles(hrfile, centers, nr_particles=10, avg_dist=10.0,
                       avg_radial_vel=1.0, avg_rand_vel=0.1,
                       min_mass=0.01, max_mass=10.0):
     '''compute nr_particles around the given center of gravity,
@@ -24,14 +26,14 @@ def compute_particles(hrfile, center, nr_particles=10, avg_dist=10.0,
                                     tables.Float64Atom(),
                                     (0, 3), 'particle velocities')
     mass = h5file.create_earray(particles, 'mass', tables.Float64Atom(),
-                                    (0,), 'particle masses')
-    for center in centers:
-        pos = avg_dist*(center + np.random.randn(nr_particles, 3))
-        position.append(pos)
-        vel = (avg_rand_vel*np.random.randn(nr_particles, 3) +
-               avg_radial_vel*(pos - center))
-        velocity.append(vel)
-        mass.append(np.random.uniform(min_mass, max_mass, nr_particles))
+                                (0,), 'particle masses')
+    center = np.sum(centers, axis=0)
+    pos = avg_dist*(center + np.random.randn(nr_particles, 3))
+    position.append(pos)
+    vel = (avg_rand_vel*np.random.randn(nr_particles, 3) +
+           avg_radial_vel*(pos - center))
+    velocity.append(vel)
+    mass.append(np.random.uniform(min_mass, max_mass, nr_particles))
     h5file.flush()
 
 
@@ -49,6 +51,7 @@ def compute_grid(h5file, group='grid', extent=750.0, points=1000,
         h5file.flush()
     return x, y, z
 
+
 def compute_scalar_field(h5file, centers, xs, ys, zs, max_field=5000.0,
                          array='scalar'):
     '''compute scalar field, that decreases linearly with the
@@ -64,6 +67,7 @@ def compute_scalar_field(h5file, centers, xs, ys, zs, max_field=5000.0,
                                              (Z - center[2])**2 + 1.0)
         field.append(field_slice)
     h5file.flush()
+
 
 def compute_vector_field(h5file, centers, xs, ys, zs, max_field=50.0,
                          group='vector'):
@@ -86,9 +90,10 @@ def compute_vector_field(h5file, centers, xs, ys, zs, max_field=50.0,
             comp.append(field_slice)
         h5file.flush()
 
+
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    import os.path, sys
+    import os.path
     from xdmf import Xdmf
     arg_parser = ArgumentParser(description='data generator')
     arg_parser.add_argument('--centers', type=int, default=5,
@@ -152,14 +157,30 @@ if __name__ == '__main__':
     xdmf = Xdmf(options.centers, options.particles, options.points,
                 options.file)
     xdmf.create_centers()
-    if options.particle_data:
-        xdmf.create_particles()
-    if options.scalar_field_data or options.vector_field_data:
-        xdmf.create_field_geometry()
-    if options.scalar_field_data:
-        xdmf.create_scalar_field()
-    if options.vector_field_data:
-        xdmf.create_vector_field()
     base_name, _ = os.path.splitext(options.file)
-    xdmf_file_name = base_name + '.xdmf'
+    xdmf_file_name = base_name + '_centers.xdmf'
     xdmf.to_xml(xdmf_file_name)
+    xdmf.to_xml(xdmf_file_name)
+    if options.particle_data:
+        xdmf = Xdmf(options.centers, options.particles, options.points,
+                    options.file)
+        xdmf.create_particles()
+        base_name, _ = os.path.splitext(options.file)
+        xdmf_file_name = base_name + '_particles.xdmf'
+        xdmf.to_xml(xdmf_file_name)
+    if options.scalar_field_data:
+        xdmf = Xdmf(options.centers, options.particles, options.points,
+                    options.file)
+        xdmf.create_field_geometry()
+        xdmf.create_scalar_field()
+        base_name, _ = os.path.splitext(options.file)
+        xdmf_file_name = base_name + '_scalar_field.xdmf'
+        xdmf.to_xml(xdmf_file_name)
+    if options.vector_field_data:
+        xdmf = Xdmf(options.centers, options.particles, options.points,
+                    options.file)
+        xdmf.create_field_geometry()
+        xdmf.create_vector_field()
+        base_name, _ = os.path.splitext(options.file)
+        xdmf_file_name = base_name + '_vector_field.xdmf'
+        xdmf.to_xml(xdmf_file_name)
