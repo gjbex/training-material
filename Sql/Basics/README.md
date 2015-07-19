@@ -150,7 +150,7 @@ mysql> .read make_find_friendships.sql
 To find friends of friends, one has to use a recursive query.  Note that
 this can only be done in recent versions of SQLite.  The query in
 `friends_of_friends.sql` will return all friends of the person with
-`person_id = 3`, as well as all their friends, and so on.
+liat name Fransen, as well as all their friends, and so on.
 
 ```
 mysql> .read friends_of_friends.sql

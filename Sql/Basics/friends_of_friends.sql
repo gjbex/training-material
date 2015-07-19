@@ -1,6 +1,6 @@
 WITH RECURSIVE
     all_friends(person_id) AS (
-        VALUES(2)
+        SELECT person_id FROM persons WHERE last_name = 'Fransen'
         UNION
         SELECT friends.friend_id FROM friends, all_friends
             WHERE friends.person_id = all_friends.person_id)
