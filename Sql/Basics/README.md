@@ -15,7 +15,7 @@ accessed later.
 
 What is it?
 -----------
-1. Creating tables means defining columns, their data types, and
+Creating tables means defining columns, their data types, and
     relations between them.  The relevant SQL statements are in
     `create_tables.sql` that illustrates the `CREATE TABLE` statement:
     ```
@@ -33,7 +33,7 @@ What is it?
     ```
     mysql> .schema persons
     ```
-1. Right now, the tables are empty, but they can be populated using the
+Right now, the tables are empty, but they can be populated using the
     `INSERT INTO` command, as illustrated in `insert_data.sql`.  Executing
     it in SQLite:
     ```
@@ -43,17 +43,17 @@ What is it?
     ```
     sqlite> SELECT * FROM persons;
     ```
-1. To see all cities in the database, a `SELECT` statement can be executed:
+To see all cities in the database, a `SELECT` statement can be executed:
     ```
     sqlite> .read  distinct_cities.sql
     ```
-1. To find out who's actually living in London, the information in both
+To find out who's actually living in London, the information in both
     tables `persons` and `addresses` has to be combined using an
     `INNER JOIN`:
     ```
     sqlite> .read  select_london_people.sql
     ```
-1. Illustrating joins in general, `inner_join.sql` and `left_join.sql`
+Illustrating joins in general, `inner_join.sql` and `left_join.sql`
     can be used:
     ```
     sqlite> .read  inner_join.sql
@@ -61,7 +61,7 @@ What is it?
     ```
     sqlite> .read  left_join.sql
     ```
-1. It is of course possible to modify table defintions, `add_age.sql`
+It is of course possible to modify table defintions, `add_age.sql`
     illustrates this by adding a column `age` to the `persons` table
     using `ALTER TABLE`:
     ```
@@ -74,12 +74,12 @@ What is it?
     ```
     sqlite> SELECT * FROM persons LIMIT 2;
     ```
-1. Computing trivial statistics is trivial, e.g., the average age of
+Computing trivial statistics is trivial, e.g., the average age of
     people in the `persons` table can be done using the `AVG` function:
     ```
     mysql> .read average_age.sql
     ```
-1. Making friends is easy as well, we create a table `friends` that
+Making friends is easy as well, we create a table `friends` that
     has a `person_id` and a `friend_id` column that represents a
     friendship relation.  Both are foreign keys referencing `person_id`
     in the `persons` table.
@@ -88,7 +88,8 @@ What is it?
     ```
     Note the `UNIQUE` constraint that ensures that people are only friends
     once.
-1. Finding friends is now a maater of a join between three tables, or
+
+Finding friends is now a maater of a join between three tables, or
     rather, two, but the `persons` table is used twice:
     ```
     mysql> .read make_find_friendships.sql
