@@ -1,4 +1,4 @@
-MPI
+Mpi
 ===
 
 Work in progress, for now basic examples of using the Message Passing
