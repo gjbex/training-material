@@ -135,11 +135,23 @@ Note the `UNIQUE` constraint that ensures that people are only friends
 once.
 
 
-### More joings
+### More joins
 
 Finding friends is now a maater of a join between three tables, or
 rather, two, but the `persons` table is used twice:
 
 ```
 mysql> .read make_find_friendships.sql
+```
+
+
+### Transitive closure
+
+To find friends of friends, one has to use a recursive query.  Note that
+this can only be done in recent versions of SQLite.  The query in
+`friends_of_friends.sql` will return all friends of the person with
+`person_id = 3`, as well as all their friends, and so on.
+
+```
+mysql> .read friends_of_friends.sql
 ```
