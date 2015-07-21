@@ -116,7 +116,7 @@ Computing trivial statistics is trivial, e.g., the average age of
 people in the `persons` table can be done using the `AVG` function:
 
 ```
-mysql> .read average_age.sql
+sqlite> .read average_age.sql
 ```
 
 
@@ -128,7 +128,7 @@ friendship relation.  Both are foreign keys referencing `person_id`
 in the `persons` table.
 
 ```
-mysql> .read make_friendships.sql
+sqlite> .read make_friendships.sql
 ```
 
 Note the `UNIQUE` constraint that ensures that people are only friends
@@ -141,7 +141,7 @@ Finding friends is now a maater of a join between three tables, or
 rather, two, but the `persons` table is used twice:
 
 ```
-mysql> .read make_find_friendships.sql
+sqlite> .read make_find_friendships.sql
 ```
 
 
@@ -153,5 +153,24 @@ this can only be done in recent versions of SQLite.  The query in
 liat name Fransen, as well as all their friends, and so on.
 
 ```
-mysql> .read friends_of_friends.sql
+sqlite> .read friends_of_friends.sql
+```
+
+
+### Grouping
+
+To count how many addresses we have in the `addresses` table for each
+city, a `GROUP BY` can be used:
+
+```
+sqlite> .read count_address_by_city.sql
+```
+
+Results are shown ordered by count, descending.
+
+Similarly, to count the persons in the `persons` table per city, we use
+an `INNER JOIN` and a `GROUP BY`:
+
+```
+sqlite> .read how_many_person_per_city.sql~
 ```
