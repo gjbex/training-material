@@ -48,6 +48,7 @@ What is it?
     from Python using `f2py`, C code by using `ctype`, and C/C++ code
     using SWIG.
 1. `Joblib`: illustrates the use of this library for easy task parallelism
+1. `Jupyter`: A few notebooks to illustrate the Jupyter notebook GUI.
 1. `Logging`: illustration of Python's logging facilities.
 1. `Matplotlib`: a few illustrations of how to use the `pyplot` module.
 1. `Matrices`: a few timings of matrix-matrix multiplications using
@@ -62,6 +63,8 @@ What is it?
     library.
 1. `Numpy`: a few illustratios of using numpy, scipy, and matplotlib
     (linear regression, optimization, solving ODEs, FFT).
+1. `Pandas`: R dataframe-like data structures for Python, contains a
+    Jupyter notebook to illustrate using pandas interactively.
 1. `PhraseIndexer`: parses a text file to find the line number on which a
     given eet of phrases occurs.
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
