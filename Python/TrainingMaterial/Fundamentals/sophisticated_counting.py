@@ -2,12 +2,13 @@
 
 import sys
 
+
 def main():
     sys.stdin.readline()
     threshold = 1.0e-7
     categories = {
         'negative': lambda x: x < -threshold,
-        'zero':     lambda x: -threshold <= x and x <= threshold,
+        'zero': lambda x: -threshold <= x and x <= threshold,
         'positive': lambda x: threshold < x,
     }
     counter = {}
@@ -20,8 +21,7 @@ def main():
                 counter[name] += 1
                 break
     for name, value in counter.items():
-        print '{0}: {1}'.format(name, value)
+        print('{0}: {1}'.format(name, value))
 
 if __name__ == '__main__':
     main()
-

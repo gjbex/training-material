@@ -2,6 +2,7 @@
 
 import sys
 
+
 def validate(case_nr, dim_nr, temp):
     if dim_nr == 3 and temp < 0.0:
         sys.stderr.write('# error in case {0}\n'.format(case_nr))
@@ -9,11 +10,13 @@ def validate(case_nr, dim_nr, temp):
     else:
         return True
 
+
 def parse_line(line):
     '''Split a line into its fields, convert to the appropriate types,
        and return as a tuple.'''
     data = line.rstrip('\r\n').split()
     return (int(data[0]), int(data[1]), float(data[2]))
+
 
 def main():
     sys.stdin.readline()
@@ -23,4 +26,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

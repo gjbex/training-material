@@ -2,14 +2,15 @@
 
 import sys
 
+
 def main():
     try:
         file_name = sys.argv[1]
         in_file = open(file_name)
         with in_file:
             for line in in_file:
-                print '|{0}|'.format(line.rstrip('\r\n'))
-    except IndexError as e:
+                print('|{0}|'.format(line.rstrip('\r\n')))
+    except IndexError:
         sys.stderr.write('### error: no input file specified\n')
         return 1
     except IOError as e:
@@ -21,4 +22,3 @@ def main():
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

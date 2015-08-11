@@ -2,12 +2,14 @@
 
 import math
 
+
 def is_prime(n):
-    for i in xrange(2, int(math.sqrt(n)) + 1):
+    for i in range(2, int(math.sqrt(n)) + 1):
         if n % i == 0:
             return False
     return True
-    
+
+
 def next_prime():
     n = 3
     while True:
@@ -15,10 +17,10 @@ def next_prime():
             yield n
         n += 1
 
+
 def main():
     for n in next_prime():
-        print n
+        print(n)
 
 if __name__ == '__main__':
     main()
-
