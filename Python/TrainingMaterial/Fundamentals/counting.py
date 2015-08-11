@@ -3,6 +3,7 @@
 import sys
 import data_parsing
 
+
 def main():
     sys.stdin.readline()
     threshold = 1.0e-7
@@ -14,10 +15,9 @@ def main():
         elif value > threshold:
             counter['positive'] += 1
         else:
-            counter['zero'] += 1    
+            counter['zero'] += 1
     for key, value in counter.items():
-        print '{0}: {1}'.format(key, value)
+        print('{0}: {1}'.format(key, value))
 
 if __name__ == '__main__':
     main()
-

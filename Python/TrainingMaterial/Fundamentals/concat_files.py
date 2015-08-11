@@ -4,11 +4,12 @@ from argparse import ArgumentParser, FileType
 from glob import glob
 import sys
 
+
 def main():
     arg_parser = ArgumentParser(description='concatenate data files')
     arg_parser.add_argument('-o', dest='output_file', type=FileType('w'),
-                            help='output file')
-    arg_parser.add_argument('-p', dest='pattern',
+                            required=True, help='output file')
+    arg_parser.add_argument('-p', dest='pattern', required=True,
                             help='file glob pattern')
     options = arg_parser.parse_args()
     is_header_printed = False
@@ -26,4 +27,3 @@ def main():
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

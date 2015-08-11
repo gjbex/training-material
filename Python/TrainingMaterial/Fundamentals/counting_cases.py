@@ -2,6 +2,7 @@
 
 import sys
 
+
 def main():
     sys.stdin.readline()
     counter = {}
@@ -10,9 +11,8 @@ def main():
         if value not in counter:
             counter[value] = 0
         counter[value] += 1
-    for value, count in counter.items():
-        print '{0}: {1}'.format(value, count)
+    for value, count in list(counter.items()):
+        print('{0}: {1}'.format(value, count))
 
 if __name__ == '__main__':
     main()
-
