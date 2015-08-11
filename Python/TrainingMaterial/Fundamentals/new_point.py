@@ -1,6 +1,7 @@
 from array import array
 import math
 
+
 class Point(object):
 
     _id = 0
@@ -39,7 +40,7 @@ class Point(object):
             return math.fabs(self.y - a*self.x - b) < tol
         else:
             return math.fabs(self.x - p.x) < tol
-        
+
     @staticmethod
     def all_on_line(p, q, *points):
         for r in points:
@@ -50,10 +51,11 @@ class Point(object):
     def __str__(self):
         return '{id}: ({x}, {y})'.format(x=self.x, y=self.y, id=self.id)
 
+
 class PointMass(Point):
 
     def __init__(self, x, y, mass):
-        super(self.__class__, self).__init__(x, y)
+        super().__init__(x, y)
         self._mass = mass
 
     @property
@@ -72,6 +74,4 @@ class PointMass(Point):
         return (x/m, y/m, m)
 
     def __str__(self):
-        return '{0}: {1}'.format(super(self.__class__, self).__str__(), self.mass)
-
-
+        return '{0}: {1}'.format(super().__str__(), self.mass)

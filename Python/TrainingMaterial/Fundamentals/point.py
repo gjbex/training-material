@@ -1,12 +1,13 @@
 import math
 
+
 class Point(object):
 
     _id = 0
 
     def __init__(self, x, y):
-        self._x = x
-        self._y = y
+        self._x = float(x)
+        self._y = float(y)
         self._id = Point._id
         self.__class__._id += 1
 
@@ -36,7 +37,7 @@ class Point(object):
             return math.fabs(self.y - a*self.x - b) < tol
         else:
             return math.fabs(self.x - p.x) < tol
-        
+
     @staticmethod
     def all_on_line(p, q, *points):
         for r in points:
@@ -47,11 +48,12 @@ class Point(object):
     def __str__(self):
         return '{id}: ({x}, {y})'.format(x=self.x, y=self.y, id=self.id)
 
+
 class PointMass(Point):
 
     def __init__(self, x, y, mass):
-        super(PointMass, self).__init__(x, y)
-        self._mass = mass
+        super().__init__(x, y)
+        self._mass = float(mass)
 
     @property
     def mass(self):
@@ -69,5 +71,4 @@ class PointMass(Point):
         return (x/m, y/m, m)
 
     def __str__(self):
-        return '{0}: {1}'.format(super(self.__class__, self).__str__(), self.mass)
-
+        return '{0}: {1}'.format(super().__str__(), self.mass)

@@ -2,21 +2,21 @@
 
 from point import Point, PointMass
 
+
 def main():
     p = Point(3, 4)
     q = Point(-2, 5)
-    print p.x, p.y
-    print str(p), str(q)
-    print p.distance(q)
+    print(p.x, p.y)
+    print(p, q)
+    print(p.distance(q))
     v = Point(9, 9)
     w = Point(10, 10)
-    points = [Point(i, i) for i in xrange(5)]
+    points = [Point(i, i) for i in range(5)]
     if Point.all_on_line(v, w, *points):
-        print 'on a line'
-    print Point.nr_points()
+        print('on a line')
+    print(Point.nr_points())
     p = PointMass(7, -1, 3.0)
-    print str(p)
+    print(p)
 
 if __name__ == '__main__':
     main()
-
