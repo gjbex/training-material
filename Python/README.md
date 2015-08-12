@@ -44,6 +44,8 @@ What is it?
     processing language" training session.
 1. `FiniteStateParser`: illustrates how to parse a file that is structured
     as a regular language.  A `pyparsing` example is also given.
+1. `Fundamentals`: code samples that where used to extract fragments
+    in the part of the presentation on core Python features.
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
     from Python using `f2py`, C code by using `ctype`, and C/C++ code
     using SWIG.
@@ -75,3 +77,6 @@ What is it?
 1. `style.md`: some style tips based on code reviews and observations in
     the field
 1. `Vtk`: examples of using the KitWare VTK library.
+1. `WxPython`: some illustrations of GUI developlement using the Python
+    bindings for Wx.
+1. `XmlGenerator`: code to generate a random XML documents.
