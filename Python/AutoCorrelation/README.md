@@ -26,7 +26,7 @@ What is it?
 How to use?
 -----------
 First generate some sample values, e.g.,
-```[bassh]
+```[bash]
 $ ./process.py --steps 1000 > values.txt
 ```
 Next, copmute the autocorrelation, e.g.,
