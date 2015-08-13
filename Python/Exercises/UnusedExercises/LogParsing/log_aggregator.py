@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 def create_event(event_str):
     event_date, event_info = event_str.split(';')
     event_name, event_type = event_info.split(' ')
@@ -7,10 +8,8 @@ def create_event(event_str):
             event_name, event_type)
 
 if __name__ == '__main__':
-    
     from datetime import datetime
     import sys
-
     events = {}
     aggr = {}
     for line in sys.stdin:
@@ -29,7 +28,7 @@ if __name__ == '__main__':
         else:
             sys.stderr.write('{0} off without on at {1}\n'.format(name,
                                                                   date))
-    for name, date in events.items():
+    for name, date in list(events.items()):
         sys.stderr.write('{0} on without off at {1}\n'.format(name, date))
-    for name, value in aggr.items():
-        print '{0}: {1}'.format(name, value)
+    for name, value in list(aggr.items()):
+        print('{0}: {1}'.format(name, value))

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 def create_event(event_str):
     event_date, event_info = event_str.split(';')
     event_name, event_type = event_info.split(' ')
@@ -7,10 +8,9 @@ def create_event(event_str):
             event_name, event_type)
 
 if __name__ == '__main__':
-    
     from datetime import datetime
-    import logging, sys
-
+    import logging
+    import sys
     logging.basicConfig(filename='error.log', filemode='w',
                         format='%(asctime)s:%(levelname)s:%(message)s')
     events = {}
@@ -32,6 +32,5 @@ if __name__ == '__main__':
             logging.warn('{0} off without on at {1}'.format(name, date))
     for name, date in events.items():
         logging.warn('{0} on without off at {1}'.format(name, date))
-    for name, value in aggr.items():
-        print '{0}: {1}'.format(name, value)
-
+    for name, value in list(aggr.items()):
+        print('{0}: {1}'.format(name, value))
