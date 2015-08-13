@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import os, re, sys
+import re
+import sys
+
 
 class Mapper(object):
 
@@ -40,6 +42,7 @@ class Mapper(object):
                     words.append(word)
         return words
 
+
 def main():
     arg_parser = ArgumentParser(description='convert phone number to'
                                             ' English word, if possible')
@@ -51,11 +54,9 @@ def main():
     for line in sys.stdin:
         phone_number = line.strip()
         words = mapper.map(phone_number)
-        print phone_number, ':', ','.join(words)
+        print(phone_number, ':', ','.join(words))
     return 0
 
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-
-
