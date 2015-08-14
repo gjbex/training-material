@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class UnknownConstantError(Exception):
     pass
 
@@ -24,7 +25,7 @@ class ConstantDb(object):
                               value REAL NOT NULL,
                               unit  TEXT
                           )''')
-        for name, data in constants.iteritems():
+        for name, data in constants.items():
             cursor.execute('''INSERT INTO constants
                                   (name, value, unit) VALUES (?, ?, ?)''',
                            (name, data[0], data[1]))

@@ -18,3 +18,10 @@ What is it?
     defined by `unittest.TestCase`.
 1. `run_test.sh`: shell script that actually runs the test code, and that
     uses discovery to minimize maintenance of test code.
+
+Note
+----
+The unit test that checks the number of entries in the database should
+fail to illustrate the output.  Although there are only three constants
+defined in the database, `pi` was added twice, so the total number of
+rows is 4, not 3.
