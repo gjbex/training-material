@@ -31,3 +31,7 @@ To create the library, use the provided `Makefile`.
    * `stats.py`: computes the descriptive statistics for a 5 and a 3
      element array.
 
+Note
+----
+To run the C test programs, add the current working directory to
+`LD_LIBRARY_PATH` so that the shared library can be loaded succesfully.
