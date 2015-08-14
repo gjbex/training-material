@@ -5,6 +5,7 @@ import scipy as sp
 import matplotlib.pyplot as plt
 import scipy.io.wavfile as wav_io
 
+
 def compute_spectrum(signal, rate):
     n = len(signal)
     k = np.arange(n)
@@ -15,7 +16,6 @@ def compute_spectrum(signal, rate):
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    import sys
     import sound_plot
     arg_parser = ArgumentParser(description='analyse WAV file')
     arg_parser.add_argument('wav_file', help='WAV file to analyse')
