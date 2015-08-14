@@ -13,3 +13,7 @@ What is it?
   entering, and exiting sandwiches a `yield` statement that returns the
   value.
 
+Note
+----
+The exception is raised on purpose to illustrate exception handling by
+a context manager.
