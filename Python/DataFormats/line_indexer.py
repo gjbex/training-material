@@ -2,7 +2,8 @@
 
 if __name__ == '__main__':
     from argparse import ArgumentParser, FileType
-    import csv, sys
+    import csv
+    import sys
     arg_parser = ArgumentParser(description='create a CSV file with start '
                                             'line positions and line '
                                             'lengths for a given file')
@@ -25,9 +26,9 @@ if __name__ == '__main__':
     line_pos = 0
     while c:
         pos += 1
-        if c == '\r':
+        if c == b'\r':
             pass
-        elif c == '\n':
+        elif c == b'\n':
             csv_writer.writerow([line_pos, length])
             length = 0
             line_pos = pos
