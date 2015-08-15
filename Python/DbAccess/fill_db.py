@@ -1,20 +1,24 @@
 #!/usr/bin/env python
 
+from argparse import ArgumentParser
+from datetime import date, timedelta
 import random
+import sqlite3
 import string
+
 
 def generate_city_codes(nr_cities, code_length=4):
     cities = []
-    for city_nr in xrange(nr_cities):
+    for city_nr in range(nr_cities):
         cities.append(''.join([random.choice(string.letters)
-                                   for i in xrange(code_length)]))
+                               for i in range(code_length)]))
     return cities
 
-from datetime import date, timedelta
 
 def convert_date(date_str):
     (year, month, day) = date_str.split('-')
     return date(int(year), int(month), int(day))
+
 
 def date_xrange(start_str, end_str):
     start_date = convert_date(start_str)
@@ -25,17 +29,17 @@ def date_xrange(start_str, end_str):
         yield curr_date
         curr_date += delta
 
+
 def generate_data(nr_cities, start_str, end_str):
     city_codes = generate_city_codes(nr_cities=nr_cities)
     for curr_date in date_xrange(start_str, end_str):
         for city_code in city_codes:
             yield (city_code, curr_date, random.gauss(10.0, 15.0))
 
-from argparse import ArgumentParser
-import sqlite3
 
 def main():
-    arg_parser = ArgumentParser(description='Randomly generate Sqlite database with weather data')
+    arg_parser = ArgumentParser(description='Randomly generate Sqlite '
+                                            'database with weather data')
     arg_parser.add_argument('--nr_cities', action='store', type=int,
                             default=3, help='number of cities')
     arg_parser.add_argument('--start', action='store', default='2012-01-01',
@@ -57,11 +61,10 @@ def main():
                               (city_code, date, temperature)
                               VALUES (?, ?, ?)''',
                        data)
-        print 'inserted {0}, {1}, {2}'.format(data[0], data[1], data[2])
+        print('inserted {0}, {1}, {2}'.format(data[0], data[1], data[2]))
     conn.commit()
     cursor.close()
     conn.close()
 
 if __name__ == '__main__':
     main()
-

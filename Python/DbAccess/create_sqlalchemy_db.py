@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
+
 class City(Base):
     __tablename__ = 'cities'
     city_id = Column(Integer, primary_key=True)
