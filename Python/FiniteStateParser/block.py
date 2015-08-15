@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 '''module that defines the Block class'''
 
+import unittest
+
+
 class Block():
     '''Class representing a data block, a block has a name, a description,
        a data type, and its data'''
@@ -10,13 +13,13 @@ class Block():
         self._name = name
         self._data = []
 
-    def _repr_haeder(self):
+    def _repr_header(self):
         '''return header for __repr__'''
         return 'block {0}:'.format(self.get_name())
-        
+
     def __repr__(self):
         '''create a string representation of the block'''
-        header = self._repr_haeder()
+        header = self._repr_header()
         data = '\n\t'.join([str(item) for item in self._data])
         return '{0}\n\t{1}'.format(header, data)
 
@@ -69,10 +72,10 @@ class TypedBlock(Block):
         '''return the block's type'''
         return self._type
 
-    def _repr_haeder(self):
+    def _repr_header(self):
         return 'block {0}[{1}]:'.format(
             self.get_name(), self.get_type())
-        
+
     def _str_header(self):
         return 'begin {0}[{1}]'.format(
             self.get_name(), self.get_type())
@@ -87,7 +90,7 @@ class TypedBlock(Block):
 
 
 # unit test implementation for Block class
-import unittest
+
 
 class BlockTest(unittest.TestCase):
     '''Tests for the block class'''
@@ -97,7 +100,7 @@ class BlockTest(unittest.TestCase):
         name = 'test name'
         block = Block(name)
         self.assertIsNotNone(block)
-        self.assertEquals(block.get_name(), name)
+        self.assertEqual(block.get_name(), name)
 
     def test_repr(self):
         '''create a Block object, add some data, check its representation'''
@@ -108,7 +111,7 @@ class BlockTest(unittest.TestCase):
         block = Block(name)
         for item in data:
             block.add_data(item)
-        self.assertEquals(repr(block), target)
+        self.assertEqual(repr(block), target)
 
     def test_str(self):
         '''create a Block object, add some data, check its representation'''
@@ -119,7 +122,7 @@ class BlockTest(unittest.TestCase):
         block = Block(name)
         for item in data:
             block.add_data(item)
-        self.assertEquals(str(block), target)
+        self.assertEqual(str(block), target)
 
     def test_data_ordered(self):
         '''create a Block object, add some data, check whether the data
@@ -130,7 +133,7 @@ class BlockTest(unittest.TestCase):
         for item in data:
             block.add_data(item)
         block.sort_data()
-        self.assertEquals(block.get_data(), sorted(data))
+        self.assertEqual(block.get_data(), sorted(data))
 
 
 class UnknownBlockTypeError(Exception):
@@ -140,7 +143,7 @@ class UnknownBlockTypeError(Exception):
         self._type = block_type
 
     def __str__(self):
-        return 'unknown block type "{0}"'.format( self._type)
+        return 'unknown block type "{0}"'.format(self._type)
 
 
 class TypedBlockTest(unittest.TestCase):
@@ -152,8 +155,8 @@ class TypedBlockTest(unittest.TestCase):
         block_type = 'int'
         block = TypedBlock(name, block_type)
         self.assertIsNotNone(block)
-        self.assertEquals(block.get_name(), name)
-        self.assertEquals(block.get_type(), block_type)
+        self.assertEqual(block.get_name(), name)
+        self.assertEqual(block.get_type(), block_type)
 
     def test_typed_constructor_default(self):
         '''create a default typed TypedBlock object, tests its name and type'''
@@ -161,8 +164,8 @@ class TypedBlockTest(unittest.TestCase):
         block_type = 'str'
         block = TypedBlock(name)
         self.assertIsNotNone(block)
-        self.assertEquals(block.get_name(), name)
-        self.assertEquals(block.get_type(), block_type)
+        self.assertEqual(block.get_name(), name)
+        self.assertEqual(block.get_type(), block_type)
 
     def test_typed_constructor_none(self):
         '''create a None typed TypedBlock object, tests its name and type'''
@@ -170,8 +173,8 @@ class TypedBlockTest(unittest.TestCase):
         block_type = 'str'
         block = TypedBlock(name, None)
         self.assertIsNotNone(block)
-        self.assertEquals(block.get_name(), name)
-        self.assertEquals(block.get_type(), block_type)
+        self.assertEqual(block.get_name(), name)
+        self.assertEqual(block.get_type(), block_type)
 
     def test_typed_repr(self):
         '''create a TypedBlock object, add some data, check its
@@ -184,7 +187,7 @@ class TypedBlockTest(unittest.TestCase):
         block = TypedBlock(name, block_type)
         for item in data:
             block.add_data(item)
-        self.assertEquals(repr(block), target)
+        self.assertEqual(repr(block), target)
 
     def test_typed_str(self):
         '''create a TypedBlock object, add some data, check its
@@ -198,7 +201,7 @@ class TypedBlockTest(unittest.TestCase):
         block = TypedBlock(name, block_type)
         for item in data:
             block.add_data(item)
-        self.assertEquals(str(block), target)
+        self.assertEqual(str(block), target)
 
     def test_typed_str_data_ordered(self):
         '''create a TypedBlock object, add some str data, check whether the
@@ -210,7 +213,7 @@ class TypedBlockTest(unittest.TestCase):
         for item in data:
             block.add_data(item)
         block.sort_data()
-        self.assertEquals(block.get_data(), sorted(data))
+        self.assertEqual(block.get_data(), sorted(data))
 
     def test_typed_int_data_ordered(self):
         '''create a TypedBlock object, add some int data, check whether the
@@ -222,7 +225,7 @@ class TypedBlockTest(unittest.TestCase):
         for item in data:
             block.add_data(item)
         block.sort_data()
-        self.assertEquals(block.get_data(), sorted(data))
+        self.assertEqual(block.get_data(), sorted(data))
 
     def test_typed_float_data_ordered(self):
         '''create a TypedBlock object, add some fload data,
@@ -234,7 +237,7 @@ class TypedBlockTest(unittest.TestCase):
         for item in data:
             block.add_data(item)
         block.sort_data()
-        self.assertEquals(block.get_data(), sorted(data))
+        self.assertEqual(block.get_data(), sorted(data))
 
     def test_typed_unknown_type_error(self):
         '''create a TypedBlock of a non-existing type, check
@@ -242,7 +245,7 @@ class TypedBlockTest(unittest.TestCase):
         name = 'block_name'
         block_type = 'bla'
         with self.assertRaises(UnknownBlockTypeError):
-            block = TypedBlock(name, block_type)
+            _ = TypedBlock(name, block_type)
 
     def test_wrong_type_error(self):
         '''create a TypeBlock, and add wrong type of data'''
@@ -256,4 +259,3 @@ class TypedBlockTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
