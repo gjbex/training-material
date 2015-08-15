@@ -37,8 +37,6 @@ What is it?
     and query it, both with Python's sqlite3 module, and SQLAlchemy.
 1. `Decorators`: illustrates how to create decorators to wrap functions.
 1. `Descriptors`: illustrates the descriptor concept in Python
-1. `Exec`: illustrates executing a shell command from a Python script
-    using the `subprocess` module.
 1. `Exercises`: example solutions to exercises to be found in the 
     Powerpoint presentation; this is part of the "Python as a data
     processing language" training session.
@@ -76,6 +74,8 @@ What is it?
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
     the field
+1. `Subprocess`: illustrates executing a shell command from a Python script
+    using the `subprocess` module.
 1. `Vtk`: examples of using the KitWare VTK library.
 1. `WxPython`: some illustrations of GUI developlement using the Python
     bindings for Wx.
