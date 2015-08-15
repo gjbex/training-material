@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
+from argparse import ArgumentParser
+from subprocess import check_output, CalledProcessError, STDOUT
+
+
 class WcInfo:
 
-    def __init__(self, str):
-        data = str.strip().split(' ')
+    def __init__(self, out_str):
+        data = out_str.strip().split(' ')
         self._name = data[3]
         self._lines = int(data[0])
         self._words = int(data[1])
@@ -46,8 +50,6 @@ def compute_stats(wc):
             cpl=float(wc.chars)/wc.lines,
             wpl=float(wc.words)/wc.lines)
 
-from argparse import ArgumentParser
-from subprocess import check_output, CalledProcessError, STDOUT
 
 def main():
     arg_parser = ArgumentParser(description='compute word count stats')
@@ -57,12 +59,11 @@ def main():
     for f in args.files:
         try:
             stats = check_output(['wc', f], stderr=STDOUT)
-            wc_info = WcInfo(stats)
-            print wc_info
-            print compute_stats(wc_info)
-        except CalledProcessError, e:
-            print e
+            wc_info = WcInfo(stats.decode(encoding='utf-8'))
+            print(wc_info)
+            print(compute_stats(wc_info))
+        except CalledProcessError as e:
+            print(e)
 
 if __name__ == '__main__':
     main()
-
