@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser, FileType
-import logging, sys
+import logging
+import sys
 import xml.sax
 from xml.sax.handler import ContentHandler
+
 
 class Block(object):
 
@@ -23,7 +25,7 @@ class Block(object):
 
     def __str__(self):
         return '\n'.join(['{0}: {1}'.format(self.name, x)
-                             for x in self._data])
+                          for x in self._data])
 
 
 class BlocksHandler(ContentHandler):
@@ -93,9 +95,8 @@ def main():
         logging.basicConfig(level=logging.INFO)
     handler = BlocksHandler()
     xml.sax.parse(options.file, handler)
-    print '\n'.join(str(b) for b in handler.get_blocks())
+    print('\n'.join(str(b) for b in handler.get_blocks()))
 
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

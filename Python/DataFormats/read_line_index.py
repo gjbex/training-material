@@ -12,4 +12,4 @@ if __name__ == '__main__':
     options = arg_parser.parse_args()
     options.file.seek(options.pos)
     line = options.file.read(options.len)
-    print '|{0}|'.format(line)
+    print('|{0}|'.format(line))
