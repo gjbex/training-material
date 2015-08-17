@@ -19,10 +19,10 @@ all: log_test \
 	 comp_pi.so array_utils.so
 
 array_utils.so: array_utils.f90
-	f2py -c -m array_utils array_utils.f90
+	f2py3 -c -m array_utils array_utils.f90
 
 comp_pi.so: pi.f90
-	f2py -c -m comp_pi $<
+	f2py3 -c -m comp_pi $<
 
 _stats.so: $(STATS_LIB_OBJS)
 	$(CC) -shared $(CFLAGS) $(CPPFLAGS) -o $@ $(STATS_LIB_OBJS)
