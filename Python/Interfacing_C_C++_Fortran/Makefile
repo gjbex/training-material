@@ -80,7 +80,7 @@ cl_params.h: params.txt
 	weave -l C -d $<
 
 clean:
-	rm -f log_test liblog_map.so \
+	rm -f log_test *.so \
 	      logistic_map_wrap.c log_map.py _log_map.so \
 	      point_wrap.c point.py _point.so \
 	      point_class_wrap.cxx Point.py _Point.so \
