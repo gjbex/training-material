@@ -1,6 +1,7 @@
 from Shape import Shape
 from Colored import Colored
 
+
 class Circle(Shape, Colored):
 
     def __init__(self, x, y, r, color):
@@ -25,4 +26,3 @@ class Circle(Shape, Colored):
     def __str__(self):
         return '{name} ({x}, {y}: {r})'.format(name=self.name, x=self.x,
                                                y=self.y, r=self.r)
-
