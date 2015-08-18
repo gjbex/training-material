@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 
-from math import gamma, ceil, floor
-import sys
+from math import ceil, floor
 import numpy as np
-import scipy as sp
 import scipy.stats
+
 
 def gamma_distr(x, params):
     k = params['k']
     theta = params['theta']
-    return sp.stats.gamma.pdf(x, k, scale=theta)
-    
+    return scipy.stats.gamma.pdf(x, k, scale=theta)
+
+
 def gauss_distr(x, params):
     mu = params['mu']
     sigma = params['sigma']
-    return sp.stats.norm.pdf(x - mu)/sigma
+    return scipy.stats.norm.pdf(x - mu)/sigma
 
 distributions = {
     'gamma': gamma_distr,
@@ -63,12 +63,11 @@ if __name__ == '__main__':
                 plt.plot(x, y, linewidth=2.0, color='black')
             except KeyError as e:
                 param_name = e.args[0]
-                warn_msg = "missing parameter '{0}' for distribution {1}".format(param_name, name)
-                warn(warn_msg)
+                warn_msg = "missing parameter '{0}' for distribution {1}"
+                warn(warn_msg.format(param_name, name))
 
 # if output file given, create plot, otherise, show it
     if options.output:
         plt.savefig(options.output)
     else:
         plt.show()
-
