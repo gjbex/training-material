@@ -38,7 +38,7 @@ colors = [
     'rgb(107,85,250)',
     'rgb(138,119,250)',
     'rgb(164,150,250)',
-    'rgb(200,200,200)', # grey
+    'rgb(200,200,200)',  # grey
     'rgb(250,177,177)',
     'rgb(250,93,93)',
     'rgb(250,0,0)',
@@ -61,5 +61,4 @@ layout = Layout(
 fig = Figure(data=data, layout=layout)
 
 plot_url = py.plot(fig, filename='bubble_colors_test')
-print plot_url
-
+print(plot_url)
