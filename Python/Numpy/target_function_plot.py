@@ -48,4 +48,3 @@ if __name__ == '__main__':
         plt.savefig(options.file)
     else:
         plt.show()
-
