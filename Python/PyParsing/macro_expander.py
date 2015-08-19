@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+from argparse import ArgumentParser, FileType
+import imp
+import sys
+import types
+from pyparsing import Regex, Literal, ZeroOrMore, Group
+
+
 class UndefinedMacroError(Exception):
     '''Class encoding an exception for an undefined macro encountered
        while parsing a text'''
@@ -13,8 +20,6 @@ class UndefinedMacroError(Exception):
         '''method to stringify the exception'''
         return repr(self._msg)
 
-
-from pyparsing import Regex, Literal, ZeroOrMore, Group
 
 class MacroExpander(object):
     '''Macro expansion class, macros are encoded as
@@ -32,6 +37,7 @@ class MacroExpander(object):
         macro_name = Regex(r'\\\w+').setResultsName('macro')
         macro_call = macro_name + params
         text_file = ZeroOrMore(text | macro_call)
+
         def macro_action(toks):
             macro_name = toks['macro']
             params = toks['params']
@@ -50,18 +56,13 @@ class MacroExpander(object):
     def _has_macro(self, macro_name):
         '''internal method to check whether the parser has a
            definition for the given macro name'''
-        return self._macros.has_key(macro_name)
+        return macro_name in self._macros
 
     def expand(self, text):
         '''method to perform the macro expansion on the given text'''
-        results = self._grammar.parseString(text);
+        results = self._grammar.parseString(text)
         return ''.join(results)
 
-
-from argparse import ArgumentParser, FileType
-import imp
-import sys
-import types
 
 def main():
     arg_parser = ArgumentParser(description='macro expansion utility')
@@ -80,7 +81,7 @@ def main():
         for macro_def in macro_module.__dict__.values():
             if isinstance(macro_def, types.FunctionType):
                 expander.add_macro(macro_def.__name__, macro_def)
-        print expander.expand(text)
+        print(expander.expand(text))
     except UndefinedMacroError as error:
         sys.stderr.write('### error: ' + str(error) + '\n')
         sys.exit(2)
@@ -90,4 +91,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

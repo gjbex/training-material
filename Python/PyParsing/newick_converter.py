@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 '''various implementations of tree writers'''
 
+from argparse import ArgumentParser, FileType
 from tree_converter import XmlWriter, IndentedStringWriter, RelationalWriter
+from newick_parser import NewickParser
+
 
 class XmlNewickWriter(XmlWriter):
     '''Writes a given node and its children as XML'''
@@ -19,7 +22,6 @@ class XmlNewickWriter(XmlWriter):
 class IndentedStringNewickWriter(IndentedStringWriter):
     '''Writes a given node and its children as an indented string'''
 
-
     def node_attr(self, node):
         '''formats node attributes, if any'''
         attr = ''
@@ -33,7 +35,7 @@ class IndentedStringNewickWriter(IndentedStringWriter):
 class RelationalNewickWriter(RelationalWriter):
     '''Writes a given node and its children in a form that can be stored in
        a relational table'''
-    
+
     def node_attr(self, node):
         '''formats node attributes, if any'''
         attr = ''
@@ -48,14 +50,9 @@ class RelationalNewickWriter(RelationalWriter):
         return attr
 
 
-from argparse import ArgumentParser, FileType
-import pprint
-
-from newick_parser import NewickParser
-
 def main():
     '''Function that will parse the given file and convert the tree to the
-       format specified''' 
+       format specified'''
     argParser = ArgumentParser(description='tree structured data converter')
     argParser.add_argument('--file', type=FileType('r'), action='store',
                            dest='file', required=True,
@@ -74,8 +71,7 @@ def main():
         writer = RelationalNewickWriter()
     else:
         writer = IndentedStringNewickWriter()
-    print writer.write(tree)
+    print(writer.write(tree))
 
 if __name__ == '__main__':
     main()
-

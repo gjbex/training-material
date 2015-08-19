@@ -1,6 +1,11 @@
+#!/usr/bin/env python
 '''parser for Newick tree-structured data'''
 
 import node
+import node_parser
+from pyparsing import (alphanums, Literal, Word, Group, Forward, Regex,
+                       delimitedList)
+
 
 class NewickNode(node.Node):
     '''Class representing nodes in a Newick encoded tree'''
@@ -9,7 +14,7 @@ class NewickNode(node.Node):
 
     def __init__(self, name=None):
         '''Constructor'''
-        if name == None:
+        if name is None:
             NewickNode._node_id += 1
             name = 'node_{0:03d}'.format(NewickNode._node_id)
         super(NewickNode, self).__init__(name)
@@ -37,9 +42,6 @@ class NewickNode(node.Node):
         self._length = length
 
 
-from pyparsing import (nums, alphanums,
-                       Literal, Word, Group, Forward, Regex,
-                       ZeroOrMore, delimitedList)
 class NewickParser(object):
     '''Class implementing a Newick data parser'''
 
@@ -63,16 +65,18 @@ class NewickParser(object):
         node << (leaf | children)
         tree = lb + siblings + rb + end
         self._grammar = tree
+
         def leaf_action(toks):
             '''create a node, and add label and length'''
             leaf_node = NewickNode()
             leaf_node.label = toks['taxa_name']
             leaf_node.length = float(toks['length'])
             return leaf_node
+
         def children_action(toks):
             '''create a node, add children and length'''
             parent_node = NewickNode()
-            if 'length' in toks.keys():
+            if 'length' in list(toks.keys()):
                 parent_node.length = float(toks['length'])
             for child in toks['children']:
                 parent_node.add_child(child)
@@ -88,12 +92,10 @@ class NewickParser(object):
 
 def main():
     tree_str = '(c1 ((c2) (c3 ((c4) (c5))) (c6)))'
-    parser = NodeParser()
+    parser = node_parser.NodeParser()
     results = parser.parse(tree_str)
-    print results
-    print parser.get_node().to_string()
-
+    print(results)
+    print(parser.node())
 
 if __name__ == '__main__':
     main()
-

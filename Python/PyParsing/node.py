@@ -1,5 +1,6 @@
 '''module that defines a Node class to work with trees'''
 
+
 class Node(object):
     '''class representing a node in a tree'''
 
@@ -39,4 +40,3 @@ class Node(object):
         return 'node "{0}" with {1} children'.format(
             self.name,
             len(self._children))
-
