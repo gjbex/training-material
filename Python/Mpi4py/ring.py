@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import socket, sys
+import socket
 from mpi4py import MPI
 
 if __name__ == '__main__':
@@ -12,7 +12,7 @@ if __name__ == '__main__':
     source = (size + rank - 1) % size
 
     outgoing_msg = 'hello from rank {0} to {1}'.format(rank, dest)
-    print 'sending {0} to {1}'.format(outgoing_msg, dest)
+    print('sending {0} to {1}'.format(outgoing_msg, dest))
     if rank % 2 == 0:
         comm.send(outgoing_msg, dest=dest, tag=11)
         incoming_msg = comm.recv(source=source, tag=11)
@@ -20,6 +20,6 @@ if __name__ == '__main__':
         incoming_msg = comm.recv(source=source, tag=11)
         comm.send(outgoing_msg, dest=dest, tag=11)
 
-    print '{0} received {1} from {2} on {3}'.format(rank, incoming_msg,
+    print('{0} received {1} from {2} on {3}'.format(rank, incoming_msg,
                                                     source,
-                                                    socket.gethostname())
+                                                    socket.gethostname()))
