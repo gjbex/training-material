@@ -76,7 +76,8 @@ What is it?
     the field
 1. `Subprocess`: illustrates executing a shell command from a Python script
     using the `subprocess` module.
-1. `Vtk`: examples of using the KitWare VTK library.
+1. `Vtk`: examples of using the KitWare VTK library (No support for Python
+    3 yet).
 1. `WxPython`: some illustrations of GUI developlement using the Python
     bindings for Wx.
 1. `XmlGenerator`: code to generate a random XML documents.
