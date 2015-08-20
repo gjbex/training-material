@@ -79,5 +79,5 @@ What is it?
 1. `Vtk`: examples of using the KitWare VTK library (No support for Python
     3 yet).
 1. `WxPython`: some illustrations of GUI developlement using the Python
-    bindings for Wx.
+    bindings for Wx (No support for Python 3 as yet).
 1. `XmlGenerator`: code to generate a random XML documents.
