@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
-import datetime, math, random, time
-
+import datetime
+import math
+import random
+import time
 import plotly.plotly as py
 import plotly.tools as tls
-from plotly.graph_objs import Data, Figure, Scatter, Layout
 
 stream_id = tls.get_credentials_file()['stream_ids'][0]
 

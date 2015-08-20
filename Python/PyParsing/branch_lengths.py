@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+from argparse import ArgumentParser, FileType
+from newick_parser import NewickParser
+
+
 def compute_branch_lengths(node, branch_lengths=None, length=0.0):
     if branch_lengths is None:
         branch_lengths = {}
@@ -13,11 +17,10 @@ def compute_branch_lengths(node, branch_lengths=None, length=0.0):
         for child in node.children():
             compute_branch_lengths(child, branch_lengths, length)
 
-from argparse import ArgumentParser, FileType
-from newick_parser import NewickParser
 
 def main():
-    arg_parser = ArgumentParser(description='Determine leaf branch lengths for Newick tree.')
+    arg_parser = ArgumentParser(description='Determine leaf branch '
+                                            'lengths for Newick tree.')
     arg_parser.add_argument('--file', type=FileType('r'), action='store',
                             dest='file', required=True,
                             help='Newick file to parse')
@@ -27,9 +30,8 @@ def main():
     node_parser = NewickParser()
     tree = node_parser.parse(tree_str)
     branch_lengths = compute_branch_lengths(tree)
-    for taxa, length in branch_lengths.items():
-        print '{taxa}: {length}'.format(taxa=taxa, length=length)
-    
+    for taxa, length in list(branch_lengths.items()):
+        print('{taxa}: {length}'.format(taxa=taxa, length=length))
+
 if __name__ == '__main__':
     main()
-

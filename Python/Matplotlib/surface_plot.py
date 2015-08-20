@@ -2,6 +2,7 @@
 
 import numpy as np
 
+
 def f(x, y, x0=0.0, freq=1.0, beta=0.5):
     r = np.sqrt((x - x0)**2 + y**2)
     return np.exp(-beta*r)*np.cos(2.0*np.pi*freq*r)
@@ -44,7 +45,7 @@ if __name__ == '__main__':
     y = np.linspace(options.y_min, options.y_max, options.points)
     xx, yy = np.meshgrid(x, y)
     z = (f(xx, yy, x0=options.x0_1, freq=options.f_1) +
-             f(xx, yy, x0=options.x0_2, freq=options.f_2))
+         f(xx, yy, x0=options.x0_2, freq=options.f_2))
 
 # plot
     figure = plt.figure()
@@ -60,4 +61,3 @@ if __name__ == '__main__':
         plt.savefig(options.file)
     else:
         plt.show()
-

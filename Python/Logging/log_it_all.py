@@ -1,17 +1,22 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import logging, math, os, sys
+import logging
+import math
+import os
+import sys
+
 
 def do_stuff(n):
     if n < 0:
         logging.error('can not do stuff for {0}'.format(n))
         return 1
-    for i in xrange(n):
+    for i in range(n):
         logging.info('doing stuff {0}'.format(str(i)))
-        print 'doing {0}: {1:.4f}'.format(i, math.sqrt(i))
+        print('doing {0}: {1:.4f}'.format(i, math.sqrt(i)))
         logging.info('done stuff {0}'.format(str(i)))
     return 0
+
 
 def main():
     arg_parser = ArgumentParser(description='example for logging facility')
@@ -29,18 +34,17 @@ def main():
         level = logging.INFO
     else:
         level = logging.WARNING
-    if options.log_file:
-        filename = options.log_file
-        exists = os.path.exists(filename)
-    else:
-        filename = None
-        exists = False
     if options.new_log:
         filemode = 'w'
     else:
         filemode = 'a'
-    logging.basicConfig(level=level, filename=filename, filemode=filemode,
-                        format=format_str)
+    if options.log_file:
+        exists = os.path.exists(options.log_file)
+        logging.basicConfig(level=level, filename=options.log_file,
+                            filemode=filemode, format=format_str)
+    else:
+        exists = False
+        logging.basicConfig(level=level, format=format_str)
     if exists:
         logging.warn('overwriting existing log file')
     logging.info('application started')
@@ -52,4 +56,3 @@ def main():
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

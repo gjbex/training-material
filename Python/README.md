@@ -37,13 +37,13 @@ What is it?
     and query it, both with Python's sqlite3 module, and SQLAlchemy.
 1. `Decorators`: illustrates how to create decorators to wrap functions.
 1. `Descriptors`: illustrates the descriptor concept in Python
-1. `Exec`: illustrates executing a shell command from a Python script
-    using the `subprocess` module.
 1. `Exercises`: example solutions to exercises to be found in the 
     Powerpoint presentation; this is part of the "Python as a data
     processing language" training session.
 1. `FiniteStateParser`: illustrates how to parse a file that is structured
     as a regular language.  A `pyparsing` example is also given.
+1. `Fundamentals`: code samples that where used to extract fragments
+    in the part of the presentation on core Python features.
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
     from Python using `f2py`, C code by using `ctype`, and C/C++ code
     using SWIG.
@@ -74,4 +74,10 @@ What is it?
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
     the field
-1. `Vtk`: examples of using the KitWare VTK library.
+1. `Subprocess`: illustrates executing a shell command from a Python script
+    using the `subprocess` module.
+1. `Vtk`: examples of using the KitWare VTK library (No support for Python
+    3 yet).
+1. `WxPython`: some illustrations of GUI developlement using the Python
+    bindings for Wx (No support for Python 3 as yet).
+1. `XmlGenerator`: code to generate a random XML documents.

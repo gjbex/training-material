@@ -18,12 +18,12 @@ def main():
                             default=1,
                             help='number to generate')
     args = arg_parser.parse_args()
-    for i in xrange(args.nr_numbers):
+    for i in range(args.nr_numbers):
         prefix = ''
         if args.index:
             prefix = '{0}\t'.format(i + 1)
         number = random.gauss(args.mu, args.sigma)
-        print '{0}{1}'.format(prefix, number)
+        print('{0}{1}'.format(prefix, number))
 
 if __name__ == '__main__':
     main()

@@ -2,15 +2,16 @@
 
 from argparse import ArgumentParser
 from math import ceil
+import numpy as np
+import matplotlib.pyplot as plt
 
-arg_parser = ArgumentParser(description='plot function and frequency spectrum')
+arg_parser = ArgumentParser(description='plot function and frequency '
+                                        'spectrum')
 arg_parser.add_argument('output', nargs='?', help='name of output file')
 arg_parser.add_argument('--noise', type=float, default=0.05,
                         help='amplitude of normally distirbuted noise')
 options = arg_parser.parse_args()
 
-import numpy as np
-import matplotlib.pyplot as plt
 
 # amplitudes and frequencies of signals
 ampl = np.array([1.0, 0.75, 0.5, 0.25])
@@ -26,7 +27,7 @@ plt.figure(1)
 # compute signal
 t = np.arange(n, dtype=np.float64)
 y = np.zeros(len(t))
-for i in xrange(len(ampl)):
+for i in range(len(ampl)):
     y += ampl[i]*np.cos(2.0*np.pi*freq[i]*t/sample_freq)
 noise_ampl = options.noise
 y += noise_ampl*np.random.randn(len(t))

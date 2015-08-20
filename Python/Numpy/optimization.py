@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 # this function has:
 #  * a minimum at [x == -1.012273212379936, y == 0.0]
 #    (f_xx*f_yy - f_xy**2 > 0 and f_xx > 0)
@@ -14,11 +15,13 @@ def func(X, y=None):
         x = X
     return (x**2 + y**2)**2 - 2*x**2 - 2*y**2 + 0.1*x
 
+
 def func_grad(X):
     x, y = X
     func_x = 4*(x**2 + y**2)*x - 4*x + 0.1
     func_y = 4*(x**2 + y**2)*y - 4*y
     return np.array([func_x, func_y])
+
 
 def func_hess(X):
     x, y = X
@@ -27,6 +30,7 @@ def func_hess(X):
     func_y_x = 8*x*y
     func_y_y = 4*x**2 + 12*y**2 - 4
     return np.array([[func_x_x, func_x_y], [func_y_x, func_y_y]])
+
 
 def check_solution(x):
     from scipy.linalg import det
@@ -43,8 +47,8 @@ def check_solution(x):
         type_str += ': saddle point'
     else:
         type_str += ': inconclusive'
-    print type_str
-    
+    print(type_str)
+
 if __name__ == '__main__':
     from argparse import ArgumentParser
     import time
@@ -71,7 +75,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--check', action='store_true',
                             help='check critical point')
     options = arg_parser.parse_args()
-    
+
 # Powell's method
     x0 = np.array([options.x0, options.y0])
     start = time.time()
@@ -87,11 +91,11 @@ if __name__ == '__main__':
     info_str = '  needed {iter} iterations, {calls} function calls'
     time_str = '  in {sec:.6f} seocnds'
     warn_str = '  result flag = {flag}'
-    print "Powell's method:"
-    print output_str.format(fopt=fopt, x=xopt[0], y=xopt[1])
-    print info_str.format(iter=iter, calls=funcalls)
-    print time_str.format(sec=durationn)
-    print warn_str.format(flag=warnflag)
+    print("Powell's method:")
+    print(output_str.format(fopt=fopt, x=xopt[0], y=xopt[1]))
+    print(info_str.format(iter=iter, calls=funcalls))
+    print(time_str.format(sec=durationn))
+    print(warn_str.format(flag=warnflag))
     if options.check:
         check_solution(xopt)
 
@@ -110,11 +114,11 @@ if __name__ == '__main__':
     info_str = '  needed {calls} function calls, {gradcalls} gradient calls'
     time_str = '  in {sec:.6f} seocnds'
     warn_str = '  result flag = {flag}'
-    print '\nconjugate gradient method'
-    print output_str.format(fopt=fopt, x=xopt[0], y=xopt[1])
-    print info_str.format(calls=funcalls, gradcalls=gradcalls)
-    print time_str.format(sec=durationn)
-    print warn_str.format(flag=warnflag)
+    print('\nconjugate gradient method')
+    print(output_str.format(fopt=fopt, x=xopt[0], y=xopt[1]))
+    print(info_str.format(calls=funcalls, gradcalls=gradcalls))
+    print(time_str.format(sec=durationn))
+    print(warn_str.format(flag=warnflag))
     if options.check:
         check_solution(xopt)
 
@@ -133,11 +137,11 @@ if __name__ == '__main__':
     info_str = '  needed {calls} function calls, {gradcalls} gradient calls'
     time_str = '  in {sec:.6f} seocnds'
     warn_str = '  result flag = {flag}'
-    print '\nBFGS method'
-    print output_str.format(fopt=fopt, x=xopt[0], y=xopt[1])
-    print info_str.format(calls=funcalls, gradcalls=gradcalls)
-    print time_str.format(sec=durationn)
-    print warn_str.format(flag=warnflag)
+    print('\nBFGS method')
+    print(output_str.format(fopt=fopt, x=xopt[0], y=xopt[1]))
+    print(info_str.format(calls=funcalls, gradcalls=gradcalls))
+    print(time_str.format(sec=durationn))
+    print(warn_str.format(flag=warnflag))
     if options.check:
         check_solution(xopt)
 
@@ -159,11 +163,11 @@ if __name__ == '__main__':
                 ', {hesscalls} Hessian calls')
     time_str = '  in {sec:.6f} seocnds'
     warn_str = '  result flag = {flag}'
-    print '\nNewton conjugate gradient method'
-    print output_str.format(fopt=fopt, x=xopt[0], y=xopt[1])
-    print info_str.format(calls=funcalls, gradcalls=gradcalls,
-                          hesscalls=hesscalls)
-    print time_str.format(sec=durationn)
-    print warn_str.format(flag=warnflag)
+    print('\nNewton conjugate gradient method')
+    print(output_str.format(fopt=fopt, x=xopt[0], y=xopt[1]))
+    print(info_str.format(calls=funcalls, gradcalls=gradcalls,
+                          hesscalls=hesscalls))
+    print(time_str.format(sec=durationn))
+    print(warn_str.format(flag=warnflag))
     if options.check:
         check_solution(xopt)

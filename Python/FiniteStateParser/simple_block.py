@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 '''module that defines the Block class'''
 
+import unittest
+
+
 class Block():
     '''Class representing a data block, a block has a name, a description,
        a data type, and its data'''
@@ -41,7 +44,6 @@ class Block():
 
 
 # unit test implementation for Block class
-import unittest
 
 class BlockTest(unittest.TestCase):
     '''Tests for the block class'''
@@ -51,7 +53,7 @@ class BlockTest(unittest.TestCase):
         name = 'test name'
         block = Block(name)
         self.assertIsNotNone(block)
-        self.assertEquals(block.get_name(), name)
+        self.assertEqual(block.get_name(), name)
 
     def test_repr(self):
         '''create a Block object, add some data, check its representation'''
@@ -62,7 +64,7 @@ class BlockTest(unittest.TestCase):
         block = Block(name)
         for item in data:
             block.add_data(item)
-        self.assertEquals(repr(block), target)
+        self.assertEqual(repr(block), target)
 
     def test_str(self):
         '''create a Block object, add some data, check its representation'''
@@ -73,7 +75,7 @@ class BlockTest(unittest.TestCase):
         block = Block(name)
         for item in data:
             block.add_data(item)
-        self.assertEquals(str(block), target)
+        self.assertEqual(str(block), target)
 
     def test_data_ordered(self):
         '''create a Block object, add some data, check whether the data
@@ -84,9 +86,8 @@ class BlockTest(unittest.TestCase):
         for item in data:
             block.add_data(item)
         block.sort_data()
-        self.assertEquals(block.get_data(), sorted(data))
+        self.assertEqual(block.get_data(), sorted(data))
 
 
 if __name__ == '__main__':
     unittest.main()
-

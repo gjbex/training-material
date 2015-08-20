@@ -1,15 +1,17 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import random, sys
+import random
+import sys
 from joblib import Parallel, delayed
 
 nr_hits = 0
 
+
 def try_hits(nr_trials):
     global nr_hits
     my_hits = 0
-    for _ in xrange(nr_trials):
+    for _ in range(nr_trials):
         x = random.random()
         y = random.random()
         if x**2 + y**2 <= 1.0:
@@ -26,8 +28,7 @@ if __name__ == '__main__':
                             help='number of work packets')
     options = arg_parser.parse_args()
     Parallel(n_jobs=-1)(delayed(try_hits)(options.nr_trials)
-                            for i in range(options.nr_packets))
+                        for i in range(options.nr_packets))
     pi = 4.0*float(nr_hits)/(options.nr_trials*options.nr_packets)
-    print '{0:.10f}'.format(pi)
+    print('{0:.10f}'.format(pi))
     sys.exit(0)
-

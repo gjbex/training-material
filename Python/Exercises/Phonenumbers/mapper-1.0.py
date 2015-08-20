@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import os, sys
+import sys
+
 
 class Mapper(object):
 
@@ -58,6 +59,7 @@ class Mapper(object):
                         new_words.append(new_word)
         return new_words
 
+
 def main():
     arg_parser = ArgumentParser(description='convert phone number to'
                                             ' English word, if possible')
@@ -70,7 +72,7 @@ def main():
     words = mapper.map(options.phone_number)
     if len(words) > 0:
         for word in words:
-            print word
+            print(word)
         return 0
     else:
         sys.stderr.write('### warming: no words found\n')
@@ -79,4 +81,3 @@ def main():
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

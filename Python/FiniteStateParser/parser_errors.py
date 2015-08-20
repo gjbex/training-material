@@ -1,6 +1,7 @@
 '''Auxilary classes for exceptions.  Can be called directly with a file
    name as argument'''
 
+
 class ParseError(Exception):
     '''base exception class for parse errors'''
     def __init__(self, parser):
@@ -17,7 +18,6 @@ class ParseError(Exception):
         return self._parser.get_line_nr()
 
 
-
 class NestedBlocksError(ParseError):
     '''exception that indicates that a begin block was found within a
        block'''
@@ -27,10 +27,10 @@ class NestedBlocksError(ParseError):
         self._nested_block_name = parser._match.group(1)
 
     def __str__(self):
-        return "line {0}: block {1} seems to be nested within block {2}".format(
-            self.get_line_nr(), self._current_block_name,
-            self._nested_block_name)
-
+        return ("line {0}: block {1} seems to be nested "
+                "within block {2}".format(self.get_line_nr(),
+                                          self._current_block_name,
+                                          self._nested_block_name))
 
 
 class NonMatchingBlockDelimitersError(ParseError):
@@ -47,7 +47,6 @@ class NonMatchingBlockDelimitersError(ParseError):
             self._end_block_name)
 
 
-
 class DanglingEndBlockError(ParseError):
     '''exception that indicates that an end block is encountered with a
        begin block'''
@@ -56,8 +55,9 @@ class DanglingEndBlockError(ParseError):
         self._end_block_name = parser._match.group(1)
 
     def __str__(self):
-        return 'line {0}: block {1} is closed without previous begin block'.format(
-            self.get_line_nr(), self._end_block_name)
+        return ('line {0}: block {1} is closed without '
+                'previous begin block'.format(self.get_line_nr(),
+                                              self._end_block_name))
 
 
 class NonClosedBlockError(ParseError):
@@ -79,5 +79,4 @@ class UnknownStateError(Exception):
         self._state = state
 
     def __str__(self):
-        return "parser has reached unknown state '{0}'".format( self._state)
-
+        return "parser has reached unknown state '{0}'".format(self._state)

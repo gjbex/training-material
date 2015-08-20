@@ -8,17 +8,20 @@ imgfile_fmt = '{0:s}-{1:04d}.png'
 imgpatt_fmt = '{0:s}-*.png'
 moviefile_fmt = '{0:s}.gif'
 
+
 def create_sigmoid(beta):
     def f(x):
         return np.tanh(4*beta*x)
     return f
-        
+
+
 def find_roots(f, x_low=-5.0, x_high=5.0):
     def f_opt(X):
         return f(X[0]) - X[0]
     r1 = opt.root(f_opt, np.array([x_low]))
     r2 = opt.root(f_opt, np.array([x_high]))
     return np.array([r1.x[0], 0.0, r2.x[0]])
+
 
 def create_plot(beta, i, betas, magnetization, options):
     sigmoid = create_sigmoid(beta)
@@ -51,7 +54,9 @@ def create_plot(beta, i, betas, magnetization, options):
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    import os, subprocess, sys
+    import os
+    import subprocess
+    import sys
 
     arg_parser = ArgumentParser(description='create movie for Ising mean '
                                             'field equation')
@@ -103,8 +108,7 @@ if __name__ == '__main__':
         sys.stderr.write('# error: {0}\n'.format(e.message))
         sys.exit(status)
     if not options.keep_all:
-        for i in xrange(1, total_figures):
+        for i in range(1, total_figures):
             os.remove(imgfile_fmt.format(options.file_base, i))
         if not options.keep_last:
             os.remove(imgfile_fmt.format(options.file_base, total_figures))
-

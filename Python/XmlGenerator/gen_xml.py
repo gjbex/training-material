@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import math, random, string, sys
+import math
+import random
+import string
+import sys
 from xml.dom.minidom import Document
+
 
 class Tags(object):
 
@@ -15,7 +19,7 @@ class Tags(object):
     @property
     def size(self):
         return self._size
-        
+
     def random(self):
         index = random.randint(0, self._size - 1)
         return self._format_str.format(index=index)
@@ -27,9 +31,9 @@ class Texts(object):
         self._size = size
 
     def random(self):
-        return ''.join([random.choice(string.lowercase)
-                            for _ in xrange(random.randint(1, self._size))])
-        
+        return ''.join([random.choice(string.ascii_lowercase)
+                       for _ in range(random.randint(1, self._size))])
+
 
 class Docs(object):
 
@@ -47,7 +51,7 @@ class Docs(object):
     def random(self):
         doc = Document()
         node_list = []
-        for _ in xrange(self._size):
+        for _ in range(self._size):
             tag = self._tags.random()
             element = doc.createElement(tag)
             if node_list:
@@ -62,7 +66,7 @@ class Docs(object):
                 text = doc.createTextNode(text_value)
                 element.appendChild(text)
         return doc
-        
+
 
 def main():
     arg_parser = ArgumentParser('creates XML encoded block data')
@@ -86,10 +90,9 @@ def main():
     texts = Texts(options.max_text_length)
     docs = Docs(options.nr_elements, tags, options.text_prob, texts)
     doc = docs.random()
-    print doc.toprettyxml(indent='  ')
+    print(doc.toprettyxml(indent='  '))
     return 0
 
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

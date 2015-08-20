@@ -2,10 +2,11 @@
 
 import sys
 
+
 class BaseError(Exception):
 
     def __init__(self, position):
-        super(BaseError, self).__init__()
+        super().__init__()
         self._position = position
 
     @property
@@ -19,21 +20,23 @@ class BaseError(Exception):
 class MissingRBError(BaseError):
 
     def __init__(self, position):
-        super(self.__class__, self).__init__(position)
-        self.message = 'missing right bracket for bracket at {0}'.format(position)
+        super().__init__(position)
+        msg = 'missing right bracket for bracket at {0}'
+        self.message = msg.format(position)
 
 
 class MissingLBError(BaseError):
 
     def __init__(self, position):
-        super(self.__class__, self).__init__(position)
-        self.message = 'missing left bracket for bracket at {0}'.format(position)
+        super().__init__(position)
+        msg = 'missing left bracket for bracket at {0}'
+        self.message = msg.format(position)
 
 
 class TrailingCharsError(BaseError):
 
     def __init__(self, position):
-        super(self.__class__, self).__init__(position)
+        super().__init__(position)
         self.message = 'trailing characters at position {0}'.format(position)
 
 
@@ -48,12 +51,14 @@ def check_tree(tree):
                 bracket_positions.pop()
             else:
                 raise MissingLBError(position)
-        if len(bracket_positions) == 0: break
+        if len(bracket_positions) == 0:
+            break
         position += 1
     if len(bracket_positions) == 0 and position < len(tree) - 1:
         raise TrailingCharsError(position + 1)
     elif len(bracket_positions) > 0:
         raise MissingRBError(bracket_positions.pop())
+
 
 def main():
     tree = ''.join([line.strip() for line in sys.stdin.readlines()])
@@ -68,4 +73,3 @@ def main():
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

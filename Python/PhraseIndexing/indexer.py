@@ -2,6 +2,7 @@
 
 import sys
 
+
 class Indexer(object):
     '''An Indexer can parse a text file, using a phrase dictionary, and
        record for each phrase the line number it occurs on in the
@@ -14,7 +15,7 @@ class Indexer(object):
            index, read_length, i.e., the buffer length for file read
            operations, and progress line numbers, i.e., the number of
            lines after which to report indexing progress'''
-        sefl._phrases = None
+        self._phrases = None
         self._window = []
         self._window_size = window_size
         self._line_nr = 0
@@ -24,7 +25,7 @@ class Indexer(object):
     def _check_window(self):
         '''private method to check whether the current window contains
            phrases that have to be indexed, if so, record line numbers'''
-        for i in xrange(len(self._window)):
+        for i in range(len(self._window)):
             phrase = ' '.join(self._window[i:])
             if phrase in self._phrases:
                 self._phrases[phrase].append(self._line_nr)
@@ -34,7 +35,7 @@ class Indexer(object):
            dictionary, write progress information if show_progress is
            True'''
         self._phrases = phrases
-        with open(text_file_name, 'rb') as text_file:
+        with open(text_file_name, 'r', newline='') as text_file:
             word = ''
             buffer = text_file.read(self._read_length)
             while buffer:
@@ -56,7 +57,6 @@ class Indexer(object):
                                 sys.stderr.write(msg.format(self._line_nr))
                 buffer = text_file.read(self._read_length)
         return self._phrases
-
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -94,4 +94,6 @@ if __name__ == '__main__':
 
 # print results
     for phrase in phrases:
-        print '{0}: {1}'.format(phrase, ', '.join([str(x) for x in phrases[phrase]]))
+        print('{0}: {1}'.format(phrase,
+                                ', '.join([str(x)
+                                           for x in phrases[phrase]])))

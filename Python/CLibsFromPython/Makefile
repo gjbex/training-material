@@ -28,4 +28,3 @@ stats_test: stats_main.o $(LIB)
 
 clean:
 	rm -f core *.o $(LIB) $(APPLS)
-

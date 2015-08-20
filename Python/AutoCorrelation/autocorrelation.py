@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
-import itertools, math
+import itertools
+import math
+
 
 def autocorrelation(iterator, max_distance):
     x_hist = [x for x in itertools.islice(iterator, max_distance + 1)]
     x_hist.reverse()
-    prod_sum = [0.0 for _ in xrange(max_distance + 1)]
+    prod_sum = [0.0 for _ in range(max_distance + 1)]
     n = 0
     sum_value = 0.0
     sum2_value = 0.0
@@ -13,10 +15,9 @@ def autocorrelation(iterator, max_distance):
         n += 1
         x_hist.pop()
         x_hist.insert(0, x)
-#        print x_hist
         sum_value += x
         sum2_value += x**2
-        for l in xrange(max_distance + 1):
+        for l in range(max_distance + 1):
             prod_sum[l] += x*x_hist[l]
     assert math.fabs(sum2_value - prod_sum[0]) < 1e-6
     mean = sum_value/n
@@ -24,7 +25,6 @@ def autocorrelation(iterator, max_distance):
     return [(x - mean**2)/(mean_corr[0] - mean**2) for x in mean_corr]
 
 if __name__ == '__main__':
-
     from argparse import ArgumentParser
     import sys
 
@@ -35,8 +35,8 @@ if __name__ == '__main__':
         options = arg_parser.parse_args()
         data = (float(x) for x in sys.stdin)
         corr = autocorrelation(data, options.max_dist)
-        print '\n'.join(['{0}\t{1:.3f}'.format(i, x)
-                             for i, x in enumerate(corr)])
+        print('\n'.join(['{0}\t{1:.3f}'.format(i, x)
+                         for i, x in enumerate(corr)]))
         return 0
 
     status = main()

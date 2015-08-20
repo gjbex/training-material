@@ -3,11 +3,13 @@
 
 import re
 
+
 class ParseError(Exception):
     """Exception thrown when a parse error occurs"""
     def __init__(self, msg):
         Exception.__init__(self)
         self.msg = msg
+
     def __str__(self):
         return repr(self.msg)
 
@@ -24,6 +26,7 @@ block_end_pattern = re.compile(r"\s*end\s+(\w+)")
 current_block = None
 # dictionary to hold the blocks' content
 block_content = {}
+
 
 def parse(file_name):
     """function that takes a file name, and returns a dictionary of blocks,
@@ -77,12 +80,10 @@ def parse(file_name):
 
     def sort_block_data():
         global block_content
-        for key in block_content.keys():
+        for key in list(block_content.keys()):
             block_content[key].sort()
-
 # open file, specified on command line
     block_file = open(file_name, 'r')
-
 # iterate over the lines in the file and process
     for line in block_file:
         line = filter_line(line)
@@ -95,26 +96,23 @@ def parse(file_name):
                 current_block = None
             elif is_in_block():
                 store_data(line)
-
 # close the file
     block_file.close()
-
     sort_block_data()
-
     return block_content
+
 
 def main():
     """main program to be executed when this module is used as a script"""
     import sys
 # check whether at least one command line argument has been passed
     if len(sys.argv) == 1:
-        print "### error: no file specified"
+        print("### error: no file specified")
         exit(1)
     content = parse(sys.argv[1])
-    for block_name in content.keys():
+    for block_name in list(content.keys()):
         for value in content[block_name]:
-            print "%s: '%s'" % (block_name, value)
+            print("%s: '%s'" % (block_name, value))
 
 if __name__ == "__main__":
     main()
-

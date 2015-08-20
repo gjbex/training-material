@@ -5,9 +5,10 @@
      -n <num> : number of data items per block
    output is written to stdout'''
 
+import argparse
 import random
-
 import block
+
 
 class BlockGenerator:
     '''Class that implements a block structured data generator'''
@@ -102,8 +103,6 @@ class TypedBlockGenerator(BlockGenerator):
         return block.TypedBlock(block_name, block_type)
 
 
-import argparse
-
 def main():
     '''function called when the module is called as a script'''
     parser = argparse.ArgumentParser(
@@ -126,9 +125,7 @@ def main():
                                     options.max_nr_items,
                                     options.block_type)
     for data_block in generator.generate():
-        print data_block
-
+        print(data_block)
 
 if __name__ == '__main__':
     main()
-

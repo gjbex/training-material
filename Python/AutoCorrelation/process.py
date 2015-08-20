@@ -3,9 +3,10 @@
 from functions import w
 import random
 
+
 def monte_carlo(w, nr_steps, burn_in=0, skip=1, max_delta=0.01):
     x = random.random()
-    for _ in xrange(burn_in):
+    for _ in range(burn_in):
         delta_x = random.uniform(-max_delta, max_delta)
         x_new = x + delta_x
         while x_new < 0.0 or x_new > 1.0:
@@ -13,7 +14,7 @@ def monte_carlo(w, nr_steps, burn_in=0, skip=1, max_delta=0.01):
             x_new = x + delta_x
         if w(x_new)/w(x) >= random.random():
             x = x_new
-    for step in xrange(nr_steps):
+    for step in range(nr_steps):
         delta_x = random.uniform(-max_delta, max_delta)
         x_new = x + delta_x
         while x_new < 0.0 or x_new > 1.0:
@@ -47,19 +48,18 @@ if __name__ == '__main__':
                                 help='print time step colomn')
         options = arg_parser.parse_args()
         if options.time:
-            print '\n'.join(('{0:d}\t{1:.8f}'.format(t, x) for t, x in
-                                 enumerate(monte_carlo(
-                                             w, options.steps,
-                                             burn_in=options.burn_in,
-                                             skip=options.skip,
-                                             max_delta=options.max_delta))))
+            print('\n'.join(('{0:d}\t{1:.8f}'.format(t, x) for t, x in
+                             enumerate(monte_carlo(
+                                       w, options.steps,
+                                       burn_in=options.burn_in,
+                                       skip=options.skip,
+                                       max_delta=options.max_delta)))))
         else:
-            print '\n'.join(('{0:.8f}'.format(x) for x in
-                                 monte_carlo(w, options.steps,
-                                             burn_in=options.burn_in,
-                                             skip=options.skip,
-                                             max_delta=options.max_delta)))
+            print('\n'.join(('{0:.8f}'.format(x) for x in
+                             monte_carlo(w, options.steps,
+                                         burn_in=options.burn_in,
+                                         skip=options.skip,
+                                         max_delta=options.max_delta))))
 
     status = main()
     sys.exit(status)
-

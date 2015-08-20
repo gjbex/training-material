@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 '''parser for block-structured data using the pyparsing module'''
 
 from pyparsing import (alphas, alphanums, restOfLine,
@@ -5,7 +6,6 @@ from pyparsing import (alphas, alphanums, restOfLine,
                        Optional, ZeroOrMore, OneOrMore,
                        LineStart, LineEnd, NotAny,
                        ParserElement, ParseFatalException)
-
 from block import Block
 
 ParserElement.setDefaultWhitespaceChars(' \t')
@@ -13,9 +13,11 @@ ParserElement.setDefaultWhitespaceChars(' \t')
 current_block = None
 blocks = []
 
+
 def create_block(token):
     global current_block
     current_block = Block(token[0])
+
 
 def finish_block(parsed_str, location, token):
     global current_block, blocks
@@ -23,9 +25,11 @@ def finish_block(parsed_str, location, token):
         blocks.append(current_block)
         current_block = None
     else:
-        message = 'mismatched begin {0}/end {1}'.format(current_block.get_name(),
-                                                        token[0])
-        raise ParseFatalException(parsed_str, loc=location, msg=message)
+        message = 'mismatched begin {0}/end {1}'
+        block_name = current_block.get_name()
+        raise ParseFatalException(parsed_str, loc=location,
+                                  msg=message.format(block_name, token[0]))
+
 
 def handle_data(token):
     global current_block
@@ -41,7 +45,7 @@ block_name = Word(alphas, alphanums + '_')
 begin_block = LineStart() + begin + block_name + Optional(comment) + eol
 end_block = LineStart() + end + block_name + Optional(comment) + eol
 junk = ZeroOrMore(LineStart() + NotAny(begin) + restOfLine + eol).suppress()
-block_def =  begin_block + Group(ZeroOrMore(NotAny(end) + data)) + end_block
+block_def = begin_block + Group(ZeroOrMore(NotAny(end) + data)) + end_block
 block_defs = junk + OneOrMore(block_def + junk)
 
 begin_block.addParseAction(create_block)
@@ -66,4 +70,4 @@ end block_2
 results = block_defs.parseString(test_str)
 
 for data_block in blocks:
-    print data_block
+    print(data_block)

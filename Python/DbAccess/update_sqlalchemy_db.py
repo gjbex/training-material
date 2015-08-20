@@ -2,13 +2,9 @@
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    from datetime import datetime
-    import sys
-
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker
-    from create_sqlalchemy_db import City, Measurement, Base
-
+    from create_sqlalchemy_db import City, Base
     arg_parser = ArgumentParser(description='create tables in database')
     arg_parser.add_argument('db_name', help='name of DB to create')
     options = arg_parser.parse_args()

@@ -4,6 +4,7 @@ import numpy as np
 import scipy.integrate
 from functions import w
 
+
 def cumm_values(iterator, nr_points=10, min_x=0.0, max_x=1.0):
     x_values = np.linspace(min_x, max_x, nr_points, endpoint=True)
     c_values = np.zeros(nr_points)
@@ -14,10 +15,11 @@ def cumm_values(iterator, nr_points=10, min_x=0.0, max_x=1.0):
         c_values[index] += 1.0
     return c_values/n
 
+
 def cumm_function(func, nr_points=10, min_x=0.0, max_x=1.0):
     x_values = np.linspace(min_x, max_x, nr_points, endpoint=True)
     return np.array([scipy.integrate.quad(func, min_x, x)[0]
-                         for x in x_values])
+                     for x in x_values])
 
 if __name__ == '__main__':
 
@@ -42,11 +44,11 @@ if __name__ == '__main__':
         if options.target:
             target = cumm_function(w, nr_points=options.points,
                                    min_x=options.min, max_x=options.max)
-            print '\n'.join(['{0:.2f}\t{1:.3f}\t{2:.3f}'.format(u, v, t)
-                                 for u, v, t in zip(x, cumms, target)])
+            print('\n'.join(['{0:.2f}\t{1:.3f}\t{2:.3f}'.format(u, v, t)
+                             for u, v, t in zip(x, cumms, target)]))
         else:
-            print '\n'.join(['{0:.2f}\t{1:.3f}'.format(u, v)
-                                 for u, v in zip(x, cumms)])
+            print('\n'.join(['{0:.2f}\t{1:.3f}'.format(u, v)
+                             for u, v in zip(x, cumms)]))
         return 0
 
     status = main()

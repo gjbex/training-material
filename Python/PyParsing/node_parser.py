@@ -1,8 +1,9 @@
 '''parser for tree-structured data'''
 
 from pyparsing import (Forward, Word, alphas, alphanums, Literal,
-                       Optional, ZeroOrMore, OneOrMore, Group)
+                       Optional, ZeroOrMore, Group)
 from node import Node
+
 
 class NodeParser:
     '''Class implementing tree structured data parser, data is of the form
@@ -65,4 +66,3 @@ class NodeParser:
         '''Returns the Node object representing the root of the tree that
            was just parsed'''
         return self._current_node
-
