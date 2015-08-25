@@ -1,4 +1,9 @@
+#!/usr/bin/env python
 '''various implementations of tree writers'''
+
+from argparse import ArgumentParser, FileType
+from node_parser import NodeParser
+
 
 class XmlWriter:
     '''Writes a given node and its children as XML'''
@@ -20,6 +25,7 @@ class XmlWriter:
         '''formats node attributes, if any'''
         return ''
 
+
 class IndentedStringWriter:
     '''Writes a given node and its children as an indented string'''
 
@@ -40,10 +46,10 @@ class IndentedStringWriter:
 class RelationalWriter:
     '''Writes a given node and its children in a form that can be stored in
        a relational table'''
-    
+
     def write(self, node):
-        '''compute a string representation suitable for storage in a relational
-           table'''
+        '''compute a string representation suitable for storage in a
+           relational table'''
         current_id = 0
         id_dict = {node: current_id}
         repr = '{0}\t{1}\t{2}'.format(id_dict[node], None, node.name)
@@ -60,24 +66,20 @@ class RelationalWriter:
                 repr += self.node_attr(child) + '\n'
                 queue.append(child)
         return repr
-    
+
     def node_attr(self, node):
         '''formats node attributes, if any'''
         return ''
 
 
-from argparse import ArgumentParser, FileType
-
-from node_parser import NodeParser
-
 def main():
     '''Function that will parse the given file and convert the tree to the
-       format specified''' 
-    arg_parser = ArgumentParser(description='tree structured data converter')
-    arg_parser.add_argument('--file', type=FileType('r'), action='store',
-                            dest='file', help='file to parse')
-    arg_parser.add_argument('--format', type=str, action='store',
-                            default='string', dest='format',
+       format specified'''
+    arg_parser = ArgumentParser(description='tree structured data '
+                                            'converter')
+    arg_parser.add_argument('file', type=FileType('r'),
+                            help='file to parse')
+    arg_parser.add_argument('--format', type=str, default='string',
                             help='format to convert to, default = string')
     options = arg_parser.parse_args()
     tree_str = '\n'.join(options.file.readlines())
@@ -91,8 +93,7 @@ def main():
         writer = RelationalWriter()
     else:
         writer = IndentedStringWriter()
-    print writer.write(tree)
+    print(writer.write(tree))
 
 if __name__ == '__main__':
     main()
-

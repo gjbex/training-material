@@ -3,6 +3,7 @@
 from argparse import ArgumentParser
 from xml.dom.minidom import Document
 
+
 def main():
     arg_parser = ArgumentParser('creates XML encoded block data')
     arg_parser.add_argument('--blocks', type=int, default=3,
@@ -22,8 +23,7 @@ def main():
             text = doc.createTextNode('{0}.{1}'.format(item_nr, block_nr))
             item.appendChild(text)
             block.appendChild(item)
-    print doc.toprettyxml(indent='  ')
+    print(doc.toprettyxml(indent='  '))
 
 if __name__ == '__main__':
     main()
-

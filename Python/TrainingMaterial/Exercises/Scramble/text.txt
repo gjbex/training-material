@@ -1,2 +1,0 @@
-This is a text with a few examples of long words, like for instance
-lexicographic, and also  biochemistry.

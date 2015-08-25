@@ -14,4 +14,4 @@ if __name__ == '__main__':
     exec(source, globals, locals)
     for obj, val in locals.items():
         if type(val) in [int, float, str, bool]:
-            print '{0} = {1}'.format(obj, str(val))
+            print('{0} = {1}'.format(obj, str(val)))

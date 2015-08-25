@@ -21,5 +21,4 @@ layout = Layout(
 fig = Figure(data=data, layout=layout)
 
 plot_url = py.plot(fig, filename='bubblechart_test')
-print plot_url
-
+print(plot_url)

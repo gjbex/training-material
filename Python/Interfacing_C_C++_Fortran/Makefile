@@ -3,9 +3,9 @@ CXX = g++
 CFLAGS = -O2 -fPIC
 CXXFLAGS = -O2 -fPIC
 CPPFLAGS = 
-CPP_PYTHON = -I/usr/include/python2.7
-LDFLAGS = 
-LIBS = -lpython2.7 -lm
+CPP_PYTHON = -I$(HOME)/miniconda/envs/py3k/include/python3.4m/
+LDFLAGS = -L$(HOME)/miniconda/envs/py3k/lib/
+LIBS = -lpython3.4m -lm
 
 OBJS = cl_params.o cl_params_aux.o main.o
 LOGMAP_LIB_OBJS = logistic_map_wrap.o logistic_map.o
@@ -19,10 +19,10 @@ all: log_test \
 	 comp_pi.so array_utils.so
 
 array_utils.so: array_utils.f90
-	f2py -c -m array_utils array_utils.f90
+	f2py3 -c -m array_utils array_utils.f90
 
 comp_pi.so: pi.f90
-	f2py -c -m comp_pi $<
+	f2py3 -c -m comp_pi $<
 
 _stats.so: $(STATS_LIB_OBJS)
 	$(CC) -shared $(CFLAGS) $(CPPFLAGS) -o $@ $(STATS_LIB_OBJS)
@@ -80,7 +80,7 @@ cl_params.h: params.txt
 	weave -l C -d $<
 
 clean:
-	rm -f log_test liblog_map.so cl_params.[ch] cl_params_aux.[ch] \
+	rm -f log_test *.so \
 	      logistic_map_wrap.c log_map.py _log_map.so \
 	      point_wrap.c point.py _point.so \
 	      point_class_wrap.cxx Point.py _Point.so \
@@ -89,3 +89,5 @@ clean:
 	      array_utils.so \
 	      *.o *.pyc core
 
+clean_weave:
+	rm -f cl_params.[ch] cl_params_aux.[ch]

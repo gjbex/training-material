@@ -6,11 +6,12 @@ in a technical sense.
 """
 
 from argparse import ArgumentParser
-import os.path, sys
-
+import os.path
+import sys
 from mpi4py import MPI
 
 terminators = set(['.', '?', '!'])
+
 
 def extract_prefix(file_name, start_pos, end_pos):
     global terminators
@@ -26,9 +27,10 @@ def extract_prefix(file_name, start_pos, end_pos):
                     c = file.read(1)
                     prefix_str += c
                     index += 1
-                    if c  in terminators:
+                    if c in terminators:
                         break
         return (prefix_str, start_pos + index)
+
 
 def extract_suffix(file_name, start_pos, end_pos):
     global terminators
@@ -45,9 +47,11 @@ def extract_suffix(file_name, start_pos, end_pos):
                         break
                     else:
                         suffix_str = c + suffix_str
-                        file.seek(-2, os.SEEK_CUR)
+                        current_pos = file.tell()
+                        file.seek(current_pos - 2)
                         end_pos -= 1
         return (suffix_str, end_pos)
+
 
 def count_sentences(file_name, start_pos, end_pos):
     """Parse a given string, returning the number of sentences, as well
@@ -60,7 +64,7 @@ def count_sentences(file_name, start_pos, end_pos):
         index = start_pos
         while index <= end_pos:
             c = file.read(1)
-            if c  in terminators:
+            if c in terminators:
                 count += 1
             index += 1
         return count
@@ -76,14 +80,15 @@ def main():
     arg_parser.add_argument('file', metavar='FILE', help='file to parse')
     options = arg_parser.parse_args()
     file_size = os.path.getsize(options.file)
-    chunck_size = file_size/size
+    chunck_size = int(file_size/size)
     start_pos = chunck_size*rank
     if rank + 1 < size:
         end_pos = start_pos + chunck_size - 1
     else:
         end_pos = file_size - 1
     if options.is_verbose:
-        sys.stderr.write("rank {0} reading '{1}' from {2} to {3}\n".format(rank, options.file, start_pos, end_pos))
+        msg = "rank {0} reading '{1}' from {2} to {3}\n"
+        sys.stderr.write(msg.format(rank, options.file, start_pos, end_pos))
 
     prefix, new_start_pos = extract_prefix(options.file, start_pos, end_pos)
 # send new_start_pos - 1 to previous, to use as new_end_pos
@@ -93,16 +98,17 @@ def main():
     if rank < size - 1:
         end_pos = comm.recv(source=rank + 1)
     if options.is_verbose:
-        sys.stderr.write("rank {0} reading '{1}' from {2} to {3}\n".format(rank, options.file, new_start_pos, end_pos))
+        msg = "rank {0} reading '{1}' from {2} to {3}\n"
+        sys.stderr.write(msg.format(rank, options.file, new_start_pos,
+                                    end_pos))
     count = count_sentences(options.file, new_start_pos, end_pos)
     if options.is_verbose:
         sys.stderr.write('rank {0} counted {1}\n'.format(rank, count))
     total = comm.reduce(count, op=MPI.SUM, root=0)
     if rank == 0:
-        print 'sentences: {0}'.format(total)
+        print('sentences: {0}'.format(total))
     return 0
 
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

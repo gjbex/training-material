@@ -3,6 +3,7 @@
 import numpy as np
 from scipy.integrate import ode
 
+
 #
 # f[0] = d theta1/dt = omega1
 # f[1] = d theata2/dt = omega2
@@ -23,6 +24,7 @@ def functions(t, y, l1, l2, k):
         -(g/l2)*y[1] - k*(y[1] - y[0])
     ]
 
+
 def jacobian(t, y, l1, l2, k):
     g = 9.81
     return [
@@ -31,6 +33,7 @@ def jacobian(t, y, l1, l2, k):
         [-(g/l1) - k,            k,  0.0,   0.0],
         [k,            -(g/l2) - k,  0.0,   0.0]
     ]
+
 
 def init_integrator(theta0_1, theta0_2, t0=0.0, l1=1.0, l2=1.0, k=0.1):
     integrator = ode(functions, jacobian).set_integrator('dopri5',
@@ -56,13 +59,13 @@ if __name__ == '__main__':
                             help="Hooke's constant")
     arg_parser.add_argument('--t_max', type=float, default=10*2*np.pi,
                             help='maximum time')
-    arg_parser.add_argument('--delta_t', type=float, default=0.01, 
+    arg_parser.add_argument('--delta_t', type=float, default=0.01,
                             help='delta t')
     options = arg_parser.parse_args()
     integrator = init_integrator(options.theta0_1, options.theta0_2, t0=0.0,
                                  l1=options.l1, l2=options.l2, k=options.k)
     while integrator.successful() and integrator.t < options.t_max:
         integrator.integrate(integrator.t + options.delta_t)
-        print '{0:.3f}\t{1:.5f}\t{2:.5f}'.format(integrator.t,
+        print('{0:.3f}\t{1:.5f}\t{2:.5f}'.format(integrator.t,
                                                  integrator.y[0],
-                                                 integrator.y[1])
+                                                 integrator.y[1]))

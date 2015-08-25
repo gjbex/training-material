@@ -6,9 +6,11 @@ in a tehcnical sense.
 """
 
 from argparse import ArgumentParser
-import os.path, sys
+import os.path
+import sys
 
 terminators = set(['.', '?', '!'])
+
 
 def extract_prefix(file_name, start_pos, end_pos):
     global terminators
@@ -24,9 +26,10 @@ def extract_prefix(file_name, start_pos, end_pos):
                     c = file.read(1)
                     prefix_str += c
                     index += 1
-                    if c  in terminators:
+                    if c in terminators:
                         break
         return (prefix_str, start_pos + index)
+
 
 def extract_suffix(file_name, start_pos, end_pos):
     global terminators
@@ -43,9 +46,11 @@ def extract_suffix(file_name, start_pos, end_pos):
                         break
                     else:
                         suffix_str = c + suffix_str
-                        file.seek(-2, os.SEEK_CUR)
+                        current_pos = file.tell()
+                        file.seek(current_pos - 2)
                         end_pos -= 1
         return (suffix_str, end_pos)
+
 
 def count_sentences(file_name, start_pos, end_pos):
     """Parse a given string, returning the number of sentences, as well
@@ -58,10 +63,11 @@ def count_sentences(file_name, start_pos, end_pos):
         index = start_pos
         while index <= end_pos:
             c = file.read(1)
-            if c  in terminators:
+            if c in terminators:
                 count += 1
             index += 1
         return count
+
 
 def main():
     arg_parser = ArgumentParser(description='count sentences in a text file')
@@ -72,18 +78,18 @@ def main():
     start_pos = 0
     end_pos = os.path.getsize(options.file)
     if options.is_verbose:
-        sys.stderr.write("reading '{0}' from {1} to {2}\n".format(options.file, start_pos, end_pos))
+        msg = "reading '{0}' from {1} to {2}\n"
+        sys.stderr.write(msg.format(options.file, start_pos, end_pos))
     prefix, new_start_pos = extract_prefix(options.file, start_pos, end_pos)
     if options.is_verbose:
-        print "prefix: '{0}', start: {1}".format(prefix, new_start_pos)
+        print("prefix: '{0}', start: {1}".format(prefix, new_start_pos))
     suffix, new_end_pos = extract_suffix(options.file, start_pos, end_pos)
     if options.is_verbose:
-        print "suffix: '{0}', end: {1}".format(suffix, new_end_pos)
+        print("suffix: '{0}', end: {1}".format(suffix, new_end_pos))
     count = count_sentences(options.file, new_start_pos, new_end_pos)
-    print "sentences: {0}".format(count)
+    print("sentences: {0}".format(count))
     return 0
 
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

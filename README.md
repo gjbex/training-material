@@ -16,7 +16,7 @@ What is it?
 * `HDF5`: sample code showing how to read/write HDF5 files from C and
     Python.  HDF5 can be used for parallel I/O, C sample code is provided.
     This material is part of a tutorial on  HDF5.
-* `MPI`: illustration of distributed programming using the Message Passing
+* `Mpi`: illustration of distributed programming using the Message Passing
     Interface API.
 * `NetCDF`: sample code showing how to read/write NetCDF files for C,
     Fortran and Python.  This material is prepared in preparation of
@@ -29,6 +29,8 @@ What is it?
     used in a tutorial on using Python for scientific data processing.
 * `R`: some very simple illustrations of how to run R scripts from the
     command line, and to submit as (PBS) jobs
+* `Sql`: sample SQL that covers the basics of querying relational
+    databases
 * `Visualization`: data files, XDMF files and ParaView state files to
     use during a demo of scientific visualization with ParaView.
 

@@ -2,8 +2,8 @@
 
 from argparse import ArgumentParser
 import numpy as np
-import random
 import time
+
 
 def init_matrix(n, value=None):
     if value is None:
@@ -11,6 +11,7 @@ def init_matrix(n, value=None):
     else:
         m = np.fromfunction(lambda i, j: value, (n, n))
     return m
+
 
 def main():
     arg_parser = ArgumentParser(description='matrix multiplication timer')
@@ -21,18 +22,17 @@ def main():
     start_time = time.time()
     a = init_matrix(args.n)
     end_time = time.time()
-    print('initialized a: {0} s'.format(end_time - start_time))
+    print(('initialized a: {0} s'.format(end_time - start_time)))
     print('initializing b...')
     start_time = time.time()
     b = init_matrix(args.n)
     end_time = time.time()
-    print('initialized b: {0} s'.format(end_time - start_time))
+    print(('initialized b: {0} s'.format(end_time - start_time)))
     print('multiplying...')
     start_time = time.time()
     c = np.dot(a, b)
     end_time = time.time()
-    print('multiplied: {0} s'.format(end_time - start_time))
+    print(('multiplied: {0} s'.format(end_time - start_time)))
 
 if __name__ == '__main__':
     main()
-

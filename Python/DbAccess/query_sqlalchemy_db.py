@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 
+
 def convert2date(date_str):
-    year, month, day = map(int, date_str.split('-'))
+    year, month, day = list(map(int, date_str.split('-')))
     return datetime(year, month, day)
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
     from datetime import datetime
     import sys
-
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker
     from create_sqlalchemy_db import City, Measurement, Base
-
     arg_parser = ArgumentParser(description='create tables in database')
     arg_parser.add_argument('db_name', help='name of DB to create')
     arg_parser.add_argument('-list', action='store_true',
@@ -31,7 +30,7 @@ if __name__ == '__main__':
     cities = db_session.query(City).all()
     if options.list:
         for city in cities:
-            print city.name
+            print(city.name)
         sys.exit(0)
     if options.city:
         if options.city not in [city.name for city in cities]:
@@ -46,4 +45,4 @@ if __name__ == '__main__':
                                          Measurement.time <= end_date) \
                                  .all()
         for measurement in measurements:
-            print measurement
+            print(measurement)

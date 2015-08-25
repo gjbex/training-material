@@ -5,6 +5,7 @@ from scipy.integrate import ode
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
+
 class PhaseSpaceAnim(object):
 
     def __init__(self, figure, times, theta, omega, skip):
@@ -48,6 +49,7 @@ def func(t, y, g, l, q, F_d, omega_d, phase_d, anharmonic):
             -(g/l)*y[0] - q*y[1] + F_d*np.sin(omega_d*t + phase_d)
         ]
 
+
 def jacobian(t, y, g, l, q, F_d, omega_d, phase_d, anharmonic):
     if anharmonic:
         return [
@@ -60,13 +62,14 @@ def jacobian(t, y, g, l, q, F_d, omega_d, phase_d, anharmonic):
             [-g/l, -q]
         ]
 
+
 def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
           theta0=0.1, omega0=0.0, params={'g': 9.81, 'l': 9.81,
                                           'q': 0.05, 'F_d': 0.0,
                                           'omega_d': 0.5, 'phase_d': 0.0,
                                           'anharmonic': False},
           atol=1.0e-6, rtol=0.0):
-# select integrator
+    # select integrator
     integrator = ode(func, jac).set_integrator('dopri5', atol=atol,
                                                rtol=rtol)
 # set initial values
@@ -76,8 +79,8 @@ def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
                             params['F_d'], params['omega_d'],
                             params['phase_d'], params['anharmonic'])
     integrator.set_jac_params(params['g'], params['l'], params['q'],
-                            params['F_d'], params['omega_d'],
-                            params['phase_d'], params['anharmonic'])
+                              params['F_d'], params['omega_d'],
+                              params['phase_d'], params['anharmonic'])
 # solve equations
     times = [t0]
     thetas = [theta0]
@@ -94,6 +97,7 @@ def solve(func, jac, t0=0.0, t_max=20.0, delta_t=0.01,
         omegas.append(integrator.y[1])
     return times, thetas, omegas
 
+
 def sample_poincare(times, thetas, omegas, omega_d, prec=1.0e-4):
     p_times = []
     p_thetas = []
@@ -107,6 +111,7 @@ def sample_poincare(times, thetas, omegas, omega_d, prec=1.0e-4):
             p_omegas.append(omega)
     return np.array(p_times), np.array(p_thetas), np.array(p_omegas)
 
+
 def plot_solution(times, thetas, omegas):
     plt.subplot(3, 1, 1)
     plt.plot(times, thetas, ',')
@@ -114,6 +119,7 @@ def plot_solution(times, thetas, omegas):
     plt.plot(times, omegas, ',')
     plt.subplot(3, 1, 3)
     plt.plot(thetas, omegas, ',')
+
 
 def animate_solution(mp4_file, times, thetas, omegas, skip):
     figure = plt.figure()
@@ -186,13 +192,13 @@ if __name__ == '__main__':
         )
     if options.output:
         if options.poincare:
-            for time, theta, omega in zip(p_times, p_thetas, p_omegas): 
-                print '{0:.3f}\t{1:.10f}\t{2:.10f}'.format(time, theta,
-                                                           omega)
+            for time, theta, omega in zip(p_times, p_thetas, p_omegas):
+                print('{0:.3f}\t{1:.10f}\t{2:.10f}'.format(time, theta,
+                                                           omega))
         else:
-            for time, theta, omega in zip(times, thetas, omegas): 
-                print '{0:.3f}\t{1:.10f}\t{2:.10f}'.format(time, theta,
-                                                           omega)
+            for time, theta, omega in zip(times, thetas, omegas):
+                print('{0:.3f}\t{1:.10f}\t{2:.10f}'.format(time, theta,
+                                                           omega))
     if options.plot:
         if options.only:
             plt.plot(p_thetas, p_omegas, '.')

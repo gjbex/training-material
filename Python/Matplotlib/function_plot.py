@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -36,4 +35,3 @@ if options.file:
     plt.savefig(options.file)
 else:
     plt.show()
-

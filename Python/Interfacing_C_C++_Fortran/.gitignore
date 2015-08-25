@@ -1,0 +1,8 @@
+*.so
+*_wrap.c
+*_wrap.cxx
+point.py
+Point.py
+stats.py
+log_map.py
+log_test

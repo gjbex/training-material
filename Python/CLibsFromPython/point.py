@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from ctypes import Structure, cdll, c_double, Structure
+from ctypes import Structure, cdll, c_double
 import os
+
 
 class Point(Structure):
     _fields_ = [
@@ -22,5 +23,5 @@ if __name__ == '__main__':
     p1 = Point(3.0, 4.0)
     p2 = Point(-1.0, 5.0)
     d = distance(p1, p2)
-    print '({0:.1f},{1:.1f}) <-> ({2:.1f},{3:.1f}) = {4:.5f}'.format(p1.x, p1.y, p2.x, p2.y, d)
-
+    str_tmpl = '({0:.1f},{1:.1f}) <-> ({2:.1f},{3:.1f}) = {4:.5f}'
+    print(str_tmpl.format(p1.x, p1.y, p2.x, p2.y, d))

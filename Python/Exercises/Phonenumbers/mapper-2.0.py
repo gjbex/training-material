@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import os, sys
+import sys
+
 
 class Mapper(object):
 
@@ -31,8 +32,10 @@ class Mapper(object):
         for idx, digit in enumerate(phone_number):
             if digit in self._mapping:
                 chars = self._mapping[digit]
-                words = [word for word in words if idx < len(word) and word[idx] in chars]
+                words = [word for word in words if (idx < len(word) and
+                                                    word[idx] in chars)]
         return words
+
 
 def main():
     arg_parser = ArgumentParser(description='convert phone number to'
@@ -45,11 +48,9 @@ def main():
     for line in sys.stdin:
         phone_number = line.strip()
         words = mapper.map(phone_number)
-        print phone_number, ':', ','.join(words)
+        print(phone_number, ':', ','.join(words))
     return 0
 
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-
-

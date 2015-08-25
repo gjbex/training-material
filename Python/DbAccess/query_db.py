@@ -3,6 +3,7 @@
 from argparse import ArgumentParser
 import sqlite3
 
+
 def main():
     arg_parser = ArgumentParser(description='Compute average temperatures')
     arg_parser.add_argument('--start', action='store', default='2012-01-01',
@@ -22,10 +23,9 @@ def main():
                           GROUP BY city_code''',
                    (options.start, options.end))
     for row in cursor:
-        print '{city}\t{tmp}'.format(city=row['city_code'],
-                                     tmp=row['temperature'])
+        print('{city}\t{tmp}'.format(city=row['city_code'],
+                                     tmp=row['temperature']))
     cursor.close()
 
 if __name__ == '__main__':
     main()
-

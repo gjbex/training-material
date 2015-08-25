@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from ctypes import Structure, cdll, c_double, c_int, Structure
+from ctypes import Structure, cdll, c_double, c_int
 import os
+
 
 class Stats(Structure):
     _fields_ = [
@@ -13,6 +14,7 @@ class Stats(Structure):
 
 _stats = None
 
+
 def get_stats(n):
     global _stats
     if _stats is None:
@@ -22,6 +24,7 @@ def get_stats(n):
     _stats.argtypes = [c_double * n, c_int]
     return _stats
 
+
 def compute_stats(*data):
     n = len(data)
     stats = get_stats(n)
@@ -30,11 +33,10 @@ def compute_stats(*data):
     return stats(d, n)
 
 if __name__ == '__main__':
+    str_tmpl = 'mean = {0:f}, stddev = {1:f}, n = {2}'
     s = compute_stats(1.0, 2.5, 2.0, 3.0, 3.5)
-    print 'mean = {0:f}, stddev = {1:f}, n = {2}'.format(s.mean, s.stddev, s.n)
+    print(str_tmpl.format(s.mean, s.stddev, s.n))
     s = compute_stats(1.0, 2.5, 2.0, 3.0, 3.5, -1.0, -3.0)
-    print 'mean = {0:f}, stddev = {1:f}, n = {2}'.format(s.mean, s.stddev, s.n)
+    print(str_tmpl.format(s.mean, s.stddev, s.n))
     s = compute_stats(3.0, 4.0, 5.0)
-    print 'mean = {0:f}, stddev = {1:f}, n = {2}'.format(s.mean, s.stddev, s.n)
-
-
+    print(str_tmpl.format(s.mean, s.stddev, s.n))

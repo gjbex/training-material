@@ -1,13 +1,16 @@
+#!/usr/bin/env python
 '''parser for block-structured data using the pyparsing module'''
 
 from pyparsing import (alphas, alphanums, restOfLine,
-                       Literal, Keyword, Word, CharsNotIn, Group, Combine,
-                       Optional, ZeroOrMore, OneOrMore,
+                       Literal, Keyword, Word, CharsNotIn, Group,
+                       Combine, Optional, ZeroOrMore, OneOrMore,
                        LineStart, LineEnd, NotAny, White,
                        ParserElement, ParseFatalException)
+import unittest
+from block import Block
+
 ParserElement.setDefaultWhitespaceChars(' \t')
 
-from block import Block
 
 class BlockPyParser:
     '''pyparsing based parser class for block-structured data'''
@@ -53,7 +56,8 @@ class BlockPyParser:
         data_line = (LineStart() + white + Optional(data_value) +
                      Optional(comment) + eol)
         block_name = Word(alphas, alphanums + '_')
-        begin_block = LineStart() + begin + block_name + Optional(comment) + eol
+        begin_block = (LineStart() + begin + block_name +
+                       Optional(comment) + eol)
         end_block = LineStart() + end + block_name + Optional(comment) + eol
         junk = ZeroOrMore(LineStart() + white + NotAny(begin) +
                           restOfLine + eol).suppress()
@@ -73,8 +77,6 @@ class BlockPyParser:
         '''return the blocks that were parsed'''
         return self._blocks
 
-
-import unittest
 
 class BlockPyParserTest(unittest.TestCase):
 
@@ -98,10 +100,9 @@ end block_2
         results = parser.parse(test_str)
         blocks = parser.get_blocks()
         self.assertEqual(len(blocks), 2)
-        self.assertEquals(blocks[0].get_data(), ['0.17', '-7.34', '18.9'])
-        self.assertEquals(blocks[1].get_data(), ['17.34', '11.8'])
+        self.assertEqual(blocks[0].get_data(), ['0.17', '-7.34', '18.9'])
+        self.assertEqual(blocks[1].get_data(), ['17.34', '11.8'])
 
 
 if __name__ == '__main__':
     unittest.main()
-

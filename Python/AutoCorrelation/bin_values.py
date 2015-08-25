@@ -4,21 +4,22 @@ from math import floor
 import numpy as np
 import scipy.integrate
 
+
 def bin_values(iterator, nr_bins=10, min_x=0.0, max_x=1.0):
-    bins = [0 for _ in xrange(nr_bins)]
+    bins = [0 for _ in range(nr_bins)]
     n = 0
     for x in iterator:
         n += 1
         index = int(floor(nr_bins*(x - min_x)/(max_x - min_x)))
         bins[index] += 1
-    return [float(x)/n for x in bins]
+    return [x/n for x in bins]
+
 
 def dist(func, x):
     temp = [0.0] + [scipy.integrate.quad(func, 0.0, u)[0] for u in x]
     return [temp[i] - temp[i - 1] for i in range(1, len(temp))]
 
 if __name__ == '__main__':
-
     from argparse import ArgumentParser
     import sys
     from functions import w
@@ -41,11 +42,11 @@ if __name__ == '__main__':
         x = np.linspace(x_min, options.max, options.bins)
         if options.target:
             target = dist(w, x)
-            print '\n'.join(['{0:.2f}\t{1:.3f}\t{2:.3f}'.format(u, v, t)
-                                 for u, v, t in zip(x, bins, target)])
+            print('\n'.join(['{0:.2f}\t{1:.3f}\t{2:.3f}'.format(u, v, t)
+                             for u, v, t in zip(x, bins, target)]))
         else:
-            print '\n'.join(['{0:.2f}\t{1:.3f}'.format(u, v)
-                                 for u, v in zip(x, bins)])
+            print('\n'.join(['{0:.2f}\t{1:.3f}'.format(u, v)
+                             for u, v in zip(x, bins)]))
         return 0
 
     status = main()

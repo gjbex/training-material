@@ -3,11 +3,13 @@
    for untyped and typed data, as well as auxilary classes for
    exceptions.  Can be called directly to perform unit tests'''
 
+import io
 import re
 import sys
-
+import unittest
 import parser_errors as err
 import block
+
 
 class BlockParser:
     '''Parser class to parse file in block format'''
@@ -79,7 +81,7 @@ class BlockParser:
             self._state = new_state
         else:
             raise err.UnknownStateError(new_state)
-        
+
     def _is_begin_block(self, line):
         '''checks whether this is a line indicating the beginning of a
            block, if so, temporarilly store the match object'''
@@ -144,7 +146,7 @@ class BlockParser:
         for line in block_file:
             self._incr_line_nr()
             line = self._preprocess(line)
-            if self._is_in_state('not_in_block'):    
+            if self._is_in_state('not_in_block'):
                 if self._is_begin_block(line):
                     self._init_block()
                     self._set_state('in_block')
@@ -180,7 +182,8 @@ class TypedBlockParser(BlockParser):
     def __init__(self):
         '''constructor for the typed block parser'''
         BlockParser.__init__(self)
-        self._block_begin_pattern = re.compile(r'\s*begin\s+(\w+)(?:\s*\[\s*(\w+)\s*\])?')
+        pattern = r'\s*begin\s+(\w+)(?:\s*\[\s*(\w+)\s*\])?'
+        self._block_begin_pattern = re.compile(pattern)
 
     def _init_block(self):
         '''creates a new typed block'''
@@ -189,18 +192,15 @@ class TypedBlockParser(BlockParser):
         self._match = None
 
 
-import StringIO
-import unittest
-
 class ParserTest(unittest.TestCase):
     '''Tests for the parser class'''
 
     def test_constructor(self):
         '''create a parser, check initial state'''
         parser = BlockParser()
-        self.assertEquals(parser.get_line_nr(), 0)
-        self.assertEquals(parser.get_state(), 'not_in_block')
-        self.assertEquals(parser.get_blocks(), [])
+        self.assertEqual(parser.get_line_nr(), 0)
+        self.assertEqual(parser.get_state(), 'not_in_block')
+        self.assertEqual(parser.get_blocks(), [])
 
     def test_parse_blocks(self):
         '''parse data from two blocks and check'''
@@ -224,18 +224,18 @@ class ParserTest(unittest.TestCase):
             # some final comments
             and some ordinary text.
             '''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = BlockParser()
         blocks = parser.parse(block_file)
-        self.assertEquals(len(blocks), 2)
-        self.assertEquals(blocks[0].get_name(), 'b1')
-        self.assertEquals(blocks[1].get_name(), 'b2')
-        self.assertEquals(len(blocks[0].get_data()), 3)
-        self.assertEquals(len(blocks[1].get_data()), 4)
-        self.assertEquals(blocks[0].get_data(),
-                          ['0.31', '0.21', '0.41'])
-        self.assertEquals(blocks[1].get_data(),
-                          ['0.42', '0.22', '0.12', '0.32'])
+        self.assertEqual(len(blocks), 2)
+        self.assertEqual(blocks[0].get_name(), 'b1')
+        self.assertEqual(blocks[1].get_name(), 'b2')
+        self.assertEqual(len(blocks[0].get_data()), 3)
+        self.assertEqual(len(blocks[1].get_data()), 4)
+        self.assertEqual(blocks[0].get_data(),
+                         ['0.31', '0.21', '0.41'])
+        self.assertEqual(blocks[1].get_data(),
+                         ['0.42', '0.22', '0.12', '0.32'])
 
     def test_processing(self):
         '''parse a block, and test sorting of data'''
@@ -245,14 +245,14 @@ class ParserTest(unittest.TestCase):
                 0.21
                 0.41
             end b1'''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = BlockParser()
         blocks = parser.parse(block_file)
-        map(lambda x: x.sort_data(), blocks)
-        self.assertEquals(len(blocks), 1)
-        self.assertEquals(blocks[0].get_name(), 'b1')
-        self.assertEquals(blocks[0].get_data(),
-                          ['0.21', '0.31', '0.41'])
+        list(map(lambda x: x.sort_data(), blocks))
+        self.assertEqual(len(blocks), 1)
+        self.assertEqual(blocks[0].get_name(), 'b1')
+        self.assertEqual(blocks[0].get_data(),
+                         ['0.21', '0.31', '0.41'])
 
     def test_nested_blocks(self):
         '''parse nested blocks, check for exception'''
@@ -269,7 +269,7 @@ class ParserTest(unittest.TestCase):
                 0.41
             end b1
             '''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = BlockParser()
         with self.assertRaises(err.NestedBlocksError):
             parser.parse(block_file)
@@ -282,7 +282,7 @@ class ParserTest(unittest.TestCase):
                 0.21
             end b2
             '''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = BlockParser()
         with self.assertRaises(err.NonMatchingBlockDelimitersError):
             parser.parse(block_file)
@@ -296,7 +296,7 @@ class ParserTest(unittest.TestCase):
             end b1
             end b2
             '''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = BlockParser()
         with self.assertRaises(err.DanglingEndBlockError):
             parser.parse(block_file)
@@ -308,7 +308,7 @@ class ParserTest(unittest.TestCase):
                 0.31
                 0.21
             '''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = BlockParser()
         with self.assertRaises(err.NonClosedBlockError):
             parser.parse(block_file)
@@ -319,9 +319,9 @@ class TypedParserTest(unittest.TestCase):
     def test_typed_constructor(self):
         '''create a TypedParser, check initial state'''
         parser = TypedBlockParser()
-        self.assertEquals(parser.get_line_nr(), 0)
-        self.assertEquals(parser.get_state(), 'not_in_block')
-        self.assertEquals(parser.get_blocks(), [])
+        self.assertEqual(parser.get_line_nr(), 0)
+        self.assertEqual(parser.get_state(), 'not_in_block')
+        self.assertEqual(parser.get_blocks(), [])
 
     def test_typed_parse_blocks(self):
         '''parse data from two blocks and check'''
@@ -345,20 +345,20 @@ class TypedParserTest(unittest.TestCase):
             # some final comments
             and some ordinary text.
             '''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = TypedBlockParser()
         blocks = parser.parse(block_file)
-        self.assertEquals(len(blocks), 2)
-        self.assertEquals(blocks[0].get_name(), 'b1')
-        self.assertEquals(blocks[0].get_type(), 'float')
-        self.assertEquals(blocks[1].get_name(), 'b2')
-        self.assertEquals(blocks[1].get_type(), 'float')
-        self.assertEquals(len(blocks[0].get_data()), 3)
-        self.assertEquals(len(blocks[1].get_data()), 4)
-        self.assertEquals(blocks[0].get_data(),
-                          [0.31, 0.21, 0.41])
-        self.assertEquals(blocks[1].get_data(),
-                          [0.42, 0.22, 0.12, 0.32])
+        self.assertEqual(len(blocks), 2)
+        self.assertEqual(blocks[0].get_name(), 'b1')
+        self.assertEqual(blocks[0].get_type(), 'float')
+        self.assertEqual(blocks[1].get_name(), 'b2')
+        self.assertEqual(blocks[1].get_type(), 'float')
+        self.assertEqual(len(blocks[0].get_data()), 3)
+        self.assertEqual(len(blocks[1].get_data()), 4)
+        self.assertEqual(blocks[0].get_data(),
+                         [0.31, 0.21, 0.41])
+        self.assertEqual(blocks[1].get_data(),
+                         [0.42, 0.22, 0.12, 0.32])
 
     def test_typed_processing_default_type(self):
         '''parse a block, and test sorting of data'''
@@ -368,14 +368,14 @@ class TypedParserTest(unittest.TestCase):
                 0.21
                 0.41
             end b1'''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = TypedBlockParser()
         blocks = parser.parse(block_file)
-        map(lambda x: x.sort_data(), blocks)
-        self.assertEquals(len(blocks), 1)
-        self.assertEquals(blocks[0].get_name(), 'b1')
-        self.assertEquals(blocks[0].get_data(),
-                          ['0.21', '0.31', '0.41'])
+        list(map(lambda x: x.sort_data(), blocks))
+        self.assertEqual(len(blocks), 1)
+        self.assertEqual(blocks[0].get_name(), 'b1')
+        self.assertEqual(blocks[0].get_data(),
+                         ['0.21', '0.31', '0.41'])
 
     def test_typed_parse_iter_blocks(self):
         '''parse data from two blocks and check'''
@@ -399,17 +399,16 @@ class TypedParserTest(unittest.TestCase):
             # some final comments
             and some ordinary text.
             '''
-        block_file = StringIO.StringIO(data)
+        block_file = io.StringIO(data)
         parser = TypedBlockParser()
         blocks = parser.parse(block_file)
         block_file.seek(0)
         block_nr = 0
         for parsed_block in parser.parse_iter(block_file):
-            self.assertEquals(str(blocks[block_nr]),
-                              str(parsed_block))
+            self.assertEqual(str(blocks[block_nr]),
+                             str(parsed_block))
             block_nr += 1
 
 
 if __name__ == '__main__':
     unittest.main()
-

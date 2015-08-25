@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, time
+import time
 from mpi4py import MPI
 
 if __name__ == '__main__':
@@ -17,6 +17,6 @@ if __name__ == '__main__':
     while True:
         msg = comm.recv(source=source, tag=11)
         msg += ', now at {0}'.format(rank)
-        print msg
+        print(msg, flush=True)
         time.sleep(1)
         comm.send(msg, dest=dest, tag=11)

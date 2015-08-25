@@ -3,6 +3,7 @@
 from math import sqrt
 import sys
 
+
 def main():
     names_str = sys.stdin.readline().rstrip()
     names = [x.strip() for x in names_str.split(',')]
@@ -19,7 +20,7 @@ def main():
         for name, s, s2 in zip(names, sums, sums2):
             mean = s/nr_cols
             stddev = sqrt((s2 - nr_cols*mean**2)/nr_cols)
-            print '{0}: {1:.2f}, {2:.2f}'.format(name, mean, stddev)
+            print('{0}: {1:.2f}, {2:.2f}'.format(name, mean, stddev))
         return 0
     else:
         sys.stderr.write('no data given')
@@ -28,4 +29,3 @@ def main():
 if __name__ == '__main__':
     status = main()
     sys.exit(status)
-

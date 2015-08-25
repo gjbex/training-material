@@ -18,7 +18,7 @@ slope, intercept, r, _, _ = scipy.stats.linregress(data['x'], data['y'])
 result_str = ('slope = {0:.3f}, ' +
               'intercept = {1:.3f}, ' +
               '(R = {0:.3e})').format(slope, intercept, r)
-print result_str
+print(result_str)
 fit = slope*data['x'] + intercept
 plt.plot(data['x'], fit, 'b-')
 
@@ -26,4 +26,3 @@ if options.out:
     plt.savefig(options.out)
 else:
     plt.show()
-
