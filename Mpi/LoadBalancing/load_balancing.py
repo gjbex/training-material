@@ -2,11 +2,11 @@
 
 
 def compute_bounds(size, rank, n, offset):
-    chunk_size = n/size
+    chunk_size = int(n/size)
     rest = n % size
-    lbound = (min(rank, rest)*(chunk_size + 1) +
-              max(0, rank - rest)*chunk_size)
-    ubound = lbound + (chunk_size + 1 if rank < rest else chunk_size)
+    lbound = (min(rank, size - rest)*chunk_size +
+              max(0, rank - (size - rest))*(chunk_size + 1))
+    ubound = lbound + (chunk_size + 1 if rank >= size - rest else chunk_size)
     return lbound + offset, ubound
 
 if __name__ == '__main__':
