@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <mpi.h>
 
+#define MIN(X, Y) ((X) < (Y) ? (X) : (Y))
+#define MAX(X, Y) ((X) > (Y) ? (X) : (Y))
+
 void compute_bounds(int size, int rank, int n, int *lbound, int *rbound);
 
 int main(int argc, char *argv[]) {
@@ -25,7 +28,7 @@ int main(int argc, char *argv[]) {
 
 void compute_bounds(int size, int rank, int n, int *lbound, int *ubound) {
     int chunk_size = n/size, rest = n % size;
-    *lbound = (rank < rest ? rank : rest)*(chunk_size + 1) +
-              (rank - rest > 0 ? rank - rest : 0)*chunk_size;
-    *ubound = *lbound + (rank < rest ? chunk_size + 1 : chunk_size);
+    *lbound = MIN(rank, size - rest)*chunk_size +
+              MAX(0, rank - (size - rest))*(chunk_size + 1);
+    *ubound = *lbound + (rank >= size - rest ? chunk_size + 1 : chunk_size);
 }

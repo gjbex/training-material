@@ -34,10 +34,10 @@ contains
         integer :: chunk_size, rest
         chunk_size = n/size
         rest = mod(n, size)
-        lbound = min(rank, rest)*(chunk_size + 1) + &
-                 max(0, rank - rest)*chunk_size
+        lbound = min(rank, size - rest)*chunk_size + &
+                 max(0, rank - (size - rest))*(chunk_size + 1)
         ubound = lbound + chunk_size
-        if (rank < rest) ubound = ubound + 1
+        if (rank >= size - rest) ubound = ubound + 1
         lbound = lbound + 1
     end subroutine compute_bounds
 
