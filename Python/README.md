@@ -47,6 +47,8 @@ What is it?
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
     from Python using `f2py`, C code by using `ctype`, and C/C++ code
     using SWIG.
+1. `HoloViews`: data visualization library examples, especially in the
+    context of exploration in notebooks.
 1. `Joblib`: illustrates the use of this library for easy task parallelism
 1. `Jupyter`: A few notebooks to illustrate the Jupyter notebook GUI.
 1. `Logging`: illustration of Python's logging facilities.
@@ -70,6 +72,8 @@ What is it?
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
     processing language, exercises for the corresponding training session
     can be found in the `Exercsises` directory.
+1. `ScikitLearn`: examples using the scikit-learn machine learning
+    library.
 1. `SentenceCounter`: scripts to (naively) count sentences in natural
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
