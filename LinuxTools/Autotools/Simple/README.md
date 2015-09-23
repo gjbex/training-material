@@ -1,25 +1,19 @@
-Autotools: trivial example
-==========================
+Simple
+======
 
-This is a trivial example of using autotools for creating build
-infrastructure.
+A very simple example of how to use Gnu Autotools to generate a `configure`
+and make files.
 
-What is it?
------------
-1. `configure.ac`: autoconfig file used to generate the configure script,
-    note that it should list all make files to be created.
-1. `Makefile.am`: automake file that describes the make file to be
-    generated in the root directory, only lists the subdirectory to build
-    in this case.
-1. `src`: source directory with four Fortran files, two main programs, and
-    two modules.
-1. `src/Makefile.am`: automake file to create the make file to actually
-    build the software, lists targets, and the source files they depend on.
-1. `prepare.sh`: shell script to generate configure.
-1. `cleanup.sh`: shell script to remove all autotool artefacts.
-
-How to use?
------------
-1. Generate the configure script: `$ ./prepare.sh`
-1. Run configure: `$ ./configure --prefix=$HOME/tmp/test`
-1. Build and install: `$ make install`
+Contents
+--------
+1. `configure.ac`: sets meta information about the project, options for
+    Automake, and the make files to be generated.
+1. `Makefile.am`: top-level make file, indicates which subdirectories
+    should be processed.
+1. `src`: directory containing the source code, and the `Makefile.am`
+    that describes how to build it.
+1. `prepare.sh`: Bash script to generate the `configure` and make files,
+    this should not be redistributed, since one would typically bundle
+    the result of this for distribution.
+1. `cleanup.sh`: Bash script to remove all autotools artefacts, this is
+    only useful for illustrating how autotools works.
