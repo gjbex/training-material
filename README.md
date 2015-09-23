@@ -16,6 +16,8 @@ What is it?
 * `HDF5`: sample code showing how to read/write HDF5 files from C and
     Python.  HDF5 can be used for parallel I/O, C sample code is provided.
     This material is part of a tutorial on  HDF5.
+* `LinuxTools`: some illustrations of using Linux tools such as the `M4`
+    macro processor, make files and autotools.
 * `Mpi`: illustration of distributed programming using the Message Passing
     Interface API.
 * `NetCDF`: sample code showing how to read/write NetCDF files for C,
