@@ -19,3 +19,5 @@ Contents
 1. `Makefile`: make file to build the code.
 1. `build.sh`: Bash script to drive the make process when building with
     Intel's MKL library (11.2).
+1. `setenv.sh`: file to be sourced, setting up the enivronment to run
+    the executables with Intel's MKL.
