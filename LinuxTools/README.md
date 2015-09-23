@@ -6,4 +6,6 @@ preliminary, and the set of tools and examples will grow over time.
 
 Contents
 --------
+1. `Autotools`: examples of how to use autotools.
 1. `M4`: examples for the `m4` macro processor.
+1. `Make`: examples for the Gnu Make build tool.
