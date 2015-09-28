@@ -1,0 +1,21 @@
+#!/bin/bash -l
+#PBS -l nodes=4:ppn=10
+#PBS -l partition=smp2
+#PBS -l pmem=12gb
+#PBS -l walltime=10:00:00
+#PBS -m ae
+
+if [ -z "${file}" ]
+then
+    echo "no file specified" >&2
+    exit 1
+fi
+echo "File: ${file}" >&2
+
+module purge
+module load intel/2014a
+module load HDF5/1.8.12-intel-2014a-serial
+
+cd $PBS_O_WORKDIR
+
+./svd.exe ${file} matrix >&2
