@@ -8,7 +8,7 @@ module blacs_matrices
     
 contains
 
-    subroutine blacs_setup(my_id, context)
+    subroutine blacs_start(my_id, context)
         use mpi
         implicit none
         integer, intent(out) :: my_id, context
@@ -30,7 +30,8 @@ contains
             call MPI_ABORT(MPI_COMM_WORLD, ierror)
         end if
         call BLACS_GRIDINIT(context, 'R', nr_proc_rows, nr_proc_cols)
-        ! retrieve processor grid dimensions and coordinates for this process
+        ! retrieve processor grid dimensions and coordinates for this
+        ! process
         call BLACS_GRIDINFO(context, nr_proc_rows, nr_proc_cols, &
                             my_proc_row, my_proc_col)
     end subroutine blacs_setup
@@ -137,7 +138,8 @@ contains
         integer, dimension(DLEN_), intent(in) :: matrix_desc
         double precision, dimension(:, :), intent(inout) :: local_matrix
         character(len=1024), intent(in) :: in_file
-        integer :: rows, cols, row_block, col_block, nr_proc_rows, nr_proc_cols, &
+        integer :: rows, cols, row_block, col_block, &
+                   nr_proc_rows, nr_proc_cols, &
                    my_proc_row, my_proc_col, start_row, row_incr, &
                    start_col, col_incr, local_row, local_col, row_size, &
                    buffer_size, j, context, file_pointer, &
@@ -183,22 +185,26 @@ contains
                     pos = 8_LONG*((row + i - 1)*cols + col)
                     call set_file_pos(file_pointer, pos, ierror)
                     if (ierror /= 0) then
-                        print 3002, my_proc_row, my_proc_col, pos, file_pointer
+                        print 3002, my_proc_row, my_proc_col, pos, &
+                                    file_pointer
                         3002 format(1X, 'error seek file in [', &
-                                    I3, ', ', I3, ']', ' at ', I10, ' fp ', I10)
-                        call MPI_ERROR_STRING(ierror, error_str, error_str_len, &
-                                              jerror)
+                                    I3, ', ', I3, ']', ' at ', &
+                                    I10, ' fp ', I10)
+                        call MPI_ERROR_STRING(ierror, error_str, &
+                                              error_str_len, jerror)
                         print *, ierror, trim(error_str)
                         call MPI_ABORT(MPI_COMM_WORLD, ierror)
                     end if
                     call MPI_FILE_READ(file_pointer, buffer, buffer_size, &
                                        MPI_DOUBLE_PRECISION, status, ierror)
                     if (ierror /= 0) then
-                        print 3003, my_proc_row, my_proc_col, pos, buffer_size
+                        print 3003, my_proc_row, my_proc_col, pos, &
+                                    buffer_size
                         3003 format(1X, 'error reading in [', &
-                                    I3 ' x ', I3, '] at ' I10, ' size ', I10)
-                        call MPI_ERROR_STRING(ierror, error_str, error_str_len, &
-                                              jerror)
+                                    I3 ' x ', I3, '] at ' &
+                                    I10, ' size ', I10)
+                        call MPI_ERROR_STRING(ierror, error_str, &
+                                              error_str_len, jerror)
                         print *, ierror, trim(error_str)
                         call MPI_ABORT(MPI_COMM_WORLD, ierror)
                     end if
@@ -287,11 +293,13 @@ contains
                     pos = 8_LONG*((row + i - 1)*cols + col)
                     call set_file_pos(file_pointer, pos, ierror)
                     if (ierror /= 0) then
-                        print 5002, my_proc_row, my_proc_col, pos, file_pointer
+                        print 5002, my_proc_row, my_proc_col, pos, &
+                                    file_pointer
                         5002 format(1X, 'error seek file in [', &
-                                    I3, ', ', I3, ']', ' at ', I10, ' fp ', I10)
-                        call MPI_ERROR_STRING(ierror, error_str, error_str_len, &
-                                              jerror)
+                                    I3, ', ', I3, ']', ' at ', &
+                                    I10, ' fp ', I10)
+                        call MPI_ERROR_STRING(ierror, error_str, &
+                                              error_str_len, jerror)
                         print *, ierror, trim(error_str)
                         call MPI_ABORT(MPI_COMM_WORLD, ierror)
                     end if
@@ -301,11 +309,13 @@ contains
                     call MPI_FILE_READ(file_pointer, buffer, buffer_size, &
                                        MPI_DOUBLE_PRECISION, status, ierror)
                     if (ierror /= 0) then
-                        print 5003, my_proc_row, my_proc_col, pos, buffer_size
+                        print 5003, my_proc_row, my_proc_col, pos, &
+                                    buffer_size
                         5003 format(1X, 'error writing in [', &
-                                    I3 ' x ', I3, '] at ' I10, ' size ', I10)
-                        call MPI_ERROR_STRING(ierror, error_str, error_str_len, &
-                                              jerror)
+                                    I3 ' x ', I3, '] at ' &
+                                    I10, ' size ', I10)
+                        call MPI_ERROR_STRING(ierror, error_str, &
+                                              error_str_len, jerror)
                         print *, ierror, trim(error_str)
                         call MPI_ABORT(MPI_COMM_WORLD, ierror)
                     end if
