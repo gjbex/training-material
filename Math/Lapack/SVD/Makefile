@@ -1,10 +1,12 @@
 HDF5_DIR = /usr
+BLAS_DIR = /usr
+BLACS_DIR = /usr
 F90 = gfortran
 MPIF90 = mpif90
 FFLAGS = -O2 -g -I$(HDF5_DIR)/include
 LIBS = -L$(HDF5_DIR)/lib -lhdf5_fortran
-MATH_LIBS = -lblas -llapack -lm
-DISTR_MATH_LIBS = -lblacs-openmpi -lscalapack-openmpi
+MATH_LIBS = -L$(BLAS_DIR) -lblas -llapack -lm
+DISTR_MATH_LIBS = -L$(BLACS_DIR) -lblacsF77init-openmpi -lblacs-openmpi -lscalapack-openmpi
 
 APPS = create_h5.exe dump_h5.exe svd.exe svd_blacs.exe
 OBJS = utils_mod.o matrix_mod.o
