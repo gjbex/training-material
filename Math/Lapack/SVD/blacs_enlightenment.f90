@@ -1,9 +1,10 @@
 program blacs_enlightenment
+    use, intrinsic :: iso_fortran_env, only : error_unit
     use mpi
     implicit none
-    integer, parameter :: nr_matrix_rows = 17, nr_matrix_cols = 13, &
-                          row_block_size = 3, col_block_size = 4
-    integer :: proc_nr, nr_procs, context, ierr, &
+    integer :: nr_matrix_rows = 17, nr_matrix_cols = 13, &
+               row_block_size = 3, col_block_size = 4
+    integer :: proc_nr, nr_procs, context, &
                nr_proc_rows, nr_proc_cols, proc_row, proc_col, &
                nr_local_rows, nr_local_cols, row_offset, col_offset, &
                row_start, row_size, row_stride, &
@@ -11,12 +12,27 @@ program blacs_enlightenment
     integer, dimension(2) :: grid_dims
     character, parameter :: orientation = 'R'
     integer :: numroc
-    integer :: i
+    integer :: i, ierr
+    character(len=1024) :: argv
 
 ! initialize BLACS (initializes MPI under the hood), and determine
 ! process info
     call blacs_pinfo(proc_nr, nr_procs)
     call blacs_get(0, 0, context)
+! get command line arguments
+    if (command_argument_count() /= 4) then
+        write (unit=error_unit, fmt="(A)") &
+            "# warning: expecting M N row_blocking col_blocking, using defaults"
+    else
+        call get_command_argument(1, argv)
+        read (argv, "(I10)") nr_matrix_rows
+        call get_command_argument(2, argv)
+        read (argv, "(I10)") nr_matrix_cols
+        call get_command_argument(3, argv)
+        read (argv, "(I10)") row_block_size
+        call get_command_argument(4, argv)
+        read (argv, "(I10)") col_block_size
+    end if
 ! show parameters
     if (proc_nr == 0) then
         print "(2(A, I0))", "matrix ", &
