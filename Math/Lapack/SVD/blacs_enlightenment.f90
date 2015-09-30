@@ -21,8 +21,11 @@ program blacs_enlightenment
     call blacs_get(0, 0, context)
 ! get command line arguments
     if (command_argument_count() /= 4) then
-        write (unit=error_unit, fmt="(A)") &
-            "# warning: expecting M N row_blocking col_blocking, using defaults"
+        if (proc_nr == 0) then
+            write (unit=error_unit, fmt="(A)") &
+                "# warning: expecting M N row_blocking " // &
+                "col_blocking, using defaults"
+        end if
     else
         call get_command_argument(1, argv)
         read (argv, "(I10)") nr_matrix_rows
@@ -57,6 +60,8 @@ program blacs_enlightenment
                         ", proc col ", proc_col, &
                         ", local rows ", nr_local_rows, &
                         ", local cols ", nr_local_cols
+    call mpi_barrier(MPI_COMM_WORLD, ierr)
+
 ! for each process, print the offset and dimensions of each matrix block
     do i = 0, nr_procs
         if (proc_nr == i) then
