@@ -65,6 +65,8 @@ What is it?
     library.
 1. `Numpy`: a few illustratios of using numpy, scipy, and matplotlib
     (linear regression, optimization, solving ODEs, FFT).
+1. `OperatorFunctools`: some illustrations of the functional programming
+    options offered by `opeator` and `functools` packages.
 1. `Pandas`: R dataframe-like data structures for Python, contains a
     Jupyter notebook to illustrate using pandas interactively.
 1. `PhraseIndexer`: parses a text file to find the line number on which a
