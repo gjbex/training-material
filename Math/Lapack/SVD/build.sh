@@ -9,5 +9,5 @@ MATH_LIBS="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thre
 
 DISTR_MATH_LIBS=" -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lmkl_blacs_intelmpi_lp64 -lpthread -lm"
 
-make F90=ifort FFLAGS="${FFLAGS}" HDF5_DIR="${EBROOTHDF5}" \
+make F90=ifort MPIF90=mpiifort FFLAGS="${FFLAGS}" HDF5_DIR="${EBROOTHDF5}" \
      MATH_LIBS="${MATH_LIBS}" DISTR_MATH_LIBS="${DISTR_MATH_LIBS}" all
