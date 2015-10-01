@@ -1,21 +1,30 @@
 program svd_blacs
     use, intrinsic :: iso_fortran_env, only : dp => REAL64, error_unit
-    use matrix_mod, only : get_matrix_dimensions
+    use hdf5
+    use mpi
+    use matrix_mod, only : print_matrix
     use utils_mod, only : get_file_name, get_dataset_name
     implicit none
+    integer, parameter :: DLEN_ = 9, DTYPE_ = 1, CTXT_ = 2, &
+                          M_ = 3, N_ = 4, MB_ = 5, NB_ = 6, &
+                          RSRC_ = 7, CSRC_ = 8, LLD_ = 9
     logical :: is_verbose = .true.
-    integer, parameter :: nr_matrix_rows = 17, nr_matrix_cols = 13, &
-                          row_block_size = 3, col_block_size = 4
+    integer, parameter :: row_block_size = 3, col_block_size = 4
+    integer :: nr_matrix_rows, nr_matrix_cols
     character(len=1024) :: file_name, dataset_name
     integer :: proc_nr, nr_procs, context, ierr, &
                nr_proc_rows, nr_proc_cols, proc_row, proc_col, &
                nr_local_rows, nr_local_cols, row_offset, col_offset, &
-               row_start, row_size, row_stride, &
-               col_start, col_size, col_stride
-    integer, dimension(2) :: matrix_dims
+               row_start, row_size, row_stride, local_row_start, &
+               col_start, col_size, col_stride, local_col_start
+    integer(hsize_t), dimension(2) :: offset, chunk_dim, local_offset, &
+                                      local_dim
+    integer(hid_t) :: file_id, matrix_fspace_id, matrix_dset_id, &
+                      matrix_mspace_id
     character, parameter :: orientation = "R"
     integer :: numroc
     real(kind=dp), dimension(:, :), allocatable :: A_local
+    integer, dimension(DLEN_) :: A_desc
     integer :: i
 
 ! initialize BLACS (initializes MPI under the hood), and determine
@@ -32,11 +41,15 @@ program svd_blacs
     call get_file_name(file_name)
     call get_dataset_name(dataset_name)
 
-! get matrix dimensions
-    call get_matrix_dimensions(file_name, dataset_name, matrix_dims)
+! prepare for reading HDF5 file
+    call init_read(file_name, file_id)
+
+! Open dataset and retrieve dimensions
+    call init_dataset(file_id, dataset_name, matrix_dset_id, &
+                      matrix_fspace_id, nr_matrix_rows, nr_matrix_cols)
     if (is_verbose .and. proc_nr == 0) then
-        print "(2(A, I0))", "dimesions ", matrix_dims(1), &
-                            " x ", matrix_dims(2)
+        print "(2(A, I0))", "dimesions ", nr_matrix_rows, &
+                            " x ", nr_matrix_cols
     end if
 
 ! determine size of local storage and allocate
@@ -58,12 +71,26 @@ program svd_blacs
             nr_local_rows, " x ", nr_local_cols
         call blacs_exit(0)
     end if
+    A_local = -1.0_dp
+    call DESCINIT(A_desc, nr_matrix_rows, nr_matrix_cols, &
+                  row_block_size, col_block_size, 0, 0, &
+                  context, nr_local_rows, ierr)
+    if (ierr /= 0) then
+        write (unit=error_unit, fmt="(A, I0)") "error in paramter", ierr
+        call blacs_exit(0)
+    end if
+
+    local_dim(1) = nr_local_rows
+    local_dim(2) = nr_local_cols
+    call h5screate_simple_f(2, local_dim, matrix_mspace_id, ierr)
 
     row_start = proc_row*row_block_size
     row_stride = nr_proc_rows*row_block_size
     col_start = proc_col*col_block_size
     col_stride = nr_proc_cols*col_block_size
+    local_row_start = 1
     do row_offset = row_start, nr_matrix_rows, row_stride
+        local_col_start = 1
         row_size = min(row_block_size, nr_matrix_rows - row_offset)
         do col_offset = col_start, nr_matrix_cols, col_stride
             col_size = min(col_block_size, &
@@ -74,9 +101,49 @@ program svd_blacs
                     row_offset, ", ", col_offset, " -> ", &
                     row_size, " x ", col_size
             end if
-        end do
-    end do
+            offset(1) = row_offset
+            offset(2) = col_offset
+            chunk_dim(1) = row_size
+            chunk_dim(2) = col_size
+            call h5sselect_hyperslab_f(matrix_fspace_id, H5S_SELECT_SET_F, &
+                                       offset, chunk_dim, ierr)
+            local_offset(1) = local_row_start - 1
+            local_offset(2) = local_col_start - 1
+            call h5sselect_hyperslab_f(matrix_mspace_id, H5S_SELECT_SET_F, &
+                                       local_offset, chunk_dim, ierr)
+            if (is_verbose) then
+                print "(A, I0, A, I0, A, I0, A, I0, A, I0)", &
+                    "proc_nr ", proc_nr, " local: ", &
+                    local_row_start, ", ", local_col_start, " -> ", &
+                    chunk_dim(1), " x ", chunk_dim(2)
+            end if
 
+            ! read the data
+            call h5dread_f(matrix_dset_id, H5T_NATIVE_DOUBLE, &
+                           A_local, &
+                           chunk_dim, ierr, &
+                           mem_space_id=matrix_mspace_id, &
+                           file_space_id=matrix_fspace_id)
+            local_col_start = local_col_start + col_block_size
+        end do
+        local_row_start = local_row_start + row_block_size
+    end do
+    call h5sclose_f(matrix_mspace_id, ierr)
+
+    call mpi_barrier(MPI_COMM_WORLD, ierr)
+    do i = 0, nr_procs
+        if (i == proc_nr) then
+            print "(A, I0)", "proc nr ", proc_nr
+            call print_matrix(A_local)
+        end if
+        call mpi_barrier(MPI_COMM_WORLD, ierr)
+    end do
+! close HDF5 dataset
+    call finalize_dataset(matrix_dset_id, matrix_fspace_id)
+
+! close HDF5 file and Fortran bindings
+    call finalize_read(file_id)
+    
 ! deallocate memory
     deallocate(A_local)
 
@@ -147,15 +214,15 @@ contains
     end subroutine init_read
 
     subroutine init_dataset(file_id, matrix_dset_name, matrix_dset_id, &
-                            matrix_fspace_id, matrix_dims)
+                            matrix_fspace_id, matrix_rows, matrix_cols)
         use hdf5
         use, intrinsic :: iso_fortran_env, only : error_unit
         implicit none
         integer(hid_t), intent(in) :: file_id
         character(len=*), intent(in) :: matrix_dset_name
         integer(hid_t), intent(out) :: matrix_fspace_id, matrix_dset_id
-        integer(hsize_t), dimension(2), intent(out) :: matrix_dims
-        integer(hsize_t), dimension(2) :: max_matrix_dims
+        integer, intent(out) :: matrix_rows, matrix_cols
+        integer(hsize_t), dimension(2) :: matrix_dims, max_matrix_dims
         integer :: error
         ! open the matrix dataset, and get the matrix file dataspace
         call h5dopen_f(file_id, matrix_dset_name, matrix_dset_id, error)
@@ -164,6 +231,8 @@ contains
         ! retrieve the dimensions of the matrix, and allocate the matrix
         call h5sget_simple_extent_dims_f(matrix_fspace_id, matrix_dims, &
                                          max_matrix_dims, error)
+        matrix_rows = int(matrix_dims(1))
+        matrix_cols = int(matrix_dims(2))
     end subroutine init_dataset
 
     subroutine finalize_dataset(matrix_dset_id, matrix_fspace_id)
