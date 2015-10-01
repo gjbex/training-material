@@ -10,7 +10,7 @@ MATH_LIBS = -L$(BLAS_DIR) -lblas -llapack -lm
 DISTR_MATH_LIBS = -L$(BLACS_DIR) -lblacsF77init-openmpi -lblacs-openmpi -lscalapack-openmpi
 
 APPS = create_h5.exe dump_h5.exe svd.exe svd_blacs.exe \
-       blacs_enlightenment.exe
+       blacs_enlightenment.exe create_test_h5.exe
 OBJS = utils_mod.o matrix_mod.o
 
 all: $(APPS)
