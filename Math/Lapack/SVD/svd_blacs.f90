@@ -23,8 +23,12 @@ program svd_blacs
                       matrix_mspace_id
     character, parameter :: orientation = "R"
     integer :: numroc
-    real(kind=dp), dimension(:, :), allocatable :: A_local
-    integer, dimension(DLEN_) :: A_desc
+    real(kind=dp), dimension(:, :), allocatable :: A_local, A_copy_local, &
+                                                   U_local, VT_local, &
+                                                   Sigma_local
+    integer, dimension(DLEN_) :: A_desc, A_copy_desc, U_desc, VT_desc, &
+                                 Sigma_desc
+    real(kind=dp), dimension(:), allocatable :: S
     integer :: i
 
 ! initialize BLACS (initializes MPI under the hood), and determine
@@ -53,37 +57,20 @@ program svd_blacs
     end if
 
 ! determine size of local storage and allocate
-    call compute_local_storage_sizes(context, &
-                                     nr_matrix_rows, nr_matrix_cols, &
-                                     row_block_size, col_block_size, &
-                                     nr_local_rows, nr_local_cols)
-    if (is_verbose) then
-        print "(5(A, I0))", "proc_nr ", proc_nr, &
-                            ", proc row ", proc_row, &
-                            ", proc col ", proc_col, &
-                            ", local rows ", nr_local_rows, &
-                            ", local cols ", nr_local_cols
-    end if
-    allocate(A_local(nr_local_rows, nr_local_cols),stat=ierr)
-    if (ierr /= 0) then
-        write (unit=error_unit, fmt="(A, I0, A, I0, A, I0)")  &
-            "proc_nr ", proc_nr, " can not allocate ", &
-            nr_local_rows, " x ", nr_local_cols
-        call blacs_exit(0)
-    end if
+    call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
+                         row_block_size, col_block_size, &
+                         nr_local_rows, nr_local_cols, &
+                         A_copy_local, A_copy_desc)
     A_local = -1.0_dp
-    call DESCINIT(A_desc, nr_matrix_rows, nr_matrix_cols, &
-                  row_block_size, col_block_size, 0, 0, &
-                  context, nr_local_rows, ierr)
-    if (ierr /= 0) then
-        write (unit=error_unit, fmt="(A, I0)") "error in paramter", ierr
-        call blacs_exit(0)
-    end if
 
+! create memory space for matrix
     local_dim(1) = nr_local_rows
     local_dim(2) = nr_local_cols
     call h5screate_simple_f(2, local_dim, matrix_mspace_id, ierr)
 
+! for each chunk of the local matrix, create the appropriate hyperslab
+! in both the file space and the memory space of the matrix, and read
+! it
     row_start = proc_row*row_block_size
     row_stride = nr_proc_rows*row_block_size
     col_start = proc_col*col_block_size
@@ -128,24 +115,73 @@ program svd_blacs
         end do
         local_row_start = local_row_start + row_block_size
     end do
+
+! close all HDF5 stuff, since reading is done
     call h5sclose_f(matrix_mspace_id, ierr)
-
-    call mpi_barrier(MPI_COMM_WORLD, ierr)
-    do i = 0, nr_procs
-        if (i == proc_nr) then
-            print "(A, I0)", "proc nr ", proc_nr
-            call print_matrix(A_local)
-        end if
-        call mpi_barrier(MPI_COMM_WORLD, ierr)
-    end do
-! close HDF5 dataset
     call finalize_dataset(matrix_dset_id, matrix_fspace_id)
-
-! close HDF5 file and Fortran bindings
     call finalize_read(file_id)
-    
+
+    if (is_verbose) then
+        call mpi_barrier(MPI_COMM_WORLD, ierr)
+        do i = 0, nr_procs
+            if (i == proc_nr) then
+                print "(A, I0)", "proc nr ", proc_nr
+                call print_matrix(A_local)
+            end if
+            call mpi_barrier(MPI_COMM_WORLD, ierr)
+        end do
+    end if
+
+! create copy of original matrix since dgesvd will clobber it    
+    call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
+                         row_block_size, col_block_size, &
+                         nr_local_rows, nr_local_cols, &
+                         A_copy_local, A_copy_desc)
+    A_copy_local = A_local
+
+! determine size of local storage and allocate U and VT
+    call allocate_matrix(context, nr_matrix_rows, nr_matrix_rows, &
+                         row_block_size, col_block_size, &
+                         nr_local_rows, nr_local_cols, &
+                         U_local, U_desc)
+    call allocate_matrix(context, nr_matrix_cols, nr_matrix_cols, &
+                         row_block_size, col_block_size, &
+                         nr_local_rows, nr_local_cols, &
+                         VT_local, VT_desc)
+! allocate S vector in each process, non-distributed
+    allocate(S(min(nr_matrix_rows, nr_matrix_cols)), stat=ierr)
+    if (ierr /= 0) then
+        write (unit=error_unit, fmt="(A, I0, A, I0)")  &
+            "proc_nr ", proc_nr, " can not allocate ", nr_local_rows
+        call blacs_exit(0)
+    end if
+
+! lwork = -1
+! allocate(work(1))
+! call pdgesvd('V', 'V', vec_len, nr_vecs, local_storage, 1, 1, storage_desc, &
+!                        singular_values,  local_u, 1, 1, u_desc, &
+!                                                                 local_vt, 1, 1,
+!                                                                 vt_desc, &
+!                                                                              work,
+!                                                                              lwork,
+!                                                                              info)
+! lwork = work(1)
+! deallocate(work)
+! allocate(work(lwork))
+! call pdgesvd('V', 'V', vec_len, nr_vecs, local_storage, 1, 1, storage_desc, &
+!                        singular_values,  local_u, 1, 1, u_desc, &
+!                                                                 local_vt, 1, 1,
+!                                                                 vt_desc, &
+!                                                                              work,
+!                                                                              lwork,
+!                                                                              info)
+! 
 ! deallocate memory
     deallocate(A_local)
+    deallocate(A_copy_local)
+    deallocate(U_local)
+    deallocate(VT_local)
+    deallocate(S)
 
 ! finalize BLACS (finalizes MPI as well)
     call blacs_exit(0)
@@ -256,5 +292,38 @@ contains
         ! finalize Fortran HDF5 interface
         call h5close_f(error)
     end subroutine finalize_read
+
+    subroutine allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
+                               row_block_size, col_block_size, &
+                               nr_local_rows, nr_local_cols, &
+                               matrix_local, matrix_desc)
+        use, intrinsic :: iso_fortran_env, only : dp => REAL64, error_unit
+        implicit none
+        integer, intent(in) :: context, nr_matrix_rows, nr_matrix_cols, &
+                               row_block_size, col_block_size
+        integer, intent(out) :: nr_local_rows, nr_local_cols
+        real(kind=dp), dimension(:, :), allocatable, &
+            intent(out) :: matrix_local
+        integer, dimension(:), intent(inout) :: matrix_desc
+        integer :: ierr
+        call compute_local_storage_sizes(context, &
+                                         nr_matrix_rows, nr_matrix_cols, &
+                                         row_block_size, col_block_size, &
+                                         nr_local_rows, nr_local_cols)
+        allocate(matrix_local(nr_local_rows, nr_local_cols), stat=ierr)
+        if (ierr /= 0) then
+            write (unit=error_unit, fmt="(A, I0, A, I0, A, I0)")  &
+                "proc_nr ", proc_nr, " can not allocate ", &
+                nr_local_rows, " x ", nr_local_cols
+            call blacs_exit(0)
+        end if
+        call descinit(matrix_desc, nr_matrix_rows, nr_matrix_cols, &
+                      row_block_size, col_block_size, 0, 0, &
+                      context, nr_local_rows, ierr)
+        if (ierr /= 0) then
+            write (unit=error_unit, fmt="(A, I0)") "error in paramter", ierr
+            call blacs_exit(0)
+        end if
+    end subroutine allocate_matrix
 
 end program svd_blacs
