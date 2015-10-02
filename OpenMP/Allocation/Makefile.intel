@@ -8,7 +8,7 @@ APPS = allocation_serial.exe allocation_omp.exe
 all: $(APPS)
 
 %_serial.exe: %.c
-	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
+	$(CC) $(CFLAGS) -diag-disable 3180 -o $@ $< $(LIBS)
 
 %_omp.exe: %.c
 	$(CC) $(CFLAGS) $(OMP) -o $@ $< $(LIBS)

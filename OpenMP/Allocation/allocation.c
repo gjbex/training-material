@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 #pragma omp parallel
     {
 #ifdef _OPENMP
-#pragma master
+#pragma omp master
         num_threads = omp_get_num_threads();
         if (n % num_threads != 0) {
             errx(EXIT_FAILURE, "number of threads should divide %d", n);
