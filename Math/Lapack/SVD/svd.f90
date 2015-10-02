@@ -56,7 +56,8 @@ program svd
     call dgesvd('A', 'A', nr_rows, nr_cols, A, nr_rows, S, &
                 U, nr_rows, VT, nr_cols, work, -1, info)
     lwork = work(1)
-    write (unit=error_unit, fmt="(A, I0, A)") "work size is ", lwork, " double"
+    write (unit=error_unit, fmt="(A, I0, A)") &
+        "work size is ", lwork, " double"
     deallocate(work)
     allocate(work(lwork))
     if (error /= 0) then
