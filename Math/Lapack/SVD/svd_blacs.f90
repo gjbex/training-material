@@ -28,8 +28,8 @@ program svd_blacs
                                                    Sigma_local
     integer, dimension(DLEN_) :: A_desc, A_copy_desc, U_desc, VT_desc, &
                                  Sigma_desc
-    real(kind=dp), dimension(:), allocatable :: S
-    integer :: i
+    real(kind=dp), dimension(:), allocatable :: S, work
+    integer :: i, lwork
 
 ! initialize BLACS (initializes MPI under the hood), and determine
 ! process info
@@ -60,7 +60,7 @@ program svd_blacs
     call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
                          row_block_size, col_block_size, &
                          nr_local_rows, nr_local_cols, &
-                         A_copy_local, A_copy_desc)
+                         A_local, A_desc)
     A_local = -1.0_dp
 
 ! create memory space for matrix
@@ -156,26 +156,38 @@ program svd_blacs
         call blacs_exit(0)
     end if
 
-! lwork = -1
-! allocate(work(1))
-! call pdgesvd('V', 'V', vec_len, nr_vecs, local_storage, 1, 1, storage_desc, &
-!                        singular_values,  local_u, 1, 1, u_desc, &
-!                                                                 local_vt, 1, 1,
-!                                                                 vt_desc, &
-!                                                                              work,
-!                                                                              lwork,
-!                                                                              info)
-! lwork = work(1)
-! deallocate(work)
-! allocate(work(lwork))
-! call pdgesvd('V', 'V', vec_len, nr_vecs, local_storage, 1, 1, storage_desc, &
-!                        singular_values,  local_u, 1, 1, u_desc, &
-!                                                                 local_vt, 1, 1,
-!                                                                 vt_desc, &
-!                                                                              work,
-!                                                                              lwork,
-!                                                                              info)
-! 
+! copmute SVD, start by determining the work array size
+    lwork = -1
+    allocate(work(1))
+    call pdgesvd('V', 'V', nr_matrix_rows, nr_matrix_cols, &
+                 A_local, 1, 1, A_desc, &
+                 S,  U_local, 1, 1, U_desc, VT_local, 1, 1, VT_desc, &
+                 work, lwork, ierr)
+    if (ierr /= 0) then
+        write (unit=error_unit, fmt="(A, I0)") "pdgesvd error code ", ierr
+        call blacs_exit(0)
+    end if
+    lwork = work(1)
+    if (is_verbose) then
+        print "(A, I0, A, I0)", "proc nr ", proc_nr, " work ", lwork
+    end if
+    deallocate(work)
+    allocate(work(lwork), stat=ierr)
+    if (ierr /= 0) then
+        write (unit=error_unit, fmt="(A, I0, A, I0)")  &
+            "proc_nr ", proc_nr, " can not allocate work ", nr_local_rows
+        call blacs_exit(0)
+    end if
+    call pdgesvd('V', 'V', nr_matrix_rows, nr_matrix_cols, &
+                 A_local, 1, 1, A_desc, &
+                 S,  U_local, 1, 1, U_desc, VT_local, 1, 1, VT_desc, &
+                 work, lwork, ierr)
+    deallocate(work)
+    if (ierr /= 0) then
+        write (unit=error_unit, fmt="(A, I0)") "pdgesvd error code ", ierr
+        call blacs_exit(0)
+    end if
+ 
 ! deallocate memory
     deallocate(A_local)
     deallocate(A_copy_local)
@@ -303,7 +315,7 @@ contains
                                row_block_size, col_block_size
         integer, intent(out) :: nr_local_rows, nr_local_cols
         real(kind=dp), dimension(:, :), allocatable, &
-            intent(out) :: matrix_local
+            intent(inout) :: matrix_local
         integer, dimension(:), intent(inout) :: matrix_desc
         integer :: ierr
         call compute_local_storage_sizes(context, &
