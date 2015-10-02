@@ -12,5 +12,7 @@ What is it?
     when the argument is negative, the second, `check_max`, throws another
     exception when the function is called with an argument that is too
     large.  The decorated function is this example is the factorial.
+    Also illustrates `functools` wrap decorator to retain the wrapped
+    function's name, docstring, etc.
 1. `memoize.py`: an example of adding a cache to a function using a simple
-    decorator
+    custom decorator, as well as `functools`'s `lru_cache` decorator.
