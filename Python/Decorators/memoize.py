@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from functools import lru_cache
+
 
 def memoize(f):
     cache = {}
@@ -18,6 +20,14 @@ def fib_memoized(n):
         return 1
     else:
         return fib_memoized(n - 1) + fib_memoized(n - 2)
+
+
+@lru_cache(100)
+def fib_lru_cache(n):
+    if n < 2:
+        return 1
+    else:
+        return fib_lru_cache(n - 1) + fib_lru_cache(n - 2)
 
 
 def fib(n):
@@ -49,5 +59,7 @@ if __name__ == '__main__':
     options = arg_parser.parse_args()
     delta_fib = execute(fib, options.n_max)
     delta_fib_memoized = execute(fib_memoized, options.n_max)
+    delta_fib_lru_cache = execute(fib_lru_cache, options.n_max)
     print('non-memoized:\t\t{0:.6f} s'.format(delta_fib))
     print('memoized:\t\t{0:.6f} s'.format(delta_fib_memoized))
+    print('lru_cache:\t\t{0:.6f} s'.format(delta_fib_lru_cache))
