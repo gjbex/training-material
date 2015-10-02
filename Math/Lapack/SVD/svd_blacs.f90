@@ -24,12 +24,13 @@ program svd_blacs
                       matrix_mspace_id
     character, parameter :: orientation = "R"
     integer :: numroc
-    real(kind=dp), dimension(:, :), allocatable :: A_local, A_copy_local, &
+    real(kind=dp), dimension(:, :), allocatable :: A_local, orig_A_local, &
                                                    U_local, VT_local, &
-                                                   Sigma_local
-    integer, dimension(DLEN_) :: A_desc, A_copy_desc, U_desc, VT_desc, &
-                                 Sigma_desc
+                                                   Sigma_local, tmp_local
+    integer, dimension(DLEN_) :: A_desc, orig_A_desc, U_desc, VT_desc, &
+                                 Sigma_desc, tmp_desc
     real(kind=dp), dimension(:), allocatable :: S, work
+    real(kind=dp) :: local_error, global_error
     integer :: i, lwork
 
 ! initialize BLACS (initializes MPI under the hood), and determine
@@ -135,11 +136,11 @@ program svd_blacs
         end do
     end if
 
-! create copy of original matrix since dgesvd will clobber it    
+! create orig of original matrix since dgesvd will clobber it    
     call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
                          block_size, nr_local_rows, nr_local_cols, &
-                         A_copy_local, A_copy_desc)
-    A_copy_local = A_local
+                         orig_A_local, orig_A_desc)
+    orig_A_local = A_local
 
 ! determine size of local storage and allocate U and VT
     call allocate_matrix(context, nr_matrix_rows, nr_matrix_rows, &
@@ -156,7 +157,7 @@ program svd_blacs
         call blacs_exit(0)
     end if
 
-! copmute SVD, start by determining the work array size
+! compute SVD, start by determining the work array size
     lwork = -1
     allocate(work(1))
     call pdgesvd('V', 'V', nr_matrix_rows, nr_matrix_cols, &
@@ -186,13 +187,42 @@ program svd_blacs
         write (unit=error_unit, fmt="(A, I0)") "pdgesvd error code ", ierr
         call blacs_exit(0)
     end if
+    deallocate(work)
+
+! to eat some more memory, explicitly construct Sigma, and a temporary
+! matrix
+    call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
+                         block_size, nr_local_rows, nr_local_cols, &
+                         Sigma_local, Sigma_desc)
+    call init_sigma(S, Sigma_desc, Sigma_local)
+    call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
+                         block_size, nr_local_rows, nr_local_cols, &
+                         tmp_local, tmp_desc)
+    call pdgemm('N', 'N', nr_matrix_rows, nr_matrix_cols, nr_matrix_rows, &
+                1.0_dp, U_local, 1, 1, U_desc, &
+                        Sigma_local, 1, 1, Sigma_desc, &
+                0.0_dp, tmp_local, 1, 1, tmp_desc)
+    call pdgemm('N', 'N', nr_matrix_rows, nr_matrix_cols, nr_matrix_cols, &
+                1.0_dp, tmp_local, 1, 1, tmp_desc, &
+                        VT_local, 1, 1, VT_desc, &
+                0.0_dp, A_local, 1, 1, A_desc)
+
+    ! compute and print relative error
+!    local_error = compute_error(orig_A_local, A)
+!    call MPI_Reduce(local_error, global_error, 1, MPI_DOUBLE_PRECISION, &
+!                    MPI_SUM, 0, MPI_COMM_WORLD, ierr)
+!    if (proc_nr == 0) then
+!        print "(A, E10.3)", 'relative error = ', global_error/nr_procs
+!    end if
  
 ! deallocate memory
     deallocate(A_local)
-    deallocate(A_copy_local)
+    deallocate(orig_A_local)
     deallocate(U_local)
     deallocate(VT_local)
     deallocate(S)
+    deallocate(Sigma_local)
+    deallocate(tmp_local)
 
 ! finalize BLACS (finalizes MPI as well)
     call blacs_exit(0)
@@ -335,5 +365,33 @@ contains
             call blacs_exit(0)
         end if
     end subroutine allocate_matrix
+
+    logical function is_mine(block_len, nr_procs, my_proc, g_i)
+        implicit none
+        integer, intent(in) :: block_len, nr_procs, my_proc, g_i
+        integer :: nr_blocks
+        nr_blocks = (g_i - 1)/block_len
+        is_mine = my_proc == mod(nr_blocks, nr_procs)
+    end function is_mine
+
+    subroutine init_sigma(context, block_size, S, Sigma_local)
+        use, intrinsic :: iso_fortran_env, only : dp => REAL64
+        implicit none
+        integer, intent(in) :: context, block_size
+        real(kind=dp), dimension(:), intent(in) :: S
+        real(kind=dp), dimension(:, :), intent(inout) :: Sigma
+        integer :: nr_proc_rows, nr_proc_cols, proc_row, proc_col, i, index
+        call blacs_gridinfo(context, nr_proc_rows, nr_proc_cols, &
+                            proc_row, proc_col)                           
+        Sigma_local = 0.0_dp
+        index = 1
+        do i = 1, size(S)
+            if (is_mine(block_size, nr_proc_rows, proc_row, i) .and. &
+                is_mine(block_size, nr_proc_cols, proc_col, i)) then
+                Sigma_local(index, index) = S(i)
+                index = index + 1
+            end if
+        end do
+    end subroutine init_sigma
 
 end program svd_blacs
