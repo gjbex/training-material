@@ -3,15 +3,16 @@ program svd_blacs
     use hdf5
     use mpi
     use matrix_mod, only : print_matrix
-    use utils_mod, only : get_file_name, get_dataset_name
+    use utils_mod, only : get_file_name, get_dataset_name, get_block_size
     implicit none
     integer, parameter :: DLEN_ = 9, DTYPE_ = 1, CTXT_ = 2, &
                           M_ = 3, N_ = 4, MB_ = 5, NB_ = 6, &
                           RSRC_ = 7, CSRC_ = 8, LLD_ = 9
     logical :: is_verbose = .true.
-    integer, parameter :: row_block_size = 3, col_block_size = 4
-    integer :: nr_matrix_rows, nr_matrix_cols
+    ! Note that for pdgesvd the row and column blocking size must be the
+    ! same, hence only a single variable is defined to avoid mistakes
     character(len=1024) :: file_name, dataset_name
+    integer :: nr_matrix_rows, nr_matrix_cols, block_size
     integer :: proc_nr, nr_procs, context, ierr, &
                nr_proc_rows, nr_proc_cols, proc_row, proc_col, &
                nr_local_rows, nr_local_cols, row_offset, col_offset, &
@@ -44,6 +45,7 @@ program svd_blacs
 ! get the file and dataset name
     call get_file_name(file_name)
     call get_dataset_name(dataset_name)
+    call get_block_size(block_size)
 
 ! prepare for reading HDF5 file
     call init_read(file_name, file_id)
@@ -58,10 +60,11 @@ program svd_blacs
 
 ! determine size of local storage and allocate
     call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
-                         row_block_size, col_block_size, &
-                         nr_local_rows, nr_local_cols, &
+                         block_size, nr_local_rows, nr_local_cols, &
                          A_local, A_desc)
-    A_local = -1.0_dp
+    if (is_verbose) then
+        A_local = -1.0_dp
+    end if
 
 ! create memory space for matrix
     local_dim(1) = nr_local_rows
@@ -71,16 +74,16 @@ program svd_blacs
 ! for each chunk of the local matrix, create the appropriate hyperslab
 ! in both the file space and the memory space of the matrix, and read
 ! it
-    row_start = proc_row*row_block_size
-    row_stride = nr_proc_rows*row_block_size
-    col_start = proc_col*col_block_size
-    col_stride = nr_proc_cols*col_block_size
+    row_start = proc_row*block_size
+    row_stride = nr_proc_rows*block_size
+    col_start = proc_col*block_size
+    col_stride = nr_proc_cols*block_size
     local_row_start = 1
     do row_offset = row_start, nr_matrix_rows, row_stride
         local_col_start = 1
-        row_size = min(row_block_size, nr_matrix_rows - row_offset)
+        row_size = min(block_size, nr_matrix_rows - row_offset)
         do col_offset = col_start, nr_matrix_cols, col_stride
-            col_size = min(col_block_size, &
+            col_size = min(block_size, &
                            nr_matrix_cols - col_offset)
             if (is_verbose) then
                 print "(A, I0, A, I0, A, I0, A, I0, A, I0)", &
@@ -111,9 +114,9 @@ program svd_blacs
                            chunk_dim, ierr, &
                            mem_space_id=matrix_mspace_id, &
                            file_space_id=matrix_fspace_id)
-            local_col_start = local_col_start + col_block_size
+            local_col_start = local_col_start + block_size
         end do
-        local_row_start = local_row_start + row_block_size
+        local_row_start = local_row_start + block_size
     end do
 
 ! close all HDF5 stuff, since reading is done
@@ -134,19 +137,16 @@ program svd_blacs
 
 ! create copy of original matrix since dgesvd will clobber it    
     call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
-                         row_block_size, col_block_size, &
-                         nr_local_rows, nr_local_cols, &
+                         block_size, nr_local_rows, nr_local_cols, &
                          A_copy_local, A_copy_desc)
     A_copy_local = A_local
 
 ! determine size of local storage and allocate U and VT
     call allocate_matrix(context, nr_matrix_rows, nr_matrix_rows, &
-                         row_block_size, col_block_size, &
-                         nr_local_rows, nr_local_cols, &
+                         block_size, nr_local_rows, nr_local_cols, &
                          U_local, U_desc)
     call allocate_matrix(context, nr_matrix_cols, nr_matrix_cols, &
-                         row_block_size, col_block_size, &
-                         nr_local_rows, nr_local_cols, &
+                         block_size, nr_local_rows, nr_local_cols, &
                          VT_local, VT_desc)
 ! allocate S vector in each process, non-distributed
     allocate(S(min(nr_matrix_rows, nr_matrix_cols)), stat=ierr)
@@ -182,7 +182,6 @@ program svd_blacs
                  A_local, 1, 1, A_desc, &
                  S,  U_local, 1, 1, U_desc, VT_local, 1, 1, VT_desc, &
                  work, lwork, ierr)
-    deallocate(work)
     if (ierr /= 0) then
         write (unit=error_unit, fmt="(A, I0)") "pdgesvd error code ", ierr
         call blacs_exit(0)
@@ -226,19 +225,19 @@ contains
 
     subroutine compute_local_storage_sizes(context, &
                                            nr_matrix_rows, nr_matrix_cols, &
-                                           row_block_size, col_block_size, &
+                                           block_size, &
                                            local_rows, local_cols)
         implicit none
         integer, intent(in) :: context, &
                                nr_matrix_rows, nr_matrix_cols, &
-                               row_block_size, col_block_size
+                               block_size
         integer, intent(out) :: local_rows, local_cols
         integer :: nr_proc_rows, nr_proc_cols, proc_row, proc_col, numroc
         call blacs_gridinfo(context, nr_proc_rows, nr_proc_cols, &
                             proc_row, proc_col)                           
-        local_rows = numroc(nr_matrix_rows, row_block_size, proc_row, 0, &
+        local_rows = numroc(nr_matrix_rows, block_size, proc_row, 0, &
                             nr_proc_rows)
-        local_cols = numroc(nr_matrix_cols, col_block_size, proc_col, 0, &
+        local_cols = numroc(nr_matrix_cols, block_size, proc_col, 0, &
                            nr_proc_cols)
     end subroutine compute_local_storage_sizes
     
@@ -306,13 +305,12 @@ contains
     end subroutine finalize_read
 
     subroutine allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
-                               row_block_size, col_block_size, &
-                               nr_local_rows, nr_local_cols, &
+                               block_size, nr_local_rows, nr_local_cols, &
                                matrix_local, matrix_desc)
         use, intrinsic :: iso_fortran_env, only : dp => REAL64, error_unit
         implicit none
         integer, intent(in) :: context, nr_matrix_rows, nr_matrix_cols, &
-                               row_block_size, col_block_size
+                               block_size 
         integer, intent(out) :: nr_local_rows, nr_local_cols
         real(kind=dp), dimension(:, :), allocatable, &
             intent(inout) :: matrix_local
@@ -320,7 +318,7 @@ contains
         integer :: ierr
         call compute_local_storage_sizes(context, &
                                          nr_matrix_rows, nr_matrix_cols, &
-                                         row_block_size, col_block_size, &
+                                         block_size, &
                                          nr_local_rows, nr_local_cols)
         allocate(matrix_local(nr_local_rows, nr_local_cols), stat=ierr)
         if (ierr /= 0) then
@@ -330,7 +328,7 @@ contains
             call blacs_exit(0)
         end if
         call descinit(matrix_desc, nr_matrix_rows, nr_matrix_cols, &
-                      row_block_size, col_block_size, 0, 0, &
+                      block_size, block_size, 0, 0, &
                       context, nr_local_rows, ierr)
         if (ierr /= 0) then
             write (unit=error_unit, fmt="(A, I0)") "error in paramter", ierr
