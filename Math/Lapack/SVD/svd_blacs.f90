@@ -8,7 +8,7 @@ program svd_blacs
     integer, parameter :: DLEN_ = 9, DTYPE_ = 1, CTXT_ = 2, &
                           M_ = 3, N_ = 4, MB_ = 5, NB_ = 6, &
                           RSRC_ = 7, CSRC_ = 8, LLD_ = 9
-    logical :: is_verbose = .true.
+    logical :: is_verbose = .false.
     ! Note that for pdgesvd the row and column blocking size must be the
     ! same, hence only a single variable is defined to avoid mistakes
     character(len=1024) :: file_name, dataset_name
@@ -30,7 +30,7 @@ program svd_blacs
     integer, dimension(DLEN_) :: A_desc, orig_A_desc, U_desc, VT_desc, &
                                  Sigma_desc, tmp_desc
     real(kind=dp), dimension(:), allocatable :: S, work
-    real(kind=dp) :: local_error, global_error
+    real(kind=dp) :: local_error, global_error, start_time, stop_time
     integer :: i, lwork
 
 ! initialize BLACS (initializes MPI under the hood), and determine
@@ -48,6 +48,7 @@ program svd_blacs
     call get_dataset_name(dataset_name)
     call get_block_size(block_size)
 
+    start_time = mpi_wtime()
 ! prepare for reading HDF5 file
     call init_read(file_name, file_id)
 
@@ -124,6 +125,11 @@ program svd_blacs
     call h5sclose_f(matrix_mspace_id, ierr)
     call finalize_dataset(matrix_dset_id, matrix_fspace_id)
     call finalize_read(file_id)
+    stop_time = mpi_wtime()
+
+    if (proc_nr == 0) then
+        print "(A, F15.6)", "HDF5 read: ", stop_time - start_time
+    end if
 
     if (is_verbose) then
         call mpi_barrier(MPI_COMM_WORLD, ierr)
@@ -158,6 +164,7 @@ program svd_blacs
     end if
 
 ! compute SVD, start by determining the work array size
+    start_time = mpi_wtime()
     lwork = -1
     allocate(work(1))
     call pdgesvd('V', 'V', nr_matrix_rows, nr_matrix_cols, &
@@ -187,17 +194,39 @@ program svd_blacs
         write (unit=error_unit, fmt="(A, I0)") "pdgesvd error code ", ierr
         call blacs_exit(0)
     end if
+    stop_time = mpi_wtime()
     deallocate(work)
+    if (proc_nr == 0) then
+        print "(A, F15.6)", "pdgesvd:", stop_time - start_time
+    end if
+
 
 ! to eat some more memory, explicitly construct Sigma, and a temporary
 ! matrix
     call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
                          block_size, nr_local_rows, nr_local_cols, &
                          Sigma_local, Sigma_desc)
-    call init_sigma(S, Sigma_desc, Sigma_local)
+    call init_sigma(context, block_size, S, Sigma_local)
+    if (is_verbose) then
+        call mpi_barrier(MPI_COMM_WORLD, ierr)
+        if (proc_nr == 0) then
+            print "(A)", "Sigma"
+        end if
+        call mpi_barrier(MPI_COMM_WORLD, ierr)
+        do i = 0, nr_procs
+            if (i == proc_nr) then
+                print "(A, I0)", "proc nr ", proc_nr
+                call print_matrix(Sigma_local)
+            end if
+            call mpi_barrier(MPI_COMM_WORLD, ierr)
+        end do
+    end if
+
+    A_local = 0.0_dp
     call allocate_matrix(context, nr_matrix_rows, nr_matrix_cols, &
                          block_size, nr_local_rows, nr_local_cols, &
                          tmp_local, tmp_desc)
+    start_time = mpi_wtime()
     call pdgemm('N', 'N', nr_matrix_rows, nr_matrix_cols, nr_matrix_rows, &
                 1.0_dp, U_local, 1, 1, U_desc, &
                         Sigma_local, 1, 1, Sigma_desc, &
@@ -206,14 +235,33 @@ program svd_blacs
                 1.0_dp, tmp_local, 1, 1, tmp_desc, &
                         VT_local, 1, 1, VT_desc, &
                 0.0_dp, A_local, 1, 1, A_desc)
+    stop_time = mpi_wtime()
+    if (proc_nr == 0) then
+        print "(A, F15.6)", "pdgemm 1 & 2:", stop_time - start_time
+    end if
+
+    if (is_verbose) then
+        call mpi_barrier(MPI_COMM_WORLD, ierr)
+        if (proc_nr == 0) then
+            print "(A)", "Sigma"
+        end if
+        call mpi_barrier(MPI_COMM_WORLD, ierr)
+        do i = 0, nr_procs
+            if (i == proc_nr) then
+                print "(A, I0)", "proc nr ", proc_nr
+                call print_matrix(A_local)
+            end if
+            call mpi_barrier(MPI_COMM_WORLD, ierr)
+        end do
+    end if
 
     ! compute and print relative error
-!    local_error = compute_error(orig_A_local, A)
-!    call MPI_Reduce(local_error, global_error, 1, MPI_DOUBLE_PRECISION, &
-!                    MPI_SUM, 0, MPI_COMM_WORLD, ierr)
-!    if (proc_nr == 0) then
-!        print "(A, E10.3)", 'relative error = ', global_error/nr_procs
-!    end if
+    local_error = compute_error(orig_A_local, A_local)
+    call MPI_Reduce(local_error, global_error, 1, MPI_DOUBLE_PRECISION, &
+                    MPI_SUM, 0, MPI_COMM_WORLD, ierr)
+    if (proc_nr == 0) then
+        print "(A, E10.3)", 'relative error = ', global_error/nr_procs
+    end if
  
 ! deallocate memory
     deallocate(A_local)
@@ -366,12 +414,12 @@ contains
         end if
     end subroutine allocate_matrix
 
-    logical function is_mine(block_len, nr_procs, my_proc, g_i)
+    logical function is_mine(block_size, nr_procs, proc_nr, g_i)
         implicit none
-        integer, intent(in) :: block_len, nr_procs, my_proc, g_i
+        integer, intent(in) :: block_size, nr_procs, proc_nr, g_i
         integer :: nr_blocks
-        nr_blocks = (g_i - 1)/block_len
-        is_mine = my_proc == mod(nr_blocks, nr_procs)
+        nr_blocks = (g_i - 1)/block_size
+        is_mine = proc_nr == mod(nr_blocks, nr_procs)
     end function is_mine
 
     subroutine init_sigma(context, block_size, S, Sigma_local)
@@ -379,8 +427,10 @@ contains
         implicit none
         integer, intent(in) :: context, block_size
         real(kind=dp), dimension(:), intent(in) :: S
-        real(kind=dp), dimension(:, :), intent(inout) :: Sigma
-        integer :: nr_proc_rows, nr_proc_cols, proc_row, proc_col, i, index
+        real(kind=dp), dimension(:, :), intent(inout) :: Sigma_local
+        integer :: nr_proc_rows, nr_proc_cols, proc_row, proc_col, i, &
+                   index, nr_procs, proc_nr
+        call blacs_pinfo(proc_nr, nr_procs)
         call blacs_gridinfo(context, nr_proc_rows, nr_proc_cols, &
                             proc_row, proc_col)                           
         Sigma_local = 0.0_dp
@@ -388,10 +438,27 @@ contains
         do i = 1, size(S)
             if (is_mine(block_size, nr_proc_rows, proc_row, i) .and. &
                 is_mine(block_size, nr_proc_cols, proc_col, i)) then
-                Sigma_local(index, index) = S(i)
-                index = index + 1
+                    Sigma_local(index, index) = S(i)
+                    index = index + 1
             end if
         end do
     end subroutine init_sigma
+
+    function compute_error(orig_A, A) result(rel_err)
+        use, intrinsic :: iso_fortran_env, only : dp => REAL64
+        implicit none
+        real(kind=dp), dimension(:, :), intent(in) :: orig_A, A
+        real(kind=dp) :: rel_err
+        integer :: i, j
+        real(kind=dp) :: norm
+        rel_err = 0.0_dp
+        do j = 1, size(A, 2)
+            do i = 1, size(A, 1)
+                norm = abs(orig_A(i, j))
+                rel_err = rel_err + abs(A(i, j) - orig_A(i, j))/norm
+            end do
+        end do
+        rel_err = rel_err/(size(A, 1)*size(A, 2))
+    end function compute_error
 
 end program svd_blacs
