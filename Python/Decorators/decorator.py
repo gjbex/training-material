@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from functools import wraps
+
 
 class NegArgError(Exception):
     def __init__(self, name, n):
@@ -13,31 +15,28 @@ class TooLargeArgError(Exception):
         self.message = 'argument {0} for {1} too large'.format(n, name)
 
 
-def trace(f):
-    pass
-
-
 def check_min(f):
+    @wraps(f)
     def wrapped(n):
         if n < 0:
             raise NegArgError(f.__name__, n)
         return f(n)
-    wrapped.__name__ = f.__name__
     return wrapped
 
 
 def check_max(f):
+    @wraps(f)
     def wrapped(n):
         if n > 12:
             raise TooLargeArgError(f.__name__, n)
         return f(n)
-    wrapped.__name__ = f.__name__
     return wrapped
 
 
 @check_max
 @check_min
 def fact(n):
+    '''compute factorial of given number'''
     if n == 0:
         return 1
     else:
@@ -49,4 +48,6 @@ if __name__ == '__main__':
         try:
             print('{0}! = {1}'.format(n, fact(n)))
         except Exception as error:
-            sys.stderr.write('### error: {0}\n'.format(error.message))
+            sys.stderr.write('### error: {0}\n'.format(error))
+    print('function name: {0}'.format(fact.__name__))
+    print('function docs: {0}'.format(fact.__doc__))
