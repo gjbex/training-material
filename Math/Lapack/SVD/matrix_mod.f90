@@ -3,6 +3,47 @@ implicit none
 
 contains
 
+    subroutine get_matrix_dimensions(file_name, matrix_dset_name, &
+                                     dims)
+        use hdf5
+        use, intrinsic :: iso_fortran_env, only : dp => REAL64, error_unit
+        implicit none
+        integer, parameter :: matrix_rank = 2
+        character(len=*), intent(in) :: file_name, matrix_dset_name
+        integer, dimension(matrix_rank) :: dims
+        integer(hid_t) :: file_id, matrix_dset_id, dset_prop_id, &
+                          matrix_mspace_id, matrix_fspace_id
+        integer(hsize_t), dimension(matrix_rank) :: matrix_dims, &
+                                                max_matrix_dims
+        integer :: error
+        call h5open_f(error)
+
+        ! open the HDF5 file, overwriting it if it alread exists
+        call h5fopen_f(file_name, H5F_ACC_RDONLY_F, file_id, error)
+        if (error /= 0) then
+            write (unit=error_unit, fmt="(2A)") "# error opening file ", &
+                                                file_name
+            stop
+        end if
+
+        ! open the matrix dataset, and get the matrix file dataspace
+        call h5dopen_f(file_id, matrix_dset_name, matrix_dset_id, error)
+        call h5dget_space_f(matrix_dset_id, matrix_fspace_id, error)
+
+        ! retrieve the dimensions of the matrix, and allocate the matrix
+        call h5sget_simple_extent_dims_f(matrix_fspace_id, matrix_dims, &
+                                         max_matrix_dims, error)
+        ! close the matrix dataset
+        call h5dclose_f(matrix_dset_id, error)
+
+        ! close HDF5 file
+        call h5fclose_f(file_id, error)
+
+        ! finalize Fortran HDF5 interface
+        call h5close_f(error)
+        dims = int(matrix_dims)
+    end subroutine get_matrix_dimensions
+
     subroutine read_matrix(file_name, matrix_dset_name, matrix)
         use hdf5
         use, intrinsic :: iso_fortran_env, only : dp => REAL64, error_unit
@@ -33,7 +74,7 @@ contains
 
         ! retrieve the dimensions of the matrix, and allocate the matrix
         call h5sget_simple_extent_dims_f(matrix_fspace_id, matrix_dims, &
-                                       max_matrix_dims, error)
+                                         max_matrix_dims, error)
         allocate(matrix(matrix_dims(1), matrix_dims(2)), stat=error)
         if (error /= 0) then
             write (unit=error_unit, fmt="(A)") &
