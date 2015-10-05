@@ -26,6 +26,5 @@ What is it?
    a `yield` statement.
 3. `primes_itertools.py`: this script also generates a potentially
    infinite sequence of prime numbers, but it is implemented using
-   the `count` and `ifilter` functions of the `itertools` module in
-   Python's standard library.
-
+   the `count` function of the `itertools` module in Python's standard
+   library, as well as the `filter` function.
