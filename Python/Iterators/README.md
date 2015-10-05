@@ -21,10 +21,14 @@ What is it?
    `EventIter` constructor takes a list of event types, and a start time.
    It generates sequence of random type, start time and duration, until an
    event is generated that last later than the stop time.
-2. `primes.py`: this script will generate the sequence of prime numbers
+1. `people.py`: illustration of `itertools`'s `groupby`, and `operator`'s
+    `attrgetter` methods.  Note that `groupby` does not reorder the
+    original iterators element, but only groups consecutive elements that
+    have the same key.
+1. `primes.py`: this script will generate the sequence of prime numbers
    until it is interupted.  The iterator is implemented by a function with
    a `yield` statement.
-3. `primes_itertools.py`: this script also generates a potentially
+1. `primes_itertools.py`: this script also generates a potentially
    infinite sequence of prime numbers, but it is implemented using
    the `count` function of the `itertools` module in Python's standard
    library, as well as the `filter` function.
