@@ -1,0 +1,33 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=20:ivybridge
+#PBS -l mem=120gb
+#PBS -l walltime=4:00:00
+#PBS -m ae
+
+if [ -z "${file}" ]
+then
+    echo "no file specified" >&2
+    exit 1
+fi
+echo "File: ${file}" >&2
+
+if [ -z "${block_size}" ]
+then
+    echo "# warning: using default block size" >&2
+    block_size=400
+fi
+echo "block size: ${block_size}" >&2
+
+module purge
+module load intel/2014a
+module load HDF5/1.8.12-intel-2014a-serial
+
+nr_nodes=`cat ${PBS_NODEFILE} | uniq | wc -l`
+nr_procs=`cat ${PBS_NODEFILE} | wc -l`
+
+echo "number of nodes: ${nr_nodes}" >&2
+echo "number of procs: ${nr_procs}" >&2
+
+cd $PBS_O_WORKDIR
+
+mpirun -np ${nr_procs} ./svd_blacs.exe ${file} matrix ${block_size} >&2
