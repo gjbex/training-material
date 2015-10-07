@@ -40,5 +40,5 @@ export MKL_NUM_THREADS=${ppn}
 export I_MPI_PIN_DOMAIN=omp:scatter
 export KMP_AFFINITY=scatter
 
-mpirun -np ${nr_nodes} -ppn ${ppn} \
+mpirun -np ${nr_nodes} -ppn 1 \
        ./svd_blacs_hybrid.exe ${file} matrix ${block_size} >&2
