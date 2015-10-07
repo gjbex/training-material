@@ -16,6 +16,8 @@ if __name__ == '__main__':
         start = datetime.now()
         matrix = h5file.get_node(h5file.root, name=options.dataset)
         m, n = matrix.shape
+        m_sum = np.sum(matrix)
+        print('avg: {0:.4f}'.format(m_sum/(m*n)))
         print('{0:d} x {1:d} matrix'.format(m, n))
         delta = datetime.now() - start
         print('HDF5 read: {0:d}.{1:06d}'.format(delta.seconds,
