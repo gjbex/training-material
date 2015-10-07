@@ -1,0 +1,26 @@
+#!/bin/bash -l
+#PBS -l nodes=2:ppn=10
+#PBS -l partition=smp2
+#PBS -l pmem=12gb
+#PBS -l walltime=10:00:00
+#PBS -m ae
+
+if [ -z "${file}" ]
+then
+    echo "no file specified" >&2
+    exit 1
+fi
+echo "HDF5 file ${file}" >&2
+
+source switch_to_2015a
+module load pyTables/3.2.2-intel-2015a-Python-2.7.9
+
+cd $PBS_O_WORKDIR
+
+for threads in 1 2 4 8 10 16 20
+do
+    echo "threads: ${threads}" >&2
+    env KMP_AFFINITY=disabled MKL_NUM_THREADS=${threads} \
+        dplace -e -x 2 -c 0-$(( ${threads} - 1 )) \
+            ./svd.py ${file} matrix >&2
+done

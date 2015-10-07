@@ -8,9 +8,12 @@ FPPFLAGS = -I$(HDF5_DIR)/include
 LIBS = -L$(HDF5_DIR)/lib -lhdf5_fortran
 MATH_LIBS = -L$(BLAS_DIR) -lblas -llapack -lm
 DISTR_MATH_LIBS = -L$(BLACS_DIR) -lblacsF77init-openmpi -lblacs-openmpi -lscalapack-openmpi
+HYBRID_MATH_LIBS = -L$(BLACS_DIR) -lblacsF77init-openmpi -lblacs-openmpi -lscalapack-openmpi
 
-APPS = create_h5.exe dump_h5.exe svd.exe svd_blacs.exe \
-       blacs_enlightenment.exe create_test_h5.exe
+APPS = create_h5.exe create_test_h5.exe dump_h5.exe \
+       blacs_enlightenment.exe \
+       svd.exe svd_blacs.exe svd_blacs_hybrid.exe
+       
 OBJS = utils_mod.o matrix_mod.o
 
 all: $(APPS)
@@ -23,6 +26,9 @@ blacs_enlightenment.exe: blacs_enlightenment.f90
 
 svd_blacs.exe: utils_mod.f90 matrix_mod.f90 svd_blacs.f90
 	$(MPIF90) $(FFLAGS) $(FPPFLAGS) -o $@ $^ $(DISTR_MATH_LIBS) $(LIBS)
+
+svd_blacs_hybrid.exe: utils_mod.f90 matrix_mod.f90 svd_blacs.f90
+	$(MPIF90) $(FFLAGS) $(FPPFLAGS) -o $@ $^ $(HYBRID_MATH_LIBS) $(LIBS)
 
 %.exe: $(OBJS) %.o
 	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $^ $(LIBS)
