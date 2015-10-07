@@ -25,6 +25,8 @@ What is it?
     Python code at runtime.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
     setting up and executing unit tests
+1. `Collections`: illustration of some data types defined in Python's
+    `collections` standard library module.
 1. `ConfigParser`: illustrates how to use the ConfigParser module to handle
     configuration files.
 1. `ContextManager`: illustrates the concept of a context manager, a
