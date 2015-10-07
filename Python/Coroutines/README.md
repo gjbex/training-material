@@ -6,8 +6,9 @@ preserve state between invocations.
 
 What is it?
 -----------
-`coroutine.py`: implements a coroutine `my_printer` that can can be
-"created" by invocating the function, "started" using the `next()` method,
-"invoked" using the `send()` method, and terminated using the `close()`
-method.
-
+1. `coroutine.py`: implements a coroutine `my_printer` that can can be
+    "created" by invocating the function, "started" using the `next()`
+    method, "invoked" using the `send()` method, and terminated using
+    the `close()` method.
+1. `stats.py`: coroutine implementation for collecting statistics (mean,
+    standard deviation).
