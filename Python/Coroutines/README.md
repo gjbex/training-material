@@ -12,3 +12,4 @@ What is it?
     the `close()` method.
 1. `stats.py`: coroutine implementation for collecting statistics (mean,
     standard deviation).
+1. `data.txt`: data file to compute statistical measures from.
