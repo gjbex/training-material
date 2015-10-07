@@ -11,3 +11,7 @@ What is it?
     represents a tuple that has elements that can be addressed by names,
     in addition to index.  This example also shows how to use `itertools`
     `combinations` iterator, as well as an interesting string format.
+1. `ordered_dict.py`: counts characters from standard input, and stores
+    counts in an `OrderedDict` so that the output reflects the order of
+    the first occurence in the text.
+1. `text.txt`: text file to experiment with.

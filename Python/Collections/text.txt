@@ -1,0 +1,7 @@
+This is just
+some random text
+used to count characters
+to illustrate two of the
+data types in Python's
+collection module, i.e.,
+OrderedDict and Counter.
