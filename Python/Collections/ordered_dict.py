@@ -9,6 +9,7 @@ def count_chars(line, counter):
     '''count the alphabetical characters in the given line'''
     for character in line:
         if character in string.ascii_letters:
+            character = character.lower()
             if character not in counter:
                 counter[character] = 0
             counter[character] += 1
