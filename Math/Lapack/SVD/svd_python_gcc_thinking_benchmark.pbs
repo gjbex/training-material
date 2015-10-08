@@ -12,7 +12,7 @@ fi
 echo "File: ${file}" >&2
 
 source switch_to_2015a
-module load pyTables/3.2.2-foss-2015a-Python-2.7.9
+module load pyTables/3.1.1-foss-2015a-Python-2.7.9
 
 cd $PBS_O_WORKDIR
 
