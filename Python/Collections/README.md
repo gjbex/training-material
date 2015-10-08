@@ -14,4 +14,7 @@ What is it?
 1. `ordered_dict.py`: counts characters from standard input, and stores
     counts in an `OrderedDict` so that the output reflects the order of
     the first occurence in the text.
+1. `counter.py`: counts characters from stardard input, but uses a
+    `Counter` to store the results.  The three most common characters are
+    listed using the `most_common` method.
 1. `text.txt`: text file to experiment with.
