@@ -18,4 +18,4 @@ module load HDF5/1.8.12-intel-2014a-serial
 
 cd $PBS_O_WORKDIR
 
-./svd.exe ${file} matrix >&2
+./svd_threaded.exe ${file} matrix >&2

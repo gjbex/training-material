@@ -22,5 +22,5 @@ for threads in 1 2 4 8 10 16 20
 do
     echo "threads: ${threads}" >&2
     export MKL_NUM_THREADS=${threads}
-    ./svd.exe ${file} matrix >&2
+    ./svd_threaded.exe ${file} matrix >&2
 done

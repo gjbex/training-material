@@ -1,6 +1,5 @@
 #!/bin/bash -l
-#PBS -l nodes=1:ppn=20:ivybridge
-#PBS -l mem=120gb
+#PBS -l nodes=1:ppn=24:haswell
 #PBS -l walltime=4:00:00
 #PBS -m ae
 
@@ -17,7 +16,7 @@ module load HDF5/1.8.14-intel-2015a-serial
 
 cd $PBS_O_WORKDIR
 
-for threads in 1 2 4 8 10 16 20
+for threads in 1 2 4 8 10 12 16 20 24
 do
     export MKL_NUM_THREADS=${threads}
     echo "threads: ${MKL_NUM_THREADS}" >&2

@@ -24,5 +24,5 @@ do
     export MKL_NUM_THREADS=${threads}
     env KMP_AFFINITY=disabled MKL_NUM_THREADS=${threads} \
         dplace -e -x 2 -c 0-$(( ${threads} - 1 )) \
-            ./svd.exe ${file} matrix >&2
+            ./svd_threaded.exe ${file} matrix >&2
 done
