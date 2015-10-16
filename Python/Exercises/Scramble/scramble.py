@@ -40,12 +40,11 @@ def scramble_chars(token, max_nr_swaps, positions):
 
 
 def scramble(input_file, output_file, nr_swaps, positions):
-    with input_file as input:
-        with output_file as output:
-            for line in input:
-                tokens = [scramble_chars(token, nr_swaps, positions)
-                          for token in tokenize(line)]
-                output.write(''.join(tokens))
+    with input_file as input, output_file as output:
+        for line in input:
+            tokens = [scramble_chars(token, nr_swaps, positions)
+                      for token in tokenize(line)]
+            output.write(''.join(tokens))
 
 
 def main():
