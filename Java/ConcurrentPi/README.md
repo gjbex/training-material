@@ -9,12 +9,12 @@ application with the worker framework.
 What is it?
 -----------
 1. `src`: source code for the Java application.
-  a. `PiDriver.java`: main method that handles command line arguments, if
+  1. `PiDriver.java`: main method that handles command line arguments, if
         any, and starts and finishes the computation of pi.
-  a. `gjb.demo.concurrentpi.PiComputer.java`: class that performs the
+  1. `gjb.demo.concurrentpi.PiComputer.java`: class that performs the
         multithreaded computation, using tasks implemented by
         `gjb.demo.concurrentpi.PartialPi.java`.
-  a. `gjb.demo.concurrentpi.PartialPi.java`: computes a quadrature over
+  1. `gjb.demo.concurrentpi.PartialPi.java`: computes a quadrature over
         a given interval, contributing to the overall result on the
         interval [0.0, 1.0].
 1. `build.xml`: Ant build file to compile the code, and build two JAR
@@ -22,3 +22,5 @@ What is it?
     compute pi using one or more threads, the second `pi_app.jar`
     contains a `main` method that handles command line arguments and
     output.
+1. `scaling.pbs`: check scaling when running with 1, 2, 4, 8, and 16
+    threads on a compute node with at least that many physical cores.

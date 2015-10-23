@@ -1,0 +1,18 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=20:ivybridge
+#PBS -l feature=mem64
+#PBS -l walltime=00:10:00
+#PBS -j oe
+
+module load Java/1.7.0_51
+
+cd $PBS_O_WORKDIR
+
+delta_x="1.0e-10"
+
+for nr_threads in 1 2 4 8 16;
+do
+    echo "${nr_threads} threads:"
+    time java -classpath "pi_computer.jar:pi_app.jar" \
+        PiDriver ${nr_threads} ${nr_threads} ${delta_x}
+done
