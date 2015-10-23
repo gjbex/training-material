@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+	<property name="src.dir"    value="src"/>
+	<property name="build.dir"  value="build"/>
+	<property name="docs.dir"   value="docs"/>
+	<property name="lib.jar"    value="pi_computer.jar"/>
+	<property name="app.jar"    value="pi_app.jar"/>
+	<property name="main.class" value="PiDriver"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${docs.dir}"/>
+    	<delete file="${lib.jar}"/>
+    	<delete file="${app.jar}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"/>
+    </target>
+
+    <target name="libjar" depends="compile">
+        <jar destfile="${lib.jar}" basedir="${build.dir}"
+        	 excludes="${main.class}.class"/>
+    </target>
+
+    <target name="appjar" depends="libjar">
+        <jar destfile="${app.jar}" basedir="${build.dir}"
+        	 excludes="gjb/"/>
+    </target>
+
+    <target name="run" depends="appjar">
+        <java classname="${main.class}" fork="true">
+        	<classpath>
+        		<pathelement location="${lib.jar}"/>
+        		<pathelement location="${app.jar}"/>
+        	</classpath>
+        </java>
+    </target>
+
+	<target name="docs">
+		<mkdir dir="${docs.dir}"/>
+		<javadoc sourcepath="${src.dir}" Private="true" destdir="${docs.dir}" author="true">
+			<doctitle>"Compute pi concurrently"</doctitle>
+		</javadoc>
+    </target>
+		
+
+</project>
