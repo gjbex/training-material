@@ -26,3 +26,21 @@ What is it?
     threads on a compute node with at least that many physical cores.
 1. `submit.sh`: submits the `scaling.pbs` PBS file, simply for
     illustrating the `qsub` command.
+
+How to use it?
+--------------
+The java application can be build using ant, i.e.,
+```bash
+$ ant appjar
+```
+This will build two JAR files, one containing the actual implementation,
+the second a driver program to execute the computation.
+For a simple test, run it with
+```bash
+$ ant run
+```
+
+Prerequisites
+-------------
+* Java 1.7+
+* ant
