@@ -24,3 +24,5 @@ What is it?
     output.
 1. `scaling.pbs`: check scaling when running with 1, 2, 4, 8, and 16
     threads on a compute node with at least that many physical cores.
+1. `submit.sh`: submits the `scaling.pbs` PBS file, simply for
+    illustrating the `qsub` command.
