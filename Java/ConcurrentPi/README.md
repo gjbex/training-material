@@ -26,6 +26,12 @@ What is it?
     threads on a compute node with at least that many physical cores.
 1. `submit.sh`: submits the `scaling.pbs` PBS file, simply for
     illustrating the `qsub` command.
+1. `precision.pbs`: using a specified number of threads, compute pi using
+    the given value of `delta_x`.
+1. `precision.dat`: data file for `precision.pbs`
+1. `submit_with_worker.sh`: submit `precision.pbs` as a PBS batch file
+    with worker, using `precision.dat` as a data file.  This is added to
+    document the submission process.
 
 How to use it?
 --------------
