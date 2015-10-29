@@ -11,8 +11,8 @@ def plot_spectrum(freq, spectrum, rate, half_spectrum=True,
                   spectrum_max=0.15):
     if half_spectrum:
         n = len(freq)
-        freq_half = freq[list(range(int(n/2)))]
-        spectrum_half = spectrum[list(range(int(n/2)))]
+        freq_half = freq[list(range(n//2))]
+        spectrum_half = spectrum[list(range(n//2))]
 # plotting the spectrum
         plt.plot(freq_half, abs(spectrum_half), 'r')
         plt.axis([0.0, rate/2.0, 0.0, spectrum_max])
