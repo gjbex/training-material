@@ -19,5 +19,5 @@ if __name__ == '__main__':
     elif options.format == 'text':
         v = np.fromfile(options.file, sep='\n')
     t_stop = time.time()
-    print('{0:.10e} ({1:d} elements)'.format(np.sum(v), len(v)))
+    print('{0:.10e} ({1:d} elements)'.format(np.sum(v), v.shape[0]))
     print('time {0:.6f}'.format(t_stop - t_start))
