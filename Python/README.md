@@ -1,6 +1,4 @@
-Python
-======
-
+# Python
 Python is an excellent programming language for data processing,
 prototyping and writing glue code for C/C++/Fortran libraries.
 
@@ -8,8 +6,7 @@ This directory contains code samples that illustrate particular features
 and programming techniques, or how to use Python iibraries.  Many of
 these samples have been used for Python tutorials.
 
-What is it?
------------
+# What is it?
 1. `ArgParse`: illustration of how to use the argparse module to handle
     command line arguments.
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
@@ -65,6 +62,7 @@ What is it?
    `multiprocessing` library.
 1. `NetworkX`: illustration of the graph representation and algorithms
     library.
+1. `Nltk`: some initial Natural Language ToolKit experiments.
 1. `Numpy`: a few illustratios of using numpy, scipy, and matplotlib
     (linear regression, optimization, solving ODEs, FFT).
 1. `OperatorFunctools`: some illustrations of the functional programming
