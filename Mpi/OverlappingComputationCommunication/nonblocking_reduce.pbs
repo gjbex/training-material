@@ -7,4 +7,4 @@ cd ${PBS_O_WORKDIR}
 source setuo.sh
 
 export MPICH_ASYNC_PROGRESS=1
-mpirun -np 40 ./async_reduce 10000000 100
+mpirun -np 40 ./nonblocking_reduce.exe 10000000 100
