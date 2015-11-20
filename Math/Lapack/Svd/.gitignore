@@ -4,3 +4,7 @@
 *.e[0-9]*
 .ipynb_checkpoints
 core.[0-9]*
+matlab_svd
+run_matlab_svd.sh
+readme.txt
+mccExcludedFiles.log

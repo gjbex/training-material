@@ -32,6 +32,7 @@ consumes some more memory, which is the purpose of the application.
 1. `setenv.sh`: file to be sourced, setting up the enivronment to run
     the executables with Intel's MKL.
 1. `svd.py`: Python implementation of `svd.f90`.
+1. `matlab_svd.m`: Matlab implementation of `svd.f90`
 1. `build_201[45]a.sh`: build scripts for the Intel 2014a and 2015a
     toolchains.
 1. `setenv_201[45]a.sh`: scripts to be source to set up the environment
