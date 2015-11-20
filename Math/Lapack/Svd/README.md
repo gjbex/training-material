@@ -15,6 +15,10 @@ consumes some more memory, which is the purpose of the application.
 1. `svd.f90`; computes the SVD of a matrix read from an HDF5 file using
     `dgesvd`, reconstructs the matrix using `dgemm`, and computes the
     relative error.
+1. `blacs_enlightenment.f90`: computes the BLACS storage layout for a 2D
+    array.
+1. `blacs_data_distribution.ods`: visual representation of BLACS 2D array
+    memory layout (LibreOffice Calc file).
 1. `svd_blacs.f90`: compute the SVD of a maatrix read from an HDF5 file
     using Scalapack's `pdgesvd`, reconstructs the matrix using PBLAS's
     `pdgemm` and computes the relative error.
@@ -27,3 +31,10 @@ consumes some more memory, which is the purpose of the application.
     Intel's MKL library (11.2).
 1. `setenv.sh`: file to be sourced, setting up the enivronment to run
     the executables with Intel's MKL.
+1. `svd.py`: Python implementation of `svd.f90`.
+1. `build_201[45]a.sh`: build scripts for the Intel 2014a and 2015a
+    toolchains.
+1. `setenv_201[45]a.sh`: scripts to be source to set up the environment
+    for the Intel 2014a and 2015a toolchains.
+1. `*.pbs`: various PBS scripts for benchmarking.
+1. `svd_benchmarks.xlsx`: some benchmark results (LibreOffice Calc file).
