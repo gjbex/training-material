@@ -61,7 +61,7 @@ do iter = 1, nr_iters
         call random_number(r)
         will_send = r < prob 
         if (will_send) then
-            print '(A, I0)', 'will send: ', rank
+            print '(A, I0, A, I0)', 'will send: ', rank, ' in ', iter
             incr = 1
             target_disp = 0
             call MPI_Accumulate(incr, 1, MPI_INTEGER, target_rank, &
@@ -76,7 +76,7 @@ do iter = 1, nr_iters
 
     ! for debugging, print the number of senders
     if (rank == target_rank) then
-        print '(A, I0)', 'expecting ', nr_recvs
+        print '(A, I0, A, I0)', 'expecting ', nr_recvs, ' in ', iter
     end if
 
     ! the target will receive nr_recvs messages, each process willing
@@ -85,7 +85,8 @@ do iter = 1, nr_iters
         do i = 1, nr_recvs
             call MPI_Recv(msg_buff, 1, MPI_INTEGER, MPI_ANY_SOURCE, tag, &
                           MPI_COMM_WORLD, status)
-            print '(A, I0)', 'received from ', status%MPI_SOURCE
+            print '(A, I0, A, I0)', 'received from ', status%MPI_SOURCE, &
+                                        ' in ', iter
         end do
     else
         if (will_send) then
