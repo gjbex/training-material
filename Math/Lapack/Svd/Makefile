@@ -20,6 +20,11 @@ SRCS = utils_mod.f90 matrix_mod.f90
 
 all: $(APPS)
 
+matlab: matlab_svd
+
+matlab_svd: matlab_svd.m
+	$(MCC) $(MFLAGS) $@
+
 svd.exe: $(SRCS) svd.f90
 	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $^ \
 	       $(MATH_LIBS) $(LIBS)
@@ -43,4 +48,5 @@ blacs_enlightenment.exe: blacs_enlightenment.f90
 	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $^ $(LIBS)
 
 clean:
-	rm -f $(APPS) *.o *.mod
+	rm -f $(APPS) *.o *.mod \
+	      matlab_svd run_matlab_svd.sh readme.txt mccExcludedFiles.log
