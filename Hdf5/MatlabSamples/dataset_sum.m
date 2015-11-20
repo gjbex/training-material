@@ -1,4 +1,4 @@
-function matrix_sum = hdf5_reading(filename, datasetname)
+function matrix_sum = dataset_sum(filename, datasetname)
     data = h5read(filename, datasetname)
     [rows, cols] = size(data);
     if isdeployed

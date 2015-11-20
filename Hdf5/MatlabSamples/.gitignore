@@ -1,4 +1,4 @@
-hdf5_reading
-run_hdf5_reading.sh
+dataset_sum
+run_dataset_sum.sh
 mccExcludedFiles.log
 readme.txt

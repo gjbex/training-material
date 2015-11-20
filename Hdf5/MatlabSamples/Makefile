@@ -1,7 +1,7 @@
 MCC = mcc
 MFLAGS = -m
 
-APPS := hdf5_reading
+APPS := dataset_sum
 DUMMY := $(addprefix run_, $(APPS))
 SCRIPTS := $(addsuffix .sh, $(DUMMY))
 
