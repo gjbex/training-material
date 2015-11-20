@@ -13,3 +13,5 @@ What is it?
     `rand_r` function.
 1. `Ring`: a few examples of point-to-point communication for "halo
     exchange".
+1. `SparseSends`: how to receive messages from a small number of a-priory
+    unknown processes.
