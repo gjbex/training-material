@@ -1,13 +1,10 @@
-SVD
-===
-
+# SvD
 Illustration of computing the singular value decomposition of a matrix.
 Note that the way to reconstruct the original matrix from U, S, and VT
 is definitely not efficient, however, constructing the Sigma matrix
 consumes some more memory, which is the purpose of the application.
 
-Contents
---------
+## Contents
 1. `create_h5.f90`: creates an HDF5 file containing a matrix with elements
     drawn from a uniform random distribution.
 1. `create_test_h5.f90`: creates an HDF5 file containing a matrix with
