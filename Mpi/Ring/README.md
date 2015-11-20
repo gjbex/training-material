@@ -26,3 +26,5 @@ What is it?
     grid, found using shift operation using Fortran 2008 interface.
 1. `torus.f90`: 2D torus topology using a Carthesian communicator and
     `MPI_Sendrecv' for halo exchange.
+1. `one_sided.f90`: each process puts a value into its right neighbour,
+    and gets a message from that neighbour using one-sided communication.
