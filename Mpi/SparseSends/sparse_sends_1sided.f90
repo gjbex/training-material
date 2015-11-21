@@ -51,12 +51,7 @@ do iter = 1, nr_iters
     ! start RMA epoch, only processes intending to send add 1 to nr_recvs
     if (.not. MPI_ASYNC_PROTECTS_NONBLOCKING) &
         call MPI_F_SYNC_REG(nr_recvs)
-    if (rank == 0) then
-        call MPI_Win_fence(MPI_MODE_NOPRECEDE, window)
-    else
-        call MPI_Win_fence(MPI_MODE_NOPRECEDE + MPI_MODE_NOSTORE + &
-                           MPI_MODE_NOPUT, window)
-    end if
+    call MPI_Win_fence(0, window)
     if (rank /= target_rank) then
         call random_number(r)
         will_send = r < prob 
@@ -69,8 +64,7 @@ do iter = 1, nr_iters
                                 MPI_SUM, window)
         end if
     end if
-    call MPI_Win_fence(MPI_MODE_NOSUCCEED + MPI_MODE_NOPUT + &
-                       MPI_MODE_NOSTORE, window)
+    call MPI_Win_fence(0, window)
     if (.not. MPI_ASYNC_PROTECTS_NONBLOCKING) &
         call MPI_F_SYNC_REG(nr_recvs)
 
