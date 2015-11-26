@@ -31,7 +31,7 @@ database containing data on scientific experiments.
         runs of a specified run type.
   * `28_select_result_stats.sql`: get statistics (average, minimum and
         maximum value) on all te runs of a specfied run type.
-1. `sql_experiments.sql`: slides documenting the database.
+1. `sql_experiments.pptx`: slides documenting the database.
 
 ## Requirements
 This is for demonstration purposes only, so SQLite3 is used as a database.
