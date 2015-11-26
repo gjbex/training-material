@@ -10,6 +10,8 @@ learning SQL.
 What is it?
 -----------
 1. `Basics`: some basic SQL examples
+1. `ExperimentDB`: some tutorial material with an emphasis on database
+    schema design in third normal form.
 
 Requirements
 ------------
