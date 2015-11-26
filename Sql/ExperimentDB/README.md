@@ -23,7 +23,7 @@ database containing data on scientific experiments.
   * `19_select_old.sql`: get the experiments that ended a while ago.
   * `20_select_unfinished.sql`: get the experiments that are not yet
         completed, i.e., those that have `NULL` for an end date.
-  * `21_select_lazy.sql`: get researchers who have unfinished experiments.
+  * `21_select_lazy.pptx`: get researchers who have unfinished experiments.
   * `25_select_heleen.wql`: get all experiments Heleen has been doing.
   * `26_select_parameters.sql`: get the values and unit for all the
         parameters in all the runs.
