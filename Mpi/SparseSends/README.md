@@ -9,4 +9,6 @@ of processes which are not known in advance.
 1. `sparse_sends_ibarrier.f90`: using a non-blocking barrier to indicate
     that all processes have send their messages, and that the target can
     proceed.
+1. `sparse_sends_reduce.f90`: a collective `MPI_Reduce` is used to inform
+    the target process how many processes intend to send messages to it.
 1. `Makefile`: make file to build the executables
