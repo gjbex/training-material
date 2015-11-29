@@ -20,7 +20,8 @@ What is it?
     This material is part of a tutorial on  HDF5.
 * `Java`: sample code mostly for demonstration purposes.
 * `LinuxTools`: some illustrations of using Linux tools such as the `M4`
-    macro processor, make files and autotools.
+    macro processor, make files and autotools, as well as slides on
+    version control using svn and git.
 * `Mpi`: illustration of distributed programming using the Message Passing
     Interface API.
 * `NetCDF`: sample code showing how to read/write NetCDF files for C,
