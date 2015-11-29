@@ -10,6 +10,8 @@ is subject to the license included in this repository.
 
 What is it?
 -----------
+* `Debugging`: slides used for an info session on debugging tools and
+    techniques, as well as sample code.
 * `Fortran`: sample Fortran code intended to illustrate Fortran 95, 2003,
     and 2008 features.  This material is developed in preparation of a
     tutorial on modern Fortran features.
