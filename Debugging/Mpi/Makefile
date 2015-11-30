@@ -3,7 +3,8 @@ FFLAGS = -g
 LDFLAGS = 
 LIBS =
 
-all: diffusion.exe 010_deadlock.exe 020_no_allocate.exe
+all: diffusion.exe 010_deadlock.exe 020_no_allocate.exe \
+     030_index_out_of_bounds.exe
 
 %.exe: %.o
 	$(MPIF90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
