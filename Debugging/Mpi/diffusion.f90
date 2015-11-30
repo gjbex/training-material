@@ -1,4 +1,4 @@
-program deadlock
+program diffusion
 use, intrinsic :: iso_fortran_env, only : dp => REAL64, error_unit
 use :: mpi
 implicit none
@@ -52,7 +52,6 @@ call allocate_matrix(new_temp, n)
 ! number of iterations is exceeded
 delta = 0.0_dp
 do iter_nr = 1, nr_iters
-! TODO implement halo exchange
     if (mod(iter_nr, 2) == 0) then
         call halo_exchange(new_temp, cart_comm, row_type, col_type)
         call update_matrix(new_temp, temp, delta)
@@ -143,21 +142,6 @@ contains
         end do
     end subroutine update_matrix
 
-! compute the local average, and compute global average in rank 0
-    subroutine compute_avg(matrix, avg, comm)
-        implicit none
-        real(kind=dp), dimension(:, :), intent(in) :: matrix
-        real(kind=dp), intent(out) :: avg
-        integer, intent(in) :: comm
-        real(kind=dp) :: local_avg
-        integer :: comm_size, ierr
-        call MPI_Comm_size(comm, comm_size, ierr)
-        local_avg = sum(matrix)/size(matrix)
-        call MPI_Reduce(local_avg, avg, 1, MPI_DOUBLE_PRECISION, MPI_SUM, &
-                        0, comm, ierr)
-        avg = avg/comm_size
-    end subroutine compute_avg
-
     subroutine halo_exchange(matrix, comm, row_type, col_type)
         implicit none
         real(kind=dp), dimension(:, :), intent(inout) :: matrix
@@ -183,4 +167,19 @@ contains
                           comm, MPI_STATUS_IGNORE, ierr)
     end subroutine halo_exchange
 
-end program deadlock
+! compute the local average, and compute global average in rank 0
+    subroutine compute_avg(matrix, avg, comm)
+        implicit none
+        real(kind=dp), dimension(:, :), intent(in) :: matrix
+        real(kind=dp), intent(out) :: avg
+        integer, intent(in) :: comm
+        real(kind=dp) :: local_avg
+        integer :: comm_size, ierr
+        call MPI_Comm_size(comm, comm_size, ierr)
+        local_avg = sum(matrix)/size(matrix)
+        call MPI_Reduce(local_avg, avg, 1, MPI_DOUBLE_PRECISION, MPI_SUM, &
+                        0, comm, ierr)
+        avg = avg/comm_size
+    end subroutine compute_avg
+
+end program diffusion
