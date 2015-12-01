@@ -11,6 +11,7 @@ character(len=1024) :: buffer
 integer, dimension(nr_dims) :: dims
 logical, dimension(nr_dims) :: periodic
 logical :: reorder
+logical, parameter :: is_verbose = .false.
 integer :: cart_comm, row_type, col_type
 
 ! setup MPI and get size and initial rank
@@ -47,14 +48,14 @@ call allocate_matrix(temp, n)
 call init_matrix(temp, cart_comm)
 
 ! show matrix
-call print_Matrix(temp, cart_comm)
+if (is_verbose) call print_Matrix(temp, cart_comm)
 
 ! allow diffusion until changes are smaller than tolerance, or the maximum
 ! number of iterations is exceeded
 call halo_exchange(temp, cart_comm, row_type, col_type)
 
 ! show matrix
-call print_Matrix(temp, cart_comm)
+if (is_verbose) call print_Matrix(temp, cart_comm)
 
 ! take down MPI
 call MPI_Finalize(ierr)
