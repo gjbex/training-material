@@ -9,6 +9,8 @@ What is it?
 -----------
 1. `HelloWorld`: most basic MPI program to show initialization, rank, size,
     and finalization.
+1. `mpi.pptx`: a very basic and gentle introduction to MPI from a
+    C programmer's perspective.
 1. `OverlappingComputationCommunication`: illustration of overlapping
     a computation and a communcation using non-blocking communication.
 1. `Pi`: sample of a hybrid MPI/OpenMP code, illustrating use of re-entrant
