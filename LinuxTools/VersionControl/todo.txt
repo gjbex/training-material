@@ -1,2 +1,0 @@
-* check exact semantics of git fetch
-* fix animation
