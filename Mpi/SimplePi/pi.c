@@ -36,6 +36,9 @@ int main(int argc, char *argv[]) {
     }
     MPI_Scatter(limits, 2, MPI_DOUBLE, local_limits, 2, MPI_DOUBLE, root,
                MPI_COMM_WORLD);
+    if (rank == 0) {
+        free(limits);
+    }
     if (params.is_verbose)
         printf("rank %d: %.5lf -> %.5lf (%ld)\n",
                rank, local_limits[0], local_limits[1], params.n);
