@@ -13,8 +13,6 @@ if __name__ == '__main__':
     from create import Experiment, Researcher, Sample, Base
     arg_parser = ArgumentParser(description='create tables in database')
     arg_parser.add_argument('db_name', help='name of DB to create')
-    arg_parser.add_argument('-list', action='store_true',
-                            help='show a list of all experiments')
     options = arg_parser.parse_args()
 
     engine = create_engine('sqlite:///{0}'.format(options.db_name))
