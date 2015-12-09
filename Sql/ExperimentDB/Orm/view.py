@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 
 
-def convert2date(date_str):
-    year, month, day = list(map(int, date_str.split('-')))
-    return datetime(year, month, day)
-
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    from datetime import datetime
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker
     from create import Experiment, Researcher, Sample, Base
