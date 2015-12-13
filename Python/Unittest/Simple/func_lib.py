@@ -28,6 +28,17 @@ def fib_fast(n):
         n -= 1
     return a
 
+
+def pi(n):
+    '''copmute pi using a quadrature method'''
+    sum = 0.0
+    x = 0.0
+    delta_x = 1.0/n
+    while x <= 1.0:
+        sum += 4.0/(1.0 + x**2)
+        x += delta_x
+    return sum/n
+
 if __name__ == '__main__':
     for i in range(5):
         print('fib({0:d}) = {1:d}'.format(i, fib(i)))
