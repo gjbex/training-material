@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from func_lib import fib_fast as fib, InvalidArgumentException
+from func_lib import fib, InvalidArgumentException
 
 
 class FibTest(unittest.TestCase):

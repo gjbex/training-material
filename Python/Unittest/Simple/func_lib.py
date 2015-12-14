@@ -8,16 +8,6 @@ class InvalidArgumentException(Exception):
 
 
 def fib(n):
-    '''compute the nth Fibonacci number recursively'''
-    if n == 0 or n == 1:
-        return 1
-    elif n > 1:
-        return fib(n - 1) + fib(n - 2)
-    else:
-        raise InvalidArgumentException('illegal negative argument for fib')
-
-
-def fib_fast(n):
     '''compute the nth Fibonacci number iteratively'''
     if n < 0:
         raise InvalidArgumentException('illegal negative argument for fib')
