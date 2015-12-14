@@ -17,6 +17,10 @@ class PiTest(unittest.TestCase):
         expected = 3.14159265359
         self.assertAlmostEqual(expected, pi(1000000), places=5)
 
+    def test_illegal_argument(self):
+        '''test an exception is raised when negative number is given'''
+        with self.assertRaises(Exception):
+            pi(-1)
 
 if __name__ == '__main__':
     unittest.main()

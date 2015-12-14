@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from func_lib import is_prime
+from func_lib import is_prime, InvalidArgumentException
 
 
 class IsPrimeTest(unittest.TestCase):
@@ -20,6 +20,11 @@ class IsPrimeTest(unittest.TestCase):
         for non_prime in non_primes:
             self.assertFalse(is_prime(non_prime),
                              msg='failed for {}'.format(non_prime))
+
+    def test_invalid_argument(self):
+        '''test for exception with negative argument'''
+        with self.assertRaises(InvalidArgumentException):
+            is_prime(-1)
 
 
 if __name__ == '__main__':

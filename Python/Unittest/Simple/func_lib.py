@@ -33,6 +33,9 @@ def fib_fast(n):
 
 def pi(n):
     '''copmute pi using a quadrature method'''
+    if n < 1:
+        raise InvalidArgumentException('number of integration points '
+                                       'should at least be 1')
     sum = 0.0
     x = 0.0
     delta_x = 1.0/n
@@ -44,6 +47,8 @@ def pi(n):
 
 def is_prime(n):
     '''returns True when the given number of prime, false otherwise'''
+    if n < 0:
+        raise InvalidArgumentException('number should be positive')
     factor = 2
     while factor <= int(math.sqrt(n)):
         if n % factor == 0:

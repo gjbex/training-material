@@ -16,5 +16,6 @@ module.
     `assertTrue` and `assertFalse`.  Test for non-prime numbers will fail
     for illustration.
 1. `primes`: test for the `primes` function, illustrates
-    `assertListEqual`.  Test will fail as a consequence of the problem in
-    `is_prime_test.py`.
+    `assertListEqual`.  One test will fail as a consequence of the
+    problem in `is_prime_test.py`, the other because an exception is not
+    raised..

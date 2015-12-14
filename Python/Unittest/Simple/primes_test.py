@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from func_lib import primes
+from func_lib import primes, InvalidArgumentException
 
 
 class PrimesTest(unittest.TestCase):
@@ -12,6 +12,10 @@ class PrimesTest(unittest.TestCase):
         expected = [2, 3, 5, 7, 11, 13, 17]
         self.assertListEqual(expected, primes(18))
 
+    def test_invalid_argument(self):
+        '''test for exception with negative argument'''
+        with self.assertRaises(InvalidArgumentException):
+            primes(-1)
 
 if __name__ == '__main__':
     unittest.main()
