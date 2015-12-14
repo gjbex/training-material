@@ -11,15 +11,15 @@ class IsPrimeTest(unittest.TestCase):
         '''test is_prime for prime numbers'''
         primes = [2, 3, 5, 7, 11, 13, 17]
         for prime in primes:
-            self.assertTrue(is_prime(prime),
-                            msg='failed for {}'.format(prime))
+            with self.subTest(i=prime):
+                self.assertTrue(is_prime(prime))
 
     def test_non_primes(self):
         '''test is_prime for non-prime numbers'''
         non_primes = [0, 1, 4, 6, 9]
         for non_prime in non_primes:
-            self.assertFalse(is_prime(non_prime),
-                             msg='failed for {}'.format(non_prime))
+            with self.subTest(i=non_prime):
+                self.assertFalse(is_prime(non_prime))
 
     def test_invalid_argument(self):
         '''test for exception with negative argument'''

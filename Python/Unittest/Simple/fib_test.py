@@ -11,8 +11,8 @@ class FibTest(unittest.TestCase):
         '''test a number computations for small arguments'''
         expected = [1, 1, 2, 3, 5, 8, 13]
         for i in range(len(expected)):
-            self.assertEqual(expected[i], fib(i),
-                             msg='failed for {}'.format(i))
+            with self.subTest(i=i):
+                self.assertEqual(expected[i], fib(i))
 
     def test_negative_values(self):
         '''test for call with negative argument'''
