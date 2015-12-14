@@ -52,6 +52,15 @@ def is_prime(n):
     return n > 1
 
 
+def primes(n):
+    '''returns a list of primes less than or equal to the given nuber'''
+    prime_list = []
+    for i in range(n + 1):
+        if is_prime(i):
+            prime_list.append(i)
+    return prime_list
+
+
 if __name__ == '__main__':
     for i in range(5):
         print('fib({0:d}) = {1:d}'.format(i, fib(i)))
