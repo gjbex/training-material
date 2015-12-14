@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import unittest
-from func_lib import fib
+from func_lib import fib, InvalidArgumentException
 
 
 class FibTest(unittest.TestCase):
@@ -16,7 +16,7 @@ class FibTest(unittest.TestCase):
 
     def test_negative_values(self):
         '''test for call with negative argument'''
-        with self.assertRaises(Exception):
+        with self.assertRaises(InvalidArgumentException):
             fib(-1)
 
 
