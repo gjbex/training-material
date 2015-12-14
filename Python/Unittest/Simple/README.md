@@ -12,6 +12,8 @@ module.
 1. `pi_test.py`: test for the pi function, illustrates
     `assertAlmostEqual`.
 1. `is_primes_test.py`: test for the`is_prime` function, illustrates
-    `assertTrue` and `assertFalse`.
+    `assertTrue` and `assertFalse`.  Test for non-prime numbers will fail
+    for illustration.
 1. `primes`: test for the `primes` function, illustrates
-    `assertListEqual`.
+    `assertListEqual`.  Test will fail as a consequence of the problem in
+    `is_prime_test.py`.

@@ -49,7 +49,10 @@ def is_prime(n):
         if n % factor == 0:
             return False
         factor += 1
-    return n > 1
+    return True
+# correct implementation for n >= 0
+#    return n > 1
+# for n < 0, an exception might be thrown
 
 
 def primes(n):
