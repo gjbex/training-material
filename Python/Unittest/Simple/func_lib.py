@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import math
+
 
 class InvalidArgumentException(Exception):
     '''Exception raised when an illigal agrument is passed to a function'''
@@ -38,6 +40,17 @@ def pi(n):
         sum += 4.0/(1.0 + x**2)
         x += delta_x
     return sum/n
+
+
+def is_prime(n):
+    '''returns True when the given number of prime, false otherwise'''
+    factor = 2
+    while factor <= int(math.sqrt(n)):
+        if n % factor == 0:
+            return False
+        factor += 1
+    return n > 1
+
 
 if __name__ == '__main__':
     for i in range(5):
