@@ -26,3 +26,13 @@ CREATE TABLE staff_assignments (
     FOREIGN KEY (project_id) REFERENCES projects(project_id),
     FOREIGN KEY (researcher_id) REFERENCES researchers(researcher_id)
 );
+
+DROP VIEW IF EXISTS project_staffing;
+
+CREATE VIEW project_staffing
+    (project_name, first_name, last_name)
+AS SELECT p.project_name, r.first_name, r.last_name
+    FROM projects AS p, researchers AS r, staff_assignments AS s
+    WHERE p.project_id = s.project_id AND
+          s.researcher_id = r.researcher_id AND
+          s.researcher_id = r.researcher_id;
