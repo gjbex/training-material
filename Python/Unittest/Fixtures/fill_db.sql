@@ -11,3 +11,17 @@ VALUES
     ('Alice', 'Perry'),
     ('Bob', 'Dreary'),
     ('Carol', 'Flynn');
+
+INSERT INTO staff_assignments
+    (project_id, researcher_id)
+SELECT p.project_id, r.researcher_id
+    FROM projects AS p, researchers AS r
+    WHERE p.project_name = 'project 1' AND
+          r.first_name = 'Bob';
+
+INSERT INTO staff_assignments
+    (project_id, researcher_id)
+SELECT p.project_id, r.researcher_id
+    FROM projects AS p, researchers AS r
+    WHERE p.project_name = 'project 2' AND
+          r.first_name = 'Alice';
