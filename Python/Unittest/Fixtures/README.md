@@ -10,3 +10,5 @@ before and after running each test.
     with the desired information.  It requires the existence of
     `projects.db`, initialized by the queries in `create_db.sql`,
     followed by `fill_db.sql`.
+1. `constraints_test.py`: series of tests for column constraints, table
+    constraints, and triggers.
