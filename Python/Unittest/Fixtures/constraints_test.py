@@ -35,5 +35,35 @@ class ConstraintsTest(unittest.TestCase):
                 (project_name, start_date, end_date)
             )
 
+    def test_project_name_uniqueness(self):
+        '''inserting a project with a name that is already in the table
+           should fail'''
+        project_name = 'project 2'
+        start_date = '2015-01-05'
+        end_date = '2015-12-15'
+        with self.assertRaises(sqlite3.IntegrityError):
+            self._cursor.execute(
+                '''INSERT INTO projects (project_name, start_date, end_date)
+                       VALUES (?, ?, ?);''',
+                (project_name, start_date, end_date)
+            )
+
+    def test_double_assignment(self):
+        '''assigning a researcher to a project twice should fail'''
+        project_name = 'project 1'
+        first_name = 'Bob'
+        with self.assertRaises(sqlite3.IntegrityError):
+            self._cursor.execute(
+                '''INSERT INTO staff_assignments
+                       (project_id, researcher_id)
+                       SELECT p.project_id AS 'project_id',
+                              r.researcher_id AS 'researcher_id'
+                       FROM projects AS p, researchers AS r
+                       WHERE p.project_name = ? AND
+                             r.first_name = ?;''',
+                (project_name, first_name)
+            )
+
+
 if __name__ == '__main__':
     unittest.main()
