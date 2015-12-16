@@ -6,8 +6,8 @@ import sqlite3
 import unittest
 
 
-class ConstrainsTest(unittest.TestCase):
-    '''tests the table constrains and triggers defined on the schema'''
+class ConstraintsTest(unittest.TestCase):
+    '''tests the table constraints and triggers defined on the schema'''
 
     def setUp(self):
         '''copy original database, and open connection, create cursor'''
