@@ -120,8 +120,8 @@ class ContentsTest(unittest.TestCase):
         '''tset whether each project has the correct number of samples
            associated with it'''
         expected_samples = {
-            'project 1': {'homo sapiens', 'felix felix'},
-            'project 2': {'felix felix'},
+            'project 1': {'homo sapiens', 'felis catus'},
+            'project 2': {'felis catus'},
             'project 3': set(),
         }
         self._cursor.execute(

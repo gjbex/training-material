@@ -66,7 +66,7 @@ CREATE VIEW project_staffing
 DROP TABLE IF EXISTS samples;
 CREATE TABLE samples (
     sample_id INTEGER PRIMARY KEY ASC AUTOINCREMENT,
-    project_id INTEGER NOT NULL,
+    project_id INTEGER,
     organism TEXT NOT NULL,
     FOREIGN KEY (project_id) REFERENCES projects(project_id)
 );

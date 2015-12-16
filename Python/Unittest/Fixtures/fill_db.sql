@@ -36,11 +36,11 @@ INSERT INTO samples
         WHERE project_name = 'project 1';
 INSERT INTO samples
         (project_id, organism)
-    SELECT project_id, 'felix felix'
+    SELECT project_id, 'felis catus'
         FROM projects
         WHERE project_name = 'project 1';
 INSERT INTO samples
         (project_id, organism)
-    SELECT project_id, 'felix felix'
+    SELECT project_id, 'felis catus'
         FROM projects
         WHERE project_name = 'project 2';
