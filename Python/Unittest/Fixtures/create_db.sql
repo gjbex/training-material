@@ -6,7 +6,8 @@ CREATE TABLE projects (
     start_date TEXT NOT NULL,
     end_date TEXT,
     CONSTRAINT end_date_check CHECK (end_date IS NULL OR
-                                     start_date < end_date)
+                                     start_date < end_date),
+    UNIQUE (project_name)
 );
 
 -- Create researchers table
