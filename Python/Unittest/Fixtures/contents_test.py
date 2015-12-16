@@ -106,6 +106,16 @@ class ContentsTest(unittest.TestCase):
             researchers.append(row['first_name'])
         self.assertListEqual(expected_researchers, researchers)
 
+    def test_assigned_projects(self):
+        '''test whether the expected number of projects has been
+           assigned'''
+        expected_nr_assignments = 2
+        self._cursor.execute(
+            '''SELECT COUNT(DISTINCT project_id) FROM staff_assignments;'''
+        )
+        nr_assignments = self._cursor.fetchone()[0]
+        self.assertEqual(expected_nr_assignments, nr_assignments)
+
 
 if __name__ == '__main__':
     unittest.main()
