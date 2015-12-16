@@ -64,6 +64,42 @@ class ConstraintsTest(unittest.TestCase):
                 (project_name, first_name)
             )
 
+    def test_researcher_delete(self):
+        '''when a researcher is deleted, the staff assignments for this
+           person should be deleted as well'''
+        expected_nr_rows = 1
+        project_name = 'project 2'
+        first_name = 'Bob'
+# first, assign Bob to project 2 as well
+        self._cursor.execute(
+            '''INSERT INTO staff_assignments
+                   (project_id, researcher_id)
+                   SELECT p.project_id AS 'project_id',
+                          r.researcher_id AS 'researcher_id'
+                   FROM projects AS p, researchers AS r
+                   WHERE p.project_name = ? AND
+                         r.first_name = ?;''',
+            (project_name, first_name)
+        )
+        self._cursor.execute(
+            '''DELETE FROM researchers WHERE first_name = ?;''',
+            (first_name, )
+        )
+        self._cursor.execute(
+            '''SELECT COUNT(*) FROM staff_assignments;'''
+        )
+        nr_rows = 0
+        for row in self._cursor:
+            nr_rows += 1
+        self.assertEqual(expected_nr_rows, nr_rows)
+        self._cursor.execute(
+            '''SELECT COUNT(*) FROM project_staffing;'''
+        )
+        nr_rows = 0
+        for row in self._cursor:
+            nr_rows += 1
+        self.assertEqual(expected_nr_rows, nr_rows)
+
 
 if __name__ == '__main__':
     unittest.main()
