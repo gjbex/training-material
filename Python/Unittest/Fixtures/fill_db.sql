@@ -1,4 +1,4 @@
--- initialize projects table
+-- Initialize projects table
 INSERT INTO projects
         (project_name, start_date, end_date)
     VALUES
@@ -6,7 +6,7 @@ INSERT INTO projects
         ('project 2', '2014-10-24', '2015-05-09'),
         ('project 3', '2014-11-04', '2015-03-24');
 
--- initialize researchers table
+-- Initialize researchers table
 INSERT INTO researchers
     (first_name, last_name)
     VALUES
@@ -14,7 +14,7 @@ INSERT INTO researchers
         ('Bob', 'Dreary'),
         ('Carol', 'Flynn');
 
--- assign researchers to projects
+-- Assign researchers to projects
 INSERT INTO staff_assignments
         (project_id, researcher_id)
     SELECT p.project_id, r.researcher_id
@@ -27,3 +27,20 @@ INSERT INTO staff_assignments
         FROM projects AS p, researchers AS r
         WHERE p.project_name = 'project 2' AND
               r.first_name = 'Alice';
+
+-- Initialize samples table
+INSERT INTO samples
+        (project_id, organism)
+    SELECT project_id, 'homo sapiens'
+        FROM projects
+        WHERE project_name = 'project 1';
+INSERT INTO samples
+        (project_id, organism)
+    SELECT project_id, 'felix felix'
+        FROM projects
+        WHERE project_name = 'project 1';
+INSERT INTO samples
+        (project_id, organism)
+    SELECT project_id, 'felix felix'
+        FROM projects
+        WHERE project_name = 'project 2';

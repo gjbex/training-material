@@ -54,10 +54,28 @@ CREATE TRIGGER delete_project_assignemnt
 -- Create a view to get a more convenient overview of staff assignments
 DROP VIEW IF EXISTS project_staffing;
 CREATE VIEW project_staffing
-    AS SELECT p.project_name AS project_name,
+    AS SELECT p.project_name AS 'project_name',
               r.first_name AS 'first_name',
               r.last_name AS 'last_name'
             FROM projects AS p, researchers AS r, staff_assignments AS s
             WHERE p.project_id = s.project_id AND
                   s.researcher_id = r.researcher_id AND
                   s.researcher_id = r.researcher_id;
+
+-- Create samples table
+DROP TABLE IF EXISTS samples;
+CREATE TABLE samples (
+    sample_id INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+    project_id INTEGER NOT NULL,
+    organism TEXT NOT NULL,
+    FOREIGN KEY (project_id) REFERENCES projects(project_id)
+);
+
+-- Create a view to get a more convenient overview of samples used in
+-- projects
+DROP VIEW IF EXISTS project_samples;
+CREATE VIEW project_samples
+    AS SELECT p.project_name AS 'project_name',
+              s.organism AS 'organism'
+            FROM projects AS p, samples AS s
+            WHERE p.project_id = s.project_id;
