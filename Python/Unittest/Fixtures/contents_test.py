@@ -116,6 +116,37 @@ class ContentsTest(unittest.TestCase):
         nr_assignments = self._cursor.fetchone()[0]
         self.assertEqual(expected_nr_assignments, nr_assignments)
 
+    def test_samples_per_project(self):
+        '''tset whether each project has the correct number of samples
+           associated with it'''
+        expected_samples = {
+            'project 1': {'homo sapiens', 'felix felix'},
+            'project 2': {'felix felix'},
+            'project 3': set(),
+        }
+        self._cursor.execute(
+            '''SELECT p.project_name AS 'project_name',
+                      COUNT(s.sample_id) AS 'nr_samples'
+                   FROM projects AS p, samples AS s
+                   WHERE s.project_id = p.project_id
+                   GROUP BY p.project_id;'''
+        )
+        for row in self._cursor:
+            self.assertEqual(len(expected_samples[row['project_name']]),
+                             row['nr_samples'])
+        for project_name in expected_samples:
+            self._cursor.execute(
+                '''SELECT s.organism AS organism
+                       FROM projects AS p, samples AS s
+                       WHERE p.project_name = ? AND
+                             p.project_id = s.project_id;''',
+                (project_name, )
+            )
+            samples = set()
+            for row in self._cursor:
+                samples.add(row['organism'])
+            self.assertSetEqual(expected_samples[project_name], samples)
+
 
 if __name__ == '__main__':
     unittest.main()
