@@ -8,19 +8,28 @@ import unittest
 
 class ContentsTest(unittest.TestCase):
 
+    master_name = 'projects.db'
+    test_name = 'test.db'
+
+    @classmethod
+    def setUpClass(cls):
+        '''copy original database'''
+        shutil.copyfile(cls.master_name, cls.test_name)
+
     def setUp(self):
-        '''copy original database, and open connection, create cursor'''
-        master_name = 'projects.db'
-        self._test_name = 'test.db'
-        shutil.copyfile(master_name, self._test_name)
-        self._conn = sqlite3.connect(self._test_name)
+        '''open connection, create cursor'''
+        self._conn = sqlite3.connect(self.__class__.test_name)
         self._conn.row_factory = sqlite3.Row
         self._cursor = self._conn.cursor()
 
     def tearDown(self):
-        '''close database connection and remove test database'''
+        '''close database connection'''
         self._conn.close()
-        os.remove(self._test_name)
+
+    @classmethod
+    def tearDownClass(cls):
+        '''remove test database'''
+        os.remove(cls.test_name)
 
     def test_num_projects(self):
         '''test whether the projects table has the expected number of
