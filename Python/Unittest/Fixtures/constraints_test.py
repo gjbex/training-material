@@ -100,6 +100,25 @@ class ConstraintsTest(unittest.TestCase):
             nr_rows += 1
         self.assertEqual(expected_nr_rows, nr_rows)
 
+    def test_project_delete_trigger(self):
+        '''when a project is deleted, the staff assignments for this
+           project should be deleted as well'''
+        project_name = 'project 1'
+        expected_staffed_projects = {'project 2'}
+        self._cursor.execute(
+            '''DELETE FROM projects
+                   WHERE project_name = ?;''',
+            (project_name, )
+        )
+        self._cursor.execute(
+            '''SELECT p.project_name AS 'project_name'
+                   FROM projects AS p, staff_assignments AS s
+                   WHERE p.project_id = s.project_id;'''
+        )
+        staffed_projects = set()
+        for row in self._cursor:
+            staffed_projects.add(row['project_name'])
+        self.assertSetEqual(expected_staffed_projects, staffed_projects)
 
 if __name__ == '__main__':
     unittest.main()
