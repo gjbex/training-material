@@ -120,5 +120,28 @@ class ConstraintsTest(unittest.TestCase):
             staffed_projects.add(row['project_name'])
         self.assertSetEqual(expected_staffed_projects, staffed_projects)
 
+    def test_sample_update_trigger(self):
+        '''when a project is deleted, samples for that project should
+           refer to NULL'''
+        project_name = 'project 1'
+        expected_nr_samples = 3
+        expected_nr_null_ref_samples = 2
+        self._cursor.execute(
+            '''DELETE FROM projects
+                   WHERE project_name = ?;''',
+            (project_name, )
+        )
+        self._cursor.execute(
+            '''SELECT COUNT(*) FROM samples
+                   WHERE project_id IS NULL;'''
+        )
+        nr_null_ref_samples = self._cursor.fetchone()[0]
+        self.assertEqual(expected_nr_null_ref_samples, nr_null_ref_samples)
+        self._cursor.execute(
+            '''SELECT COUNT(*) FROM samples;'''
+        )
+        nr_samples = self._cursor.fetchone()[0]
+        self.assertEqual(expected_nr_samples, nr_samples)
+
 if __name__ == '__main__':
     unittest.main()

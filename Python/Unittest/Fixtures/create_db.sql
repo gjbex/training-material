@@ -79,3 +79,15 @@ CREATE VIEW project_samples
               s.organism AS 'organism'
             FROM projects AS p, samples AS s
             WHERE p.project_id = s.project_id;
+
+-- Ensure that when a project is deleted, all samples for that project are
+-- updated to have NULL for project reference
+DROP TRIGGER IF EXISTS update_project_samples;
+CREATE TRIGGER update_project_samples
+    DELETE ON projects
+    FOR EACH ROW
+    BEGIN
+        UPDATE samples
+            SET project_id = NULL
+            WHERE project_id = OLD.project_id;
+    END;
