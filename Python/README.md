@@ -82,6 +82,8 @@ these samples have been used for Python tutorials.
     the field
 1. `Subprocess`: illustrates executing a shell command from a Python script
     using the `subprocess` module.
+1. `Unittest`: illustration of how to use Python's standard library
+    unit testing framework.
 1. `Vtk`: examples of using the KitWare VTK library (No support for Python
     3 yet).
 1. `WxPython`: some illustrations of GUI developlement using the Python
