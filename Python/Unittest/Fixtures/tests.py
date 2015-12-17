@@ -5,16 +5,33 @@ import shutil
 import sqlite3
 import unittest
 
+import init_db
+
+
+'''name of database to use as master'''
+master_name = 'projects.db'
+
+
+def setUpModule():
+    '''create and fill the database'''
+    conn = sqlite3.connect(master_name)
+    init_db.execute_file(conn, 'create_db.sql')
+    init_db.execute_file(conn, 'fill_db.sql')
+
+
+def tearDownModule():
+    '''remove database file once testing is done'''
+    os.remove(master_name)
+
 
 class ContentsTest(unittest.TestCase):
 
-    master_name = 'projects.db'
     test_name = 'test.db'
 
     @classmethod
     def setUpClass(cls):
         '''copy original database'''
-        shutil.copyfile(cls.master_name, cls.test_name)
+        shutil.copyfile(master_name, cls.test_name)
 
     def setUp(self):
         '''open connection, create cursor'''
@@ -155,6 +172,144 @@ class ContentsTest(unittest.TestCase):
             for row in self._cursor:
                 samples.add(row['organism'])
             self.assertSetEqual(expected_samples[project_name], samples)
+
+
+class ConstraintsTest(unittest.TestCase):
+    '''tests the table constraints and triggers defined on the schema'''
+
+    test_name = 'test.db'
+
+    def setUp(self):
+        '''copy original database, and open connection, create cursor'''
+        shutil.copyfile(master_name, self.__class__.test_name)
+        self._conn = sqlite3.connect(self.__class__.test_name)
+        self._conn.row_factory = sqlite3.Row
+        self._cursor = self._conn.cursor()
+
+    def tearDown(self):
+        '''close database connection and remove test database'''
+        self._conn.close()
+        os.remove(self.__class__.test_name)
+
+    def test_project_end_date(self):
+        '''inserting a project with an invaid end date should fail'''
+        project_name = 'project 4'
+        start_date = '2015-01-05'
+        end_date = '2014-12-15'
+        with self.assertRaises(sqlite3.IntegrityError):
+            self._cursor.execute(
+                '''INSERT INTO projects (project_name, start_date, end_date)
+                       VALUES (?, ?, ?);''',
+                (project_name, start_date, end_date)
+            )
+
+    def test_project_name_uniqueness(self):
+        '''inserting a project with a name that is already in the table
+           should fail'''
+        project_name = 'project 2'
+        start_date = '2015-01-05'
+        end_date = '2015-12-15'
+        with self.assertRaises(sqlite3.IntegrityError):
+            self._cursor.execute(
+                '''INSERT INTO projects (project_name, start_date, end_date)
+                       VALUES (?, ?, ?);''',
+                (project_name, start_date, end_date)
+            )
+
+    def test_double_assignment(self):
+        '''assigning a researcher to a project twice should fail'''
+        project_name = 'project 1'
+        first_name = 'Bob'
+        with self.assertRaises(sqlite3.IntegrityError):
+            self._cursor.execute(
+                '''INSERT INTO staff_assignments
+                       (project_id, researcher_id)
+                       SELECT p.project_id AS 'project_id',
+                              r.researcher_id AS 'researcher_id'
+                       FROM projects AS p, researchers AS r
+                       WHERE p.project_name = ? AND
+                             r.first_name = ?;''',
+                (project_name, first_name)
+            )
+
+    def test_researcher_delete_trigger(self):
+        '''when a researcher is deleted, the staff assignments for this
+           person should be deleted as well'''
+        expected_nr_rows = 1
+        project_name = 'project 2'
+        first_name = 'Bob'
+# first, assign Bob to project 2 as well
+        self._cursor.execute(
+            '''INSERT INTO staff_assignments
+                   (project_id, researcher_id)
+                   SELECT p.project_id AS 'project_id',
+                          r.researcher_id AS 'researcher_id'
+                   FROM projects AS p, researchers AS r
+                   WHERE p.project_name = ? AND
+                         r.first_name = ?;''',
+            (project_name, first_name)
+        )
+        self._cursor.execute(
+            '''DELETE FROM researchers WHERE first_name = ?;''',
+            (first_name, )
+        )
+        self._cursor.execute(
+            '''SELECT COUNT(*) FROM staff_assignments;'''
+        )
+        nr_rows = 0
+        for row in self._cursor:
+            nr_rows += 1
+        self.assertEqual(expected_nr_rows, nr_rows)
+        self._cursor.execute(
+            '''SELECT COUNT(*) FROM project_staffing;'''
+        )
+        nr_rows = 0
+        for row in self._cursor:
+            nr_rows += 1
+        self.assertEqual(expected_nr_rows, nr_rows)
+
+    def test_project_delete_trigger(self):
+        '''when a project is deleted, the staff assignments for this
+           project should be deleted as well'''
+        project_name = 'project 1'
+        expected_staffed_projects = {'project 2'}
+        self._cursor.execute(
+            '''DELETE FROM projects
+                   WHERE project_name = ?;''',
+            (project_name, )
+        )
+        self._cursor.execute(
+            '''SELECT p.project_name AS 'project_name'
+                   FROM projects AS p, staff_assignments AS s
+                   WHERE p.project_id = s.project_id;'''
+        )
+        staffed_projects = set()
+        for row in self._cursor:
+            staffed_projects.add(row['project_name'])
+        self.assertSetEqual(expected_staffed_projects, staffed_projects)
+
+    def test_sample_update_trigger(self):
+        '''when a project is deleted, samples for that project should
+           refer to NULL'''
+        project_name = 'project 1'
+        expected_nr_samples = 3
+        expected_nr_null_ref_samples = 2
+        self._cursor.execute(
+            '''DELETE FROM projects
+                   WHERE project_name = ?;''',
+            (project_name, )
+        )
+        self._cursor.execute(
+            '''SELECT COUNT(*) FROM samples
+                   WHERE project_id IS NULL;'''
+        )
+        nr_null_ref_samples = self._cursor.fetchone()[0]
+        self.assertEqual(expected_nr_null_ref_samples, nr_null_ref_samples)
+        self._cursor.execute(
+            '''SELECT COUNT(*) FROM samples;'''
+        )
+        nr_samples = self._cursor.fetchone()[0]
+        self.assertEqual(expected_nr_samples, nr_samples)
 
 
 if __name__ == '__main__':
