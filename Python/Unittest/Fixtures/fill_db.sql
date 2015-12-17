@@ -14,13 +14,14 @@ INSERT INTO researchers
         ('Bob', 'Dreary'),
         ('Carol', 'Flynn');
 
--- Assign researchers to projects
+-- Assign researcher to project
 INSERT INTO staff_assignments
         (project_id, researcher_id)
     SELECT p.project_id, r.researcher_id
         FROM projects AS p, researchers AS r
         WHERE p.project_name = 'project 1' AND
               r.first_name = 'Bob';
+-- Assign researcher to project
 INSERT INTO staff_assignments
         (project_id, researcher_id)
     SELECT p.project_id, r.researcher_id
@@ -28,17 +29,19 @@ INSERT INTO staff_assignments
         WHERE p.project_name = 'project 2' AND
               r.first_name = 'Alice';
 
--- Initialize samples table
+-- insert sample
 INSERT INTO samples
         (project_id, organism)
     SELECT project_id, 'homo sapiens'
         FROM projects
         WHERE project_name = 'project 1';
+-- insert sample
 INSERT INTO samples
         (project_id, organism)
     SELECT project_id, 'felis catus'
         FROM projects
         WHERE project_name = 'project 1';
+-- insert sample
 INSERT INTO samples
         (project_id, organism)
     SELECT project_id, 'felis catus'

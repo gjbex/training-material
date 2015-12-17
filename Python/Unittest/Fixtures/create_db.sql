@@ -1,5 +1,6 @@
--- Create projects table
+-- Drop table if it exists to start from scratch
 DROP TABLE IF EXISTS projects;
+-- Create projects table
 CREATE TABLE projects (
     project_id INTEGER PRIMARY KEY ASC AUTOINCREMENT,
     project_name TEXT NOT NULL,
@@ -10,17 +11,19 @@ CREATE TABLE projects (
     UNIQUE (project_name)
 );
 
--- Create researchers table
+-- Drop table if it exists to start from scratch
 DROP TABLE IF EXISTS researchers;
+-- Create researchers table
 CREATE TABLE researchers (
     researcher_id INTEGER PRIMARY KEY ASC AUTOINCREMENT,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL
 );
 
+-- Drop table if it exists to start from scratch
+DROP TABLE IF EXISTS staff_assignments;
 -- Create staff assignments table, encoding the many-to-many relation
 -- between researchers and projects
-DROP TABLE IF EXISTS staff_assignments;
 CREATE TABLE staff_assignments (
     project_id INTEGER NOT NULL,
     researcher_id INTEGER NOT NULL,
@@ -29,9 +32,10 @@ CREATE TABLE staff_assignments (
     FOREIGN KEY (researcher_id) REFERENCES researchers(researcher_id)
 );
 
+-- Drop trigger if it exists to start from scratch
+DROP TRIGGER IF EXISTS delete_researcher_assignemnt;
 -- Ensure that when a researcher is deleted, all staff assignments
 -- he is involved in are also deleted
-DROP TRIGGER IF EXISTS delete_researcher_assignemnt;
 CREATE TRIGGER delete_researcher_assignemnt
     DELETE ON researchers
     FOR EACH ROW
@@ -40,9 +44,10 @@ CREATE TRIGGER delete_researcher_assignemnt
             WHERE OLD.researcher_id = researcher_id;
     END;
 
+-- Drop trigger if it exists to start from scratch
+DROP TRIGGER IF EXISTS delete_project_assignemnt;
 -- Ensure that when a project is deleted, all staff assignments
 -- he is involved in are also deleted
-DROP TRIGGER IF EXISTS delete_project_assignemnt;
 CREATE TRIGGER delete_project_assignemnt
     DELETE ON projects
     FOR EACH ROW
@@ -51,8 +56,9 @@ CREATE TRIGGER delete_project_assignemnt
             WHERE OLD.project_id = project_id;
     END;
 
--- Create a view to get a more convenient overview of staff assignments
+-- Drop view if it exists to start from scratch
 DROP VIEW IF EXISTS project_staffing;
+-- Create a view to get a more convenient overview of staff assignments
 CREATE VIEW project_staffing
     AS SELECT p.project_name AS 'project_name',
               r.first_name AS 'first_name',
@@ -62,8 +68,9 @@ CREATE VIEW project_staffing
                   s.researcher_id = r.researcher_id AND
                   s.researcher_id = r.researcher_id;
 
--- Create samples table
+-- Drop table if it exists to start from scratch
 DROP TABLE IF EXISTS samples;
+-- Create samples table
 CREATE TABLE samples (
     sample_id INTEGER PRIMARY KEY ASC AUTOINCREMENT,
     project_id INTEGER,
@@ -71,18 +78,20 @@ CREATE TABLE samples (
     FOREIGN KEY (project_id) REFERENCES projects(project_id)
 );
 
+-- Drop trigger if it exists to start from scratch
+DROP VIEW IF EXISTS project_samples;
 -- Create a view to get a more convenient overview of samples used in
 -- projects
-DROP VIEW IF EXISTS project_samples;
 CREATE VIEW project_samples
     AS SELECT p.project_name AS 'project_name',
               s.organism AS 'organism'
             FROM projects AS p, samples AS s
             WHERE p.project_id = s.project_id;
 
+-- Drop trigger if it exists to start from scratch
+DROP TRIGGER IF EXISTS update_project_samples;
 -- Ensure that when a project is deleted, all samples for that project are
 -- updated to have NULL for project reference
-DROP TRIGGER IF EXISTS update_project_samples;
 CREATE TRIGGER update_project_samples
     DELETE ON projects
     FOR EACH ROW
