@@ -7,3 +7,5 @@ versatile.
 ## What is it?
 1. `Simple`: a simple example demonstrating useful assertion function in
     unittest`.
+1. `Fixtures`: an example of the use of fixtures for unit testing in the
+    context of database testing.
