@@ -12,9 +12,10 @@ def execute_statement(cursor, sql_statement, is_verbose=False):
         cursor.execute(sql_statement)
 
 
-def execute_file(cursor, file_name, is_verbose=False):
+def execute_file(conn, file_name, is_verbose=False):
     '''execute all SQL statements in the specified file, statements are
        expected to be separated by SQL comments, i.e., '--' '''
+    cursor = conn.cursor()
     with open(file_name, 'r') as sql_file:
         sql_statement = ''
         for line in sql_file:
@@ -24,6 +25,8 @@ def execute_file(cursor, file_name, is_verbose=False):
             else:
                 sql_statement += line
         execute_statement(cursor, sql_statement, is_verbose)
+    conn.commit()
+
 
 if __name__ == '__main__':
     arg_parser = ArgumentParser(description='create and initialize an '
@@ -43,11 +46,9 @@ if __name__ == '__main__':
                                  'executed')
     options = arg_parser.parse_args()
     conn = sqlite3.connect(options.db)
-    cursor = conn.cursor()
-    execute_file(cursor, options.create, options.verbose)
+    execute_file(conn, options.create, options.verbose)
     for file_name in options.fill:
         if options.verbose:
             print('processing {0}'.format(file_name))
-        execute_file(cursor, file_name, options.verbose)
-        conn.commit()
+        execute_file(conn, file_name, options.verbose)
     conn.close()
