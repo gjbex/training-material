@@ -16,7 +16,7 @@ def execute_statement(cursor, sql_statement, is_verbose=False):
 def execute_file(conn, file_name, is_verbose=False):
     '''execute all SQL statements in the specified file, statements are
        expected to be separated by SQL comments, i.e., '--' '''
-    if options.verbose:
+    if is_verbose:
         print('processing {0}'.format(file_name), file=sys.stderr)
     cursor = conn.cursor()
     with open(file_name, 'r') as sql_file:
