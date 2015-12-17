@@ -64,7 +64,7 @@ class ConstraintsTest(unittest.TestCase):
                 (project_name, first_name)
             )
 
-    def test_researcher_delete(self):
+    def test_researcher_delete_trigger(self):
         '''when a researcher is deleted, the staff assignments for this
            person should be deleted as well'''
         expected_nr_rows = 1
