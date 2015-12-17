@@ -2,19 +2,22 @@
 
 from argparse import ArgumentParser
 import sqlite3
+import sys
 
 
 def execute_statement(cursor, sql_statement, is_verbose=False):
     '''execute SQL statement if it is non-empty'''
     if len(sql_statement):
         if is_verbose:
-            print('executing:\n{0}'.format(sql_statement))
+            print('executing:\n{0}'.format(sql_statement), file=sys.stderr)
         cursor.execute(sql_statement)
 
 
 def execute_file(conn, file_name, is_verbose=False):
     '''execute all SQL statements in the specified file, statements are
        expected to be separated by SQL comments, i.e., '--' '''
+    if options.verbose:
+        print('processing {0}'.format(file_name), file=sys.stderr)
     cursor = conn.cursor()
     with open(file_name, 'r') as sql_file:
         sql_statement = ''
@@ -48,7 +51,5 @@ if __name__ == '__main__':
     conn = sqlite3.connect(options.db)
     execute_file(conn, options.create, options.verbose)
     for file_name in options.fill:
-        if options.verbose:
-            print('processing {0}'.format(file_name))
         execute_file(conn, file_name, options.verbose)
     conn.close()
