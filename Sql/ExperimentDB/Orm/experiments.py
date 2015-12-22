@@ -45,7 +45,7 @@ class Experiment(Base):
         str_repr = fmt_str.format(id=self.experiment_id,
                                   desc=self.description,
                                   start=self.start_date)
-        if self._end_date:
+        if self.end_date:
             str_repr = '{base:s}, ended {end}'.format(base=str_repr,
                                                       end=self.end_date)
         return str_repr
