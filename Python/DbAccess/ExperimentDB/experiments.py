@@ -41,13 +41,13 @@ class Experiment(Base):
 
     def __str__(self):
         '''string representation of an experiment'''
-        fmt_str = 'id {id:d}: {desc:s}, started on {start:s}'
+        fmt_str = 'id {id:d}: {desc:s}, started on {start}'
         str_repr = fmt_str.format(id=self.experiment_id,
                                   desc=self.description,
                                   start=self.start_date)
         if self.end_date:
-            str_repr = '{base:s}, ended {end}'.format(base=str_repr,
-                                                      end=self.end_date)
+            str_repr = '{base:s}, ended on {end}'.format(base=str_repr,
+                                                         end=self.end_date)
         return str_repr
 
 
