@@ -3,17 +3,12 @@
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    from sqlalchemy import create_engine
-    from sqlalchemy.orm import sessionmaker
-    from create import Experiment, Researcher, Sample, Base
+    from experiments import Experiment, Researcher, Sample
+    from orm_utils import create_session
     arg_parser = ArgumentParser(description='create tables in database')
     arg_parser.add_argument('db_name', help='name of DB to create')
     options = arg_parser.parse_args()
-
-    engine = create_engine('sqlite:///{0}'.format(options.db_name))
-    Base.metadata.bind = engine
-    DBSession = sessionmaker(bind=engine)
-    db_session = DBSession()
+    db_session = create_session(options.db_name)
     experiments = db_session.query(Experiment).all()
     for experiment in experiments:
         print(experiment.description)
