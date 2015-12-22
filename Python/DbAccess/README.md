@@ -15,13 +15,8 @@ What is it?
 1. `ExperimentDB`: Example of SQLAlchemy's object-relational mapping,
     illustrating declarative schema definition, bidirectional associations
     and back references.
-1. `fill_db.py`: this script will initialize an SQLite3 database by
-    creating a table `weather` with three fields `city_code`, `date`,
-    and `temperature`.  The inserted values are randomly determined.
-1. `query_db.py`: this script uses a database such as the one generated
-    by the script above and cmoputes the average temperature for each
-    city code between a given date range.
-1. `weather-db`: an example SQLite database.
+1. `StraightSql`: Example of how to interact with a relation database
+    (SQLite3) using SQL from Python.
 1. `create_sqlalchemy_db.py`: implements two classes representing SQL
     tables, and creates them in an RDBMS using SQLAlchemy's
     object-relational mapping mechanisms
