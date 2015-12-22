@@ -12,6 +12,9 @@ which is also illustrated by sample code.
 
 What is it?
 -----------
+1. `ExperimentDB`: Example of SQLAlchemy's object-relational mapping,
+    illustrating declarative schema definition, bidirectional associations
+    and back references.
 1. `fill_db.py`: this script will initialize an SQLite3 database by
     creating a table `weather` with three fields `city_code`, `date`,
     and `temperature`.  The inserted values are randomly determined.
