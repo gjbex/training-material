@@ -1,16 +1,19 @@
 #!/usr/bin/env python
 
+from datetime import datetime
+
 
 def convert2date(date_str):
+    '''convert a string representation 'yyyy-mm-dd' to a Python
+       datetime object'''
     year, month, day = list(map(int, date_str.split('-')))
     return datetime(year, month, day)
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    from datetime import datetime
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker
-    from create import Experiment, Researcher, Sample, Base
+    from experiments import Experiment, Researcher, Base
     arg_parser = ArgumentParser(description='create tables in database')
     arg_parser.add_argument('db_name', help='name of DB to create')
     arg_parser.add_argument('--first_name',
