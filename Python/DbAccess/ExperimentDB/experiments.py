@@ -41,7 +41,7 @@ class Experiment(Base):
 
     def __str__(self):
         '''string representation of an experiment'''
-        fmt_str = 'id {id:d}: {desc:s}, started on {start}'
+        fmt_str = 'id {id:d}: {desc:s},\n\tstarted on {start}'
         str_repr = fmt_str.format(id=self.experiment_id,
                                   desc=self.description,
                                   start=self.start_date)
