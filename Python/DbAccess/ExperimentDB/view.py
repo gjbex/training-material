@@ -5,7 +5,8 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
     from experiments import Experiment, Researcher, Sample
     from orm_utils import create_session
-    arg_parser = ArgumentParser(description='create tables in database')
+    arg_parser = ArgumentParser(description='show experiments, researchrs, '
+                                            'samples in the database')
     arg_parser.add_argument('db_name', help='name of DB to create')
     options = arg_parser.parse_args()
     db_session = create_session(options.db_name)
