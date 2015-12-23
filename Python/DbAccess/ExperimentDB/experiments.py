@@ -89,4 +89,8 @@ class Sample(Base):
     def __str__(self):
         '''string representation of a sample'''
         fmt_str = 'id {id:d}: {descr}'
-        return fmt_str.format(id=self.sample_id, descr=self.description)
+        str_repr = fmt_str.format(id=self.sample_id, descr=self.description)
+        if self.experiment_id:
+            str_repr = '{base} used in {e_id:d}'.format(base=str_repr,
+                                                        e_id=self.experiment_id)
+        return str_repr
