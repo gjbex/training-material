@@ -64,9 +64,17 @@ class Researcher(Base):
     def __str__(self):
         '''string representation of a researcher'''
         fmt_str = 'id {id:d}: {last:s}, {first:s}'
-        return fmt_str.format(id=self.researcher_id,
-                              last=self.last_name,
-                              first=self.first_name)
+        str_repr = fmt_str.format(id=self.researcher_id,
+                                  last=self.last_name,
+                                  first=self.first_name)
+        if self.u_number:
+            str_repr = '{base} ({u_nr})'.format(base=str_repr,
+                                                u_nr=self.u_number)
+        if self.description:
+            str_repr = '{base}: {descr}'.format(base=str_repr,
+                                                descr=self.description)
+
+        return str_repr
 
 
 class Sample(Base):
