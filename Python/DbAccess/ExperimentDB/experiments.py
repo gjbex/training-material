@@ -41,13 +41,13 @@ class Experiment(Base):
 
     def __str__(self):
         '''string representation of an experiment'''
-        fmt_str = 'id {id:d}: {desc:s}, started on {start:s}'
+        fmt_str = 'id {id:d}: {desc:s},\n\tstarted on {start}'
         str_repr = fmt_str.format(id=self.experiment_id,
                                   desc=self.description,
                                   start=self.start_date)
         if self.end_date:
-            str_repr = '{base:s}, ended {end}'.format(base=str_repr,
-                                                      end=self.end_date)
+            str_repr = '{base:s}, ended on {end}'.format(base=str_repr,
+                                                         end=self.end_date)
         return str_repr
 
 
@@ -64,9 +64,17 @@ class Researcher(Base):
     def __str__(self):
         '''string representation of a researcher'''
         fmt_str = 'id {id:d}: {last:s}, {first:s}'
-        return fmt_str.format(id=self.researcher_id,
-                              last=self.last_name,
-                              first=self.first_name)
+        str_repr = fmt_str.format(id=self.researcher_id,
+                                  last=self.last_name,
+                                  first=self.first_name)
+        if self.u_number:
+            str_repr = '{base} ({u_nr})'.format(base=str_repr,
+                                                u_nr=self.u_number)
+        if self.description:
+            str_repr = '{base}: {descr}'.format(base=str_repr,
+                                                descr=self.description)
+
+        return str_repr
 
 
 class Sample(Base):
@@ -81,4 +89,8 @@ class Sample(Base):
     def __str__(self):
         '''string representation of a sample'''
         fmt_str = 'id {id:d}: {descr}'
-        return fmt_str.format(id=self.sample_id, descr=self.description)
+        str_repr = fmt_str.format(id=self.sample_id, descr=self.description)
+        if self.experiment_id:
+            str_repr = '{base} used in {e_id:d}'.format(base=str_repr,
+                                                        e_id=self.experiment_id)
+        return str_repr
