@@ -4,6 +4,7 @@ from argparse import ArgumentParser
 import cmd
 import shlex
 import sys
+from sqlalchemy.orm.exc import NoResultFound
 from experiments import Experiment, Researcher, Sample, staff_assignments
 from orm_utils import create_session
 
@@ -42,7 +43,7 @@ class ExperimentShell(cmd.Cmd):
             raise SyntaxException(msg)
         cls = classes[cls_str]
         if len(args) > 1 and args[1] != 'for':
-            msg = "Syntax error, expected for, not '{0}'".format(cls_str)
+            msg = "Syntax error, expected for, not '{0}'".format(args[1])
             raise SyntaxException(msg)
         if len(args) == 3:
             try:
@@ -123,10 +124,72 @@ class ExperimentShell(cmd.Cmd):
 
     @staticmethod
     def parse_assign_arg(arg_str):
-        pass
+        args = shlex.split(arg_str)
+        if len(args) != 3:
+            msg = 'Expecting assign <id> to <id>'
+            raise SyntaxException(msg)
+        if args[1] != 'to':
+            msg = "Syntax error, expected to, not '{0}'".format(args[1])
+            raise SyntaxException(msg)
+        try:
+            args[0] = int(args[0])
+        except:
+            msg = "researcher ID must be int, not '{0]}".format(args[0])
+            raise SyntaxException(msg)
+        try:
+            args[2] = int(args[2])
+        except:
+            msg = "experiment ID must be int, not '{0]}".format(args[2])
+            raise SyntaxException(msg)
+        return args[0], args[2]
 
     def do_assign(self, arg_str):
         '''Use: assign <researcher_id> to <experiment_id>'''
+
+        try:
+            r_id, e_id = ExperimentShell.parse_assign_arg(arg_str)
+        except SyntaxException as e:
+            print('*** {0}'.format(str(e)), file=sys.stderr)
+            return
+        try:
+            experiment = self._db_session.\
+                              query(Experiment).\
+                              filter_by(experiment_id=e_id).one()
+        except NoResultFound:
+            print('*** No experiment with ID {0:d}'.format(e_id),
+                  file=sys.stderr)
+            return
+        try:
+            researcher = self._db_session.\
+                              query(Researcher).\
+                              filter_by(researcher_id=r_id).one()
+        except NoResultFound:
+            print('*** No researcher with ID {0:d}'.format(r_id),
+                  file=sys.stderr)
+            return
+        experiment.researchers.append(researcher)
+        self._db_session.commit()
+
+    @staticmethod
+    def parse_set_arg(arg_str):
+        pass
+
+    def do_set(self, arg_str):
+        '''Use either:
+           set end_date <datetime> for <experiment_id>
+           set description <string> for <researcher_id>
+           set u_number <id> for <reseacer_id>'''
+        pass
+
+    @staticmethod
+    def parse_remove_arg(arg_str):
+        pass
+
+    def do_remove(self, arg_str):
+        '''User either:
+           remove experiment <experiment_id>
+           remove researcher <researcher_id>
+           remove sample <sample_id>'''
         pass
 
 
