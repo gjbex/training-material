@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 import cmd
+from datetime import datetime
 import shlex
 import sys
 from sqlalchemy.orm.exc import NoResultFound
@@ -95,6 +96,12 @@ class ExperimentShell(cmd.Cmd):
         if args[0] not in types:
             msg = "Illegal keyword '{0}' for add".format(args[0])
             raise SyntaxException(msg)
+        if args[0] == 'experiment':
+            try:
+                args[2] = datetime.strptime(args[2], '%Y-%m-%d %H:%M:%S')
+            except:
+                msg = "timestamp should be yyyy-mm-dd HH:MM:SS, not '{0]}"
+                raise SyntaxException(msg.format(args[2]))
         if args[0] == 'sample':
             try:
                 args[2] = int(args[2])
@@ -172,25 +179,132 @@ class ExperimentShell(cmd.Cmd):
 
     @staticmethod
     def parse_set_arg(arg_str):
-        pass
+        args = shlex.split(arg_str)
+        attrs = {
+            'end_date': Experiment,
+            'description': Researcher,
+            'u_number': Researcher,
+        }
+        if len(args) != 4:
+            msg = 'Expecting set <attr> to <value>'
+            raise SyntaxException(msg)
+        if args[0] not in attrs:
+            msg = "Illegal keyword '{0}' for set".format(args[0])
+            raise SyntaxException(msg)
+        if args[2] != 'for':
+            msg = "Syntax error, expected for, not '{0}'".format(args[2])
+            raise SyntaxException(msg)
+        if args[0] == 'end_date':
+            try:
+                args[1] = datetime.strptime(args[1], '%Y-%m-%d %H:%M:%S')
+            except:
+                msg = "timestamp should be yyyy-mm-dd HH:MM:SS, not '{0]}"
+                raise SyntaxException(msg.format(args[1]))
+        try:
+            args[3] = int(args[3])
+        except:
+            msg = "ID must be int, not '{0]}".format(args[3])
+            raise SyntaxException(msg)
+        return attrs[args[0]], args[0], args[1], args[3]
 
     def do_set(self, arg_str):
         '''Use either:
            set end_date <datetime> for <experiment_id>
            set description <string> for <researcher_id>
            set u_number <id> for <reseacer_id>'''
-        pass
+        try:
+            cls, attr, val, item_id = ExperimentShell.parse_set_arg(arg_str)
+        except SyntaxException as e:
+            print('*** {0}'.format(str(e)), file=sys.stderr)
+            return
+        if cls == Experiment:
+            try:
+                experiment = self._db_session.\
+                                  query(Experiment).\
+                                  filter_by(experiment_id=item_id).one()
+                experiment.end_date = val
+                self._db_session.commit()
+            except NoResultFound:
+                print('*** No experiment with ID {0:d}'.format(item_id),
+                      file=sys.stderr)
+                return
+        elif cls == Researcher:
+            try:
+                researcher = self._db_session.\
+                                  query(Researcher).\
+                                  filter_by(researcher_id=item_id).one()
+            except NoResultFound:
+                print('*** No researcher with ID {0:d}'.format(item_id),
+                      file=sys.stderr)
+                return
+            if attr == 'description':
+                researcher.description = val
+            elif attr == 'u_number':
+                researcher.u_number = val
+            self._db_session.commit()
 
     @staticmethod
     def parse_remove_arg(arg_str):
-        pass
+        classes = {
+            'experiment': Experiment,
+            'researcher': Researcher,
+            'sample': Sample,
+        }
+        args = shlex.split(arg_str)
+        if len(args) != 2:
+            msg = 'Expecting remove <type> <id>'
+            raise SyntaxException(msg)
+        if args[0] not in classes:
+            msg = "Illegal keyword '{0}' for remove".format(args[0])
+            raise SyntaxException(msg)
+        try:
+            args[1] = int(args[1])
+        except:
+            msg = "ID must be int, not '{0]}".format(args[1])
+            raise SyntaxException(msg)
+        return classes[args[0]], args[1]
 
     def do_remove(self, arg_str):
         '''User either:
            remove experiment <experiment_id>
            remove researcher <researcher_id>
            remove sample <sample_id>'''
-        pass
+        try:
+            cls, item_id = ExperimentShell.parse_remove_arg(arg_str)
+        except SyntaxException as e:
+            print('*** {0}'.format(str(e)), file=sys.stderr)
+            return
+        if cls == Experiment:
+            try:
+                experiment = self._db_session.\
+                                  query(Experiment).\
+                                  filter_by(experiment_id=item_id).one()
+                self._db_session.delete(experiment)
+            except NoResultFound:
+                print('*** No experiment with ID {0:d}'.format(item_id),
+                      file=sys.stderr)
+                return
+        elif cls == Researcher:
+            try:
+                researcher = self._db_session.\
+                                  query(Researcher).\
+                                  filter_by(researcher_id=item_id).one()
+                self._db_session.delete(researcher)
+            except NoResultFound:
+                print('*** No researcher with ID {0:d}'.format(item_id),
+                      file=sys.stderr)
+                return
+        elif cls == Sample:
+            try:
+                sample = self._db_session.\
+                                  query(Sample).\
+                                  filter_by(sample_id=item_id).one()
+                self._db_session.delete(sample)
+            except NoResultFound:
+                print('*** No sample with ID {0:d}'.format(item_id),
+                      file=sys.stderr)
+                return
+        self._db_session.commit()
 
 
 if __name__ == '__main__':
