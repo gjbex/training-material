@@ -12,3 +12,5 @@ TODO: make schemas on slides, in SQL examples and ORM code consistent
 1. `fill.py`: add some data to the database, illustrating back references.
 1. `view.py`: illustrate using back references when using objects.
 1. `orm_utils.py`: some helper functions for more convenient ORM usage.
+1. `shell.py`: a shell to work with the database using a domain specific
+    language.
