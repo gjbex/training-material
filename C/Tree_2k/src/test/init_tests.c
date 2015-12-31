@@ -35,8 +35,8 @@ void test_tree_alloc_rank_0(void) {
     double center[] = {0.0, 0.0};
     double extent[] = {1.0, 1.0};
     tree_2k_t *tree;
-    int status = tree_2k_alloc(&tree, rank, center, extent,
-                               max_points, bucket_size);
+    tree_2k_err_t status = tree_2k_alloc(&tree, rank, center, extent,
+                                         max_points, bucket_size);
     CU_ASSERT_EQUAL(status, TREE_2K_INVALID_RANK_ERR);
 }
 
@@ -45,7 +45,7 @@ void test_tree_alloc_invalid_extent(void) {
     double center[] = {0.0, 0.0};
     double extent[] = {1.0, 0.0};
     tree_2k_t *tree;
-    int status = tree_2k_alloc(&tree, rank, center, extent,
-                               max_points, bucket_size);
+    tree_2k_err_t status = tree_2k_alloc(&tree, rank, center, extent,
+                                         max_points, bucket_size);
     CU_ASSERT_EQUAL(status, TREE_2K_INVALID_EXTENT_ERR);
 }

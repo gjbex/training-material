@@ -7,7 +7,8 @@
 
 void test_single_insert(void) {
     const int nr_points = 1;
-    int i, status;
+    int i;
+    tree_2k_err_t status;
     const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 1;
     double center[] = {0.0, 0.0};
@@ -35,7 +36,8 @@ void test_single_insert(void) {
 
 void test_multiple_insert_no_split(void) {
     const int nr_points = 3;
-    int i, j, status;
+    int i, j;
+    tree_2k_err_t status;
     const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 5;
     double center[] = {0.0, 0.0};
@@ -71,7 +73,8 @@ void test_multiple_insert_no_split(void) {
 
 void test_multiple_insert_with_split(void) {
     const int nr_points = 3;
-    int i, j, region_nr, status;
+    int i, j, region_nr;
+    tree_2k_err_t status;
     const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 1;
     double center[] = {0.0, 0.0};
@@ -110,7 +113,7 @@ void test_multiple_insert_with_split(void) {
     tree_2k_free(tree);
 }
 void test_failed_insert(void) {
-    int status;
+    tree_2k_err_t status;
     const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 1;
     double center[] = {0.0, 0.0};
