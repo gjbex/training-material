@@ -20,7 +20,8 @@ bool is_valid_extent(int rank, double *extent);
   \brief Tree constructor, will allocate the tree itself, all data
          structures required for a tree without points inserted into
          it, and initialize all members
-  \param tree Address of a pointer to a tree_2k_t.
+  \param tree Double dereferenced pointer to a tree_2k_t that will be
+              allocated and initialized.
   \param rank The rank of the points to be stored.
   \param center An array of size rank containing the cooridantes of the
          new node's center as double precision numbers,
@@ -46,6 +47,7 @@ tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
   \brief Tree initializer, will allocate the tree itself, all data
          structures required for a tree without points inserted into
          it, and initialize all members
+  \param tree Address of the tree to be initialized.
   \param rank The rank of the points to be stored.
   \param center An array of size rank containing the cooridantes of the
          new node's center as double precision numbers,
@@ -95,7 +97,7 @@ tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
 /*!
   \brief Tree destructor, will free all memory used by the tree, including
          the tree itself.
-  \param tree The tree to free.
+  \param tree The address of the tree to free.
 */
 void tree_2k_free(tree_2k_t *tree) {
     for (int i = 0; i < tree->nr_points; i++)
@@ -111,7 +113,8 @@ void tree_2k_free(tree_2k_t *tree) {
 
   A point can only be stored in the tree when its coordinates fall into
   the tree's extent.
-  \param tree The tree to check for.
+  \param tree Address of the tree to check whether it can store the given
+              point.
   \param coords A size rank array with the coordinates to tesst.
   \return True when the coordinates can be stored, false otherwise.
 */
@@ -126,7 +129,7 @@ bool tree_2k_can_store(tree_2k_t *tree, double *coords) {
 /*!
   \brief Insert a point with given coordinates and (optionally)
          associated data in the tree.
-  \param tree Tree to store the data in.
+  \param tree Address of the tree to store the data in.
   \param coords An array of size rank that represents the point's
                 coordinates
   \param data A pointer to data to be associated with the point, may be
