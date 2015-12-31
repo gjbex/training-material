@@ -5,7 +5,6 @@
 #include "init_tests.h"
 
 void test_tree_alloc(void) {
-    int i;
     const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 1;
     double center[] = {0.0, 0.0};
@@ -22,10 +21,10 @@ void test_tree_alloc(void) {
     CU_ASSERT_PTR_NOT_NULL_FATAL(tree->root);
     CU_ASSERT_PTR_NOT_NULL(tree->root->bucket);
     CU_ASSERT_PTR_NOT_NULL_FATAL(tree->root->center);
-    for (i = 0; i < rank; i++)
+    for (int i = 0; i < rank; i++)
         CU_ASSERT_DOUBLE_EQUAL(tree->root->center[i], center[i], PREC);
     CU_ASSERT_PTR_NOT_NULL_FATAL(tree->root->extent);
-    for (i = 0; i < rank; i++)
+    for (int i = 0; i < rank; i++)
         CU_ASSERT_DOUBLE_EQUAL(tree->root->extent[i], extent[i], PREC);
     tree_2k_free(tree);
 }
