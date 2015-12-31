@@ -65,5 +65,9 @@ tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
 void tree_2k_free(tree_2k_t *tree);
 bool tree_2k_can_store(tree_2k_t *tree, double *coords);
 tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data);
+int tree_2k_get_rank(tree_2k_t *tree);
+int tree_2k_get_nr_points(tree_2k_t *tree);
+const double *tree_2k_get_coords(tree_2k_t *tree, int i);
+void *tree_2k_get_data(tree_2k_t *tree, int point_id);
 
 #endif

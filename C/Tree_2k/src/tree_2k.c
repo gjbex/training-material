@@ -44,57 +44,6 @@ tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
 }
 
 /*!
-  \brief Tree initializer, will allocate the tree itself, all data
-         structures required for a tree without points inserted into
-         it, and initialize all members
-  \param tree Address of the tree to be initialized.
-  \param rank The rank of the points to be stored.
-  \param center An array of size rank containing the cooridantes of the
-         new node's center as double precision numbers,
-  \param extent An array of size rank containing the extent for each
-         dimension for the new node as double precision numbers,
-  \param max_points The maximum number of points to be stored in the tree.
-  \param bucket_size The maximum number of points any node will store
-                     before it is split.
-  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
-          an error code otherwise.
-*/
-tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
-                           double *center, double *extent,
-                           int max_points, int bucket_size) {
-    double *node_center, *node_extent;
-    if (rank <= 0)
-        return TREE_2K_INVALID_RANK_ERR;
-    if (center == NULL)
-        return TREE_2K_CENTER_IS_NULL_ERR;
-    if (extent == NULL)
-        return TREE_2K_EXTENT_IS_NULL_ERR;
-    if (!is_valid_extent(rank, extent))
-        return TREE_2K_INVALID_EXTENT_ERR;
-    if (max_points <= 0)
-        return TREE_2K_INVALID_MAX_POINT_ERR;
-    if (bucket_size <= 0)
-        return TREE_2K_INVALID_BUCKET_SIZE_ERR;
-    tree->rank = rank;
-    tree->bucket_size = bucket_size;
-    tree->max_points = max_points;
-    tree->data = (void **) malloc(sizeof(void *));
-    tree->coords = (double **) malloc(max_points*sizeof(double *));
-    if (tree->data == NULL || tree->coords == NULL)
-        return TREE_2K_OUT_OF_MEMORY_ERR;
-    tree->nr_points = 0;
-    node_center = (double *) malloc(tree->rank*sizeof(double));
-    node_extent = (double *) malloc(tree->rank*sizeof(double));
-    if (node_center == NULL || node_extent == NULL)
-        return TREE_2K_OUT_OF_MEMORY_ERR;
-    for (int i = 0; i < rank; i++) {
-        node_center[i] = center[i];
-        node_extent[i] = extent[i];
-    }
-    return node_2k_alloc(&(tree->root), tree, node_center, node_extent);
-}
-
-/*!
   \brief Tree destructor, will free all memory used by the tree, including
          the tree itself.
   \param tree The address of the tree to free.
@@ -155,6 +104,102 @@ tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
         tree->data[tree->nr_points] = data;
         return node_2k_insert(tree->root, tree->nr_points++);
     }
+}
+
+/*!
+  \brief Return the tree's rank.
+  \param tree Address of the tree to retrieve the rank of.
+  \return The rank of the tree.
+*/
+int tree_2k_get_rank(tree_2k_t *tree) {
+    return tree->rank;
+}
+
+/*!
+  \brief Return the total number of points currently stored in the tree.
+  \param tree Address of the tree to retrieve the number of points of.
+  \return The number of points in the tree.
+*/
+int tree_2k_get_nr_points(tree_2k_t *tree) {
+    return tree->nr_points;
+}
+
+/*!
+  \brief Retrieves the coordinates of the point specified by the point ID.
+  \param tree Address of the tree to fetch the coordinates from.
+  \param point_id Point ID to retrieve the cooridnates for.
+  \return Constant array of size rank, or NULL is the given point ID is
+          not valid.
+*/
+const double *tree_2k_get_coords(tree_2k_t *tree, int point_id) {
+    if (0 <= point_id && point_id < tree->nr_points)
+        return tree->coords[point_id];
+    else
+        return NULL;
+}
+
+/*!
+  \brief Retrieves the data of the point specified by the point ID.
+  \param tree Address of the tree to fetch the data from.
+  \param point_id Point ID to retrieve the data for.
+  \return Address of the data, or NULL is the given point ID is not valid.
+*/
+void *tree_2k_get_data(tree_2k_t *tree, int point_id) {
+    if (0 <= point_id && point_id < tree->nr_points)
+        return tree->data[point_id];
+    else
+        return NULL;
+}
+
+/*!
+  \brief Tree initializer, will allocate the tree itself, all data
+         structures required for a tree without points inserted into
+         it, and initialize all members
+  \param tree Address of the tree to be initialized.
+  \param rank The rank of the points to be stored.
+  \param center An array of size rank containing the cooridantes of the
+         new node's center as double precision numbers,
+  \param extent An array of size rank containing the extent for each
+         dimension for the new node as double precision numbers,
+  \param max_points The maximum number of points to be stored in the tree.
+  \param bucket_size The maximum number of points any node will store
+                     before it is split.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
+                           double *center, double *extent,
+                           int max_points, int bucket_size) {
+    double *node_center, *node_extent;
+    if (rank <= 0)
+        return TREE_2K_INVALID_RANK_ERR;
+    if (center == NULL)
+        return TREE_2K_CENTER_IS_NULL_ERR;
+    if (extent == NULL)
+        return TREE_2K_EXTENT_IS_NULL_ERR;
+    if (!is_valid_extent(rank, extent))
+        return TREE_2K_INVALID_EXTENT_ERR;
+    if (max_points <= 0)
+        return TREE_2K_INVALID_MAX_POINT_ERR;
+    if (bucket_size <= 0)
+        return TREE_2K_INVALID_BUCKET_SIZE_ERR;
+    tree->rank = rank;
+    tree->bucket_size = bucket_size;
+    tree->max_points = max_points;
+    tree->data = (void **) malloc(sizeof(void *));
+    tree->coords = (double **) malloc(max_points*sizeof(double *));
+    if (tree->data == NULL || tree->coords == NULL)
+        return TREE_2K_OUT_OF_MEMORY_ERR;
+    tree->nr_points = 0;
+    node_center = (double *) malloc(tree->rank*sizeof(double));
+    node_extent = (double *) malloc(tree->rank*sizeof(double));
+    if (node_center == NULL || node_extent == NULL)
+        return TREE_2K_OUT_OF_MEMORY_ERR;
+    for (int i = 0; i < rank; i++) {
+        node_center[i] = center[i];
+        node_extent[i] = extent[i];
+    }
+    return node_2k_alloc(&(tree->root), tree, node_center, node_extent);
 }
 
 /*!
