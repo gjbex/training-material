@@ -145,6 +145,13 @@ void get_new_region_center(node_2k_t *node, int index, double *center) {
             center[i] = node->center[i] + 0.5*node->extent[i];
 }
 
+/*!
+  \brief Allocate and initialize a new region node.
+  \param node Address of the node to create the new region node in.
+  \param index Index encoding the region the new node will represent.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
 tree_2k_err_t node_2k_alloc_region(node_2k_t *node, int index) {
     tree_2k_err_t status;
     double *center, *extent;
