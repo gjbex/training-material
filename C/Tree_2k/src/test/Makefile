@@ -4,7 +4,7 @@ CPPFLAGS = -I..
 LDFLAGS = -L..
 LIBS = -ltree_2k -lcunit -lm
 
-TESTS_OBJS = init_tests.o insert_tests.o
+TESTS_OBJS = init_tests.o insert_tests.o accessor_tests.o
 
 test: all
 	./run_tests
