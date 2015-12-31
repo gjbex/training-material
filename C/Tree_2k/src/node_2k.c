@@ -122,7 +122,7 @@ int get_region_index(node_2k_t *node, int point_id) {
          node's extent.
   \param node Node that will get a new region node with the extent to
               be computed.
-  \param center New center coordinates, rank-sized array.
+  \param extent New extent, rank-sized array.
 */
 void get_new_region_extent(node_2k_t *node, double *extent) {
     for (int i = 0; i < node->tree->rank; i++)
