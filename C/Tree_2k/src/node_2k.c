@@ -22,7 +22,7 @@ int get_nr_regions(int rank);
          it, and initialize all members
   \param node Double dereferenced pointer to the node to be allocated
               and initialized.
-  \param tree Tree the node is part off.
+  \param tree Address of the tree the node is part off.
   \param center An array of size rank containing the cooridantes of the
          new node's center as double precision numbers,
   \param extent An array of size rank containing the extent for each
@@ -120,8 +120,8 @@ int get_region_index(node_2k_t *node, int point_id) {
 /*!
   \brief Computes the extent of a new region node based on the parent
          node's extent.
-  \param node Node that will get a new region node with the extent to
-              be computed.
+  \param node Address of the node that will get a new region node with
+              the extent to be computed.
   \param extent New extent, rank-sized array.
 */
 void get_new_region_extent(node_2k_t *node, double *extent) {
@@ -132,8 +132,8 @@ void get_new_region_extent(node_2k_t *node, double *extent) {
 /*!
   \brief Computes the center of a new region node based on the parent
          node's coordinates and extent.
-  \param node Node that will get a new region node with the center to
-              be computed.
+  \param node Address of the node that will get a new region node with
+              the center to be computed.
   \param index Index encodes the region.
   \param center New center coordinates, rank-sized array.
 */
@@ -170,7 +170,7 @@ tree_2k_err_t node_2k_alloc_region(node_2k_t *node, int index) {
 /*!
   \brief Split the node into 2^rank nodes, and redistribute the points over
   the new nodes.
-  \param node The node to be split.
+  \param node Address of the node to be split.
   \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
           an error code otherwise.
 */
@@ -203,7 +203,7 @@ tree_2k_err_t node_2k_split(node_2k_t *node) {
 
 /*!
   \brief Insert the point with given ID into the node
-  \param node The node to insert the point into.
+  \param node Address of the node to insert the point into.
   \param point_id The point's index in the tree's point array.
   \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
           an error code otherwise.
