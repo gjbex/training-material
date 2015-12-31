@@ -12,6 +12,8 @@
 #ifndef _TREE_2K_HDR_
 #define _TREE_2K_HDR_
 
+#include <stdbool.h>
+
 #include "tree_2k_err.h"
 
 /*!
@@ -61,7 +63,7 @@ tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
                             double *center, double *extent,
                             int max_points, int bucket_size);
 void tree_2k_free(tree_2k_t *tree);
-int tree_2k_can_store(tree_2k_t *tree, double *coords);
+bool tree_2k_can_store(tree_2k_t *tree, double *coords);
 tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data);
 
 #endif

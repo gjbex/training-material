@@ -14,7 +14,7 @@
 tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
                            double *center, double *extent,
                            int max_points, int bucket_size);
-int is_valid_extent(int rank, double *extent);
+bool is_valid_extent(int rank, double *extent);
 
 /*!
   \brief Tree constructor, will allocate the tree itself, all data
@@ -60,7 +60,6 @@ tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
 tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
                            double *center, double *extent,
                            int max_points, int bucket_size) {
-    int i;
     double *node_center, *node_extent;
     if (rank <= 0)
         return TREE_2K_INVALID_RANK_ERR;
@@ -86,7 +85,7 @@ tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
     node_extent = (double *) malloc(tree->rank*sizeof(double));
     if (node_center == NULL || node_extent == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
-    for (i = 0; i < rank; i++) {
+    for (int i = 0; i < rank; i++) {
         node_center[i] = center[i];
         node_extent[i] = extent[i];
     }
@@ -99,8 +98,7 @@ tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
   \param tree The tree to free.
 */
 void tree_2k_free(tree_2k_t *tree) {
-    int i;
-    for (i = 0; i < tree->nr_points; i++)
+    for (int i = 0; i < tree->nr_points; i++)
         free(tree->coords[i]);
     free(tree->data);
     free(tree->coords);
@@ -117,13 +115,12 @@ void tree_2k_free(tree_2k_t *tree) {
   \param coords A size rank array with the coordinates to tesst.
   \return True when the coordinates can be stored, false otherwise.
 */
-int tree_2k_can_store(tree_2k_t *tree, double *coords) {
-    int i;
-    for (i = 0; i < tree->rank; i++)
+bool tree_2k_can_store(tree_2k_t *tree, double *coords) {
+    for (int i = 0; i < tree->rank; i++)
         if (coords[i] < tree->root->center[i] - tree->root->extent[i] ||
             tree->root->center[i] + tree->root->extent[i] < coords[i])
-            return FALSE;
-    return TRUE;
+            return false;
+    return true;
 }
 
 /*!
@@ -146,12 +143,11 @@ tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
     if (tree->nr_points >= tree->max_points) {
         return TREE_2K_CAPACITY_EXCEEDED_ERR;
     } else {
-        int i;
         tree->coords[tree->nr_points] =
             (double *) malloc(tree->rank*sizeof(double));
         if (tree->coords[tree->nr_points] == NULL)
             return TREE_2K_OUT_OF_MEMORY_ERR;
-        for (i = 0; i < tree->rank; i++)
+        for (int i = 0; i < tree->rank; i++)
             tree->coords[tree->nr_points][i] = coords[i];
         tree->data[tree->nr_points] = data;
         return node_2k_insert(tree->root, tree->nr_points++);
@@ -165,10 +161,9 @@ tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
   \param rank The rank of the tree.
   \param extent An array of size rank, storing double precision numbers
 */
-int is_valid_extent(int rank, double *extent) {
-    int i;
-    for (i = 0; i < rank; i++)
+bool  is_valid_extent(int rank, double *extent) {
+    for (int i = 0; i < rank; i++)
         if (extent[i] <= 0.0)
-            return FALSE;
-    return TRUE;
+            return false;
+    return true;
 }

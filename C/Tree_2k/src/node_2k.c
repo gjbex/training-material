@@ -56,7 +56,6 @@ tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
     assert(tree != NULL);
     assert(center != NULL);
     assert(extent != NULL);
-    int i;
     node->tree = tree;
     node->bucket = (int *) malloc(tree->bucket_size*sizeof(int));
     if (node->bucket == NULL)
@@ -75,9 +74,8 @@ tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
 */
 void node_2k_free(node_2k_t *node) {
     if (node->region != NULL) {
-        int region_nr;
         int nr_regions = get_nr_regions(node->tree->rank);
-        for (region_nr = 0; region_nr < nr_regions; region_nr++) {
+        for (int region_nr = 0; region_nr < nr_regions; region_nr++) {
             if (node->region[region_nr] != NULL)
                 node_2k_free(node->region[region_nr]);
         }
@@ -96,8 +94,8 @@ void node_2k_free(node_2k_t *node) {
   \return 2^rank
 */
 int get_nr_regions(int rank) {
-    int n = 1, i;
-    for (i = 0; i < rank; i++)
+    int n = 1;
+    for (int i = 0; i < rank; i++)
         n *= 2;
     return n;
 }
@@ -111,9 +109,9 @@ int get_nr_regions(int rank) {
                   region array.
 */
 int get_region_index(node_2k_t *node, int point_id) {
-    int i, index = 0;
+    int index = 0;
     double *coords = node->tree->coords[point_id];
-    for (i = 0; i < node->tree->rank; i++) {
+    for (int i = 0; i < node->tree->rank; i++) {
         index |= (coords[i] < node->center[i] ? 1 : 0) << i;
     }
     return index;
@@ -127,8 +125,7 @@ int get_region_index(node_2k_t *node, int point_id) {
   \param center New center coordinates, rank-sized array.
 */
 void get_new_region_extent(node_2k_t *node, double *extent) {
-    int i;
-    for (i = 0; i < node->tree->rank; i++)
+    for (int i = 0; i < node->tree->rank; i++)
         extent[i] = 0.5*node->extent[i];
 }
 
@@ -141,16 +138,15 @@ void get_new_region_extent(node_2k_t *node, double *extent) {
   \param center New center coordinates, rank-sized array.
 */
 void get_new_region_center(node_2k_t *node, int index, double *center) {
-    int i;
-    for (i = 0; i < node->tree->rank; i++)
+    for (int i = 0; i < node->tree->rank; i++)
         if (index & (1 << i))
             center[i] = node->center[i] - 0.5*node->extent[i];
         else
             center[i] = node->center[i] + 0.5*node->extent[i];
 }
 
-int node_2k_alloc_region(node_2k_t *node, int index) {
-    int status;
+tree_2k_err_t node_2k_alloc_region(node_2k_t *node, int index) {
+    tree_2k_err_t status;
     double *center, *extent;
     center = (double *) malloc(node->tree->rank*sizeof(double));
     extent = (double *) malloc(node->tree->rank*sizeof(double));
@@ -172,14 +168,14 @@ int node_2k_alloc_region(node_2k_t *node, int index) {
           an error code otherwise.
 */
 tree_2k_err_t node_2k_split(node_2k_t *node) {
-    int i, nr_regions = get_nr_regions(node->tree->rank);
+    int nr_regions = get_nr_regions(node->tree->rank);
     node->region = (node_2k_t **) malloc(nr_regions*sizeof(node_2k_t *));
     if (node->region == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
-    for (i = 0; i < nr_regions; i++) {
-        node->region[i] = NULL;
+    for (int region_nr = 0; region_nr < nr_regions; region_nr++) {
+        node->region[region_nr] = NULL;
     }
-    for (i = 0; i < node->nr_points; i++) {
+    for (int i = 0; i < node->nr_points; i++) {
         tree_2k_err_t status;
         int point_id = node->bucket[i];
         int index = get_region_index(node, point_id);
