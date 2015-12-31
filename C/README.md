@@ -6,5 +6,5 @@ and idiosyncracies particular to C.
 ## What is it?
 1. `Tree_2K`: library for storing spatial data in a tree-like data
     structure that allows range queries.  It illustrates some pointer
-    juggling, bit-level operations, error handling, CUnit testing, and
-    Doxygen documentation.
+    juggling, bit-level operations, error handling, CUnit testing, C99
+    features, and Doxygen documentation.

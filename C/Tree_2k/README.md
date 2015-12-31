@@ -10,6 +10,6 @@ It is similar to a quadtree, but works for any specified rank.
 1. `src/test`: unit tests written for the `CUnit` framework.
 
 ## Requirements
-* A C89 compliant compiler, and GNU make to build.
+* A C99 compliant compiler, and GNU make to build.
 * To compile and run the tests, CUnit is required.
 * To generate HTML and LaTeX documentation, doxygen is required.
