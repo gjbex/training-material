@@ -11,9 +11,9 @@
 #include "tree_2k.h"
 #include "node_2k.h"
 
-int tree_2k_init(tree_2k_t *tree, int rank,
-                 double *center, double *extent,
-                 int max_points, int bucket_size);
+tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
+                           double *center, double *extent,
+                           int max_points, int bucket_size);
 int is_valid_extent(int rank, double *extent);
 
 /*!
@@ -29,11 +29,12 @@ int is_valid_extent(int rank, double *extent);
   \param max_points The maximum number of points to be stored in the tree.
   \param bucket_size The maximum number of points any node will store
                      before it is split.
-  \return The initialized node.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
 */
-int tree_2k_alloc(tree_2k_t **tree, int rank,
-                  double *center, double *extent,
-                  int max_points, int bucket_size) {
+tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
+                            double *center, double *extent,
+                            int max_points, int bucket_size) {
     *tree = (tree_2k_t *) malloc(sizeof(struct tree_2k));
     if (*tree == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
@@ -53,12 +54,13 @@ int tree_2k_alloc(tree_2k_t **tree, int rank,
   \param max_points The maximum number of points to be stored in the tree.
   \param bucket_size The maximum number of points any node will store
                      before it is split.
-  \return The initialized node.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
 */
-int tree_2k_init(tree_2k_t *tree, int rank,
-                 double *center, double *extent,
-                 int max_points, int bucket_size) {
-    int i, status;
+tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
+                           double *center, double *extent,
+                           int max_points, int bucket_size) {
+    int i;
     double *node_center, *node_extent;
     if (rank <= 0)
         return TREE_2K_INVALID_RANK_ERR;
@@ -88,10 +90,7 @@ int tree_2k_init(tree_2k_t *tree, int rank,
         node_center[i] = center[i];
         node_extent[i] = extent[i];
     }
-    status = node_2k_alloc(&(tree->root), tree, node_center, node_extent);
-    if (status != TREE_2K_SUCCESS)
-        return status;
-    return TREE_2K_SUCCESS;
+    return node_2k_alloc(&(tree->root), tree, node_center, node_extent);
 }
 
 /*!
@@ -101,9 +100,8 @@ int tree_2k_init(tree_2k_t *tree, int rank,
 */
 void tree_2k_free(tree_2k_t *tree) {
     int i;
-    for (i = 0; i < tree->nr_points; i++) {
+    for (i = 0; i < tree->nr_points; i++)
         free(tree->coords[i]);
-    }
     free(tree->data);
     free(tree->coords);
     node_2k_free(tree->root);
@@ -137,9 +135,10 @@ int tree_2k_can_store(tree_2k_t *tree, double *coords) {
   \param data A pointer to data to be associated with the point, may be
               NULL if that is not necessary.  Note that memory management
               is up to the caller, data is not copied, and not freed.
-  \return Non-zero integer upon failed insert, zero otherwise.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
 */
-int tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
+tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
     double *new_coords;
     if (!tree_2k_can_store(tree, coords)) {
         return TREE_2K_COORDS_NOT_IN_EXTENT_ERR;

@@ -12,21 +12,26 @@
 
 #include "node_2k.h"
 
+tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
+                           double *center, double *extent);
 int get_nr_regions(int rank);
 
 /*!
   \brief Node constructor, will allocate the node itself, all data
          structures required for a node without points inserted into
          it, and initialize all members
+  \param node Double dereferenced pointer to the node to be allocated
+              and initialized.
   \param tree Tree the node is part off.
   \param center An array of size rank containing the cooridantes of the
          new node's center as double precision numbers,
   \param extent An array of size rank containing the extent for each
          dimension for the new node as double precision numbers,
-  \return The initialized node.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
 */
-int node_2k_alloc(node_2k_t **node, tree_2k_t *tree,
-                  double *center, double *extent) {
+tree_2k_err_t node_2k_alloc(node_2k_t **node, tree_2k_t *tree,
+                            double *center, double *extent) {
     *node = (node_2k_t *) malloc(sizeof(struct node_2k));
     if (*node == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
@@ -37,15 +42,17 @@ int node_2k_alloc(node_2k_t **node, tree_2k_t *tree,
   \brief Node initialization, will allocate the node itself, all data
          structures required for a node without points inserted into
          it, and initialize all members
-  \param tree Tree the node is part off.
+  \param node Address of the node to be initialized.
+  \param tree Tree address the node is part off.
   \param center An array of size rank containing the cooridantes of the
          new node's center as double precision numbers,
   \param extent An array of size rank containing the extent for each
          dimension for the new node as double precision numbers,
-  \return The initialized node.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
 */
-int node_2k_init(node_2k_t *node, tree_2k_t *tree,
-                        double *center, double *extent) {
+tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
+                           double *center, double *extent) {
     assert(tree != NULL);
     assert(center != NULL);
     assert(extent != NULL);
@@ -161,9 +168,10 @@ int node_2k_alloc_region(node_2k_t *node, int index) {
   \brief Split the node into 2^rank nodes, and redistribute the points over
   the new nodes.
   \param node The node to be split.
-  \return Non-zero integer upon successful split, zero otherwise.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
 */
-int node_2k_split(node_2k_t *node) {
+tree_2k_err_t node_2k_split(node_2k_t *node) {
     int i, nr_regions = get_nr_regions(node->tree->rank);
     node->region = (node_2k_t **) malloc(nr_regions*sizeof(node_2k_t *));
     if (node->region == NULL)
@@ -172,7 +180,7 @@ int node_2k_split(node_2k_t *node) {
         node->region[i] = NULL;
     }
     for (i = 0; i < node->nr_points; i++) {
-        int status;
+        tree_2k_err_t status;
         int point_id = node->bucket[i];
         int index = get_region_index(node, point_id);
         if (node->region[index] == NULL) {
@@ -194,9 +202,10 @@ int node_2k_split(node_2k_t *node) {
   \brief Insert the point with given ID into the node
   \param node The node to insert the point into.
   \param point_id The point's index in the tree's point array.
-  \return Non-zero integer upon successful insert, zero otherwise.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
 */
-int node_2k_insert(node_2k_t *node, int point_id) {
+tree_2k_err_t node_2k_insert(node_2k_t *node, int point_id) {
     int index;
     // node has no regions yet
     if (node->region == NULL) {
@@ -206,7 +215,7 @@ int node_2k_insert(node_2k_t *node, int point_id) {
             return TREE_2K_SUCCESS;
         } else {
             // the bucket is full, split the node
-            int status = node_2k_split(node);
+            tree_2k_err_t status = node_2k_split(node);
             if (status != TREE_2K_SUCCESS)
                 return status;
         }
@@ -216,7 +225,7 @@ int node_2k_insert(node_2k_t *node, int point_id) {
     // a new one if it doesn't exist yet
     index = get_region_index(node, point_id);
     if (node->region[index] == NULL) {
-        int status = node_2k_alloc_region(node, index);
+        tree_2k_err_t status = node_2k_alloc_region(node, index);
         if (status != TREE_2K_SUCCESS)
             return status;
     }

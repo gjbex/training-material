@@ -57,10 +57,11 @@ typedef struct tree_2k {
     node_2k_t *root;
 } tree_2k_t;
 
-int tree_2k_alloc(tree_2k_t **tree, int rank,
-                  double *center, double *extent,
-                  int max_points, int bucket_size);
+tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
+                            double *center, double *extent,
+                            int max_points, int bucket_size);
 void tree_2k_free(tree_2k_t *tree);
-int tree_2k_insert(tree_2k_t *tree, double *coords, void *data);
+int tree_2k_can_store(tree_2k_t *tree, double *coords);
+tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data);
 
 #endif
