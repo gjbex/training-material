@@ -6,6 +6,7 @@
 void add_init_suite(void);
 void add_insert_suite(void);
 void add_accessor_suite(void);
+void add_query_suite(void);
 
 int main(int argc, char *argv[]) {
     int status = CU_initialize_registry();
@@ -15,6 +16,7 @@ int main(int argc, char *argv[]) {
     add_init_suite();
     add_insert_suite();
     add_accessor_suite();
+    add_query_suite();
     CU_basic_run_tests();
     CU_cleanup_registry();
     return EXIT_SUCCESS;
@@ -53,4 +55,11 @@ void add_accessor_suite(void) {
                 &test_data_accessors);
     CU_add_test(suite, "data access fail",
                 &test_data_access_fail);
+}
+
+#include "query_tests.h"
+void add_query_suite(void) {
+    CU_pSuite suite = CU_add_suite("queries", NULL, NULL);
+    CU_add_test(suite, "can have point",
+                &test_can_have_points);
 }

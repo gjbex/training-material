@@ -8,6 +8,8 @@
 
 #include <assert.h>
 #include <err.h>
+#include <math.h>
+#include <stdbool.h>
 #include <stdlib.h>
 
 #include "node_2k.h"
@@ -233,4 +235,120 @@ tree_2k_err_t node_2k_insert(node_2k_t *node, int point_id) {
             return status;
     }
     return node_2k_insert(node->region[index], point_id);
+}
+
+/*!
+  \brief Check whether the given point can have points in this node
+         within the given radius.
+
+  Note: this may produce false positives.
+
+  \param node Address of the node to check for.
+  \param coords An array of size rank that represent the query point.
+  \param radius The query's radius.
+  \return True if the node can have points within the given radius, false
+          otherwise.
+*/
+bool node_2k_can_have_points(node_2k_t *node, const double *coords,
+                             double radius) {
+    for (int i = 0; i < node->tree->rank; i++)
+        if (fabs(node->center[i] - coords[i]) > radius + node->extent[i])
+            return false;
+    return true;
+}
+
+/*!
+  \brief Checks whether a node is a leaf in the tree.
+  \param node Address of the node to check
+  \return True if the node has no region nodes, false otherwise.
+*/
+bool node_2k_is_leaf(node_2k_t *node) {
+    return node->region == NULL;
+}
+
+/*!
+  \brief Allocate a new node list.
+  \param node_list Double dereferenced pointer to the list of nodes.
+  \param max_nodes The initial capacity of the list.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t node_2k_list_alloc(node_2k_list_t **node_list,
+                                 int max_nodes) {
+    *node_list = (node_2k_list_t *) malloc(sizeof(struct node_2k_list));
+    if (*node_list == NULL)
+        return TREE_2K_OUT_OF_MEMORY_ERR;
+    size_t list_size = max_nodes*sizeof(node_2k_t *);
+    (*node_list)->node = (node_2k_t **) malloc(list_size);
+    if ((*node_list)->node == NULL)
+        return TREE_2K_OUT_OF_MEMORY_ERR;
+    (*node_list)->nr_nodes = 0;
+    (*node_list)->max_nodes = max_nodes;
+    return TREE_2K_SUCCESS;
+}
+
+/*!
+  \brief Free the memory allocated for this query result.
+  \param node_list Address of a node list
+*/
+void node_2k_list_free(node_2k_list_t *node_list) {
+    free(node_list->node);
+    free(node_list);
+}
+
+/*!
+  \brief Store a node address in the list of nodes.
+
+  The list will be extended when its maximum capacity is reached.
+  \param node_list Address of the list of nodes.
+  \param node Node address to add to the list.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t node_2k_list_add(node_2k_list_t *node_list,
+                               node_2k_t *node) {
+    if (node_list->nr_nodes >= node_list->max_nodes) {
+        int new_max = 2*node_list->max_nodes;
+        size_t new_size = new_max*sizeof(node_2k_t *);
+        node_2k_t **new_array = (node_2k_t **) realloc(node_list,
+                                                       new_size);
+        if (new_array == NULL)
+            return TREE_2K_OUT_OF_MEMORY_ERR;
+        node_list->node = new_array;
+        node_list->max_nodes = new_max;
+    }
+    node_list->node[node_list->nr_nodes++] = node;
+    return TREE_2K_SUCCESS;
+}
+
+/*!
+  \brief Recursively go down in region nodes, returning a list of any node
+         that could have points within the radius of the query point.
+  \param node Address of the node to query.
+  \param query_result Address of the node_2k_list of nodes that could
+                      satisfy the query.
+  \param coords An array of size rank that represent the query point.
+  \param radius The query's radius.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t node_2k_query(node_2k_t *node, node_2k_list_t *query_result,
+                            const double *coords, double radius) {
+    if (node_2k_can_have_points(node, coords, radius)) {
+        if (node_2k_is_leaf(node)) {
+            node_2k_list_add(query_result, node);
+        } else {
+            int nr_regions = get_nr_regions(node->tree->rank);
+            for (int region_nr = 0; region_nr < nr_regions; region_nr++) {
+                if (node->region[region_nr] != NULL) {
+                    tree_2k_err_t status;
+                    status = node_2k_query(node->region[region_nr],
+                                           query_result, coords, radius);
+                    if (status != TREE_2K_SUCCESS)
+                        return status;
+                }
+            }
+        }
+    }
+    return TREE_2K_SUCCESS;
 }
