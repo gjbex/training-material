@@ -50,20 +50,21 @@ void test_multiple_insert_no_split(void) {
     status = tree_2k_alloc(&tree, rank, center, extent,
                            max_points, bucket_size);
     CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
-    for (int i = 0; i < nr_points; i++) {
-        status = tree_2k_insert(tree, coords[i], &q[i]);
+    for (int point_nr = 0; point_nr < nr_points; point_nr++) {
+        status = tree_2k_insert(tree, coords[point_nr], &q[point_nr]);
         CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
     }
     CU_ASSERT_EQUAL_FATAL(tree->nr_points, nr_points);
-    for (int i = 0; i < nr_points; i++) {
-        for (int j = 0; j < rank; j++) {
-            CU_ASSERT_EQUAL(tree->coords[i][j], coords[i][j]);
+    for (int point_nr = 0; point_nr < nr_points; point_nr++) {
+        for (int i = 0; i < rank; i++) {
+            CU_ASSERT_DOUBLE_EQUAL(tree->coords[point_nr][i],
+                                   coords[point_nr][i], PREC);
         }
-        CU_ASSERT_EQUAL(*((int *) tree->data[i]), q[i]);
+        CU_ASSERT_EQUAL(*((int *) tree->data[point_nr]), q[point_nr]);
     }
     CU_ASSERT_EQUAL_FATAL(tree->root->nr_points, nr_points);
-    for (int i = 0; i < nr_points; i++) {
-        CU_ASSERT_EQUAL(tree->root->bucket[i], i);
+    for (int point_nr = 0; point_nr < nr_points; point_nr++) {
+        CU_ASSERT_EQUAL(tree->root->bucket[point_nr], point_nr);
     }
     CU_ASSERT_PTR_NULL(tree->root->region);
     tree_2k_free(tree);
@@ -83,20 +84,27 @@ void test_multiple_insert_with_split(void) {
     };
     int q[] = {-1, 0, +1};
     int region_content[] = {2, 0, 1};
+    double new_center[][2] = {
+        {+0.5, +0.5},
+        {-0.5, +0.5},
+        {+0.5, -0.5}
+    };
+    double new_extent[] = {0.5, 0.5};
     tree_2k_t *tree;
     status = tree_2k_alloc(&tree, rank, center, extent,
                            max_points, bucket_size);
     CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
-    for (int i = 0; i < nr_points; i++) {
-        status = tree_2k_insert(tree, coords[i], &q[i]);
+    for (int point_nr = 0; point_nr < nr_points; point_nr++) {
+        status = tree_2k_insert(tree, coords[point_nr], &q[point_nr]);
         CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
     }
     CU_ASSERT_EQUAL_FATAL(tree->nr_points, nr_points);
-    for (int i = 0; i < nr_points; i++) {
-        for (int j = 0; j < rank; j++) {
-            CU_ASSERT_EQUAL(tree->coords[i][j], coords[i][j]);
+    for (int point_nr = 0; point_nr < nr_points; point_nr++) {
+        for (int i = 0; i < rank; i++) {
+            CU_ASSERT_DOUBLE_EQUAL(tree->coords[point_nr][i],
+                                   coords[point_nr][i], PREC);
         }
-        CU_ASSERT_EQUAL(*((int *) tree->data[i]), q[i]);
+        CU_ASSERT_EQUAL(*((int *) tree->data[point_nr]), q[point_nr]);
     }
     CU_ASSERT_EQUAL(tree->root->nr_points, 0);
     CU_ASSERT_PTR_NOT_NULL_FATAL(tree->root->region);
@@ -105,10 +113,17 @@ void test_multiple_insert_with_split(void) {
         CU_ASSERT_EQUAL(tree->root->region[region_nr]->nr_points, 1);
         CU_ASSERT_EQUAL(tree->root->region[region_nr]->bucket[0],
                         region_content[region_nr]);
+        for (int i = 0; i < tree->rank; i++) {
+            CU_ASSERT_DOUBLE_EQUAL(tree->root->region[region_nr]->center[i],
+                                   new_center[region_nr][i], PREC); 
+            CU_ASSERT_DOUBLE_EQUAL(tree->root->region[region_nr]->extent[i],
+                                   new_extent[i], PREC); 
+        }
     }
     CU_ASSERT_PTR_NULL(tree->root->region[3]);
     tree_2k_free(tree);
 }
+
 void test_failed_insert(void) {
     tree_2k_err_t status;
     const double PREC = 1.0e-12;
