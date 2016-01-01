@@ -3,5 +3,6 @@
 
 void test_basic_accessors(void);
 void test_data_accessors(void);
+void test_data_access_fail(void);
 
 #endif

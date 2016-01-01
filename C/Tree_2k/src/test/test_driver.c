@@ -51,4 +51,6 @@ void add_accessor_suite(void) {
                 &test_basic_accessors);
     CU_add_test(suite, "data accessors",
                 &test_data_accessors);
+    CU_add_test(suite, "data access fail",
+                &test_data_access_fail);
 }
