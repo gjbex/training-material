@@ -12,6 +12,9 @@
 #include "tree_2k.h"
 #include "node_2k.h"
 
+tree_2k_err_t tree_2k_validate_params(int rank,
+                           double *center, double *extent,
+                           int max_points, int bucket_size);
 tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
                            double *center, double *extent,
                            int max_points, int bucket_size);
@@ -37,6 +40,11 @@ bool is_valid_extent(int rank, double *extent);
 tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
                             double *center, double *extent,
                             int max_points, int bucket_size) {
+    *tree = NULL;
+    tree_2k_err_t status = tree_2k_validate_params(rank, center, extent,
+                                                   max_points, bucket_size);
+    if (status != TREE_2K_SUCCESS)
+        return status;
     *tree = (tree_2k_t *) malloc(sizeof(struct tree_2k));
     if (*tree == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
@@ -153,6 +161,36 @@ void *tree_2k_get_data(tree_2k_t *tree, int point_id) {
 }
 
 /*!
+  \brief Validate the parameters used to initialize a tree
+  \param rank The rank of the points to be stored.
+  \param center An array of size rank containing the cooridantes of the
+         new node's center as double precision numbers,
+  \param extent An array of size rank containing the extent for each
+         dimension for the new node as double precision numbers,
+  \param max_points The maximum number of points to be stored in the tree.
+  \param bucket_size The maximum number of points any node will store
+                     before it is split.
+  \return TREE_2K_SUCCESS if all parameters are valid, false otherwise
+*/
+tree_2k_err_t tree_2k_validate_params(int rank,
+                           double *center, double *extent,
+                           int max_points, int bucket_size) {
+    if (rank <= 0)
+        return TREE_2K_INVALID_RANK_ERR;
+    if (center == NULL)
+        return TREE_2K_CENTER_IS_NULL_ERR;
+    if (extent == NULL)
+        return TREE_2K_EXTENT_IS_NULL_ERR;
+    if (!is_valid_extent(rank, extent))
+        return TREE_2K_INVALID_EXTENT_ERR;
+    if (max_points <= 0)
+        return TREE_2K_INVALID_MAX_POINT_ERR;
+    if (bucket_size <= 0)
+        return TREE_2K_INVALID_BUCKET_SIZE_ERR;
+    return TREE_2K_SUCCESS;
+}
+
+/*!
   \brief Tree initializer, will allocate the tree itself, all data
          structures required for a tree without points inserted into
          it, and initialize all members
@@ -172,18 +210,6 @@ tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
                            double *center, double *extent,
                            int max_points, int bucket_size) {
     double *node_center, *node_extent;
-    if (rank <= 0)
-        return TREE_2K_INVALID_RANK_ERR;
-    if (center == NULL)
-        return TREE_2K_CENTER_IS_NULL_ERR;
-    if (extent == NULL)
-        return TREE_2K_EXTENT_IS_NULL_ERR;
-    if (!is_valid_extent(rank, extent))
-        return TREE_2K_INVALID_EXTENT_ERR;
-    if (max_points <= 0)
-        return TREE_2K_INVALID_MAX_POINT_ERR;
-    if (bucket_size <= 0)
-        return TREE_2K_INVALID_BUCKET_SIZE_ERR;
     tree->rank = rank;
     tree->bucket_size = bucket_size;
     tree->max_points = max_points;
