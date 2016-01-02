@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "tree_2k.h"
 #include "node_2k.h"
@@ -58,8 +59,8 @@ tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
   \param tree The address of the tree to free.
 */
 void tree_2k_free(tree_2k_t *tree) {
-    for (int i = 0; i < tree->nr_points; i++)
-        free(tree->coords[i]);
+    for (int point_nr = 0; point_nr < tree->nr_points; point_nr++)
+        free(tree->coords[point_nr]);
     free(tree->data);
     free(tree->coords);
     node_2k_free(tree->root);
@@ -101,18 +102,16 @@ tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
     if (!tree_2k_can_store(tree, coords)) {
         return TREE_2K_COORDS_NOT_IN_EXTENT_ERR;
     }
-    if (tree->nr_points >= tree->max_points) {
+    if (tree->nr_points >= tree->max_points)
         return TREE_2K_CAPACITY_EXCEEDED_ERR;
-    } else {
-        tree->coords[tree->nr_points] =
-            (double *) malloc(tree->rank*sizeof(double));
-        if (tree->coords[tree->nr_points] == NULL)
-            return TREE_2K_OUT_OF_MEMORY_ERR;
-        for (int i = 0; i < tree->rank; i++)
-            tree->coords[tree->nr_points][i] = coords[i];
-        tree->data[tree->nr_points] = data;
-        return node_2k_insert(tree->root, tree->nr_points++);
-    }
+    tree->coords[tree->nr_points] =
+        (double *) malloc(tree->rank*sizeof(double));
+    if (tree->coords[tree->nr_points] == NULL)
+        return TREE_2K_OUT_OF_MEMORY_ERR;
+    memcpy(tree->coords[tree->nr_points], coords,
+           tree->rank*sizeof(double));
+    tree->data[tree->nr_points] = data;
+    return node_2k_insert(tree->root, tree->nr_points++);
 }
 
 /*!
@@ -222,10 +221,8 @@ tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
     node_extent = (double *) malloc(tree->rank*sizeof(double));
     if (node_center == NULL || node_extent == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
-    for (int i = 0; i < rank; i++) {
-        node_center[i] = center[i];
-        node_extent[i] = extent[i];
-    }
+    memcpy(node_center, center, tree->rank*sizeof(double));
+    memcpy(node_extent, extent, tree->rank*sizeof(double));
     return node_2k_alloc(&(tree->root), tree, node_center, node_extent);
 }
 
