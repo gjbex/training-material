@@ -317,6 +317,33 @@ tree_2k_err_t tree_2k_query_result_add(tree_2k_query_result_t *query_result,
     query_result->index[query_result->nr_results++] = index;
     return TREE_2K_SUCCESS;
 }
+
+/*!
+  \brief Checks whether a point is within the radius of the query point.
+  \param rank Rank of the tree.
+  \param p_coord Coordinates as a size rank array of the point to check.
+  \param coord Coordinates as a size rank array of the query point.
+  \param radius Query radius.
+  \return True if the distance between both points is less or equal to
+          than radius, false otherwise.
+*/
+bool tree_2k_is_in_range(int rank, const double *p_coords,
+                         const double *coords, double radius) {
+    double distance2 = 0.0;
+    for (int i = 0; i < rank; i++)
+        distance2 += (p_coords[i] - coords[i])*(p_coords[i] - coords[i]);
+    return distance2 <= radius*radius;
+}
+
+/*!
+  \brief Query the tree for points within the given radius from the
+         specified point.
+  \param tree Address of the tree to query.
+  \param coords Coordinates of the query point.
+  \param radius Radius to search in.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
 tree_2k_err_t tree_2k_query(tree_2k_t *tree,
                             const double *coords, double radius,
                             tree_2k_query_result_t *query_result) {
@@ -328,6 +355,16 @@ tree_2k_err_t tree_2k_query(tree_2k_t *tree,
     status = node_2k_query(tree->root, node_list, coords, radius);
     if (status != TREE_2K_SUCCESS)
         return status;
+    for (int node_nr = 0; node_nr < node_list->nr_nodes; node_nr++) {
+        for (int point_nr = 0; point_nr < node_list->node[node_nr]->nr_points;
+                point_nr++) {
+            int index = node_list->node[node_nr]->bucket[point_nr];
+            if (tree_2k_is_in_range(tree->rank, tree->coords[index],
+                                    coords, radius)) {
+                tree_2k_query_result_add(query_result, index);
+            }
+        }
+    }
     node_2k_list_free(node_list);
     return TREE_2K_SUCCESS;
 }
