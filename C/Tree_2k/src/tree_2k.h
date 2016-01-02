@@ -71,6 +71,10 @@ typedef struct tree_2k_query_result {
     int max_results;
 } tree_2k_query_result_t;
 
+tree_2k_err_t tree_2k_query_result_alloc(tree_2k_query_result_t **query_result,
+                                         int max_results);
+void tree_2k_query_result_free(tree_2k_query_result_t *query_result);
+
 tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
                             double *center, double *extent,
                             int max_points, int bucket_size);
@@ -81,5 +85,8 @@ int tree_2k_get_rank(tree_2k_t *tree);
 int tree_2k_get_nr_points(tree_2k_t *tree);
 const double *tree_2k_get_coords(tree_2k_t *tree, int i);
 void *tree_2k_get_data(tree_2k_t *tree, int point_id);
+tree_2k_err_t tree_2k_query(tree_2k_t *tree,
+                            const double *coords, double radius,
+                            tree_2k_query_result_t *query_result);
 
 #endif
