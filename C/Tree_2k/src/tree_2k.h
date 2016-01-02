@@ -66,9 +66,9 @@ typedef struct tree_2k_query_result {
     /*! Elements of the list */
     int *index;
     /*! Current number of elements in the list */
-    int nr_indices;
+    int nr_results;
     /*! Maximum number of elements in the list */
-    int max_indices;
+    int max_results;
 } tree_2k_query_result_t;
 
 tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,

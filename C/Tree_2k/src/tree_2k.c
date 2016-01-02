@@ -263,8 +263,71 @@ int tree_2k_estimate_result_size(tree_2k_t *tree, double radius) {
         ((int) ceil(tree->nr_points*query_volume/total_volume));
 }
 
-tree_2k_err_t tree_2k_query(tree_2k_t *tree, double *coords, double radius,
-                            tree_2k_query_result_t *query_result) {
+/*!
+  \brief Allocate a new query result
+  \param query_result Double dereferenced pointer to the query result
+  \param max_results The initial capacity of the result list.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t tree_2k_query_result_alloc(tree_2k_query_result_t **query_result,
+                                         int max_results) {
+    assert(max_results > 0);
+    size_t query_size = sizeof(struct tree_2k_query_result *);
+    *query_result = (tree_2k_query_result_t *) malloc(query_size);
+    if (*query_result == NULL)
+        return TREE_2K_OUT_OF_MEMORY_ERR;
+    (*query_result)->index = (int *) malloc(max_results*sizeof(int));
+    if ((*query_result)->index == NULL)
+        return TREE_2K_OUT_OF_MEMORY_ERR;
+    (*query_result)->nr_results = 0;
+    (*query_result)->max_results = max_results;
+    return TREE_2K_SUCCESS;
+}
 
+/*!
+  \brief Free the memory allocated for this query result.
+  \param query_result Address of the query result.
+*/
+void tree_2k_query_result_free(tree_2k_query_result_t *query_result) {
+    free(query_result->index);
+    free(query_result);
+}
+
+/*!
+  \brief Store a node index in the list of query results.
+
+  The list will be extended when its maximum capacity is reached.
+  \param query_result Address of the query results.
+  \param index Point index to add to the list.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t tree_2k_query_result_add(tree_2k_query_result_t *query_result,
+                                       int index) {
+    if (query_result->nr_results >= query_result->max_results) {
+        int new_max = 2*query_result->max_results;
+        size_t new_size = new_max*sizeof(int);
+        int *new_array = (int *) realloc(query_result->index, new_size);
+        if (new_array == NULL)
+            return TREE_2K_OUT_OF_MEMORY_ERR;
+        query_result->index = new_array;
+        query_result->max_results = new_max;
+    }
+    query_result->index[query_result->nr_results++] = index;
+    return TREE_2K_SUCCESS;
+}
+tree_2k_err_t tree_2k_query(tree_2k_t *tree,
+                            const double *coords, double radius,
+                            tree_2k_query_result_t *query_result) {
+    node_2k_list_t *node_list;
+    tree_2k_err_t status;
+    status = node_2k_list_alloc(&node_list, 10);
+    if (status != TREE_2K_SUCCESS)
+        return status;
+    status = node_2k_query(tree->root, node_list, coords, radius);
+    if (status != TREE_2K_SUCCESS)
+        return status;
+    node_2k_list_free(node_list);
     return TREE_2K_SUCCESS;
 }
