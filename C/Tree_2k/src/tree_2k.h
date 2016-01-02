@@ -88,5 +88,7 @@ void *tree_2k_get_data(tree_2k_t *tree, int point_id);
 tree_2k_err_t tree_2k_query(tree_2k_t *tree,
                             const double *coords, double radius,
                             tree_2k_query_result_t *query_result);
+tree_2k_err_t tree_2k_naive_query_print(tree_2k_t *tree, double *coords,
+                                        double radius);
 
 #endif

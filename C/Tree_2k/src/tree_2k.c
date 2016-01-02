@@ -370,3 +370,16 @@ tree_2k_err_t tree_2k_query(tree_2k_t *tree,
     node_2k_list_free(node_list);
     return TREE_2K_SUCCESS;
 }
+
+tree_2k_err_t tree_2k_naive_query_print(tree_2k_t *tree, double *coords,
+                                        double radius) {
+    for (int point_nr = 0; point_nr < tree->nr_points; point_nr++) {
+        if (tree_2k_is_in_range(tree->rank, tree->coords[point_nr],
+                                coords, radius)) {
+            printf("point %d: (", point_nr);
+            for (int i = 0; i < tree->rank; i++)
+                printf("%8.4f", tree->coords[point_nr][i]);
+            printf(")\n");
+        }
+    }
+}
