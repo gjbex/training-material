@@ -98,6 +98,7 @@ bool tree_2k_can_store(tree_2k_t *tree, double *coords) {
           an error code otherwise.
 */
 tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
+    tree_2k_err_t status;
     double *new_coords;
     if (!tree_2k_can_store(tree, coords)) {
         return TREE_2K_COORDS_NOT_IN_EXTENT_ERR;
@@ -111,7 +112,11 @@ tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
     memcpy(tree->coords[tree->nr_points], coords,
            tree->rank*sizeof(double));
     tree->data[tree->nr_points] = data;
-    return node_2k_insert(tree->root, tree->nr_points++);
+    status = node_2k_insert(tree->root, tree->nr_points);
+    if (status != TREE_2K_SUCCESS)
+        return status;
+    tree->nr_points++;
+    return TREE_2K_SUCCESS;
 }
 
 /*!
@@ -212,7 +217,7 @@ tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
     tree->rank = rank;
     tree->bucket_size = bucket_size;
     tree->max_points = max_points;
-    tree->data = (void **) malloc(sizeof(void *));
+    tree->data = (void **) malloc(max_points*sizeof(void *));
     tree->coords = (double **) malloc(max_points*sizeof(double *));
     if (tree->data == NULL || tree->coords == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
