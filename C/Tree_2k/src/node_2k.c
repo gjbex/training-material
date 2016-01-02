@@ -288,7 +288,7 @@ tree_2k_err_t node_2k_list_alloc(node_2k_list_t **node_list,
 }
 
 /*!
-  \brief Free the memory allocated for this query result.
+  \brief Free the memory allocated for this node list.
   \param node_list Address of a node list
 */
 void node_2k_list_free(node_2k_list_t *node_list) {
