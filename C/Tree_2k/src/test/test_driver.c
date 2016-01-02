@@ -62,4 +62,6 @@ void add_query_suite(void) {
     CU_pSuite suite = CU_add_suite("queries", NULL, NULL);
     CU_add_test(suite, "can have point",
                 &test_can_have_points);
+    CU_add_test(suite, "succesful query",
+                &test_query_success);
 }
