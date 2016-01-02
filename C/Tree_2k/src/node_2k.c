@@ -275,6 +275,7 @@ bool node_2k_is_leaf(node_2k_t *node) {
 */
 tree_2k_err_t node_2k_list_alloc(node_2k_list_t **node_list,
                                  int max_nodes) {
+    assert(max_nodes > 0);
     *node_list = (node_2k_list_t *) malloc(sizeof(struct node_2k_list));
     if (*node_list == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
