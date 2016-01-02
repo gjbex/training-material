@@ -59,6 +59,18 @@ typedef struct tree_2k {
     node_2k_t *root;
 } tree_2k_t;
 
+/*!
+  \brief Data structure to represent a list of nodes indices
+*/
+typedef struct tree_2k_query_result {
+    /*! Elements of the list */
+    int *index;
+    /*! Current number of elements in the list */
+    int nr_indices;
+    /*! Maximum number of elements in the list */
+    int max_indices;
+} tree_2k_query_result_t;
+
 tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
                             double *center, double *extent,
                             int max_points, int bucket_size);

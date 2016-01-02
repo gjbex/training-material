@@ -5,6 +5,7 @@
 
 #include <assert.h>
 #include <err.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -214,4 +215,30 @@ bool  is_valid_extent(int rank, double *extent) {
         if (extent[i] <= 0.0)
             return false;
     return true;
+}
+
+/*!
+  \brief Compute an estimate for the number of query result.
+
+  The assumption is that the number of query results will be proportional to
+  the ratio between the total volume represented by the tree and that of
+  query.
+  \param tree Address of the tree to query.
+  \param radius The query's radius.
+  \return An estimate for the number of query results.
+*/
+int tree_2k_estimate_result_size(tree_2k_t *tree, double radius) {
+    double total_volume = 1.0, query_volume = 1.0;
+    for (int i = 0; i < tree->rank; i++) {
+        total_volume *= tree->root->extent[i];
+        query_volume *= radius;
+    }
+    return tree->bucket_size  +
+        ((int) ceil(tree->nr_points*query_volume/total_volume));
+}
+
+tree_2k_err_t tree_2k_query(tree_2k_t *tree, double *coords, double radius,
+                            tree_2k_query_result_t *query_result) {
+
+    return TREE_2K_SUCCESS;
 }
