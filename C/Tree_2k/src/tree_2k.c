@@ -275,7 +275,7 @@ int tree_2k_estimate_result_size(tree_2k_t *tree, double radius) {
 tree_2k_err_t tree_2k_query_result_alloc(tree_2k_query_result_t **query_result,
                                          int max_results) {
     assert(max_results > 0);
-    size_t query_size = sizeof(struct tree_2k_query_result *);
+    size_t query_size = sizeof(struct tree_2k_query_result);
     *query_result = (tree_2k_query_result_t *) malloc(query_size);
     if (*query_result == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
