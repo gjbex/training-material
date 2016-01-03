@@ -140,4 +140,5 @@ void test_failed_insert(void) {
     status = tree_2k_insert(tree, coords, q);
     CU_ASSERT_EQUAL_FATAL(status, TREE_2K_COORDS_NOT_IN_EXTENT_ERR);
     tree_2k_free(tree);
+    free(q);
 }

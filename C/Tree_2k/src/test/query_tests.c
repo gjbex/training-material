@@ -101,4 +101,5 @@ void test_query_success(void) {
     CU_ASSERT_EQUAL(query_result->nr_results, nr_results);
     tree_2k_query_result_free(query_result);
     tree_2k_free(tree);
+    free(results);
 }
