@@ -325,8 +325,8 @@ tree_2k_err_t tree_2k_query_result_add(tree_2k_query_result_t *query_result,
 /*!
   \brief Checks whether a point is within the radius of the query point.
   \param rank Rank of the tree.
-  \param p_coord Coordinates as a size rank array of the point to check.
-  \param coord Coordinates as a size rank array of the query point.
+  \param p_coords Coordinates as a size rank array of the point to check.
+  \param coords Coordinates as a size rank array of the query point.
   \param radius Query radius.
   \return True if the distance between both points is less or equal to
           than radius, false otherwise.
@@ -345,6 +345,7 @@ bool tree_2k_is_in_range(int rank, const double *p_coords,
   \param tree Address of the tree to query.
   \param coords Coordinates of the query point.
   \param radius Radius to search in.
+  \param query_result Address of a query result data stucture.
   \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
           an error code otherwise.
 */
@@ -384,6 +385,7 @@ tree_2k_err_t tree_2k_query(tree_2k_t *tree,
   \param tree Address of the tree to query.
   \param coords Coordinates of the query point.
   \param radius Radius to search in.
+  \param query_result Address of a query result data stucture.
   \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
           an error code otherwise.
 */
