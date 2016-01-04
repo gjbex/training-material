@@ -16,7 +16,6 @@
 
 tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
                            double *center, double *extent);
-int get_nr_regions(int rank);
 
 /*!
   \brief Node constructor, will allocate the node itself, all data
@@ -76,11 +75,10 @@ tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
 */
 void node_2k_free(node_2k_t *node) {
     if (node->region != NULL) {
-        int nr_regions = get_nr_regions(node->tree->rank);
-        for (int region_nr = 0; region_nr < nr_regions; region_nr++) {
+        for (int region_nr = 0; region_nr < node->tree->nr_regions;
+                region_nr++)
             if (node->region[region_nr] != NULL)
                 node_2k_free(node->region[region_nr]);
-        }
         free(node->region);
     }
     if (node->bucket != NULL)
@@ -88,18 +86,6 @@ void node_2k_free(node_2k_t *node) {
     free(node->center);
     free(node->extent);
     free(node);
-}
-
-/*!
-  \brief Compute the number of regions a node can have base on the rank
-  \param rank The rank of the tree.
-  \return 2^rank
-*/
-int get_nr_regions(int rank) {
-    int n = 1;
-    for (int i = 0; i < rank; i++)
-        n *= 2;
-    return n;
 }
 
 /*!
@@ -177,7 +163,7 @@ tree_2k_err_t node_2k_alloc_region(node_2k_t *node, int index) {
           an error code otherwise.
 */
 tree_2k_err_t node_2k_split(node_2k_t *node) {
-    int nr_regions = get_nr_regions(node->tree->rank);
+    int nr_regions = node->tree->nr_regions;
     node->region = (node_2k_t **) malloc(nr_regions*sizeof(node_2k_t *));
     if (node->region == NULL)
         return TREE_2K_OUT_OF_MEMORY_ERR;
@@ -339,8 +325,8 @@ tree_2k_err_t node_2k_query(node_2k_t *node, node_2k_list_t *query_result,
         if (node_2k_is_leaf(node)) {
             node_2k_list_add(query_result, node);
         } else {
-            int nr_regions = get_nr_regions(node->tree->rank);
-            for (int region_nr = 0; region_nr < nr_regions; region_nr++) {
+            for (int region_nr = 0; region_nr < node->tree->nr_regions;
+                    region_nr++) {
                 if (node->region[region_nr] != NULL) {
                     tree_2k_err_t status;
                     status = node_2k_query(node->region[region_nr],

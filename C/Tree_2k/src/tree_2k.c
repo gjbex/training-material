@@ -20,6 +20,7 @@ tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
                            double *center, double *extent,
                            int max_points, int bucket_size);
 bool is_valid_extent(int rank, double *extent);
+int get_nr_regions(int rank);
 
 /*!
   \brief Tree constructor, will allocate the tree itself, all data
@@ -215,6 +216,7 @@ tree_2k_err_t tree_2k_init(tree_2k_t *tree, int rank,
                            int max_points, int bucket_size) {
     double *node_center, *node_extent;
     tree->rank = rank;
+    tree->nr_regions = get_nr_regions(rank);
     tree->bucket_size = bucket_size;
     tree->max_points = max_points;
     tree->data = (void **) malloc(max_points*sizeof(void *));
@@ -410,4 +412,16 @@ tree_2k_err_t tree_2k_naive_query_print(tree_2k_t *tree, double *coords,
             printf(")\n");
         }
     }
+}
+
+/*!
+  \brief Compute the number of regions a node can have base on the rank
+  \param rank The rank of the tree.
+  \return 2^rank
+*/
+int get_nr_regions(int rank) {
+    int n = 1;
+    for (int i = 0; i < rank; i++)
+        n *= 2;
+    return n;
 }
