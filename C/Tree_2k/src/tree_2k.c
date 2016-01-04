@@ -363,7 +363,9 @@ tree_2k_err_t tree_2k_query(tree_2k_t *tree,
             int index = node_list->node[node_nr]->bucket[point_nr];
             if (tree_2k_is_in_range(tree->rank, tree->coords[index],
                                     coords, radius)) {
-                tree_2k_query_result_add(query_result, index);
+                status = tree_2k_query_result_add(query_result, index);
+                if (status != TREE_2K_SUCCESS)
+                    return status;
             }
         }
     }
