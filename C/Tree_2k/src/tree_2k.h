@@ -45,6 +45,8 @@ typedef struct node_2k {
 typedef struct tree_2k {
     /*! Tree rank. */
     int rank; 
+    /*! Number of regions per node */
+    int nr_regions;
     /*! Number of points currently in the tree. */
     int nr_points;
     /*! Maximum number of points the tree can store. */
@@ -88,6 +90,9 @@ void *tree_2k_get_data(tree_2k_t *tree, int point_id);
 tree_2k_err_t tree_2k_query(tree_2k_t *tree,
                             const double *coords, double radius,
                             tree_2k_query_result_t *query_result);
+tree_2k_err_t tree_2k_naive_query(tree_2k_t *tree,
+                                  const double *coords, double radius,
+                                  tree_2k_query_result_t *query_result);
 tree_2k_err_t tree_2k_naive_query_print(tree_2k_t *tree, double *coords,
                                         double radius);
 

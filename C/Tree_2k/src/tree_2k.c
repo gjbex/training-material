@@ -373,6 +373,32 @@ tree_2k_err_t tree_2k_query(tree_2k_t *tree,
     return TREE_2K_SUCCESS;
 }
 
+/*!
+  \brief Query the tree for points within the given radius from the
+         specified point by computing the distance to all points in
+         the tree.
+
+  This method is supplied for benchmarking pruposes.
+  \param tree Address of the tree to query.
+  \param coords Coordinates of the query point.
+  \param radius Radius to search in.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t tree_2k_naive_query(tree_2k_t *tree,
+                                  const double *coords, double radius,
+                                  tree_2k_query_result_t *query_result) {
+    for (int point_nr = 0; point_nr < tree->nr_points; point_nr++)
+        if (tree_2k_is_in_range(tree->rank, tree->coords[point_nr],
+                                coords, radius)) {
+            tree_2k_err_t status = tree_2k_query_result_add(query_result,
+                                                            point_nr);
+            if (status != TREE_2K_SUCCESS)
+                return status;
+        }
+    return TREE_2K_SUCCESS;
+}
+
 tree_2k_err_t tree_2k_naive_query_print(tree_2k_t *tree, double *coords,
                                         double radius) {
     for (int point_nr = 0; point_nr < tree->nr_points; point_nr++) {
