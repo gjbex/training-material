@@ -34,9 +34,16 @@ tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
 tree_2k_err_t node_2k_alloc(node_2k_t **node, tree_2k_t *tree,
                             double *center, double *extent) {
     *node = (node_2k_t *) malloc(sizeof(struct node_2k));
-    if (*node == NULL)
+    if (*node == NULL) {
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[TREE_2K_OUT_OF_MEMORY_ERR]);
         return TREE_2K_OUT_OF_MEMORY_ERR;
-    return node_2k_init(*node, tree, center, extent);
+    }
+    tree_2k_err_t status = node_2k_init(*node, tree, center, extent);
+    if (status != TREE_2K_SUCCESS)
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[status]);
+    return status;
 }
 
 /*!
@@ -59,8 +66,11 @@ tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
     assert(extent != NULL);
     node->tree = tree;
     node->bucket = (int *) malloc(tree->bucket_size*sizeof(int));
-    if (node->bucket == NULL)
+    if (node->bucket == NULL) {
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[TREE_2K_OUT_OF_MEMORY_ERR]);
         return TREE_2K_OUT_OF_MEMORY_ERR;
+    }
     node->nr_points = 0;
     node->center = center;
     node->extent = extent;
@@ -145,14 +155,20 @@ tree_2k_err_t node_2k_alloc_region(node_2k_t *node, int index) {
     double *center, *extent;
     center = (double *) malloc(node->tree->rank*sizeof(double));
     extent = (double *) malloc(node->tree->rank*sizeof(double));
-    if (center == NULL || extent == NULL)
+    if (center == NULL || extent == NULL) {
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[TREE_2K_OUT_OF_MEMORY_ERR]);
         return TREE_2K_OUT_OF_MEMORY_ERR;
+    }
     get_new_region_center(node, index, center);
     get_new_region_extent(node, extent);
     status = node_2k_alloc(&(node->region[index]), node->tree,
                            center, extent);
-    if (status != TREE_2K_SUCCESS)
+    if (status != TREE_2K_SUCCESS) {
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[status]);
         return status;
+    }
 }
 
 /*!
@@ -165,23 +181,31 @@ tree_2k_err_t node_2k_alloc_region(node_2k_t *node, int index) {
 tree_2k_err_t node_2k_split(node_2k_t *node) {
     int nr_regions = node->tree->nr_regions;
     node->region = (node_2k_t **) malloc(nr_regions*sizeof(node_2k_t *));
-    if (node->region == NULL)
+    if (node->region == NULL) {
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[TREE_2K_OUT_OF_MEMORY_ERR]);
         return TREE_2K_OUT_OF_MEMORY_ERR;
-    for (int region_nr = 0; region_nr < nr_regions; region_nr++) {
-        node->region[region_nr] = NULL;
     }
+    for (int region_nr = 0; region_nr < nr_regions; region_nr++)
+        node->region[region_nr] = NULL;
     for (int i = 0; i < node->nr_points; i++) {
         tree_2k_err_t status;
         int point_id = node->bucket[i];
         int index = get_region_index(node, point_id);
         if (node->region[index] == NULL) {
             status = node_2k_alloc_region(node, index);
-            if (status != TREE_2K_SUCCESS)
+            if (status != TREE_2K_SUCCESS) {
+                warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                        tree_2k_err_msg[status]);
                 return status;
+            }
         }
         status = node_2k_insert(node->region[index], point_id);
-        if (status != TREE_2K_SUCCESS)
+        if (status != TREE_2K_SUCCESS) {
+            warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                    tree_2k_err_msg[status]);
             return status;
+        }
     }
     free(node->bucket);
     node->bucket = NULL;
@@ -207,8 +231,11 @@ tree_2k_err_t node_2k_insert(node_2k_t *node, int point_id) {
         } else {
             // the bucket is full, split the node
             tree_2k_err_t status = node_2k_split(node);
-            if (status != TREE_2K_SUCCESS)
+            if (status != TREE_2K_SUCCESS) {
+                warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                        tree_2k_err_msg[status]);
                 return status;
+            }
         }
     }
     // the node has regions, perhaps because it was just split,
@@ -217,10 +244,17 @@ tree_2k_err_t node_2k_insert(node_2k_t *node, int point_id) {
     index = get_region_index(node, point_id);
     if (node->region[index] == NULL) {
         tree_2k_err_t status = node_2k_alloc_region(node, index);
-        if (status != TREE_2K_SUCCESS)
+        if (status != TREE_2K_SUCCESS) {
+            warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                    tree_2k_err_msg[status]);
             return status;
+        }
     }
-    return node_2k_insert(node->region[index], point_id);
+    tree_2k_err_t status =  node_2k_insert(node->region[index], point_id);
+    if (status != TREE_2K_SUCCESS)
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[status]);
+    return status;
 }
 
 /*!
@@ -263,12 +297,18 @@ tree_2k_err_t node_2k_list_alloc(node_2k_list_t **node_list,
                                  int max_nodes) {
     assert(max_nodes > 0);
     *node_list = (node_2k_list_t *) malloc(sizeof(struct node_2k_list));
-    if (*node_list == NULL)
+    if (*node_list == NULL) {
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[TREE_2K_OUT_OF_MEMORY_ERR]);
         return TREE_2K_OUT_OF_MEMORY_ERR;
+    }
     size_t list_size = max_nodes*sizeof(node_2k_t *);
     (*node_list)->node = (node_2k_t **) malloc(list_size);
-    if ((*node_list)->node == NULL)
+    if ((*node_list)->node == NULL) {
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[TREE_2K_OUT_OF_MEMORY_ERR]);
         return TREE_2K_OUT_OF_MEMORY_ERR;
+    }
     (*node_list)->nr_nodes = 0;
     (*node_list)->max_nodes = max_nodes;
     return TREE_2K_SUCCESS;
@@ -299,8 +339,11 @@ tree_2k_err_t node_2k_list_add(node_2k_list_t *node_list,
         size_t new_size = new_max*sizeof(node_2k_t *);
         node_2k_t **new_array = (node_2k_t **) realloc(node_list,
                                                        new_size);
-        if (new_array == NULL)
+        if (new_array == NULL) {
+            warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                    tree_2k_err_msg[TREE_2K_OUT_OF_MEMORY_ERR]);
             return TREE_2K_OUT_OF_MEMORY_ERR;
+        }
         node_list->node = new_array;
         node_list->max_nodes = new_max;
     }
@@ -331,8 +374,11 @@ tree_2k_err_t node_2k_query(node_2k_t *node, node_2k_list_t *query_result,
                     tree_2k_err_t status;
                     status = node_2k_query(node->region[region_nr],
                                            query_result, coords, radius);
-                    if (status != TREE_2K_SUCCESS)
+                    if (status != TREE_2K_SUCCESS) {
+                        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                                tree_2k_err_msg[status]);
                         return status;
+                    }
                 }
             }
         }

@@ -10,6 +10,8 @@ is subject to the license included in this repository.
 
 What is it?
 -----------
+* `C`: some C sample code.
+* `CPlusPlus`: some C++ sample code.  This is very much work in progress.
 * `Debugging`: slides used for an info session on debugging tools and
     techniques, as well as sample code.
 * `Fortran`: sample Fortran code intended to illustrate Fortran 95, 2003,
