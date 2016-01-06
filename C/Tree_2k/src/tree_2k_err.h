@@ -31,4 +31,6 @@ typedef enum tree_2k_err {
 
 extern const char *tree_2k_err_msg[];
 
+#define TREE_2K_ERR_FMT  "%s:%s:%d error: %s"
+
 #endif
