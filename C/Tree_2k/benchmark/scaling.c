@@ -10,7 +10,8 @@ void tree_spatial_dims_alloc(Params params, double **center,
         double **extent);
 void tree_spatial_dims_free(double *center, double *extent);
 double insert_points(tree_2k_t *tree, int nr_points);
-double query_points(tree_2k_t *tree, double radius);
+double query_points(tree_2k_t *tree, double radius, int *nr_results,
+                    int verbose);
 
 int main(int argc, char *argv[]) {
     tree_2k_t *tree;
@@ -26,14 +27,24 @@ int main(int argc, char *argv[]) {
             params.max_nr_points, params.bucket_size);
     if (status != TREE_2K_SUCCESS)
         errx(EXIT_FAILURE, "can not allocate tree: %d", status);
-    printf("nr_points i_time\n");
+    printf("nr_points i_time radius nr_results q_time\n");
     for (int point_nr = params.delta_nr_points;
             point_nr <= params.max_nr_points;
             point_nr += params.delta_nr_points) {
         double i_time = insert_points(tree, params.delta_nr_points);
-        printf("%d %.6lf\n", point_nr, i_time);
+        if (params.verbose)
+            fprintf(stderr, "points = %d\n", tree->nr_points);
         if (params.verbose)
             fprintf(stderr, "nr points: %d\n", tree_2k_get_nr_points(tree));
+        for (double radius = params.delta_radius;
+                radius <= params.max_radius + 0.1*params.delta_radius;
+                radius += params.delta_radius) {
+            int nr_results = 0;
+            double q_time = query_points(tree, radius, &nr_results,
+                                         params.verbose);
+            printf("%d %.6lf %.2lf %d %.6lf\n",
+                   point_nr, i_time, radius, nr_results, q_time);
+        }
     }
     finalizeCL(&params);
     tree_2k_free(tree);
@@ -47,8 +58,10 @@ void tree_spatial_dims_alloc(Params params, double **center,
     *extent = (double *) malloc(params.rank*sizeof(double));
     if (*center == NULL || *extent == NULL)
         errx(EXIT_FAILURE, "can not allocate center and extent"); 
-    for (int i = 0; i < params.rank; i++)
-        (*center)[i] = (*extent)[i] = 1.0;
+    for (int i = 0; i < params.rank; i++) {
+        (*center)[i] = 0.0;
+        (*extent)[i] = 1.0;
+    }
 }
 
 void tree_spatial_dims_free(double *center, double *extent) {
@@ -77,9 +90,10 @@ double insert_points(tree_2k_t *tree, int nr_points) {
     if (coords == NULL)
         errx(EXIT_FAILURE, "can not allocate coords");
     while (point_nr < nr_points) {
+        int offset = point_nr*rank;
         for (int i = 0; i < rank; i++)
-            coords[point_nr*rank + i] = ((double) rand())/RAND_MAX;
-        if (is_in_circle(rank, coords))
+            coords[offset + i] = 2.0*((double) rand())/RAND_MAX - 1.0;
+        if (is_in_circle(rank, &(coords[offset])))
             point_nr++;
     }
     gettimeofday(&start_time, NULL);
@@ -93,9 +107,11 @@ double insert_points(tree_2k_t *tree, int nr_points) {
     return compute_time(start_time, end_time);
 }
 
-double query_points(tree_2k_t *tree, double radius) {
+double query_points(tree_2k_t *tree, double radius, int *nr_results,
+                    int verbose) {
     struct timeval start_time, end_time;
     double *coords, *c_coords;
+    tree_2k_err_t status;
     tree_2k_query_result_t *query_result;
     coords = (double *) malloc(tree_2k_get_rank(tree)*sizeof(double));
     c_coords = (double *) malloc(tree_2k_get_rank(tree)*sizeof(double));
@@ -103,12 +119,15 @@ double query_points(tree_2k_t *tree, double radius) {
         errx(EXIT_FAILURE, "can not allocate coords");
     for (int i = 0; i < tree_2k_get_rank(tree); i++)
         coords[i] = c_coords[i] = 0.0;
-    if (!tree_2k_query_result_alloc(&query_result,
-                                    tree_2k_get_nr_points(tree)))
+    status = tree_2k_query_result_alloc(&query_result,
+                                        tree_2k_get_nr_points(tree));
+    if (status != TREE_2K_SUCCESS)
         errx(EXIT_FAILURE, "can not allocate query results");
     gettimeofday(&start_time, NULL);
-    if (!tree_2k_query(tree, coords, radius, query_result))
+    status = tree_2k_query(tree, coords, radius, query_result);
+    if (status != TREE_2K_SUCCESS)
         errx(EXIT_FAILURE, "query failed");
+    *nr_results = query_result->nr_results;
     for (int result_nr = 0; result_nr < query_result->nr_results;
             result_nr++) {
         const double *p_coords = tree_2k_get_coords(
@@ -118,7 +137,14 @@ double query_points(tree_2k_t *tree, double radius) {
             c_coords[i] += p_coords[i];
     }
     gettimeofday(&end_time, NULL);
+    if (verbose) {
+        fprintf(stderr, "center of mass = ");
+        for (int i = 0; i < tree_2k_get_rank(tree); i++)
+            fprintf(stderr, "%10.5f", c_coords[i]);
+        fprintf(stderr, "\n");
+    }
     tree_2k_query_result_free(query_result);
     free(coords);
+    free(c_coords);
     return compute_time(start_time, end_time);
 }
