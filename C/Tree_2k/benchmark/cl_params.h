@@ -10,6 +10,7 @@ typedef struct {
 	int bucket_size;
 	double max_radius;
 	double delta_radius;
+	int nr_iters;
 	int verbose;
 } Params;
 

@@ -15,6 +15,7 @@ void initCL(Params *params) {
 	params->bucket_size = 10;
 	params->max_radius = 1.0;
 	params->delta_radius = 0.05;
+	params->nr_iters = 100;
 	params->verbose = 0;
 }
 
@@ -90,6 +91,17 @@ void parseCL(Params *params, int *argc, char **argv[]) {
 				exit(EXIT_CL_INVALID_VALUE);
 			}
 			params->delta_radius = atof(argv_str);
+			i++;
+			continue;
+		}
+		if (!strncmp((*argv)[i], "-nr_iters", 10)) {
+			shiftCL(&i, *argc, *argv);
+			argv_str = (*argv)[i];
+			if (!isIntCL(argv_str, 0)) {
+				fprintf(stderr, "### error: invalid value for option '-nr_iters' of type int\n");
+				exit(EXIT_CL_INVALID_VALUE);
+			}
+			params->nr_iters = atoi(argv_str);
 			i++;
 			continue;
 		}
@@ -172,6 +184,14 @@ void parseFileCL(Params *params, char *fileName) {
 			params->delta_radius = atof(argv_str);
 			continue;
 		}
+		if (sscanf(line_str, "nr_iters = %[^\n]", argv_str) == 1) {
+			if (!isIntCL(argv_str, 0)) {
+				fprintf(stderr, "### error: invalid value for option '-nr_iters' of type int\n");
+				exit(EXIT_CL_INVALID_VALUE);
+			}
+			params->nr_iters = atoi(argv_str);
+			continue;
+		}
 		if (sscanf(line_str, "verbose = %[^\n]", argv_str) == 1) {
 			if (!isIntCL(argv_str, 0)) {
 				fprintf(stderr, "### error: invalid value for option '-verbose' of type int\n");
@@ -192,6 +212,7 @@ void dumpCL(FILE *fp, char prefix[], Params *params) {
 	fprintf(fp, "%sbucket_size = %d\n", prefix, params->bucket_size);
 	fprintf(fp, "%smax_radius = %.16lf\n", prefix, params->max_radius);
 	fprintf(fp, "%sdelta_radius = %.16lf\n", prefix, params->delta_radius);
+	fprintf(fp, "%snr_iters = %d\n", prefix, params->nr_iters);
 	fprintf(fp, "%sverbose = %d\n", prefix, params->verbose);
 }
 
@@ -199,5 +220,5 @@ void finalizeCL(Params *params) {
 }
 
 void printHelpCL(FILE *fp) {
-	fprintf(fp, "  -rank <integer>\n  -max_nr_points <integer>\n  -delta_nr_points <integer>\n  -bucket_size <integer>\n  -max_radius <DP float>\n  -delta_radius <DP float>\n  -verbose <integer>\n  -?: print this message");
+	fprintf(fp, "  -rank <integer>\n  -max_nr_points <integer>\n  -delta_nr_points <integer>\n  -bucket_size <integer>\n  -max_radius <DP float>\n  -delta_radius <DP float>\n  -nr_iters <integer>\n  -verbose <integer>\n  -?: print this message");
 }

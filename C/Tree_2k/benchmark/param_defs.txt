@@ -4,4 +4,5 @@ int	delta_nr_points	100
 int	bucket_size	10
 double	max_radius	1.0
 double	delta_radius	0.05
+int	nr_iters	100
 int	verbose	0
