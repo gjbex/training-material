@@ -7,7 +7,6 @@
 void test_basic_accessors(void) {
     const int nr_points = 3;
     tree_2k_err_t status;
-    const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 5;
     double center[] = {0.0, 0.0};
     double extent[] = {1.0, 1.0};
@@ -33,7 +32,6 @@ void test_basic_accessors(void) {
 void test_data_accessors(void) {
     const int nr_points = 3;
     tree_2k_err_t status;
-    const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 5;
     double center[] = {0.0, 0.0};
     double extent[] = {1.0, 1.0};
@@ -65,7 +63,6 @@ void test_data_accessors(void) {
 void test_data_access_fail(void) {
     const int nr_points = 3;
     tree_2k_err_t status;
-    const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 5;
     double center[] = {0.0, 0.0};
     double extent[] = {1.0, 1.0};

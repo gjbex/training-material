@@ -10,7 +10,6 @@ void add_query_suite(void);
 
 int main(int argc, char *argv[]) {
     int status = CU_initialize_registry();
-    CU_pSuite init_suite, insert_suite;
     if (status != CUE_SUCCESS)
         errx(status, "CUnit registry initialization failed");
     add_init_suite();
