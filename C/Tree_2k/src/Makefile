@@ -1,5 +1,5 @@
 CC = gcc
-override CFLAGS += -g -O2 -std=c99
+override CFLAGS += -g -O2 -std=c99 -Wall
 LIBS = -lm
 
 TREE_2K_OBJ = tree_2k_err.o node_2k.o tree_2k.o
