@@ -43,15 +43,18 @@ int main(int argc, char *argv[]) {
         for (double radius = params.delta_radius;
                 radius <= params.max_radius + 0.1*params.delta_radius;
                 radius += params.delta_radius) {
+            double q_time = 0.0, n_q_time = 0.0;
             int nr_results = 0, n_nr_results = 0;
-            double q_time = query_points(tree, radius, &nr_results,
-                                         params.verbose);
-            double n_q_time = naive_query_points(tree, radius,
-                                                 &n_nr_results,
-                                                 params.verbose);
+            for (int iter_nr = 0; iter_nr < params.nr_iters; iter_nr++) {
+                q_time += query_points(tree, radius, &nr_results,
+                                      params.verbose);
+                n_q_time += naive_query_points(tree, radius, &n_nr_results,
+                                              params.verbose);
+            }
             printf("%d %.6lf %.2lf %d %.6lf %d %.6lf\n",
-                   point_nr, i_time, radius, nr_results, q_time,
-                   n_nr_results, n_q_time);
+                   point_nr, i_time, radius, nr_results,
+                   q_time/params.nr_iters, n_nr_results,
+                   n_q_time/params.nr_iters);
         }
     }
     finalizeCL(&params);
