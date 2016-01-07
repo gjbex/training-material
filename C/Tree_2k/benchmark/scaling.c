@@ -12,6 +12,8 @@ void tree_spatial_dims_free(double *center, double *extent);
 double insert_points(tree_2k_t *tree, int nr_points);
 double query_points(tree_2k_t *tree, double radius, int *nr_results,
                     int verbose);
+double naive_query_points(tree_2k_t *tree, double radius, int *nr_results,
+                          int verbose);
 
 int main(int argc, char *argv[]) {
     tree_2k_t *tree;
@@ -27,7 +29,9 @@ int main(int argc, char *argv[]) {
             params.max_nr_points, params.bucket_size);
     if (status != TREE_2K_SUCCESS)
         errx(EXIT_FAILURE, "can not allocate tree: %d", status);
-    printf("nr_points i_time radius nr_results q_time\n");
+    printf("nr_points i_time");
+    printf(" radius nr_results q_time");
+    printf(" n_nr_results n_q_time\n");
     for (int point_nr = params.delta_nr_points;
             point_nr <= params.max_nr_points;
             point_nr += params.delta_nr_points) {
@@ -39,11 +43,15 @@ int main(int argc, char *argv[]) {
         for (double radius = params.delta_radius;
                 radius <= params.max_radius + 0.1*params.delta_radius;
                 radius += params.delta_radius) {
-            int nr_results = 0;
+            int nr_results = 0, n_nr_results = 0;
             double q_time = query_points(tree, radius, &nr_results,
                                          params.verbose);
-            printf("%d %.6lf %.2lf %d %.6lf\n",
-                   point_nr, i_time, radius, nr_results, q_time);
+            double n_q_time = naive_query_points(tree, radius,
+                                                 &n_nr_results,
+                                                 params.verbose);
+            printf("%d %.6lf %.2lf %d %.6lf %d %.6lf\n",
+                   point_nr, i_time, radius, nr_results, q_time,
+                   n_nr_results, n_q_time);
         }
     }
     finalizeCL(&params);
@@ -107,8 +115,10 @@ double insert_points(tree_2k_t *tree, int nr_points) {
     return compute_time(start_time, end_time);
 }
 
-double query_points(tree_2k_t *tree, double radius, int *nr_results,
-                    int verbose) {
+double query_tree(tree_2k_t *tree, double radius, int *nr_results,
+                  tree_2k_err_t (*func) (tree_2k_t *, const double *,
+                                         double, tree_2k_query_result_t *),
+                  int verbose) {
     struct timeval start_time, end_time;
     double *coords, *c_coords;
     tree_2k_err_t status;
@@ -124,7 +134,7 @@ double query_points(tree_2k_t *tree, double radius, int *nr_results,
     if (status != TREE_2K_SUCCESS)
         errx(EXIT_FAILURE, "can not allocate query results");
     gettimeofday(&start_time, NULL);
-    status = tree_2k_query(tree, coords, radius, query_result);
+    status = func(tree, coords, radius, query_result);
     if (status != TREE_2K_SUCCESS)
         errx(EXIT_FAILURE, "query failed");
     *nr_results = query_result->nr_results;
@@ -147,4 +157,15 @@ double query_points(tree_2k_t *tree, double radius, int *nr_results,
     free(coords);
     free(c_coords);
     return compute_time(start_time, end_time);
+}
+
+double query_points(tree_2k_t *tree, double radius, int *nr_results,
+                    int verbose) {
+    return query_tree(tree, radius, nr_results, &tree_2k_query, verbose);
+}
+
+double naive_query_points(tree_2k_t *tree, double radius, int *nr_results,
+                          int verbose) {
+    return query_tree(tree, radius, nr_results, &tree_2k_naive_query,
+                      verbose);
 }
