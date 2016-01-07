@@ -110,7 +110,6 @@ bool tree_2k_can_store(tree_2k_t *tree, double *coords) {
 */
 tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
     tree_2k_err_t status;
-    double *new_coords;
     if (!tree_2k_can_store(tree, coords)) {
         warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
                 tree_2k_err_msg[TREE_2K_COORDS_NOT_IN_EXTENT_ERR]);
