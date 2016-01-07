@@ -337,7 +337,7 @@ tree_2k_err_t node_2k_list_add(node_2k_list_t *node_list,
     if (node_list->nr_nodes >= node_list->max_nodes) {
         int new_max = 2*node_list->max_nodes;
         size_t new_size = new_max*sizeof(node_2k_t *);
-        node_2k_t **new_array = (node_2k_t **) realloc(node_list,
+        node_2k_t **new_array = (node_2k_t **) realloc(node_list->node,
                                                        new_size);
         if (new_array == NULL) {
             warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
