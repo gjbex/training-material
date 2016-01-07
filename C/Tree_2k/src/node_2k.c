@@ -164,11 +164,10 @@ tree_2k_err_t node_2k_alloc_region(node_2k_t *node, int index) {
     get_new_region_extent(node, extent);
     status = node_2k_alloc(&(node->region[index]), node->tree,
                            center, extent);
-    if (status != TREE_2K_SUCCESS) {
+    if (status != TREE_2K_SUCCESS)
         warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
                 tree_2k_err_msg[status]);
-        return status;
-    }
+    return status;
 }
 
 /*!
