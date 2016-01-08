@@ -485,3 +485,22 @@ int get_nr_regions(int rank) {
         n *= 2;
     return n;
 }
+
+/*!
+  \brief Walks the tree downwoard in post order, first processing regions,
+         then the node itself using the specifed function and its argument.
+  \param tree Address of the tree to process.
+  \param f Function to call.
+  \param x Argument for the function.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t tree_2k_walk(tree_2k_t *tree,
+                           int (*f) (node_2k_t *, void *),
+                           void *x) {
+    tree_2k_err_t status = node_2k_walk(tree->root, f, x);
+    if (status != TREE_2K_SUCCESS)
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[status]);
+    return status;
+}

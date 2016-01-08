@@ -7,6 +7,7 @@ void add_init_suite(void);
 void add_insert_suite(void);
 void add_accessor_suite(void);
 void add_query_suite(void);
+void add_walk_suite(void);
 
 int main(int argc, char *argv[]) {
     int status = CU_initialize_registry();
@@ -16,6 +17,7 @@ int main(int argc, char *argv[]) {
     add_insert_suite();
     add_accessor_suite();
     add_query_suite();
+    add_walk_suite();
     CU_basic_run_tests();
     CU_cleanup_registry();
     return EXIT_SUCCESS;
@@ -63,4 +65,11 @@ void add_query_suite(void) {
                 &test_can_have_points);
     CU_add_test(suite, "succesful query",
                 &test_query_success);
+}
+
+#include "walk_tests.h"
+void add_walk_suite(void) {
+    CU_pSuite suite = CU_add_suite("walks", NULL, NULL);
+    CU_add_test(suite, "counts points",
+                &test_count_walk);
 }

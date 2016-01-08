@@ -26,11 +26,14 @@ typedef enum tree_2k_err {
     /*! \brief Memory allocation failure */
     TREE_2K_OUT_OF_MEMORY_ERR = 8,
     /*! \brief Maximum number of points in tree reached */
-    TREE_2K_CAPACITY_EXCEEDED_ERR = 9
+    TREE_2K_CAPACITY_EXCEEDED_ERR = 9,
+    /*! \brief User defined function didn't return normally */
+    TREE_2K_UDF_FAIL_ERR = 10
 } tree_2k_err_t;
 
 extern const char *tree_2k_err_msg[];
 
 #define TREE_2K_ERR_FMT  "%s:%s:%d error: %s"
+#define TREE_2K_UDF_ERR_FMT  "%s:%s:%d error: %s: %d"
 
 #endif
