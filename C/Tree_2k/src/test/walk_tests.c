@@ -14,7 +14,7 @@ int count_points(node_2k_t *node, void *x) {
 void test_count_walk(void) {
     const int nr_points = 9;
     tree_2k_err_t status;
-    const int rank = 2, max_points = 10, bucket_size = 2;
+    const int rank = 2, max_points = 10, bucket_size = 1;
     double center[] = {0.0, 0.0};
     double extent[] = {1.0, 1.0};
     tree_2k_t *tree;
@@ -29,6 +29,7 @@ void test_count_walk(void) {
         status = tree_2k_insert(tree, coords, NULL);
         CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
     }
+    CU_ASSERT_EQUAL(tree_2k_get_nr_points(tree), nr_points);
     status = tree_2k_walk(tree, &count_points, &counted_points);
     CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
     CU_ASSERT_EQUAL(counted_points, tree_2k_get_nr_points(tree));
