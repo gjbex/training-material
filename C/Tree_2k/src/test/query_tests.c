@@ -9,7 +9,6 @@
 void test_can_have_points(void) {
     const int nr_points = 3;
     tree_2k_err_t status;
-    const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 5;
     double center[] = {0.0, 0.0};
     double extent[] = {1.0, 1.0};
@@ -72,7 +71,6 @@ void expected_query_result(tree_2k_t *tree, double *coords, double radius,
 void test_query_success(void) {
     const int nr_points = 9;
     tree_2k_err_t status;
-    const double PREC = 1.0e-12;
     const int rank = 2, max_points = 10, bucket_size = 2;
     double center[] = {0.0, 0.0};
     double extent[] = {1.0, 1.0};

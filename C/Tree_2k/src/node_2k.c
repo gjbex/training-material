@@ -164,11 +164,10 @@ tree_2k_err_t node_2k_alloc_region(node_2k_t *node, int index) {
     get_new_region_extent(node, extent);
     status = node_2k_alloc(&(node->region[index]), node->tree,
                            center, extent);
-    if (status != TREE_2K_SUCCESS) {
+    if (status != TREE_2K_SUCCESS)
         warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
                 tree_2k_err_msg[status]);
-        return status;
-    }
+    return status;
 }
 
 /*!
@@ -384,4 +383,41 @@ tree_2k_err_t node_2k_query(node_2k_t *node, node_2k_list_t *query_result,
         }
     }
     return TREE_2K_SUCCESS;
+}
+
+/*!
+  \brief Walks the tree downwoard from the specified node in post order,
+         first processing regions, then the node itself using the specifed
+         function and its argument.
+  \param node Address of the starting node.
+  \param f Function to call.
+  \param x Argument for the function.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t node_2k_walk(node_2k_t *node,
+                           int (*f) (node_2k_t *, void *),
+                           void *x) {
+    if (!node_2k_is_leaf(node)) {
+        for (int region_nr = 0; region_nr < node->tree->nr_regions;
+                region_nr++) {
+            if (node->region[region_nr] != NULL) {
+                tree_2k_err_t status = node_2k_walk(node->region[region_nr],
+                                                    f, x);
+                if (status != TREE_2K_SUCCESS) {
+                    warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                            tree_2k_err_msg[status]);
+                    return status;
+                }
+            }
+        }
+    }
+    int err = f(node, x);
+    if (err != TREE_2K_SUCCESS) {
+        warnx(TREE_2K_UDF_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[TREE_2K_UDF_FAIL_ERR], err);
+        return TREE_2K_UDF_FAIL_ERR;
+    } else {
+        return TREE_2K_SUCCESS;
+    }
 }

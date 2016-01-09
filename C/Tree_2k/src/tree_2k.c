@@ -110,7 +110,6 @@ bool tree_2k_can_store(tree_2k_t *tree, double *coords) {
 */
 tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
     tree_2k_err_t status;
-    double *new_coords;
     if (!tree_2k_can_store(tree, coords)) {
         warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
                 tree_2k_err_msg[TREE_2K_COORDS_NOT_IN_EXTENT_ERR]);
@@ -485,4 +484,23 @@ int get_nr_regions(int rank) {
     for (int i = 0; i < rank; i++)
         n *= 2;
     return n;
+}
+
+/*!
+  \brief Walks the tree downwoard in post order, first processing regions,
+         then the node itself using the specifed function and its argument.
+  \param tree Address of the tree to process.
+  \param f Function to call.
+  \param x Argument for the function.
+  \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
+          an error code otherwise.
+*/
+tree_2k_err_t tree_2k_walk(tree_2k_t *tree,
+                           int (*f) (node_2k_t *, void *),
+                           void *x) {
+    tree_2k_err_t status = node_2k_walk(tree->root, f, x);
+    if (status != TREE_2K_SUCCESS)
+        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                tree_2k_err_msg[status]);
+    return status;
 }

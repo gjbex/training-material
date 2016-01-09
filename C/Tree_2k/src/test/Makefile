@@ -1,10 +1,11 @@
 CC = gcc
-override CFLAGS += -g -O2 -std=c99
+override CFLAGS += -g -O2 -std=c99 -Wall
 CPPFLAGS = -I..
 LDFLAGS = -L..
 LIBS = -ltree_2k -lcunit -lm
 
-TESTS_OBJS = init_tests.o insert_tests.o accessor_tests.o query_tests.o
+TESTS_OBJS = init_tests.o insert_tests.o accessor_tests.o query_tests.o \
+             walk_tests.o
 
 test: all
 	./run_tests
