@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "tree_2k_utils.h"
+#include "node_2k.h"
 
 /*!
   \brief Write the node's center and extent to the specified file pointer
@@ -11,14 +12,16 @@
           an error code otherwise.
 */
 int node_2k_fwrite(node_2k_t *node, void *fptr) {
-    FILE *fp = (FILE *) fptr;
-    const int rank = tree_2k_get_rank(node->tree);
-    fprintf(fp, "%.15le", node->center[0]);
-    for (int i = 1; i < rank; i++)
-        fprintf(fp, " %.15le", node->center[i]);
-    for (int i = 0; i < rank; i++)
-        fprintf(fp, " %.15le", node->extent[i]);
-    fprintf(fp, "\n");
+    if (node_2k_is_leaf(node)) {
+        FILE *fp = (FILE *) fptr;
+        const int rank = tree_2k_get_rank(node->tree);
+        fprintf(fp, "%.15le", node->center[0]);
+        for (int i = 1; i < rank; i++)
+            fprintf(fp, " %.15le", node->center[i]);
+        for (int i = 0; i < rank; i++)
+            fprintf(fp, " %.15le", node->extent[i]);
+        fprintf(fp, "\n");
+    }
     return TREE_2K_SUCCESS;
 }
 
