@@ -40,6 +40,8 @@ def parse_file(file_name):
 
 
 def plot_tree(rectangles, points, file_name=None):
+    plt.xlim((-1.2, 1.2))
+    plt.ylim((-1.2, 1.2))
     plt.plot(points.x, points.y, 'o')
     for rectangle in rectangles:
         for segment in rectangle:
