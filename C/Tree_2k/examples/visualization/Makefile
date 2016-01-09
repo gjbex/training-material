@@ -21,4 +21,4 @@ cl_params.h: param_defs.txt
 	weave -l C -d $<
 
 clean:
-	rm -f $(SVIS_OBJS) $(APPL) core
+	rm -f $(VIS_OBJS) $(APPL) core
