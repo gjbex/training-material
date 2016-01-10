@@ -45,6 +45,8 @@ void add_insert_suite(void) {
                 &test_multiple_insert_with_split);
     CU_add_test(suite, "failed insert, not in extent",
                 &test_failed_insert);
+    CU_add_test(suite, "capacity increase",
+                &test_increase_capacity_insert);
 }
 
 #include "accessor_tests.h"
