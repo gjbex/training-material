@@ -33,7 +33,10 @@ int get_nr_regions(int rank);
          new node's center as double precision numbers,
   \param extent An array of size rank containing the extent for each
          dimension for the new node as double precision numbers,
-  \param max_points The maximum number of points to be stored in the tree.
+  \param max_points The initial maximum number of points to be stored in
+                    the tree. Note that the capacity will be increased
+                    dynamically as required, but that may have an impact
+                    on performance and overall memory requirements.
   \param bucket_size The maximum number of points any node will store
                      before it is split.
   \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
