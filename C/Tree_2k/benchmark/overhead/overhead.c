@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
     tree_2k_err_t status;
     tree_2k_stats_t stats;
     double *center, *extent;
+    size_t tree_size, data_size;
     Params params;
     initCL(&params);
     parseCL(&params, &argc, &argv);
@@ -34,9 +35,12 @@ int main(int argc, char *argv[]) {
             point_nr += params.delta_nr_points) {
         insert_points(tree, params.delta_nr_points);
         tree_2k_compute_stats(tree, &stats);
+        tree_2k_sizeof(tree, &tree_size);
+        tree_2k_data_sizeof(tree, &data_size);
         printf("%d %d %d %.2lf %.3lf %d %d\n",
                 tree_2k_get_nr_points(tree), stats.nr_nodes, stats.nr_leafs,
-                stats.avg_nr_points, stats.stddev_nr_points, 0, 0);
+                stats.avg_nr_points, stats.stddev_nr_points,
+                data_size, tree_size);
     }
     finalizeCL(&params);
     tree_2k_free(tree);
