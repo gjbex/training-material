@@ -77,6 +77,17 @@ tree_2k_err_t tree_2k_compute_stats(tree_2k_t *tree,
     return TREE_2K_SUCCESS;
 }
 
+tree_2k_err_t tree_2k_data_min_sizeof(tree_2k_t *tree, size_t *total_size) {
+    *total_size = 0;
+    /* minimal size of the array holding the coordinate array addresses */
+    *total_size += tree->nr_points*sizeof(double *);
+    /* minimal size of all the arrays holding the actual coordinates */
+    *total_size += tree->nr_points*tree_2k_get_rank(tree)*sizeof(double);
+    /* minimal size of the data array, so not the actual data */
+    *total_size += tree->nr_points*sizeof(void *);
+    return TREE_2K_SUCCESS;
+}
+
 tree_2k_err_t tree_2k_data_sizeof(tree_2k_t *tree, size_t *total_size) {
     *total_size = 0;
     /* size of the array holding the coordinate array addresses */

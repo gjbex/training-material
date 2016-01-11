@@ -33,6 +33,7 @@ tree_2k_err_t tree_2k_fwrite(tree_2k_t *tree, FILE *fp);
 tree_2k_err_t tree_2k_compute_stats(tree_2k_t *tree,
                                     tree_2k_stats_t *stats);
 tree_2k_err_t tree_2k_data_sizeof(tree_2k_t *tree, size_t *total_size);
+tree_2k_err_t tree_2k_data_min_sizeof(tree_2k_t *tree, size_t *total_size);
 tree_2k_err_t tree_2k_sizeof(tree_2k_t *tree, size_t *total_size);
 
 #endif
