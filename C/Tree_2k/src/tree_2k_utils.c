@@ -1,4 +1,5 @@
 #include <err.h>
+#include <math.h>
 #include <stdlib.h>
 
 #include "tree_2k_utils.h"
@@ -49,4 +50,29 @@ tree_2k_err_t tree_2k_fwrite(tree_2k_t *tree, FILE *fp) {
         fprintf(fp, "\n");
     }
     return status;
+}
+
+int node_2k_update_stats(node_2k_t *node, void *x) {
+    tree_2k_stats_t *stats = (tree_2k_stats_t *) x;
+    stats->nr_nodes++;
+    if (node_2k_is_leaf(node)) {
+        stats->nr_leafs++;
+        stats->sum_nr_points += node->nr_points;
+        stats->sum_nr_points_2 += node->nr_points*node->nr_points;
+    }
+    return TREE_2K_SUCCESS;
+}
+
+tree_2k_err_t tree_2k_compute_stats(tree_2k_t *tree,
+                                    tree_2k_stats_t *stats) {
+    stats->nr_nodes = stats->nr_leafs = 0;
+    stats->sum_nr_points = stats->sum_nr_points_2 = 0;
+    stats->avg_nr_points = stats->stddev_nr_points = 0.0;
+    tree_2k_walk(tree, &node_2k_update_stats, stats);
+    stats->avg_nr_points = ((double) stats->sum_nr_points)/stats->nr_leafs;
+    stats->stddev_nr_points = sqrt(
+            ((double) stats->sum_nr_points_2)/stats->nr_leafs -
+            stats->avg_nr_points*stats->avg_nr_points
+    );
+    return TREE_2K_SUCCESS;
 }
