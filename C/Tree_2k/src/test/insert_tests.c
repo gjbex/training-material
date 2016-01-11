@@ -140,3 +140,39 @@ void test_failed_insert(void) {
     tree_2k_free(tree);
     free(q);
 }
+
+void test_increase_capacity_insert(void) {
+    const int nr_points = 30;
+    tree_2k_err_t status;
+    const double PREC = 1.0e-12;
+    const int rank = 2, max_points = 10, bucket_size = 5;
+    double center[] = {0.0, 0.0};
+    double extent[] = {1.0, 1.0};
+    double coords[2];
+    int *data;
+    tree_2k_t *tree;
+    status = tree_2k_alloc(&tree, rank, center, extent,
+                           max_points, bucket_size);
+    CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
+    for (int point_nr = 0; point_nr < nr_points; point_nr++) {
+        coords[0] = ((double) point_nr)/nr_points;
+        coords[1] = ((double) point_nr)/nr_points;
+        data = (int *) malloc(sizeof(int));
+        *data = point_nr;
+        status = tree_2k_insert(tree, coords, data);
+        CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
+    }
+    CU_ASSERT_EQUAL_FATAL(tree->nr_points, nr_points);
+    for (int point_nr = 0; point_nr < nr_points; point_nr++) {
+        coords[0] = ((double) point_nr)/nr_points;
+        coords[1] = ((double) point_nr)/nr_points;
+        for (int i = 0; i < rank; i++) {
+            CU_ASSERT_DOUBLE_EQUAL(tree->coords[point_nr][i],
+                                   coords[i], PREC);
+        }
+        CU_ASSERT_EQUAL(*((int *) tree->data[point_nr]), point_nr);
+    }
+    for (int point_nr; point_nr < nr_points; point_nr++)
+        free(tree->data[point_nr]);
+    tree_2k_free(tree);
+}

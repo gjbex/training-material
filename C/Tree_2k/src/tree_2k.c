@@ -33,7 +33,10 @@ int get_nr_regions(int rank);
          new node's center as double precision numbers,
   \param extent An array of size rank containing the extent for each
          dimension for the new node as double precision numbers,
-  \param max_points The maximum number of points to be stored in the tree.
+  \param max_points The initial maximum number of points to be stored in
+                    the tree. Note that the capacity will be increased
+                    dynamically as required, but that may have an impact
+                    on performance and overall memory requirements.
   \param bucket_size The maximum number of points any node will store
                      before it is split.
   \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
@@ -116,9 +119,18 @@ tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data) {
         return TREE_2K_COORDS_NOT_IN_EXTENT_ERR;
     }
     if (tree->nr_points >= tree->max_points) {
-        warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
-                tree_2k_err_msg[TREE_2K_CAPACITY_EXCEEDED_ERR]);
-        return TREE_2K_CAPACITY_EXCEEDED_ERR;
+        size_t new_size = 2*tree->max_points*sizeof(double *);
+        double **new_coords = (double **) realloc(tree->coords, new_size);
+        new_size = 2*tree->max_points*sizeof(void *);
+        void **new_data = (void **) realloc(tree->data, new_size);
+        if (new_coords == NULL || new_data == NULL) {
+            warnx(TREE_2K_ERR_FMT, __FILE__, __func__, __LINE__,
+                  tree_2k_err_msg[TREE_2K_OUT_OF_MEMORY_ERR]);
+            return TREE_2K_OUT_OF_MEMORY_ERR;
+        }
+        tree->coords = new_coords;
+        tree->data = new_data;
+        tree->max_points *= 2;
     }
     tree->coords[tree->nr_points] =
         (double *) malloc(tree->rank*sizeof(double));
