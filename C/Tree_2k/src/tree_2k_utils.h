@@ -7,6 +7,7 @@
 #define _TREE_2K_UTIL_HDR_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "tree_2k.h"
 
@@ -31,5 +32,7 @@ typedef struct tree_2k_stats {
 tree_2k_err_t tree_2k_fwrite(tree_2k_t *tree, FILE *fp);
 tree_2k_err_t tree_2k_compute_stats(tree_2k_t *tree,
                                     tree_2k_stats_t *stats);
+tree_2k_err_t tree_2k_data_sizeof(tree_2k_t *tree, size_t *total_size);
+tree_2k_err_t tree_2k_sizeof(tree_2k_t *tree, size_t *total_size);
 
 #endif
