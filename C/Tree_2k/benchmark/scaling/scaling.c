@@ -29,17 +29,13 @@ int main(int argc, char *argv[]) {
             params.max_nr_points, params.bucket_size);
     if (status != TREE_2K_SUCCESS)
         errx(EXIT_FAILURE, "can not allocate tree: %d", status);
-    printf("nr_points i_time");
+    printf("nr_points bucket_size i_time");
     printf(" radius nr_results q_time");
     printf(" n_nr_results n_q_time\n");
     for (int point_nr = params.delta_nr_points;
             point_nr <= params.max_nr_points;
             point_nr += params.delta_nr_points) {
         double i_time = insert_points(tree, params.delta_nr_points);
-        if (params.verbose)
-            fprintf(stderr, "points = %d\n", tree->nr_points);
-        if (params.verbose)
-            fprintf(stderr, "nr points: %d\n", tree_2k_get_nr_points(tree));
         for (double radius = params.delta_radius;
                 radius <= params.max_radius + 0.1*params.delta_radius;
                 radius += params.delta_radius) {
@@ -51,8 +47,8 @@ int main(int argc, char *argv[]) {
                 n_q_time += naive_query_points(tree, radius, &n_nr_results,
                                               params.verbose);
             }
-            printf("%d %.6lf %.2lf %d %.6lf %d %.6lf\n",
-                   point_nr, i_time, radius, nr_results,
+            printf("%d %d %.6lf %.2lf %d %.6lf %d %.6lf\n",
+                   point_nr, tree->bucket_size, i_time, radius, nr_results,
                    q_time/params.nr_iters, n_nr_results,
                    n_q_time/params.nr_iters);
         }
