@@ -30,6 +30,6 @@ typedef struct tree_2k_stats {
 
 tree_2k_err_t tree_2k_fwrite(tree_2k_t *tree, FILE *fp);
 tree_2k_err_t tree_2k_compute_stats(tree_2k_t *tree,
-                                    tree_2k_stats_t *status);
+                                    tree_2k_stats_t *stats);
 
 #endif
