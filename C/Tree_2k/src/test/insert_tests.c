@@ -172,7 +172,7 @@ void test_increase_capacity_insert(void) {
         }
         CU_ASSERT_EQUAL(*((int *) tree->data[point_nr]), point_nr);
     }
-    for (int point_nr; point_nr < nr_points; point_nr++)
+    for (int point_nr = 0; point_nr < nr_points; point_nr++)
         free(tree->data[point_nr]);
     tree_2k_free(tree);
 }
