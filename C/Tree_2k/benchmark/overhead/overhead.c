@@ -37,10 +37,10 @@ int main(int argc, char *argv[]) {
         tree_2k_compute_stats(tree, &stats);
         tree_2k_sizeof(tree, &tree_size);
         tree_2k_data_sizeof(tree, &data_size);
-        printf("%d %d %d %.2lf %.3lf %d %d\n",
+        printf("%d %d %d %.2lf %.3lf %lu %lu\n",
                 tree_2k_get_nr_points(tree), stats.nr_nodes, stats.nr_leafs,
                 stats.avg_nr_points, stats.stddev_nr_points,
-                data_size, tree_size);
+                (unsigned long) data_size, (unsigned long) tree_size);
     }
     finalizeCL(&params);
     tree_2k_free(tree);
