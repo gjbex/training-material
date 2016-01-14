@@ -1,5 +1,5 @@
 CC = gcc
-override CFLAGS += -g -O2 -std=c99 -Wall
+override CFLAGS += -g -O2 -std=c99 -Wall -fPIC
 CPPFLAGS = -I..
 LDFLAGS = -L..
 LIBS = -ltree_2k -lcunit -lm

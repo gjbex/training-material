@@ -1,0 +1,5 @@
+int	rank	2
+int	max_nr_points	1000
+int	delta_nr_points	100
+int	bucket_size	10
+int	verbose	0
