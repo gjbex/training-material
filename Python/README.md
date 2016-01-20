@@ -16,6 +16,8 @@ these samples have been used for Python tutorials.
     (amplitude) and the frequency spectrum using Matplotlib.  Another
     script illustrates elementary signal processing using a highpass
     filter.
+1. `Bokeh`: illustrations of how to use the Bokeh plotting library for,
+    e.g., interactive graphs.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
 1. `CodeEvaluation`: illustrates how to evaluate a string containing
