@@ -70,6 +70,15 @@ Finally, start sparkR:
 $ sparkR --master yarn
 ```
 
+When done with your experiments, don't foget to stop the job using `qdel`,
+simply quitting sparkR and login out of the interactive shell will not end
+the job.
+
+To list all jobs, use:
+```bash
+$ hod list
+```
+
 When finished, jobs can be removed by:
 ```bash
 $ hod clean
