@@ -10,8 +10,8 @@ is subject to the license included in this repository.
 
 What is it?
 -----------
-* `C`: some C sample code.
-* `CPlusPlus`: some C++ sample code.  This is very much work in progress.
+* `C`: some C sample code. (Work in progress)
+* `CPlusPlus`: some C++ sample code. (Work in progress)
 * `Debugging`: slides used for an info session on debugging tools and
     techniques, as well as sample code.
 * `Fortran`: sample Fortran code intended to illustrate Fortran 95, 2003,
@@ -37,6 +37,7 @@ What is it?
     used in a tutorial on using Python for scientific data processing.
 * `R`: some very simple illustrations of how to run R scripts from the
     command line, and to submit as (PBS) jobs
+* `Spark`: some Spark-related material. (Work in progress)
 * `Sql`: sample SQL that covers the basics of querying relational
     databases
 * `Visualization`: data files, XDMF files and ParaView state files to
