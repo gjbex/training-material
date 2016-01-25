@@ -9,6 +9,7 @@ C/C++ or Fortran implementations.
 
 ## What is it?
 1. `all_to_all.py`: simple example of an all-to-all comminication.
+1. `pi.py`: implementation for computing pi as suggested in the slides.
 1. `reduce.py`: example of numpy array reduction.
 1. `ring.py`: implementation of a "token" send around a ring.
 1. `run_ring.sh`: Bash script illustrating how to run the program.
