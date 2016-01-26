@@ -73,7 +73,7 @@ if __name__ == '__main__':
                                  '+ (1/4 - beta(i))/alpha')
     arg_parser.add_argument('--file_base', default='ising_magnetization',
                             help='base name to use for file')
-    arg_parser.add_argument('--steps', type=int, default=10,
+    arg_parser.add_argument('--steps', type=int, default=20,
                             help='number of plot points to use')
     arg_parser.add_argument('--keep_last', action='store_true',
                             help='keep last image')
@@ -92,7 +92,7 @@ if __name__ == '__main__':
         i += 1
         beta = 0.25 + (beta - 0.25)/options.alpha
     beta = 0.25
-    while beta >= options.beta_min and i <= options.steps:
+    while beta >= options.beta_min and i <= 2*options.steps:
         msg_str = 'creating plot {0:d} for beta = {1:.5f}\n'.format(i, beta)
         sys.stderr.write(msg_str)
         create_plot(beta, i, betas, magnetization, options)
