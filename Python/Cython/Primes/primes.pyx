@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-
-
 def primes(int kmax):
     cdef int n, k, i
     cdef int p[1000]
