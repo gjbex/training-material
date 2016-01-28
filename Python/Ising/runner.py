@@ -90,7 +90,7 @@ class BaseRunner(object):
         if not self._ising:
             raise NoRunnerSystemError()
         self._prologue()
-        for t in xrange(1, steps + 1):
+        for t in range(1, steps + 1):
             if not self._pre_step(t):
                 break
             self._ising.step()
@@ -169,8 +169,8 @@ class MovieRunner(BaseRunner):
     def _post_step(self, t):
         file_name = os.path.join(self._dir_name, self._file_fmt.format(t))
         spins = np.array([[self._ising.s(i, j)
-                               for j in xrange(self._ising.N())]
-                                    for i in xrange(self._ising.N())])
+                               for j in range(self._ising.N())]
+                                    for i in range(self._ising.N())])
         plt.imsave(file_name, spins)
         return True
 
@@ -214,8 +214,8 @@ class Visualize3DRunner(BaseRunner):
         )
 
     def _post_step(self, t):
-        for i in xrange(self._ising.N()):
-            for j in xrange(self._ising.N()):
+        for i in range(self._ising.N()):
+            for j in range(self._ising.N()):
                 self._file.write('{0:d}\n'.format(self._ising.s(i, j)))
         return True
 
@@ -243,8 +243,8 @@ class ActivityHeatmapRunner(BaseRunner):
 
     def _post_step(self, t):
         if t > self._burn_in:
-            for i in xrange(self._ising.N()):
-                for j in xrange(self._ising.N()):
+            for i in range(self._ising.N()):
+                for j in range(self._ising.N()):
                     self._quantities['heatmap'][i, j] += self._ising.s(i, j)
         return True
 
