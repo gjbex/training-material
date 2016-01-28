@@ -33,8 +33,8 @@ class IsingSystem(object):
                                  self.H)
 
     def step(self):
-        for i in xrange(self._N):
-            for j in xrange(self._N):
+        for i in range(self._N):
+            for j in range(self._N):
                 delta = self._delta_E(i, j)
                 if (delta < 0.0 or
                         np.exp(-delta/self.T) > np.random.uniform()):
