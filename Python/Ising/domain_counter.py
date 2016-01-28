@@ -30,8 +30,8 @@ def find_domain(ising, domains, cd, domain_nr):
 def identify_domains(ising):
     domains = -np.ones((ising.N(), ising.N()), dtype=np.int32)
     domain_nr = 0
-    for i in xrange(domains.shape[0]):
-        for j in xrange(domains.shape[1]):
+    for i in range(domains.shape[0]):
+        for j in range(domains.shape[1]):
             if domains[i, j] == -1:
                 find_domain(ising, domains, (i, j), domain_nr)
                 domain_nr += 1
@@ -41,7 +41,7 @@ def identify_domains(ising):
 def compute_domain_sizes(ising):
     domains, nr_domains = identify_domains(ising)
     domain_sizes = [0] * nr_domains
-    for i in xrange(domains.shape[0]):
-        for j in xrange(domains.shape[1]):
+    for i in range(domains.shape[0]):
+        for j in range(domains.shape[1]):
             domain_sizes[domains[i, j]] += 1
     return domain_sizes
