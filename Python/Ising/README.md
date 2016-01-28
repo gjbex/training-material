@@ -25,3 +25,6 @@ Simulation of a 2D Ising system with an emphasis on visualization.
 1. `util.py`: helper utilities.
 1. `src`: C++ implementation of the 2D Ising system, as well as a SWIG
     file to generate Python wrapper code.
+1. `build.sh`: build script that will run SWIG, build the shared
+    library, and copy the library and the generated Python module to
+    the working directory.
