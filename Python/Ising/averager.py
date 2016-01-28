@@ -31,7 +31,7 @@ class Averager(object):
             for quantity in runner.quantities():
                 quantities[quantity] = runner.get(quantity)
             return quantities
-        run_input = [(run, self) for run in xrange(1, runs + 1)]
+        run_input = [(run, self) for run in range(1, runs + 1)]
         results = self._pool.map(do_run, run_input)
         for result in results:
             for quantity in result:
