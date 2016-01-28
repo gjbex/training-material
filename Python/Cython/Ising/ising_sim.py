@@ -39,8 +39,8 @@ if __name__ == '__main__':
     arg_parser.add_argument('--seed', type=int,
                             help='seed for random number generator, '
                                  'only needed for development')
-    arg_parser.add_argument('--impl', choices=['python'], default='python',
-                            help='implementation to use')
+    arg_parser.add_argument('--impl', choices=['python', 'cython'],
+                            default='python', help='implementation to use')
     options = arg_parser.parse_args()
     magn_file = open('{0}-magn.txt'.format(options.file), 'w')
     domain_file = open('{0}-domains.txt'.format(options.file), 'w')
@@ -50,6 +50,8 @@ if __name__ == '__main__':
         seed = options.seed
     if options.impl == 'python':
         ising_module = importlib.import_module('ising')
+    elif options.impl == 'cython':
+        ising_module = importlib.import_module('ising_cython')
     else:
         msg = "### error: implementation '{0}' undefined"
         print(msg.format(options.impl), file=sys.stderr)
