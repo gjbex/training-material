@@ -6,6 +6,7 @@ import numpy as np
 
 from runner import UnknownQuantityError
 
+
 class Averager(object):
 
     def __init__(self, runner, ising, is_verbose=1):
@@ -61,4 +62,3 @@ class Averager(object):
             return result
         else:
             raise UnknownQuantityError(quantity)
-
