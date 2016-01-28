@@ -65,5 +65,5 @@ if __name__ == '__main__':
         np.savetxt(sys.stdout, runner.get('heatmap'))
     elif options.mode == 'equilibrium':
         for quantity in runner.quantities():
-            print '{0:s} = {1:.4e}'.format(quantity, runner.get(quantity))
+            print('{0:s} = {1:.4e}'.format(quantity, runner.get(quantity)))
 
