@@ -1,14 +1,16 @@
 #!/usr/bin/env python
-
-import numpy as np
 '''
 Alternative implementation using 1D rather than 2D storage, slower
 than the 2D version, but just to ensure that comparison to C++
 implementation is fair.
 '''
+
+import numpy as np
+
+
 class IsingSystem(object):
 
-    def __init__(self, N, J = 1.0, H = 0.0, T = 1.5):
+    def __init__(self, N, J=1.0, H=0.0, T=1.5):
         self._N = N
         self._J = J
         self._H = H
@@ -35,12 +37,12 @@ class IsingSystem(object):
             for j in xrange(self._N):
                 delta = self._delta_E(i, j)
                 if (delta < 0.0 or
-                    np.exp(-delta/self.T) > np.random.uniform()):
+                        np.exp(-delta/self.T) > np.random.uniform()):
                     idx = i*self.N + j
                     self._s[idx] = -self._s[idx]
                     self._M += 2*self._s[idx]
                     self._E += delta
-    
+
     @property
     def T(self):
         return self._T
@@ -65,4 +67,3 @@ class IsingSystem(object):
 
     def init_random(self, seed):
         np.random.seed(seed)
-
