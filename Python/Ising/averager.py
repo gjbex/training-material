@@ -52,7 +52,7 @@ class Averager(object):
                             result[key] = 0
                         result[key] += dictionary[key]
                 for key in result:
-                    result[key] /= len(self._quantities[quantity])
+                    result[key] /= float(len(self._quantities[quantity]))
             else:
                 result['mean'] = np.mean(self._quantities[quantity])
                 result['std'] = np.std(self._quantities[quantity])
