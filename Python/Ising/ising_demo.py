@@ -2,15 +2,13 @@
 
 
 if __name__ == '__main__':
-
     from argparse import ArgumentParser
-    import random, sys
-
+    import random
+    import sys
     import numpy as np
-
     from ising_cxx import IsingSystem
     from runner import (SingleRunner, MovieRunner, ActivityHeatmapRunner,
-                        EquilibriumRunner, UnknownQuantityError)
+                        EquilibriumRunner)
 
     arg_parser = ArgumentParser(description='2D ising system simulaation')
     arg_parser.add_argument('--N', type=int, default=10,
@@ -65,5 +63,4 @@ if __name__ == '__main__':
         np.savetxt(sys.stdout, runner.get('heatmap'))
     elif options.mode == 'equilibrium':
         for quantity in runner.quantities():
-            print '{0:s} = {1:.4e}'.format(quantity, runner.get(quantity))
-
+            print('{0:s} = {1:.4e}'.format(quantity, runner.get(quantity)))

@@ -6,6 +6,7 @@ import numpy as np
 
 from runner import UnknownQuantityError
 
+
 class Averager(object):
 
     def __init__(self, runner, ising, is_verbose=1):
@@ -30,7 +31,7 @@ class Averager(object):
             for quantity in runner.quantities():
                 quantities[quantity] = runner.get(quantity)
             return quantities
-        run_input = [(run, self) for run in xrange(1, runs + 1)]
+        run_input = [(run, self) for run in range(1, runs + 1)]
         results = self._pool.map(do_run, run_input)
         for result in results:
             for quantity in result:
@@ -51,7 +52,7 @@ class Averager(object):
                             result[key] = 0
                         result[key] += dictionary[key]
                 for key in result:
-                    result[key] /= len(self._quantities[quantity])
+                    result[key] /= float(len(self._quantities[quantity]))
             else:
                 result['mean'] = np.mean(self._quantities[quantity])
                 result['std'] = np.std(self._quantities[quantity])
@@ -61,4 +62,3 @@ class Averager(object):
             return result
         else:
             raise UnknownQuantityError(quantity)
-

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 if __name__ == '__main__':
-
     from argparse import ArgumentParser
-    import importlib, random, sys
-
-    from runner import EquilibriumRunner, DomainSizeRunner
+    import importlib
+    import random
+    import sys
+    from runner import DomainSizeRunner
     from averager import Averager
     from util import print_options
 
@@ -87,9 +87,8 @@ if __name__ == '__main__':
         magn_file.flush()
         domains = averager.get('domains')
         distrubtion = ','.join(['{0:d}:{1:.8e}'.format(k, v)
-                                    for k, v in domains.items()])
+                                for k, v in domains.items()])
         domain_file.write('{0:.4f} {1:s}\n'.format(T, distrubtion))
         domain_file.flush()
     magn_file.close()
     domain_file.close()
-
