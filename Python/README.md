@@ -50,6 +50,9 @@ these samples have been used for Python tutorials.
     using SWIG.
 1. `HoloViews`: data visualization library examples, especially in the
     context of exploration in notebooks.
+1. `Ising`: Implementation of the 2D Ising system in pure Python, as well
+    as in C++ using SWIG to wrap the implementation.  Mostly intended for
+    visualization purposes.
 1. `Joblib`: illustrates the use of this library for easy task parallelism
 1. `Jupyter`: A few notebooks to illustrate the Jupyter notebook GUI.
 1. `Logging`: illustration of Python's logging facilities.
