@@ -1,2 +1,4 @@
 *.so
 ising_cython.c
+result-domains.txt
+result-magn.txt
