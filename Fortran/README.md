@@ -33,6 +33,8 @@ Contents
 1. `OOProgramming`: an illustration of how to define a tree data structure
     using classes and inheritance.  A second examples shows a naive
     implementation of rational numbers to illustrate operator overloading.
+1. `Preprocessing`: illustration of how to use the C preprocessor in
+    Fortran.
 1. `Refactoring`: shows how to fix legacy code with a suboptimal array
     access pattern by encapsulating the array.
 1. `Types`: illustrates the various basic data types such as `REAL`,

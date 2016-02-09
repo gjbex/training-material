@@ -9,4 +9,8 @@ Spark/~$pyspark.pptx
 C/Tree_2k/~$tree_2k.pptx
 LinuxTools/VersionControl/~$version_control_git.pptx
 Python/Mpi4py/~$mpi4py.pptx
+<<<<<<< HEAD
 Python/Cython/~$cython.pptx
+=======
+Python/~$python-intro.pptx
+>>>>>>> refs/remotes/origin/master
