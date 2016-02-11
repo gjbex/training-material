@@ -8,4 +8,4 @@ Motivating example for using Cython
 1. `primes_vanilla.py`: pure Python implementation of the primes function.
 1. `primes_cython.pyx`: Cython implementation of the primes function.
 1. `setup.py`: Python build script.
-1. `build.sh`: Bash script to execute the Python setup script.
+1. `Makefile`: make file to build the extension.
