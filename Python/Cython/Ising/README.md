@@ -15,4 +15,5 @@ Simulation of a 2D Ising system.
     the 2D Ising system for various purposes.
 1. `util.py`: helper utilities.
 1. `setup.py`: build file for Cython version.
-1. `build.sh`: shell script to build Cython implementation.
+1. `Makefile`: make file to build Cython implementation and run the
+    profiler.
