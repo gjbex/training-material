@@ -19,22 +19,21 @@ class IsingSystem(object):
     def clone(self):
         return IsingSystem(self.N(), self.J(), self.H(), self.T())
 
+    def _delta_E(self, int i, int j):
+        cdef tuple left = (i - 1, j)
+        cdef tuple up = (i, j - 1)
+        cdef tuple right = (i + 1 - self._N, j)
+        cdef tuple down = (i, j + 1 - self._N)
+        return 2.0*self._s[i, j]*(self._J*(self._s[left] + self._s[up] +
+                                           self._s[right] + self._s[down]) +
+                                  self._H)
+
     def step(self):
-        cdef int i, j
-        cdef double delta
-        cdef double J = self._J
-        cdef double H = self._H
-        cdef int N = self._N
-        cdef double T = self._T
         for i in range(self._N):
             for j in range(self._N):
-                delta = 2.0*self._s[i][j]*(J*(self._s[i-1,j] +
-                                              self._s[i,j-1] +
-                                              self._s[i+1-N,j] +
-                                              self._s[i,j+1-N]) +
-                                           H)
+                delta = self._delta_E(i, j)
                 if (delta < 0.0 or
-                        math.exp(-delta/T) > np.random.uniform()):
+                        np.exp(-delta/self._T) > np.random.uniform()):
                     self._s[i, j] = -self._s[i, j]
                     self._M += 2*self._s[i, j]
                     self._E += delta

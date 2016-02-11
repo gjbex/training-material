@@ -4,7 +4,6 @@ import os
 import sys
 import numpy as np
 import scipy.stats
-import matplotlib.pyplot as plt
 from domain_counter import compute_domain_sizes
 
 
@@ -149,79 +148,6 @@ class SingleRunner(BaseRunner):
                                                self._ising.energy()))
         return True
 
-
-class MovieRunner(BaseRunner):
-
-    def __init__(self, ising=None, steps=None, dir_name='Movie',
-                 file_fmt='spins_{0:06d}.png', is_verbose=1):
-        super(MovieRunner, self).__init__(ising, steps, is_verbose)
-        self._dir_name = dir_name
-        self._file_fmt = file_fmt
-
-    def clone(self):
-        return MovieRunner(self._ising, self._steps, self._dir_name,
-                           self._file_fmt, self._is_verbose)
-
-    def _prologue(self):
-        if not os.path.exists(self._dir_name):
-            os.makedirs(self._dir_name)
-
-    def _post_step(self, t):
-        file_name = os.path.join(self._dir_name, self._file_fmt.format(t))
-        spins = np.array([[self._ising.s(i, j)
-                           for j in range(self._ising.N())]
-                          for i in range(self._ising.N())])
-        plt.imsave(file_name, spins)
-        return True
-
-
-class Visualize3DRunner(BaseRunner):
-
-    header = '''<?xml version="1.0" ?>
-<Xdmf Version="2.0">
-  <Domain Name="domain">
-    <Grid GridType="Uniform" Name="mesh">
-      <Topology Dimensions="{N:d} {N:d} {steps:d}"
-                Name="topology" TopologyType="3DCoRectMesh"/>
-      <Geometry GeometryType="ORIGIN_DxDyDz" Name="geometry">
-        <DataItem Dimensions="3" Format="XML">
-          0.0 0.0 0.0
-        </DataItem>
-        <DataItem Dimensions="3" Format="XML">
-          {XY:.1f} {XY:.1f} {Z:.1f}
-        </DataItem>
-      </Geometry>
-      <Attribute Center="Node" Name="temperature">
-        <DataItem Dimensions="{N:d} {N:d} {steps:d}" Format="XML">
-'''
-    footer = '''       </DataItem>
-      </Attribute>
-    </Grid>
-  </Domain>
-</Xdmf>'''
-
-    def __init__(self, ising=None, steps=None, file_name='ising_run.xmdf',
-                 is_verbose=1):
-        super(Visualize3DRunner, self).__init__(ising, steps, is_verbose)
-        self._file_name = open(file_name, 'w')
-
-    def _prologue(self):
-        self._file = open(self._file_name, 'w')
-        self._file.write(Visualize3DRunner.header.format(
-            N=self._ising.N(), steps=self._steps,
-            XY=np.log10(self._ising.N()),
-            Z=np.log10(self._steps))
-        )
-
-    def _post_step(self, t):
-        for i in range(self._ising.N()):
-            for j in range(self._ising.N()):
-                self._file.write('{0:d}\n'.format(self._ising.s(i, j)))
-        return True
-
-    def _epilogue(self):
-        self._file.write(Visualize3DRunner.footer)
-        self._file.close()
 
 
 class ActivityHeatmapRunner(BaseRunner):
