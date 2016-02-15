@@ -1,11 +1,8 @@
-Simple
-======
-
+# Simple
 A very simple example of how to use Gnu Autotools to generate a `configure`
 and make files.
 
-Contents
---------
+## Contents
 1. `configure.ac`: sets meta information about the project, options for
     Automake, and the make files to be generated.
 1. `Makefile.am`: top-level make file, indicates which subdirectories
