@@ -19,11 +19,11 @@ class IsingSystem(object):
     def clone(self):
         return IsingSystem(self.N(), self.J(), self.H(), self.T())
 
-    def _delta_E(self, int i, int j):
-        cdef tuple left = (i - 1, j)
-        cdef tuple up = (i, j - 1)
-        cdef tuple right = (i + 1 - self._N, j)
-        cdef tuple down = (i, j + 1 - self._N)
+    def _delta_E(self, i, j):
+        left = (i - 1, j)
+        up = (i, j - 1)
+        right = (i + 1 - self._N, j)
+        down = (i, j + 1 - self._N)
         return 2.0*self._s[i, j]*(self._J*(self._s[left] + self._s[up] +
                                            self._s[right] + self._s[down]) +
                                   self._H)
