@@ -1,10 +1,11 @@
-# Simple
-A very simple example of how to use Gnu Autotools to generate a `configure`
-and make files.
+# Options
+An example of using a `--enable` configure option to enable OpenMP
+compilation.
 
 ## Contents
 1. `configure.ac`: sets meta information about the project, options for
-    Automake, and the make files to be generated.
+    Automake, and the make files to be generated.  Note the
+    `--enable-openmp` option.
 1. `Makefile.am`: top-level make file, indicates which subdirectories
     should be processed.
 1. `src`: directory containing the source code, and the `Makefile.am`

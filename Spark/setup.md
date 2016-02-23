@@ -6,6 +6,7 @@ Load the R module for the version you want to use, e.g.,
 $ module load R/3.1.2-foss-2015a-bare
 ```
 Load the Java module to use, e.g.,
+```bash
 $ module load Java/1.8.0_31
 ```
 
