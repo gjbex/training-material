@@ -1,9 +1,7 @@
 VERSION = cpython-34m
 COMPOUNDS_LIB = compounds.$(VERSION).so
 
-all: compounds
-
-compounds: $(COMPOUNDS_LIB)
+all: $(COMPOUNDS_LIB)
 
 $(COMPOUNDS_LIB): compounds.pyx
 	python setup.py build_ext --inplace

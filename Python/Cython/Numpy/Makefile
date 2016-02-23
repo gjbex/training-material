@@ -4,9 +4,7 @@ PROFILE = array_sums_prof.txt
 override DIM = 1000
 override ITER = 10
 
-all: array_sum
-
-array_sum: $(ARRAY_SUM_LIB)
+all: $(ARRAY_SUM_LIB)
 
 $(ARRAY_SUM_LIB): array_sum.pyx
 	python setup.py build_ext --inplace
