@@ -1,0 +1,10 @@
+#!/bin/bash -l
+#PBS -l nodes=2:ppn=20
+#PBS -l walltime=00:05:00
+#PBS -l qos=debugging
+
+cd ${PBS_O_WORKDIR}
+source setuo.sh
+
+export MPICH_ASYNC_PROGRESS=1
+mpirun -np 40 ./nonblocking_reduce.exe 10000000 100

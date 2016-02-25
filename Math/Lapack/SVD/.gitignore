@@ -1,6 +1,0 @@
-*.h5
-*.exe
-*.o[0-9]*
-*.e[0-9]*
-.ipynb_checkpoints
-core.[0-9]*

@@ -2,9 +2,10 @@
 
 import numpy as np
 
+
 class IsingSystem(object):
 
-    def __init__(self, N, J = 1.0, H = 0.0, T = 1.5):
+    def __init__(self, N, J=1.0, H=0.0, T=1.5):
         self._N = N
         self._J = J
         self._H = H
@@ -22,19 +23,19 @@ class IsingSystem(object):
         right = (i + 1 - self._N, j)
         down = (i, j + 1 - self._N)
         return 2.0*self._s[i][j]*(self._J*(self._s[left] + self._s[up] +
-                                          self._s[right] + self._s[down]) +
+                                           self._s[right] + self._s[down]) +
                                   self._H)
 
     def step(self):
-        for i in xrange(self._N):
-            for j in xrange(self._N):
+        for i in range(self._N):
+            for j in range(self._N):
                 delta = self._delta_E(i, j)
                 if (delta < 0.0 or
-                    np.exp(-delta/self._T) > np.random.uniform()):
+                        np.exp(-delta/self._T) > np.random.uniform()):
                     self._s[i, j] = -self._s[i, j]
                     self._M += 2*self._s[i, j]
                     self._E += delta
-    
+
     def T(self):
         return self._T
 
@@ -58,4 +59,3 @@ class IsingSystem(object):
 
     def init_random(self, seed):
         np.random.seed(seed)
-

@@ -80,7 +80,7 @@ def main():
     arg_parser.add_argument('file', metavar='FILE', help='file to parse')
     options = arg_parser.parse_args()
     file_size = os.path.getsize(options.file)
-    chunck_size = int(file_size/size)
+    chunck_size = file_size//size
     start_pos = chunck_size*rank
     if rank + 1 < size:
         end_pos = start_pos + chunck_size - 1

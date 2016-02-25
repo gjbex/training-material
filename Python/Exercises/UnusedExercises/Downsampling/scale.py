@@ -25,7 +25,7 @@ def get_image(img_file, width, height):
     img = []
     for _ in range(height):
         img.append([0] * width)
-    bytes = int(width/8)
+    bytes = width//8
     if width % 8 != 0:
         bytes += 1
     for i in range(height):
@@ -52,7 +52,7 @@ def compute_black_fraction(img):
 def write_image(img_file, img):
     height = len(img)
     width = len(img[0])
-    bytes = int(width/8)
+    bytes = width//8
     if width % 8 != 0:
         bytes += 1
     img_file.write(b'P4\n')
@@ -76,8 +76,8 @@ def write_image(img_file, img):
 def scale_image(img, threshold=2):
     width = len(img[0])
     height = len(img)
-    new_width = int(width/2)
-    new_height = int(height/2)
+    new_width = width//2
+    new_height = height//2
     new_img = []
     for _ in range(new_height):
         new_img.append([0] * new_width)

@@ -1,0 +1,24 @@
+#ifndef CL_PARAMS_HDR
+#define CL_PARAMS_HDR
+
+#include <stdio.h>
+
+typedef struct {
+	int rank;
+	int max_nr_points;
+	int delta_nr_points;
+	int bucket_size;
+	double max_radius;
+	double delta_radius;
+	int nr_iters;
+	int verbose;
+} Params;
+
+void initCL(Params *params);
+void parseCL(Params *params, int *argc, char **argv[]);
+void parseFileCL(Params *params, char *fileName);
+void dumpCL(FILE *fp, char prefix[], Params *params);
+void finalizeCL(Params *params);
+void printHelpCL(FILE *fp);
+
+#endif

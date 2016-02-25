@@ -1,6 +1,4 @@
-Python
-======
-
+# Python
 Python is an excellent programming language for data processing,
 prototyping and writing glue code for C/C++/Fortran libraries.
 
@@ -8,8 +6,7 @@ This directory contains code samples that illustrate particular features
 and programming techniques, or how to use Python iibraries.  Many of
 these samples have been used for Python tutorials.
 
-What is it?
------------
+# What is it?
 1. `ArgParse`: illustration of how to use the argparse module to handle
     command line arguments.
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
@@ -19,6 +16,8 @@ What is it?
     (amplitude) and the frequency spectrum using Matplotlib.  Another
     script illustrates elementary signal processing using a highpass
     filter.
+1. `Bokeh`: illustrations of how to use the Bokeh plotting library for,
+    e.g., interactive graphs.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
 1. `CodeEvaluation`: illustrates how to evaluate a string containing
@@ -51,6 +50,9 @@ What is it?
     using SWIG.
 1. `HoloViews`: data visualization library examples, especially in the
     context of exploration in notebooks.
+1. `Ising`: Implementation of the 2D Ising system in pure Python, as well
+    as in C++ using SWIG to wrap the implementation.  Mostly intended for
+    visualization purposes.
 1. `Joblib`: illustrates the use of this library for easy task parallelism
 1. `Jupyter`: A few notebooks to illustrate the Jupyter notebook GUI.
 1. `Logging`: illustration of Python's logging facilities.
@@ -65,6 +67,7 @@ What is it?
    `multiprocessing` library.
 1. `NetworkX`: illustration of the graph representation and algorithms
     library.
+1. `Nltk`: some initial Natural Language ToolKit experiments.
 1. `Numpy`: a few illustratios of using numpy, scipy, and matplotlib
     (linear regression, optimization, solving ODEs, FFT).
 1. `OperatorFunctools`: some illustrations of the functional programming
@@ -84,6 +87,8 @@ What is it?
     the field
 1. `Subprocess`: illustrates executing a shell command from a Python script
     using the `subprocess` module.
+1. `Unittest`: illustration of how to use Python's standard library
+    unit testing framework.
 1. `Vtk`: examples of using the KitWare VTK library (No support for Python
     3 yet).
 1. `WxPython`: some illustrations of GUI developlement using the Python

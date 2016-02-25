@@ -10,14 +10,20 @@ is subject to the license included in this repository.
 
 What is it?
 -----------
+* `C`: some C sample code. (Work in progress)
+* `CPlusPlus`: some C++ sample code. (Work in progress)
+* `Debugging`: slides used for an info session on debugging tools and
+    techniques, as well as sample code.
 * `Fortran`: sample Fortran code intended to illustrate Fortran 95, 2003,
     and 2008 features.  This material is developed in preparation of a
     tutorial on modern Fortran features.
 * `HDF5`: sample code showing how to read/write HDF5 files from C and
     Python.  HDF5 can be used for parallel I/O, C sample code is provided.
     This material is part of a tutorial on  HDF5.
+* `Java`: sample code mostly for demonstration purposes.
 * `LinuxTools`: some illustrations of using Linux tools such as the `M4`
-    macro processor, make files and autotools.
+    macro processor, make files and autotools, as well as slides on
+    version control using svn and git.
 * `Mpi`: illustration of distributed programming using the Message Passing
     Interface API.
 * `NetCDF`: sample code showing how to read/write NetCDF files for C,
@@ -31,6 +37,7 @@ What is it?
     used in a tutorial on using Python for scientific data processing.
 * `R`: some very simple illustrations of how to run R scripts from the
     command line, and to submit as (PBS) jobs
+* `Spark`: some Spark-related material. (Work in progress)
 * `Sql`: sample SQL that covers the basics of querying relational
     databases
 * `Visualization`: data files, XDMF files and ParaView state files to

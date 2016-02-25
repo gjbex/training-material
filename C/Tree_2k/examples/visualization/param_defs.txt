@@ -1,0 +1,4 @@
+int	rank	2
+int	nr_points	20
+int	bucket_size	3
+int	verbose	0

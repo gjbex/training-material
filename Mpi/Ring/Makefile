@@ -4,7 +4,7 @@ LDFLAGS =
 LIBS = -lm
 
 all: unidirectional.exe nonblocking.exe deadlock.exe bidirectional.exe \
-     sendrecv.exe cart_sendrecv.exe torus.exe
+     sendrecv.exe cart_sendrecv.exe torus.exe one_sided.exe
 
 f08: nonblocking_f08.exe cart_sendrecv_f08.exe
 
