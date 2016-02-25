@@ -1,0 +1,3 @@
+build
+*.so
+array_sum.c
