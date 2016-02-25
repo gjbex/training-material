@@ -1,9 +1,7 @@
 VERSION = cpython-34m
 HELLO_WORLD_LIB = hello_world.$(VERSION).so
 
-all: hello_world
-
-hello_world: $(HELLO_WORLD_LIB)
+all: $(HELLO_WORLD_LIB)
 
 $(HELLO_WORLD_LIB): hello_world.pyx
 	python setup.py build_ext --inplace

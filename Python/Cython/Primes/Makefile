@@ -1,9 +1,7 @@
 VERSION = cpython-34m
 PRIMES_LIB = primes_cython.$(VERSION).so
 
-all: primes_cython
-
-primes_cython: $(PRIMES_LIB)
+all: $(PRIMES_LIB)
 
 $(PRIMES_LIB): primes_cython.pyx
 	python setup.py build_ext --inplace

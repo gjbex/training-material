@@ -1,9 +1,7 @@
 VERSION = cpython-34m
 AVERAGE_LIB = average.$(VERSION).so
 
-all: average
-
-average: $(AVERAGE_LIB)
+all: $(AVERAGE_LIB)
 
 $(AVERAGE_LIB): average.pyx
 	python setup.py build_ext --inplace
