@@ -75,6 +75,8 @@ these samples have been used for Python tutorials.
     options offered by `opeator` and `functools` packages.
 1. `Pandas`: R dataframe-like data structures for Python, contains a
     Jupyter notebook to illustrate using pandas interactively.
+1. `Paramiko`: a few examples of using the Paramiko library for SSH
+    to remote hosts.
 1. `PhraseIndexer`: parses a text file to find the line number on which a
     given eet of phrases occurs.
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
