@@ -32,6 +32,7 @@ these samples have been used for Python tutorials.
     mechanism to deal with resource setup/teardown.
 1. `Coroutines`: illustrates coroutines, functions that preserve state
     between invocations.
+1. `Cython`: Powerpoint presentation on Cython, as well as example code.
 1. `DataFormats`: illustrates how to deal with data formats such as CSV
     files, binary data and XML.
 1. `DbAccess`: illustrates how to insert data into a relational database
