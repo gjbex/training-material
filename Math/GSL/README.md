@@ -7,3 +7,4 @@ Contents
 --------
 1. `ODEs`: examples of solving a second order differential equation
     using high-level drivers.
+1. `RNGs`: examples of using GSL's random number generators.
