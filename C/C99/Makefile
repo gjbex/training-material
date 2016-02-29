@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -O2 -g -Wall -std=c99
 LIBS = -lm
 
-APPL = bool.exe
+APPL = bool.exe complex.exe
 
 all: $(APPL)
 
