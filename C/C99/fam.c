@@ -9,6 +9,7 @@ typedef struct {
 } Particle;
 
 typedef struct {
+    int dims;
     int nr_particles;
     Particle *particle[];
 } System;
@@ -17,6 +18,8 @@ Particle *init_particle(int dims);
 System *init_system(int nr_particles, int dims);
 void free_system(System *system);
 double total_mass(System *system);
+void center_of_mass(System *system, double coords[]);
+void print_position(double position[], int dims);
 void print_system(System *system);
 
 int main(int argc, char *argv[]) {
@@ -29,6 +32,9 @@ int main(int argc, char *argv[]) {
     System *system = init_system(nr_particles, dims);
     print_system(system);
     printf("total mass = %lf\n", total_mass(system));
+    double cms[dims];
+    center_of_mass(system, cms);
+    print_position(cms, dims);
     free_system(system);
     return EXIT_SUCCESS;
 }
@@ -48,6 +54,7 @@ Particle *init_particle(int dims) {
 System *init_system(int nr_particles, int dims) {
     System *system = (System *) malloc(sizeof(System) +
                                        nr_particles*sizeof(Particle *));
+    system->dims = dims;
     system->nr_particles = nr_particles;
     for (int i = 0; i < nr_particles; i++)
         system->particle[i] = init_particle(dims);
@@ -61,17 +68,34 @@ double total_mass(System *system) {
     return sum;
 }
 
+void center_of_mass(System *system, double coords[]) {
+    double total_mass = 0.0;
+    for (int i = 0; i < system->dims; i++)
+        coords[i] = 0.0;
+    for (int n = 0; n < system->nr_particles; n++) {
+        total_mass += system->particle[n]->mass;
+        for (int i = 0; i < system->dims; i++)
+            coords[i] += system->particle[n]->mass*
+                         system->particle[n]->position[i];
+    }
+    for (int i = 0; i < system->dims; i++)
+        coords[i] /= total_mass;
+}
+
 void free_system(System *system) {
     for (int i = 0; i < system->nr_particles; i++)
         free(system->particle[i]);
     free(system);
 }
 
-void print_particle(Particle *particle) {
+void print_position(double position[], int dims) {
     printf("(");
-    for (int i = 0; i < particle->dims; i++)
-        printf("%lf%s", particle->position[i],
-                i < particle->dims - 1 ? ", " : ")");
+    for (int i = 0; i < dims; i++)
+        printf("%lf%s", position[i], i < dims - 1 ? ", " : ")");
+}
+
+void print_particle(Particle *particle) {
+    print_position(particle->position, particle->dims);
     printf(": %lf\n", particle->mass);
 }
 
