@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
 void init_temperature(double T[], int n);
 void print_temperature(double T[], int n);
@@ -9,6 +10,7 @@ void update_temperature_r(double * restrict old_T, double * restrict new_T,
 void init_tmp_temperature(double T_tmp[], double T[], int n);
 
 int main(int argc, char *argv[]) {
+    struct timeval start_tv, end_tv;
     int n = 10;
     int nr_steps = 100;
     if (argc > 1)
@@ -16,24 +18,36 @@ int main(int argc, char *argv[]) {
     if (argc > 2)
         nr_steps = atoi(argv[2]);
     double T[n*n], T_tmp[n*n];
+    srand(1234);
     init_temperature(T, n);
     init_tmp_temperature(T_tmp, T, n);
     print_temperature(T, n);
     printf("\n");
+    gettimeofday(&start_tv, NULL);
     for (int step = 0; step < nr_steps/2; step++) {
         update_temperature(T, T_tmp, n);
         update_temperature(T_tmp, T, n);
     }
+    gettimeofday(&end_tv, NULL);
     print_temperature(T, n);
+    printf("non restrict: %.6lf\n",
+            1.0e6*(end_tv.tv_sec - start_tv.tv_sec) +
+            (end_tv.tv_usec - start_tv.tv_usec));
+    srand(1234);
     init_temperature(T, n);
     init_tmp_temperature(T_tmp, T, n);
     print_temperature(T, n);
     printf("\n");
+    gettimeofday(&start_tv, NULL);
     for (int step = 0; step < nr_steps/2; step++) {
         update_temperature_r(T, T_tmp, n);
         update_temperature_r(T_tmp, T, n);
     }
+    gettimeofday(&end_tv, NULL);
     print_temperature(T, n);
+    printf("restrict: %.6lf\n",
+            1.0e6*(end_tv.tv_sec - start_tv.tv_sec) +
+            (end_tv.tv_usec - start_tv.tv_usec));
     return EXIT_SUCCESS;
 }
 
