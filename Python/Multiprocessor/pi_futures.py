@@ -2,42 +2,54 @@
 
 from argparse import ArgumentParser
 import math
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+import multiprocessing
+import random
 import sys
 
 
-def partial_pi(args=(0.0, 1.0, 0.01)):
-    a, b, delta = args
-    part_pi = 0.0
-    x = a + 0.5*delta
-    while x <= b:
-        part_pi += 4.0/(1.0 + x*x)
-        x += delta
-    return part_pi*delta
+def partial_pi(args=(1000, )):
+    nr_tries = args[0]
+    nr_hits = 0
+    for _ in range(nr_tries):
+        x = random.random()
+        y = random.random()
+        if x**2 + y**2 < 1.0:
+            nr_hits += 1
+    return 4.0*nr_hits/nr_tries
 
 
-def compute_pi(delta=0.01, pool_size=None, intervals=None):
-    if not intervals:
-        intervals = pool_size
-    executor = ProcessPoolExecutor(max_workers=pool_size)
-    interval = 1.0/intervals
-    args = [(i*interval, (i + 1)*interval - delta, delta)
-            for i in range(intervals)]
+def compute_pi(nr_tries=10000, pool_size=None, constructor=None):
+    if not constructor:
+        executor = ProcessPoolExecutor(max_workers=pool_size)
+    else:
+        executor = constructor(max_workers=pool_size)
+    args = [(nr_tries//pool_size, )
+            for _ in range(pool_size)]
     results = executor.map(partial_pi, args)
-    return sum(results)
+    if not pool_size:
+        pool_size = multiprocessing.cpu_count()
+    return sum(results)/pool_size
 
 
 def main():
     arg_parser = ArgumentParser(description='compute pi')
-    arg_parser.add_argument('-d', dest='delta', type=float,
-                            default=0.01, help='resolution for quadrature')
-    arg_parser.add_argument('-p', dest='pool_size', type=int,
+    arg_parser.add_argument('--p', dest='pool_size', type=int,
                             default=1, help='pool size')
-    arg_parser.add_argument('-n', dest='intervals', type=int,
-                            default=1, help='number of intervals')
+    arg_parser.add_argument('--n', dest='nr_tries', type=int,
+                            default=1, help='number of tries')
+    arg_parser.add_argument('--t', default='processes', dest='type',
+                            choices=['processes', 'threads'],
+                            help='Either use processes or treads')
     options = arg_parser.parse_args()
-    my_pi = compute_pi(options.delta, options.pool_size,
-                       options.intervals)
+    if options.type:
+        if options.type == 'processes':
+            constructor = ProcessPoolExecutor
+        else:
+            constructor = ThreadPoolExecutor
+        my_pi = compute_pi(options.nr_tries, options.pool_size, constructor)
+    else:
+        my_pi = compute_pi(options.nr_tries, options.pool_size)
     print('computed pi = {0:.15f}'.format(my_pi))
     print('exact pi    = {0:.15f}'.format(math.pi))
     return 0
