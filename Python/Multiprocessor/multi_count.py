@@ -24,8 +24,8 @@ def count_chunk(args):
 
 def count_nucl(file_name, pool_size):
     file_size = os.path.getsize(file_name)
-    chunk_size = file_size/pool_size + 1
-    offsets = list(range(0, file_size, chunk_size))
+    chunk_size = file_size//pool_size + 1
+    offsets = range(0, file_size, chunk_size)
     args = [(file_name, offset, chunk_size) for offset in offsets]
     pool = multiprocessing.Pool(pool_size)
     counters = pool.map(count_chunk, args)
