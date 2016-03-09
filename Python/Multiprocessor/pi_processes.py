@@ -18,7 +18,7 @@ def partial_pi(nr_tries, p_sum):
         p_sum.value += 4.0*nr_hits/nr_tries
 
 
-def compute_pi(nr_tries=10000, pool_size=None):
+def compute_pi(nr_tries=10000, pool_size=1):
     ctx = mp.get_context('forkserver')
     p_sum = ctx.Value('d', 0.0)
     processes = [ctx.Process(target=partial_pi,
@@ -28,8 +28,6 @@ def compute_pi(nr_tries=10000, pool_size=None):
         process.start()
     for process in processes:
         process.join()
-    if not pool_size:
-        pool_size = mp.cpu_count()
     return p_sum.value/pool_size
 
 
