@@ -14,7 +14,8 @@ def partial_pi(nr_tries, p_sum):
         y = random.random()
         if x**2 + y**2 < 1.0:
             nr_hits += 1
-    p_sum.value += 4.0*nr_hits/nr_tries
+    with p_sum.get_lock():
+        p_sum.value += 4.0*nr_hits/nr_tries
 
 
 def compute_pi(nr_tries=10000, pool_size=None):
