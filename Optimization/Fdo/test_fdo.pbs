@@ -1,0 +1,31 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=20:ivybridge
+#PBS -l walltime=00:15:00
+#PBS -l qos=debugging
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+source switch_to_2015a
+module load GCC/4.9.2
+module load binutils/2.25-GCC-4.9.2
+
+APPL=cache_hierarchy
+
+# build with -O2, time
+rm -f ${APPL}
+gcc -O3 -o ${APPL} ${APPL}.c
+echo '-O3 run'
+time ./${APPL} > cache_hierarchy_O3.txt
+
+# build with instrumentation for FDO, time, but disgard output
+rm -f ${APPL}
+gcc -o ${APPL} ${APPL}.c -fprofile-generate
+echo 'instrumented run'
+time ./${APPL} > /dev/null
+
+# build using profile information and time
+rm -f ${APPL}
+gcc -O3 -o ${APPL} ${APPL}.c -fprofile-use=${APPL}.gcda
+rm -f ${APPL}.gcda
+echo 'FDO run'
+time ./${APPL} > cache_hierarchy_O3_FDO.txt
