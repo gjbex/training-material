@@ -1,6 +1,6 @@
-CC = icc
+CC = gcc
 CFLAGS = -O2
-OMP_FLAGS = -openmp
+OMP_FLAGS = -fopenmp
 LDFLAGS = 
 LIBS =
 
