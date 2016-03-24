@@ -31,6 +31,7 @@ What is it?
 1. `limits_test`: shows numerical model paraemters for integers and reals
 1. `infinity_nan_test`: illustrates infinity and NaN results of floating
     point computations
+1. `default_type_test`: check which real number type `REAL` defaults to.
 
 How to build?
 -------------
