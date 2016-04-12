@@ -75,12 +75,12 @@ typedef struct tree_2k_query_result {
 
 tree_2k_err_t tree_2k_query_result_alloc(tree_2k_query_result_t **query_result,
                                          int max_results);
-void tree_2k_query_result_free(tree_2k_query_result_t *query_result);
+void tree_2k_query_result_free(tree_2k_query_result_t **query_result);
 
 tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
                             double *center, double *extent,
                             int max_points, int bucket_size);
-void tree_2k_free(tree_2k_t *tree);
+void tree_2k_free(tree_2k_t **tree);
 bool tree_2k_can_store(tree_2k_t *tree, double *coords);
 tree_2k_err_t tree_2k_insert(tree_2k_t *tree, double *coords, void *data);
 int tree_2k_get_rank(tree_2k_t *tree);

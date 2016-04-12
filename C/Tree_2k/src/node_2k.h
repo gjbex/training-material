@@ -22,11 +22,11 @@ typedef struct node_2k_list {
 
 tree_2k_err_t node_2k_list_alloc(node_2k_list_t **node_list,
                                  int max_nodes);
-void node_2k_list_free(node_2k_list_t *node_list);
+void node_2k_list_free(node_2k_list_t **node_list);
 
 tree_2k_err_t node_2k_alloc(node_2k_t **node, tree_2k_t *tree,
                             double *center, double *extent);
-void node_2k_free(node_2k_t *node);
+void node_2k_free(node_2k_t **node);
 tree_2k_err_t node_2k_insert(node_2k_t *node, int point_id);
 bool node_2k_can_have_points(node_2k_t *node, const double *coords,
                              double radius);

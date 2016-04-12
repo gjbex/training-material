@@ -33,5 +33,5 @@ void test_count_walk(void) {
     status = tree_2k_walk(tree, &count_points, &counted_points);
     CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
     CU_ASSERT_EQUAL(counted_points, tree_2k_get_nr_points(tree));
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }
