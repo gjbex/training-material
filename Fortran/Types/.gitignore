@@ -7,3 +7,4 @@ select_precision_test
 complex_test
 limits_test
 infinity_nan_test
+default_type_test

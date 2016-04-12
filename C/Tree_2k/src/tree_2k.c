@@ -70,15 +70,16 @@ tree_2k_err_t tree_2k_alloc(tree_2k_t **tree, int rank,
 /*!
   \brief Tree destructor, will free all memory used by the tree, including
          the tree itself.
-  \param tree The address of the tree to free.
+  \param tree Pointer to the address of the tree to free.
 */
-void tree_2k_free(tree_2k_t *tree) {
-    for (int point_nr = 0; point_nr < tree->nr_points; point_nr++)
-        free(tree->coords[point_nr]);
-    free(tree->data);
-    free(tree->coords);
-    node_2k_free(tree->root);
-    free(tree);
+void tree_2k_free(tree_2k_t **tree) {
+    for (int point_nr = 0; point_nr < (*tree)->nr_points; point_nr++)
+        free((*tree)->coords[point_nr]);
+    free((*tree)->data);
+    free((*tree)->coords);
+    node_2k_free(&((*tree)->root));
+    free(*tree);
+    tree = NULL;
 }
 
 /*!
@@ -358,11 +359,12 @@ tree_2k_err_t tree_2k_query_result_alloc(tree_2k_query_result_t **query_result,
 
 /*!
   \brief Free the memory allocated for this query result.
-  \param query_result Address of the query result.
+  \param Address of query_result Address of the query result.
 */
-void tree_2k_query_result_free(tree_2k_query_result_t *query_result) {
-    free(query_result->index);
-    free(query_result);
+void tree_2k_query_result_free(tree_2k_query_result_t **query_result) {
+    free((*query_result)->index);
+    free(*query_result);
+    query_result = NULL;
 }
 
 /*!
@@ -452,7 +454,7 @@ tree_2k_err_t tree_2k_query(tree_2k_t *tree,
             }
         }
     }
-    node_2k_list_free(node_list);
+    node_2k_list_free(&node_list);
     return TREE_2K_SUCCESS;
 }
 

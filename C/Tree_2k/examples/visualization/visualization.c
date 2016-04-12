@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     status = tree_2k_fwrite(tree, stdout);
     if (status != TREE_2K_SUCCESS)
         errx(EXIT_FAILURE, "tree write failed");
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
     tree_spatial_dims_free(center, extent);
     finalizeCL(&params);
     return EXIT_SUCCESS;

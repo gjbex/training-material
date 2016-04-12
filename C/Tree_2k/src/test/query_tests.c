@@ -51,7 +51,7 @@ void test_can_have_points(void) {
                                                 point_neg[test_nr],
                                                 radius_neg));
     }
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }
 
 void expected_query_result(tree_2k_t *tree, double *coords, double radius,
@@ -97,7 +97,7 @@ void test_query_success(void) {
     CU_ASSERT_PTR_NOT_NULL_FATAL(query_result->index);
     expected_query_result(tree, query, radius, &nr_results, &results);
     CU_ASSERT_EQUAL(query_result->nr_results, nr_results);
-    tree_2k_query_result_free(query_result);
-    tree_2k_free(tree);
+    tree_2k_query_result_free(&query_result);
+    tree_2k_free(&tree);
     free(results);
 }

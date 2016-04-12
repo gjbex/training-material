@@ -26,7 +26,7 @@ void test_tree_alloc(void) {
     CU_ASSERT_PTR_NOT_NULL_FATAL(tree->root->extent);
     for (int i = 0; i < rank; i++)
         CU_ASSERT_DOUBLE_EQUAL(tree->root->extent[i], extent[i], PREC);
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }
 
 void test_tree_alloc_rank_0(void) {

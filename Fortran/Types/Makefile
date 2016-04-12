@@ -7,7 +7,8 @@ PART_OBJS = random_mod.o particles_mod.o particle_sim.o
 RAND_TEST_OBJS = random_mod.o rand_test.o
 
 APPS = single double particle_sim rand_test precision_test \
-       select_precision_test complex_test limits_test infinity_nan_test
+       select_precision_test complex_test limits_test infinity_nan_test \
+	   default_type_test
 
 all: $(APPS)
 
@@ -34,6 +35,9 @@ complex_test: complex_test.o
 
 limits_test: limits_test.o
 	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+
+default_type_test: default_type_test.f90
+	$(F90) $(FFLAGS) -cpp -o $@ $< $(LDFLAGS) $(LIBS)
 
 infinity_nan_test: infinity_nan_test.f90
 	$(F90) $(FFLAGS) -cpp -o $@ $< $(LDFLAGS) $(LIBS)
