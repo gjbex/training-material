@@ -28,7 +28,7 @@ void test_single_insert(void) {
     CU_ASSERT_EQUAL_FATAL(tree->root->nr_points, nr_points);
     CU_ASSERT_EQUAL(tree->root->bucket[0], 0);
     CU_ASSERT_PTR_NULL(tree->root->region);
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
     free(q);
 }
 
@@ -66,7 +66,7 @@ void test_multiple_insert_no_split(void) {
         CU_ASSERT_EQUAL(tree->root->bucket[point_nr], point_nr);
     }
     CU_ASSERT_PTR_NULL(tree->root->region);
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }
 
 void test_multiple_insert_with_split(void) {
@@ -120,7 +120,7 @@ void test_multiple_insert_with_split(void) {
         }
     }
     CU_ASSERT_PTR_NULL(tree->root->region[3]);
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }
 
 void test_failed_insert(void) {
@@ -137,7 +137,7 @@ void test_failed_insert(void) {
     CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
     status = tree_2k_insert(tree, coords, q);
     CU_ASSERT_EQUAL_FATAL(status, TREE_2K_COORDS_NOT_IN_EXTENT_ERR);
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
     free(q);
 }
 
@@ -174,5 +174,5 @@ void test_increase_capacity_insert(void) {
     }
     for (int point_nr = 0; point_nr < nr_points; point_nr++)
         free(tree->data[point_nr]);
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }

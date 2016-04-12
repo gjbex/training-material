@@ -26,7 +26,7 @@ void test_basic_accessors(void) {
         CU_ASSERT_EQUAL_FATAL(status, TREE_2K_SUCCESS);
     }
     CU_ASSERT_EQUAL(tree_2k_get_nr_points(tree), nr_points);
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }
 
 void test_data_accessors(void) {
@@ -57,7 +57,7 @@ void test_data_accessors(void) {
         for (int i = 0; i < tree_2k_get_rank(tree); i++)
             CU_ASSERT_EQUAL(p_coords[i], coords[point_nr][i]);
     }
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }
 
 void test_data_access_fail(void) {
@@ -83,5 +83,5 @@ void test_data_access_fail(void) {
     CU_ASSERT_EQUAL_FATAL(tree_2k_get_nr_points(tree), nr_points);
     CU_ASSERT_PTR_NULL(tree_2k_get_coords(tree, 3));
     CU_ASSERT_PTR_NULL(tree_2k_get_data(tree, 3));
-    tree_2k_free(tree);
+    tree_2k_free(&tree);
 }

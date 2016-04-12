@@ -81,21 +81,22 @@ tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
 /*!
   \brief Node destructor, will free all memory used by the node, including
          the node itself, and all of its region nodes.
-  \param node The node to free.
+  \param node The address of the node to free.
 */
-void node_2k_free(node_2k_t *node) {
-    if (node->region != NULL) {
-        for (int region_nr = 0; region_nr < node->tree->nr_regions;
+void node_2k_free(node_2k_t **node) {
+    if ((*node)->region != NULL) {
+        for (int region_nr = 0; region_nr < (*node)->tree->nr_regions;
                 region_nr++)
-            if (node->region[region_nr] != NULL)
-                node_2k_free(node->region[region_nr]);
-        free(node->region);
+            if ((*node)->region[region_nr] != NULL)
+                node_2k_free(&((*node)->region[region_nr]));
+        free((*node)->region);
     }
-    if (node->bucket != NULL)
-        free(node->bucket);
-    free(node->center);
-    free(node->extent);
-    free(node);
+    if ((*node)->bucket != NULL)
+        free((*node)->bucket);
+    free((*node)->center);
+    free((*node)->extent);
+    free(*node);
+    node = NULL;
 }
 
 /*!
@@ -315,11 +316,12 @@ tree_2k_err_t node_2k_list_alloc(node_2k_list_t **node_list,
 
 /*!
   \brief Free the memory allocated for this node list.
-  \param node_list Address of a node list
+  \param node_list Pointer to address of a node list
 */
-void node_2k_list_free(node_2k_list_t *node_list) {
-    free(node_list->node);
-    free(node_list);
+void node_2k_list_free(node_2k_list_t **node_list) {
+    free((*node_list)->node);
+    free(*node_list);
+    node_list = NULL;
 }
 
 /*!
