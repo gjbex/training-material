@@ -13,9 +13,9 @@ AC_SEARCH_LIBS([sqrt], [m], [],
                [AC_MSG_ERROR([unable to find log10 function])])
 
 # hiredis library
-PKG_CHECK_MODULES([libgsl], [libgsl])
+PKG_CHECK_MODULES([gsl], [gsl])
 AC_CHECK_HEADERS([gsl/gsl_errno.h gsl/gsl_odeiv2.h])
-AC_SEARCH_LIBS([gsl_odeiv2_driver_apply], [gsl], [J], [])
+# AC_SEARCH_LIBS([gsl_odeiv2_driver_apply], [gsl], [], [])
 
 AC_CONFIG_FILES([
     Makefile
