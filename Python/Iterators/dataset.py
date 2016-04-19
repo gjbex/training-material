@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+'''dataset implements a poor man's version of pandas data frames, it is
+   only intended to illustrate a number of concepts about iterators
+   and can be used when dependencies on third party libraries should
+   be avoided'''
 
 import collections
 import operator
