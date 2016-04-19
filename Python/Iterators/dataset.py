@@ -6,9 +6,42 @@ import operator
 ColumnDef = collections.namedtuple('ColumnSpecs', ['name', 'type'])
 
 
-class DataLenError(Exception):
+class DatasetError(Exception):
+    '''Base class for Dataset exceptions'''
+
+    pass
+
+
+class DataLenError(DatasetError):
     '''Exception indicating that a list of data is being appended with
        a length different from the number of headers of the data set'''
+
+    pass
+
+
+class ConversionError(DatasetError):
+    '''Exception indicating that a type conversion failed, i.e., a
+       value is appended that can not be converted to its column's
+       type'''
+
+    pass
+
+
+class ColumnOverwriteError(DataLenError):
+    '''Exception indicating that a new column would overwrite an
+       existing one.'''
+
+    pass
+
+
+class UndefinedColumnError(DataLenError):
+    '''Exception indicating that a column does not exist in the dataset'''
+
+    pass
+
+
+class ComputeError(DataLenError):
+    '''Exception indicating that a computation failed'''
 
     pass
 
@@ -29,6 +62,11 @@ class Dataset(object):
     def headers(self):
         '''get the list of headers for the data set'''
         return list(self._headers)
+
+    @property
+    def nr_columns(self):
+        '''returns number of columns in the dataset'''
+        return len(self._headers)
 
     @property
     def column_defs(self):
@@ -53,7 +91,12 @@ class Dataset(object):
                                                       len(data))
             raise DataLenError(msg)
         for i, header in enumerate(self._headers):
-            self._data[header].append(self._convert(header, data[i]))
+            try:
+                value = self._convert(header, data[i])
+            except ValueError as error:
+                msg = 'type conversion failed: {0}'.format(str(error))
+                raise ConversionError(msg)
+            self._data[header].append(value)
         self._nr_data += 1
 
     def __iter__(self):
@@ -78,12 +121,26 @@ class Dataset(object):
         '''perform a computation producing extra columns by applying a
            function using the specified argument names'''
         for col_def in col_defs:
+            if col_def.name in self._headers:
+                msg = 'column {0} already exists'.format(col_def.name)
+                raise ColumnOverwriteError(msg)
             self._data[col_def.name] = []
+        for name in args:
+            if name not in self._headers:
+                msg = 'no column {0} in dataset'.format(name)
+                raise UndefinedColumnError(msg)
         arg_idx = tuple(self._headers.index(name) for name in args)
         selector = operator.itemgetter(*arg_idx)
         names = [col_def.name for col_def in col_defs]
         for row in self:
-            values = function(*selector(row))
+            args = selector(row)
+            try:
+                values = function(*args)
+            except Exception as error:
+                args_str = ', '.join([str(arg) for arg in args])
+                msg = "computation for '{0}' failed: {1}".format(args_str,
+                                                                 str(error))
+                raise ComputeError(msg)
             for name, value in zip(names, values):
                 self._data[name].append(value)
         for col_def in col_defs:
@@ -116,3 +173,7 @@ if __name__ == '__main__':
     data.compute([ColumnDef('substr', int)], ['x', 'y'],
                  lambda x, y: (y - x, ))
     print(data)
+    try:
+        data.append(['bla'] * data.nr_columns)
+    except Exception as error:
+        print('### error: {0}'.format(error))
