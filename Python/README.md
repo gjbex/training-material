@@ -79,6 +79,7 @@ these samples have been used for Python tutorials.
     to remote hosts.
 1. `PhraseIndexer`: parses a text file to find the line number on which a
     given eet of phrases occurs.
+1. `Profiling`: a few examples of how to use profilers for Python.
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
     processing language, exercises for the corresponding training session
     can be found in the `Exercsises` directory.
