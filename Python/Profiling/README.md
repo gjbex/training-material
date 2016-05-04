@@ -12,5 +12,7 @@ the optimization process is currently focussing on.
 1. `run_cprofile.sh`: Bash shell script to run the `cProfile`.
 1. `run_kernprof.sh`: Bash shell script to run the `kernprof`
     `line_profiler`).
-1. `run_snakeviz.sh`: Bash shell script to to `cProfile`, save the profile
+1. `run_snakeviz.sh`: Bash shell script to `cProfile`, save the profile
     to a file and invoke `snakeviz` to visualize it.
+1. `run_mprof.sh`: Bash shell script to visualize memory usage as a function
+    of time.
