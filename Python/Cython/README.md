@@ -8,4 +8,5 @@ Examples of how to use Cython and its impact on performance.
 1. `Exceptions`: exception handling in Cython code.
 1. `Pointers`: simple example of using pointers in Cython.
 1. `Primes`: motivating example shown in the slides.
+1. `Profiling`: example of how to profile Cython code.
 1. `Structures`: simple example of using structures in Cython and Python.
