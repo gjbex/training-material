@@ -3,13 +3,9 @@ import math
 
 class Point(object):
 
-    _id = 0
-
     def __init__(self, x, y):
         self._x = float(x)
         self._y = float(y)
-        self._id = Point._id
-        self.__class__._id += 1
 
     @property
     def x(self):
@@ -20,12 +16,13 @@ class Point(object):
         return self._y
 
     @property
-    def id(self):
-        return self._id
+    def coords(self):
+        return (self.x, self.y)
 
-    @classmethod
-    def nr_points(cls):
-        return cls._id
+    @coords.setter
+    def coords(self, value):
+        self._x = value[0]
+        self._y = value[1]
 
     def distance(self, p):
         return math.sqrt((self.x - p.x)**2 + (self.y - p.y)**2)
@@ -46,18 +43,31 @@ class Point(object):
         return True
 
     def __str__(self):
-        return '{id}: ({x}, {y})'.format(x=self.x, y=self.y, id=self.id)
+        return '({x}, {y})'.format(x=self.x, y=self.y)
 
 
 class PointMass(Point):
 
-    def __init__(self, x, y, mass):
+    _default_mass = 1.0
+
+    def __init__(self, x, y, mass=None):
         super().__init__(x, y)
-        self._mass = float(mass)
+        if mass:
+            self._mass = float(mass)
+        else:
+            self._mass = self.__class__.get_default_mass()
 
     @property
     def mass(self):
         return self._mass
+
+    @classmethod
+    def get_default_mass(cls):
+        return float(cls._default_mass)
+
+    @classmethod
+    def set_default_mass(cls, mass):
+        cls._default_mass = float(mass)
 
     @staticmethod
     def center_of_mass(*points):

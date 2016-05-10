@@ -14,9 +14,16 @@ def main():
     points = [Point(i, i) for i in range(5)]
     if Point.all_on_line(v, w, *points):
         print('on a line')
-    print(Point.nr_points())
     p = PointMass(7, -1, 3.0)
     print(p)
+    p = PointMass(1, 2)
+    print(p)
+    PointMass.set_default_mass(5.0)
+    p = PointMass(3, 4)
+    print(p)
+    print(p.coords)
+    p.coords = (9, 10)
+    print(p.coords)
 
 if __name__ == '__main__':
     main()
