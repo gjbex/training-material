@@ -1,4 +1,4 @@
-# `Iterators
+# Iterators
 An iterator is a nice concept since it allows to create laze sequences,
 i.e., sequences that have elements that are computed only when they are
 requested by retrieving the enxt element.
@@ -20,6 +20,7 @@ often they can be constructed by using the Python standard library's
     `EventIter` constructor takes a list of event types, and a start time.
     It generates sequence of random type, start time and duration, until an
     event is generated that last later than the stop time.
+1. `generators.ipynb`: Jupyter notebook illustrating generators.
 1. `people.py`: illustration of `itertools`'s `groupby`, and `operator`'s
     `attrgetter` methods.  Note that `groupby` does not reorder the
     original iterators element, but only groups consecutive elements that
