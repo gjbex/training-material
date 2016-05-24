@@ -37,6 +37,7 @@ these samples have been used for Python tutorials.
     files, binary data and XML.
 1. `DbAccess`: illustrates how to insert data into a relational database
     and query it, both with Python's sqlite3 module, and SQLAlchemy.
+1. `Debugging`: some code that is useful for debugging demos.
 1. `Decorators`: illustrates how to create decorators to wrap functions.
 1. `Descriptors`: illustrates the descriptor concept in Python
 1. `Exercises`: example solutions to exercises to be found in the 
