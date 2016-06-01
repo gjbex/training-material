@@ -1,6 +1,4 @@
-Common problems & best practices
-================================
-
+# Common problems & best practices
 This document is the result of code reviews and observations in the field.
 Although there are quite some style guides for Python, it may perhaps
 be useful to some anyway.  It is of course work in progress.
@@ -14,12 +12,13 @@ Useful references:
     http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
 
 Useful tools:
+* flake8, a syntax checker, static analyser and PEP8 compliance checker
+    for Python: http://pypi.python.org/pypi/flake8
 * Pylint, a syntax checker, static analyser and code style checker for
     Python: http://www.pylint.org/
 
 
-Control flow
-------------
+## Control flow
 When tempted to use `pass` in the body of a conditional statement, and
 have only statements that do actual work in the `else` part, simply
 use the negation of the condition, and dropt the `else`, e.g.,
@@ -37,7 +36,7 @@ if x >= 10:
 
 A construct such as:
 ```python
-for i in xrange(len(x)):
+for i in range(len(x)):
     f(x[i], y[i])
 ```
 can be replaced by:
@@ -47,8 +46,19 @@ for x_elem, y_elem in zip(x, y):
 ```
 
 
-Regular expressions
--------------------
+A construct such as:
+```python
+for i in range(len(x)):
+    f(i, x[i])
+```
+can be replaced by:
+```python
+for i, x_elem in enumerate(x):
+    f(i, x[i])
+```
+
+
+## Regular expressions
 When a regular expression is compiled, an object is created with
 its own methods, e.g., `search`, so
 ```python
@@ -71,24 +81,24 @@ at any point in the target stting, the latter only at the beginning of
 the target string.
 
 
-Files and I/O
--------------
+## Files and I/O
 When a file is opened in a `with` statement, i.e., under control of a
 context manager, one need not explicitely close the file, since this
 is handled by the context manager.
 
 
-Data structures
----------------
+## Data structures
 When a list as a data structure where the items have non-homogeneous
 types, especially lists or tuples, it is probably wise to consider
 introducing a class to make code more robust, and easier to read and
 hence maintain.
 
 
-Data structures
----------------
-To add all eleemnt of a list `b` to list `a`, do not use:
+When using a dictionary to represent static properties of things, consider
+using a collections.namedtuple, or introducnig a class.
+
+
+To add all element of a list `b` to list `a`, do not use:
 ```python
 for x in b:
     a.append(x)
@@ -110,16 +120,15 @@ a.update(b)
 The set data type has an `update` method with similar semantics.
 
 
-String formatting
------------------
+## String formatting
 It is always better to resist the temptation of using positional
 substitution when using `format`, i.e., better replace:
 ```python
-file_name = '{0}.txt'.format(base_Name)
+file_name = '{0}.txt'.format(base_name)
 ```
 by:
 ```python
-file_name = '{base}.txt'.format(base=base_Name)
+file_name = '{base}.txt'.format(base=base_name)
 ```
 
 It is of course possible to create format strings programmatically, e.g.,
