@@ -74,6 +74,8 @@ these samples have been used for Python tutorials.
     (linear regression, optimization, solving ODEs, FFT).
 1. `OperatorFunctools`: some illustrations of the functional programming
     options offered by `opeator` and `functools` packages.
+1. `OsFileSystem`: illustrations of interacting with the operating system
+    and the file system.
 1. `Pandas`: R dataframe-like data structures for Python, contains a
     Jupyter notebook to illustrate using pandas interactively.
 1. `Paramiko`: a few examples of using the Paramiko library for SSH
