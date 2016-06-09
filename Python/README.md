@@ -74,6 +74,8 @@ these samples have been used for Python tutorials.
     (linear regression, optimization, solving ODEs, FFT).
 1. `OperatorFunctools`: some illustrations of the functional programming
     options offered by `opeator` and `functools` packages.
+1. `OsFileSystem`: illustrations of interacting with the operating system
+    and the file system.
 1. `Pandas`: R dataframe-like data structures for Python, contains a
     Jupyter notebook to illustrate using pandas interactively.
 1. `Paramiko`: a few examples of using the Paramiko library for SSH
@@ -86,6 +88,7 @@ these samples have been used for Python tutorials.
     can be found in the `Exercsises` directory.
 1. `ScikitLearn`: examples using the scikit-learn machine learning
     library.
+1. `Regexes`: some material related to using regular expressions in Python.
 1. `SentenceCounter`: scripts to (naively) count sentences in natural
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
