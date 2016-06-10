@@ -13,3 +13,5 @@ using the SFTP protocol.
 1. `module_av.py`: performs a `module av` command on the remote server for
     the specified software package, will only work on the
     KU Leuven/UHasselt VSC infrastructure.
+1. `wc.py`: example of executing a command on a remote machine that reads
+    from standard input, and writes to standard output/error.
