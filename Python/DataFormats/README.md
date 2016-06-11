@@ -30,6 +30,8 @@ What is it?
   * `data_commented_commas.csv`: comma separated CSV ile
   * `data_commented_semicolon.csv`: semicolon separated CSV ile
   * `read_csv_rows.py`: illustrates the default CSV reader
+  * `agt_parser.py`: parser for a file format that is partially CSV.
+  * `agt_data`: data files to parse using `agt_parser.py`.
 1. XML files
   * `write_xml.py`: creates XML that has a root-level `blocks` element,
     containing `block` elements that are named (by attribue), and can
