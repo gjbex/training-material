@@ -141,6 +141,8 @@ class AgtPandasParser(AgtParser):
 
     def _parse_footer(self, agt_file):
         '''parse footer, i.e., file content after data.'''
+# Since the pandas read_csv method swallows an extra line, this parser needs
+# to check for an empty footer
         line = agt_file.readline().rstrip()
         self._current_line += 1
         if line:
