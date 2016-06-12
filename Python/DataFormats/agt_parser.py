@@ -75,21 +75,10 @@ class AgtParser(object):
         else:
             raise NoAgtDataSectionError()
 
-    def _parse_data(self, agt_file):
-        '''parse the data section, the file points is at the line below
-        the header'''
-        nr_lines_str = agt_file.readline()
-        match = re.match(r'(\d+)', nr_lines_str)
-        if not match:
-            msg = "line {0:d}: invalid number of measurements '{1}'"
-            raise AgtDataError(msg.format(self._current_line, nr_lines_str))
-        nr_lines = int(match.group(1))
+    def _read_data(self, agt_file, nr_lines):
+        '''erad the actual data, this is a hand written parser.'''
         indices = []
         measurements = np.empty((nr_lines, 2))
-        self._current_line += 1
-# ignore header line
-        agt_file.readline()
-        self._current_line += 1
         for line_nr in range(nr_lines):
             self._current_line += 1
             line = agt_file.readline().rstrip()
@@ -109,11 +98,53 @@ class AgtParser(object):
         df.index.name = 'timestamp'
         return df
 
+    def _parse_data(self, agt_file):
+        '''parse the data section, the file points is at the line below
+        the header'''
+        nr_lines_str = agt_file.readline()
+        match = re.match(r'(\d+)', nr_lines_str)
+        if not match:
+            msg = "line {0:d}: invalid number of measurements '{1}'"
+            raise AgtDataError(msg.format(self._current_line, nr_lines_str))
+        nr_lines = int(match.group(1))
+        self._current_line += 1
+# ignore header line
+        agt_file.readline()
+        self._current_line += 1
+        return self._read_data(agt_file, nr_lines)
+
     def _parse_footer(self, agt_file):
         '''parse footer, i.e., file content after data.'''
         line = agt_file.readline().rstrip()
+        self._current_line += 1
         if not (line and line.startswith(self._footer_header)):
-            msg = "line {0:d}: invalid footer '{}'"
+            msg = "line {0:d}: invalid footer '{1}'"
+            raise AgtDataError(msg.format(self._current_line, line))
+
+
+class AgtPandasParser(AgtParser):
+    '''Parser for agt files that contain sensor data, i.e., timestamps,
+    temerature, and pressure. These files also contain meta-inforamtion
+    that is ignored.
+    '''
+
+    def _read_data(self, agt_file, nr_lines):
+        '''read data using pandas methods'''
+        def dt_conv(dt):
+            return pd.datetime.strptime(dt, self._dt_fmt)
+        df = pd.read_csv(agt_file, sep=self._sep, converters={0: dt_conv},
+                         names=(['timestamp'] + list(self._columns)),
+                         nrows=nr_lines)
+        df.set_index('timestamp', inplace=True)
+        self._current_line += nr_lines
+        return df
+
+    def _parse_footer(self, agt_file):
+        '''parse footer, i.e., file content after data.'''
+        line = agt_file.readline().rstrip()
+        self._current_line += 1
+        if line:
+            msg = "line {0:d}: invalid footer '{1}'"
             raise AgtDataError(msg.format(self._current_line, line))
 
 
@@ -132,3 +163,8 @@ if __name__ == '__main__':
         print(df.tail())
     except AgtException as error:
         print('Parse error at {0}'.format(error), file=sys.stderr)
+    agt_parser = AgtPandasParser(dt_fmt=options.dt_fmt)
+    df = agt_parser.parse(options.file)
+    print(df.head())
+    print('...')
+    print(df.tail())
