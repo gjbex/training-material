@@ -1,10 +1,10 @@
-Fortran control structures
-==========================
-
+# Fortran control structures
 Modern Fortran has a number of succinct control structures.
 
-What is it?
------------
+## What is it?
+1. `associate_test`: illustrates the associate construct that can be used
+    to associate a name with an expression, an array segment, or
+    components of a user defined structure.
 1. `forall_test`: illustrates the `forall` construct that can be used
     to initialize array elements by index, but selectively, i.e., based
     on conditions on those indices.  Here, a matrix is constructed that
@@ -26,6 +26,5 @@ What is it?
 1. `block_test`: illustrates how to use a block construct to use local
     variables
 
-How to build?
--------------
+## How to build?
 A make file is provided.
