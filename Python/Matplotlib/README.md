@@ -1,12 +1,9 @@
-Matplotlib
-==========
-
+# Matplotlib
 Matplotlib is the de facto standard to create scientific plots when using
 Python.
 
 
-What is it?
------------
+## What is it?
 1. `animation.py`: illustration of how to do animations with matplotlib,
     and convert them to a movie (e.g., WMA).
 1. `distribution_plot.py`: takes a file as input and plots the values as a
