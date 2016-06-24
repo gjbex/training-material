@@ -18,14 +18,14 @@ class CosDecay:
     def create_init(self):
         def init():
             self._line.set_data([], [])
-            return self._line
+            return [self._line]
         return init
 
     def create_animate(self):
         def animate(i):
             y = np.cos(2.0*np.pi*self._x)*np.exp(-0.005*self._x**2*i)
             self._line.set_data(self._x, y)
-            return self._line
+            return [self._line]
         return animate
 
 
@@ -43,4 +43,4 @@ anim_f = cosDecay.create_animate()
 
 anim = animation.FuncAnimation(figure, anim_f, init_func=init_f,
                                frames=300, interval=20, blit=True)
-anim.save(options.file, fps=2, writer=animation.AVConvFileWriter())
+anim.save(options.file, fps=2, writer=animation.FFMpegFileWriter(extra_args=['--verbose-debug']))
