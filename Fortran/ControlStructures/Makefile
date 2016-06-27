@@ -4,7 +4,8 @@ LDFLAGS =
 LIBS = -lm
 
 APPL = forall_test.exe where_test.exe select_test.exe do_test.exe \
-       do_while_test.exe block_test.exe associate_test.exe merge_test.exe
+       do_while_test.exe block_test.exe associate_test.exe \
+       merge_test.exe stop_test.exe
 
 all: $(APPL)
 
