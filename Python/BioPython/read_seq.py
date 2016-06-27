@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 from Bio import SeqIO, SeqUtils
 from collections import namedtuple
 
-SeqStats = namedtuple('SeqUtils', ['length', 'gc', 'weight'])
+SeqStats = namedtuple('SeqStats', ['length', 'gc', 'weight'])
 
 
 def compute_stats(seq):

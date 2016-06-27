@@ -2,3 +2,4 @@ cache_associativity
 cache_hierarchy
 cache_lines
 instruction_parallelism
+.ipynb_checkpoints

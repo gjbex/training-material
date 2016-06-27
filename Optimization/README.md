@@ -11,3 +11,6 @@ optimization, or highlight potential performance bottlenecks.
     caching mechanisms in a modern CPU can have on performance.  See the
     following URL for his original post:
     http://igoro.com/archive/gallery-of-processor-cache-effects/
+1. `hpc_efficiency.pptx`: slides on a number of aspects related to
+    efficiency in HPC.  Scaling is discussed, as well as various aspects
+    of hardware properties that influence performance.
