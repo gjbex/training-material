@@ -9,6 +9,8 @@ Modern Fortran has a number of succinct control structures.
     to initialize array elements by index, but selectively, i.e., based
     on conditions on those indices.  Here, a matrix is constructed that
     has all elements equal to zero, except the first diagonals.
+1. `merge_test`: illustrates the use of the `merge` function for conditional
+    assignment in both scalar and array context.
 1. `select_test`: illustrates the `select case` construct that allows
     branching based on the values of scalar variables (`integer` and
     `character(len=*)`).  This program implements a very simple command
