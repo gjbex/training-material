@@ -43,4 +43,4 @@ anim_f = cosDecay.create_animate()
 
 anim = animation.FuncAnimation(figure, anim_f, init_func=init_f,
                                frames=300, interval=20, blit=True)
-anim.save(options.file, fps=2, writer=animation.FFMpegFileWriter(extra_args=['--verbose-debug']))
+anim.save(options.file, fps=2, writer=animation.AVConvWriter())
