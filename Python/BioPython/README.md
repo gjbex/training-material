@@ -1,11 +1,8 @@
-BioPython
-=========
-
-BioPython is the de facto standard to handle biological sequence data
+# Biopython
+Biopython is the de facto standard to handle biological sequence data
 and perfrm various bioinformatics computations.
 
-What is it?
------------
+## What is it?
 1. `read_seq.py`: read a seqeunce file, e.g., in FASTA format, and
     compute some statistics on the sequences.
 1. `align_seqs.py`: read a sequence file with multiple sequencs in,
@@ -16,13 +13,12 @@ What is it?
     sequences of the MLH1 gene in homo sapiens by default, or any gene and
     organism specified via the command line.
 
-Requirements
-------------
-The BioPython library should be installed, and, to run the `align_seqs.py`
+## Requirements
+The Biopython library should be installed, and, to run the `align_seqs.py`
 script, the MUSCLE multiple alignment software tool as well
 (http://www.drive5.com/muscle/).
 
-Note
-----
-The Entrez search script `search_entrez.py` queries the NCBI online database,
-don't stress that database unnecessarily with this or similar scripts.
+## Note
+The Entrez search script `search_entrez.py` queries the NCBI online
+database, don't stress that database unnecessarily with this or
+similar scripts.
