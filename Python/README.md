@@ -12,6 +12,7 @@ these samples have been used for Python tutorials.
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
     implements a Monte Carlo algorithm, and allows to show evolution over
     time, autocorrelation, and to compare with target distribution.
+1. `Biopython`: some Biopython examples.
 1. `Birdsong`: implements a FFT of WAV files, and shows the original signal
     (amplitude) and the frequency spectrum using Matplotlib.  Another
     script illustrates elementary signal processing using a highpass
