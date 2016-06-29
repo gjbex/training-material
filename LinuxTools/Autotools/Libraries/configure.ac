@@ -7,7 +7,7 @@ AC_PROG_CC
 standard headers
 AC_CHECK_HEADERS([err.h stdio.h])
 
-# hiredis library
+# GSL library
 PKG_CHECK_MODULES([gsl], [gsl])
 AC_CHECK_HEADERS([gsl/gsl_errno.h gsl/gsl_odeiv2.h])
 # AC_SEARCH_LIBS([gsl_odeiv2_driver_apply], [gsl], [], [])
