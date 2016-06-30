@@ -16,5 +16,5 @@ MPI functions illustrated:
 * `MPI_Finalize`
 
 ## What is it?
-1. `pi.c`: distributed cmoputation of pi using a quadrature method.
+1. `pi.c`: distributed computation of pi using a quadrature method.
 1. `Makefile`: make file to build the executable.
