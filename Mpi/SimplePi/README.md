@@ -8,8 +8,9 @@ MPI functions illustrated:
 * `MPI_Init`
 * `MPI_Comm_rank`
 * `MPI_Comm_size`
-* `MPI_Type_struct`
+* `MPI_Type_create_struct`
 * `MPI_Type_commit`
+* `MPI_Type_free`
 * `MPI_Bcast`
 * `MPI_Scatter`
 * `MPI_Reduce`
