@@ -7,6 +7,7 @@ and perfrm various bioinformatics computations.
     compute some statistics on the sequences.
 1. `align_seqs.py`: read a sequence file with multiple sequencs in,
     e.g., FASTA format, and perform a multiple alightment using MUSCLE.
+1. `entrez_db_info.py`: search for Entrez database properties.
 1. `UnalignedSeq14666.fasta`: sample FASTA format file containing multiple
     sequences.
 1. `search_entrez.py`: search the NCBI Entrez nucleotide database for
