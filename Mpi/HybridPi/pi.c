@@ -157,6 +157,7 @@ MPI_Datatype *alloc_mpi_params_type() {
 }
 
 void free_mpi_params_type(MPI_Datatype *params_type) {
+    MPI_Type_free(params_type);
     free(params_type);
 }
 #endif
