@@ -117,7 +117,7 @@ double partial_pi(double left, double right, Params *params) {
 #pragma omp parallel default(none) \
     shared(sum, delta, left, right, result, params, rank)
     {
-        int i;
+        long i;
         double x;
         if (params->is_verbose) {
             int thread_num = 0, num_threads = 1;
