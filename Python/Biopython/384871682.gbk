@@ -1,0 +1,329 @@
+LOCUS       NM_001258274            2623 bp    mRNA    linear   PRI 12-JUN-2016
+DEFINITION  Homo sapiens mutL homolog 1 (MLH1), transcript variant 7, mRNA.
+ACCESSION   NM_001258274
+VERSION     NM_001258274.1  GI:384871682
+KEYWORDS    RefSeq.
+SOURCE      Homo sapiens (human)
+  ORGANISM  Homo sapiens
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini;
+            Catarrhini; Hominidae; Homo.
+REFERENCE   1  (bases 1 to 2623)
+  AUTHORS   Buchanan DD, Tan YY, Walsh MD, Clendenning M, Metcalf AM, Ferguson
+            K, Arnold ST, Thompson BA, Lose FA, Parsons MT, Walters RJ, Pearson
+            SA, Cummings M, Oehler MK, Blomfield PB, Quinn MA, Kirk JA, Stewart
+            CJ, Obermair A, Young JP, Webb PM and Spurdle AB.
+  TITLE     Tumor mismatch repair immunohistochemistry and DNA MLH1 methylation
+            testing of patients with endometrial cancer diagnosed at age
+            younger than 60 years optimizes triage for population-level
+            germline mismatch repair gene mutation testing
+  JOURNAL   J. Clin. Oncol. 32 (2), 90-100 (2014)
+   PUBMED   24323032
+  REMARK    GeneRIF: Data show that endometrial cancer screened by testing for
+            tumor MLH1 methylation in individuals with MLH1
+            immunohistochemistry loss, and germline mutations exhibiting loss
+            of MSH6, MSH2, or PMS2 or loss of MLH1/PMS2 with absence of MLH1
+            methylation.
+REFERENCE   2  (bases 1 to 2623)
+  AUTHORS   Lin-Hurtubise KM, Yheulon CG, Gagliano RA Jr and Lynch HT.
+  TITLE     Excess of extracolonic non-endometrial multiple primary cancers in
+            MSH2 germline mutation carriers over MLH1
+  JOURNAL   J Surg Oncol 108 (7), 433-437 (2013)
+   PUBMED   24122742
+  REMARK    GeneRIF: MLH1 patients presented more frequently with only CRC.
+REFERENCE   3  (bases 1 to 2623)
+  AUTHORS   Jensen LH, Rasmussen AA, Byriel L, Kuramochi H, Cruger DG,
+            Lindebjerg J, Danenberg PV, Jakobsen A and Danenberg K.
+  TITLE     Regulation of MLH1 mRNA and protein expression by promoter
+            methylation in primary colorectal cancer: a descriptive and
+            prognostic cancer marker study
+  JOURNAL   Cell Oncol (Dordr) 36 (5), 411-419 (2013)
+   PUBMED   24027018
+  REMARK    GeneRIF: MLH1 inactivation through hypermethylation was found to be
+            related to improved survival. Hypermethylation in promoter region C
+            and intron 1 served as the most specific markers for this
+            inactivation.
+REFERENCE   4  (bases 1 to 2623)
+  AUTHORS   Milanovic R, Stanec S, Stanec M, Korusic A, Husedzinovic I and
+            Razumovic JJ.
+  TITLE     Expression of genes responsible for the repair of mispaired bases
+            of the DNA (MLH1) in invasive ductal breast carcinoma
+  JOURNAL   Coll Antropol 37 (3), 929-935 (2013)
+   PUBMED   24308239
+  REMARK    GeneRIF: These results indicate that there is a possible
+            involvement of MLH1 gene in the progression and development of
+            breast cancer.
+REFERENCE   5  (bases 1 to 2623)
+  AUTHORS   Petersen SM, Dandanell M, Rasmussen LJ, Gerdes AM, Krogh LN,
+            Bernstein I, Okkels H, Wikman F, Nielsen FC and Hansen TV.
+  TITLE     Functional examination of MLH1, MSH2, and MSH6 intronic mutations
+            identified in Danish colorectal cancer patients
+  JOURNAL   BMC Med. Genet. 14, 103 (2013)
+   PUBMED   24090359
+  REMARK    GeneRIF: The in silico analysis predicted altered splicing for MLH1
+            c.588 + 5G > A, MLH1 c.677 + 3A > T, MLH1 c.1039-8 T > A, MLH1
+            c.1732-2A > T,whereas MLH1 c.117-34A > T were predicted to have no
+            effect on splicing.
+            Publication Status: Online-Only
+REFERENCE   6  (bases 1 to 2623)
+  AUTHORS   Nystrom-Lahti M, Kristo P, Nicolaides NC, Chang SY, Aaltonen LA,
+            Moisio AL, Jarvinen HJ, Mecklin JP, Kinzler KW and Vogelstein B.
+  CONSRTM   et al
+  TITLE     Founding mutations and Alu-mediated recombination in hereditary
+            colon cancer
+  JOURNAL   Nat. Med. 1 (11), 1203-1206 (1995)
+   PUBMED   7584997
+REFERENCE   7  (bases 1 to 2623)
+  AUTHORS   Charbonnier F, Martin C, Scotte M, Sibert L, Moreau V and Frebourg
+            T.
+  TITLE     Alternative splicing of MLH1 messenger RNA in human normal cells
+  JOURNAL   Cancer Res. 55 (9), 1839-1841 (1995)
+   PUBMED   7728749
+REFERENCE   8  (bases 1 to 2623)
+  AUTHORS   Paraf F, Sasseville D, Watters AK, Narod S, Ginsburg O, Shibata H
+            and Jothy S.
+  TITLE     Clinicopathological relevance of the association between
+            gastrointestinal and sebaceous neoplasms: the Muir-Torre syndrome
+  JOURNAL   Hum. Pathol. 26 (4), 422-427 (1995)
+   PUBMED   7705822
+  REMARK    Review article
+REFERENCE   9  (bases 1 to 2623)
+  AUTHORS   Hamilton SR, Liu B, Parsons RE, Papadopoulos N, Jen J, Powell SM,
+            Krush AJ, Berk T, Cohen Z and Tetu B.
+  CONSRTM   et al
+  TITLE     The molecular basis of Turcot's syndrome
+  JOURNAL   N. Engl. J. Med. 332 (13), 839-847 (1995)
+   PUBMED   7661930
+REFERENCE   10 (bases 1 to 2623)
+  AUTHORS   Kohlmann,W. and Gruber,S.B.
+  TITLE     Lynch Syndrome
+  JOURNAL   (in) Pagon RA, Adam MP, Ardinger HH, Bird TD, Dolan CR, Fong CT,
+            Smith RJH and Stephens K (Eds.);
+            GENEREVIEWS(R);
+            (1993)
+   PUBMED   20301390
+COMMENT     REVIEWED REFSEQ: This record has been curated by NCBI staff. The
+            reference sequence was derived from BX648844.1, AC011816.17 and
+            BC006850.1.
+            
+            Summary: This gene was identified as a locus frequently mutated in
+            hereditary nonpolyposis colon cancer (HNPCC). It is a human homolog
+            of the E. coli DNA mismatch repair gene mutL, consistent with the
+            characteristic alterations in microsatellite sequences
+            (RER+phenotype) found in HNPCC. Alternative splicing results in
+            multiple transcript variants encoding distinct isoforms. Additional
+            transcript variants have been described, but their full-length
+            natures have not been determined.[provided by RefSeq, Nov 2009].
+            
+            Transcript Variant: This variant (7) differs in the 5' UTR and
+            contains an alternate exon compared to variant 1, that causes a
+            frameshift. The resulting isoform (3) is shorter at the N-terminus
+            compared to isoform 1. Variants 3, 4, 6, and 7 all encode the same
+            isoform (3).
+            
+            Publication Note:  This RefSeq record includes a subset of the
+            publications that are available for this gene. Please see the Gene
+            record to access additional publications.
+            
+            ##Evidence-Data-START##
+            Transcript exon combination :: BX648844.1 [ECO:0000332]
+            RNAseq introns              :: single sample supports all introns
+                                           SAMEA2158188, SAMN01820695
+                                           [ECO:0000348]
+            ##Evidence-Data-END##
+            COMPLETENESS: complete on the 3' end.
+PRIMARY     REFSEQ_SPAN         PRIMARY_IDENTIFIER PRIMARY_SPAN        COMP
+            1-240               BX648844.1         4-243
+            241-241             AC011816.17        146849-146849
+            242-612             BX648844.1         245-615
+            613-2602            BX648844.1         617-2606
+            2603-2623           BC006850.1         2510-2530
+FEATURES             Location/Qualifiers
+     source          1..2623
+                     /organism="Homo sapiens"
+                     /mol_type="mRNA"
+                     /db_xref="taxon:9606"
+                     /chromosome="3"
+                     /map="3p21.3"
+     gene            1..2623
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /note="mutL homolog 1"
+                     /db_xref="GeneID:4292"
+                     /db_xref="HGNC:HGNC:7127"
+                     /db_xref="MIM:120436"
+     exon            1..114
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            115..205
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            206..350
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     misc_feature    318..320
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /note="upstream in-frame stop codon"
+     exon            351..449
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            450..523
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            524..596
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            597..688
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            689..731
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            732..820
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            821..933
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     CDS             867..2414
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /note="isoform 3 is encoded by transcript variant 7; DNA
+                     mismatch repair protein Mlh1; mutL homolog 1, colon
+                     cancer, nonpolyposis type 2"
+                     /codon_start=1
+                     /product="DNA mismatch repair protein Mlh1 isoform 3"
+                     /protein_id="NP_001245203.1"
+                     /db_xref="GI:384871683"
+                     /db_xref="CCDS:CCDS54563.1"
+                     /db_xref="GeneID:4292"
+                     /db_xref="HGNC:HGNC:7127"
+                     /db_xref="MIM:120436"
+                     /translation="MNGYISNANYSVKKCIFLLFINHRLVESTSLRKAIETVYAAYLP
+                     KNTHPFLYLSLEISPQNVDVNVHPTKHEVHFLHEESILERVQQHIESKLLGSNSSRMY
+                     FTQTLLPGLAGPSGEMVKSTTSLTSSSTSGSSDKVYAHQMVRTDSREQKLDAFLQPLS
+                     KPLSSQPQAIVTEDKTDISSGRARQQDEEMLELPAPAEVAAKNQSLEGDTTKGTSEMS
+                     EKRGPTSSNPRKRHREDSDVEMVEDDSRKEMTAACTPRRRIINLTSVLSLQEEINEQG
+                     HEVLREMLHNHSFVGCVNPQWALAQHQTKLYLLNTTKLSEELFYQILIYDFANFGVLR
+                     LSEPAPLFDLAMLALDSPESGWTEEDGPKEGLAEYIVEFLKKKAEMLADYFSLEIDEE
+                     GNLIGLPLLIDNYVPPLEGLPIFILRLATEVNWDEEKECFESLSKECAMFYSIRKQYI
+                     SEESTLSGQQSEVPGSIPNSWKWTVEHIVYKALRSHILPPKHFTEDGNILQLANLPDL
+                     YKVFERC"
+     exon            934..1027
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            1028..1181
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            1182..1552
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            1553..1701
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            1702..1810
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            1811..1874
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            1875..2039
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            2040..2132
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            2133..2246
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     exon            2247..2607
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /inference="alignment:Splign:1.39.8"
+     STS             2373..2455
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /standard_name="D3S2795E"
+                     /db_xref="UniSTS:150834"
+     STS             2428..2579
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /standard_name="SHGC-12575"
+                     /db_xref="UniSTS:71374"
+     regulatory      2583..2588
+                     /regulatory_class="polyA_signal_sequence"
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+     polyA_site      2602
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+     polyA_site      2607
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+ORIGIN      
+        1 acaacggcgg aggccgccgg gttccctgac gtgccagtca ggccttctcc ttttccgcag
+       61 accgtgtgtt tctttaccgc tctcccccga gaccttttaa gggttgtttg gagttttaga
+      121 tgcaaaatcc acaagtattc aagtgattgt taaagaggga ggcctgaagt tgattcagat
+      181 ccaagacaat ggcaccggga tcaggaacaa tatacgcaaa gactattaaa tggaagcata
+      241 cctgacatgt taaaggacta tcaaggaggc cagtttgtct agaggctgaa aaggaaagag
+      301 taataggaga tgaggtctga gtgaaaacac gtaaatcctt gtgggccaag aaagaagatc
+      361 tggatattgt atgtgaaagg ttcactacta gtaaactgca gtcctttgag gatttagcca
+      421 gtatttctac ctatggcttt cgaggtgagg ctttggccag cataagccat gtggctcatg
+      481 ttactattac aacgaaaaca gctgatggaa agtgtgcata cagagcaagt tactcagatg
+      541 gaaaactgaa agcccctcct aaaccatgtg ctggcaatca agggacccag atcacggtgg
+      601 aggacctttt ttacaacata gccacgagga gaaaagcttt aaaaaatcca agtgaagaat
+      661 atgggaaaat tttggaagtt gttggcaggt attcagtaca caatgcaggc attagtttct
+      721 cagttaaaaa acaaggagag acagtagctg atgttaggac actacccaat gcctcaaccg
+      781 tggacaatat tcgctccatc tttggaaatg ctgttagtcg agaactgata gaaattggat
+      841 gtgaggataa aaccctagcc ttcaaaatga atggttacat atccaatgca aactactcag
+      901 tgaagaagtg catcttctta ctcttcatca accatcgtct ggtagaatca acttccttga
+      961 gaaaagccat agaaacagtg tatgcagcct atttgcccaa aaacacacac ccattcctgt
+     1021 acctcagttt agaaatcagt ccccagaatg tggatgttaa tgtgcacccc acaaagcatg
+     1081 aagttcactt cctgcacgag gagagcatcc tggagcgggt gcagcagcac atcgagagca
+     1141 agctcctggg ctccaattcc tccaggatgt acttcaccca gactttgcta ccaggacttg
+     1201 ctggcccctc tggggagatg gttaaatcca caacaagtct gacctcgtct tctacttctg
+     1261 gaagtagtga taaggtctat gcccaccaga tggttcgtac agattcccgg gaacagaagc
+     1321 ttgatgcatt tctgcagcct ctgagcaaac ccctgtccag tcagccccag gccattgtca
+     1381 cagaggataa gacagatatt tctagtggca gggctaggca gcaagatgag gagatgcttg
+     1441 aactcccagc ccctgctgaa gtggctgcca aaaatcagag cttggagggg gatacaacaa
+     1501 aggggacttc agaaatgtca gagaagagag gacctacttc cagcaacccc agaaagagac
+     1561 atcgggaaga ttctgatgtg gaaatggtgg aagatgattc ccgaaaggaa atgactgcag
+     1621 cttgtacccc ccggagaagg atcattaacc tcactagtgt tttgagtctc caggaagaaa
+     1681 ttaatgagca gggacatgag gttctccggg agatgttgca taaccactcc ttcgtgggct
+     1741 gtgtgaatcc tcagtgggcc ttggcacagc atcaaaccaa gttatacctt ctcaacacca
+     1801 ccaagcttag tgaagaactg ttctaccaga tactcattta tgattttgcc aattttggtg
+     1861 ttctcaggtt atcggagcca gcaccgctct ttgaccttgc catgcttgcc ttagatagtc
+     1921 cagagagtgg ctggacagag gaagatggtc ccaaagaagg acttgctgaa tacattgttg
+     1981 agtttctgaa gaagaaggct gagatgcttg cagactattt ctctttggaa attgatgagg
+     2041 aagggaacct gattggatta ccccttctga ttgacaacta tgtgccccct ttggagggac
+     2101 tgcctatctt cattcttcga ctagccactg aggtgaattg ggacgaagaa aaggaatgtt
+     2161 ttgaaagcct cagtaaagaa tgcgctatgt tctattccat ccggaagcag tacatatctg
+     2221 aggagtcgac cctctcaggc cagcagagtg aagtgcctgg ctccattcca aactcctgga
+     2281 agtggactgt ggaacacatt gtctataaag ccttgcgctc acacattctg cctcctaaac
+     2341 atttcacaga agatggaaat atcctgcagc ttgctaacct gcctgatcta tacaaagtct
+     2401 ttgagaggtg ttaaatatgg ttatttatgc actgtgggat gtgttcttct ttctctgtat
+     2461 tccgatacaa agtgttgtat caaagtgtga tatacaaagt gtaccaacat aagtgttggt
+     2521 agcacttaag acttatactt gccttctgat agtattcctt tatacacagt ggattgatta
+     2581 taaataaata gatgtgtctt aacataaaaa aaaaaaaaaa aaa
+//
+

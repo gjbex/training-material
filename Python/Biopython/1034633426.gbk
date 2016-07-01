@@ -1,0 +1,108 @@
+LOCUS       XM_017006451            2267 bp    mRNA    linear   PRI 06-JUN-2016
+DEFINITION  PREDICTED: Homo sapiens mutL homolog 1 (MLH1), transcript variant
+            X8, mRNA.
+ACCESSION   XM_017006451
+VERSION     XM_017006451.1  GI:1034633426
+DBLINK      BioProject: PRJNA168
+KEYWORDS    RefSeq.
+SOURCE      Homo sapiens (human)
+  ORGANISM  Homo sapiens
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Mammalia; Eutheria; Euarchontoglires; Primates; Haplorrhini;
+            Catarrhini; Hominidae; Homo.
+COMMENT     MODEL REFSEQ:  This record is predicted by automated computational
+            analysis. This record is derived from a genomic sequence
+            (NC_000003.12) annotated using gene prediction method: Gnomon,
+            supported by mRNA and EST evidence.
+            Also see:
+                Documentation of NCBI's Annotation Process
+            
+            ##Genome-Annotation-Data-START##
+            Annotation Provider         :: NCBI
+            Annotation Status           :: Full annotation
+            Annotation Version          :: Homo sapiens Annotation Release 108
+            Annotation Pipeline         :: NCBI eukaryotic genome annotation
+                                           pipeline
+            Annotation Software Version :: 7.0
+            Annotation Method           :: Best-placed RefSeq; Gnomon
+            Features Annotated          :: Gene; mRNA; CDS; ncRNA
+            ##Genome-Annotation-Data-END##
+FEATURES             Location/Qualifiers
+     source          1..2267
+                     /organism="Homo sapiens"
+                     /mol_type="mRNA"
+                     /db_xref="taxon:9606"
+                     /chromosome="3"
+     gene            1..2267
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /note="mutL homolog 1; Derived by automated computational
+                     analysis using gene prediction method: Gnomon. Supporting
+                     evidence includes similarity to: 3 mRNAs, 106 ESTs, 192
+                     long SRA reads, 3 Proteins, and 100% coverage of the
+                     annotated genomic feature by RNAseq alignments, including
+                     108 samples with support for all annotated introns"
+                     /db_xref="GeneID:4292"
+                     /db_xref="HGNC:HGNC:7127"
+                     /db_xref="HPRD:00390"
+                     /db_xref="MIM:120436"
+     CDS             878..2074
+                     /gene="MLH1"
+                     /gene_synonym="COCA2; FCC2; hMLH1; HNPCC; HNPCC2"
+                     /codon_start=1
+                     /product="DNA mismatch repair protein Mlh1 isoform X4"
+                     /protein_id="XP_016861940.1"
+                     /db_xref="GI:1034633427"
+                     /db_xref="GeneID:4292"
+                     /db_xref="HGNC:HGNC:7127"
+                     /db_xref="HPRD:00390"
+                     /db_xref="MIM:120436"
+                     /translation="MVKSTTSLTSSSTSGSSDKVYAHQMVRTDSREQKLDAFLQPLSK
+                     PLSSQPQAIVTEDKTDISSGRARQQDEEMLELPAPAEVAAKNQSLEGDTTKGTSEMSE
+                     KRGPTSSNPRKRHREDSDVEMVEDDSRKEMTAACTPRRRIINLTSVLSLQEEINEQGH
+                     EVLREMLHNHSFVGCVNPQWALAQHQTKLYLLNTTKLSEELFYQILIYDFANFGVLRL
+                     SEPAPLFDLAMLALDSPESGWTEEDGPKEGLAEYIVEFLKKKAEMLADYFSLEIDEEG
+                     NLIGLPLLIDNYVPPLEGLPIFILRLATEVNWDEEKECFESLSKECAMFYSIRKQYIS
+                     EESTLSGQQSEVPGSIPNSWKWTVEHIVYKALRSHILPPKHFTEDGNILQLANLPDLY
+                     KVFERC"
+ORIGIN      
+        1 gctgaaggca cttccgttga gcatctagac gtttccttgg ctcttctggc gccaaaatgt
+       61 cgttcgtggc aggggttatt cggcggctgg acgagacagt ggtgaaccgc atcgcggcgg
+      121 gggaagttat ccagcggcca gctaatgcta tcaaagagat gattgagaac tgatgcaaaa
+      181 tccacaagta ttcaagtgat tgttaaagag ggaggcctga agttgattca gatccaagac
+      241 aatggcaccg ggatcaggaa agaagatctg gatattgtat gtgaaaggtt cactactagt
+      301 aaactgcagt cctttgagga tttagccagt atttctacct atggctttcg aggtgaggct
+      361 ttggccagca taagccatgt ggctcatgtt actattacaa cgaaaacagc tgatggaaag
+      421 tgtgcataca gagcaagtta ctcagatgga aaactgaaag cccctcctaa accatgtgct
+      481 ggcaatcaag ggacccagat cacggtggag gacctttttt acaacatagc cacgaggaga
+      541 aaagctttaa aaaatccaag tgaagaatat gggaaaattt tggaagttgt tggcaggtat
+      601 tcagtacaca atgcaggcat tagtttctca gttaaaaaac aaggagagac agtagctgat
+      661 gttaggacac tacccaatgc ctcaaccgtg gacaatattc gctccatctt tggaaatgct
+      721 gttagtcgag aactgataga aattggatgt gaggataaaa ccctagcctt caaaatgaat
+      781 ggttacatat ccaatgcaaa ctactcagtg aagaagtgca tcttcttact cttcatcaac
+      841 cactttgcta ccaggacttg ctggcccctc tggggagatg gttaaatcca caacaagtct
+      901 gacctcgtct tctacttctg gaagtagtga taaggtctat gcccaccaga tggttcgtac
+      961 agattcccgg gaacagaagc ttgatgcatt tctgcagcct ctgagcaaac ccctgtccag
+     1021 tcagccccag gccattgtca cagaggataa gacagatatt tctagtggca gggctaggca
+     1081 gcaagatgag gagatgcttg aactcccagc ccctgctgaa gtggctgcca aaaatcagag
+     1141 cttggagggg gatacaacaa aggggacttc agaaatgtca gagaagagag gacctacttc
+     1201 cagcaacccc agaaagagac atcgggaaga ttctgatgtg gaaatggtgg aagatgattc
+     1261 ccgaaaggaa atgactgcag cttgtacccc ccggagaagg atcattaacc tcactagtgt
+     1321 tttgagtctc caggaagaaa ttaatgagca gggacatgag gttctccggg agatgttgca
+     1381 taaccactcc ttcgtgggct gtgtgaatcc tcagtgggcc ttggcacagc atcaaaccaa
+     1441 gttatacctt ctcaacacca ccaagcttag tgaagaactg ttctaccaga tactcattta
+     1501 tgattttgcc aattttggtg ttctcaggtt atcggagcca gcaccgctct ttgaccttgc
+     1561 catgcttgcc ttagatagtc cagagagtgg ctggacagag gaagatggtc ccaaagaagg
+     1621 acttgctgaa tacattgttg agtttctgaa gaagaaggct gagatgcttg cagactattt
+     1681 ctctttggaa attgatgagg aagggaacct gattggatta ccccttctga ttgacaacta
+     1741 tgtgccccct ttggagggac tgcctatctt cattcttcga ctagccactg aggtgaattg
+     1801 ggacgaagaa aaggaatgtt ttgaaagcct cagtaaagaa tgcgctatgt tctattccat
+     1861 ccggaagcag tacatatctg aggagtcgac cctctcaggc cagcagagtg aagtgcctgg
+     1921 ctccattcca aactcctgga agtggactgt ggaacacatt gtctataaag ccttgcgctc
+     1981 acacattctg cctcctaaac atttcacaga agatggaaat atcctgcagc ttgctaacct
+     2041 gcctgatcta tacaaagtct ttgagaggtg ttaaatatgg ttatttatgc actgtgggat
+     2101 gtgttcttct ttctctgtat tccgatacaa agtgttgtat caaagtgtga tatacaaagt
+     2161 gtaccaacat aagtgttggt agcacttaag acttatactt gccttctgat agtattcctt
+     2221 tatacacagt ggattgatta taaataaata gatgtgtctt aacataa
+//
+
