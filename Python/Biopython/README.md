@@ -13,6 +13,7 @@ and perfrm various bioinformatics computations.
 1. `search_entrez.py`: search the NCBI Entrez nucleotide database for
     sequences of the MLH1 gene in homo sapiens by default, or any gene and
     organism specified via the command line.
+1. `seq_info.py`: print information on sequences in a file.
 
 ## Requirements
 The Biopython library should be installed, and, to run the `align_seqs.py`
