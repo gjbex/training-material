@@ -21,7 +21,7 @@ if __name__ == '__main__':
     record = Entrez.read(handle)
     print('total results: {0:d}'.format(int(record['Count'])))
     for seq_id in record['IdList']:
-        file_name = '{0}.gbk'.format(seq_id)
+        file_name = os.path.join('Data', '{0}.gbk'.format(seq_id)
         if not os.path.isfile(file_name):
             print('fetching {0}'.format(seq_id))
             handle = Entrez.efetch(db='nucleotide', id=seq_id,
