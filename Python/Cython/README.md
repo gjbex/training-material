@@ -8,6 +8,8 @@ Examples of how to use Cython and its impact on performance.
 1. `Exceptions`: exception handling in Cython code.
 1. `JuliaSet`: compute the Julia set using a pure Python implementation,
     a Cython implementation, and a combination of Cython + OpenMP.
+1. `Pi`: quadrature computation of pi implemented in Cython + OpenMP,
+    illustrating automatic inferrence of reduction.
 1. `Pointers`: simple example of using pointers in Cython.
 1. `Primes`: motivating example shown in the slides.
 1. `Profiling`: example of how to profile Cython code.
