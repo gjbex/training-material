@@ -42,12 +42,14 @@ if __name__ == '__main__':
                             help='maximum number of iterations')
     arg_parser.add_argument('--show', action='store_true',
                             help='show plot')
-    arg_parser.add_argument('--implementation', choices=['python'],
-                            default='python',
+    arg_parser.add_argument('--implementation', default='python',
+                            choices=['python', 'cython'],
                             help='use Cython implementation')
     options = arg_parser.parse_args()
     if options.implementation == 'python':
         from julia_python import julia_set
+    elif options.implementation == 'cython':
+        from julia_cython import julia_set
     else:
         print('{0} version not implemented', file=sys.stderr)
         sys.exit(1)
@@ -56,7 +58,7 @@ if __name__ == '__main__':
             (options.im_min, options.im_max),
             (options.n_re, options.n_im)
             )
-    iterations = np.zeros(options.n_re*options.n_im, dtype=int)
+    iterations = np.zeros(options.n_re*options.n_im, dtype=np.int32)
     start_time = time.time()
     julia_set(domain, iterations, options.max_norm, options.max_iters)
     end_time = time.time()
