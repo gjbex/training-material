@@ -1,11 +1,12 @@
-VERSION = cpython-35m-x86_64-linux-gnu
-JULIA_LIB = julia_cython.$(VERSION).so julia_cython_omp.$(VERSION).so
+PYX_FILES = julia_cython.pyx julia_cython_omp.pyx
+C_FILES = $(patsubst %.pyx,%.c,$(PYX_FILES))
+JULIA_LIB = $(patsubst %.c,%.so,$(C_FILES))
 
 all: $(JULIA_LIB)
 
-$(JULIA_LIB): julia_cython.pyx
+$(JULIA_LIB): $(PYX_FILES)
 	python setup.py build_ext --inplace
 
 clean:
 	python setup.py clean
-	rm -f julia_cython.c julia_cython_omp.c $(JULIA_LIB)
+	rm -f $(C_FILES)  $(JULIA_LIB)
