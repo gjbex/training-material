@@ -10,7 +10,7 @@ def julia_set(domain, iterations, max_norm, max_iters):
 
 @cython.boundscheck(False)
 cdef _julia_set(double complex[:] domain, int[:] iterations,
-                float max_norm, int max_iters):
+                double max_norm, int max_iters):
     '''Compute the Julia set on a complex domain.
 
     Positional arguments:
