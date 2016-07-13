@@ -1,5 +1,6 @@
 '''Module containing function for computing Julia sets'''
 
+cimport cython
 from cython.parallel import prange
 
 def julia_set(domain, iterations, max_norm, max_iters):
@@ -7,6 +8,7 @@ def julia_set(domain, iterations, max_norm, max_iters):
                       max_norm, max_iters)
 
 
+@cython.boundscheck(False)
 cdef _julia_set(double complex[:] domain, int[:] iterations,
                 float max_norm, int max_iters):
     '''Compute the Julia set on a complex domain.
