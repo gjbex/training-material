@@ -1,4 +1,4 @@
-from cython.parallel import prange, parallel
+from cython.parallel import prange
 from libc.math cimport sqrt
 
 cpdef double compute_pi(long n):
