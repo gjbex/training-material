@@ -1,5 +1,5 @@
 VERSION = cpython-35m
-JULIA_LIB = julia_cython.$(VERSION).so
+JULIA_LIB = julia_cython.$(VERSION).so julia_cython_omp.$(VERSION).so
 
 all: $(JULIA_LIB)
 

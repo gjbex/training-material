@@ -43,13 +43,15 @@ if __name__ == '__main__':
     arg_parser.add_argument('--show', action='store_true',
                             help='show plot')
     arg_parser.add_argument('--implementation', default='python',
-                            choices=['python', 'cython'],
+                            choices=['python', 'cython', 'cython_omp'],
                             help='use Cython implementation')
     options = arg_parser.parse_args()
     if options.implementation == 'python':
         from julia_python import julia_set
     elif options.implementation == 'cython':
         from julia_cython import julia_set
+    elif options.implementation == 'cython_omp':
+        from julia_cython_omp import julia_set
     else:
         print('{0} version not implemented', file=sys.stderr)
         sys.exit(1)
