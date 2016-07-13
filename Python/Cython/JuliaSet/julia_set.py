@@ -5,7 +5,21 @@ import numpy as np
 import sys
 import time
 
-from julia_python import init_julia
+
+def init_julia(re, im, n):
+    '''Initialize the complex domain.
+
+    Positional arguments:
+    re -- minimum and maximum real value as 2-tuple
+    im -- minimum and maximum imaginary value as 2-tuple
+    n -- number of real and imaginary points as 2-tuple
+    '''
+    re_vals, im_vals = np.meshgrid(
+            np.linspace(re[0], re[1], n[0]),
+            np.linspace(im[0], im[1], n[1])
+            )
+    domain = re_vals + im_vals*1j
+    return domain.flatten()
 
 
 if __name__ == '__main__':
