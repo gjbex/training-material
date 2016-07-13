@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 import numpy as np
+import time
 
 
 def init_julia(re, im, n):
@@ -63,7 +64,10 @@ if __name__ == '__main__':
             (options.n_re, options.n_im)
             )
     iterations = np.zeros(options.n_re*options.n_im, dtype=int)
+    start_time = time.time()
     julia_set(domain, iterations, options.max_norm, options.max_iters)
+    end_time = time.time()
+    print('compute time = {0:.6f s}'.format(end_time - start_time))
     if options.show:
         import matplotlib.pyplot as plt
         plt.imshow(iterations.reshape(options.n_re, options.n_im))
