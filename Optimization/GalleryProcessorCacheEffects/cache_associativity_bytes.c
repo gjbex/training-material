@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[]) {
     struct timeval tv1, tv2;
-    double *a;
+    char *a;
     int arr_size, step;
     a = (char *) calloc(MAX_SIZE, sizeof(char));
     if (!a)
