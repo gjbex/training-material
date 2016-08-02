@@ -14,6 +14,7 @@ def julia_set(domain, iterations, max_norm, max_iters):
     '''
     for i in range(len(domain)):
         z = domain[i]
-        while iterations[i] <= max_iters and np.absolute(z) <= max_norm:
+        while (iterations[i] <= max_iters and
+               z.real*z.real + z.imag*z.imag <= max_norm*max_norm):
             z = z**2 - 0.622772 + 0.42193j
             iterations[i] += 1
