@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O2 -g -Wall -std=c99
-CPPFLAGS = `pkg-config --cflags gsl`
-LDFLAGS = `pkg-config --libs gsl`
+CPPFLAGS = $(shell pkg-config --cflags gsl)
+LDFLAGS = $(shell pkg-config --libs gsl)
 
 all: generate_exp_distr.exe
 
