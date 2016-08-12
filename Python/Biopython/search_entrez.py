@@ -12,6 +12,8 @@ if __name__ == '__main__':
                             help='gene to search for')
     arg_parser.add_argument('--max_results', type=int, default=3,
                             help='maximum number of results')
+    arg_parser.add_argument('--summary', action='store_true',
+                            help='only show summary')
     options = arg_parser.parse_args()
     Entrez.email = 'geertjan.bex@uhasselt.be'
     term = '"{0}"[ORGN] AND {1}[Gene Name]'.format(options.organism,
@@ -21,13 +23,20 @@ if __name__ == '__main__':
     record = Entrez.read(handle)
     print('total results: {0:d}'.format(int(record['Count'])))
     for seq_id in record['IdList']:
-        file_name = '{0}.gbk'.format(seq_id)
-        if not os.path.isfile(file_name):
-            print('fetching {0}'.format(seq_id))
-            handle = Entrez.efetch(db='nucleotide', id=seq_id,
-                                   rettype='gb', retmode='text')
-            with open(file_name, 'w') as seq_file:
-                seq_file.write(handle.read())
-            handle.close()
+        if options.summary:
+            handle = Entrez.esummary(db='nucleotide', id=seq_id)
+            summary = Entrez.read(handle)
+            print('ID {}:'.format(seq_id))
+            print('  {}'.format(summary[0]['Title']))
+            print('  Updated: {}'.format(summary[0]['UpdateDate']))
         else:
-            print('{0} already fetched'.format(seq_id))
+            file_name = os.path.join('Data', '{0}.gbk'.format(seq_id))
+            if not os.path.isfile(file_name):
+                print('fetching {0}'.format(seq_id))
+                handle = Entrez.efetch(db='nucleotide', id=seq_id,
+                                       rettype='gb', retmode='text')
+                with open(file_name, 'w') as seq_file:
+                    seq_file.write(handle.read())
+                handle.close()
+            else:
+                print('{0} already fetched'.format(seq_id))
