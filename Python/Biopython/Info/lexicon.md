@@ -18,3 +18,4 @@
     constructing genetic and physical maps from sequence data reported
     from many different laboratories. They serve as landmarks on the
     developing physical map of a genome.
+* HSP: High-scoring Sequence Pairs as a result of a BLAST search.
