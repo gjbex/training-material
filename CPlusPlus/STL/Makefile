@@ -4,7 +4,7 @@ CPPFLAGS =
 LDFLAGS =
 LDLIBS =
 
-APPS = stl_list.exe stl_set.exe
+APPS = list_stl.exe set_stl.exe
 
 all: $(APPS)
 
