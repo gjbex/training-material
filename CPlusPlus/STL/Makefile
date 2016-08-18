@@ -2,9 +2,9 @@ CXX = g++
 CXXFLAGS = -O2 -g
 CPPFLAGS =
 LDFLAGS =
-LIBS =
+LDLIBS =
 
-APPS = stl_list.exe
+APPS = stl_list.exe stl_set.exe
 
 all: $(APPS)
 
