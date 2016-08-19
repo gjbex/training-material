@@ -4,6 +4,8 @@ Examples of generating random number from a distribution.
 ## Contents
 1. `generate_exp_distr.c`: generate random number from an exponential
     distribution.
+1. `generate_uniform_distr.c`: generates random numbers from a uniform
+    double precision distrubtion using mt19937.
 1. `Makefile`: make file to build the code.
 
 ## Usage
