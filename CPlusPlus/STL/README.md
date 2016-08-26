@@ -3,7 +3,9 @@ Some sample code for using the STL library.
 
 ## What is it?
 1. `list_stl.cpp`: very basic illustration of using STL lists.
-1. `map_tl.cpp`: very basic illustration of using STL maps, and `auto`
+1. `map_functions.cpp`: using a template function to work with `map` as
+    well as `unordered_map`.
+1. `map_stl.cpp`: very basic illustration of using STL maps, and `auto`
     type.
 1. `rpn_calc.cpp`: implementation of a simple calculater for integer
     arithmetic expression in reverse Polish notation.  Illustrates use

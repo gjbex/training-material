@@ -4,7 +4,7 @@ CPPFLAGS =
 LDFLAGS =
 LDLIBS =
 
-APPS = list_stl.exe map_stl.exe set_stl.exe rpn_calc.exe
+APPS = list_stl.exe map_stl.exe set_stl.exe rpn_calc.exe map_functions.exe
 
 all: $(APPS)
 
