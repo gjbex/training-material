@@ -3,10 +3,12 @@ CFLAGS = -O2 -g -Wall -std=c99
 CPPFLAGS = $(shell pkg-config --cflags gsl)
 LDFLAGS = $(shell pkg-config --libs gsl)
 
-all: generate_exp_distr.exe
+APPL = generate_exp_distr.exe generate_uniform_distr.exe
 
-%.exe: %.c
+all: $(APPL)
+
+%.exe: %.o
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean:
-	rm -f generate_exp_distr.exe *.o core
+	rm -f $(APPL) *.o core

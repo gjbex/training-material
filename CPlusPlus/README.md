@@ -5,4 +5,6 @@ programming concepts and idiosyncracies particular to C++.
 
 ## What is it?
 1. `Boost`: some examples of using the Boost library.
+1. `Random`: some illustrations of using the pseudorandom generator in
+    standard C++.
 1. `STL`: some illustrations of using the STL library.
