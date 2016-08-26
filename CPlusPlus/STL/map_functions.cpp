@@ -17,14 +17,10 @@ int main(int argc, char *argv[]) {
     List keys = {"a", "b", "c"};
     Map si_map;
     Unordered_map usi_map;
-    Unordered_map *usi_map_p = new Unordered_map();
     fill_map(si_map, keys);
     fill_map(usi_map, keys);
-    fill_map(*usi_map_p, keys);
     print_map(si_map, "map");
     print_map(usi_map, "unordered_map");
-    print_map(*usi_map_p, "map pointer");
-    delete usi_map_p;
     return 0;
 }
 
