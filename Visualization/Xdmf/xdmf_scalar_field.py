@@ -4,7 +4,11 @@ if __name__ == '__main__':
     
     from argparse import ArgumentParser
     from math import exp
-    from StringIO import StringIO
+    import sys
+    if sys.version_info.major < 3:
+        from StringIO import StringIO
+    else:
+        from io import StringIO
     from xml.dom.minidom import Document
     from xml.dom import minidom
     import numpy as np
@@ -96,5 +100,5 @@ if __name__ == '__main__':
     data_item.appendChild(data_text)
     attribute.appendChild(data_item)
     data_str.close()
-    print doc.toprettyxml(indent='  ')
+    print(doc.toprettyxml(indent='  '))
 
