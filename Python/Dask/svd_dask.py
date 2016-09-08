@@ -34,7 +34,7 @@ if __name__ == '__main__':
         delta = datetime.now() - start
         print('linalg.svd: {0:d}.{1:06d}'.format(delta.seconds,
                                                  delta.microseconds))
-        Sigma = linalg.diagsvd(s, m, n)
+        Sigma = da.diag(s)
         start = datetime.now()
         matrix_new = da.dot(U, da.dot(Sigma, Vh)).compute()
         delta = datetime.now() - start
