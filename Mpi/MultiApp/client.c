@@ -9,10 +9,11 @@
 int main(int argc, char *argv[]) {
     int rank, size, inter_comm_size;
     char port_name[MPI_MAX_PORT_NAME];
-    char buff[MAX_LEN] = "greetings!";
+    char buff[MAX_LEN] = "client greetings!";
     char port_filename[MAX_LEN] = "port_name.txt";
     FILE *fp;
     MPI_Comm inter_comm;
+    MPI_Status status;
 
     /* usual MPI setup */
     MPI_Init(NULL, NULL);
@@ -42,9 +43,14 @@ int main(int argc, char *argv[]) {
 
     /* send a message to server application */
     if (rank == 0) {
-        int server_rank = 0;
-        MPI_Send(buff, MAX_LEN, MPI_CHAR, server_rank, TAG, inter_comm);
+        MPI_Send(buff, MAX_LEN, MPI_CHAR, 0, TAG, inter_comm);
+        printf("client sent greeting '%s'\n", buff);
+        MPI_Recv(buff, MAX_LEN, MPI_CHAR, MPI_ANY_SOURCE, MPI_ANY_TAG,
+                 inter_comm, &status);
+        printf("client received '%s'\n", buff);
     }
+    MPI_Bcast(buff, MAX_LEN, MPI_CHAR, 0, MPI_COMM_WORLD);
+    printf("client rank %d received '%s'\n", rank, buff);
 
     /* clean up */
     MPI_Comm_free(&inter_comm);

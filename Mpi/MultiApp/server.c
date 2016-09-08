@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <mpi.h>
 
 #define MAX_LEN 80
+#define TAG 11
 
 int main(int argc, char *argv[]) {
     int rank, size, inter_comm_size;
@@ -47,7 +49,14 @@ int main(int argc, char *argv[]) {
     if (rank == 0) {
         MPI_Recv(buff, MAX_LEN, MPI_CHAR, MPI_ANY_SOURCE, MPI_ANY_TAG,
                  inter_comm, &status);
-        printf("server received '%s'\n", buff);
+    }
+    MPI_Bcast(buff, MAX_LEN, MPI_CHAR, 0, MPI_COMM_WORLD);
+    printf("server rank %d received '%s'\n", rank, buff);
+
+    if (rank == 0) {
+        strncpy(buff, "server greetings!", MAX_LEN);
+        MPI_Send(buff, MAX_LEN, MPI_CHAR, 0, TAG, inter_comm);
+        printf("server sent greeting '%s'\n", buff);
     }
 
     /* clean up */
