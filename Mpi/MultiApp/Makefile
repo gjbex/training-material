@@ -5,10 +5,10 @@ APPL = appl1.exe appl2.exe server.exe client.exe
 all: $(APPL)
 
 appl1.exe: appl.c
-	$(MPICC) $(CFLAGS) -o $@ $^
+	$(MPICC) $(CFLAGS) -DAPP_ID="\"application 1\"" -o $@ $^
 
 appl2.exe: appl.c
-	$(MPICC) $(CFLAGS) -o $@ $^
+	$(MPICC) $(CFLAGS) -DAPP_ID="\"application 2\"" -o $@ $^
 
 %.exe: %.o
 	$(MPICC) $(CFLAGS) -o $@ $^
