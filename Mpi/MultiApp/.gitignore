@@ -1,3 +1,4 @@
 port_name.txt
 *.exe
 core.*
+*.pbs.*
