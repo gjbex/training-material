@@ -11,6 +11,8 @@ int main(int argc, char *argv[]) {
     char port_name[MPI_MAX_PORT_NAME];
     char buff[MAX_LEN] = "client greetings!";
     char port_filename[MAX_LEN] = "port_name.txt";
+    char hostnaem[MAX_LEN];
+    int hostname_len = 0;
     FILE *fp;
     MPI_Comm inter_comm;
     MPI_Status status;
@@ -21,6 +23,12 @@ int main(int argc, char *argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     if (rank == 0)
         printf("%s: %d processes\n", argv[0], size);
+
+    /* determine and print hostname */
+    if (rank == 0) {
+        MPI_Get_processor_name(hostname, &hostname_len);
+        printf("client running on %s\n", hostname);
+    }
 
     /* read port name file */
     if ((fp = fopen(port_filename, "r")) == NULL) {

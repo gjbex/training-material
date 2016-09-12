@@ -21,6 +21,12 @@ int main(int argc, char *argv[]) {
     if (rank == 0)
         printf("%s: %d processes\n", argv[0], size);
 
+    /* determine and print hostname */
+    if (rank == 0) {
+        MPI_Get_processor_name(hostname, &hostname_len);
+        printf("server running on %s\n", hostname);
+    }
+
     /* open a port for communicaiton from a client */
     MPI_Open_port(MPI_INFO_NULL, port_name);
 
