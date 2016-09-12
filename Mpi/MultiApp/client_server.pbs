@@ -1,0 +1,19 @@
+#!/bin/bash -l
+#PBS -l nodes=2:ppn=20:ivybridge
+#PBS -W x:nmatchpolicy:exactnode
+#PBS -l walltime=00:05:00
+
+module load foss/2015a
+cd $PBS_O_WORKDIR
+make
+
+server_host=$(sort -u ${PBS_NODEFILE} | head -1)
+client_host=$(sort -u ${PBS_NODEFILE} | tail -1)
+
+echo "starting server on ${server_host}"
+mpirun -np 3 ./server.exe &
+echo "waiting a while to ensure port name file is written"
+
+echo "starting client on ${client_host}"
+sleep 10
+mpirun --host ${client_host}  -np 2 ./client.exe
