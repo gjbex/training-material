@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
     char port_filename[MAX_LEN] = "port_name.txt";
     char hostname[MAX_LEN];
     int hostname_len = 0;
+    size_t bytes_read;
     FILE *fp;
     MPI_Comm inter_comm;
     MPI_Status status;
@@ -30,10 +31,14 @@ int main(int argc, char *argv[]) {
 
     /* read port name file */
     if ((fp = fopen(port_filename, "r")) == NULL) {
+        fprintf(stderr, "### error: can't open port name file\n");
+        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+    }
+    bytes_read = fread(port_name, sizeof(char), MPI_MAX_PORT_NAME, fp);
+    if (bytes_read == 0) {
         fprintf(stderr, "### error: can't read port name file\n");
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
     }
-    fread(port_name, sizeof(char), MPI_MAX_PORT_NAME, fp);
     fclose(fp);
 
     /* establish connection to server application */
