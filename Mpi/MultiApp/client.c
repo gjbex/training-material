@@ -25,10 +25,8 @@ int main(int argc, char *argv[]) {
         printf("%s: %d processes\n", argv[0], size);
 
     /* determine and print hostname */
-    if (rank == 0) {
-        MPI_Get_processor_name(hostname, &hostname_len);
-        printf("client running on %s\n", hostname);
-    }
+    MPI_Get_processor_name(hostname, &hostname_len);
+    printf("%s process %d running on %s\n", argv[0], rank, hostname);
 
     /* read port name file */
     if ((fp = fopen(port_filename, "r")) == NULL) {
