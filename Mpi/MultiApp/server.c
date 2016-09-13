@@ -11,6 +11,8 @@ int main(int argc, char *argv[]) {
     char port_name[MPI_MAX_PORT_NAME];
     char buff[MAX_LEN];
     char port_filename[MAX_LEN] = "port_name.txt";
+    char hostname[MAX_LEN];
+    int hostname_len = 0;
     MPI_Comm inter_comm;
     MPI_Status status;
 
