@@ -1,5 +1,0 @@
-#!/bin/bash -l
-
-job_id=`qsub succeed.pbs`
-echo ${job_id}
-qsub -W depend=afterok:${job_id} succeed.pbs
