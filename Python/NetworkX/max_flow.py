@@ -2,7 +2,6 @@
 
 from argparse import ArgumentParser
 import networkx as nx
-from queue import deque
 import random
 
 
