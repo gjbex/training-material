@@ -38,7 +38,8 @@ def print_flow_dict(G, flow_dict):
         print('flow {0} -> {1}: {2:.3f}'.format(i, j, flow_dict[i][j]))
 
 if __name__ == '__main__':
-    arg_parser = ArgumentParser(description='experiment with min-cut')
+    arg_parser = ArgumentParser(description='experiment with maximum flow '
+                                            'algorithm')
     arg_parser.add_argument('--n', type=int, help='number of nodes/layer')
     options = arg_parser.parse_args()
     G, source, sink = create_graph(options.n)
