@@ -19,3 +19,5 @@ What is it?
 1. `graph.xml`: example GraphML representation of a tree
 1. `graph.txt`: example edge list representation of a tree
 1. `weighted_tree.xml`: example GraphML representation of a weighted tree
+1. `max_flow.py`: illustration of the maximum flow algorithm on a very
+    simple case of three parallel flows.
