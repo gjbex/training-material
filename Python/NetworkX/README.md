@@ -1,11 +1,8 @@
-NetworkX
-========
-
+# NetworkX
 NetworkX is an excellent library that implements graph representations
 and algorithms.  Note is is not part of Python's standard library.
 
-What is it?
------------
+## What is it?
 1. `generate_random_tree.py`: illustration of how to use the NetworkX
    DiGraph class to represent a tree, generates a random tree according
    to specifications
