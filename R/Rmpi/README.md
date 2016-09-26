@@ -1,6 +1,9 @@
 # Rmpi
 Very simple `Rmpi` example, mostly to verify the package installation.
 
+Note: this is probably not the way you want to go if there are
+alternatives.
+
 ## What is it?
 1. `rmpi.pbs`: PBS script for job submission.
 1. `rmpi.R`: R script that spawns slaves, lets them compute and ID
