@@ -18,3 +18,5 @@ and algorithms.  Note is is not part of Python's standard library.
 1. `weighted_tree.xml`: example GraphML representation of a weighted tree
 1. `max_flow.py`: illustration of the maximum flow algorithm on a very
     simple case of three parallel flows.
+1. `shortest_path.ipynb`: Jupyter notebook illustrating the shortest path
+    algorithm.
