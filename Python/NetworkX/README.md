@@ -1,11 +1,8 @@
-NetworkX
-========
-
+# NetworkX
 NetworkX is an excellent library that implements graph representations
 and algorithms.  Note is is not part of Python's standard library.
 
-What is it?
------------
+## What is it?
 1. `generate_random_tree.py`: illustration of how to use the NetworkX
    DiGraph class to represent a tree, generates a random tree according
    to specifications
@@ -19,3 +16,7 @@ What is it?
 1. `graph.xml`: example GraphML representation of a tree
 1. `graph.txt`: example edge list representation of a tree
 1. `weighted_tree.xml`: example GraphML representation of a weighted tree
+1. `max_flow.py`: illustration of the maximum flow algorithm on a very
+    simple case of three parallel flows.
+1. `shortest_path.ipynb`: Jupyter notebook illustrating the shortest path
+    algorithm.

@@ -1,10 +1,10 @@
 CXX = g++
-CXXFLAGS = -O2 -g
+CXXFLAGS = -O2 -g --std=c++11 -Wall
 CPPFLAGS =
 LDFLAGS =
-LIBS =
+LDLIBS =
 
-APPS = stl_list.exe
+APPS = list_stl.exe map_stl.exe set_stl.exe rpn_calc.exe map_functions.exe
 
 all: $(APPS)
 
