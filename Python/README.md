@@ -25,8 +25,6 @@ these samples have been used for Python tutorials.
     Python code at runtime.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
     setting up and executing unit tests
-1. `Collections`: illustration of some data types defined in Python's
-    `collections` standard library module.
 1. `ConfigParser`: illustrates how to use the ConfigParser module to handle
     configuration files.
 1. `ContextManager`: illustrates the concept of a context manager, a
@@ -36,6 +34,9 @@ these samples have been used for Python tutorials.
 1. `Cython`: Powerpoint presentation on Cython, as well as example code.
 1. `DataFormats`: illustrates how to deal with data formats such as CSV
     files, binary data and XML.
+1. `DataStructures`: illustration of some data types defined in Python's
+    `collections` standard library module and other standard library
+    packages.
 1. `DbAccess`: illustrates how to insert data into a relational database
     and query it, both with Python's sqlite3 module, and SQLAlchemy.
 1. `Debugging`: some code that is useful for debugging demos.
