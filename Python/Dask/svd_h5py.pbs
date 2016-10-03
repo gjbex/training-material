@@ -1,0 +1,12 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=20:ivybridge
+#PBS -l walltime=00:15:00
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+source "$VSC_DATA/miniconda3/setenv.sh"
+source activate science
+which python
+
+time ./svd_h5py.py ../../Math/Lapack/Svd/very_large.h5 \
+                   /matrix
