@@ -25,13 +25,13 @@ int main(int argc, char **argv) {
 
     /* compute and print the vector's 2-norm */
     VecNorm(x, NORM_1, &norm);
-    PetscPrintf(PETSC_COMM_WORLD, "norm = %.2e\n", (double) norm);
+    PetscPrintf(PETSC_COMM_WORLD, "norm = %.2le\n", (double) norm);
 
     /* compute and print the vector's strided 2-norm, the stride will be
      * 2, i.e., the vector's block size.
      */
     VecStrideNorm(x, 0, NORM_1, &norm);
-    PetscPrintf(PETSC_COMM_WORLD, "strided norm = %.2e\n", (double) norm);
+    PetscPrintf(PETSC_COMM_WORLD, "strided norm = %.2le\n", (double) norm);
 
     /* destroy data structures, and finalize PETSc */
     VecDestroy(&x);

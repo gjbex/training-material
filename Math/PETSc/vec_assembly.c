@@ -6,6 +6,7 @@ int main(int argc, char *argv[]) {
     Vec x;
     PetscInt n = 20, local_size;
     PetscBool show_vector = 0;
+    PetscReal norm;
     PetscScalar *local_values;
     int rank, i;
 
@@ -36,6 +37,10 @@ int main(int argc, char *argv[]) {
     /* show the vector on standard output */
     if (show_vector)
         VecView(x, PETSC_VIEWER_STDOUT_WORLD);
+
+    /* compute and print the vector's 1-norm */
+    VecNorm(x, NORM_1, &norm);
+    PetscPrintf(PETSC_COMM_WORLD, "vector 1-norm = %.2le\n", (double) norm);
 
     /* clean up and finalize PETSc */
     VecDestroy(&x);
