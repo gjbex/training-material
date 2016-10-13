@@ -4,11 +4,12 @@
 
 cd $PBS_O_WORKDIR
 
-scheduler_node=$(head -1 $PBS_NODEFILE)
+scheduler_node=$(hostname)
+scheduler_port=8786
 worker_nodes=$(uniq $PBS_NODEFILE)
 worker_launcher="$(pwd)/launch_worker.sh"
 
-echo 'launching scheduler'
+echo "launching scheduler: ${scheduler_node}:${scheduler_port}"
 ./launch_scheduler.sh
 
 echo 'waitling till scheduler launched...'
@@ -18,7 +19,7 @@ echo 'starting workers...'
 for worker in $worker_nodes;
 do
     echo "launching worker on ${worker}"
-    ssh $worker $worker_launcher "${scheduler_node}:8786" &
+    ssh $worker $worker_launcher "${scheduler_node}:${scheduler_port}" &
 done
 
 echo 'waiting for workers to start and connect'
@@ -30,5 +31,5 @@ source activate science
 which python
 
 echo 'starting computation'
-time python dask_distr_test.py --scheduler $scheduler_node \
-                               --scheduler_port 8786
+time python dask_distr_test.py --scheduler ${scheduler_node} \
+                               --scheduler_port ${scheduler_port}

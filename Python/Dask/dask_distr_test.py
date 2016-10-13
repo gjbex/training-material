@@ -20,6 +20,7 @@ if __name__ == '__main__':
     options = arg_parser.parse_args()
     executor = Executor('{0}:{1}'.format(options.scheduler,
                                          options.scheduler_port))
+    print(str(executor), flush=True)
     futures = executor.map(get_hostname, range(100))
     for future in futures:
         print(future.result())
