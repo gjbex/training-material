@@ -42,6 +42,7 @@ these samples have been used for Python tutorials.
 1. `Debugging`: some code that is useful for debugging demos.
 1. `Decorators`: illustrates how to create decorators to wrap functions.
 1. `Descriptors`: illustrates the descriptor concept in Python
+1. `Evals`: illustrates using the `exec` function.
 1. `Exercises`: example solutions to exercises to be found in the 
     Powerpoint presentation; this is part of the "Python as a data
     processing language" training session.
