@@ -10,6 +10,7 @@ is subject to the license included in this repository.
 
 What is it?
 -----------
+* `Accelerators`: some sample code and information on using accelerators.
 * `C`: some C sample code. (Work in progress)
 * `CPlusPlus`: some C++ sample code. (Work in progress)
 * `DataStorage`: sample code showing how to read/write HDF5 and NetCDF
