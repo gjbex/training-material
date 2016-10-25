@@ -40,6 +40,8 @@ What is it?
 * `R`: some very simple illustrations of how to run R scripts from the
     command line, and to submit as (PBS) jobs
 * `Spark`: some Spark-related material. (Work in progress)
+* `Virtualization`: Information on how to use Singularity. (Work in
+    progress)
 * `Visualization`: data files, XDMF files and ParaView state files to
     use during a demo of scientific visualization with ParaView.
 
