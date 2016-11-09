@@ -20,3 +20,5 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     apt-get -y install unity-gtk3-module
     apt-get -y install libcanberra-gtk3-module
     apt-get -y install gedit
+    mkdir -p /tmp/gedit-user
+    ln -s /tmp/gedit/user /run/user
