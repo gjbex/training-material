@@ -26,6 +26,8 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     apt-get -y install libopenmpi-dev
     apt-get -y install openmpi-bin
     apt-get -y install openmpi-common
+    apt-get -y install libopenblas-dev
+    apt-get -y install liblapack-dev
     apt-get -y install libblacs-mpi-dev
     apt-get -y install libscalapack-mpi-dev
     apt-get -y install libhdf5-dev
