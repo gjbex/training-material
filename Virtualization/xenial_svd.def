@@ -38,8 +38,9 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     fi
     cd training-material/Math/Lapack/Svd/
     git pull origin master
-    make clean create_h5.exe svd_blacs.exe
+    make clean create_h5.exe svd_blacs.exe svd.exe
     cp create_h5.exe /usr/bin/
     cp svd_blacs.exe /usr/bin/
+    cp svd.exe /usr/bin/
     cd /tmp
     rm -rf training-material/
