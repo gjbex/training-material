@@ -1,12 +1,17 @@
-HDF5_DIR = /usr
+HDF5_SERIAL_INC_DIR = /usr/include/hdf5/serial
+HDF5_SERIAL_LIB_DIR = /usr/lib/x86_64-linux-gnu/hdf5/serial
+HDF5_MPI_INC_DIR = /usr/include/hdf5/openmpi
+HDF5_MPI_LIB_DIR = /usr/lib/x86_64-linux-gnu/hdf5/openmpi
 BLAS_DIR = /usr
 BLACS_DIR = /usr
 F90 = gfortran
 MPIF90 = mpif90
 FFLAGS = -O2 -g
 OMP = -fopenmp
-FPPFLAGS = -I$(HDF5_DIR)/include
-LIBS = -L$(HDF5_DIR)/lib -lhdf5_fortran
+SERIAL_FPPFLAGS = -I$(HDF5_SERIAL_INC_DIR)
+MPI_FPPFLAGS = -I$(HDF5_MPI_INC_DIR)
+HDF5_SERIAL_LIBS = -L$(HDF5_SERIAL_LIB_DIR)/lib -lhdf5_fortran
+HDF5_MPI_LIBS = -L$(HDF5_MPI_LIB_DIR)/lib -lhdf5_fortran
 MATH_LIBS = -L$(BLAS_DIR) -lblas -llapack -lm
 THREADED_MATH_LIBS = -L$(BLAS_DIR) -lblas -llapack -lm
 DISTR_MATH_LIBS = -L$(BLACS_DIR) -lblacsF77init-openmpi -lblacs-openmpi -lscalapack-openmpi
@@ -26,26 +31,26 @@ matlab_svd: matlab_svd.m
 	$(MCC) $(MFLAGS) $@
 
 svd.exe: $(SRCS) svd.f90
-	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $^ \
-	       $(MATH_LIBS) $(LIBS)
+	$(F90) $(FFLAGS) $(SERIAL_FPPFLAGS) -o $@ $^ \
+	       $(MATH_LIBS) $(HDF5_SERIAL_LIBS)
 
 svd_threaded.exe: $(SRCS) svd.f90
-	$(F90) $(FFLAGS) $(OMP) $(FPPFLAGS) -o $@ $^ \
-	       $(THREADED_MATH_LIBS) $(LIBS)
+	$(F90) $(FFLAGS) $(OMP) $(SERIAL_FPPFLAGS) -o $@ $^ \
+	       $(THREADED_MATH_LIBS) $(HDF5_SERIAL_LIBS)
 
 svd_blacs.exe: $(SRCS) svd_blacs.f90
-	$(MPIF90) $(FFLAGS) $(FPPFLAGS) -o $@ $^ \
-	          $(DISTR_MATH_LIBS) $(LIBS)
+	$(MPIF90) $(FFLAGS) $(MPI_FPPFLAGS) -o $@ $^ \
+	          $(DISTR_MATH_LIBS) $(HDF5_MPI_LIBS)
 
 svd_blacs_hybrid.exe: $(SRCS) svd_blacs.f90
-	$(MPIF90) $(FFLAGS) $(OMP) $(FPPFLAGS) -o $@ $^ \
-	          $(HYBRID_MATH_LIBS) $(LIBS)
+	$(MPIF90) $(FFLAGS) $(OMP) $(MPI_FPPFLAGS) -o $@ $^ \
+	          $(HYBRID_MATH_LIBS) $(HDF5_MPI_LIBS)
 
 blacs_enlightenment.exe: blacs_enlightenment.f90
-	$(MPIF90) $(FFLAGS) -o $@ $^ $(DISTR_MATH_LIBS) $(LIBS)
+	$(MPIF90) $(FFLAGS) -o $@ $^ $(DISTR_MATH_LIBS)
 
 %_h5.exe: $(SRCS) %_h5.f90
-	$(F90) $(FFLAGS) $(FPPFLAGS) -o $@ $^ $(LIBS)
+	$(F90) $(FFLAGS) $(SERIAL_FPPFLAGS) -o $@ $^ $(HDF5_SERIAL_LIBS)
 
 clean:
 	rm -f $(APPS) *.o *.mod \
