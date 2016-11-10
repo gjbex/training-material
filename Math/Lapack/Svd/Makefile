@@ -12,8 +12,8 @@ SERIAL_FPPFLAGS = -I$(HDF5_SERIAL_INC_DIR)
 MPI_FPPFLAGS = -I$(HDF5_MPI_INC_DIR)
 HDF5_SERIAL_LIBS = -L$(HDF5_SERIAL_LIB_DIR)/lib -lhdf5_fortran
 HDF5_MPI_LIBS = -L$(HDF5_MPI_LIB_DIR)/lib -lhdf5_fortran
-MATH_LIBS = -L$(BLAS_DIR) -lblas -llapack -lm
-THREADED_MATH_LIBS = -L$(BLAS_DIR) -lblas -llapack -lm
+MATH_LIBS = -L$(BLAS_DIR) -lopenblas -llapack -lm
+THREADED_MATH_LIBS = -L$(BLAS_DIR) -lopenblas -llapack -lm
 DISTR_MATH_LIBS = -L$(BLACS_DIR) -lblacsF77init-openmpi -lblacs-openmpi -lscalapack-openmpi
 HYBRID_MATH_LIBS = -L$(BLACS_DIR) -lblacsF77init-openmpi -lblacs-openmpi -lscalapack-openmpi
 
