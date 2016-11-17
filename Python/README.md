@@ -7,6 +7,7 @@ and programming techniques, or how to use Python iibraries.  Many of
 these samples have been used for Python tutorials.
 
 # What is it?
+1. `Annotations`: illustration of type annotations.
 1. `ArgParse`: illustration of how to use the argparse module to handle
     command line arguments.
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
