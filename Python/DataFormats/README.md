@@ -50,8 +50,6 @@ What is it?
   * `blocks.xml`: example XML file.
   * `nested_blocks.xml`: example XML file containng nested block elements.
 1. Text as binary
-  For more (and better examples of reading and writing, see
-  the (DataStorage)[https://github.com/gjbex/training-material/tree/master/DataStorage/Hdf5] section.
   * `line_indexer.py`: indexes a text file, i.e., it produces a CSV file
     with two columns, the first the file position of the start of each line
     in the text file, the second the length of that line, line endings
@@ -61,6 +59,8 @@ What is it?
     a file position and a line length, and prints the characters read
     to standard output for verification, quoted by '|'.
 1. CSV, HDF5 and JSON combination
+  For more (and better examples of reading and writing, see
+  the [DataStorage](https://github.com/gjbex/training-material/tree/master/DataStorage/Hdf5) section.
   * `data_generator.py`: this script will generate numerical data (integer
     and floating point) using specified random number distributions.  The
     column names, types the distributions, and the parameters they require
@@ -72,4 +72,4 @@ What is it?
 
 ## Other formats
 
-Example code for using NetCDF can be found in the (DataFormats)[https://github.com/gjbex/training-material/tree/master/DataStorage/NetCDF] section.
+Example code for using NetCDF can be found in the [DataFormats](https://github.com/gjbex/training-material/tree/master/DataStorage/NetCDF) section.
