@@ -1,4 +1,4 @@
-Symbol   	Description	                    Bases represented
+Symbol      Description                     Bases represented
 A           Adenine                         A
 C           Cytosine                                C
 G           Guanine                                         G
