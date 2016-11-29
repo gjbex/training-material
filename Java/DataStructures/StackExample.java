@@ -1,10 +1,6 @@
 import java.util.Stack;
 
 /**
- * 
- */
-
-/**
  * @author Geert Jan Bex
  *
  */
