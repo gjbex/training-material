@@ -2,10 +2,6 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 /**
- * 
- */
-
-/**
  * @author Geert Jan Bex
  *
  */

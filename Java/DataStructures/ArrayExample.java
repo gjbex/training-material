@@ -1,8 +1,4 @@
 /**
- * 
- */
-
-/**
  * @author Geert Jan Bex
  *
  */
