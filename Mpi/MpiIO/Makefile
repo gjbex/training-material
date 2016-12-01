@@ -1,7 +1,7 @@
 MPIF90 = mpif90
 FFLAGS = -O2 -g
 
-APPS = explicit_offsets.exe
+APPS = explicit_offsets.exe views.exe
 
 all: $(APPS)
 
