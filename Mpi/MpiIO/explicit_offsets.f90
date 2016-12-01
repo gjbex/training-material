@@ -1,4 +1,5 @@
 program explicit_offsets
+    use :: iso_fortran_env, only : error_unit
     use :: mpi_f08
     implicit none
     integer, parameter :: file_name_lenght = 1024, nr_chars = 5
@@ -15,7 +16,9 @@ program explicit_offsets
     root = 0
     if (my_rank == root) then
         if (command_argument_count() /= 1) then
-            stop 1
+            write (unit=error_unit, fmt='(A)') &
+                '### error: file name expected'
+            call mpi_abort(MPI_COMM_WORLD, 1)
         end if
         call get_command_argument(1, file_name)
     end if
