@@ -18,6 +18,8 @@ What is it?
     with specified amplitudes and frequencies, adding noise; plots the
     resulting function, uses FFT to determine the frequency spectrum, and
     plot the latter
+1. `fft_experiments.ipynb`: notebook with some experiments on signal
+    analysis using FFT.
 1. `numba_test.py`: some timing tests for numpy constructs, including the
     use of numba.  Note that this requires installing numba, which is, due
     to its dependencies, perhaps non-trivial
