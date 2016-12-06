@@ -1,7 +1,7 @@
 F90 = ifort
 FFLAGS = -qopenmp -O2 -g
 
-APPL = pi1.exe pi2.exe pi3.exe pi4.exe
+APPL = pi1.exe pi2.exe pi3.exe pi4.exe pi5.exe
 
 all: $(APPL)
 

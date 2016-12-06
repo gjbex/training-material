@@ -11,4 +11,6 @@ They can be used to demo Intel Inspector.
     that the schedule will be `static`.
 1. `pi4.f90`: the schedule is set to `tuntime` to allow illustrating how
     the assumption will lead to errors.
+1. `pi5.f90`: version which is independent of the schedule used, and has
+    no data races
 1. `Makefile`: make file to build the code.
