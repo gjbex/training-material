@@ -2,12 +2,12 @@ module tasks_mod
     use :: mpi_f08
     implicit none
 
-    integer, parameter :: name_length = 10
+    integer, parameter :: name_length = 12
 
     type :: task_type
         sequence
         integer :: param
-        character(len=10) :: name
+        character(len=12) :: name
     end type task_type
 
 contains

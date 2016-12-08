@@ -42,9 +42,10 @@ program tasks
     call mpi_file_set_view(file_handle, disp, task_mpi_type, &
                            task_mpi_type, 'native', MPI_INFO_NULL)
     do task_nr = 1, nr_tasks
-        write (task%name, '(A5, I5)') 'task ', task_nr
+        write (task%name, '(A5, I7)') 'task ', task_nr
         call random_number(r)
         task%param = int(1000*r)
+        print "(I3, ':', A12)", task%param, task%name
         call mpi_file_write_all(file_handle, task, 1, task_mpi_type, status)
     end do
     

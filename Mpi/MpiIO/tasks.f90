@@ -35,9 +35,9 @@ program tasks
     do while (.true.)
         call mpi_file_read_shared(file_handle, task, 1, task_mpi_type, &
                                   status)
-        count = 0
         call mpi_get_count(status, task_mpi_type, count)
         if (count /= 1) exit
+        ! call sleep(1 + mod(task%param, 3))
         write(unit=output_unit, fmt="(A, I2, ', ', A, I10, I10)") &
             'rank ', my_rank, task%name, task%param, count
     end do
