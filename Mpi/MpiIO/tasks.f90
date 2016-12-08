@@ -37,7 +37,7 @@ program tasks
                                   status)
         call mpi_get_count(status, task_mpi_type, count)
         if (count /= 1) exit
-        ! call sleep(1 + mod(task%param, 3))
+        call sleep(1 + mod(task%param, 3))
         write(unit=output_unit, fmt="(A, I2, ', ', A, I10, I10)") &
             'rank ', my_rank, task%name, task%param, count
     end do
