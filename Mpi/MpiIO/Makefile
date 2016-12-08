@@ -5,10 +5,10 @@ APPS = explicit_offsets.exe views.exe create_tasks.exe tasks.exe
 
 all: $(APPS)
 
-create_tasks.exe: create_tasks.o tasks_mod.o
+create_tasks.exe: tasks_mod.o create_tasks.o
 	$(MPIF90) $(FFLAGS) -o $@ $^
 
-tasks.exe: tasks.o tasks_mod.o
+tasks.exe: tasks_mod.o tasks.o
 	$(MPIF90) $(FFLAGS) -o $@ $^
 
 %.exe: %.f90
