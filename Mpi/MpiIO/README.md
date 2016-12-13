@@ -15,4 +15,5 @@ Some examples of MPI-IO.
 1. `Makefile`: make file to build the examples.
 
 ## Note
-This code doesn't work with Intel MPI, it does with OpenMPI 1.10.2.
+The code illustrating shared file pointers doesn't seem to work with
+Intel MPI on GPFS, it does with OpenMPI 1.10.2 though.
