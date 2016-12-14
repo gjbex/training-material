@@ -8,8 +8,11 @@ Fortran (2008).
     and finalization.
 1. `MatrixReduce`: computing a sum of matrices in each process using
     MPI_Reduce.
+1. `MpiIO`: some examples of using MPI-IO.
 1. `mpi.pptx`: a very basic and gentle introduction to MPI from a
     C programmer's perspective.
+1. `MultiApp`: illustrations of how to use MPI communication between
+    applications.
 1. `OverlappingComputationCommunication`: illustration of overlapping
     a computation and a communcation using non-blocking communication.
 1. `Pi`: sample of a hybrid MPI/OpenMP code, illustrating use of re-entrant

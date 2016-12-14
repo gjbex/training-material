@@ -18,14 +18,14 @@ int main(int argc, char *argv[]) {
     Params params;
     const int type_count = 2;
     int block_lengths[] = {1, 1};
-    int displacements[] = {0, sizeof(long)};
+    MPI_Aint displacements[] = {0, sizeof(long)};
     MPI_Datatype types[] = {MPI_LONG, MPI_INT};
     MPI_Datatype params_type;
     double *limits, local_limits[2], partial_result, result = 0.0;
     MPI_Init(NULL, NULL);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Type_struct(type_count, block_lengths, displacements, types,
-                    &params_type);
+    MPI_Type_create_struct(type_count, block_lengths, displacements, types,
+                           &params_type);
     MPI_Type_commit(&params_type);
     if (rank == 0) {
         params = get_params(argc, argv);
@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
     if (rank == 0) {
         printf("pi = %.8lf\n", result);
     }
+    MPI_Type_free(&params_type);
     MPI_Finalize();
     return EXIT_SUCCESS;
 }

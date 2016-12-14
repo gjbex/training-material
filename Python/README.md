@@ -7,11 +7,13 @@ and programming techniques, or how to use Python iibraries.  Many of
 these samples have been used for Python tutorials.
 
 # What is it?
+1. `Annotations`: illustration of type annotations.
 1. `ArgParse`: illustration of how to use the argparse module to handle
     command line arguments.
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
     implements a Monte Carlo algorithm, and allows to show evolution over
     time, autocorrelation, and to compare with target distribution.
+1. `Biopython`: some Biopython examples.
 1. `Birdsong`: implements a FFT of WAV files, and shows the original signal
     (amplitude) and the frequency spectrum using Matplotlib.  Another
     script illustrates elementary signal processing using a highpass
@@ -24,8 +26,6 @@ these samples have been used for Python tutorials.
     Python code at runtime.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
     setting up and executing unit tests
-1. `Collections`: illustration of some data types defined in Python's
-    `collections` standard library module.
 1. `ConfigParser`: illustrates how to use the ConfigParser module to handle
     configuration files.
 1. `ContextManager`: illustrates the concept of a context manager, a
@@ -35,11 +35,15 @@ these samples have been used for Python tutorials.
 1. `Cython`: Powerpoint presentation on Cython, as well as example code.
 1. `DataFormats`: illustrates how to deal with data formats such as CSV
     files, binary data and XML.
+1. `DataStructures`: illustration of some data types defined in Python's
+    `collections` standard library module and other standard library
+    packages.
 1. `DbAccess`: illustrates how to insert data into a relational database
     and query it, both with Python's sqlite3 module, and SQLAlchemy.
 1. `Debugging`: some code that is useful for debugging demos.
 1. `Decorators`: illustrates how to create decorators to wrap functions.
 1. `Descriptors`: illustrates the descriptor concept in Python
+1. `Evals`: illustrates using the `exec` function.
 1. `Exercises`: example solutions to exercises to be found in the 
     Powerpoint presentation; this is part of the "Python as a data
     processing language" training session.

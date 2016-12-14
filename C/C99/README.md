@@ -8,5 +8,6 @@ Illustration of a few C99 features.
     functions.
 1. `fam.c`: Flexible Array Member, illustration of having a variable
     length array as the last member of a `struct` for flexibility.
+1. `struct_init.c`: illustrates `struct` initialization.
 1. `vla.c`: variable length arrays, at runtime allocated on the stack.
 1. `Makefile`: make file to build these applications.

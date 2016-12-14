@@ -1,0 +1,48 @@
+# Copyright (c) 2015-2016, Gregory M. Kurtzer. All rights reserved.
+# 
+# "Singularity" Copyright (c) 2016, The Regents of the University of California,
+# through Lawrence Berkeley National Laboratory (subject to receipt of any
+# required approvals from the U.S. Dept. of Energy).  All rights reserved.
+
+BootStrap: debootstrap
+OSVersion: xenial
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+
+%runscript
+    echo "This is what happens when you run the container..."
+
+
+%post
+    sed -i 's/$/ universe/' /etc/apt/sources.list
+    apt-get update
+    apt-get -y install build-essential
+    apt-get -y install gfortran-5
+    apt-get -y install gfortran
+    apt-get -y install libmlx4-dev
+    apt-get -y install libmlx5-dev
+    apt-get -y install libibverbs-dev
+    apt-get -y install ibverbs-utils
+    apt-get -y install libopenmpi-dev
+    apt-get -y install openmpi-bin
+    apt-get -y install openmpi-common
+    apt-get -y install libopenblas-dev
+    apt-get -y install liblapack-dev
+    apt-get -y install libblacs-mpi-dev
+    apt-get -y install libscalapack-mpi-dev
+    apt-get -y install libhdf5-dev
+    apt-get -y install libhdf5-mpi-dev
+    apt-get -y install git
+    cd /tmp
+    if [ ! -e training-material ]
+    then
+        git clone https://github.com/gjbex/training-material.git
+    fi
+    cd training-material/Math/Lapack/Svd/
+    git pull origin master
+    make clean create_h5.exe svd_blacs.exe svd.exe
+    cp create_h5.exe /usr/bin/
+    cp svd_blacs.exe /usr/bin/
+    cp svd.exe /usr/bin/
+    cd /tmp
+    rm -rf training-material/

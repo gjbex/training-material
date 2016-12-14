@@ -127,7 +127,7 @@ def animate_solution(mp4_file, times, thetas, omegas, skip):
     init_f = thetaAnim.create_init()
     anim_f = thetaAnim.create_animate()
     anim = animation.FuncAnimation(figure, anim_f, init_func=init_f,
-                                   frames=len(times)/skip, interval=1,
+                                   frames=len(times)//skip, interval=1,
                                    blit=True)
     anim.save(mp4_file, fps=15, writer=animation.AVConvFileWriter())
 

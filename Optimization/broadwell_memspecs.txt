@@ -1,0 +1,425 @@
+# dmidecode 2.12-dmifs
+SMBIOS 3.0 present.
+# SMBIOS implementations newer than version 2.8 are not
+# fully supported by this version of dmidecode.
+
+Handle 0x0030, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: Multi-bit ECC
+	Maximum Capacity: 256 GB
+	Error Information Handle: No Error
+	Number Of Devices: 4
+
+Handle 0x0033, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0030
+	Error Information Handle: No Error
+	Total Width: 72 bits
+	Data Width: 64 bits
+	Size: 16384 MB
+	Form Factor: DIMM
+	Set: 1
+	Locator: CPU1_DIMM1 
+	Bank Locator: BANK 1 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MHz
+	Manufacturer: Samsung
+	Serial Number: 41ABAB68
+	Asset Tag:  
+	Part Number: M393A2G40DB1-CRC   
+	Rank: 2
+	Configured Clock Speed: 2400 MHz
+	Minimum Voltage:  1.14 V
+	Maximum Voltage:  1.26 V
+	Configured Voltage:  1.2 V
+
+Handle 0x0036, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0030
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: DIMM
+	Set: 5
+	Locator: CPU1_DIMM5 
+	Bank Locator: BANK 5 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer:               
+	Serial Number:               
+	Asset Tag:     
+	Part Number:               
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum Voltage:  Unknown
+	Maximum Voltage:  Unknown
+	Configured Voltage:  Unknown
+
+Handle 0x003C, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0030
+	Error Information Handle: No Error
+	Total Width: 72 bits
+	Data Width: 64 bits
+	Size: 16384 MB
+	Form Factor: DIMM
+	Set: 2
+	Locator: CPU1_DIMM2 
+	Bank Locator: BANK 2 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MHz
+	Manufacturer: Samsung
+	Serial Number: 41ABABA3
+	Asset Tag:  
+	Part Number: M393A2G40DB1-CRC   
+	Rank: 2
+	Configured Clock Speed: 2400 MHz
+	Minimum Voltage:  1.14 V
+	Maximum Voltage:  1.26 V
+	Configured Voltage:  1.2 V
+
+Handle 0x003F, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0030
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: DIMM
+	Set: 6
+	Locator: CPU1_DIMM6 
+	Bank Locator: BANK 6 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer:               
+	Serial Number:               
+	Asset Tag:     
+	Part Number:               
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum Voltage:  Unknown
+	Maximum Voltage:  Unknown
+	Configured Voltage:  Unknown
+
+Handle 0x0044, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: Multi-bit ECC
+	Maximum Capacity: 256 GB
+	Error Information Handle: No Error
+	Number Of Devices: 4
+
+Handle 0x0047, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0044
+	Error Information Handle: No Error
+	Total Width: 72 bits
+	Data Width: 64 bits
+	Size: 16384 MB
+	Form Factor: DIMM
+	Set: 3
+	Locator: CPU1_DIMM3 
+	Bank Locator: BANK 3 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MHz
+	Manufacturer: Samsung
+	Serial Number: 41ABD05C
+	Asset Tag:  
+	Part Number: M393A2G40DB1-CRC   
+	Rank: 2
+	Configured Clock Speed: 2400 MHz
+	Minimum Voltage:  1.14 V
+	Maximum Voltage:  1.26 V
+	Configured Voltage:  1.2 V
+
+Handle 0x004A, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0044
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: DIMM
+	Set: 7
+	Locator: CPU1_DIMM7 
+	Bank Locator: BANK 7 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer:               
+	Serial Number:               
+	Asset Tag:     
+	Part Number:               
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum Voltage:  Unknown
+	Maximum Voltage:  Unknown
+	Configured Voltage:  Unknown
+
+Handle 0x0050, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0044
+	Error Information Handle: No Error
+	Total Width: 72 bits
+	Data Width: 64 bits
+	Size: 16384 MB
+	Form Factor: DIMM
+	Set: 4
+	Locator: CPU1_DIMM4 
+	Bank Locator: BANK 4 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MHz
+	Manufacturer: Samsung
+	Serial Number: 41ABBF92
+	Asset Tag:  
+	Part Number: M393A2G40DB1-CRC   
+	Rank: 2
+	Configured Clock Speed: 2400 MHz
+	Minimum Voltage:  1.14 V
+	Maximum Voltage:  1.26 V
+	Configured Voltage:  1.2 V
+
+Handle 0x0053, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0044
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: DIMM
+	Set: 8
+	Locator: CPU1_DIMM8 
+	Bank Locator: BANK 8 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer:               
+	Serial Number:               
+	Asset Tag:     
+	Part Number:               
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum Voltage:  Unknown
+	Maximum Voltage:  Unknown
+	Configured Voltage:  Unknown
+
+Handle 0x0058, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: Multi-bit ECC
+	Maximum Capacity: 256 GB
+	Error Information Handle: No Error
+	Number Of Devices: 4
+
+Handle 0x005B, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0058
+	Error Information Handle: No Error
+	Total Width: 72 bits
+	Data Width: 64 bits
+	Size: 16384 MB
+	Form Factor: DIMM
+	Set: 9
+	Locator: CPU2_DIMM1 
+	Bank Locator: BANK 9 
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MHz
+	Manufacturer: Samsung
+	Serial Number: 41ABBF91
+	Asset Tag:  
+	Part Number: M393A2G40DB1-CRC   
+	Rank: 2
+	Configured Clock Speed: 2400 MHz
+	Minimum Voltage:  1.14 V
+	Maximum Voltage:  1.26 V
+	Configured Voltage:  1.2 V
+
+Handle 0x005E, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0058
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: DIMM
+	Set: 13
+	Locator: CPU2_DIMM5 
+	Bank Locator: BANK 13
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer:               
+	Serial Number:               
+	Asset Tag:     
+	Part Number:               
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum Voltage:  Unknown
+	Maximum Voltage:  Unknown
+	Configured Voltage:  Unknown
+
+Handle 0x0064, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0058
+	Error Information Handle: No Error
+	Total Width: 72 bits
+	Data Width: 64 bits
+	Size: 16384 MB
+	Form Factor: DIMM
+	Set: 10
+	Locator: CPU2_DIMM2 
+	Bank Locator: BANK 10
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MHz
+	Manufacturer: Samsung
+	Serial Number: 41ABC3F4
+	Asset Tag:  
+	Part Number: M393A2G40DB1-CRC   
+	Rank: 2
+	Configured Clock Speed: 2400 MHz
+	Minimum Voltage:  1.14 V
+	Maximum Voltage:  1.26 V
+	Configured Voltage:  1.2 V
+
+Handle 0x0067, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0058
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: DIMM
+	Set: 14
+	Locator: CPU2_DIMM6 
+	Bank Locator: BANK 14
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer:               
+	Serial Number:               
+	Asset Tag:     
+	Part Number:               
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum Voltage:  Unknown
+	Maximum Voltage:  Unknown
+	Configured Voltage:  Unknown
+
+Handle 0x006C, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: Multi-bit ECC
+	Maximum Capacity: 256 GB
+	Error Information Handle: No Error
+	Number Of Devices: 4
+
+Handle 0x006F, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x006C
+	Error Information Handle: No Error
+	Total Width: 72 bits
+	Data Width: 64 bits
+	Size: 16384 MB
+	Form Factor: DIMM
+	Set: 11
+	Locator: CPU2_DIMM3 
+	Bank Locator: BANK 11
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MHz
+	Manufacturer: Samsung
+	Serial Number: 41ABCE83
+	Asset Tag:  
+	Part Number: M393A2G40DB1-CRC   
+	Rank: 2
+	Configured Clock Speed: 2400 MHz
+	Minimum Voltage:  1.14 V
+	Maximum Voltage:  1.26 V
+	Configured Voltage:  1.2 V
+
+Handle 0x0072, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x006C
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: DIMM
+	Set: 15
+	Locator: CPU2_DIMM7 
+	Bank Locator: BANK 15
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer:               
+	Serial Number:               
+	Asset Tag:     
+	Part Number:               
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum Voltage:  Unknown
+	Maximum Voltage:  Unknown
+	Configured Voltage:  Unknown
+
+Handle 0x0078, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x006C
+	Error Information Handle: No Error
+	Total Width: 72 bits
+	Data Width: 64 bits
+	Size: 16384 MB
+	Form Factor: DIMM
+	Set: 12
+	Locator: CPU2_DIMM4 
+	Bank Locator: BANK 12
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: 2400 MHz
+	Manufacturer: Samsung
+	Serial Number: 41ABCEE7
+	Asset Tag:  
+	Part Number: M393A2G40DB1-CRC   
+	Rank: 2
+	Configured Clock Speed: 2400 MHz
+	Minimum Voltage:  1.14 V
+	Maximum Voltage:  1.26 V
+	Configured Voltage:  1.2 V
+
+Handle 0x007B, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x006C
+	Error Information Handle: No Error
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: DIMM
+	Set: 16
+	Locator: CPU2_DIMM8 
+	Bank Locator: BANK 16
+	Type: DDR4
+	Type Detail: Synchronous
+	Speed: Unknown
+	Manufacturer:               
+	Serial Number:               
+	Asset Tag:     
+	Part Number:               
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum Voltage:  Unknown
+	Maximum Voltage:  Unknown
+	Configured Voltage:  Unknown
+

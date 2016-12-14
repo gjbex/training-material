@@ -1,0 +1,65 @@
+Intel(R) Memory Latency Checker - v3.1a
+Measuring idle latencies (in ns)...
+		Numa node
+Numa node	     0	     1	
+       0	  92.1	 127.1	
+       1	 129.4	  90.0	
+
+Measuring Peak Memory Bandwidths for the system
+Bandwidths are in MB/sec (1 MB/sec = 1,000,000 Bytes/sec)
+Using all the threads from each core if Hyper-threading is enabled
+Using traffic with the following read-write ratios
+ALL Reads        :	122130.1	
+3:1 Reads-Writes :	112893.9	
+2:1 Reads-Writes :	110465.2	
+1:1 Reads-Writes :	99124.2	
+Stream-triad like:	109274.7	
+
+Measuring Memory Bandwidths between nodes within system 
+Bandwidths are in MB/sec (1 MB/sec = 1,000,000 Bytes/sec)
+Using all the threads from each core if Hyper-threading is enabled
+Using Read-only traffic type
+		Numa node
+Numa node	     0	     1	
+       0	60758.6	30587.2	
+       1	30602.6	61562.1	
+
+Measuring Loaded Latencies for the system
+Using all the threads from each core if Hyper-threading is enabled
+Using Read-only traffic type
+Inject	Latency	Bandwidth
+Delay	(ns)	MB/sec
+==========================
+ 00000	200.00	 122365.1
+ 00002	198.94	 122264.6
+ 00008	191.95	 122679.7
+ 00015	186.45	 122510.3
+ 00050	158.72	 121452.3
+ 00100	121.01	 106422.8
+ 00200	106.05	  68622.5
+ 00300	101.73	  49855.1
+ 00400	 98.84	  38790.7
+ 00500	 96.82	  31029.3
+ 00700	 94.95	  23026.0
+ 01000	 93.60	  16702.3
+ 01300	 93.42	  13138.7
+ 01700	 92.76	  10329.2
+ 02500	 91.57	   7323.9
+ 03500	 91.29	   5477.1
+ 05000	 90.65	   4065.1
+ 09000	 90.06	   2586.9
+ 20000	 89.46	   1562.5
+
+Measuring cache-to-cache transfer latency (in ns)...
+Local Socket L2->L2 HIT  latency	33.2
+Local Socket L2->L2 HITM latency	36.6
+Remote Socket LLC->LLC HITM latency (data address homed in writer socket)
+			Reader Numa Node
+Writer Numa Node     0	     1	
+            0	     -	  75.7	
+            1	  75.8	     -	
+Remote Socket LLC->LLC HITM latency (data address homed in reader socket)
+			Reader Numa Node
+Writer Numa Node     0	     1	
+            0	     -	  76.0	
+            1	  76.0	     -	

@@ -1,0 +1,73 @@
+Intel(R) Memory Latency Checker - v3.1a
+Measuring idle latencies (in ns)...
+		Numa node
+Numa node	     0	     1	     2	     3	
+       0	  73.8	 151.1	 185.7	 196.0	
+       1	 141.1	  76.5	 184.6	 194.2	
+       2	 185.3	 195.0	  73.7	 150.9	
+       3	 184.8	 194.6	 141.1	  76.4	
+
+Measuring Peak Memory Bandwidths for the system
+Bandwidths are in MB/sec (1 MB/sec = 1,000,000 Bytes/sec)
+Using all the threads from each core if Hyper-threading is enabled
+Using traffic with the following read-write ratios
+ALL Reads        :	144906.6	
+3:1 Reads-Writes :	130347.1	
+2:1 Reads-Writes :	126626.7	
+1:1 Reads-Writes :	114846.3	
+Stream-triad like:	125606.5	
+
+Measuring Memory Bandwidths between nodes within system 
+Bandwidths are in MB/sec (1 MB/sec = 1,000,000 Bytes/sec)
+Using all the threads from each core if Hyper-threading is enabled
+Using Read-only traffic type
+		Numa node
+Numa node	     0	     1	     2	     3	
+       0	36481.7	18909.5	16039.3	15127.7	
+       1	20194.2	36376.3	15812.5	14946.7	
+       2	16090.9	15191.0	36507.0	18850.3	
+       3	15775.5	14939.6	20151.5	36348.1	
+
+Measuring Loaded Latencies for the system
+Using all the threads from each core if Hyper-threading is enabled
+Using Read-only traffic type
+Inject	Latency	Bandwidth
+Delay	(ns)	MB/sec
+==========================
+ 00000	203.58	 145200.4
+ 00002	202.96	 145260.1
+ 00008	198.28	 145314.3
+ 00015	192.23	 145305.6
+ 00050	164.33	 144868.6
+ 00100	103.73	 115424.2
+ 00200	 91.29	  70055.4
+ 00300	 87.57	  49582.2
+ 00400	 85.15	  38364.5
+ 00500	 83.05	  30718.6
+ 00700	 80.21	  22785.3
+ 01000	 78.70	  16523.2
+ 01300	 78.55	  13031.8
+ 01700	 77.55	  10250.7
+ 02500	 76.68	   7307.4
+ 03500	 75.41	   5504.1
+ 05000	 74.85	   4127.0
+ 09000	 74.42	   2685.3
+ 20000	 74.12	   1687.0
+
+Measuring cache-to-cache transfer latency (in ns)...
+Local Socket L2->L2 HIT  latency	34.4
+Local Socket L2->L2 HITM latency	39.2
+Remote Socket LLC->LLC HITM latency (data address homed in writer socket)
+			Reader Numa Node
+Writer Numa Node     0	     1	     2	     3	
+            0	     -	  46.9	  77.5	  80.6	
+            1	  48.8	     -	  82.1	  85.3	
+            2	  78.3	  80.7	     -	  46.8	
+            3	  82.6	  85.5	  47.6	     -	
+Remote Socket LLC->LLC HITM latency (data address homed in reader socket)
+			Reader Numa Node
+Writer Numa Node     0	     1	     2	     3	
+            0	     -	  98.9	 132.0	 145.5	
+            1	  95.5	     -	 134.4	 148.4	
+            2	 132.2	 145.5	     -	  98.9	
+            3	 134.6	 148.7	  94.1	     -	

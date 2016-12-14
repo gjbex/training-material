@@ -1,0 +1,8 @@
+version,cores,time
+python,1,2350
+cython,1,1.54
+cython_omp,1,1.54
+cython_omp,2,0.78
+cython_omp,4,0.43
+cython_omp,8,0.25
+cython_omp,16,0.14
