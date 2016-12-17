@@ -47,4 +47,5 @@ What is it?
 
 Contributors
 ------------
-Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
+* Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
+* Guillaume Jacquenot (Python 3 version of XDMF generating scripts)
