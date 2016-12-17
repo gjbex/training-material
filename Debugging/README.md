@@ -8,5 +8,7 @@ them.
     framework for testing C code.
 1. `debugging.pptx`: Microsoft Powerpoint presentation on defensive
     programming, testing and debugging techniques.
+1. `DropIn`: illustration of how to write drop-in replacements for functions
+    in libraries.
 1. `Gdb`: some sample code to illustrate using GDB.
 1. `MPI`: MPI code to illustrate using Allinea DDT.
