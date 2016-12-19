@@ -14,3 +14,12 @@ implementation for, e.g., debugging purposes.
 1. `run.sh`: Bash shell script that builds the software, runs
     `test_linked.exe`, `test_not_linked.exe`, and finally
     `test_not_linked.exe`, but with `libintercept.so` preloaded.
+
+## Notes
+Note that it is a particularly bad idea to export the `LD_PRELOAD`
+variable in yuor shell script since, depending on what is being
+preloaded, shell commands and other executables may crash horribly.  Hence,
+always use:
+```bash
+$ LD_PRELOAD=/path_to_lib/libwhatever.so ./executable.exe
+```
