@@ -64,6 +64,12 @@ public class Article {
 		this.year = year;
 	}
 
+	/*
+	 * What if we wanted to add two optional arguments, DOI and a URL where to find the article?
+	 * We would need a constructor for four cases, niether DOI nor URL, one with DOI, one with
+	 * URL, and finally one with both DOI and URL.  Note that the second and third can not be
+	 * distinguished when both are represented by a String. 
+	 */
 
 	/**
 	 * Method to validate an array that represents authors of a journal article. The array should not be
