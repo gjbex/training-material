@@ -7,3 +7,4 @@ for that purpose.
 1. `ConcurrentPi`: illustration of computing using multiple threads.
 1. `DataStructures`: some illustrations of the data structures in Java's
     standard library.
+1. `DesignPatterns`: some design patterns illustrated.
