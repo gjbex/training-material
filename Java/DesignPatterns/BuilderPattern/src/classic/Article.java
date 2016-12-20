@@ -41,25 +41,26 @@ public class Article {
 	 */
 	private final int year;
 
-	public Article(String[] authors, String title, String journal, int issue, String pages, int year) {
+	public Article(String[] authors, String title, String journal, int issue,
+			String pages, int year) throws InvalidArgumentException {
 		if (!isValidAuthors(authors))
-			throw new IllegalArgumentException("invalid authors");
+			throw new InvalidArgumentException("invalid authors");
 		for (String author: authors)
 			this.authors.add(author);
 		if (!isValidTitle(title))
 			throw new IllegalAccessError("invalid title");
 		this.title = title;
 		if (!isValidJournal(journal))
-			throw new IllegalArgumentException("invalid journal");
+			throw new InvalidArgumentException("invalid journal");
 		this.journal = journal;
 		if (!isValidIssue(issue))
-			throw new IllegalArgumentException("invalid issue");
+			throw new InvalidArgumentException("invalid issue");
 		this.issue = issue;
 		if (!isValidPages(pages))
-			throw new IllegalArgumentException("invalid pages");
+			throw new InvalidArgumentException("invalid pages");
 		this.pages = pages;
 		if (!isValidYear(year))
-			throw new IllegalArgumentException("invalid year");
+			throw new InvalidArgumentException("invalid year");
 		this.year = year;
 	}
 

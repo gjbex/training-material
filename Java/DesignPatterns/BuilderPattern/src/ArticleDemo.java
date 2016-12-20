@@ -1,4 +1,4 @@
-import builder.UninitializedArticleException;
+import classic.InvalidArgumentException;
 
 /**
  * 
@@ -20,23 +20,29 @@ public class ArticleDemo {
 		int issue = 17;
 		String pages = "25-37";
 		int year = 2014;
-		classic.Article cArticle = new classic.Article(authors, title, journal, issue, pages, year);
-		System.out.println("classic constructor:");
-		System.out.println(cArticle);
+		try {
+			classic.Article cArticle = new classic.Article(authors, title, journal, issue, pages, year);
+			System.out.println("classic constructor:");
+			System.out.println(cArticle);
+		} catch (InvalidArgumentException e) {
+			System.err.println("error: " + e.getMessage());
+		}
 		
-		builder.Article.ArticleBuilder articleBuilder = new builder.Article.ArticleBuilder();
-		articleBuilder.setAuthors(authors)
+		try {
+			builder.Article.ArticleBuilder articleBuilder = new builder.Article.ArticleBuilder();
+			articleBuilder.setAuthors(authors)
 						.setTitle(title)
 						.setJournal(journal)
 						.setIssue(issue)
 						.setPages(pages)
 						.setYear(year);
-		System.out.println("\nbuilder constructor:");
-		try {
+			System.out.println("\nbuilder constructor:");
 			builder.Article bArticle = articleBuilder.build();
 			System.out.println(bArticle);
-		} catch (UninitializedArticleException e) {
+		} catch (builder.UninitializedArticleException e) {
 			System.err.println("article not fully initialized");
+		} catch (builder.InvalidArgumentException e) {
+			System.err.println("error: " + e.getMessage());
 		}
 	}
 

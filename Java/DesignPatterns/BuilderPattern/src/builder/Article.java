@@ -136,10 +136,11 @@ public class Article {
 		 * 
 		 * @param authors String array representing the authors
 		 * @return the article builder object
+		 * @throws InvalidArgumentException 
 		 */
-		public ArticleBuilder setAuthors(String[] authors) {
+		public ArticleBuilder setAuthors(String[] authors) throws InvalidArgumentException {
 			if (!Article.isValidAuthors(authors))
-				throw new IllegalArgumentException("invalid authors");
+				throw new InvalidArgumentException("invalid authors");
 			this.article.authors = new ArrayList<String>();
 			for (String author: authors)
 				this.article.authors.add(author);
@@ -151,10 +152,11 @@ public class Article {
 		 * 
 		 * @param authors String representing the title
 		 * @return the article builder object
+		 * @throws InvalidArgumentException 
 		 */
-		public ArticleBuilder setTitle(String title) {
+		public ArticleBuilder setTitle(String title) throws InvalidArgumentException {
 			if (!Article.isValidTitle(title))
-				throw new IllegalArgumentException("invalid title");
+				throw new InvalidArgumentException("invalid title");
 			this.article.title = title;
 			return this;
 		}
@@ -164,10 +166,11 @@ public class Article {
 		 * 
 		 * @param authors String representing the journal name
 		 * @return the article builder object
+		 * @throws InvalidArgumentException 
 		 */
-		public ArticleBuilder setJournal(String journal) {
+		public ArticleBuilder setJournal(String journal) throws InvalidArgumentException {
 			if (!Article.isValidJournal(journal))
-				throw new IllegalArgumentException("invalid journal");
+				throw new InvalidArgumentException("invalid journal");
 			this.article.journal = journal;
 			return this;
 		}
@@ -177,10 +180,11 @@ public class Article {
 		 * 
 		 * @param authors String representing the journal issue
 		 * @return the article builder object
+		 * @throws InvalidArgumentException 
 		 */
-		public ArticleBuilder setIssue(int issue) {
+		public ArticleBuilder setIssue(int issue) throws InvalidArgumentException {
 			if (!Article.isValidIssue(issue))
-				throw new IllegalArgumentException("invalid issue");
+				throw new InvalidArgumentException("invalid issue");
 			this.article.issue = issue;
 			return this;
 		}
@@ -190,10 +194,11 @@ public class Article {
 		 * 
 		 * @param authors String representing the articles pages
 		 * @return the article builder object
+		 * @throws InvalidArgumentException 
 		 */
-		public ArticleBuilder setPages(String pages) {
+		public ArticleBuilder setPages(String pages) throws InvalidArgumentException {
 			if (!Article.isValidPages(pages))
-				throw new IllegalArgumentException("invalid pages");
+				throw new InvalidArgumentException("invalid pages");
 			this.article.pages = pages;
 			return this;
 		}
@@ -203,10 +208,11 @@ public class Article {
 		 * 
 		 * @param authors String representing the journal issue
 		 * @return the article builder object
+		 * @throws InvalidArgumentException 
 		 */
-		public ArticleBuilder setYear(int year) {
+		public ArticleBuilder setYear(int year) throws InvalidArgumentException {
 			if (!Article.isValidYear(year))
-				throw new IllegalArgumentException("invalid year");
+				throw new InvalidArgumentException("invalid year");
 			this.article.year = year;
 			return this;
 		}
