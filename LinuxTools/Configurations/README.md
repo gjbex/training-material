@@ -8,3 +8,8 @@ non-default settings.
     and reattach sessions. This configuration file defines a status
     line at the bottom of the screen that shows the open windows, and
     highlights the one that is active.
+
+## Important note
+To use most of the configuration files, they need to be placed in your
+home directory, and be renamed to start with a `.`, e.g., `screenrc`
+should be renamed to `.screenrc`.
