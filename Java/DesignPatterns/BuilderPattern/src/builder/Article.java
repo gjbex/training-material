@@ -21,6 +21,8 @@ public class Article {
 	private final int uninitializedIssue = -1;
 	private final String uninitializedPages = null;
 	private final int uninitializedYear = -1;
+	private final String uninitializedDOI = null;
+	private final String uninitializedURL = null;
 	
 	/**
 	 * array of strings, each string representing an author of the aritcle
@@ -46,6 +48,16 @@ public class Article {
 	 * integer representing the publication year of the article
 	 */
 	private int year = uninitializedYear;
+
+	/**
+	 * String representing the article's DOI
+	 */
+	private String doi = null;
+	
+	/**
+	 * String representing the URL where the article can be found
+	 */
+	private String url = null;
 
 	/**
 	 * Default constructor, never to be used outside of the ArticleBuilder inner class.
@@ -96,6 +108,28 @@ public class Article {
 		return year;
 	}
 
+	public boolean hasDOI() {
+		return doi != uninitializedDOI;
+	}
+	
+	/**
+	 * @return the DOI
+	 */
+	public String getDOI() {
+		return doi;
+	}
+	
+	public boolean hasURL() {
+		return url != uninitializedURL;
+	}
+	
+	/**
+	 * @return the URL
+	 */
+	public String getURL() {
+		return url;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -113,6 +147,10 @@ public class Article {
 		        .append("\nIssue: ").append(getIssue())
 		        .append("\nPages: ").append(getPages())
 		        .append("\nYear: ").append(getYear());
+		if (hasDOI())
+			builder.append("\nDOI: ").append(getDOI());
+		if (hasURL())
+			builder.append("\nURL: ").append(getURL());
 		return builder.toString();
 	}
 
@@ -150,7 +188,7 @@ public class Article {
 		/**
 		 * Method to set title of a journal article. The string  should be non-null and non-empty.
 		 * 
-		 * @param authors String representing the title
+		 * @param title String representing the title
 		 * @return the article builder object
 		 * @throws InvalidArgumentException 
 		 */
@@ -164,7 +202,7 @@ public class Article {
 		/**
 		 * Method to set journal of a journal article. The string  should be non-null and non-empty.
 		 * 
-		 * @param authors String representing the journal name
+		 * @param journal String representing the journal name
 		 * @return the article builder object
 		 * @throws InvalidArgumentException 
 		 */
@@ -178,7 +216,7 @@ public class Article {
 		/**
 		 * Method to set the issue of a journal article. The issue should be positive.
 		 * 
-		 * @param authors String representing the journal issue
+		 * @param issue integer representing the journal issue
 		 * @return the article builder object
 		 * @throws InvalidArgumentException 
 		 */
@@ -192,7 +230,7 @@ public class Article {
 		/**
 		 * Method to set the pages of a journal article. The string  should be non-null and non-empty.
 		 * 
-		 * @param authors String representing the articles pages
+		 * @param pages String representing the articles pages
 		 * @return the article builder object
 		 * @throws InvalidArgumentException 
 		 */
@@ -206,7 +244,7 @@ public class Article {
 		/**
 		 * Method to set the year of a journal article. The year should be strictly positive.
 		 * 
-		 * @param authors String representing the journal issue
+		 * @param year integer representing the journal year
 		 * @return the article builder object
 		 * @throws InvalidArgumentException 
 		 */
@@ -214,6 +252,20 @@ public class Article {
 			if (!Article.isValidYear(year))
 				throw new InvalidArgumentException("invalid year");
 			this.article.year = year;
+			return this;
+		}
+		
+		/**
+		 * Method to set the DOI of a journal article. The DOI should be not null and not empty.
+		 * 
+		 * @param doi String representing the journal DOI
+		 * @return the article builder object
+		 * @throws InvalidArgumentException 
+		 */
+		public ArticleBuilder setDOI(String doi) throws InvalidArgumentException {
+			if (!Article.isValidDOI(doi))
+				throw new InvalidArgumentException("invalid DOI");
+			this.article.doi = doi;
 			return this;
 		}
 		
@@ -280,6 +332,17 @@ public class Article {
 	}
 	
 	/**
+	 * Method to check whether a page range for an article is valid, i.e., it should not be null, and
+	 * it can be either a number, or a range, e.g., 5-12.
+	 * 
+	 * @param pages String representing the article's page range
+	 * @return true if valid
+	 */
+	private static boolean isValidPages(String pages) {
+		return pages != null && pages.matches("\\d+(?:-\\d+)");
+	}
+	
+	/**
 	 * Method to check whether the article's publication year is valid, i.e., whether it is strictly
 	 * positive.
 	 *  
@@ -291,14 +354,25 @@ public class Article {
 	}
 
 	/**
-	 * Method to check whether a page range for an article is valid, i.e., it should not be null, and
-	 * it can be either a number, or a range, e.g., 5-12.
+	 * Method to check whether an DOI for an article is valid, i.e., it should not be null, and
+	 * not empty.
 	 * 
-	 * @param pages String representing the article's page range
+	 * @param pages String representing the article's DOI
 	 * @return true if valid
 	 */
-	private static boolean isValidPages(String pages) {
-		return pages != null && pages.matches("\\d+(?:-\\d+)");
+	private static boolean isValidDOI(String doi) {
+		return isValidStringAttribute(doi);
+	}
+	
+	/**
+	 * Method to check whether an URL for an article is valid, i.e., it should not be null, and
+	 * not empty.
+	 * 
+	 * @param pages String representing the article's URL
+	 * @return true if valid
+	 */
+	private static boolean isValidURL(String url) {
+		return isValidStringAttribute(url);
 	}
 	
 	/**
