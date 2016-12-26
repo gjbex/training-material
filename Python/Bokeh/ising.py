@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-from bokeh.io import vform
+from bokeh.layouts import column
 from bokeh.models import CustomJS, ColumnDataSource, Slider
 from bokeh.plotting import Figure, output_file, show
 import math
@@ -36,6 +36,6 @@ if __name__ == '__main__':
     slider = Slider(start=0.2, end=4.0, value=4.0, step=0.01, title="beta",
                     callback=CustomJS.from_py_func(callback))
 
-    layout = vform(slider, plot)
+    layout = column(children=[plot, slider])
 
     show(layout)
