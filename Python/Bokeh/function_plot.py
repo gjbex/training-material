@@ -22,7 +22,7 @@ y_min = -np.exp(-options.mu*x)
 
 output_file(options.file, title='damped pendulum')
 plot = figure(title='damped pendulum',
-              x_axis_label='t', y_axis_label='thera')
+              x_axis_label='t', y_axis_label='theta')
 plot.line(x, y)
 plot.line(x, y_min, line_color='red', line_width=0.6, line_dash='2 2')
 plot.line(x, y_plus, line_color='red', line_width=0.6, line_dash='2 2')
