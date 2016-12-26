@@ -15,8 +15,6 @@ arg_parser.add_argument('file', nargs='?', help='output file name')
 options = arg_parser.parse_args()
 
 # create function data
-eq = (r'$\frac{d^2 \theta}{dt^2} = - \frac{g}{l} \theta ' +
-      r'- \mu \frac{d\theta}{dt}$')
 x = np.linspace(0.0, 20.0, 500)
 y = np.exp(-options.mu*x)*np.cos(2.0*np.pi*x)
 y_plus = np.exp(-options.mu*x)
