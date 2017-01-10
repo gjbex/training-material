@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     for (iter_nr = 0; iter_nr < nr_iters; iter_nr++) {
         c_read = fgetc(fp);
         if (feof(fp))
-            errx(FILE_TOO_SHORT, "file too short, got  %ld, should be %d",
+            errx(FILE_TOO_SHORT, "file too short, got  %ld, should be %ld",
                     iter_nr, nr_iters);
         if (c != c_read)
             errx(UNEXPECTED_CHAR, "unexpected '%c', should be '%c'",
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     }
     c_read = fgetc(fp);
     if (!feof(fp))
-        errx(FILE_TOO_LONG, "file too long, should be %d", nr_iters);
+        errx(FILE_TOO_LONG, "file too long, should be %ld", nr_iters);
     fclose(fp);
     return EXIT_SUCCESS;
 }
