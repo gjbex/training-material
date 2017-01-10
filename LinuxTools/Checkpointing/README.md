@@ -7,3 +7,6 @@ some examples of using the DMTCP package is illustrated.
     number of scenarios.
 1. `Simple`: a simple application to test DMTCP, single-threaded application
     infrequently writing to a file.
+1. `Pipeline`: a simple application with a data producers feeding a data
+    consumer throught a pipe, while the consumer redirects output to a
+    file.
