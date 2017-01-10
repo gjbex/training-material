@@ -8,9 +8,9 @@ int main(int argc, char *argv[]) {
     long iter_nr, nr_iters = 10;
     unsigned int sleeptime = 1;
     if (argc > 1)       
-        nr_iters = atol(argv[2]);
+        nr_iters = atol(argv[1]);
     if (argc > 2)
-        sleeptime = (unsigned int) atoi(argv[3]);
+        sleeptime = (unsigned int) atoi(argv[2]);
     for (iter_nr = 0; iter_nr < nr_iters; iter_nr++) {
         putchar(c++);
         if (c > '9')

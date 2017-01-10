@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     char c = '0', c_read;
     long iter_nr, nr_iters = 10;
     if (argc > 1)       
-        nr_iters = atol(argv[2]);
+        nr_iters = atol(argv[1]);
     for (iter_nr = 0; iter_nr < nr_iters; iter_nr++) {
         c_read = getchar();
         if (c_read == EOF)
