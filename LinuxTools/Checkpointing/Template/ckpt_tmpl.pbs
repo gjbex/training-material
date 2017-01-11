@@ -19,7 +19,7 @@
 # set the checkpoint directory and other DMTCP parameters
 export DMTCP_CHECKPOINT_INTERVAL=$(( 2*60 ))
 # default maximum retries, used only if no explicit value was given
-DEFAULT_MAX_RETRIES=1
+DEFAULT_MAX_RESTART=1
 
 # error codes used by this PBS script, modify if this conflicts with
 # your workload's error codes
@@ -55,7 +55,7 @@ export DMTCP_CHECKPOINT_DIR="$(pwd)/ckpt_${job_id}"
 # automatically
 if [ "x" == "x${max_restart}" ]
 then
-    max_restart=$DEFAULT_MAX_RETRIES
+    max_restart=$DEFAULT_MAX_RESTART
 fi
 
 # restart represents the number of times a job has been restarted
@@ -76,23 +76,23 @@ if [ ${restart} -lt ${max_restart} ]
 then
     restart=$(( $restart + 1 ))
     values="job_id=${job_id}"
-    values+="job_name=${job_name}"
+    values+=",job_name=${job_name}"
     values+=",restart=${restart}"
     values+=",max_restart=${max_restart}"
     values+=",workload=${workload}"
     next_job_name="${job_name}_${restart}"
 # restart job depends on this jobs success or failure
-    ssh -t login1 \
-        qsub -W depend=afternotok:${PBS_JOBID} -v $values \
+    ssh login1 cd ${PBS_O_WORKDIR} && \
+        qsub -W depend=afternotok:${PBS_JOBID} -v ${values} \
             -N ${next_job_name} \
-            "${PBS_O_WORKDIR}/ckpt_tmpl.pbs"
+            ckpt_tmpl.pbs
 fi
 
 # if no checkpoint directory exists, this is the original job
 if [ ! -e "${DMTCP_CHECKPOINT_DIR}" ]
 then
     mkdir -p "${DMTCP_CHECKPOINT_DIR}"
-    dmtcp_coordinator &
+    dmtcp_coordinator --exit-on-last &
     sleep 5
     dmtcp_launch "${workload}" &
     wait
