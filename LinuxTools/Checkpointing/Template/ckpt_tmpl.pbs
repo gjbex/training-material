@@ -75,12 +75,14 @@ fi
 if [ ${restart} -lt ${max_restart} ]
 then
     restart=$(( $restart + 1 ))
-    values="job_id=${job_id}"
+    values="job_id=\"${job_id}\""
     values+=",job_name=${job_name}"
     values+=",restart=${restart}"
     values+=",max_restart=${max_restart}"
     values+=",workload=${workload}"
     next_job_name="${job_name}_${restart}"
+    echo $values
+    echo $next_job_name
 # restart job depends on this jobs success or failure
     ssh login1 cd ${PBS_O_WORKDIR} && \
         qsub -W depend=afternotok:${PBS_JOBID} -v ${values} \
