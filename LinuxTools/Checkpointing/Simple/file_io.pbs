@@ -16,8 +16,8 @@ mkdir -p ${DMTCP_CHECKPOINT_DIR}
 # checkpoint every 5 mintues
 export DMTCP_CHECKPOINT_INTERVAL=$(( 3*60 ))
 
-# set the host for the coordinator
-export DMTCP_HOST=$(hostname)
+# set coordinator host
+export DMTCP_COORD_HOST=$(hostname)
 
 # start the DMTCP coordinator k
 echo "starting coordinator..."
