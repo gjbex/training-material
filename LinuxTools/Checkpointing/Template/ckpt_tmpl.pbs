@@ -49,7 +49,7 @@ then
     job_id=$PBS_JOBID
 fi
 
-export DMTCP_CHECKPINT_DIR="$(pwd)/ckpt_${job_id}"
+export DMTCP_CHECKPOINT_DIR="$(pwd)/ckpt_${job_id}"
 
 # max_restart is the maximum number of times a job will be restarted
 # automatically
@@ -85,19 +85,19 @@ then
     ssh -t login1 \
         qsub -W depend=afternotok:${PBS_JOBID} -v $values \
             -N ${next_job_name} \
-            "${PBS_O_WORKDIR}/$0"
+            "${PBS_O_WORKDIR}/ckpt_tmpl.pbs"
 fi
 
 # if no checkpoint directory exists, this is the original job
-if [ ! -e "${DMTCP_CHECKPINT_DIR}" ]
+if [ ! -e "${DMTCP_CHECKPOINT_DIR}" ]
 then
-    mkdir -p "${DMTCP_CHECKPINT_DIR}"
+    mkdir -p "${DMTCP_CHECKPOINT_DIR}"
     dmtcp_coordinator &
     sleep 5
     dmtcp_launch "${workload}" &
     wait
 else
-    restart_script="${DMTCP_CHECKPINT_DIR}/dm_tcp_restart_script.sh"
+    restart_script="${DMTCP_CHECKPOINT_DIR}/dm_tcp_restart_script.sh"
     if [ ! -e "$restart_script" ]
     then
         >&2 echo "### error: no restart script found"
