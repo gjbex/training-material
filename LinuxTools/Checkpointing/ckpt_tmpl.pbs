@@ -1,0 +1,105 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=2
+#PBS -l walltime=00:05:00
+#PBS -l mem=5gb
+########################################################################
+# How to use?
+# 1) define the workload, i.e., the cmoputations to be done in the job
+#    in a separate script, e.g., my_workload.sh
+# 2) adapt the PBS directives at the top of this file, ensure that
+#    all information is passed through directives, not via the
+#    command line upon submission
+# 3) adapt the variables below
+# 4) submit this PBS script
+#    qsub  -v workload=my_workload.sh  ckpt_tmpl.pbs
+#
+########################################################################
+
+# set the checkpoint directory and other DMTCP parameters
+export DMTCP_CHECKPOINT_INTERVAL=$(( 4*60 ))
+# default maximum retries, used only if no explicit value was given
+DEFAULT_MAX_RETRIES=1
+
+# error codes used by this PBS script, modify if this conflicts with
+# your workload's error codes
+no_workload_error=101
+no_restart_script_error=102
+
+########################################################################
+# no modifications required below this point
+########################################################################
+
+cd "${PBS_O_WORKDIR}"
+
+module purge
+module load dmtcp
+
+# check whether a workload was given, exit if not
+if [ "x" == "x${workload}" ]
+then
+    >&2 echo "### error: no workload specified, aborting"
+    exit ${no_workload_error
+fi
+
+# job_id represents the job ID of the original job, it remains the same
+# throughout restarts
+if [ "x" == "x${job_id}" ]
+then
+    job_id=$PBS_JOBID
+fi
+
+export DMTCP_CHECKPINT_DIR="$(pwd)/ckpt_${job_id}"
+
+# max_restart is the maximum number of times a job will be restarted
+# automatically
+if [ 'x" == "x${max_restart}" ]
+then
+    max_restart=$DEFAULT_MAX_RETRIES
+fi
+
+# restart represents the number of times a job has been restarted
+if [ "x" == "x${restart}" ]
+then
+    restart=0
+fi
+
+# remember the original job name
+if [ "x" == "x${job_name}" ]
+then
+    job_name="${PBS_JOBNAME}"
+fi
+
+# if the number of restarts is less than the maximum number, submit a
+# restart job
+if [ ${restart} -lt ${max_restart} ]
+then
+    restart=$(( $restart + 1 ))
+    values="job_id=${job_id}"
+    values+="job_name=${job_name}"
+    values+=",restart=${restart}"
+    values+=",max_restart=${max_restart}"
+    values+=",workload=${workload}"
+    next_job_name="${job_name}_${restart}"
+# restart job depends on this jobs success or failure
+    qsub -W depend=afternotok:${PBS_JOBID} -v $values \
+         -N ${next_job_name} \
+         "${PBS_O_WORKDIR}/$0"
+fi
+
+# if no checkpoint directory exists, this is the original job
+if [ ! -e "${DMTCP_CHECKPINT_DIR}" ]
+then
+    mkdir -p "${DMTCP_CHECKPINT_DIR}"
+    dmtcp_coordinator &
+    sleep 5
+    dmtcp_launch "${workload}" &
+    wait
+else
+    restart_script="${DMTCP_CHECKPINT_DIR}/dm_tcp_restart_script.sh"
+    if [ ! -e "$restart_script" ]
+    then
+        >&2 echo "### error: no restart script found"
+        exit ${no_restart_script_error}
+    fi
+    "$restart_script"
+fi
