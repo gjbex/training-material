@@ -10,5 +10,7 @@ module load dmtcp/2.4.5
 
 export DMTCP_CHECKPOINT_DIR=ckpt
 export DMTCP_CHECKPOINT_INTERVAL=$(( 3*60 ))
+export DMTCP_COORD_HOST=$(hostname)
+
 
 ckpt/dmtcp_restart_script.sh
