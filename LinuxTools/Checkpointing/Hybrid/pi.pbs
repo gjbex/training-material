@@ -1,0 +1,36 @@
+#!/bin/bash -l
+#PBS -A lpt1_sysadmin
+#PBS -l nodes=1:ppn=4
+#PBS -W x=nmatchpolicy:exactnode
+#PBS -l walltime=00:03:00
+#PBS -l pmem=10gb
+#PBS -m ae
+
+module load foss/2016a
+module load dmtcp
+cd $PBS_O_WORKDIR
+
+export DMTCP_CHECKPOINT_DIR=ckpt
+rm -rf ${DMTCP_CHECKPOINT_DIR}
+mkdir -p ${DMTCP_CHECKPOINT_DIR}
+
+# checkpoint every 5 mintues
+export DMTCP_CHECKPOINT_INTERVAL=$(( 2*60 ))
+
+# set coordinator host
+export DMTCP_COORD_HOST=$(hostname)
+
+# start the DMTCP coordinator k
+dmtcp_coordinator --exit-on-last &
+sleep 5
+
+export OMP_NUM_THREADS=2
+dmtcp_launch --ib mpirun --map-by ppr:2:socket:PE=2 \
+    -x OMP_NUM_THREADS \
+    -x DMTCP_CHECKPOINT_DIR \
+    -x DMTCP_COORD_HOST \
+    -x DMTCP_CHECKPOINT_INTERVAL \
+    -x PATH -x LD_LIBRARY_PATH \
+    ./pi.exe 1000000000000 1
+
+wait
