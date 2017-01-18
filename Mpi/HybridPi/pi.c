@@ -27,7 +27,16 @@ int main(int argc, char *argv[]) {
     Params params;
     double *limits, local_limits[2], partial_result, result = 0.0;
 #ifdef WITH_MPI
+#ifdef _OPENMP
+    int thread_level;
+    MPI_Init_thread(NULL, NULL, MPI_THREAD_FUNNELED, &thread_level);
+    if (thread_level != MPI_THREAD_FUNNELED) {
+        fprintf(stderr, "thread level funneled not supported\n");
+        MPI_Abort(MPI_COMM_WORLD, 1);
+    }
+#else
     MPI_Init(NULL, NULL);
+#endif
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 #endif
