@@ -1,19 +1,29 @@
 program diffusion
-use iso_fortran_env, only : REAL64
-use cl_params
-use system_class
-implicit none
+
+    use iso_fortran_env, only : REAL64
+    use mpi_f08
+    use cl_params, only : init_cl, parse_cl
+    use system_class
+    implicit none
 
     integer :: next
     integer, parameter :: file_unit = 9
     type(params_type) :: params
     type(system_type) :: system
     integer :: time, next_time, istat
+    integer :: rank, size
+    integer, parameter :: root = 0
     real(kind=REAL64) :: r
 
-    call init_cl(params)
-    call parse_cl(params, next)
-    call dump_cl(output_unit, '# ', params)
+    call MPI_Init()
+    call MPI_Comm_rank(MPI_COMM_WORLD, rank)
+    call MPI_Comm_size(MPI_COMM_WORLD, size)
+
+    if (rank == root) then
+        call init_cl(params)
+        call parse_cl(params, next)
+        call dump_cl(output_unit, '# ', params)
+    end if
 
     call system%init(params)
     call system%apply_laser(params)
@@ -43,7 +53,8 @@ implicit none
         close(unit=file_unit)
     end if
     call system%delete()
-    stop
+
+    call MPI_Finalize()
 
 end program diffusion
 

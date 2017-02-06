@@ -3,6 +3,7 @@ use iso_fortran_env, only : REAL64, error_unit
 implicit none
 
     type :: params_type
+        sequence
         integer :: n
         real(kind=REAL64) :: init_temp
         integer :: nr_spots
