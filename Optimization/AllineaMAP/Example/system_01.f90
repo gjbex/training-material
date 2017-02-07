@@ -42,12 +42,12 @@ contains
             write (error_unit, '(A)') '### error: can not allocate new_temp'
             stop
         end if
-        this%new_temp = 0.0D00
+        this%new_temp = 0.0_REAL64
         return
     end subroutine init_system
 
-    integer function get_n_system(this)
-        class(system_type) :: this
+    pure integer function get_n_system(this)
+        class(system_type), intent(in) :: this
         get_n_system = this%n_val
     end function get_n_system
 
@@ -127,7 +127,7 @@ contains
             write (o_unit, rowfmt) this%temp(row, :)
         end do
         return
-        end subroutine show_system
+    end subroutine show_system
 
 end module system_class
 
