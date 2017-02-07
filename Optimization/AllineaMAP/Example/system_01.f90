@@ -20,6 +20,7 @@ implicit none
         procedure, public :: avg_temp    => avg_temp_system
         procedure, public :: apply_laser => apply_laser_system
         procedure, public :: step        => step_system
+        procedure, public :: exchange_halos
         procedure, public :: delete      => delete_system
         procedure, public :: delete_mpi  => delete_system_mpi
         procedure, public :: show        => show_system
@@ -189,6 +190,7 @@ contains
             o_unit = output_unit
         end if
         if (present(time)) write (o_unit, '(A, I10)') 'time = ', time
+        write (o_unit, '(A, I5)') 'rank = ', this%rank
         write (rowfmt, '(A,I4,A)') '(', this%n_val, '(F7.3))'
         do row = 1, this%n_val
             write (o_unit, rowfmt) this%temp(row, :)

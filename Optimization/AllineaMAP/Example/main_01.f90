@@ -17,7 +17,7 @@ program diffusion
     logical, dimension(ndims) :: periods = .false.
     logical, parameter :: reorder = .true.
     type(MPI_Comm) :: cart_comm
-    real(kind=REAL64) :: r
+    real(kind=REAL64) :: r, temp_sum, avg_temp
 
     call MPI_Init()
     call MPI_Comm_size(MPI_COMM_WORLD, size)
@@ -40,12 +40,17 @@ program diffusion
     if (rank == root) then
         call dump_cl(output_unit, '# ', params)
     end if
+    call MPI_Barrier(cart_comm)
 
     call system%init(params)
     call system%init_mpi(cart_comm)
     call system%apply_laser(params)
+    time = 0
     if (params%verbose) call system%show(time=time)
-    print '(I10, F15.4)', time, system%avg_temp()
+    avg_temp = system%avg_temp()
+    call MPI_Reduce(avg_temp, temp_sum, 1, MPI_DOUBLE_PRECISION, &
+                    MPI_SUM, root, cart_comm)
+    if (rank == root) print '(I10,F15.4)', time, avg_temp/size
     call random_number(r)
     next_time = 2 + int(r*params%avg_delta)
     do time = 1, params%max_time
@@ -55,9 +60,13 @@ program diffusion
             call random_number(r)
             next_time = time + 1 + int(r*params%avg_delta)
         end if
+        call system%exchange_halos()
         call system%step()
         if (params%verbose) call system%show(time=time)
-        print '(I10,F15.4)', time, system%avg_temp()
+        avg_temp = system%avg_temp()
+        call MPI_Reduce(avg_temp, temp_sum, 1, MPI_DOUBLE_PRECISION, &
+                        MPI_SUM, root, cart_comm)
+        if (rank == root) print '(I10,F15.4)', time, avg_temp/size
     end do
     if (len(trim(params%output_file)) > 0) then
         open(unit=file_unit, file=trim(params%output_file), iostat=istat, &
