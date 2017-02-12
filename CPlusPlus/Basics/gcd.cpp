@@ -3,6 +3,8 @@
 
 using namespace std;
 
+int gcd(int x, int y);
+
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         cerr << "#error: expecting two integers as arguments" << endl;
@@ -14,11 +16,15 @@ int main(int argc, char *argv[]) {
         cerr << "# error: positive integers expected" << endl;
         return 2;
     }
+    cout << gcd(x, y) << endl;
+    return 0;
+}
+
+int gcd(int x, int y) {
     while (x != y)
         if (x > y)
             x -= y;
         else
             y -= x;
-    cout << x << endl;
-    return 0;
+    return x;
 }
