@@ -12,10 +12,6 @@ int main(int argc, char *argv[]) {
     }
     int x = atoi(argv[1]);
     int y = atoi(argv[2]);
-    if (x <= 0 || y <= 0) {
-        cerr << "# error: positive integers expected" << endl;
-        return 2;
-    }
     cout << gcd(x, y) << endl;
     return 0;
 }
