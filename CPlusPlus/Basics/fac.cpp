@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 
 using namespace std;
 
@@ -10,10 +9,10 @@ int main(int argc, char *argv[]) {
         cerr << "#error: expecting one integer as argument" << endl;
         return 1;
     }
-    int n = atoi(argv[1]);
+    int n = stoi(string(argv[1]));
     if (n < 0) {
         cerr << "# error: argument should be positive" << endl;
-        return 2;
+        return 3;
     }
     cout << fac(n) << endl;
     return 0;
