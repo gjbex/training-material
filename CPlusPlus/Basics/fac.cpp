@@ -9,10 +9,17 @@ int main(int argc, char *argv[]) {
         cerr << "#error: expecting one integer as argument" << endl;
         return 1;
     }
-    int n = stoi(string(argv[1]));
+    int n {0};
+   try {
+      n = stoi(string(argv[1]));
+    } catch (invalid_argument) {
+        cerr << "# error: argument can not be converted to an integer"
+             << endl;
+        return 3;
+    }
     if (n < 0) {
         cerr << "# error: argument should be positive" << endl;
-        return 3;
+        return 4;
     }
     cout << fac(n) << endl;
     return 0;
