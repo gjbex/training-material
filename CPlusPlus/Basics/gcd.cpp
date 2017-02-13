@@ -10,8 +10,8 @@ int main(int argc, char *argv[]) {
         cerr << "#error: expecting two integers as arguments" << endl;
         return 1;
     }
-    int x = atoi(argv[1]);
-    int y = atoi(argv[2]);
+    int x = stoi(string(argv[1]));
+    int y = stoi(string(argv[2]));
     cout << gcd(x, y) << endl;
     return 0;
 }
