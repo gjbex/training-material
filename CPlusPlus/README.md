@@ -4,12 +4,12 @@ non-standard libraries.  It is mainly intended to illustrate some
 programming concepts and idiosyncracies particular to C++.
 
 ## What is it?
-1. `essential_cpp_intro.pptx`: Powerpoint presentation, introduction
+1. `00_essential_cpp_intro.pptx`: Powerpoint presentation, introduction
     to "Esscitial C++", based on Bjarne Stroustrup's "A tour of C++".
-1. `essential_cpp_basics.pptx`: Powerpoint presentation, on C++ basic
+1. `01_essential_cpp_basics.pptx`: Powerpoint presentation, on C++ basic
     language features, based on Bjarne Stroustrup's "A tour of C++",
     chapter 1.
-1. `essential_cpp_udt.pptx`: Powerpoint presentation, on C++ user defined
+1. `02_essential_cpp_udt.pptx`: Powerpoint presentation, on C++ user defined
     type features, based on Bjarne Stroustrup's "A tour of C++",
     chapter 2.
 1. `Basics`: illustration of basic C++ features for presentation
