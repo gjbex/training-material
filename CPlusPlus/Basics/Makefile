@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -g -O2 -Wall -std=c++14
 
-APPL = hello.exe talk.exe col_dist.exe gcd.exe fac.exe scope.exe
+APPL = hello.exe talk.exe col_dist.exe gcd.exe fac.exe scope.exe swap.exe
 
 all: $(APPL)
 
