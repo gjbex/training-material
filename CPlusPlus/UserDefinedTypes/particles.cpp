@@ -16,12 +16,13 @@ double sqr(double x) {
 Particle init_particle(std::function<double()> pos_distr,
                        std::function<double()> mass_distr,
                        std::function<int()> charge_distr) {
-    Particle p;
-    p.x = pos_distr();
-    p.y = pos_distr();
-    p.z = pos_distr();
-    p.mass = mass_distr();
-    p.charge = charge_distr() == 0 ? -1 : 1;
+    Particle p = {
+        .x = pos_distr(),
+        .y = pos_distr(),
+        .z = pos_distr(),
+        .mass = mass_distr(),
+        .charge = charge_distr() == 0 ? -1 : 1
+    };
     return p;
 }
 
