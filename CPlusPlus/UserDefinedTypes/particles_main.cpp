@@ -17,6 +17,8 @@ int main() {
     Particle p1 = init_particle(pos_distr, mass_distr, charge_distr);
     Particle p2 = init_particle(pos_distr, mass_distr, charge_distr);
     cout << p1 << endl << p2 << endl;
+    move_particle(p1, 0.5, 0.5, 0.5);
+    cout << "moved: " << p1 << endl;
     cout << "distance = " << dist(p1, p2) << endl;
     cout << "force = " << e_force(p1, p2) << endl;
     return 0;

@@ -26,6 +26,12 @@ Particle init_particle(std::function<double()> pos_distr,
     return p;
 }
 
+void move_particle(Particle& p, double dx, double dy, double dz) {
+    p.x += dx;
+    p.y += dy;
+    p.z += dz;
+}
+
 double dist(const Particle& p1, const Particle& p2) {
     return sqrt(sqr(p1.x - p2.x) + sqr(p1.y - p2.y) + sqr(p1.z - p2.z));
 }
