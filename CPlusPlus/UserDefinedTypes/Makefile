@@ -6,7 +6,7 @@ APPS = particles.exe
 
 all: $(APPS)
 
-particles.exe: particles_main.o particles.o
+particles.exe: particles_main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
 %.o: %.cpp
