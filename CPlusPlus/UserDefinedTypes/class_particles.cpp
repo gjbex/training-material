@@ -49,22 +49,22 @@ double sqr(double x) {
 }
 
 void Particle::move(double dx, double dy, double dz) {
-    this->x += dx;
-    this->y += dy;
-    this->z += dz;
+    x += dx;
+    y += dy;
+    z += dz;
 }
 
 double Particle::dist(const Particle& other) {
-    return sqrt(sqr(this->x - other.x) + 
-                sqr(this->y - other.y) +
-                sqr(this->z - other.z));
+    return sqrt(sqr(x - other.x) + 
+                sqr(y - other.y) +
+                sqr(z - other.z));
 }
 
 double Particle::e_force(const Particle& other) {
     const double q_e {1.6021e-19};
     const double k_c {8.98755e9};
-    double r {this->dist(other)};
-    return -k_c*this->charge*other.charge*sqr(q_e/r);
+    double r {dist(other)};
+    return -k_c*charge*other.charge*sqr(q_e/r);
 }
 
 ostream& operator<<(ostream& out, const Particle& p) {
