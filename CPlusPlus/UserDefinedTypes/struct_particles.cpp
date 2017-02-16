@@ -38,8 +38,6 @@ int main() {
     return 0;
 }
 
-auto mass_distr = bind(uniform_real_distribution<double>(0.0, 1.0),
-                       mt19937_64(1234));
 double sqr(double x) {
     return x*x;
 }
