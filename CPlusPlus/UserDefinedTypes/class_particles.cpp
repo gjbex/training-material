@@ -27,7 +27,6 @@ class Particle {
         void move(double dx, double dy, double dz);
         double dist(const Particle& other) const;
         double e_force(const Particle& other) const;
-//        friend ostream& operator<<(ostream& out, const Particle& p);
 };
 
 ostream& operator<<(ostream& out, const Particle& p);
