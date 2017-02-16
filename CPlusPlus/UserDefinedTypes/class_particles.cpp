@@ -44,7 +44,7 @@ int main() {
     return 0;
 }
 
-double sqr(double x) {
+inline double sqr(double x) {
     return x*x;
 }
 
