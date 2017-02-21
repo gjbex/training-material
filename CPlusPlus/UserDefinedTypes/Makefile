@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -O2 -g -Wall -std=c++14
 LIBS = -lm
 
-APPS = struct_particles.exe class_particles.exe
+APPS = struct_particles.exe class_particles.exe charged_particles.exe
 
 all: $(APPS)
 
