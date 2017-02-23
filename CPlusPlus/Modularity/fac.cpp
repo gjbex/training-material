@@ -32,7 +32,9 @@ int main(int argc, char *argv[]) {
 
 int fac(int n) {
     if (n < 0) {
-        throw invalid_argument("fac argument must be positive");
+        string msg("fac argument ");
+        msg += to_string(n) + ", must be positive";
+        throw invalid_argument(msg);
     } else {
         int result = 1;
         for (int i = 2; i <= n; i++) {
