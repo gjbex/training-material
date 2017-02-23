@@ -6,4 +6,5 @@ Code illustrations for chapter 3, Modularity in Stroustrup's
 1. `particle.h`: declaration of the `Particle` class.
 1. `particle.cpp`: implementation of the `Particle` class.
 1. `particles_main.cpp`: main function for the particles application.
+1. `fac.cpp`: illustrates exception handling.
 1. `Makefile`: make file for these examples.
