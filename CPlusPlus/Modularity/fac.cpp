@@ -1,9 +1,9 @@
 #include <iostream>
 #include <exception>
 
-#define EXIT_MISSING_ARG 1
-#define EXIT_ARG_TYPE 2
-#define EXIT_NEG_ARG 3
+const int EXIT_MISSING_ARG = 1;
+const int EXIT_ARG_TYPE = 2;
+const int EXIT_NEG_ARG = 3;
 
 using namespace std;
 
@@ -16,16 +16,16 @@ int main(int argc, char *argv[]) {
     } catch(invalid_argument) {
         cerr << "# error: '" << argv[1] << "' can not be converted to int"
              << endl;
-        return EXIT_MISSING_ARG;
+        exit(EXIT_ARG_TYPE);
     } catch(logic_error) {
         cerr << "# error: expecting one argument to fac.exe" << endl;
-        return EXIT_ARG_TYPE;
+        exit(EXIT_MISSING_ARG);
     }
     try {
         cout << fac(n) << endl;
     } catch(invalid_argument e) {
         cerr << "# error: invalid argument, " << e.what() << endl;
-        return EXIT_NEG_ARG;
+        exit(EXIT_NEG_ARG);
     }
     return 0;
 }
