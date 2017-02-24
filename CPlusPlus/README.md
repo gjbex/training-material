@@ -20,6 +20,10 @@ programming concepts and idiosyncracies particular to C++.
     based on Bjarne Stroustrup's "A trou of C++", chapter 3.
 1. `Modularity`: illustrations of modularity in C++ for presentation
     "Essential C++: Modularity".
+1. `04_essential_cpp_classes.pptx`: Powerpoint presentation on C++ classes,
+    based on Bjarne Stroustrup's "A trou of C++", chapter 4.
+1. `Classes1``: illustration of classes in C++ for presentation
+    "Essential C++: Classes".
 1. `Random`: some illustrations of using the pseudorandom generator in
     standard C++.
 1. `STL`: some illustrations of using the STL library.
