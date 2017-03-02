@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -O2 -g -Wall -std=c++14
 LIBS = -lm
 
-APPL = tuple.exe list.exe vector.exe
+APPL = tuple.exe vector.exe list.exe set.exe
 
 all: $(APPL)
 
