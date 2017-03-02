@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -O2 -g -Wall -std=c++14
 LIBS = -lm
 
-APPL = tuple.exe
+APPL = tuple.exe list.exe
 
 all: $(APPL)
 
