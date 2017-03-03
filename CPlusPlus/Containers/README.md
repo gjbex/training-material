@@ -7,3 +7,6 @@ Code illustrations for chapter 9, Containers in Stroustrup's
 1. `list.cpp`: illustration of using STL 'list` class.
 1. `vector.cpp`: illustration of using STL `vector`class.
 1. `set.cpp`: illustration of using STL `set` class.
+1. `data.txt`: data file to perform some operations on.
+1. `dim_nrs.cpp`: use a set to keep track of number occuring in a file.
+1. `dim_nr_counts.cpp`: use a map to count occurences of number in a file.
