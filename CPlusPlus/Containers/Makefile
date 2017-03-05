@@ -2,7 +2,8 @@ CXX = g++
 CXXFLAGS = -O2 -g -Wall -std=c++14
 LIBS = -lm
 
-APPL = tuple.exe vector.exe list.exe set.exe dim_nrs.exe dim_nr_counts.exe
+APPL = tuple.exe vector.exe list.exe set.exe \
+       dim_nrs.exe dim_nr_counts.exe split_string.exe
 
 all: $(APPL)
 
