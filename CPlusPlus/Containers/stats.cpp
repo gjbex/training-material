@@ -46,7 +46,7 @@ Stats compute_stats(vector<double> data) {
     sort(data.begin(), data.end());
     int middle {n/2};
     stats.median = n % 2 == 1 ? data.at(middle) :
-        (data.at(middle) + data.at(middle + 1))/2.0;
+        (data.at(middle - 1) + data.at(middle))/2.0;
     stats.n = n;
     return stats;
 }
