@@ -3,7 +3,8 @@ CXXFLAGS = -O2 -g -Wall -std=c++14
 LIBS = -lm
 
 APPL = tuple.exe vector.exe list.exe set.exe \
-       stats.exe dim_nrs.exe dim_nr_counts.exe split_string.exe
+       stats.exe dim_nrs.exe dim_nr_counts.exe split_string.exe \
+       point_distances.exe
 
 all: $(APPL)
 
