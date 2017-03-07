@@ -4,7 +4,7 @@ LIBS = -lm
 
 APPL = tuple.exe vector.exe list.exe set.exe \
        stats.exe dim_nrs.exe dim_nr_counts.exe split_string.exe \
-       point_distances.exe
+       point_distances.exe diffusion.exe
 
 all: $(APPL)
 
