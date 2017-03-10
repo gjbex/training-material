@@ -8,6 +8,9 @@ APPL = tuple.exe vector.exe list.exe set.exe \
 
 all: $(APPL)
 
+diffusion.exe: diffusion_system.o diffusion_main.o
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
 
