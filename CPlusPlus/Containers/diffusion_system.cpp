@@ -23,6 +23,8 @@ System::System(size_t nr_particles, size_t grid_size) {
                       ref(engine));
     _time_distr = bind(gamma_distribution<double>(3.0, 1.0),
                        ref(engine));
+    _move_distr = bind(uniform_int_distribution<int>(0, 3),
+                       ref(engine));
     _grid = new bool[_grid_size*_grid_size];
     _queue = new Particle_queue(cmp);
     for (size_t i = 0; i < _grid_size*_grid_size; i++)
@@ -30,7 +32,6 @@ System::System(size_t nr_particles, size_t grid_size) {
     for (size_t i = 0; i < _nr_patricles; i++) {
         double time {_time_distr()};
         Coordinates *coords = new Coordinates({_pos_distr(), _pos_distr()});
-        cout << "(" << (*coords)[0] << ", " << (*coords)[1] << ")\n";
         _grid[(*coords)[0]*_grid_size + (*coords)[1]] = true;
         Particle particle(time, coords);
         _queue->push(particle);
@@ -39,10 +40,10 @@ System::System(size_t nr_particles, size_t grid_size) {
 
 System::~System() {
     delete[] _grid;
-    while (!_queue.empty()) {
-        Particle particle = _queue.top();
+    while (!_queue->empty()) {
+        Particle particle = _queue->top();
         delete particle.second;
-        _queue.pop();
+        _queue->pop();
     }
     delete _queue;
 }
@@ -73,6 +74,38 @@ void System::print_grid() const {
     for (size_t i = 0; i < _grid_size; i++)
         cout << "-";
     cout << "+" << endl;
+}
+
+Potential_positions System::find_moves(const Coordinates* coords) {
+    Potential_positions pos {-1};
+    int x = (*coords)[0];
+    int y = (*coords)[1];
+    int new_x, new_y;
+    new_x = x - 1;
+    new_y = y;
+    if (new_x >= 0 && !(*_grid)[new_x*_grid_size + new_y])
+        pos[0] = new_x*n + new_y;
+    new_x = x;
+    new_y = y + 1;
+    if (new_y < _grid_size && !(*_grid)[new_x*_grid_size + new_y])
+        pos[1] = new_x*n + new_y;
+    new_x = x + 1;
+    new_y = y;
+    if (new_x < _grid_size && !(*_grid)[new_x*_grid_size + new_y])
+        pos[2] = new_x*n + new_y;
+    new_x = x;
+    new_y = y - 1;
+    if (new_y >= 0 && !(*_grid)[new_x*_grid_size + new_y])
+        pos[3] = new_x*n + new_y;
+    return pos;
+}
+
+double System::update() {
+    Particle particle = _queue->top();
+    double delta_t = particle.first;
+    Potential_positions pos = find_moves(particle.second);
+    // TODO: select position, move, and requeue
+    return delta_t;
 }
 
 bool cmp(const Particle& p1, const Particle& p2) {

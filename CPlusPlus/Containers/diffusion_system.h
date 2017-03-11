@@ -29,4 +29,5 @@ class System {
         ~System();
         void print_grid() const;
         void print_queue() const;
+        double update();
 };
