@@ -14,21 +14,18 @@ ostream& operator<<(ostream& out, const Particle& p) {
 System::System(size_t nr_particles, size_t grid_size) {
     _nr_patricles = nr_particles;
     _grid_size = grid_size;
-    auto engine {mt19937_64(1234)};
-    _pos_distr = bind(uniform_int_distribution<int>(0, _grid_size - 1),
-                      ref(engine));
-    _time_distr = bind(gamma_distribution<double>(3.0, 1.0),
-                       ref(engine));
-    _move_distr = bind(uniform_int_distribution<int>(0, 3),
-                       ref(engine));
+    _engine = new mt19937_64(1234);
+    _pos_distr = uniform_int_distribution<int>(0, _grid_size - 1);
+    _time_distr = gamma_distribution<double>(3.0, 1.0);
+    _move_distr = uniform_int_distribution<int>(0, 3);
     _grid = new bool[_grid_size*_grid_size];
     for (size_t i = 0; i < _grid_size*_grid_size; i++)
         _grid[i] = false;
     _queue = new Particle_queue(cmp);
     for (size_t i = 0; i < _nr_patricles; i++) {
-        double time {_time_distr()};
-        int x {_pos_distr()};
-        int y {_pos_distr()};
+        double time {_time_distr(*_engine)};
+        int x {_pos_distr(*_engine)};
+        int y {_pos_distr(*_engine)};
         _grid[x*_grid_size + y] = true;
         Particle particle(time, x, y);
         _queue->push(particle);
@@ -38,6 +35,7 @@ System::System(size_t nr_particles, size_t grid_size) {
 System::~System() {
     delete[] _grid;
     delete _queue;
+    delete _engine;
 }
 
 void System::print_queue() const {
@@ -67,8 +65,10 @@ void System::print_grid() const {
     cout << "+" << endl;
 }
 
-Potential_positions System::find_moves(const Particle& particle) {
-    Potential_positions pos {{-1}};
+int* System::find_moves(const Particle& particle) {
+    int* pos = new int[4];
+    for (int i = 0; i < 4; i++)
+        pos[i] = -1;
     int n {(int) _grid_size};
     int new_x, new_y;
     new_x = particle.x() - 1;
@@ -93,23 +93,22 @@ Potential_positions System::find_moves(const Particle& particle) {
 double System::update() {
     if (!_queue->empty()) {
         Particle particle {_queue->top()};
-        cout << "update" << endl;
-        cout << particle << endl;
         _queue->pop();
         double delta_t {particle.time()};
         int new_x {particle.x()};
         int new_y {particle.y()};
-        Potential_positions pos {find_moves(particle)};
-        int index {_move_distr()};
+        int* pos {find_moves(particle)};
+        int index = _move_distr(*_engine);
         if (pos[index] >= 0) {
             int x = pos[index]/_grid_size;
             int y = pos[index] % _grid_size;
-            _grid[pos[index]] = false;
-            _grid[x*_grid_size + y] = true;
+            _grid[pos[index]] = true;
+            _grid[particle.x()*_grid_size + particle.y()] = false;
             new_x = x;
             new_y = y;
         }
-        particle.update(delta_t + _time_distr(), new_x, new_y);
+        delete[] pos;
+        particle.update(delta_t + _time_distr(*_engine), new_x, new_y);
         _queue->push(particle);
         return delta_t;
     } else {

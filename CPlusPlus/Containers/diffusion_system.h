@@ -1,6 +1,7 @@
 #include <array>
 #include <functional>
 #include <queue>
+#include <random>
 
 using namespace std;
 
@@ -30,17 +31,16 @@ typedef function<bool(const Particle&, const Particle&)> cmp_t;
 typedef priority_queue<Particle, vector<Particle>, cmp_t>
     Particle_queue;
 
-typedef array<int, 4> Potential_positions;
-
 class System {
     private:
         size_t _nr_patricles, _grid_size;
         Particle_queue* _queue;
         bool* _grid;
-        function<int()> _pos_distr;
-        function<double()> _time_distr;
-        function<int()> _move_distr;
-        Potential_positions find_moves(const Particle& particle);
+        mt19937_64* _engine;
+        uniform_int_distribution<int> _pos_distr;
+        gamma_distribution<double> _time_distr;
+        uniform_int_distribution<int> _move_distr;
+        int* find_moves(const Particle& particle);
     public:
         System(size_t nr_particles, size_t grid_size);
         ~System();

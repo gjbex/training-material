@@ -14,5 +14,6 @@ int main() {
         time += system.update();
         cout << "new time = " << time << endl;
     }
+    system.print_grid();
     return 0;
 }
