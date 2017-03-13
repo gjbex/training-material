@@ -1,8 +1,3 @@
-#include <array>
-#include <functional>
-#include <iostream>
-#include <random>
-
 #include "diffusion_system.h"
 
 using namespace std;
