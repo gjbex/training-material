@@ -3,7 +3,7 @@
 #include "diffusion_system.h"
 
 int main() {
-    const double max_time = {10.0};
+    const double max_time = {1000.0};
     double time {0.0};
     const size_t nr_particles {5};
     const size_t grid_size {10};

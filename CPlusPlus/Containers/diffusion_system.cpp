@@ -11,18 +11,18 @@ System::System(size_t nr_particles, size_t grid_size) {
     _grid_size = grid_size;
     _engine = new mt19937_64(1234);
     _pos_distr = uniform_int_distribution<int>(0, _grid_size - 1);
-    _time_distr = gamma_distribution<double>(3.0, 1.0);
+    _mass_distr = poisson_distribution<int>(3);
     _move_distr = uniform_int_distribution<int>(0, 3);
     _grid = new bool[_grid_size*_grid_size];
     for (size_t i = 0; i < _grid_size*_grid_size; i++)
         _grid[i] = false;
     _queue = new Particle_queue(cmp);
     for (size_t i = 0; i < _nr_patricles; i++) {
-        double time {_time_distr(*_engine)};
+        double mass {1.0 +  _mass_distr(*_engine)};
         int x {_pos_distr(*_engine)};
         int y {_pos_distr(*_engine)};
         _grid[x*_grid_size + y] = true;
-        Particle particle(time, x, y);
+        Particle particle(mass, x, y, _engine);
         _queue->push(particle);
     }
 }
@@ -103,7 +103,7 @@ double System::update() {
             new_y = y;
         }
         delete[] pos;
-        particle.update(delta_t + _time_distr(*_engine), new_x, new_y);
+        particle.update(new_x, new_y);
         _queue->push(particle);
         return delta_t;
     } else {

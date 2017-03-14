@@ -8,18 +8,28 @@ using namespace std;
 class Particle {
     private:
         double _time;
+        double _mass;
         int _x, _y;
+        function<double()> _time_distr;
+        mt19937_64* _engine;
     public:
-        Particle(double time, int x, int y) :
-            _time {time}, _x {x}, _y {y} {};
-        double time() const {return _time; };
-        int x() const {return _x;};
-        int y() const {return _y;};
+        Particle(double mass, int x, int y, mt19937_64* engine) :
+            _mass {mass}, _x {x}, _y {y}, _engine {engine}
+        {
+            _time_distr = bind(gamma_distribution<double>(1.0, _mass),
+                               ref(*_engine));
+            _time = _time_distr();
+        };
+        double time() const { return _time; };
+        double mass() const { return _mass; }
+        int x() const { return _x; };
+        int y() const { return _y; };
+        void update() {  };
         bool operator<(const Particle& other) const {
             return this->time() < other.time();
         }
-        void update(double time, int x, int y) {
-            _time = time; _x = x; _y = y;
+        void update(int x, int y) {
+            _time += _time_distr(); _x = x; _y = y;
         };
 };
 
@@ -38,7 +48,7 @@ class System {
         bool* _grid;
         mt19937_64* _engine;
         uniform_int_distribution<int> _pos_distr;
-        gamma_distribution<double> _time_distr;
+        poisson_distribution<int> _mass_distr;
         uniform_int_distribution<int> _move_distr;
         int* find_moves(const Particle& particle);
     public:
