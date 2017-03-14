@@ -3,7 +3,8 @@
 using namespace std;
 
 ostream& operator<<(ostream& out, const Particle& p) {
-    return out << "(" << p.x() << ", " << p.y() << "): "<< p.time();
+    return out << p.id() << ": (" << p.x() << ", " << p.y() << "): "
+               << p.mass() << " at " << p.time();
 }
 
 System::System(size_t nr_particles, size_t grid_size) {
@@ -22,7 +23,7 @@ System::System(size_t nr_particles, size_t grid_size) {
         int x {_pos_distr(*_engine)};
         int y {_pos_distr(*_engine)};
         _grid[x*_grid_size + y] = true;
-        Particle particle(mass, x, y, _engine);
+        Particle particle(i, mass, x, y, _engine);
         _queue->push(particle);
     }
 }
@@ -37,8 +38,7 @@ void System::print_queue() const {
     Particle_queue io_queue = *_queue;
     while (!io_queue.empty()) {
         Particle particle = io_queue.top();
-        cout << "(" << particle.x() << ", " << particle.y() << "): ";
-        cout << particle.time() << endl;
+        cout << particle << endl;
         io_queue.pop();
     }
 }
