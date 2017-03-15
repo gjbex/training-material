@@ -3,7 +3,7 @@ CXXFLAGS = -O2 -g -std=c++14 -Wall
 LIBS = -lm
 
 
-APPS = for_each.exe
+APPS = generate.exe for_each.exe
 
 all: $(APPS)
 
