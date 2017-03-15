@@ -31,7 +31,7 @@ class Particle {
             return this->time() < other.time();
         };
         void update(int x, int y) {
-            _time = _time_distr(); _x = x; _y = y;
+            _time += _time_distr(); _x = x; _y = y;
         };
 };
 
