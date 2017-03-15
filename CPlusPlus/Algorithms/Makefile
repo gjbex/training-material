@@ -3,7 +3,7 @@ CXXFLAGS = -O2 -g -std=c++14 -Wall
 LIBS = -lm
 
 
-APPS = generate.exe for_each.exe
+APPS = permutations.exe generate.exe for_each.exe
 
 all: $(APPS)
 

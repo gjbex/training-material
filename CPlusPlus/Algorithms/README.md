@@ -7,4 +7,6 @@ Code illustrations for chapter 10, Algorithms in Stroustrup's
     using `std::for_each` and a lambda function.
 1. `generate.cpp`: illustration of generating the elements of a vector
     using `std::generate` and a lambda function.
+1. `permutations.cpp`: illustration of generating the permutations of a
+    vector using `std::next_permutation`.
 1. `Makefile`: make file to build the code.
