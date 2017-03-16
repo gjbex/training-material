@@ -16,4 +16,12 @@ Code illustrations for chapter 9, Containers in Stroustrup's
 1. `split_string.cpp`: use a vector to store parts of a splitted string,
     also illustrates `std::string::find()`.
 1. `dim_nrs.cpp`: use a set to keep track of number occuring in a file.
+1. `synthesizer.cpp`: use valarrays to represent signal values and
+    compute the superposition of several cosine waves.
+1. `diffusion_system.h`: decleration of `Particle` and 'System` classes
+    to simulate diffusion through a medium.
+1. `diffusion_system.cpp`: definitions of `Particle` and 'System` classes
+    to simulate diffusion through a medium;  illustration of a priority
+    queue.
+1. `diffusion_main.ccp`: main function to drive the diffusion simulation.
 1. `dim_nr_counts.cpp`: use a map to count occurences of number in a file.
