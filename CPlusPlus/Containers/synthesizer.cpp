@@ -10,18 +10,13 @@ using namespace std;
 
 using wave_t = pair<double, double>;
 
-vector<wave_t> read_wave_properties(const string& file_name);
+vector<wave_t> read_wave_properties();
 
 int main(int argc, char *argv[]) {
     const double pi {acos(-1.0)};
     const size_t nr_points {1000};
     const double delta_t {10.0*pi/nr_points};
-    if (argc < 2) {
-        cerr << "# error: expecting a file name" << endl;
-        return 1;
-    }
-    string file_name(argv[1]);
-    auto waves = read_wave_properties(file_name);
+    auto waves = read_wave_properties();
     valarray<double> time(nr_points);
     generate(begin(time), end(time),
              [delta_t] () {
@@ -41,11 +36,10 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-vector<wave_t> read_wave_properties(const string& file_name) {
-    ifstream input(file_name);
+vector<wave_t> read_wave_properties() {
     vector<wave_t> waves;
     string line;
-    while (getline(input, line)) {
+    while (getline(cin, line)) {
         stringstream stream(line);
         double freq, phase;
         stream >> freq >> phase;
