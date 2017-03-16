@@ -38,10 +38,8 @@ class Particle {
 ostream& operator<<(ostream& out, const Particle& p);
 
 bool cmp(const Particle& p1, const Particle& p2);
-typedef function<bool(const Particle&, const Particle&)> cmp_t;
-
-typedef priority_queue<Particle, vector<Particle>, cmp_t>
-    Particle_queue;
+using cmp_t = function<bool(const Particle&, const Particle&)>;
+using Particle_queue =  priority_queue<Particle, vector<Particle>, cmp_t>;
 
 class System {
     private:
