@@ -2,7 +2,10 @@ CXX = g++
 CXXFLAGS = -O2 -g -Wall -std=c++14
 LIBS = -lm
 
-APPL = synthesizer.exe tuple.exe vector.exe list.exe set.exe \
+.PRECIOUS: %.o
+
+APPL = cosine_similarity.exe synthesizer.exe \
+       tuple.exe vector.exe list.exe set.exe \
        stats.exe dim_nrs.exe dim_nr_counts.exe split_string.exe \
        point_distances.exe diffusion.exe
 
