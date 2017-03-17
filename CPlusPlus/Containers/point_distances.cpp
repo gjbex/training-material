@@ -7,7 +7,7 @@
 
 using namespace std;
 
-typedef array<double,3> vector3d;
+using vector3d = array<double,3>;
 
 vector3d create_point(function<double()> distr);
 double compute_max_distance(const vector<vector3d>& points);
