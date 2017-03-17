@@ -3,9 +3,9 @@
 #include <list>
 #include <unordered_map>
 
-typedef std::map<std::string, int> Map;
-typedef std::unordered_map<std::string, int> Unordered_map;
-typedef std::list<std::string> List;
+using Map = std::map<std::string, int>;
+using Unordered_map = std::unordered_map<std::string, int>;
+using List = std::list<std::string>;
 
 template <typename Map_type>
 void fill_map(Map_type& map, const List& list);

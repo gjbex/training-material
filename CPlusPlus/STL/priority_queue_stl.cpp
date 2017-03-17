@@ -30,8 +30,8 @@ bool cmp(Job job1, Job job2) {
     return job1 < job2;
 };
 
-typedef std::function<bool(Job, Job)> job_cmp;
-typedef std::priority_queue<Job, std::vector<Job>, job_cmp> job_queue;
+using job_cmp = std::function<bool(Job, Job)>;
+using job_queue = std::priority_queue<Job,std::vector<Job>,job_cmp>;
 
 int main(int argc, char *argv[]) {
     job_queue jobs(cmp);
