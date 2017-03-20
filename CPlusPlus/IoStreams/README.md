@@ -7,4 +7,6 @@ Code illustrations for chapter 8, I/O streams in Stroustrup's
     standard input.
 1. `data.txt`: text data file containing double precision floating point
     numbers.
+1. `serialization.cpp`: sample implementation of the `<<` and `>>`
+    operators to serialize/deserialize a struct to a string representation.
 1. `Makefile`: make file to build the code.
