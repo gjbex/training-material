@@ -24,6 +24,8 @@ programming concepts and idiosyncracies particular to C++.
     based on Bjarne Stroustrup's "A trou of C++", chapter 4.
 1. `Classes``: illustration of classes in C++ for presentation
     "Essential C++: Classes".
+1. `08_essential_cpp_io.pptx`: Powerpoint presentation on C++ stream I/O,
+    based on Bjarne Stroustrup's "A trou of C++", chapter 8.
 1. `09_essential_cpp_containers.pptx`: Powerpoint presentation on C++
     containers based on Bjarne Stroustrup's "A trou of C++", chapter 9.
 1. `Containers``: illustration of classes in C++ for presentation
