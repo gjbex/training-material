@@ -11,4 +11,6 @@ Code illustrations for chapter 8, I/O streams in Stroustrup's
     operators to serialize/deserialize a struct to a string representation.
 1. formatting.cpp`: examples of I/O formatting for floating point numbers,
     width and fill for integers.
+1. `csv2tsv.cpp`: convert files from CSV to TSV format, using file and
+    string streams.
 1. `Makefile`: make file to build the code.

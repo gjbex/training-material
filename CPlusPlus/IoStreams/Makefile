@@ -4,7 +4,7 @@ LIBS = -lm
 
 .PRECIOUS: %.o
 
-APPL = formatting.exe serialization.exe sum.exe
+APPL = csv2tsv.exe formatting.exe serialization.exe sum.exe
 
 all: $(APPL)
 
