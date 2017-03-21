@@ -9,4 +9,6 @@ Code illustrations for chapter 8, I/O streams in Stroustrup's
     numbers.
 1. `serialization.cpp`: sample implementation of the `<<` and `>>`
     operators to serialize/deserialize a struct to a string representation.
+1. formatting.cpp`: examples of I/O formatting for floating point numbers,
+    width and fill for integers.
 1. `Makefile`: make file to build the code.
