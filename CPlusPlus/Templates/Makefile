@@ -4,7 +4,7 @@ LIBS = -lm
 
 .PRECIOUS: %.o
 
-APPL = swap.exe
+APPL = swap.exe sum.exe
 
 all: $(APPL)
 
