@@ -43,7 +43,6 @@ int main(int argc, char *argv[]) {
         }
     }
     Pendulum pendulum(freq);
-    std::cout << "frquency: " << pendulum.freq() << std::endl;
     for (double t = 0.0; t <= max_t; t += delta_t)
         std::cout << t << "," << pendulum(t) << std::endl;
     return 0;

@@ -4,7 +4,8 @@ LIBS = -lm
 
 .PRECIOUS: %.o
 
-APPL = swap.exe sum.exe points.exe pendulum.exe
+APPL = swap.exe sum.exe points.exe pendulum_func_obj.exe pendulum_bind.exe \
+       pendulum_lambda.exe
 
 all: $(APPL)
 
