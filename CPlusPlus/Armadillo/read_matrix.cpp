@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     }
     mat A;
     A.load(argv[1], raw_ascii);
-    std::cout << "matrix:" << std::endl << A << std::endl;
+    A.print("A:");
     std::cout << "det(A) = " << det(A) << std::endl;
     return 0;
 }

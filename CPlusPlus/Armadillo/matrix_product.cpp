@@ -4,10 +4,11 @@
 using namespace arma;
 
 int main() {
-    mat A(3, 2, fill::randn), B(2, 4, fill::randn);
-    std::cout << "A:" << std::endl << A << std::endl;
-    std::cout << "B:" << std::endl << B << std::endl;
-    mat D = A*B;
-    std::cout << "A*B:" << std::endl << D << std::endl;
+    mat A(3, 2, fill::randn);
+    A.print("A:");
+    mat B(2, 4, fill::randn);
+    B.print("B:");
+    mat C = A*B;
+    C.print("A*B:");
     return 0;
 }
