@@ -45,6 +45,6 @@ Parameters get_parameters(int argc, char *argv[]) {
 
 void integrate(std::function<double(double)> f,
                const double& delta_t, const double& max_t) {
-    for (double t = 0.0; t <= max_t; t += delta_t)
+    for (double t = 0.0; t <= max_t + 0.1*delta_t; t += delta_t)
         std::cout << t << "," << f(t) << std::endl;
 }
