@@ -3,10 +3,12 @@
 #include <valarray>
 
 using namespace std;
+using namespace complex_literals;
 
 int main() {
-    complex<double> a {2.0, 3.0};
-    complex<double> b {-3.0, 2.0};
+    complex<double> a {2.0 + 3.0i};
+    cout << "a.re = " << real(a) << ", a.im = " << imag(a) << endl;
+    complex<double> b {-3.0 + 2.0i};
     cout << a << " + " << b << " = " << a + b << endl;
     cout << "sqrt(" << a << ") = " << sqrt(a) << endl;
     const size_t v_size {5};
