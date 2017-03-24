@@ -12,7 +12,7 @@ double pendulum_func(double t, double freq) {
 int main(int argc, char *argv[]) {
     double freq, delta_t, max_t;
     std::tie(freq, delta_t, max_t) = get_parameters(argc, argv);
-    auto pendulum = [freq](double t) { return pendulum_func(t, freq); };
-    integrate(pendulum, delta_t, max_t);
+    integrate([=](double t) { return pendulum_func(t, freq); },
+              delta_t, max_t);
     return 0;
 }
