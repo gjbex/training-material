@@ -6,7 +6,7 @@ LIBS = -larmadillo -lm
 
 .PRECIOUS: %.o
 
-APPL = matrix_product.exe
+APPL = matrix_product.exe read_matrix.exe
 
 all: $(APPL)
 
