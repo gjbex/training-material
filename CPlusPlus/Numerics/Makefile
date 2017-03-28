@@ -4,7 +4,7 @@ LIBS = -lm
 
 .PRECIOUS: %.o
 
-APPL = complex.exe
+APPL = complex.exe limits.exe
 
 all: $(APPL)
 
