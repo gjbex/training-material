@@ -12,4 +12,6 @@ presentation `essential_cpp_basic.pptx`..
 1. `scope.cpp`: illustration of block scope.
 1. `swap.cpp`: illustration of call by reference.
 1.` `arrays.cpp`: illustration of arrays in C++.
+1. `argument_passing.cpp`: illustrates that data is not copied when
+    passing `vector` from and to functions.
 1. `Makefile`: make file to build the applications.
