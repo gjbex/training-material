@@ -6,13 +6,12 @@
 #include <valarray>
 
 using namespace std;
-using namespace complex_literals;
 using my_time_t = chrono::nanoseconds;
 
 using cmplx = complex<double>;
 
 valarray<double> coordinates(double min_coord, double max_coord,
-                           size_t steps);
+                             size_t steps);
 valarray<cmplx> z_values(const valarray<double>& x_coords,
                          const valarray<double>& y_coords);
 valarray<int> iterate_zs(valarray<cmplx>& zs, const complex<double>& c,
@@ -20,7 +19,7 @@ valarray<int> iterate_zs(valarray<cmplx>& zs, const complex<double>& c,
 void print_results(const valarray<int>& ns);
 
 int main(int argc, char *argv[]) {
-    const complex<double> c {-0.62772 - 0.42193i};
+    const cmplx c(-0.62772, - 0.42193);
     const double x1 {-1.8};
     const double x2 {1.8};
     const double y1 {-1.8};
@@ -29,10 +28,10 @@ int main(int argc, char *argv[]) {
     size_t steps {100};
     if (argc > 1)
         steps = stoi(argv[1]);
-    auto start_time = chrono::steady_clock::now();
     valarray<double> x_coords = coordinates(x1, x2, steps);
     valarray<double> y_coords = coordinates(y1, y2, steps);
     valarray<cmplx> zs = z_values(x_coords, y_coords);
+    auto start_time = chrono::steady_clock::now();
     valarray<int> ns = iterate_zs(zs, c, max_iters);
     auto end_time = chrono::steady_clock::now();
     auto duration = chrono::duration_cast<my_time_t>(end_time - start_time);
@@ -68,7 +67,7 @@ valarray<cmplx> z_values(const valarray<double>& x_coords,
 int iterate_z(cmplx z, const cmplx& c, size_t max_iters) {
     size_t n {0};
     const complex<double> z_in {z};
-    while (abs(z) < 2.0 && n++ < max_iters)
+    while (real(z)*real(z) + imag(z)*imag(z) < 4.0 && n++ < max_iters)
         z = z*z + c;
     return n;
 }
