@@ -6,9 +6,11 @@ using namespace arma;
 int main() {
     mat A {{1.0, 2.0}, {3.0, 4.0}};
     A.print("A:");
-    colvec v {5.0, 6.0};
-    v.print("v:");
-    colvec w = A*v;
-    w.print("A*v:");
+    mat B {{0.5, 1.0}, {-0.5, -1.0}};
+    B.print("B:");
+    colvec x {5.0, 6.0};
+    x.print("x:");
+    colvec y = (2.0*A + B)*x;
+    y.print("(2A+B)*x:");
     return 0;
 }
