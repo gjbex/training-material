@@ -6,7 +6,11 @@ LIBS = -lm
 
 .PRECIOUS: %.o
 
-all: julia_abs.exe julia.exe julia_tbb.exe simple_tbb.exe
+all: julia_abs.exe julia.exe julia_tbb.exe julia_omp.exe \
+     simple_tbb.exe
+
+%_omp.exe: %_omp.cpp
+	$(CXX) $(CXXFLAGS) -qopenmp -o $@ $^ $(LIBS)
 
 %_tbb.exe: %_tbb.o
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) -ltbb $(LIBS)

@@ -79,8 +79,11 @@ valarray<int> iterate_zs(valarray<cmplx>& zs, const complex<double>& c,
                          size_t max_iters) {
     valarray<int> ns(zs.size());
     size_t i {0};
-    for (auto z: zs)
-        ns[i++] = iterate_z(z, c, max_iters);
+    tbb::parallel_for(tbb::blocked_range<size_t>(0, zs.size()),
+            [&] (const tbb::blocked_range<size_t> r) {
+                for (size_t i = r.begin(); i < r.end(); i++)
+                    ns[i] = iterate_z(zs[i], c, max_iters);
+            });
     return ns;
 }
 
