@@ -2,3 +2,4 @@
 julia.txt
 core.*
 *.pbs.*
+*.map
