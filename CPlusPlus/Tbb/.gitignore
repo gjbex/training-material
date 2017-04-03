@@ -1,2 +1,3 @@
 *.exe
 julia.txt
+core.*
