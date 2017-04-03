@@ -3,9 +3,12 @@
 from argparse import ArgumentParser
 import dask.array as da
 from datetime import datetime
-from distributed import Executor
+from distributed import Client
 import time
 
+
+def square(x):
+    return x**2
 
 def get_hostname(i):
     import socket
@@ -18,9 +21,12 @@ if __name__ == '__main__':
     arg_parser.add_argument('--scheduler_port', default='8786',
                             help='scheduler port to use')
     options = arg_parser.parse_args()
-    executor = Executor('{0}:{1}'.format(options.scheduler,
-                                         options.scheduler_port))
-    print(str(executor), flush=True)
-    futures = executor.map(get_hostname, range(100))
-    for future in futures:
-        print(future.result())
+    client = Client('{0}:{1}'.format(options.scheduler,
+                                     options.scheduler_port))
+    print(str(client), flush=True)
+    futures = client.map(square, range(100))
+    total = client.submit(sum, futures)
+    print(total.result())
+    futures = client.map(get_hostname, range(500))
+    output = client.gather(futures)
+    print('\n'.join(output))
