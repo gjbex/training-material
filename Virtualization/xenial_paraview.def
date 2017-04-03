@@ -1,0 +1,30 @@
+# Copyright (c) 2015-2016, Gregory M. Kurtzer. All rights reserved.
+# 
+# "Singularity" Copyright (c) 2016, The Regents of the University of California,
+# through Lawrence Berkeley National Laboratory (subject to receipt of any
+# required approvals from the U.S. Dept. of Energy).  All rights reserved.
+
+BootStrap: debootstrap
+OSVersion: xenial
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+
+%runscript
+    /usr/bin/paraview
+
+
+%post
+    sed -i 's/$/ universe/' /etc/apt/sources.list
+    apt-get update
+    apt-get -y install libosmesa-dev
+    apt-get -y install overlay-scrollbar-gtk2
+    apt-get -y install libgail-dev
+    apt-get -y install libatk-bridge2.0-dev
+    apt-get -y install unity-gtk2-module
+    apt-get -y install libcanberra-gtk-module
+    apt-get -y install mesa-utils
+    apt-get -y install mesa-utils-extra
+    apt-get -y install libxdmf2
+    apt-get -y install paraview
+    apt-get -y install paraview-python
+    apt-get -y install paraview-doc

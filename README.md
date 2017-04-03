@@ -10,6 +10,7 @@ is subject to the license included in this repository.
 
 What is it?
 -----------
+* `Accelerators`: some sample code and information on using accelerators.
 * `C`: some C sample code. (Work in progress)
 * `CPlusPlus`: some C++ sample code. (Work in progress)
 * `DataStorage`: sample code showing how to read/write HDF5 and NetCDF
@@ -39,9 +40,12 @@ What is it?
 * `R`: some very simple illustrations of how to run R scripts from the
     command line, and to submit as (PBS) jobs
 * `Spark`: some Spark-related material. (Work in progress)
+* `Virtualization`: Information on how to use Singularity. (Work in
+    progress)
 * `Visualization`: data files, XDMF files and ParaView state files to
     use during a demo of scientific visualization with ParaView.
 
 Contributors
 ------------
-Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
+* Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
+* Guillaume Jacquenot (Python 3 version of XDMF generating scripts)

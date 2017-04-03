@@ -1,0 +1,16 @@
+#!/bin/bash
+#PBS -A lpt1_sysadmin
+#PBS -l nodes=1:ppn=4
+#PBS -l walltime=00:15:00
+#PBS -l mem=5gb
+
+cd $PBS_O_WORKDIR
+
+module load dmtcp/2.4.5
+module load foss/2016a
+
+export DMTCP_CHECKPOINT_DIR=ckpt
+export DMTCP_CHECKPOINT_INTERVAL=$(( 2*60 ))
+export DMTCP_COORD_HOST=$(hostname)
+
+ckpt/dmtcp_restart_script.sh

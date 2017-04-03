@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -O2 -g
-CPPFLAGS = `pkg-config --cflags gsl`
-LDFLAGS = `pkg-config --libs gsl`
+CPPFLAGS = $(shell pkg-config --cflags gsl)
+LDFLAGS = $(shell pkg-config --libs gsl)
 LIBS = 
 
 all: pendulum.exe

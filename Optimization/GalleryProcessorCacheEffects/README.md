@@ -17,4 +17,3 @@ included as well.
 
 ## Build instructions
 Load the appropriate module for the Intel compiler, and simply use `make`.
-

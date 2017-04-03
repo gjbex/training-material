@@ -1,0 +1,24 @@
+# Copyright (c) 2015-2016, Gregory M. Kurtzer. All rights reserved.
+# 
+# "Singularity" Copyright (c) 2016, The Regents of the University of California,
+# through Lawrence Berkeley National Laboratory (subject to receipt of any
+# required approvals from the U.S. Dept. of Energy).  All rights reserved.
+
+BootStrap: debootstrap
+OSVersion: xenial
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+
+%post
+    sed -i 's/$/ universe/' /etc/apt/sources.list
+    apt update
+    apt upgrade
+    apt-get -y install apt-utils
+    apt-get -y install software-properties-common 
+    apt-get -y install dbus-x11
+    apt-get -y install unity-gtk3-module
+    apt-get -y install libcanberra-gtk3-module
+    dpkg --add-architecture i386
+    add-apt-repository ppa:wine/wine-builds
+    apt update
+    apt-get -y install --install-recommends winehq-staging

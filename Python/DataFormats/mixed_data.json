@@ -1,0 +1,22 @@
+[
+    {
+        "name": "i1",
+        "type": "int",
+        "distribution": {"type": "uniform", "params": [0, 2]}
+    },
+    {
+        "name": "i2",
+        "type": "int",
+        "distribution": {"type": "uniform", "params": [-2, 2]}
+    },
+    {
+        "name": "f1",
+        "type": "float",
+        "distribution": {"type": "gauss", "params": [0.0, 2.0]}
+    },
+    {
+        "name": "f2",
+        "type": "float",
+        "distribution": {"type": "uniform", "params": [0.0, 2.0]}
+    }
+]

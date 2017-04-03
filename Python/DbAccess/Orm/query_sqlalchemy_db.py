@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from datetime import datetime
+
 
 def convert2date(date_str):
     year, month, day = list(map(int, date_str.split('-')))
@@ -7,7 +9,6 @@ def convert2date(date_str):
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
-    from datetime import datetime
     import sys
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker

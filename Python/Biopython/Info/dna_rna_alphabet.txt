@@ -1,0 +1,17 @@
+Symbol      Description                     Bases represented
+A           Adenine                         A
+C           Cytosine                                C
+G           Guanine                                         G
+T           Thymine                                                 T
+U           Uracil                                                  U
+W           Weak                            A                       T	
+S           Strong                                  C       G
+M           aMino                           A       C
+K           Keto                                            G       T
+R           puRine                          A               G
+Y           pYrimidine                              C               T
+B           not A (B comes after A)                 C       G       T
+D           not C (D comes after C)         A               G       T
+H           not G (H comes after G)         A       C               T
+V           not T (V comes after T and U)   A       C       G
+N or -      any Nucleotide (not a gap)      A       C       G       T

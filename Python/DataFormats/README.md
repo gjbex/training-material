@@ -58,3 +58,19 @@ What is it?
   * `read_line_index.py`: test script that takes a text file as input,
     a file position and a line length, and prints the characters read
     to standard output for verification, quoted by '|'.
+1. CSV, HDF5 and JSON combination
+
+  For more (and better examples of reading and writing, see
+  the [DataStorage](https://github.com/gjbex/training-material/tree/master/DataStorage/Hdf5) section.
+  * `data_generator.py`: this script will generate numerical data (integer
+    and floating point) using specified random number distributions.  The
+    column names, types the distributions, and the parameters they require
+    are specified in a JSON file that is read.  The generated data is
+    written to a file in either CSV or HDF5 format.
+  * `mixed_data.json`: example JSON definition file for the data table to
+    be generated.
+
+
+## Other formats
+
+Example code for using NetCDF can be found in the [DataFormats](https://github.com/gjbex/training-material/tree/master/DataStorage/NetCDF) section.

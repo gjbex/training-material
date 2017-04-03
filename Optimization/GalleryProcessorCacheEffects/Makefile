@@ -5,7 +5,7 @@ LDFLAGS =
 LIBS =
 
 TARGETS = cache_lines cache_hierarchy instruction_parallelism \
-          cache_associativity
+          cache_associativity cache_associativity_bytes
 
 all: $(TARGETS)
 

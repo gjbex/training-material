@@ -4,4 +4,7 @@ alone for high performance computing, it has nevertheless been used
 for that purpose.
 
 ## What is It?
-`ConcurrentPi`: illustration of computing using multiple threads.
+1. `ConcurrentPi`: illustration of computing using multiple threads.
+1. `DataStructures`: some illustrations of the data structures in Java's
+    standard library.
+1. `DesignPatterns`: some design patterns illustrated (work in progress).

@@ -31,7 +31,7 @@ Contents
     typically program in C/C++, but want to get a flavor of Fortran's
     capabilities and particularities.
 1. `OOProgramming`: an illustration of how to define a tree data structure
-    using classes and inheritance.  A second examples shows a naive
+    using classes and inheritance.  A second example shows a naive
     implementation of rational numbers to illustrate operator overloading.
 1. `Preprocessing`: illustration of how to use the C preprocessor in
     Fortran.
