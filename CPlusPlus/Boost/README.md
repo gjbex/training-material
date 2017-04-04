@@ -10,3 +10,5 @@ ordinary differential equations).
     ordinary differential equation solver.  Also illustrates
     currying (with std::bind) to avoid parameters as global
     variables.
+1. `plot_lorentz.plt`: Gnuplot script to plot curve for Lorentz system.
+1. `Makefile`: make file to build the code.
