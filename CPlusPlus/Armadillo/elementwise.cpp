@@ -17,5 +17,8 @@ int main() {
     B.print("B:");
     rowvec x = A.row(2);
     x.print("x:");
+    x(0) = 19.0;
+    x(1) = -13.0;
+    A.print("A:");
     return 0;
 }
