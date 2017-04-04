@@ -38,8 +38,12 @@ programming concepts and idiosyncracies particular to C++.
     "Essential C++: Containers".
 1. `Algorithms``: illustration of classes in C++ for presentation
     "Essential C++: Algorithms".
+1. `Numerics`: illustration of doing numerical computations in C++, based
+    on Bjarne Stroustrup's "A tour of C++", chapter 12.
 1. `Random`: some illustrations of using the pseudorandom generator in
     standard C++.
 1. `STL`: some illustrations of using the STL library.
+1. `Armadillo`: some illustrations of using the Armadillo linear algebra
+    library.
 1. `Boost`: some illustrations of using the Boost C++ library,
     mostly in the context of numerical programming.
