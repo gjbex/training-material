@@ -2,6 +2,8 @@ CXX = g++
 CXXFLAGS = -O2 -g -Wall -std=c++14
 LIBS = -lm
 
+.PRECIOUS: %.o
+
 APPS = lorenz.exe boost_vector.exe
 
 all: $(APPS)
