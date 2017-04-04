@@ -9,3 +9,5 @@ and idiosyncracies particular to C.
     structure that allows range queries.  It illustrates some pointer
     juggling, bit-level operations, error handling, CUnit testing, C99
     features, and Doxygen documentation.
+1. `c_intro.pptx`: Powerpoint presentation based on Kernighan and Ritchie's "The C
+    programming language".
