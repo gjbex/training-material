@@ -8,4 +8,8 @@ in Stroustrup's "A tour of C++".
     capturing, and date-time conversion.
 1. `data.txt`: data file to use with `processes.cpp` containing log
     information.
+1. `reformat_events.cpp`: illustrates replacing using regular
+    expressions and capturing.
+1. `simple_re_replace.cpp`: simple illustration of replacing using regular
+    expressions and capturing.
 1. `Makefile`: make file to build the applications.
