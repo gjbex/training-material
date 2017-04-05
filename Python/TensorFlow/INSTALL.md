@@ -3,6 +3,7 @@ Here, we describe how to install TensorFlow using conda with support for
 GPU computing.  We assume a 64-bit Linux system, with a CUDA-capable
 graphics card.  We assume that Python 3.6+ is used.
 
+
 ## Intralling Miniconda
 If you have Miniconda already installed, you can skip ahead to the next
 section, if Miniconda is not installed, we start with that. Download the
@@ -38,6 +39,7 @@ You will be asked a number of questions.
     working with the module system, so make sure that you know what you
     are doing in either case.
 
+
 ## Creating an environment
 First, ensure that the Miniconda installation is in your `PATH`.  The
 following command should return the full path to the `conda` command:
@@ -50,27 +52,29 @@ the `PATH` environment variable appropriately by adding Miniconda's
 
 Creating a new conda environment is straightforward:
 ```bash
-$ conda create  -n tensorflow  numpy scipy matplotlib pandas
+$ conda create  -n base_env  numpy scipy matplotlib pandas
 ```
-This command creates a new conda environment called `tensorflow`, and
+This command creates a new conda environment called `base_env`, and
 installs a number of Python packages that you will probably want to have
 handy in any case to preprocess, visualize, or postprocess your data.
+You can of course install more, depending on your requirements and
+personal taste.
 
-## Installing TensorFlow
-First, switch to the new conda environment you just created:
+
+## TensorFlow with GPU support
+Clone the `base_env` environment, and install the non-GPU version of
+TensorFlow in it:
+```bash
+$ source deactivate
+$ conda create  -n tensorflow  --clone base_env
+```
+The name of the new environment is `tensorflow`.  Next, activate
+the environment, and install the `tensorflow` package:
 ```bash
 $ source activate tensorflow
-```
-
-Next, install the `tensorflow` package:
-```bash
-$ conda install -c jjh_cio_testing tensorflow
-```
-
-For GPU support, also install the `tensorflow-gpu` package:
-```bash
 $ conda install -c jjh_cio_testing tensorflow-gpu
 ```
+
 
 ## Testing
 In order to test whether the installation was successful, first ensure
@@ -95,4 +99,65 @@ being loaded, and the availabilty of a CUDA-capable GPU.
 >>> session.run(hello)
 b'hello TensorFlow!'
 ```
-When you reach this point, we wish you happy deep learning.
+When you reach this point, we wish you happy deep learning!
+
+
+## Installing TensorFlow for non-GPU systems
+Unfortunately, installing a version of TensorFlow with GPU support will
+not run on a system without a CUDA-capable GPU.  Hence the cleanest
+approach to also run TensorFlow on non-GPU systems is to create a
+separate environment for it.
+
+Clone the `base_env` environment, and install the non-GPU version of
+TensorFlow in it:
+```bash
+$ source deactivate
+$ conda create  -n tensorflow_non_gpu  --clone base_env
+```
+The name of the new environment is `tensorflow_non_gpu`.  Next, activate
+the environment, and install the `tensorflow` package:
+```bash
+$ source activate tensorflow_non_gpu
+$ conda install -c jjh_cio_testing tensorflow
+```
+
+
+## Switching environments
+To switch to another environment, simply use `activate`, e.g.,
+```bash
+$ source activate tensorflow_no_gpu
+```
+You can list all available environments by:
+```bash
+$ conda env list
+```
+To deactivate an environment, use `deactivate`, i.e.,
+```bash
+$ source deactivate
+```
+
+
+## Installing additional packages
+Installing additional packages is straightforward.  First activate the
+environment you want to install the package into if is not already
+active:
+```bash
+$ source activate tensorflow
+```
+Next, install any package you like, e..g.,
+```bash
+$ conda install bokeh
+```
+Updating a package can be done using:
+```bash
+$ conda update bokeh
+```
+Updating all packages is trivial:
+```bash
+$ conda update --all
+```
+
+Removing an installed package:
+```bash
+$ conda remove bokeh
+```
