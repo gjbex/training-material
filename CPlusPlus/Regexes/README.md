@@ -12,4 +12,6 @@ in Stroustrup's "A tour of C++".
     expressions and capturing.
 1. `simple_re_replace.cpp`: simple illustration of replacing using regular
     expressions and capturing.
+1. `case.cpp`: illustration of `regex_match`, and case sensitive versus
+    insensitive search.
 1. `Makefile`: make file to build the applications.

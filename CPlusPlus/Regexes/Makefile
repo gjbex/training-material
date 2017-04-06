@@ -3,7 +3,8 @@ CXXFLAGS = -O2 -g -Wall -std=c++14
 
 .PRECIOUS: %.o
 
-all: strings.exe processes.exe reformat_events.exe simple_re_replace.exe
+all: strings.exe processes.exe reformat_events.exe simple_re_replace.exe \
+     case.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
