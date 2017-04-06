@@ -14,4 +14,7 @@ in Stroustrup's "A tour of C++".
     expressions and capturing.
 1. `case.cpp`: illustration of `regex_match`, and case sensitive versus
     insensitive search.
+1. `word_counter.cpp`: illustration of using a regular expression iterator
+    to tokenize a text and count the words occurring in it.
+1. `text.txt`: sample text to count words in.
 1. `Makefile`: make file to build the applications.
