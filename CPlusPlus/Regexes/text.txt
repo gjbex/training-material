@@ -1,0 +1,7 @@
+This is a text and
+we are going to count
+the words in this text.
+Many words will occur
+just once, but some are
+going to crop up many
+times.
