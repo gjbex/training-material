@@ -11,4 +11,6 @@ Code illustrations for chapter 10, Algorithms in Stroustrup's
     using `std::generate` and a lambda function.
 1. `permutations.cpp`: illustration of generating the permutations of a
     vector using `std::next_permutation`.
+1. `particle_sort.cpp`: illustrations of sorting structures based on
+    various fields.
 1. `Makefile`: make file to build the code.
