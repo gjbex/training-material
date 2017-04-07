@@ -1,0 +1,6 @@
+2017-02-15 05:17:03: [INFO] begin seq 1
+2017-02-15 07:03:47: [INFO] begin seq 2
+2017-02-15 08:12:24: [INFO] end seq 2
+2017-02-15 08:13:19: [WARNING] low on substance R184
+2017-02-15 10:47:17: [INFO] end seq 1
+2017-02-16 00:27:11: [INFO] end seq 3

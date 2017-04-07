@@ -1,12 +1,11 @@
+#include <array>
 #include <iostream>
-#include <boost/array.hpp>
-
 #include <boost/numeric/odeint.hpp>
 
 using namespace std;
 using namespace boost::numeric::odeint;
 
-typedef boost::array<double, 3> state_type;
+using state_type = array<double, 3>;
 
 void lorenz_param(const state_type& x, state_type& dxdt, double t,
                   double sigma, double R, double b) {

@@ -1,12 +1,12 @@
 CXX = g++
-CXXFLAGS = -O2 -g -Wall -std=c++14
+CXXFLAGS = -O2 -g -std=c++14 -Wall
 LIBS = -lm
 
 .PRECIOUS: %.o
 
-APPS = lorenz.exe boost_vector.exe
+APPL = complex.exe limits.exe julia.exe random.exe multiple_distr.exe
 
-all: $(APPS)
+all: $(APPL)
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
@@ -15,4 +15,4 @@ all: $(APPS)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(APPS) *.o
+	rm -f *.o $(APPL)
