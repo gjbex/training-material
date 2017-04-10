@@ -20,15 +20,15 @@ int main() {
     const size_t n {5};
     vector<Particle> particles = init_particles(n);
     cout << "original:" << endl;
-    for (auto particle: particles)
+    for (const auto& particle: particles)
         cout << particle << endl;
     sort(particles.begin(), particles.end(), mass_cmp);
     cout << "sorted by mass:" << endl;
-    for (auto particle: particles)
+    for (const auto& particle: particles)
         cout << particle << endl;
     sort(particles.begin(), particles.end(), dist_cmp);
     cout << "sorted by distance from origin:" << endl;
-    for (auto particle: particles)
+    for (const auto& particle: particles)
         cout << particle << " at " << distance(particle) << endl;
     return 0;
 }
