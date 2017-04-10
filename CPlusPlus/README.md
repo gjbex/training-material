@@ -41,6 +41,8 @@ programming concepts and idiosyncracies particular to C++.
     containers based on Bjarne Stroustrup's "A tour of C++", chapter 9.
 1. `Containers``: illustration of containers in C++ for presentation
     "Essential C++: Containers".
+1. `10_essential_cpp_algorithms.pptx`: Powerpoint presentation on C++
+    algorithms based on Bjarne Stroustrup's "A tour of C++", chapter 10.
 1. `Algorithms``: illustration of classes in C++ for presentation
     "Essential C++: Algorithms".
 1. `Numerics`: illustration of doing numerical computations in C++, based
