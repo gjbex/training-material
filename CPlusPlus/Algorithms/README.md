@@ -15,4 +15,8 @@ Code illustrations for chapter 10, Algorithms in Stroustrup's
     various fields.
 1. `count_clamp.cpp`: illustration of count and replace algorithms with
     predicates.
+1. `zip_it.cpp`: illustration of using `transform` to use two sequences
+    to produce a third.
+1. `find_words.cpp`: illustrates using `search` for strings.
+`. `text.txt`: text file to perform search on.
 1. `Makefile`: make file to build the code.

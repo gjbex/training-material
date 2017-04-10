@@ -5,7 +5,7 @@ LIBS = -lm
 .PRECIOUS = %.o
 
 APPS = find_if.exe permutations.exe generate.exe for_each.exe \
-       particle_sort.exe count_clamp.exe
+       particle_sort.exe count_clamp.exe find_words.exe zip_it.exe
 
 all: $(APPS)
 
