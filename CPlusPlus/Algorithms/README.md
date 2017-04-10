@@ -13,4 +13,6 @@ Code illustrations for chapter 10, Algorithms in Stroustrup's
     vector using `std::next_permutation`.
 1. `particle_sort.cpp`: illustrations of sorting structures based on
     various fields.
+1. `count_clamp.cpp`: illustration of count and replace algorithms with
+    predicates.
 1. `Makefile`: make file to build the code.
