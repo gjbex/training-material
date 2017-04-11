@@ -36,9 +36,8 @@ if __name__ == '__main__':
                                                  delta.microseconds))
         Sigma = da.diag(s)
         start = datetime.now()
-        matrix_new = da.dot(U, da.dot(Sigma, Vh)).compute()
+        eps = matrix - da.dot(U, da.dot(Sigma, Vh))
         delta = datetime.now() - start
+        print("sum of differences: {0:.4e}".format(eps.sum().compute()))
         print('np.dot: {0:d}.{1:06d}'.format(delta.seconds,
                                                  delta.microseconds))
-        if not np.allclose(matrix, matrix_new, rtol=1.0e-11):
-            sys.stderr.write('# error: matrix not reproduced\n')

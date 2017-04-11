@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 
 from argparse import ArgumentParser
 import dask.array as da
@@ -14,13 +14,16 @@ if __name__ == '__main__':
                             help='chunk size for rows')
     arg_parser.add_argument('--col_chunk', type=int, default=1000,
                             help='chunk size for columns')
-    arg_parser.add_argument('--scheduler', required=True,
+    arg_parser.add_argument('--scheduler',
                             help='scheduler as <host>:<port>')
     arg_parser.add_argument('--scheduler_port', default='8786',
                             help='scheduler port to use')
     options = arg_parser.parse_args()
-    client = Client('{0}:{1}'.format(options.scheduler,
-                                     options.scheduler_port))
+    if options.scheduler:
+        client = Client('{0}:{1}'.format(options.scheduler,
+                                         options.scheduler_port))
+    else:
+        cliet = Client()
     print('starting client...\n')
     a = np.random.uniform(-1.0, 1.0, (options.size, options.size))
     b = np.random.uniform(-1.0, 1.0, (options.size, options.size))
