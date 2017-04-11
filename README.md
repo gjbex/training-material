@@ -23,9 +23,8 @@ What is it?
     Sample SQLcovers the basics of querying relational databases
 * `Debugging`: slides used for an info session on debugging tools and
     techniques, as well as sample code.
-* `Fortran`: sample Fortran code intended to illustrate Fortran 95, 2003,
-    and 2008 features.  This material is developed in preparation of a
-    tutorial on modern Fortran features.
+* `Fortran`: presentation on "Modern Fortran" as well sample code
+    intended to illustrate Fortran 95, 2003, and 2008 features.
 * `Java`: sample code mostly for demonstration purposes.
 * `LinuxTools`: some illustrations of using Linux tools such as the `M4`
     macro processor, make files and autotools, as well as slides on
