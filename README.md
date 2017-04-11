@@ -11,8 +11,10 @@ is subject to the license included in this repository.
 What is it?
 -----------
 * `Accelerators`: some sample code and information on using accelerators.
-* `C`: some C sample code. (Work in progress)
-* `CPlusPlus`: some C++ sample code. (Work in progress)
+* `C`: presentation based "The C programming language" by Kernighan and
+   Ritchie, as well as sample code to illustration the concepts.
+* `CPlusPlus`: presentation based on "A tour of C++" by Stroustrup, as
+   well as sample code to illustrate the concepts.
 * `DataStorage`: sample code showing how to read/write HDF5 and NetCDF
     files from C, Fortran, and Python.  HDF5 can be used for parallel I/O,
     C sample code is provided.  The HDF5 material is part of a tutorial on
