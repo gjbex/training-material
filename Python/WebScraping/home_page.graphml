@@ -1,0 +1,407 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <graph edgedefault="undirected">
+    <node id="http://alpha.uhasselt.be/~gjb/mainframe.html" />
+    <node id="http://be.linkedin.com/in/geertjanbex" />
+    <node id="https://plus.google.com/112171095486764065624/about" />
+    <node id="http://www.vscentrum.be/" />
+    <node id="http://alpha.uhasselt.be/research/groups/theocomp/" />
+    <node id="http://www.uhasselt.be/" />
+    <node id="http://fox7.eu/" />
+    <node id="http://www.uhasselt.be/Natalie.Benaerts" />
+    <node id="http://alpha.uhasselt.be/~fneven" />
+    <node id="http://www.aktor-kt.com/" />
+    <node id="http://www.thomson.com/" />
+    <node id="http://www.javajunkies.org/index.pl?node_id=3182&amp;lastnode_id=44" />
+    <node id="http://www.perlmonks.org/index.pl?node_id=169799" />
+    <node id="http://www.uhasselt.be" />
+    <node id="http://picasaweb.google.com/geertjan.bex" />
+    <node id="http://www.skepp.be/" />
+    <node id="https://support.google.com/plus/?hl=en_US" />
+    <node id="http://www.google.com/policies/privacy/?hl=en-US" />
+    <node id="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/15XI8bpPCKg/googles-149-nik-photo-editing-suite-goes-free" />
+    <node id="http://arstechnica.com/tech-policy/2015/12/you-may-soon-need-a-licence-to-take-photos-of-that-classic-designer-chair-you-bought/#p3" />
+    <node id="http://change.org" />
+    <node id="https://www.change.org/p/european-parliament-save-the-freedom-of-photography-savefop-europarl-en" />
+    <node id="https://juliareda.eu/2015/06/fop-under-threat/" />
+    <node id="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/VAjjY_xGWvU/sir-terry-pratchett-succumbs-to-the-embuggerance-aged-66" />
+    <node id="http://www.bbc.co.uk/news/magazine-28838957#sa-ns_mchannel=rss&amp;ns_source=PublicRSS20-sa" />
+    <node id="http://www.newswear.com/mfouldetail.htm" />
+    <node id="http://www.wired.com/2014/06/hi-lo-dslr-lenses/" />
+    <node id="https://www.vscentrum.be" />
+    <node id="https://www.vscentrum.be/nl/home" />
+    <node id="https://www.vscentrum.be/login/vsc" />
+    <node id="https://www.vscentrum.be/" />
+    <node id="https://www.vscentrum.be/en/project-and-cases" />
+    <node id="https://www.vscentrum.be/en/access-and-infrastructure" />
+    <node id="https://www.vscentrum.be/en/education-and-trainings" />
+    <node id="https://www.vscentrum.be/en/about-vsc" />
+    <node id="https://www.vscentrum.be/en/contact" />
+    <node id="https://www.vscentrum.be/en/user-portal" />
+    <node id="https://www.vscentrum.be/en/hpc-for-industry" />
+    <node id="https://www.vscentrum.be/en/hpc-for-academics" />
+    <node id="https://www.vscentrum.be/en/general-information-about-hpc" />
+    <node id="https://www.vscentrum.be/en/education-and-trainings/detail/specialist-workshops-in-scientific-computing---swsc-18042017" />
+    <node id="https://www.vscentrum.be/en/education-and-trainings/detail/python-as-a-second-language-18042017" />
+    <node id="https://www.vscentrum.be/en/education-and-trainings/detail/high-performance-python-18042017" />
+    <node id="https://www.vscentrum.be/en/education-and-trainings/detail/python-as-a-second-language-25042017" />
+    <node id="https://www.vscentrum.be/en/education-and-trainings/detail/specialist-workshops-in-scientific-computing---swsc-03052017" />
+    <node id="https://www.vscentrum.be/en/news/detail/sesame-net-and-vsc-launch-hpc4sme-tool-for-companies" />
+    <node id="https://www.vscentrum.be/en/news-and-vacancies" />
+    <node id="https://www.vscentrum.be/en/academics-use-cases" />
+    <node id="https://www.vscentrum.be/en/industry-use-cases" />
+    <node id="https://www.vscentrum.be/en/use-cases-for-a-broad-audience" />
+    <node id="https://www.vscentrum.be/projects/overview" />
+    <node id="https://www.vscentrum.be/nodes/accessandinfrastructure2/en" />
+    <node id="https://www.vscentrum.be/nodes/tier1infrastructure/en" />
+    <node id="https://www.vscentrum.be/nodes/tier2infrastructure/en" />
+    <node id="https://www.vscentrum.be/nodes/gettingaccess/en" />
+    <node id="https://www.vscentrum.be/nodes/projectaccesstier1/en" />
+    <node id="https://www.vscentrum.be/nodes/tier1startinggrant1/en" />
+    <node id="https://www.vscentrum.be/nodes/buyingcomputetime/en" />
+    <node id="https://www.vscentrum.be/nodes/overhetvsc/en" />
+    <node id="https://www.vscentrum.be/en/about-vsc/contact" />
+    <node id="https://www.vscentrum.be/nodes/nieuws/en" />
+    <node id="https://www.vscentrum.be/nodes/hetvscinvlaanderen/en" />
+    <node id="https://www.vscentrum.be/nodes/organisatiestructuur/en" />
+    <node id="https://www.vscentrum.be/nodes/hoewegroeiden/en" />
+    <node id="https://www.vscentrum.be/nodes/missieenvisie/en" />
+    <node id="https://www.vscentrum.be/nodes/publicaties/en" />
+    <node id="https://www.vscentrum.be/nodes/persmateriaal/en" />
+    <node id="https://www.vscentrum.be/nodes/links/en" />
+    <node id="https://www.vscentrum.be/nodes/userdocs/en" />
+    <node id="https://www.vscentrum.be/nodes/usersupport1/en" />
+    <node id="https://www.vscentrum.be/nodes/statusinfologinvereist/en" />
+    <node id="https://www.vscentrum.be/en/education" />
+    <node id="https://www.vscentrum.be/nodes/overzichtdocumentatieen/en" />
+    <node id="https://www.vscentrum.be/nodes/availablehardware1/en" />
+    <node id="https://www.vscentrum.be/nodes/accountrequest1/en" />
+    <node id="https://www.vscentrum.be/nodes/practicalinformation/en" />
+    <node id="https://www.vscentrum.be/nodes/academicusecases/en" />
+    <node id="https://www.vscentrum.be/nodes/industryusecases1/en" />
+    <node id="https://www.vscentrum.be/nodes/usecasesforabroadaudience/en" />
+    <node id="https://www.vscentrum.be/en/projects" />
+    <node id="https://www.vscentrum.be/vscentrum" />
+    <node id="https://www.vscentrum.be/en/sitemap" />
+    <node id="https://www.vscentrum.be/en/privacy" />
+    <node id="http://www.uhasselt.be/fiche?voornaam=marc&amp;naam=gyssens" />
+    <node id="http://alpha.uhasselt.be/bart.kuijpers" />
+    <node id="http://alpha.uhasselt.be/frank.neven" />
+    <node id="http://alpha.uhasselt.be/jan.vandenbussche" />
+    <node id="http://alpha.uhasselt.be/tom.ameloot/" />
+    <node id="http://alpha.uhasselt.be/robert.brijder/" />
+    <node id="http://jhellings.nl/" />
+    <node id="http://alpha.uhasselt.be/~lucp1510/" />
+    <node id="http://www.basketsman.com" />
+    <node id="http://bart.moelans.be/?p=uh" />
+    <node id="http://dsurinx.be/" />
+    <node id="http://www.uhasselt.be/fiche?email=timmy.weerwag" />
+    <node id="http://www.uhasselt.be/?id=7645&amp;oid=86" />
+    <node id="http://uhdspace.uhasselt.be/dspace/report?type=collection&amp;id=ONDGR_86" />
+    <node id="http://alpha.uhasselt.be/research/groups/theocomp/spielmann/WebAuto/index.html" />
+    <node id="http://alpha.uhasselt.be/~gjb/" />
+    <node id="http://www.inf.ufrgs.br/~vbogorny/" />
+    <node id="http://homepages.inf.ed.ac.uk/fgeerts/" />
+    <node id="http://alpha.uhasselt.be/research/groups/theocomp/gillis/index.html" />
+    <node id="http://www.adrem.ua.ac.be/~goethals/" />
+    <node id="http://mate.dm.uba.ar/%7Ergrimson/" />
+    <node id="http://lrb.cs.uni-dortmund.de/~martens/" />
+    <node id="http://www.inf.ufrgs.br/~alvares/" />
+    <node id="http://othmanw.submanifold.be/" />
+    <node id="http://www.personeel.unimaas.nl/K-Tuyls/" />
+    <node id="http://www.cs.toronto.edu/~avaisman/" />
+    <node id="http://code.ulb.ac.be/code.people.php?id=992" />
+    <node id="https://www.cs.indiana.edu/~yuqwu/" />
+    <node id="http://www.twitter.com/uhasselt" />
+    <node id="http://www.facebook.com/uhasselt" />
+    <node id="http://www.linkedin.com/groups?mostPopular=&amp;gid=49957&amp;trk=myg_ugrp_ovr" />
+    <node id="http://www.uhasselt.be/Francqui-Leerstoel" />
+    <node id="http://www.uhasselt.be/UH/interculturalis/(10097)-Actueel/Kalender-OLVL/2016-2017/Mond-klassementsproeven-OLVL-30.html" />
+    <node id="http://universiteithasselt.blogspot.com" />
+    <node id="https://www.youtube.com/embed/hqqTy9DNoqI?rel=0&amp;autoplay=1" />
+    <node id="http://www.twitter.com/UHasselt" />
+    <node id="http://www.facebook.com/Uhasselt" />
+    <node id="http://www.auhl.be" />
+    <node id="https://bsm-mydrive.drivingservices.org/www/index.html#/" />
+    <node id="http://www.agencyuk.com" />
+    <node id="http://compumark.thomson.com/emea/lang/de/pid/133" />
+    <node id="http://financial.thomsonreuters.com/" />
+    <node id="http://thomsonreuters.com/en/products-services/government-solutions.html" />
+    <node id="http://thomsonreuters.com/en/products-services/legal.html" />
+    <node id="https://agency.reuters.com/en.html" />
+    <node id="https://risk.thomsonreuters.com/en.html" />
+    <node id="http://thomsonreuters.com/en/products-services/tax-accounting.html" />
+    <node id="https://blogs.thomsonreuters.com/answerson/" />
+    <node id="https://innovation.thomsonreuters.com/en.html" />
+    <node id="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Financial;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <node id="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Risk+Management+Solutions;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <node id="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Legal;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <node id="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Reuters+News+Agency;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <node id="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Tax+%26+Accounting;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <node id="https://annual-report.thomsonreuters.com/?utm_campaign=2016_annual_report&amp;utm_medium=banner&amp;utm_source=tr.comhome" />
+    <node id="https://blogs.thomsonreuters.com/answerson/toward-gender-parity/" />
+    <node id="https://blogs.thomsonreuters.com/answerson/innovation-canada-centers-strategic-partnership/" />
+    <node id="https://blogs.thomsonreuters.com/answerson/machine-learning-fake-news-twitter/" />
+    <node id="https://blogs.thomsonreuters.com/answerson/laundromat-highlights-crisis-transparency-company-ownership/" />
+    <node id="https://blogs.thomsonreuters.com/" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-news&amp;nyo=0" />
+    <node id="https://blogs.thomsonreuters.com/answerson/category/workingattr/" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-irhome" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=quarterlyearnings" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-reportsannual" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-factbook" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-stockquote" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-dividends" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-faq" />
+    <node id="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-contact" />
+    <node id="http://facebook.com/thomsonreuters" />
+    <node id="http://twitter.com/thomsonreuters" />
+    <node id="http://www.linkedin.com/company/thomson-reuters_1400" />
+    <node id="https://plus.google.com/+ThomsonReuters" />
+    <node id="http://youtube.com/thomsonreuters" />
+    <node id="https://instagram.com/thomsonreuters/" />
+    <node id="http://pair.com" />
+    <node id="http://alpha.luc.ac.be/~gjb/" />
+    <node id="http://blogs.perl.org/" />
+    <node id="http://perlsphere.net/" />
+    <node id="http://ironman.enlightenedperl.org/" />
+    <node id="http://perlweekly.com/" />
+    <node id="http://perl.com/" />
+    <node id="http://www.perlfoundation.org/perl5/index.cgi" />
+    <node id="http://jobs.perl.org/" />
+    <node id="http://www.pm.org/" />
+    <node id="http://www.perl.org/" />
+    <node id="http://perldoc.perl.org/" />
+    <node id="https://metacpan.org/" />
+    <node id="http://cpan.perl.org/" />
+    <node id="http://www.perlfoundation.org" />
+    <node id="http://promote.pair.com/direct.pl?perlmonks.org" />
+    <node id="http://perl.org" />
+    <node id="http://forum.skepp.be" />
+    <node id="http://senseaboutscience.org/activities/standing-up-for-science-workshop/" />
+    <node id="https://kloptdatwel.nl/2017/04/07/haalt-victor-mids-onterecht-wetenschap-erbij-in-mindfck/" />
+    <node id="https://kloptdatwel.nl/2017/04/04/geloof-en-bijgeloof-in-het-rusland-van-poetin/" />
+    <node id="https://kloptdatwel.nl/2017/04/02/het-schandaal-rond-kankerspecialist-stefaan-van-gool/" />
+    <node id="http://kloptdatwel.nl/" />
+    <node id="http://skepp.be/links" />
+    <node id="http://skepp.be/sites/default/files/Klacht%20tegen%20Kwak.pdf" />
+    <node id="https://www.facebook.com/SKEPPofficial/" />
+    <node id="http://twitter.com/skepp_be" />
+    <node id="http://www.facebook.com/SKEPPofficial" />
+    <node id="http://www.flickr.com/photos/skepp" />
+    <node id="http://skepp.be/nl/front" />
+    <node id="http://www.3sign.com" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://be.linkedin.com/in/geertjanbex" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="https://plus.google.com/112171095486764065624/about" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.vscentrum.be/" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://alpha.uhasselt.be/research/groups/theocomp/" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.uhasselt.be/" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://fox7.eu/" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.uhasselt.be/Natalie.Benaerts" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://alpha.uhasselt.be/~fneven" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.aktor-kt.com/" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.thomson.com/" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.javajunkies.org/index.pl?node_id=3182&amp;lastnode_id=44" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.perlmonks.org/index.pl?node_id=169799" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.uhasselt.be" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://picasaweb.google.com/geertjan.bex" />
+    <edge source="http://alpha.uhasselt.be/~gjb/mainframe.html" target="http://www.skepp.be/" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="https://support.google.com/plus/?hl=en_US" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="http://www.google.com/policies/privacy/?hl=en-US" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/15XI8bpPCKg/googles-149-nik-photo-editing-suite-goes-free" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="http://arstechnica.com/tech-policy/2015/12/you-may-soon-need-a-licence-to-take-photos-of-that-classic-designer-chair-you-bought/#p3" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="http://change.org" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="https://www.change.org/p/european-parliament-save-the-freedom-of-photography-savefop-europarl-en" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="https://juliareda.eu/2015/06/fop-under-threat/" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/VAjjY_xGWvU/sir-terry-pratchett-succumbs-to-the-embuggerance-aged-66" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="http://www.bbc.co.uk/news/magazine-28838957#sa-ns_mchannel=rss&amp;ns_source=PublicRSS20-sa" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="http://www.newswear.com/mfouldetail.htm" />
+    <edge source="https://plus.google.com/112171095486764065624/about" target="http://www.wired.com/2014/06/hi-lo-dslr-lenses/" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nl/home" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/login/vsc" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/project-and-cases" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/access-and-infrastructure" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/education-and-trainings" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/about-vsc" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/contact" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/user-portal" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/hpc-for-industry" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/hpc-for-academics" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/general-information-about-hpc" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/education-and-trainings/detail/specialist-workshops-in-scientific-computing---swsc-18042017" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/education-and-trainings/detail/python-as-a-second-language-18042017" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/education-and-trainings/detail/high-performance-python-18042017" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/education-and-trainings/detail/python-as-a-second-language-25042017" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/education-and-trainings/detail/specialist-workshops-in-scientific-computing---swsc-03052017" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/news/detail/sesame-net-and-vsc-launch-hpc4sme-tool-for-companies" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/news-and-vacancies" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/academics-use-cases" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/industry-use-cases" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/use-cases-for-a-broad-audience" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/projects/overview" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/accessandinfrastructure2/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/tier1infrastructure/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/tier2infrastructure/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/gettingaccess/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/projectaccesstier1/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/tier1startinggrant1/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/buyingcomputetime/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/overhetvsc/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/about-vsc/contact" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/nieuws/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/hetvscinvlaanderen/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/organisatiestructuur/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/hoewegroeiden/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/missieenvisie/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/publicaties/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/persmateriaal/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/links/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/userdocs/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/usersupport1/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/statusinfologinvereist/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/education" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/overzichtdocumentatieen/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/availablehardware1/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/accountrequest1/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/practicalinformation/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/academicusecases/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/industryusecases1/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/nodes/usecasesforabroadaudience/en" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/projects" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/vscentrum" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/sitemap" />
+    <edge source="http://www.vscentrum.be/" target="https://www.vscentrum.be/en/privacy" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.uhasselt.be/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.uhasselt.be/fiche?voornaam=marc&amp;naam=gyssens" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/bart.kuijpers" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/frank.neven" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/jan.vandenbussche" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/tom.ameloot/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/robert.brijder/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://jhellings.nl/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/~lucp1510/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.basketsman.com" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://bart.moelans.be/?p=uh" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://dsurinx.be/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.uhasselt.be/fiche?email=timmy.weerwag" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.uhasselt.be/?id=7645&amp;oid=86" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://uhdspace.uhasselt.be/dspace/report?type=collection&amp;id=ONDGR_86" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/research/groups/theocomp/spielmann/WebAuto/index.html" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/~gjb/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.inf.ufrgs.br/~vbogorny/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://homepages.inf.ed.ac.uk/fgeerts/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://alpha.uhasselt.be/research/groups/theocomp/gillis/index.html" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.adrem.ua.ac.be/~goethals/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://mate.dm.uba.ar/%7Ergrimson/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://lrb.cs.uni-dortmund.de/~martens/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.inf.ufrgs.br/~alvares/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://othmanw.submanifold.be/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.personeel.unimaas.nl/K-Tuyls/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://www.cs.toronto.edu/~avaisman/" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="http://code.ulb.ac.be/code.people.php?id=992" />
+    <edge source="http://alpha.uhasselt.be/research/groups/theocomp/" target="https://www.cs.indiana.edu/~yuqwu/" />
+    <edge source="http://www.uhasselt.be/" target="http://www.twitter.com/uhasselt" />
+    <edge source="http://www.uhasselt.be/" target="http://www.facebook.com/uhasselt" />
+    <edge source="http://www.uhasselt.be/" target="http://www.linkedin.com/groups?mostPopular=&amp;gid=49957&amp;trk=myg_ugrp_ovr" />
+    <edge source="http://www.uhasselt.be/" target="http://www.uhasselt.be/Francqui-Leerstoel" />
+    <edge source="http://www.uhasselt.be/" target="http://www.uhasselt.be/UH/interculturalis/(10097)-Actueel/Kalender-OLVL/2016-2017/Mond-klassementsproeven-OLVL-30.html" />
+    <edge source="http://www.uhasselt.be/" target="http://universiteithasselt.blogspot.com" />
+    <edge source="http://www.uhasselt.be/" target="https://www.youtube.com/embed/hqqTy9DNoqI?rel=0&amp;autoplay=1" />
+    <edge source="http://www.uhasselt.be/" target="http://www.twitter.com/UHasselt" />
+    <edge source="http://www.uhasselt.be/" target="http://www.facebook.com/Uhasselt" />
+    <edge source="http://www.uhasselt.be/" target="http://www.auhl.be" />
+    <edge source="http://fox7.eu/" target="https://bsm-mydrive.drivingservices.org/www/index.html#/" />
+    <edge source="http://fox7.eu/" target="http://www.agencyuk.com" />
+    <edge source="http://www.uhasselt.be/Natalie.Benaerts" target="http://www.twitter.com/uhasselt" />
+    <edge source="http://www.uhasselt.be/Natalie.Benaerts" target="http://www.facebook.com/uhasselt" />
+    <edge source="http://www.uhasselt.be/Natalie.Benaerts" target="http://www.linkedin.com/groups?mostPopular=&amp;gid=49957&amp;trk=myg_ugrp_ovr" />
+    <edge source="http://www.uhasselt.be/Natalie.Benaerts" target="http://www.twitter.com/UHasselt" />
+    <edge source="http://www.uhasselt.be/Natalie.Benaerts" target="http://www.facebook.com/Uhasselt" />
+    <edge source="http://www.uhasselt.be/Natalie.Benaerts" target="http://www.auhl.be" />
+    <edge source="http://alpha.uhasselt.be/~fneven" target="http://www.twitter.com/uhasselt" />
+    <edge source="http://alpha.uhasselt.be/~fneven" target="http://www.facebook.com/uhasselt" />
+    <edge source="http://alpha.uhasselt.be/~fneven" target="http://www.linkedin.com/groups?mostPopular=&amp;gid=49957&amp;trk=myg_ugrp_ovr" />
+    <edge source="http://alpha.uhasselt.be/~fneven" target="http://www.twitter.com/UHasselt" />
+    <edge source="http://alpha.uhasselt.be/~fneven" target="http://www.facebook.com/Uhasselt" />
+    <edge source="http://alpha.uhasselt.be/~fneven" target="http://www.auhl.be" />
+    <edge source="http://www.aktor-kt.com/" target="http://compumark.thomson.com/emea/lang/de/pid/133" />
+    <edge source="http://www.thomson.com/" target="http://financial.thomsonreuters.com/" />
+    <edge source="http://www.thomson.com/" target="http://thomsonreuters.com/en/products-services/government-solutions.html" />
+    <edge source="http://www.thomson.com/" target="http://thomsonreuters.com/en/products-services/legal.html" />
+    <edge source="http://www.thomson.com/" target="https://agency.reuters.com/en.html" />
+    <edge source="http://www.thomson.com/" target="https://risk.thomsonreuters.com/en.html" />
+    <edge source="http://www.thomson.com/" target="http://thomsonreuters.com/en/products-services/tax-accounting.html" />
+    <edge source="http://www.thomson.com/" target="https://blogs.thomsonreuters.com/answerson/" />
+    <edge source="http://www.thomson.com/" target="https://innovation.thomsonreuters.com/en.html" />
+    <edge source="http://www.thomson.com/" target="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Financial;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <edge source="http://www.thomson.com/" target="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Risk+Management+Solutions;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <edge source="http://www.thomson.com/" target="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Legal;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <edge source="http://www.thomson.com/" target="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Reuters+News+Agency;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <edge source="http://www.thomson.com/" target="https://www.thomsonreuters.com/en/products-services.html?i=1;q1=Products+%26+Services;q2=Tax+%26+Accounting;rank=trcom_id_rank;site_id=thomsonreuters;sp_cs=UTF-8;sp_k=English-All;view=xml;x1=w-page-type;x10=w-professional-function;x11=w-product-type;x12=w-customer-role;x13=w-item-type;x14=w-site-id;x2=w-sector;x3=w-sector;x4=w-brand;x5=w-juris-subj-geo;x6=w-geography-sold-in;x7=w-available-languages;x8=w-language;x9=w-content-type" />
+    <edge source="http://www.thomson.com/" target="https://annual-report.thomsonreuters.com/?utm_campaign=2016_annual_report&amp;utm_medium=banner&amp;utm_source=tr.comhome" />
+    <edge source="http://www.thomson.com/" target="https://blogs.thomsonreuters.com/answerson/toward-gender-parity/" />
+    <edge source="http://www.thomson.com/" target="https://blogs.thomsonreuters.com/answerson/innovation-canada-centers-strategic-partnership/" />
+    <edge source="http://www.thomson.com/" target="https://blogs.thomsonreuters.com/answerson/machine-learning-fake-news-twitter/" />
+    <edge source="http://www.thomson.com/" target="https://blogs.thomsonreuters.com/answerson/laundromat-highlights-crisis-transparency-company-ownership/" />
+    <edge source="http://www.thomson.com/" target="https://blogs.thomsonreuters.com/" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-news&amp;nyo=0" />
+    <edge source="http://www.thomson.com/" target="https://blogs.thomsonreuters.com/answerson/category/workingattr/" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-irhome" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=quarterlyearnings" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-reportsannual" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-factbook" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-stockquote" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-dividends" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-faq" />
+    <edge source="http://www.thomson.com/" target="http://ir.thomsonreuters.com/phoenix.zhtml?c=76540&amp;p=irol-contact" />
+    <edge source="http://www.thomson.com/" target="http://facebook.com/thomsonreuters" />
+    <edge source="http://www.thomson.com/" target="http://twitter.com/thomsonreuters" />
+    <edge source="http://www.thomson.com/" target="http://www.linkedin.com/company/thomson-reuters_1400" />
+    <edge source="http://www.thomson.com/" target="https://plus.google.com/+ThomsonReuters" />
+    <edge source="http://www.thomson.com/" target="http://youtube.com/thomsonreuters" />
+    <edge source="http://www.thomson.com/" target="https://instagram.com/thomsonreuters/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://pair.com" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://alpha.luc.ac.be/~gjb/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://blogs.perl.org/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://perlsphere.net/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://ironman.enlightenedperl.org/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://perlweekly.com/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://perl.com/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://www.perlfoundation.org/perl5/index.cgi" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://jobs.perl.org/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://www.pm.org/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://www.perl.org/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://perldoc.perl.org/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="https://metacpan.org/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://cpan.perl.org/" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://www.perlfoundation.org" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://promote.pair.com/direct.pl?perlmonks.org" />
+    <edge source="http://www.perlmonks.org/index.pl?node_id=169799" target="http://perl.org" />
+    <edge source="http://www.uhasselt.be" target="http://www.twitter.com/uhasselt" />
+    <edge source="http://www.uhasselt.be" target="http://www.facebook.com/uhasselt" />
+    <edge source="http://www.uhasselt.be" target="http://www.linkedin.com/groups?mostPopular=&amp;gid=49957&amp;trk=myg_ugrp_ovr" />
+    <edge source="http://www.uhasselt.be" target="http://www.uhasselt.be/Francqui-Leerstoel" />
+    <edge source="http://www.uhasselt.be" target="http://www.uhasselt.be/UH/interculturalis/(10097)-Actueel/Kalender-OLVL/2016-2017/Mond-klassementsproeven-OLVL-30.html" />
+    <edge source="http://www.uhasselt.be" target="http://universiteithasselt.blogspot.com" />
+    <edge source="http://www.uhasselt.be" target="https://www.youtube.com/embed/hqqTy9DNoqI?rel=0&amp;autoplay=1" />
+    <edge source="http://www.uhasselt.be" target="http://www.twitter.com/UHasselt" />
+    <edge source="http://www.uhasselt.be" target="http://www.facebook.com/Uhasselt" />
+    <edge source="http://www.uhasselt.be" target="http://www.auhl.be" />
+    <edge source="http://www.skepp.be/" target="http://forum.skepp.be" />
+    <edge source="http://www.skepp.be/" target="http://senseaboutscience.org/activities/standing-up-for-science-workshop/" />
+    <edge source="http://www.skepp.be/" target="https://kloptdatwel.nl/2017/04/07/haalt-victor-mids-onterecht-wetenschap-erbij-in-mindfck/" />
+    <edge source="http://www.skepp.be/" target="https://kloptdatwel.nl/2017/04/04/geloof-en-bijgeloof-in-het-rusland-van-poetin/" />
+    <edge source="http://www.skepp.be/" target="https://kloptdatwel.nl/2017/04/02/het-schandaal-rond-kankerspecialist-stefaan-van-gool/" />
+    <edge source="http://www.skepp.be/" target="http://kloptdatwel.nl/" />
+    <edge source="http://www.skepp.be/" target="http://skepp.be/links" />
+    <edge source="http://www.skepp.be/" target="http://skepp.be/sites/default/files/Klacht%20tegen%20Kwak.pdf" />
+    <edge source="http://www.skepp.be/" target="https://www.facebook.com/SKEPPofficial/" />
+    <edge source="http://www.skepp.be/" target="http://twitter.com/skepp_be" />
+    <edge source="http://www.skepp.be/" target="http://www.facebook.com/SKEPPofficial" />
+    <edge source="http://www.skepp.be/" target="http://www.flickr.com/photos/skepp" />
+    <edge source="http://www.skepp.be/" target="http://skepp.be/nl/front" />
+    <edge source="http://www.skepp.be/" target="http://www.3sign.com" />
+  </graph>
+</graphml>
