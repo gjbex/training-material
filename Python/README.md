@@ -49,6 +49,7 @@ these samples have been used for Python tutorials.
     processing language" training session.
 1. `FiniteStateParser`: illustrates how to parse a file that is structured
     as a regular language.  A `pyparsing` example is also given.
+1. `Flask`: some illustrations of using the Flask web services framework.
 1. `Fundamentals`: code samples that where used to extract fragments
     in the part of the presentation on core Python features.
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
