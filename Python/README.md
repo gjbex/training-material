@@ -49,6 +49,7 @@ these samples have been used for Python tutorials.
     processing language" training session.
 1. `FiniteStateParser`: illustrates how to parse a file that is structured
     as a regular language.  A `pyparsing` example is also given.
+1. `Flask`: some illustrations of using the Flask web services framework.
 1. `Fundamentals`: code samples that where used to extract fragments
     in the part of the presentation on core Python features.
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
@@ -103,6 +104,7 @@ these samples have been used for Python tutorials.
     unit testing framework.
 1. `Vtk`: examples of using the KitWare VTK library (No support for Python
     3 yet).
+1. `WebScraping`: illustration of web scraping using Beautiful Soup.
 1. `WxPython`: some illustrations of GUI developlement using the Python
     bindings for Wx (No support for Python 3 as yet).
 1. `XmlGenerator`: code to generate a random XML documents.
