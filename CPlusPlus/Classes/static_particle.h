@@ -13,6 +13,7 @@ class StaticParticle {
         double x() const { return _x; }
         double y() const { return _y; }
         double mass() const {return _mass; }
+        virtual double energy() const;
         double dist(const StaticParticle& other) const;
 };
 
