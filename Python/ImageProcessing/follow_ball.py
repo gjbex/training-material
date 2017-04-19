@@ -24,12 +24,22 @@ if __name__ == '__main__':
                             help='maximum hue')
     arg_parser.add_argument('--iterations', type=int, default=5,
                             help='number of iterations for tracking')
+    arg_parser.add_argument('--output', help='output file name')
+    arg_parser.add_argument('--fps', type=float, default=12.0,
+                            help='frames per second for output')
     options = arg_parser.parse_args()
     capture = cv2.VideoCapture(options.input)
     status, frame = capture.read()
     if not status:
         capture.release()
         sys.exit(1)
+    if options.output:
+        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        output = cv2.VideoWriter(options.output, fourcc, options.fps,
+                                 (frame.shape[1], frame.shape[0]))
+    else:
+        output = None
+                                 
     track_window = (options.col, options.row, options.width, options.height)
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv_frame,
@@ -53,6 +63,8 @@ if __name__ == '__main__':
             x, y, w, h = track_window
             img = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
             cv2.imshow('image', img)
+            if output:
+                output.write(img)
             if cv2.waitKey(1) % 0xFF == ord('q'):
                 break
         else:
@@ -60,4 +72,6 @@ if __name__ == '__main__':
 
     print(f'{nr_frames} frames processed')
     cv2.destroyAllWindows()
+    if output:
+        output.release()
     capture.release()
