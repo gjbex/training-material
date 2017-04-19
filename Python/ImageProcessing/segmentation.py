@@ -20,6 +20,9 @@ if __name__ == '__main__':
                             help='gamma value, explicit time stepping')
     arg_parser.add_argument('--n', type=int, default=360,
                             help='number of points in snake')
+    arg_parser.add_argument('--no-snake', action='store_true',
+                            help='do not compute snake, only show initial '
+                                'contour')
     options = arg_parser.parse_args()
     image = rgb2gray(data.astronaut())
     smoothed_image = gaussian(image, 3)
@@ -29,15 +32,17 @@ if __name__ == '__main__':
     y = y0 + radius*np.sin(theta)
     initial_snake = np.array([x, y]).T
 
-    snake = active_contour(smoothed_image, initial_snake,
-                           alpha=options.alpha, beta=options.beta,
-                           gamma=options.gamma)
+    if not options.no_snake:
+        snake = active_contour(smoothed_image, initial_snake,
+                               alpha=options.alpha, beta=options.beta,
+                               gamma=options.gamma)
 
     figure = plt.figure(figsize=(7, 7))
     axis = figure.add_subplot(111)
     plt.gray()
     axis.imshow(image)
     axis.plot(initial_snake[:, 0], initial_snake[:, 1], '--b')
-    axis.plot(snake[:, 0], snake[:, 1], '-r', lw=1.5)
+    if not options.no_snake:
+        axis.plot(snake[:, 0], snake[:, 1], '-r', lw=1.5)
     axis.axis([0, image.shape[1], image.shape[0], 0])
     plt.show()
