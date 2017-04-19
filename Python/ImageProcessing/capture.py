@@ -9,7 +9,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--dev', type=int, default=0,
                             help='device number to capture')
     arg_parser.add_argument('--input', help='file to read from')
-    arg_parser.add_argument('--out', help='file to write to')
+    arg_parser.add_argument('--output', help='file to write to')
     arg_parser.add_argument('--fps', type=float, default=10.0,
                             help='frames per soecond for recording')
     options = arg_parser.parse_args()
@@ -17,9 +17,10 @@ if __name__ == '__main__':
         capture = cv2.VideoCapture(options.input)
     else:
         capture = cv2.VideoCapture(options.dev)
-    if options.out:
+    if options.output:
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        out = cv2.VideoWriter(options.out, fourcc, options.fps, (640, 480))
+        output = cv2.VideoWriter(options.output, fourcc,
+                                 options.fps, (640, 480))
     counter = 0
     try:
         while True:
@@ -27,8 +28,8 @@ if __name__ == '__main__':
             if status:
                 counter += 1
                 # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                if options.out:
-                    out.write(frame)
+                if options.output:
+                    output.write(frame)
                 cv2.imshow('frame', frame)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
@@ -36,13 +37,13 @@ if __name__ == '__main__':
                 break
     except KeyboardInterrupt:
         capture.release()
-        if options.out:
-            out.release()
+        if options.output:
+            output.release()
         cv2.destroyAllWindows()
         print('captured {0:d} frames'.format(counter))
     else:
         capture.release()
-        if options.out:
-            out.release()
+        if options.output:
+            output.release()
         cv2.destroyAllWindows()
         print('captured {0:d} frames'.format(counter))
