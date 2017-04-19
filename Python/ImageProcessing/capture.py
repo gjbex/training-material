@@ -22,7 +22,7 @@ if __name__ == '__main__':
         out = cv2.VideoWriter(options.out, fourcc, options.fps, (640, 480))
     counter = 0
     try:
-        while (True):
+        while True:
             status, frame = capture.read()
             if status:
                 counter += 1
