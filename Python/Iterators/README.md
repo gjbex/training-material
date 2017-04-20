@@ -36,3 +36,6 @@ often they can be constructed by using the Python standard library's
     library, as well as the `filter` function.
 1. `dataset.py`: illustrates the `__iter__` and `__next__` methods, as well
     as utilities of the `operator` module.
+1. `generating_data.py`: a retake of the data geenration script in
+    Fundamentals, now using `itertools` and built-in Python functional
+    features.
