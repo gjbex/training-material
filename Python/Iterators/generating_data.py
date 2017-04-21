@@ -7,10 +7,10 @@ import sys
 
 def main():
     print('case', 'condition', 'temperature')
-    for i, data in zip(icount(1),
-                       iproduct(range(1, 4),
-                                map(lambda x: 0.5*x, range(-1, 2)))):
-         print(i, *data)
+    for i, data in enumerate(iproduct(range(1, 4),
+                                      map(lambda x: 0.5*x,
+                                          range(-1, 2)))):
+         print(i + 1, *data)
     return 0
 
 if __name__ == '__main__':
