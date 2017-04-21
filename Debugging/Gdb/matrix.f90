@@ -22,7 +22,7 @@ end do
 
 do i = 1, rows
     do j = 1, rows
-        C(i, j) = 0.0D00
+        C(i, j) = 0.0_dp
         do k = 1, cols
             C(i, j) = C(i, j) + A(i, k)*B(k, j)
         end do
@@ -30,7 +30,7 @@ do i = 1, rows
 end do
 
 call print_matrix(C)
-print *, sum(C)
+print '(A, F15.8)', 'sum = ', sum(C)
 
 deallocate(A)
 deallocate(B)
