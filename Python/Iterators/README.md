@@ -30,6 +30,9 @@ often they can be constructed by using the Python standard library's
 1. `primes.py`: this script will generate the sequence of prime numbers
     until it is interupted.  The iterator is implemented by a function with
     a `yield` statement.
+1. `primes_multiple_calls.py`: illustrates that a function with `yield`
+    instantiates a generator when called, and hence "starts over" for
+    each `for`-loop.
 1. `primes_itertools.py`: this script also generates a potentially
     infinite sequence of prime numbers, but it is implemented using
     the `count` function of the `itertools` module in Python's standard
