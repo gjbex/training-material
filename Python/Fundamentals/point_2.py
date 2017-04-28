@@ -32,7 +32,7 @@ class Point(object):
 
     def on_line(self, p, q, tol=1.0e-6):
         if math.fabs(p.x - q.x) > tol:
-            a = (q.x - p.x)/(q.y - p.y)
+            a = (q.y - p.y)/(q.x - p.x)
             b = p.y - a*p.x
             return math.fabs(self.y - a*self.x - b) < tol
         else:
