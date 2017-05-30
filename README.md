@@ -30,6 +30,7 @@ What is it?
     macro processor, make files and autotools, as well as slides on
     version control using svn and git.
 * `Math`: sample code for using various mathematical libraries.
+* `Misc`: catch-all for one-time presentations, or special sessions.
 * `Mpi`: illustration of distributed programming using the Message Passing
     Interface API.
 * `OpenMP`: sample code for OpenMP.
