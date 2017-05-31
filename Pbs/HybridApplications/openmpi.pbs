@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#PBS -l nodes=2:ppn=20
+#PBS -l walltime=00:05:00
+
+cd ${PBS_O_WORKDIR}
+module load foss/2016a
+
+# set the number of threads; this is required by mpirun to determine
+# whether there is oversubscription.
+export OMP_NUM_THREADS=20
+
+# the two MPI processes will be mapped by node, so each will run on its
+# own node.  However, each process will have 20 Processing Elements (PE),
+# i.e., 20 cores to run on.  Binding is by core.
+mpirun --np 2 --map-by node:PE=${OMP_NUM_THREADS} --bind-to core \
+    ./mem_limit -t ${OMP_NUM_THREADS} -m 10mb
+
+# Note: This particular application takes the size of the OpenMP parallel
+# region from the command line, i.e., the `-t` option.

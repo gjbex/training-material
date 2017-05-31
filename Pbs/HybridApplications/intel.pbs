@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#PBS -l nodes=2:ppn=20
+#PBS -l walltime=00:05:00
+
+cd ${PBS_O_WORKDIR}
+module load intel/2016a
+
+# let Intel MPI do its own process and thread placement
+export I_MPI_JOB_RESPECT_PROCESS_PLACEMENT=disable
+# set the number of OpenMP threads
+export OMP_NUM_THREADS=20
+# OpenMP threads should be pinned
+export OMP_PROC_BIND=true
+
+# start the MPI application with 2 processes, 1 process per node, OpenMP
+# threads should be bound according to OpenMP, and the spread is compact
+mpirun --np 2 --ppn 1 -genv I_MPI_PIN_DOMAIN=omp:compact \
+    ./mem_limit -t ${OMP_NUM_THREADS} -m 10mb
+
+# Note: This particular application takes the size of the OpenMP parallel
+# region from the command line, i.e., the `-t` option.
