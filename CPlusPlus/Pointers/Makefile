@@ -3,12 +3,18 @@ CXXFLAGS = -std=c++14 -Wall -O2 -g
 
 .PRECIOUS: *.o
 
-all: tree.exe
+all: tree.exe tree_uptr.exe
 
 tree.exe: tree.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o: %.cpp node.h node.cpp
+tree_uptr.exe: tree_uptr.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+tree.o: tree.cpp node.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+tree_uptr.o: tree_uptr.cpp node_uptr.h
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:

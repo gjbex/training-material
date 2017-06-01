@@ -1,7 +1,7 @@
 #ifndef NODE_HDR
 #define NODE_HDR
 
-#include <iostream>
+#include <ostream>
 
 template<typename T>
 class Node {
@@ -23,7 +23,21 @@ class Node {
         Node<T>* right() const { return _right; };
         void set_right(Node<T>* child) { _right = child; };
         void to_str(std::ostream& out) const { to_str(out, ""); };
-        void to_str(std::ostream& out, const std::string& indent) const;
+        void to_str(std::ostream& out, const std::string& indent) const {
+            out << indent << id() << ": " << _value << std::endl;
+            if (has_left())
+                left()->to_str(out, indent + "  ");
+            if (has_right())
+                right()->to_str(out, indent + "  ");
+        };
+        friend std::ostream& operator<<(std::ostream& out, const Node<T>& node) {
+            out << node.id();
+            if (node.has_left())
+                out << std::endl << (*node.left());
+            if (node.has_right())
+                out << std::endl << (*node.right());
+            return out;
+        };
         ~Node<T>() {
             if (has_left())
                 delete _left;
@@ -31,7 +45,5 @@ class Node {
                 delete _right;
         };
 };
-
-#include "node.cpp"
 
 #endif
