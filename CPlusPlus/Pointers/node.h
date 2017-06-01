@@ -2,7 +2,6 @@
 #define NODE_HDR
 
 #include <iostream>
-#include <memory>
 
 template<typename T>
 class Node {
