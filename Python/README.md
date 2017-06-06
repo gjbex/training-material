@@ -93,6 +93,7 @@ these samples have been used for Python tutorials.
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
     processing language, exercises for the corresponding training session
     can be found in the `Exercsises` directory.
+1. `Sched`: scheduled execution of funcitons in Python.
 1. `ScikitLearn`: examples using the scikit-learn machine learning
     library.
 1. `Regexes`: some material related to using regular expressions in Python.
