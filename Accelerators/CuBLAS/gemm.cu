@@ -14,11 +14,16 @@ double compute_time(struct timeval start_time, struct timeval end_time) {
 }
 
 int main(int argc, char *argv[]) {
-    const int nr_iters = 10;
+    float sum {0.0};
     struct timeval start_time, end_time;
-    int n = 5;
+    int n = 500;
     if (argc > 1)
         n = atoi(argv[1]);
+    int nr_iters = 10;
+    if (argc > 2)
+        nr_iters = atoi(argv[2]);
+    cout << n << "x" << n << " matrices, " << nr_iters << " iterations"
+         << endl;
     float *a {new float[n*n]};
     float *b {new float[n*n]};
     float *c {new float[n*n]};
@@ -34,10 +39,11 @@ int main(int argc, char *argv[]) {
     }
     float alpha {1.0};
     float beta {1.0};
+    cout << "host matrices allocated and initialized" << endl;
     cublasXtHandle_t handle;
     cublasStatus_t status = cublasXtCreate(&handle);
     const int nr_devices {2};
-    int device_ids[] = {1, 1};
+    int device_ids[] = {0, 1};
     cublasXtDeviceSelect(handle, nr_devices, device_ids);
     if (status != CUBLAS_STATUS_SUCCESS) {
         cerr << "# error: couldn't create handle: " << status << endl;
@@ -51,7 +57,7 @@ int main(int argc, char *argv[]) {
     gettimeofday(&end_time, NULL);
     cout << "GPU computation time = " << compute_time(start_time, end_time)
          << endl;
-    float sum {0.0};
+    sum = 0.0;
     for (int i = 0; i < n*n; i++)
         sum += c[i];
     cout << "GPU sum = " << sum << endl;
@@ -59,6 +65,7 @@ int main(int argc, char *argv[]) {
     delete b;
     delete c;
     cublasXtDestroy(handle);
+
     auto A = Mat<float>(n, n);
     auto B = Mat<float>(n, n);
     auto C = Mat<float>(n, n);
@@ -71,6 +78,7 @@ int main(int argc, char *argv[]) {
             k++;
         }
     }
+    cout << "CPU matrices allocated and initialized" << endl;
     gettimeofday(&start_time, NULL);
     for (int i = 0; i < nr_iters; i++) {
         C += A*B;
