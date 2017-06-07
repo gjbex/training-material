@@ -1,3 +1,4 @@
+#include <armadillo>
 #include <functional>
 #include <iostream>
 #include <random>
@@ -5,7 +6,7 @@
 #include <cublasXt.h>
 
 using namespace std;
-
+using namespace arma;
 
 double compute_time(struct timeval start_time, struct timeval end_time) {
     return (end_time.tv_sec - start_time.tv_sec) +
@@ -13,7 +14,7 @@ double compute_time(struct timeval start_time, struct timeval end_time) {
 }
 
 int main(int argc, char *argv[]) {
-    const bool verbose = false;
+    const int nr_iters = 10;
     struct timeval start_time, end_time;
     int n = 5;
     if (argc > 1)
@@ -32,7 +33,7 @@ int main(int argc, char *argv[]) {
         c[i] = 0.0;
     }
     float alpha {1.0};
-    float beta {0.0};
+    float beta {1.0};
     cublasXtHandle_t handle;
     cublasStatus_t status = cublasXtCreate(&handle);
     const int nr_devices {2};
@@ -43,18 +44,46 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     gettimeofday(&start_time, NULL);
-    status = cublasXtSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N,
-                           n, n, n, &alpha, a, n, b, n, &beta, c, n);
+    for (int i = 0; i < nr_iters; i++) {
+        status = cublasXtSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N,
+                               n, n, n, &alpha, a, n, b, n, &beta, c, n);
+    }
     gettimeofday(&end_time, NULL);
-    cout << "computation time = " << compute_time(start_time, end_time)
+    cout << "GPU computation time = " << compute_time(start_time, end_time)
          << endl;
     float sum {0.0};
     for (int i = 0; i < n*n; i++)
         sum += c[i];
-    cout << "sum = " << sum << endl;
+    cout << "GPU sum = " << sum << endl;
     delete a;
     delete b;
     delete c;
     cublasXtDestroy(handle);
+    auto A = Mat<float>(n, n);
+    auto B = Mat<float>(n, n);
+    auto C = Mat<float>(n, n);
+    int k = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            A(i, j) = k + 1.0;
+            B(i, j) = k + 10.0;
+            C(i, j) = 0.0;
+            k++;
+        }
+    }
+    gettimeofday(&start_time, NULL);
+    for (int i = 0; i < nr_iters; i++) {
+        C += A*B;
+    }
+    gettimeofday(&end_time, NULL);
+    cout << "CPU computation time = " << compute_time(start_time, end_time)
+         << endl;
+    sum = 0.0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            sum += C(i, j);
+        }
+    }
+    cout << "CPU sum = " << sum << endl;
     return 0;
 }
