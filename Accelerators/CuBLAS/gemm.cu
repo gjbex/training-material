@@ -156,7 +156,6 @@ void compute_gpu(int n, int nr_iters) {
     gettimeofday(&end_time, NULL);
     cout << "GPU device transfer time = "
          << compute_time(start_time, end_time) << endl;
-    gettimeofday(&start_time, NULL);
     for (int i = 0; i < nr_iters; i++) {
         status = cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N,
                              n, n, n, &alpha, a_gpu, n, b_gpu, n,
@@ -166,10 +165,10 @@ void compute_gpu(int n, int nr_iters) {
             exit(1);
         }
     }
-    gettimeofday(&end_time, NULL);
     cudaFree(a_gpu);
     cudaFree(b_gpu);
     error = cudaMemcpy(c, c_gpu, n*n*sizeof(float), cudaMemcpyDeviceToHost);
+    gettimeofday(&end_time, NULL);
     cout << "GPU computation time = "
          << compute_time(start_time, end_time) << endl
          << "GPU sum = " << compute_sum(c, n*n) << endl;
