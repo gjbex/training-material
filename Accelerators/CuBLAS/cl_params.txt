@@ -1,0 +1,4 @@
+int	N	500
+int	nr_iters	1
+bool	skip_gpu_xt	false
+bool	skip_cpu	false
