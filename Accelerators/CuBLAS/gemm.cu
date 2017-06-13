@@ -3,7 +3,9 @@
 #include <random>
 #include <sys/time.h>
 
+extern "C" {
 #include "cl_params.h"
+}
 
 using namespace std;
 
@@ -16,18 +18,18 @@ void compute_cpu(int n, int nr_iters);
 
 int main(int argc, char *argv[]) {
     Params params;
-    initCl(&params);
+    initCL(&params);
     parseCL(&params, &argc, &argv);
     dumpCL(stdout, "# ", &params);
 #ifndef WITHOUT_GPU_XT
     if (!params.skip_gpu_xt)
-        compute_gpu_xt(params.n, params.nr_iters);
+        compute_gpu_xt(params.N, params.nr_iters);
 #endif
 #ifndef WITHOUT_CPU
     if (!params.skip_cpu)
-        compute_cpu(params.n, params.nr_iters);
+        compute_cpu(params.N, params.nr_iters);
 #endif
-    finalizeCl(&params);
+    finalizeCL(&params);
     return 0;
 }
 
@@ -52,7 +54,7 @@ void compute_gpu_xt(int n, int nr_iters) {
     float *c {new float[n*n]};
     if (!(a && b && c)) {
         cerr << "#error: can't allocate memory" << endl;
-        return 1;
+        exit(1);
     }
     for (int i = 0; i < n*n; i++) {
         a[i] = i + 1.0;
@@ -63,25 +65,32 @@ void compute_gpu_xt(int n, int nr_iters) {
     float beta {1.0};
     cublasXtHandle_t handle;
     cublasStatus_t status = cublasXtCreate(&handle);
+    if (status != CUBLAS_STATUS_SUCCESS) {
+        cerr << "# error: couldn't create handle: " << status << endl;
+        exit(1);
+    }
     const int nr_devices {2};
     int device_ids[] = {0, 1};
     cublasXtDeviceSelect(handle, nr_devices, device_ids);
     if (status != CUBLAS_STATUS_SUCCESS) {
-        cerr << "# error: couldn't create handle: " << status << endl;
-        return 1;
+        cerr << "# error: couldn't select devices: " << status << endl;
+        exit(1);
     }
+    int block_dim;
+    cublasXtGetBlockDim(handle, &block_dim);
+    cout << "block dimension = " << block_dim << endl;
     gettimeofday(&start_time, NULL);
     for (int i = 0; i < nr_iters; i++) {
         status = cublasXtSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N,
                                n, n, n, &alpha, a, n, b, n, &beta, c, n);
         if (status != CUBLAS_STATUS_SUCCESS) {
             cerr << "# error: cublasXtSgemm returned: " << status << endl;
-            return 1;
+            exit(1);
         }
     }
     gettimeofday(&end_time, NULL);
     cout << "GPU_XT computation time = "
-         << compute_time(start_time, end_time) << endl;
+         << compute_time(start_time, end_time) << endl
          << "GPU_XT sum = " << compute_sum(c, n*n) << endl;
     delete a;
     delete b;
@@ -97,7 +106,7 @@ void compute_cpu(int n, int nr_iters) {
     struct timeval start_time, end_time;
     auto A = Mat<float>(n, n);
     auto B = Mat<float>(n, n);
-    auto C = zero<Mat<float>>(n, n);
+    auto C = Mat<float>(n, n, fill::zeros);
     int k = 0;
     for (int j = 0; j < n; j++) {
         for (int i = 0; i < n; i++) {
@@ -112,7 +121,7 @@ void compute_cpu(int n, int nr_iters) {
     }
     gettimeofday(&end_time, NULL);
     cout << "CPU computation time = "
-         << compute_time(start_time, end_time) << endl;
+         << compute_time(start_time, end_time) << endl
          << "CPU sum = " << compute_sum(C.memptr(), C.n_rows*C.n_cols)
          << endl;
 }
