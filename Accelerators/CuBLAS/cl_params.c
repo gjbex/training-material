@@ -12,6 +12,7 @@ void initCL(Params *params) {
 	params->N = 500;
 	params->nr_iters = 1;
 	params->skip_gpu_xt = false;
+	params->skip_gpu = false;
 	params->skip_cpu = false;
 }
 
@@ -48,6 +49,11 @@ void parseCL(Params *params, int *argc, char **argv[]) {
 		}
 		if (!strncmp((*argv)[i], "-skip_gpu_xt", 13)) {
 			params->skip_gpu_xt = true;
+			i++;
+			continue;
+		}
+		if (!strncmp((*argv)[i], "-skip_gpu", 10)) {
+			params->skip_gpu = true;
 			i++;
 			continue;
 		}
@@ -106,6 +112,20 @@ void parseFileCL(Params *params, char *fileName) {
 			}
 			continue;
 		}
+		if (sscanf(line_str, "skip_gpu = %[^\n]", argv_str) == 1) {
+			if (!1) {
+				fprintf(stderr, "### error: invalid value for option '-skip_gpu' of type bool\n");
+				exit(EXIT_CL_INVALID_VALUE);
+			}
+			if (!strncmp("false", argv_str, 6)) {
+				params->skip_gpu = false;
+			} else if (!strncmp("true", argv_str, 5)) {
+				params->skip_gpu = true;
+			} else {
+				params->skip_gpu = atoi(argv_str);
+			}
+			continue;
+		}
 		if (sscanf(line_str, "skip_cpu = %[^\n]", argv_str) == 1) {
 			if (!1) {
 				fprintf(stderr, "### error: invalid value for option '-skip_cpu' of type bool\n");
@@ -129,6 +149,7 @@ void dumpCL(FILE *fp, char prefix[], Params *params) {
 	fprintf(fp, "%sN = %d\n", prefix, params->N);
 	fprintf(fp, "%snr_iters = %d\n", prefix, params->nr_iters);
 	fprintf(fp, "%sskip_gpu_xt = %d\n", prefix, params->skip_gpu_xt);
+	fprintf(fp, "%sskip_gpu = %d\n", prefix, params->skip_gpu);
 	fprintf(fp, "%sskip_cpu = %d\n", prefix, params->skip_cpu);
 }
 
@@ -136,5 +157,5 @@ void finalizeCL(Params *params) {
 }
 
 void printHelpCL(FILE *fp) {
-	fprintf(fp, "  -N <integer>\n  -nr_iters <integer>\n  -skip_gpu_xt\n  -skip_cpu\n  -?: print this message");
+	fprintf(fp, "  -N <integer>\n  -nr_iters <integer>\n  -skip_gpu_xt\n  -skip_gpu\n  -skip_cpu\n  -?: print this message");
 }

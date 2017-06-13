@@ -8,6 +8,7 @@ typedef struct {
 	int N;
 	int nr_iters;
 	bool skip_gpu_xt;
+	bool skip_gpu;
 	bool skip_cpu;
 } Params;
 
