@@ -1,6 +1,6 @@
 #include <iostream>
 #include <memory>
-#include "node_uptr.h"
+#include "node_sptr.h"
 
 template class Node<double>;
 
