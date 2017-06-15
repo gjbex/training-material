@@ -49,6 +49,7 @@ these samples have been used for Python tutorials.
     processing language" training session.
 1. `FiniteStateParser`: illustrates how to parse a file that is structured
     as a regular language.  A `pyparsing` example is also given.
+1. `Flask`: some illustrations of using the Flask web services framework.
 1. `Fundamentals`: code samples that where used to extract fragments
     in the part of the presentation on core Python features.
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
@@ -56,6 +57,8 @@ these samples have been used for Python tutorials.
     using SWIG.
 1. `HoloViews`: data visualization library examples, especially in the
     context of exploration in notebooks.
+1. `ImageProcessing`: some Scikit-Image sample code for image processing,
+    as well as OpenCV for video analysis.
 1. `Ising`: Implementation of the 2D Ising system in pure Python, as well
     as in C++ using SWIG to wrap the implementation.  Mostly intended for
     visualization purposes.
@@ -90,6 +93,7 @@ these samples have been used for Python tutorials.
 1. `python-intro.pptx`: Powerpoint presentation on Python as a data
     processing language, exercises for the corresponding training session
     can be found in the `Exercsises` directory.
+1. `Sched`: scheduled execution of funcitons in Python.
 1. `ScikitLearn`: examples using the scikit-learn machine learning
     library.
 1. `Regexes`: some material related to using regular expressions in Python.
@@ -103,6 +107,11 @@ these samples have been used for Python tutorials.
     unit testing framework.
 1. `Vtk`: examples of using the KitWare VTK library (No support for Python
     3 yet).
+1. `WebScraping`: illustration of web scraping using Beautiful Soup.
 1. `WxPython`: some illustrations of GUI developlement using the Python
     bindings for Wx (No support for Python 3 as yet).
 1. `XmlGenerator`: code to generate a random XML documents.
+
+## Installation
+Instructions for installing `conda` and hence Python package managenment
+on the VSC cluster [are available](INSTALL_CONDA.md).

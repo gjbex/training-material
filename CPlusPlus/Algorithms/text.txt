@@ -1,0 +1,5 @@
+This is a long text with a number of words
+that may be repeated.  Those words hence can
+be found at multiple positions in the text,
+so this is a good test for a search algorithm
+to see whether the words can be found.

@@ -1,0 +1,10 @@
+# Turn off that annoying start up message
+startup_message off
+defscrollback 10000
+
+# Window list at the bottom
+hardstatus alwayslastline
+hardstatus string "%{rw}%H%{wk}|%?%-Lw%?%{wb}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
+
+# Turn off pesky visual bell
+vbell off

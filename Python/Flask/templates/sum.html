@@ -1,0 +1,19 @@
+<!doctype html>
+
+<title>EasySum</title>
+
+<body>
+
+    <h1>EasySum</h2>
+    {% if result %}
+        <p> The result of {{op1}} + {{op2}} is {{result}}. </p>
+    {% else %}
+        <p> This web aplication computes the sum of two numbers
+          , the can even be floating point values. </p>
+        <form method="POST">
+            First operand: <input type="text" name="op1"/> <br/>
+            Second operand: <input type="text" name="op2"/> <br/>
+            <input type="submit" value="Compute"/>
+        </form>
+    {% endif %}
+</body>                                                                     

@@ -11,8 +11,10 @@ is subject to the license included in this repository.
 What is it?
 -----------
 * `Accelerators`: some sample code and information on using accelerators.
-* `C`: some C sample code. (Work in progress)
-* `CPlusPlus`: some C++ sample code. (Work in progress)
+* `C`: presentation based "The C programming language" by Kernighan and
+   Ritchie, as well as sample code to illustration the concepts.
+* `CPlusPlus`: presentation based on "A tour of C++" by Stroustrup, as
+   well as sample code to illustrate the concepts.
 * `DataStorage`: sample code showing how to read/write HDF5 and NetCDF
     files from C, Fortran, and Python.  HDF5 can be used for parallel I/O,
     C sample code is provided.  The HDF5 material is part of a tutorial on
@@ -21,14 +23,14 @@ What is it?
     Sample SQLcovers the basics of querying relational databases
 * `Debugging`: slides used for an info session on debugging tools and
     techniques, as well as sample code.
-* `Fortran`: sample Fortran code intended to illustrate Fortran 95, 2003,
-    and 2008 features.  This material is developed in preparation of a
-    tutorial on modern Fortran features.
+* `Fortran`: presentation on "Modern Fortran" as well sample code
+    intended to illustrate Fortran 95, 2003, and 2008 features.
 * `Java`: sample code mostly for demonstration purposes.
 * `LinuxTools`: some illustrations of using Linux tools such as the `M4`
     macro processor, make files and autotools, as well as slides on
     version control using svn and git.
 * `Math`: sample code for using various mathematical libraries.
+* `Misc`: catch-all for one-time presentations, or special sessions.
 * `Mpi`: illustration of distributed programming using the Message Passing
     Interface API.
 * `OpenMP`: sample code for OpenMP.
@@ -47,4 +49,5 @@ What is it?
 
 Contributors
 ------------
-Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
+* Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
+* Guillaume Jacquenot (Python 3 version of XDMF generating scripts)

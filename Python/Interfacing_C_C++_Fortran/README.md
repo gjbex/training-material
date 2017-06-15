@@ -1,4 +1,4 @@
-Integrating C, C++ and Fortran code with Pythno
+Integrating C, C++ and Fortran code with Python
 ===============================================
 
 Two ways to integrate C/C++ code are illustrated, using `ctype` and
@@ -10,7 +10,7 @@ What is it?
   * `array_utils.f90`: a Fortran module that defines a function to
     sum the elements of a double precesion array.  `f2py` creates
     a shared library and a wrapper file.
-  * ``array_utils_f2py.f90`: loads the module defined in the wrapper
+  * `array_utils_f2py.f90`: loads the module defined in the wrapper
     file and calls the `sum` function with a `numpy` array.
   * `sum.f90`: Fortran program to test `array_utils.f90`
   * `pi.f90`: Fortran function to compute pi from random numbers, `f2py`
