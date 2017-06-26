@@ -12,37 +12,17 @@ $ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
 Once downloaded, run the script:
 ```bash
-$ bash Miniconda3-latest-Linux-x86_64.sh
+$ bash Miniconda3-latest-Linux-x86_64.sh -b -p $VSC_DATA/miniconda3
 ```
-You will be asked a number of questions. Note that the location of the
-installation directory is very important.  `conda` tneds to use a lot
-of disk space, and you'll easily exceed your disk quota, so install in
-your data directory.  To get that path, execute
+
+Optionally, you can add the path to the   Miniconda installation to the
+`PATH` environment variable in your `.bashrc` file.  This is convenient,
+but may lead to conflicts when working with the module system, so make
+sure that you know what you are doing in either case.
+The line to add to your `.bashrc` file would be:
 ```bash
-$ echo $VSC_DATA
+export PATH="${VSC_DATA}/miniconda3/bin:${PATH}
 ```
-
-1. First, the installer will let you have to review the
-    license, press enter as requested.  The license is shown, read it,
-    hitting the space bar for the next pages.  If you agree, type "yes"
-    when requested.
-1. The installer will suggest an installation directory, `miniconda3` in
-    your home directory.  Bear in mind that, depending on the number of
-    conda environments you wish to have, and the number of Python packages,
-    you might be better of installing this in your `$VSC_DATA`
-    directory.  So if your VSC user ID is vsc98765, and your account's
-    affiliation is `my_uni` (either `antwerpen`, `brussel`, `gent`, or
-    `leuven`), then the directory could be changed to
-    `/data/my_uni/987/vsc98765/miniconda3`.  Typically, your home
-    directory will do though.  Either press return to accept the installer's
-    suggestion, or enter your own, and pressing return to proceed.
-1. The installation will now proceed.
-1. Next, the installer will offer to permanently add the path to the
-    Miniconda installation to the `PATH` environment variable in your
-    `.bashrc` file.  This is convenient, but may lead to conflicts when
-    working with the module system, so make sure that you know what you
-    are doing in either case.
-
 
 ## Creating an environment
 First, ensure that the Miniconda installation is in your `PATH`.  The
