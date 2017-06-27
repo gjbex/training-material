@@ -10,7 +10,6 @@ if __name__ == '__main__':
     else:
         from io import StringIO
     from xml.dom.minidom import Document
-    from xml.dom import minidom
     import numpy as np
 
     min_val = -1.0
@@ -99,7 +98,7 @@ if __name__ == '__main__':
     time_values = doc.createTextNode('0.0 1.0 {0}'.format(options.t))
     time_data_item.appendChild(time_values)
     time.appendChild(time_data_item)
-    for t in xrange(options.t):
+    for t in range(options.t):
 # create time point grid
         time_grid = doc.createElement('Grid')
         time_grid.setAttribute('Name', 'time {0}'.format(t))

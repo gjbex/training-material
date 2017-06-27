@@ -10,7 +10,6 @@ if __name__ == '__main__':
     else:
         from io import StringIO
     from xml.dom.minidom import Document
-    from xml.dom import minidom
     import numpy as np
 
     min_val = -1.0
