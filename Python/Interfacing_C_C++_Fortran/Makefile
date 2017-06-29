@@ -3,9 +3,9 @@ CXX = g++
 CFLAGS = -O2 -fPIC
 CXXFLAGS = -O2 -fPIC
 CPPFLAGS = 
-CPP_PYTHON = -I$(HOME)/miniconda/envs/py3k/include/python3.4m/
-LDFLAGS = -L$(HOME)/miniconda/envs/py3k/lib/
-LIBS = -lpython3.4m -lm
+CPP_PYTHON = -I$(HOME)/miniconda3/envs/py36/include/python3.6m/
+LDFLAGS = -L$(HOME)/miniconda3/envs/py36/lib/
+LIBS = -lpython3 -lm
 
 OBJS = cl_params.o cl_params_aux.o main.o
 LOGMAP_LIB_OBJS = logistic_map_wrap.o logistic_map.o

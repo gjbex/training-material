@@ -24,6 +24,7 @@ programming concepts and idiosyncracies particular to C++.
 1. `Random`: some illustrations of using the pseudorandom generator in
     standard C++.
 1. `STL`: some illustrations of using the STL library.
+1. `Pointers`: illustration of pointer usage in C++.
 1. `Armadillo`: some illustrations of using the Armadillo linear algebra
     library.
 1. `Boost`: some illustrations of using the Boost C++ library,
