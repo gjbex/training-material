@@ -2,7 +2,7 @@
 Here, we describe how to install Python packages using conda.
 
 
-## Intralling Miniconda
+## Installing Miniconda
 If you have Miniconda already installed, you can skip ahead to the next
 section, if Miniconda is not installed, we start with that. Download the
 Bash script that will install it from
