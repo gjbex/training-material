@@ -34,6 +34,10 @@ If the result is blank, or reports that `conda` can not be found, modify
 the `PATH` environment variable appropriately by adding Miniconda's
 `bin` directory to `PATH`.
 
+At this point, you may wish to load a module for a recent compiler (GCC
+is likely givnig the least problems).  Note that this module should also
+be loaded when using the environment you are about to create.
+
 Creating a new conda environment is straightforward:
 ```bash
 $ conda create  -n science  numpy scipy matplotlib
