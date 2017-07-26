@@ -48,6 +48,12 @@ handy in any case to preprocess, visualize, or postprocess your data.
 You can of course install more, depending on your requirements and
 personal taste.
 
+This will default to the latest Python 3 version, if you need a specific version,
+e.g., Python 2.7.x, this can be specified as follows:
+```
+$ conda create -n science python=2.7 numpy scipy matplotlib
+```
+
 
 ## Working with the environment
 To work with an environment, you have to activate it.  This is done with,
