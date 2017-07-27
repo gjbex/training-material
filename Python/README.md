@@ -112,6 +112,9 @@ these samples have been used for Python tutorials.
     bindings for Wx (No support for Python 3 as yet).
 1. `XmlGenerator`: code to generate a random XML documents.
 
-## Installation
-Instructions for installing `conda` and hence Python package managenment
-on the VSC cluster [are available](INSTALL_CONDA.md).
+
+## How to
+* Instructions for [installing `conda` and hence Python package managenment
+    on the VSC cluster are available](INSTALL_CONDA.md).
+* Instructions on how to use a [Jupyter notebook server that runs on a
+compute node on the VSC cluster](HOWTO_REMOTE_JUPYTER.md).
