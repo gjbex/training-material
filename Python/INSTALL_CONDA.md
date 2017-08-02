@@ -25,8 +25,9 @@ export PATH="${VSC_DATA}/miniconda3/bin:${PATH}
 ```
 
 ## Creating an environment
-First, ensure that the Miniconda installation is in your `PATH`.  The
-following command should return the full path to the `conda` command:
+First, ensure that the Miniconda installation is in your `PATH` environment
+variable.  The following command should return the full path to the `conda`
+executable:
 ```bash
 $ which conda
 ```
@@ -35,7 +36,7 @@ the `PATH` environment variable appropriately by adding Miniconda's
 `bin` directory to `PATH`.
 
 At this point, you may wish to load a module for a recent compiler (GCC
-is likely givnig the least problems).  Note that this module should also
+is likely causing the least problems).  Note that this module should also
 be loaded when using the environment you are about to create.
 
 Creating a new conda environment is straightforward:
@@ -51,7 +52,7 @@ personal taste.
 This will default to the latest Python 3 version, if you need a specific version,
 e.g., Python 2.7.x, this can be specified as follows:
 ```
-$ conda create -n science python=2.7 numpy scipy matplotlib
+$ conda create -n science  python=2.7  numpy scipy matplotlib
 ```
 
 
@@ -64,11 +65,11 @@ $ source activate science
 Here, `science` is the name of the environment you want to work in.
 
 
-## Install an additoinal package
-To install an additoinal package, e.g., `pandas`, first ensure that the
+## Install an additional package
+To install an additional package, e.g., `pandas`, first ensure that the
 environment you want to work in is activated.
 ```bash
-$ source activate tensorflow
+$ source activate science
 ```
 Next, install the package
 ```bash
@@ -81,7 +82,7 @@ Using `conda`, it is easy to keep your packages up-to-date.
 
 Updating a single package (and its dependencies) can be done using:
 ```bash
-$ conda update pandas
+$ conda update tensorflow-gpu
 ```
 Updating all packages is trivial:
 ```bash
@@ -90,5 +91,14 @@ $ conda update --all
 
 Removing an installed package:
 ```bash
-$ conda remove bokeh
+$ conda remove tensorflow-gpu
 ```
+
+## Deactivating an environment
+To stop using an active environment, and return your shell to its original state, use the following command:
+```bash
+$ source deactivate
+```
+
+## More information
+Additional information on conda can be found on its [documentation site)[https://conda.readthedocs.io/en/latest/].
