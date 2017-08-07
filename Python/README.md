@@ -14,6 +14,8 @@ these samples have been used for Python tutorials.
     implements a Monte Carlo algorithm, and allows to show evolution over
     time, autocorrelation, and to compare with target distribution.
 1. `Biopython`: some Biopython examples.
+1. `biopython.pptx`: Microsoft Powerpoint presentation on using BioPython
+    for bioinformatics related tasks.
 1. `Birdsong`: implements a FFT of WAV files, and shows the original signal
     (amplitude) and the frequency spectrum using Matplotlib.  Another
     script illustrates elementary signal processing using a highpass
@@ -49,6 +51,7 @@ these samples have been used for Python tutorials.
     processing language" training session.
 1. `FiniteStateParser`: illustrates how to parse a file that is structured
     as a regular language.  A `pyparsing` example is also given.
+1. `Flask`: some illustrations of using the Flask web services framework.
 1. `Fundamentals`: code samples that where used to extract fragments
     in the part of the presentation on core Python features.
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
@@ -56,6 +59,8 @@ these samples have been used for Python tutorials.
     using SWIG.
 1. `HoloViews`: data visualization library examples, especially in the
     context of exploration in notebooks.
+1. `ImageProcessing`: some Scikit-Image sample code for image processing,
+    as well as OpenCV for video analysis.
 1. `Ising`: Implementation of the 2D Ising system in pure Python, as well
     as in C++ using SWIG to wrap the implementation.  Mostly intended for
     visualization purposes.
@@ -87,9 +92,16 @@ these samples have been used for Python tutorials.
 1. `PhraseIndexer`: parses a text file to find the line number on which a
     given eet of phrases occurs.
 1. `Profiling`: a few examples of how to use profilers for Python.
-1. `python-intro.pptx`: Powerpoint presentation on Python as a data
+1. `python_development_practices.pptx`: Powerpoint presentation on some
+    development good practices.
+1. `python_hpc.pptx`: Powerpoint presentation on how to use Python for
+    high performance computing, contains sections on Cython, using
+    C/C++/Fortran libraries from Python, shared memory programming, MPI,
+    and PySpark.
+1. `python_intro.pptx`: Powerpoint presentation on Python as a data
     processing language, exercises for the corresponding training session
     can be found in the `Exercsises` directory.
+1. `Sched`: scheduled execution of funcitons in Python.
 1. `ScikitLearn`: examples using the scikit-learn machine learning
     library.
 1. `Regexes`: some material related to using regular expressions in Python.
@@ -103,6 +115,14 @@ these samples have been used for Python tutorials.
     unit testing framework.
 1. `Vtk`: examples of using the KitWare VTK library (No support for Python
     3 yet).
+1. `WebScraping`: illustration of web scraping using Beautiful Soup.
 1. `WxPython`: some illustrations of GUI developlement using the Python
     bindings for Wx (No support for Python 3 as yet).
 1. `XmlGenerator`: code to generate a random XML documents.
+
+
+## How to
+* Instructions for [installing `conda` and hence Python package managenment
+    on the VSC cluster are available](INSTALL_CONDA.md).
+* Instructions on how to use a [Jupyter notebook server that runs on a
+compute node on the VSC cluster](HOWTO_REMOTE_JUPYTER.md).

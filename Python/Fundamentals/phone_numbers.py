@@ -9,9 +9,9 @@ def main():
                     /            # separator
                     [1-9]\d{5,6} # 6 or 7 digit number'''
     if re.match(regex_str, phone_number, re.VERBOSE):
-        print 'ok'
+        print('ok')
     else:
-        print 'not ok'
+        print('not ok')
     return 0
 
 if __name__ == '__main__':

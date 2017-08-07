@@ -130,6 +130,11 @@ by:
 ```python
 file_name = '{base}.txt'.format(base=base_name)
 ```
+Starting from Python 3.6, you can use f-strings to accomplish the same,
+i.e.,
+```python
+file_name = f'{base_name}.txt'
+```
 
 It is of course possible to create format strings programmatically, e.g.,
 ```python

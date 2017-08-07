@@ -1,0 +1,16 @@
+<!doctype html>
+<title>Fibonacci numbers</title>
+<body>
+<h1>Fibonacci numbers</h1>
+
+{% if number %}
+    <p>Fibonacci number {{number}} is {{fibonacci}}.</p>
+    <p>Get <a href="/">next</a>, or <a href="reset">reset</a> the session
+       to start over.</p>
+{% else %}
+    <p>This is an illustration of Flask sessions, each time this page is
+    hit within a session, the next Fibonacci number will be shown.</p>
+    <p>Get <a href="/">started</a>!</p>
+{% endif %}
+
+</body>

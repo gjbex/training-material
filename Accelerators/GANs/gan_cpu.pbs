@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#PBS -l nodes=1:ppn=20:ivybridge
+#PBS -l walltime=04:00:00
+#PBS -j oe
+#PBS -m ae
+
+cd $PBS_O_WORKDIR
+
+source $VSC_DATA/miniconda3/bin/activate science
+
+time python gan.py --train --output "output.${PBS_JOBID}"
