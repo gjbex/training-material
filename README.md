@@ -1,5 +1,4 @@
-training-material
-=================
+# training-material
 
 A collection of code examples for training purposes, mostly in the
 context of data processing and parallel prgramming.
@@ -10,8 +9,9 @@ is subject to the license included in this repository.
 
 [![DOI](https://www.zenodo.org/badge/18587808.svg)](https://www.zenodo.org/badge/latestdoi/18587808)
 
-What is it?
------------
+
+## What is it?
+
 * `Accelerators`: some sample code and information on using accelerators.
 * `C`: presentation based "The C programming language" by Kernighan and
    Ritchie, as well as sample code to illustration the concepts.
@@ -49,7 +49,8 @@ What is it?
 * `Visualization`: data files, XDMF files and ParaView state files to
     use during a demo of scientific visualization with ParaView.
 
-Contributors
-------------
+
+## Contributors
+
 * Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
 * Guillaume Jacquenot (Python 3 version of XDMF generating scripts)
