@@ -8,6 +8,8 @@ This material is made available as is, i.e., anyone is free to use it,
 and to contribute.  However, no support is guaranteed in any form.  It
 is subject to the license included in this repository.
 
+[![DOI](https://www.zenodo.org/badge/18587808.svg)](https://www.zenodo.org/badge/latestdoi/18587808)
+
 What is it?
 -----------
 * `Accelerators`: some sample code and information on using accelerators.
