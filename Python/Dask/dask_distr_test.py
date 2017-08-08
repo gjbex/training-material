@@ -20,6 +20,8 @@ if __name__ == '__main__':
     arg_parser.add_argument('--scheduler', help='scheduler host')
     arg_parser.add_argument('--scheduler_port', default='8786',
                             help='scheduler port to use')
+    arg_parser.add_argument('--n', type=int, default=100,
+                            help='number of terms in sum')
     arg_parser.add_argument('--verbose', action='store_true',
                             help='give verbose output')
     options = arg_parser.parse_args()
@@ -27,9 +29,11 @@ if __name__ == '__main__':
                                      options.scheduler_port))
     if options.verbose:
         print('Client: {0}'.format(str(client)), flush=True)
-    futures = client.map(square, range(100))
+    futures = client.map(square, range(options.n))
     total = client.submit(sum, futures)
-    print('sum_i=0..99 i^2 = {0:.1f}'.format(total.result()))
+    expected_total = (options.n - 1)*options.n*(2*options.n - 1)//6
+    print('sum_i=0..99 i^2 = {0:d}, expected {1:d}'.format(total.result(),
+                                                           expected_total))
     futures = client.map(get_hostname, range(500))
     process_locations = client.gather(futures)
     if options.verbose:
