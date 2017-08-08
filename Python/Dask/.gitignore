@@ -1,3 +1,4 @@
 *.pbs.*
 .dask-web-ui.json
 Backup
+scheduler.log
