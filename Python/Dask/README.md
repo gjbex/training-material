@@ -13,6 +13,11 @@ CSV or HDF5 files.
 * `dask_avg_csv.py`: Dask computation of the average value of columns in
     a large number of CSV files.
 * `dask_avg_csv.pbs`: PBS script to run `dask_avg_csv.py`.
+* `dask_distr_avg_csv.py`: Dask computation of the average value of columns in
+    a large number of CSV files, it creates a client for distributed execution
+    of `DataFrame` operations.
+* `dask_distr_avg_csv.pbs`: PBS script to run `dask_distr_avg_csv.py`,
+    launches a scheduler and workers for the client to connect to.
 * `launch_scheduler.sh`: Bash script to launch a Dash scheduler for
     distributed computations. Dash workers can connect to it and
     receive work.
