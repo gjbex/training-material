@@ -26,10 +26,14 @@ echo 'waiting for workers to start and connect'
 sleep 15
 
 source "$VSC_DATA/miniconda3/setenv.sh"
-source activate science
+source activate science 2> /dev/null
 
-which python
+if [ $? -ne 0 ]
+then
+    (>&2 echo '### error: conda environment not sourced successfully' )
+fi
 
 echo 'starting computation'
+
 time python dask_distr_test.py --scheduler ${scheduler_node} \
                                --scheduler_port ${scheduler_port}
