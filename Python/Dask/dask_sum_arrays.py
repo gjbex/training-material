@@ -7,7 +7,7 @@ import numpy as np
 
 
 if __name__ == '__main__':
-    arg_parser = ArgumentParser(description='compute and check SVD')
+    arg_parser = ArgumentParser(description='Create two arrays, compute the sum')
     arg_parser.add_argument('--size', type=int, default=5000,
                             help='arrays size to use')
     arg_parser.add_argument('--row_chunk', type=int, default=1000,
@@ -23,7 +23,7 @@ if __name__ == '__main__':
         client = Client('{0}:{1}'.format(options.scheduler,
                                          options.scheduler_port))
     else:
-        cliet = Client()
+        client = Client()
     print('starting client...\n')
     a = np.random.uniform(-1.0, 1.0, (options.size, options.size))
     b = np.random.uniform(-1.0, 1.0, (options.size, options.size))
