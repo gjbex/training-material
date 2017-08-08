@@ -20,13 +20,26 @@ if __name__ == '__main__':
     arg_parser.add_argument('--scheduler', help='scheduler host')
     arg_parser.add_argument('--scheduler_port', default='8786',
                             help='scheduler port to use')
+    arg_parser.add_argument('--verbose', action='store_true',
+                            help='give verbose output')
     options = arg_parser.parse_args()
     client = Client('{0}:{1}'.format(options.scheduler,
                                      options.scheduler_port))
-    print(str(client), flush=True)
+    if options.verbose:
+        print('Client: {0}'.format(str(client)), flush=True)
     futures = client.map(square, range(100))
     total = client.submit(sum, futures)
-    print(total.result())
+    print('sum_i=0..99 i^2 = {0:.1f}'.format(total.result()))
     futures = client.map(get_hostname, range(500))
-    output = client.gather(futures)
-    print('\n'.join(output))
+    process_locations = client.gather(futures)
+    if options.verbose:
+        print('\n'.join(process_locations))
+    else:
+        count = dict()
+        for process_location in process_locations:
+            _, _, hostname = process_location.split()
+            if hostname not in count:
+                count[hostname] = 0
+            count[hostname] += 1
+        for hostname, nr_procs in count.items():
+            print('{0:d} processes on {1}'.format(nr_procs, hostname))
