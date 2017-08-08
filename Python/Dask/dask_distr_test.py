@@ -16,7 +16,8 @@ def get_hostname(i):
     return '{0} on {1}'.format(i, socket.gethostname())
 
 if __name__ == '__main__':
-    arg_parser = ArgumentParser(description='compute and check SVD')
+    arg_parser = ArgumentParser(description='compute sum of squares and check '
+                                            'task placement')
     arg_parser.add_argument('--scheduler', help='scheduler host')
     arg_parser.add_argument('--scheduler_port', default='8786',
                             help='scheduler port to use')
@@ -45,5 +46,5 @@ if __name__ == '__main__':
             if hostname not in count:
                 count[hostname] = 0
             count[hostname] += 1
-        for hostname, nr_procs in count.items():
-            print('{0:d} processes on {1}'.format(nr_procs, hostname))
+        for hostname, nr_tasks in count.items():
+            print('{0:d} tasks on {1}'.format(nr_tasks, hostname))
