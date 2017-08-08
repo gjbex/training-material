@@ -40,12 +40,12 @@ if __name__ == '__main__':
     if options.verbose:
         print('task placement:\n\t')
         print('\n\t'.join(process_locations))
-    else:
-        count = dict()
-        for process_location in process_locations:
-            _, _, hostname = process_location.split()
-            if hostname not in count:
-                count[hostname] = 0
-            count[hostname] += 1
-        for hostname, nr_tasks in count.items():
-            print('{0:d} tasks on {1}'.format(nr_tasks, hostname))
+        print('\n')
+    count = dict()
+    for process_location in process_locations:
+        _, _, hostname = process_location.split()
+        if hostname not in count:
+            count[hostname] = 0
+        count[hostname] += 1
+    for hostname, nr_tasks in count.items():
+        print('{0:d} tasks on {1}'.format(nr_tasks, hostname))
