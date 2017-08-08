@@ -38,9 +38,8 @@ if __name__ == '__main__':
     futures = client.map(get_hostname, range(options.n))
     process_locations = client.gather(futures)
     if options.verbose:
-        print('task placement:\n\t')
-        print('\n\t'.join(process_locations))
-        print('\n')
+        print('task placement:')
+        print('\t' + '\n\t'.join(process_locations))
     count = dict()
     for process_location in process_locations:
         _, _, hostname = process_location.split()
