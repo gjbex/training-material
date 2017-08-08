@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser
-import dask.array as da
 from datetime import datetime
 from distributed import Client
 import time
