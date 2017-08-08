@@ -35,7 +35,7 @@ if __name__ == '__main__':
     expected_total = (options.n - 1)*options.n*(2*options.n - 1)//6
     print('sum_i=0..99 i^2 = {0:d}, expected {1:d}'.format(total.result(),
                                                            expected_total))
-    futures = client.map(get_hostname, range(500))
+    futures = client.map(get_hostname, range(options.n))
     process_locations = client.gather(futures)
     if options.verbose:
         print('task placement:\n\t')
