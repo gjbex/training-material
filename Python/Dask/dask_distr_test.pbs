@@ -36,4 +36,5 @@ fi
 echo 'starting computation'
 
 time python dask_distr_test.py --scheduler ${scheduler_node} \
-                               --scheduler_port ${scheduler_port}
+                               --scheduler_port ${scheduler_port} \
+                               --verbose
