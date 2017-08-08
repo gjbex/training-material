@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#PBS -l nodes=1:ppn=20
+#PBS -l walltime=00:30:00
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+
+CONDA_DIR=$VSC_DATA/miniconda3/bin/
+source $CONDA_DIR/activate science
+
+time ./dask_avg_csv.py $VSC_SCRATCH/data
