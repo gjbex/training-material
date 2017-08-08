@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from argparse import ArgumentParser, FileType
-from glob import glob
+from pathlib import Path
 import sys
 
 
@@ -12,8 +12,9 @@ def main():
     arg_parser.add_argument('-p', dest='pattern', required=True,
                             help='file glob pattern')
     options = arg_parser.parse_args()
+    path = Path('.')
     is_header_printed = False
-    for file_name in glob(options.pattern):
+    for file_name in path.glob(options.pattern):
         with open(file_name, 'r') as input_file:
             header = input_file.readline()
             if not is_header_printed:

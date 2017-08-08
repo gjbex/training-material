@@ -10,6 +10,7 @@ class Particle : public StaticParticle {
             };
         double v_x() const { return _v_x; };
         double v_y() const { return _v_y; };
+        double energy() const override;
         void move(double t);
 };
 

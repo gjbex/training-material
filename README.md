@@ -1,5 +1,4 @@
-training-material
-=================
+# training-material
 
 A collection of code examples for training purposes, mostly in the
 context of data processing and parallel prgramming.
@@ -8,8 +7,11 @@ This material is made available as is, i.e., anyone is free to use it,
 and to contribute.  However, no support is guaranteed in any form.  It
 is subject to the license included in this repository.
 
-What is it?
------------
+[![DOI](https://www.zenodo.org/badge/18587808.svg)](https://www.zenodo.org/badge/latestdoi/18587808)
+
+
+## What is it?
+
 * `Accelerators`: some sample code and information on using accelerators.
 * `C`: presentation based "The C programming language" by Kernighan and
    Ritchie, as well as sample code to illustration the concepts.
@@ -30,6 +32,7 @@ What is it?
     macro processor, make files and autotools, as well as slides on
     version control using svn and git.
 * `Math`: sample code for using various mathematical libraries.
+* `Misc`: catch-all for one-time presentations, or special sessions.
 * `Mpi`: illustration of distributed programming using the Message Passing
     Interface API.
 * `OpenMP`: sample code for OpenMP.
@@ -46,7 +49,8 @@ What is it?
 * `Visualization`: data files, XDMF files and ParaView state files to
     use during a demo of scientific visualization with ParaView.
 
-Contributors
-------------
+
+## Contributors
+
 * Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
 * Guillaume Jacquenot (Python 3 version of XDMF generating scripts)

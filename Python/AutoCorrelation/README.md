@@ -29,7 +29,7 @@ First generate some sample values, e.g.,
 ```[bash]
 $ ./process.py --steps 1000 > values.txt
 ```
-Next, copmute the autocorrelation, e.g.,
+Next, compute the autocorrelation, e.g.,
 ```[bash]
 $ ./autocorrelation.py < values.txt
 ```
