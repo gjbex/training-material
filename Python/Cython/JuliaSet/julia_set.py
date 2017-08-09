@@ -44,7 +44,7 @@ if __name__ == '__main__':
                             help='show plot')
     arg_parser.add_argument('--implementation', default='python',
                             choices=['python', 'cython', 'cython_omp'],
-                            help='use Cython implementation')
+                            help='implementation to use')
     options = arg_parser.parse_args()
     if options.implementation == 'python':
         from julia_python import julia_set
