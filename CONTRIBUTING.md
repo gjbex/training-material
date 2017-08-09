@@ -10,8 +10,10 @@ the GitHub workflow:
 
   * simply send an [email](geertjan.bex@uhasselt.be),
   * open an issue on GitHub, or
-  * fork the repository on GitHub, create a branch based on the development
-    branch, make your contribution, and submit a pull request.
+  * [fork the repository](https://help.github.com/articles/fork-a-repo/)
+    on GitHub, create a branch based on the development
+    branch, make your contribution, and submit a
+    [pull request](https://help.github.com/articles/about-pull-requests/).
 
 For pull requests, a few things should be noted:
 
