@@ -9,7 +9,8 @@ This can be done in several ways, depending on how familiar you are with
 the GitHub workflow:
 
   * simply send an [email](geertjan.bex@uhasselt.be),
-  * open an issue on GitHub, or
+  * [create an issue](https://help.github.com/articles/creating-an-issue/)
+    on GitHub, or
   * [fork the repository](https://help.github.com/articles/fork-a-repo/)
     on GitHub, create a branch based on the development
     branch, make your contribution, and submit a
@@ -19,8 +20,10 @@ For pull requests, a few things should be noted:
 
   * you may be asked to modify your contribution to fit better into
     the context,
-  * please base them on the development branch, and
-  * please try to use [informative commit messages](https://chris.beams.io/posts/git-commit/) (not mine are shining examples, but well...),
+  * please base them on the development branch,
+  * please ensure your branch is in sync with the upstream development
+    branch before submitting the pull request,
+  * please try to use [informative commit messages](https://chris.beams.io/posts/git-commit/) (not mine are shining examples, but well...), and
   * if you want to suggest modifications to Powerpoint presentations,
     please make a copy of the original presentation, modify it, and
     add it.
