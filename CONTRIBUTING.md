@@ -9,7 +9,8 @@ This can be done in several ways, depending on how familiar you are with
 the GitHub workflow:
 
   * simply send an [email](geertjan.bex@uhasselt.be),
-  * open an issue on GitHub, or
+  * [create an issue](https://help.github.com/articles/creating-an-issue/)
+    on GitHub, or
   * [fork the repository](https://help.github.com/articles/fork-a-repo/)
     on GitHub, create a branch based on the development
     branch, make your contribution, and submit a
