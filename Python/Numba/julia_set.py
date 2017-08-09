@@ -43,13 +43,15 @@ if __name__ == '__main__':
     arg_parser.add_argument('--show', action='store_true',
                             help='show plot')
     arg_parser.add_argument('--implementation', default='python',
-                            choices=['python', 'numba'],
+                            choices=['python', 'numba', 'numba_eager'],
                             help='implementation to use')
     options = arg_parser.parse_args()
     if options.implementation == 'python':
         from julia_python import julia_set
     elif options.implementation == 'numba':
         from julia_numba import julia_set
+    elif options.implementation == 'numba_eager':
+        from julia_numba_eager import julia_set
     else:
         msg = '{0} version not implemented\n'
         sys.stderr.write(msg.format(options.implementation))
