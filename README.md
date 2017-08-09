@@ -3,9 +3,10 @@
 A collection of code examples for training purposes, mostly in the
 context of data processing and parallel prgramming.
 
-This material is made available as is, i.e., anyone is free to use it,
-and to contribute.  However, no support is guaranteed in any form.  It
-is subject to the license included in this repository.
+This material is made available as is, i.e., anyone is welcome to use it,
+and to [contribute](CONTRIBUTING.md).  However, no support is guaranteed
+in any form.  All material is subject to the [license](LICENSE) included
+in this repository.
 
 [![DOI](https://www.zenodo.org/badge/18587808.svg)](https://www.zenodo.org/badge/latestdoi/18587808)
 
