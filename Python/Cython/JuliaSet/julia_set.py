@@ -53,7 +53,8 @@ if __name__ == '__main__':
     elif options.implementation == 'cython_omp':
         from julia_cython_omp import julia_set
     else:
-        sys.stderr.write('{0} version not implemented\n')
+        msg = '{0} version not implemented\n'
+        sys.stderr.write(msg.format(options.implementation))
         sys.exit(1)
     domain = init_julia(
             (options.re_min, options.re_max),
