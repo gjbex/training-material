@@ -54,3 +54,6 @@ is subject to the license included in this repository.
 
 * Geert Jan Bex, Universiteit Hasselt/KU Leuven (geertjan.bex@uhasselt.be)
 * Guillaume Jacquenot (Python 3 version of XDMF generating scripts)
+
+You are very welcome to contribute, please read
+[some guidelines](CONTRIBUTING.md) before you do.
