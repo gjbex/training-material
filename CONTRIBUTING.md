@@ -20,6 +20,7 @@ For pull requests, a few things should be noted:
   * you may be asked to modify your contribution to fit better into
     the context,
   * please base them on the development branch, and
+  * please try to use [informative commit messages](https://chris.beams.io/posts/git-commit/) (not mine are shining examples, but well...),
   * if you want to suggest modifications to Powerpoint presentations,
     please make a copy of the original presentation, modify it, and
     add it.
