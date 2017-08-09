@@ -20,9 +20,6 @@ What is it?
     plot the latter
 1. `fft_experiments.ipynb`: notebook with some experiments on signal
     analysis using FFT.
-1. `numba_test.py`: some timing tests for numpy constructs, including the
-    use of numba.  Note that this requires installing numba, which is, due
-    to its dependencies, perhaps non-trivial
 1. `numpy.ipynb`: Jupyter notebook illustrating some numpy aspects like
     array slicing, adding dimension to arrays, and so on.
 1. `optimization.py`: illustration of how to use the `scipy.optimize` for
