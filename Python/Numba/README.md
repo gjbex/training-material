@@ -9,3 +9,5 @@ can be obtained without much effort.
     use of numba.
 1. `Julia`: Julia set code implementation comparing a pure Python implementation
     with numba JIT and eager JIT.
+1. `Primes`: code to compute the first n prime numbers comparing a pure Python implementation
+    with numba JIT and eager JIT.
