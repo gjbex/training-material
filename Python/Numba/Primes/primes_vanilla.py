@@ -1,11 +1,11 @@
-from array import array
+import numpy as np
 
 
 def primes(kmax):
-    p = array('i', [0]*1000)
+    p = np.zeros(10000)
     result = []
-    if kmax > 1000:
-        kmax = 1000
+    if kmax > 10000:
+        kmax = 10000
     k = 0
     n = 2
     while k < kmax:
