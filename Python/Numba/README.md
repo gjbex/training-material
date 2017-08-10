@@ -7,7 +7,7 @@ can be obtained without much effort.
 ## What is it?
 1. `numba_test.py`: some timing tests for numpy constructs, including the
     use of numba.
-1. `Julia`: Julia set code implementation comparing a pure Python implementation
-    with numba JIT and eager JIT.
-1. `Primes`: code to compute the first n prime numbers comparing a pure Python implementation
-    with numba JIT and eager JIT.
+1. `JuliaSet`: Julia set code implementation comparing a pure Python
+    implementation with numba JIT and eager JIT.
+1. `Primes`: code to compute the first n prime numbers comparing a pure Python
+    implementation with numba JIT and eager JIT.
