@@ -17,7 +17,7 @@ def init_julia(re, im, n):
     re_vals, im_vals = np.meshgrid(
             np.linspace(re[0], re[1], n[0]),
             np.linspace(im[0], im[1], n[1])
-            )
+    )
     domain = re_vals + im_vals*1j
     return domain.flatten()
 
@@ -43,15 +43,15 @@ if __name__ == '__main__':
     arg_parser.add_argument('--show', action='store_true',
                             help='show plot')
     arg_parser.add_argument('--implementation', default='python',
-                            choices=['python', 'cython', 'cython_omp'],
+                            choices=['python', 'numba', 'numba_eager'],
                             help='implementation to use')
     options = arg_parser.parse_args()
     if options.implementation == 'python':
         from julia_python import julia_set
-    elif options.implementation == 'cython':
-        from julia_cython import julia_set
-    elif options.implementation == 'cython_omp':
-        from julia_cython_omp import julia_set
+    elif options.implementation == 'numba':
+        from julia_numba import julia_set
+    elif options.implementation == 'numba_eager':
+        from julia_numba_eager import julia_set
     else:
         msg = '{0} version not implemented\n'
         sys.stderr.write(msg.format(options.implementation))
@@ -60,7 +60,7 @@ if __name__ == '__main__':
             (options.re_min, options.re_max),
             (options.im_min, options.im_max),
             (options.n_re, options.n_im)
-            )
+    )
     iterations = np.zeros(options.n_re*options.n_im, dtype=np.int32)
     start_time = time.time()
     julia_set(domain, iterations, options.max_norm, options.max_iters)
