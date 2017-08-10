@@ -7,3 +7,7 @@ Motivating example for using Numba.
     number.
 1. `primes_vanilla.py`: pure Python implementation of the primes function.
 1. `primes_numba.py`: numba implementation of the primes function.
+1. `primes_vanilla_array.py`: pure Python implementation of the primes function, but
+    using Python array, rather than numpy array.
+1. `primes_numba_array.py`: numba implementation of the primes function, but
+    using Python array, rather than numpy array.

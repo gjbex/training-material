@@ -6,7 +6,9 @@ import sys
 
 if __name__ == '__main__':
     arg_parser = ArgumentParser(description='compute primes')
-    arg_parser.add_argument('implmentation', choices=['python', 'numba'],
+    arg_parser.add_argument('implmentation', choices=['python', 'numba'
+                                                      'python_array',
+                                                      'numba_array'],
                             default='python', nargs='?',
                             help='implementation to run')
     arg_parser.add_argument('--n', type=int, default=10,
