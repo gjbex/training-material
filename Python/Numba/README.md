@@ -11,3 +11,4 @@ can be obtained without much effort.
     implementation with numba JIT and eager JIT.
 1. `Primes`: code to compute the first n prime numbers comparing a pure Python
     implementation with numba JIT and eager JIT.
+1. `Ufunc`: defining a numpy ufunc using numba.
