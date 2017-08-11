@@ -57,17 +57,22 @@ if __name__ == '__main__':
         start_time = time.time()
         julia_set(domain, iterations, options.max_norm, options.max_iters)
         end_time = time.time()
+        if options.show:
+            import matplotlib.pyplot as plt
+            plt.imshow(np.log1p(iterations.reshape(options.n_re, options.n_im)))
+            plt.show()
     elif options.implementation == 'ufunc':
         from julia_ufunc import julia_set
         start_time = time.time()
-        iterations = julia_set(domain, options.max_norm, options.max_iters)
+        iterations = julia_set(domain.reshape(options.n_re, options.n_im),
+                               options.max_norm, options.max_iters)
         end_time = time.time()
+        if options.show:
+            import matplotlib.pyplot as plt
+            plt.imshow(np.log1p(iterations))
+            plt.show()
     else:
         msg = '{0} version not implemented\n'
         sys.stderr.write(msg.format(options.implementation))
         sys.exit(1)
     print('compute time = {0:.6f} s'.format(end_time - start_time))
-    if options.show:
-        import matplotlib.pyplot as plt
-        plt.imshow(np.log1p(iterations.reshape(options.n_re, options.n_im)))
-        plt.show()
