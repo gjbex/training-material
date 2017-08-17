@@ -5,12 +5,13 @@ LDFLAGS =
 LIBS =
 
 TARGETS = cache_lines cache_hierarchy instruction_parallelism \
-          cache_associativity cache_associativity_bytes
+          cache_associativity cache_associativity_bytes \
+		  false_sharing
 
 all: $(TARGETS)
 
 false_sharing: false_sharing.c
-	$(CC) $(CFLAGS) $(OMP_FLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+	$(CC) -O0 -g $(OMP_FLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
