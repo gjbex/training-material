@@ -5,6 +5,7 @@ modern CPU can have on performance.  See the following URL for his
 original post:
 http://igoro.com/archive/gallery-of-processor-cache-effects/
 
+
 ## What is it?
 1. Example 2: `cache_lines.c`
 1. Example 3: `cache_hierarchy.c`
@@ -15,5 +16,14 @@ Each C file is accompagnied by a PBS script to run it in batch, and a
 make file is provided for building the software.  Some sample output is
 included as well.
 
+
 ## Build instructions
-Load the appropriate module for the Intel compiler, and simply use `make`.
+To build with the GCC compiler suite, load the appropriate module, and use
+```bash
+make
+```
+
+To build with the Intel compiler suite, load the appropriate module, and use
+```bash
+make -f Makefile.intel
+```
