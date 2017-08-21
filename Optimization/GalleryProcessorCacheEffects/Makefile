@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O2 -g
+CFLAGS = -O2 -g -Wall
 OMP_FLAGS = -fopenmp
 LDFLAGS = 
 LIBS =
