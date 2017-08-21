@@ -16,6 +16,8 @@ http://igoro.com/archive/gallery-of-processor-cache-effects/
     threads, with and without false sharing.
   * `false_sharing_02.c`: counters stored in an array are updated from
     each thread, either with or without padding to avoid false sharing.
+  * `alignment.c`: illustration of using variable attributes to align
+    on cache line boundaries.
 
 Each C file is accompagnied by a PBS script to run it in batch, and a
 make file is provided for building the software.  Some sample output is

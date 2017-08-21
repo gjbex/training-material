@@ -4,6 +4,7 @@ cache_hierarchy
 cache_lines
 instruction_parallelism
 false_sharing_[12]
+alignment
 .ipynb_checkpoints
 *.o[0-9][0-9]*
 *.e[0-9][0-9]*
