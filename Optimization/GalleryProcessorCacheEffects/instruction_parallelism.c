@@ -8,7 +8,7 @@
 int main(int argc, char *argv[]) {
     struct timeval tv1, tv2;
     double a[PAR];
-    int par, j;
+    int j;
     long i;
 
     printf("instructions,time dependent,check dependent,"
