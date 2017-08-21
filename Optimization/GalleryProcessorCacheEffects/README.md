@@ -18,6 +18,8 @@ http://igoro.com/archive/gallery-of-processor-cache-effects/
     each thread, either with or without padding to avoid false sharing.
   * `alignment.c`: illustration of using variable attributes to align
     on cache line boundaries.
+  * `alignment.f90`: illustration of using variable attributes to align
+    on cache line boundaries (Intel only).
 
 Each C file is accompagnied by a PBS script to run it in batch, and a
 make file is provided for building the software.  Some sample output is
