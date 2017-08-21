@@ -6,11 +6,11 @@ LIBS =
 
 TARGETS = cache_lines cache_hierarchy instruction_parallelism \
           cache_associativity cache_associativity_bytes \
-		  false_sharing
+		  false_sharing_1 false_sharing_2
 
 all: $(TARGETS)
 
-false_sharing: false_sharing.c
+false_sharing_%: false_sharing_%.c
 	$(CC) -O0 -g $(OMP_FLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
 
 %: %.c

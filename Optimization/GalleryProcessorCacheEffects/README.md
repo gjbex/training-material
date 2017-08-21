@@ -11,6 +11,11 @@ http://igoro.com/archive/gallery-of-processor-cache-effects/
 1. Example 3: `cache_hierarchy.c`
 1. Example 4: `instruction_parallelism.c`
 1. Example 5: `cache_associativity.c`
+1. False sharing:
+  * `false_sharing_01.c`: array that fits in L1 is accessed from two
+    threads, with and without false sharing.
+  * `false_sharing_02.c`: counters stored in an array are updated from
+    each thread, either with or without padding to avoid false sharing.
 
 Each C file is accompagnied by a PBS script to run it in batch, and a
 make file is provided for building the software.  Some sample output is
