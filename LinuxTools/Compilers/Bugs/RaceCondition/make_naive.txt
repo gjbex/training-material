@@ -1,0 +1,3 @@
+rm -f *.o *.exe
+icc -O2 -g -Wall -DFAIL -o fail_icc.exe spooky_macro.c
+icc -O2 -g -Wall -o succeed_icc.exe spooky_macro.c
