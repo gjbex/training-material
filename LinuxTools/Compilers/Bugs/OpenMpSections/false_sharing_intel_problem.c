@@ -7,7 +7,7 @@
 int main(int argc, char *argv[]) {
     const int nr_threads = 2;
     const int n = 1000;
-    const int nr_runs = 100000000;
+    const int nr_runs = 20000000;
     double a[n], sum = 0.0;
     int i;
     omp_set_dynamic(0);
