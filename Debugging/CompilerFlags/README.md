@@ -30,3 +30,7 @@ The use of the static global variable `__arg__` in this macro leads to a
 race condition that produces incorrect results. No one questions that this
 implementation if badly flawed, but a compiler should try to detect this,
 and produce correct code. GNU gcc and clang do, Intel icc does not.
+
+## Compiler versions
+* Intel icc: 13.x-16.x
+* GNU gcc: 4.9.x
