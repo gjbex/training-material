@@ -1,0 +1,6 @@
+thread 0: 1.445501
+thread 1: 3.703855
+no false sharing: 9990000000000.0
+thread 0: 1.412268
+thread 1: 1.436837
+false sharing: 9990000000000.0
