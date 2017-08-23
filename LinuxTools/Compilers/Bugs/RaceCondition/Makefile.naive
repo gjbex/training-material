@@ -1,0 +1,13 @@
+ICC = icc
+ICFLAGS += -O2 -g -Wall
+
+all: fail_icc.exe succeed_icc.exe
+
+fail_icc.exe: spooky_macro.c
+	$(ICC) $(ICFLAGS) -DFAIL -o $@ $<
+
+succeed_icc.exe: spooky_macro.c
+	$(ICC) $(ICFLAGS) -o $@ $<
+
+clean:
+	rm -f *.o *.exe
