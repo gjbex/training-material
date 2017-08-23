@@ -1,0 +1,30 @@
+icc -O2 -g -Wall -c spooky_macro.c
+icc -O2 -g -Wall -Wremarks -Wchecks -w3 -c spooky_macro.c
+spooky_macro.c(25): remark #1572: floating-point equality and inequality comparisons are unreliable
+          a[i] = SQR(b[i]) + SQR(c[i]);
+                 ^
+
+spooky_macro.c(25): remark #1572: floating-point equality and inequality comparisons are unreliable
+          a[i] = SQR(b[i]) + SQR(c[i]);
+                             ^
+
+spooky_macro.c(25): remark #981: operands are evaluated in unspecified order
+          a[i] = SQR(b[i]) + SQR(c[i]);
+                           ^
+
+gcc -O2 -g -c spooky_macro.c
+gcc -O2 -g -Wall -c spooky_macro.c
+spooky_macro.c: In function ‘main’:
+spooky_macro.c:6:26: warning: operation on ‘__arg__’ may be undefined [-Wsequence-point]
+ #define SQR(a) ((__arg__ = (a)) == 0.0 ? 0.0 : __arg__*__arg__)
+                          ^
+spooky_macro.c:25:16: note: in expansion of macro ‘SQR’
+         a[i] = SQR(b[i]) + SQR(c[i]);
+                ^
+spooky_macro.c:6:26: warning: operation on ‘__arg__’ may be undefined [-Wsequence-point]
+ #define SQR(a) ((__arg__ = (a)) == 0.0 ? 0.0 : __arg__*__arg__)
+                          ^
+spooky_macro.c:25:16: note: in expansion of macro ‘SQR’
+         a[i] = SQR(b[i]) + SQR(c[i]);
+                ^
+rm *.o
