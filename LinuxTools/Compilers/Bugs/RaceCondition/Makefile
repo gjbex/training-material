@@ -4,8 +4,6 @@ ICFLAGS += -O2 -g -Wall -Wremarks -Wchecks -w3 -fp-model precise
 GCC = gcc
 GCFLAGS += -O2 -g -Wall
 
-APPL = icc_fail.exe icc_succeed.exe
-
 all: fail_icc.exe succeed_icc.exe fail_gcc.exe succeed_gcc.exe
 
 fail_icc.exe: spooky_macro.c
