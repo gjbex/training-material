@@ -27,4 +27,18 @@ spooky_macro.c:6:26: warning: operation on ‘__arg__’ may be undefined [-Wseq
 spooky_macro.c:25:16: note: in expansion of macro ‘SQR’
          a[i] = SQR(b[i]) + SQR(c[i]);
                 ^
+gcc -O2 -g -Wfloat-equal -c spooky_macro.c
+spooky_macro.c: In function ‘main’:
+spooky_macro.c:6:33: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+ #define SQR(a) ((__arg__ = (a)) == 0.0 ? 0.0 : __arg__*__arg__)
+                                 ^
+spooky_macro.c:25:16: note: in expansion of macro ‘SQR’
+         a[i] = SQR(b[i]) + SQR(c[i]);
+                ^
+spooky_macro.c:6:33: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]
+ #define SQR(a) ((__arg__ = (a)) == 0.0 ? 0.0 : __arg__*__arg__)
+                                 ^
+spooky_macro.c:25:28: note: in expansion of macro ‘SQR’
+         a[i] = SQR(b[i]) + SQR(c[i]);
+                            ^
 rm *.o
