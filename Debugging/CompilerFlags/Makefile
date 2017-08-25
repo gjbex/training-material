@@ -5,6 +5,7 @@ warnings:
 	icc -O2 -g -Wall -Wremarks -Wchecks -w3 -c spooky_macro.c
 	gcc -O2 -g -c spooky_macro.c
 	gcc -O2 -g -Wall -c spooky_macro.c
+	gcc -O2 -g -Wfloat-equal -c spooky_macro.c
 	rm *.o
 
 fail_icc.exe: spooky_macro.c

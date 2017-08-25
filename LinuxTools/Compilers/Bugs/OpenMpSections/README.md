@@ -31,3 +31,7 @@ In each of the four cases, the correct result is computed.  However,
 `false_sharing_intel_problem_icc.txt` shows a significant difference in
 the time taken by each of the threads in the case where no false sharing
 should occur.
+
+## Version information
+* Intel icc pre-17.x affected, fixed in 17.x+
+* GCC gcc 4.9.x

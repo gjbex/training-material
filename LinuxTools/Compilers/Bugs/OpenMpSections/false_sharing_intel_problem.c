@@ -4,12 +4,14 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-int main(int argc, char *argv[]) {
+#define N 1000
+
+int main() {
     const int nr_threads = 2;
-    const int n = 1000;
+    const int n = N;
     const int nr_runs = 20000000;
     double a[n], sum = 0.0;
-    int i;
+    int j;
     omp_set_dynamic(0);
     omp_set_num_threads(nr_threads);
 
@@ -52,8 +54,8 @@ int main(int argc, char *argv[]) {
         }
     }
     sum = 0.0;
-    for (i = 0; i < n; i++)
-        sum += a[i];
+    for (j = 0; j < n; j++)
+        sum += a[j];
     printf("no false sharing: %.1lf\n", sum);
 
 #pragma omp parallel default(none) shared(a)
@@ -95,8 +97,8 @@ int main(int argc, char *argv[]) {
         }
     }
     sum = 0.0;
-    for (i = 0; i < n; i++)
-        sum += a[i];
+    for (j = 0; j < n; j++)
+        sum += a[j];
     printf("false sharing: %.1lf\n", sum);
 
     return EXIT_SUCCESS;
