@@ -23,13 +23,13 @@ Parameters get_parameters(int argc, char *argv[]) {
     while ((opt = getopt(argc, argv, "f:d:m:h")) != -1) {
         switch (opt) {
             case 'f':
-                freq = std::stof(optarg);
+                freq = std::stod(optarg);
                 break;
             case 'd':
-                delta_t = std::stof(optarg);
+                delta_t = std::stod(optarg);
                 break;
             case 'm':
-                max_t = std::stof(optarg);
+                max_t = std::stod(optarg);
                 break;
             case 'h':
                 print_help();
