@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
         try {
             switch (opt) {
                 case 't':
-                    max_time = stof(optarg);
+                    max_time = stod(optarg);
                     break;
                 case 'p':
                     nr_particles = stoi(optarg);
