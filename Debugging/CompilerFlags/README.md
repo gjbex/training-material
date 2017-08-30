@@ -31,6 +31,9 @@ race condition that produces incorrect results. No one questions that this
 implementation if badly flawed, but a compiler should try to detect this,
 and produce correct code. GNU gcc and clang do, Intel icc does not.
 
+Using `make warnings` also illustrates that `-Wfloat-equal` for gcc may
+also report potential problems.
+
 ## Compiler versions
-* Intel icc: 13.x-16.x
-* GNU gcc: 4.9.x
+* Intel icc: 13.x-17.x
+* GNU gcc: 4.9.x-7.0
