@@ -1,4 +1,4 @@
-#!/usr/bin/env gnuplot
+#!/usr/bin/gnuplot -persistent
 
 set datafile separator ","
 set logscale x 2
