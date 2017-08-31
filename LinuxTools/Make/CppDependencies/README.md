@@ -1,4 +1,4 @@
-# Diffusion
+# CppDependencies
 Illustration of dependency handling for C++ code, especially with respect
 to header files.
 
