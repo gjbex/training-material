@@ -1,0 +1,4 @@
+*.exe
+*.gcov
+*.gcda
+*.gcno
