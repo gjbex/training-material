@@ -24,10 +24,10 @@ tree_2k_err_t node_2k_init(node_2k_t *node, tree_2k_t *tree,
   \param node Double dereferenced pointer to the node to be allocated
               and initialized.
   \param tree Address of the tree the node is part off.
-  \param center An array of size rank containing the cooridantes of the
-         new node's center as double precision numbers,
+  \param center An array of size rank containing the coordinates of the
+                new node's center as double precision numbers,
   \param extent An array of size rank containing the extent for each
-         dimension for the new node as double precision numbers,
+                dimension for the new node as double precision numbers,
   \return TREE_2K_SUCCESS if the allocation and initialization succeeded,
           an error code otherwise.
 */

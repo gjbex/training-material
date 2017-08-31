@@ -4,7 +4,7 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign tar-pax])
 # C compiler
 AC_PROG_CC
 
-standard headers
+# standard headers
 AC_CHECK_HEADERS([err.h stdio.h])
 
 # GSL library
