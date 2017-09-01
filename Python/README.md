@@ -24,6 +24,7 @@ these samples have been used for Python tutorials.
     e.g., interactive graphs.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
+1. `CodeCoverage`: illustration f how to use a code coverage tool.
 1. `CodeEvaluation`: illustrates how to evaluate a string containing
     Python code at runtime.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
@@ -45,7 +46,6 @@ these samples have been used for Python tutorials.
 1. `Debugging`: some code that is useful for debugging demos.
 1. `Decorators`: illustrates how to create decorators to wrap functions.
 1. `Descriptors`: illustrates the descriptor concept in Python
-1. `Evals`: illustrates using the `exec` function.
 1. `Exercises`: example solutions to exercises to be found in the 
     Powerpoint presentation; this is part of the "Python as a data
     processing language" training session.
