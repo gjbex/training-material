@@ -6,7 +6,10 @@ Illustration of how to use code coverage tools.
     `funcs.h`.
 * `funcs.h`: declaration of two functions, one called, the other not.
 * `funcs.c`: implementation of the functions.
-* `Makefile`: make file to illustrate how to get the code coverage.
+* `Makefile`: make file to illustrate how to get the code coverage using
+    the GNU GCC compiler suite.
+* `Makefile.intel`: make file to illustrate how to get the code coverage
+    using the Intel cmopiler suite.
 
 
 ## How to use?
