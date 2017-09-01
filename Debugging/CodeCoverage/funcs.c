@@ -5,7 +5,7 @@ int fac(int n) {
     if (n < 0) {
         errx(1, "### error: negative argument to fac");
     } else if (n == 0 || n == 1) {
-        return 0;
+        return 1;
     } else {
         return n*fac(n - 1);
     }
