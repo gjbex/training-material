@@ -24,6 +24,7 @@ these samples have been used for Python tutorials.
     e.g., interactive graphs.
 1. `CLibsFromPython`: illustrate how to use a C library from a Python
     script.
+1. `CodeCoverage`: illustration f how to use a code coverage tool.
 1. `CodeEvaluation`: illustrates how to evaluate a string containing
     Python code at runtime.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
