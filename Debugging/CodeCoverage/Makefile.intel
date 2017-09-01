@@ -1,0 +1,22 @@
+CC = icc
+CFLAGS = -g
+PROF_FLAGS = -prof-gen=srcpos -prof-dir=./profiles
+
+all: fac.exe
+
+coverage: fac.exe
+	./fac.exe
+	profmerge -prof_dir ./profiles
+	codecov -dpi profiles/pgopti.dpi -spi profiles/pgopti.spi
+
+fac.exe: main.o funcs.o
+	$(CC) $(CFLAGS) $(PROF_FLAGS) -o $@ $^
+
+%.o: %.c
+	mkdir -p ./profiles
+	$(CC) $(CFLAGS) $(PROF_FLAGS) -c -o $@ $<
+
+clean:
+	$(RM) *.exe *.o
+	$(RM) -r ./profiles *.HTML CodeCoverage
+	$(RM) core core.*
