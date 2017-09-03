@@ -14,7 +14,7 @@ them.
 1. `DropIn`: illustration of how to write drop-in replacements for functions
     in libraries.
 1. `fUnit`: very simple illustration of how to use the fUnit testing
-    framework for testing Fortran code.
+    framework for Fortran unit testing.
 1. `Gdb`: some sample code to illustrate using GDB.
 1. `MPI`: MPI code to illustrate using Allinea DDT.
 1. `Pfunit`: very simple illustration of how to use the pFUnit testing
