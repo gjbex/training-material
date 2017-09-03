@@ -17,4 +17,6 @@ them.
     framework for testing Fortran code.
 1. `Gdb`: some sample code to illustrate using GDB.
 1. `MPI`: MPI code to illustrate using Allinea DDT.
+1. `Pfunit`: very simple illustration of how to use the pFUnit testing
+	framework for Fortran unit testing.
 1. `Qmtest`: illustration of how to use QMTest for integration testing.

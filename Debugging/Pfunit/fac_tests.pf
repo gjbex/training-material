@@ -1,0 +1,35 @@
+@test
+subroutine test_fac_0()
+    use fac_mod
+    use pfunit_mod
+    implicit none
+
+    @assertEqual(1, fac(0))
+end subroutine test_fac_0
+
+@test
+subroutine test_fac_1()
+    use fac_mod
+    use pfunit_mod
+    implicit none
+
+    @assertEqual(1, fac(1))
+end subroutine test_fac_1
+
+@test
+subroutine test_fac_4()
+    use fac_mod
+    use pfunit_mod
+    implicit none
+
+    @assertEqual(20, fac(4), message='test fails on purpose')
+end subroutine test_fac_4
+
+@test
+subroutine test_fac_5()
+    use fac_mod
+    use pfunit_mod
+    implicit none
+
+    @assertEqual(120, fac(5))
+end subroutine test_fac_5
