@@ -1,0 +1,1 @@
+ADD_TEST_SUITE(fac_tests_suite)
