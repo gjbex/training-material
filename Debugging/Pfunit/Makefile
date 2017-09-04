@@ -6,7 +6,7 @@ include $(PFUNIT)/include/base.mk
 endif
 
 FC = gfortran
-FFLAGS += -g -O2 -I. -I$(PFUNIT)/mod
+FFLAGS += -g -I$(PFUNIT)/mod -I.
 LIBS = $(PFUNIT)/lib/libpfunit$(LIB_EXT)
 
 SRCS = $(wildcard *.pf)
@@ -23,7 +23,7 @@ testSuites.inc: $(SRCS)
 	$(PFUNIT)/bin/pFUnitParser.py $<  $@
 
 fac_mod.o: fac_mod.f90
-	$(FC) $(FFLAGS) -c $<
+	$(FC) $(FPPFLAGS) -c $<
 
 %.o: %.F90
 	$(FC) -c $(FFLAGS) $(FPPFLAGS) $<
