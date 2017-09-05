@@ -27,3 +27,6 @@ fac_mod.o: fac_mod.f90
 
 %.o: %.F90
 	$(FC) -c $(FFLAGS) $(FPPFLAGS) $<
+
+clean:
+	$(RM) *.exe
