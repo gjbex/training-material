@@ -6,7 +6,7 @@ include $(PFUNIT)/include/base.mk
 endif
 
 FC = gfortran
-FFLAGS += -g -O2 -I. -I$(PFUNIT)/mod
+FFLAGS += -g -I$(PFUNIT)/mod -I.
 LIBS = $(PFUNIT)/lib/libpfunit$(LIB_EXT)
 
 SRCS = $(wildcard *.pf)
@@ -14,8 +14,8 @@ OBJS = $(SRCS:.pf=.o)
 APPL_OBJS = fac_mod.o
 
 tests.exe: $(APPL_OBJS) $(OBJS)
-	$(FC) $(FFLAGS) $(FPPFLAGS) -o $@  -I$(PFUNIT)/include \
-        $(PFUNIT)/include/driver.F90 $(OBJS) fac_mod.o $(LIBS)
+	$(FC) $(FFLAGS) $(FPPFLAGS) -o $@  \
+        $(PFUNIT)/include/driver.F90 $(OBJS) $(APPL_OBJS) $(LIBS)
 
 testSuites.inc: $(SRCS)
 
@@ -23,7 +23,10 @@ testSuites.inc: $(SRCS)
 	$(PFUNIT)/bin/pFUnitParser.py $<  $@
 
 fac_mod.o: fac_mod.f90
-	$(FC) $(FFLAGS) -c $<
+	$(FC) $(FPPFLAGS) -c $<
 
 %.o: %.F90
 	$(FC) -c $(FFLAGS) $(FPPFLAGS) $<
+
+clean:
+	$(RM) *.exe
