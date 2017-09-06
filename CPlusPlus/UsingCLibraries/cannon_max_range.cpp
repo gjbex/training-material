@@ -21,15 +21,16 @@ double rad2deg(const double angle);
 int main(int argc, char *argv[]) {
     int iter_nr {0};
     int nr_iters {100};
-    gsl_function F;
     double min_alpha {deg2rad(3.0)};
     double max_alpha {deg2rad(87.0)};
     double alpha {deg2rad(30.0)};
     double extrema[2];
     if (argc > 1)
         alpha = deg2rad(std::stod(argv[1]));
-    F.function = &shot_range;
-    F.params = extrema;
+    gsl_function F {
+        .function = &shot_range,
+        .params = extrema
+    };
     auto minimizer = gsl_min_fminimizer_alloc(gsl_min_fminimizer_brent);
     gsl_min_fminimizer_set(minimizer, &F, alpha, min_alpha, max_alpha);
     std::cerr.precision(12);
@@ -107,8 +108,9 @@ double shot_range(const double alpha, void *params) {
         i++;
     }
     gsl_odeiv2_driver_free(driver);
-    *((double *) params) = X;
-    *(1 + (double *) params) = h_max;
+    auto params_arr = static_cast<double*>(params);
+    params_arr[0] = X;
+    params_arr[1] = h_max;
     return -X;
 }
 
