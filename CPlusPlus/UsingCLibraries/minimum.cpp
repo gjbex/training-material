@@ -1,4 +1,3 @@
-#include <cmath>
 #include <iostream>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_min.h>
