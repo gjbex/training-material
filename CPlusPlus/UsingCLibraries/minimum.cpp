@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
 }
 
 double func(const double x, void *params) {
-    double* params_arr = (double *) params;
+    auto params_arr = static_cast<double*>(params);
     double a {params_arr[0]};
     double b {params_arr[1]};
     double c {params_arr[2]};
