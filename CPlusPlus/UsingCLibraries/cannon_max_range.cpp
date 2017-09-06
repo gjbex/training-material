@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         .function = &shot_range,
         .params = extrema
     };
-    auto minimizer = gsl_min_fminimizer_alloc(gsl_min_fminimizer_brent);
+    auto minimizer {gsl_min_fminimizer_alloc(gsl_min_fminimizer_brent)};
     gsl_min_fminimizer_set(minimizer, &F, alpha, min_alpha, max_alpha);
     std::cerr.precision(12);
     std::cout.precision(12);

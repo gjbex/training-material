@@ -1,4 +1,3 @@
-#include <cmath>
 #include <iostream>
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_min.h>
@@ -24,12 +23,12 @@ int main(int argc, char *argv[]) {
         .function = &func,
         .params = params
     };
-    auto minimizer = gsl_min_fminimizer_alloc(gsl_min_fminimizer_brent);
+    auto minimizer {gsl_min_fminimizer_alloc(gsl_min_fminimizer_brent)};
     int status {gsl_min_fminimizer_set(minimizer, &F, x, x_min, x_max)};
     if (status == GSL_EINVAL) {
         std::cerr << "### error: interval [" << x_min << ", " << x_max
                      << "] doesn't contain a minimum" << std::endl;
-        std::exit(2);
+        std::exit(GSL_EINVAL);
     }
     std::cerr.precision(12);
     int iter_nr {0};
