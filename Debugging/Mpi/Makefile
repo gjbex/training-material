@@ -1,16 +1,15 @@
-MPIF90 = mpiifort
+FC = mpif90
 FFLAGS = -g
-LDFLAGS = 
-LIBS =
 
 all: diffusion.exe 010_deadlock.exe 020_no_allocate.exe \
      030_index_out_of_bounds.exe prototype.exe
 
 %.exe: %.o
-	$(MPIF90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $<
 
 %.o: %.f90
-	$(MPIF90) $(FFLAGS) -c $<
+	$(FC) $(FFLAGS) -c $<
 
 clean:
-	rm -f *.o *.exe core
+	$(RM) *.o *.exe
+	$(RM)  core core.*
