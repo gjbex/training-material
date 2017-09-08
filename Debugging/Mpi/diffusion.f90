@@ -72,6 +72,9 @@ if (comm_rank == 0) then
 end if
 
 ! take down MPI
+call MPI_Comm_free(cart_comm, ierr)
+call MPI_Type_free(row_type, ierr)
+call MPI_Type_free(col_type, ierr)
 call MPI_Finalize(ierr)
 
 contains
