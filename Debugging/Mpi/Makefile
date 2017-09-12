@@ -14,3 +14,4 @@ all: diffusion.exe 010_deadlock.exe 012_leak.exe 020_no_allocate.exe \
 clean:
 	$(RM) *.o *.exe
 	$(RM)  core core.*
+	$(RM) -r MUST_Output-files MUST_Output.html
