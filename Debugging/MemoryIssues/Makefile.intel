@@ -1,0 +1,12 @@
+CC = icc
+CFLAGS = -O1 -g -Wall -Wremarks
+
+all: leak.exe array_bounds.exe
+
+%.exe: %.o
+	$(CC) $(CFLAGS) -o $@ $<
+
+clean:
+	$(RM) *.o *.exe
+	$(RM) core core.*
+
