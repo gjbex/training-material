@@ -1,5 +1,5 @@
-FC = gfortran
-FFLAGS = -fopenmp -O0 -g
+FC = ifort
+FFLAGS = -qopenmp -O0 -g
 
 APPL = pi1.exe pi2.exe pi3.exe pi4.exe pi5.exe
 
