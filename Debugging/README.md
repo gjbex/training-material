@@ -16,6 +16,7 @@ them.
 1. `fUnit`: very simple illustration of how to use the fUnit testing
     framework for Fortran unit testing.
 1. `Gdb`: some sample code to illustrate using GDB.
+1. `MemoryIssues`: sample code to illustrate various memory issues.
 1. `MPI`: MPI code to illustrate using Allinea DDT.
 1. `Pfunit`: very simple illustration of how to use the pFUnit testing
 	framework for Fortran unit testing.
