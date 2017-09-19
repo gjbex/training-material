@@ -1,11 +1,23 @@
 CC = gcc
-CFLAGS = -O2 -g -Wall -Wextra
+CFLAGS = -O1 -g -Wall -Wextra
+ASMFLAGS = -S
 
-all: leak.exe array_bounds.exe
+APPL = leak.exe array_bounds.exe dangling_pointer.exe
+SRCS = $(APPL:.exe=.c)
+OBJS = $(SRCS:.c=.o)
+ASMS = $(SRCS:.c=.s)
+
+all: $(APPL)
+
+asm: $(ASMS)
 
 %.exe: %.o
 	$(CC) $(CFLAGS) -o $@ $<
 
+%.s: %.c
+	$(CC) $(CFLAGS) $(ASMFLAGS) -c -o $@ $<
+
 clean:
-	$(RM) *.o *.exe
+	$(RM) $(APPL) $(OBJS)
+	$(RM) $(ASMS)
 	$(RM) core core.*
