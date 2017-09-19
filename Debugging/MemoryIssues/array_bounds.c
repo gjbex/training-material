@@ -29,6 +29,7 @@ int main(int argc, char *argv[]) {
         a[i] = i;
     a[shift] = new_val;
     printf("setting a[%ld] = %d\n", shift, new_val);
+    printf("a[%ld] = %d\n", shift, a[shift]);
     printf("b = %d\n", b);
     return EXIT_SUCCESS;
 }
