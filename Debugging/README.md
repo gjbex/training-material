@@ -4,6 +4,7 @@ testing code is shown, since trying to prevent bugs is better than fixing
 them.
 
 ## What is it?
+1. `Arithmetic`: illustrations of arithmetic bugs.
 1. `CodeCoverage`: illustration of how to use code coverage tools.
 1. `CompilerFlags`: illustration of the value of specifying maximal warnings
     when compiling, as well as trying multiple compilers.
