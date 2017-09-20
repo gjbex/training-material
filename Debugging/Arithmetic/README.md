@@ -9,4 +9,6 @@ Some illustrations of arithmetic bugs.
 1. `float_overflow.c`: illustration of code that generates `inf`.
 1. `overflow.cpp`: illustration of arithmetic overflow when using a
     counter.
+1. `underflow.c`: illustration of numerical underflow in floating point
+    artihmetic.
 1. `Makefile`: make file to build the applications.
