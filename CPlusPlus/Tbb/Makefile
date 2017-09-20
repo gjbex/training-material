@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -O2 -g -Wall
+CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 OMPFLAGS = -fopenmp
 CPPFLAGS =
 LDFLAGS =
@@ -23,4 +23,5 @@ all: julia_abs.exe julia.exe julia_tbb.exe julia_omp.exe \
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 clean:
-	rm -f *.o *.exe
+	$(RM) *.o *.exe
+	$(RM) core core.*
