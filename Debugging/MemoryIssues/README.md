@@ -11,4 +11,7 @@ such as Valgrind or Intel Inspector.
 1. `dangling_pointer.c`: simple example of using a dangling pionter,
     caught easily by valgrind. Application termintates with segmentation
     fault.
+1. `null_pointer.c`: simple example of a non-checked, failed `malloc`,
+    caught easily by valgrind. Application termintates with segmentation
+    fault.
 1. `Makefile`: make file to build using GCC.
