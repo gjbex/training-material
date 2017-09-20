@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -O1 -g -Wall -Wextra
 ASMFLAGS = -S
 
-APPL = leak.exe array_bounds.exe dangling_pointer.exe
+APPL = leak.exe array_bounds.exe dangling_pointer.exe memory_leak.exe
 SRCS = $(APPL:.exe=.c)
 OBJS = $(SRCS:.c=.o)
 ASMS = $(SRCS:.c=.s)
