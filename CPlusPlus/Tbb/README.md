@@ -5,6 +5,8 @@ programming in C++.
 ## What is it?
 1. `simple_cpp`: simple application illustrating a `parallel_for`
     loop over a `valarray`.
+1. `simple_reduce_tbb.cpp`: simple application illustraing a
+    `tbb::parallel_reduce` over a `std::valarray`.
 1. `julia.cpp`: serial Julia set implementation as base case.
 1. `julia_tbb.cpp`: TBB implementation of Julia set.
 1. `Makefile`: make file to build the applications.
