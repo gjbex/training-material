@@ -10,5 +10,6 @@ source $INTEL_DIR/bin/compilervars.sh intel64
 source $INTEL_DIR/tbb/bin/tbbvars.sh intel64
 
 make CXX=icpc \
+     OMPFLAGS="-qopenmp" \
      CPPFLAGS="-I$INTEL_DIR/tbb/include" \
      LDFLAGS="-L$INTEL_DIR/tbb/lib/intel64/gcc4.4"
