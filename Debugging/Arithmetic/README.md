@@ -6,6 +6,7 @@ Some illustrations of arithmetic bugs.
     of different orders of magnitude.
 1. `addition.c`: C implementation of illustration of loss of precision
     when adding numbers of different orders of magnitude.
+1. `float_overflow.c`: illustration of code that generates `inf`.
 1. `overflow.cpp`: illustration of arithmetic overflow when using a
     counter.
 1. `Makefile`: make file to build the applications.
