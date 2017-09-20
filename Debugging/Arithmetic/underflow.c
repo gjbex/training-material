@@ -22,5 +22,9 @@ int main() {
     printf("float product = %e\n", prod);
     printf("double product = %le\n", dprod);
     printf("log float product = %e\n", exp(log_prod));
+    prod = 1.0f;
+    for (i = 4; i >= 0; i--)
+        prod *= x[i];
+    printf("float product (reverse) = %e\n", prod);
     return EXIT_SUCCESS;
 }
