@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -g -Wall
-OMPFLAGS = -gopenmp
+OMPFLAGS = -fopenmp
 CPPFLAGS =
 LDFLAGS =
 LIBS = -lm
