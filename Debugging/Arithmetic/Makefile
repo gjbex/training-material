@@ -1,7 +1,11 @@
 CFLAGS = -O2 -g -Wall -Wextra
+CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 LDFLAGS = -lm
 
-all: addition.exe
+all: addition.exe overflow.exe
+
+overflow.exe: overflow.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 %.exe: %.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
