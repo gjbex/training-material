@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 LDFLAGS = -lm
 
 all: addition.exe overflow.exe float_overflow.exe underflow.exe \
-        equality.exe
+        equality.exe float_overflow_nan.exe
 
 overflow.exe: overflow.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
