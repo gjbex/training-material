@@ -8,7 +8,10 @@ Some illustrations of arithmetic bugs.
     when adding numbers of different orders of magnitude.
 1. `float_overflow.c`: illustration of code that generates `inf`.
 1. `overflow.cpp`: illustration of arithmetic overflow when using a
-    counter.
+    counter. The application reads a DNA sequence from standard input,
+    and counts the number of A, C, G, T nucleotides.
+1. `dna_generator.py`: Script to generate a DNA sequence of specified
+    composition, used to generate input for `overflow.cpp`.
 1. `underflow.c`: illustration of numerical underflow in floating point
     artihmetic.
 1. `Makefile`: make file to build the applications.
