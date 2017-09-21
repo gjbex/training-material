@@ -7,6 +7,8 @@ Some illustrations of arithmetic bugs.
 1. `addition.c`: C implementation of illustration of loss of precision
     when adding numbers of different orders of magnitude.
 1. `float_overflow.c`: illustration of code that generates `inf`.
+1. `equality.c`: illustrates that testing for floating point equality is
+    a bad idea.
 1. `overflow.cpp`: illustration of arithmetic overflow when using a
     counter. The application reads a DNA sequence from standard input,
     and counts the number of A, C, G, T nucleotides.
