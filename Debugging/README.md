@@ -5,6 +5,8 @@ them.
 
 ## What is it?
 1. `Arithmetic`: illustrations of arithmetic bugs.
+1. `ControlFlow`: illustrations of bugs in the control flow.
+1. `MemoryIssues`: sample code to illustrate various memory issues.
 1. `CodeCoverage`: illustration of how to use code coverage tools.
 1. `CompilerFlags`: illustration of the value of specifying maximal warnings
     when compiling, as well as trying multiple compilers.
@@ -17,7 +19,6 @@ them.
 1. `fUnit`: very simple illustration of how to use the fUnit testing
     framework for Fortran unit testing.
 1. `Gdb`: some sample code to illustrate using GDB.
-1. `MemoryIssues`: sample code to illustrate various memory issues.
 1. `MPI`: MPI code to illustrate using Allinea DDT.
 1. `Pfunit`: very simple illustration of how to use the pFUnit testing
 	framework for Fortran unit testing.
