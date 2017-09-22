@@ -6,6 +6,7 @@ program logical_order
     real(kind=dp), dimension(n) :: x
     real(kind=dp) :: result
     integer :: i
+
     do i = 1, n
         x(i) = real(i*i, kind=dp)
     end do
