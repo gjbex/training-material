@@ -10,4 +10,6 @@ These code samples represent a collections of control flow related bugs.
     so evaluation order is fixed, and has to be taken into account. This
     code will terminate with a segmentation fault. valgrind will catch
     this.
+1. `init_proc_vars.f90`: illustrates potential bug when initializing
+    variables in Fortran procedures.
 1. `Makefile`: make file to build the applications.
