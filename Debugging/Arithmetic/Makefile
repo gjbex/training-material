@@ -3,7 +3,8 @@ FFLAGS = -O2 -g -Wall -Wextra
 CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 LDFLAGS = -lm
 
-all: addition.exe overflow_cpp.exe float_overflow.exe underflow.exe \
+all: addition.exe overflow_cpp.exe float_overflow.exe \
+        underflow.exe  underflow_c_fpe.exe \
         equality.exe float_overflow_nan.exe trace_nan_f90.exe \
         trace_nan_f90_fpe.exe trace_nan_c.exe trace_nan_c_fpe.exe
 

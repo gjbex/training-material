@@ -1,3 +1,4 @@
+#include <fenv.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,11 +15,15 @@ int main() {
     float prod = 1.0f;
     float log_prod = 0.0f;
     double dprod = 1.0;
-    for (i = 0; i < 5; i++) {
+#ifdef FPE_TRAP
+    feenableexcept(FE_ALL_EXCEPT);
+#endif
+    for (i = 0; i < 5; i++)
         prod *= x[i];
+    for (i = 0; i < 5; i++)
         dprod *= x[i];
+    for (i = 0; i < 5; i++)
         log_prod += log(x[i]);
-    }
     printf("float product = %e\n", prod);
     printf("double product = %le\n", dprod);
     printf("log float product = %e\n", exp(log_prod));
