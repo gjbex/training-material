@@ -16,6 +16,8 @@ Some illustrations of arithmetic bugs.
     and counts the number of A, C, G, T nucleotides.
 1. `dna_generator.py`: Script to generate a DNA sequence of specified
     composition, used to generate input for `overflow.cpp`.
+1. `trace_nan.c`: code to illustrate how to trace the origin of a NaN
+    by enabling FPE traps programmatically.
 1. `trace_nan.f90`: code to illustrate how to trace the origin of a NaN
     by enabling compiler FPE trapping.
 1. `underflow.c`: illustration of numerical underflow in floating point
