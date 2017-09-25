@@ -10,7 +10,7 @@ int main() {
     double b[N];
     int i;
 #ifdef FPE_TRAP
-    feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
+    feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW | FE_UNDERFLOW);
 #endif
     for (i = 0; i < N; i++)
         b[i] = sqrt(a[i]);

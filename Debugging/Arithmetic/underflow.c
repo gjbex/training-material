@@ -16,7 +16,7 @@ int main() {
     float log_prod = 0.0f;
     double dprod = 1.0;
 #ifdef FPE_TRAP
-    feenableexcept(FE_ALL_EXCEPT);
+    feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW | FE_UNDERFLOW);
 #endif
     for (i = 0; i < 5; i++)
         prod *= x[i];
