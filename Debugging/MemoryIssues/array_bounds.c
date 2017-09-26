@@ -4,7 +4,7 @@
 
 #define N 8
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[] __attribute__((unused))) {
     const int old_val = 15;
     const int new_val = 42;
     int i, b, a[N];
