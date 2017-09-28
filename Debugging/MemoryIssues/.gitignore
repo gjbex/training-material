@@ -1,2 +1,4 @@
 *.exe
 *.s
+core
+core.*
