@@ -4,7 +4,7 @@ ASMFLAGS = -S
 LDFLAGS = -lm
 
 APPL = leak.exe array_bounds.exe dangling_pointer.exe memory_leak.exe \
-       null_pointer.exe
+       null_pointer.exe stack_issue.exe
 SRCS = $(APPL:.exe=.c)
 OBJS = $(SRCS:.c=.o)
 ASMS = $(SRCS:.c=.s)

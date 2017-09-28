@@ -16,4 +16,6 @@ such as Valgrind or Intel Inspector.
 1. `null_pointer.c`: simple example of a non-checked, failed `malloc`,
     caught easily by valgrind. Application termintates with segmentation
     fault.
+1. `stack_issue.c`: function returns stack variable, which makes the
+    caller segfault, can be caught using valgrind.
 1. `Makefile`: make file to build using GCC.
