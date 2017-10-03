@@ -4,6 +4,9 @@ testing code is shown, since trying to prevent bugs is better than fixing
 them.
 
 ## What is it?
+1. `Arithmetic`: illustrations of arithmetic bugs.
+1. `ControlFlow`: illustrations of bugs in the control flow.
+1. `MemoryIssues`: sample code to illustrate various memory issues.
 1. `CodeCoverage`: illustration of how to use code coverage tools.
 1. `CompilerFlags`: illustration of the value of specifying maximal warnings
     when compiling, as well as trying multiple compilers.

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <tbb/tbb.h>
 #include <valarray>
 
@@ -7,8 +8,12 @@ using namespace std;
 void print_values(const valarray<int>& v) {
     tbb::parallel_for(tbb::blocked_range<size_t>(0, v.size()),
             [&] (const tbb::blocked_range<size_t>& r) {
-                for (size_t i = r.begin(); i < r.end(); i++)
-                    cout << i << ": " << v[i] << endl;
+                for (size_t i = r.begin(); i < r.end(); i++) {
+                    string line;
+                    stringstream stream(line);
+                    stream << i << ": " << v[i] << endl;
+                    cout << stream.str();
+                }
             });
 }
 

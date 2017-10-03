@@ -1,0 +1,5 @@
+*.exe
+*.s
+core
+core.*
+vgcore.*

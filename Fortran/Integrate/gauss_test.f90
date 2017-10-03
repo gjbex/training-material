@@ -16,7 +16,7 @@ program integration_test
         read (buffer, fmt='(E25.15)') b
     else
         write (unit=error_unit, fmt='(A)') &
-            '#error: two command line argument expected, n, a, and b'
+            '#error: three command line argument expected, n, a, and b'
     end if
     call quad%init_gen_gauss(n, eps)
     print '(F25.15)', quad%integrate(f, a, b)
