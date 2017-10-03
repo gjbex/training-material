@@ -12,4 +12,6 @@ These code samples represent a collections of control flow related bugs.
     this.
 1. `init_proc_vars.f90`: illustrates potential bug when initializing
     variables in Fortran procedures.
+1. `unintended_global.f90`: illustration of a bug introduced by omitting
+    a local variable declaration in a function (infinite loop).
 1. `Makefile`: make file to build the applications.
