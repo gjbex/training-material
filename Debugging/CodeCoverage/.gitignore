@@ -2,3 +2,6 @@
 *.gcov
 *.gcda
 *.gcno
+profiles
+*.HTML
+CodeCoverage
