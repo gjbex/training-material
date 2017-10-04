@@ -89,6 +89,8 @@ these samples have been used for Python tutorials.
     Jupyter notebook to illustrate using pandas interactively.
 1. `Paramiko`: a few examples of using the Paramiko library for SSH
     to remote hosts.
+1. `Pitfalls`: illusttrations of pitfalls when coding Python due to
+    non-trivial semantics.
 1. `PhraseIndexer`: parses a text file to find the line number on which a
     given eet of phrases occurs.
 1. `Profiling`: a few examples of how to use profilers for Python.
