@@ -20,3 +20,5 @@ useful data structures.
     former may be overkill since it can be used from multiple processes
     simultaneously.
 1. `text.txt`: text file to experiment with.
+1. `performance.ipynb`: jupyter notebook with some timings to test
+    performance of operations on data structures.
