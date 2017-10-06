@@ -1,4 +1,4 @@
-# SvD
+# Svd
 Illustration of computing the singular value decomposition of a matrix.
 Note that the way to reconstruct the original matrix from U, S, and VT
 is definitely not efficient, however, constructing the Sigma matrix
