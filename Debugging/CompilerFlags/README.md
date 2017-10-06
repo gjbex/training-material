@@ -1,6 +1,8 @@
 # CmopilerFlags
 
 ## What is it?
+1. `BoundsCheck`: illustration of runtime array bounds checking for
+    Fortran code.
 1. `ConstQual`: illustrates bugs caused by type casts that drop the `const`
     qualifier of a variable.
 1. `Shadow`: illustration of using the `-Wshadow` option to detect
