@@ -5,6 +5,8 @@
     Fortran code.
 1. `ConstQual`: illustrates bugs caused by type casts that drop the `const`
     qualifier of a variable.
+1. `FloatEqual`: illustration of the a compiler options to check for
+    floating point equality/inequality comparisons.
 1. `Shadow`: illustration of using the `-Wshadow` option to detect
     potential problems caused by local variable declarations that shadow
     those in outer scope.
