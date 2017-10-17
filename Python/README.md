@@ -54,6 +54,7 @@ these samples have been used for Python tutorials.
 1. `Flask`: some illustrations of using the Flask web services framework.
 1. `Fundamentals`: code samples that where used to extract fragments
     in the part of the presentation on core Python features.
+1. `Gis`: code samples for dealing with GIS data.
 1. `Interfacing_C_C++_Fortran`: illustrates how to use Fortran code
     from Python using `f2py`, C code by using `ctype`, and C/C++ code
     using SWIG.
