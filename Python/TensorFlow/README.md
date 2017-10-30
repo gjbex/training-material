@@ -1,5 +1,5 @@
-# Tensorflow
-This is work in progess, simple examples only.  Another example can be
+# TensorFlow
+This is work in progress, simple examples only.  Another example can be
 found in the [Accelerators section](httpA://github.com/gjbex/training-material/tree/master/Accelerators/GANs), which is mainly intended as a benchmark.
 
 ## What is it?
