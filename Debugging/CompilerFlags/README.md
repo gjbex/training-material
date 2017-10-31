@@ -1,6 +1,8 @@
 # CmopilerFlags
 
 ## What is it?
+1. `BadFunctionCast`: illustrates a dangerous function call cast, caught
+    by `-Wbad_function_cast`.
 1. `BoundsCheck`: illustration of runtime array bounds checking for
     Fortran code.
 1. `ConstQual`: illustrates bugs caused by type casts that drop the `const`
