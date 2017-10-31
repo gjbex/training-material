@@ -9,3 +9,6 @@ configure
 depcomp
 install-sh
 missing
+
+build
+build_debug

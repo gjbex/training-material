@@ -2,6 +2,8 @@
 An example of using a library (i.e., the GSL) in an autotools project.
 
 ## Contents
+1. `build.sh`: configures and builds application for production.
+1. `build_debug.sh`: configures and builds application for debugging.
 1. `configure.ac`: sets meta information about the project, options for
     Automake, and the make files to be generated.  Note the macros for
     checking libraries.
