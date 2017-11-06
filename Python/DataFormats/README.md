@@ -32,6 +32,12 @@ What is it?
   * `read_csv_rows.py`: illustrates the default CSV reader
   * `agt_parser.py`: parser for a file format that is partially CSV.
   * `agt_data`: data files to parse using `agt_parser.py`.
+1. JSON files
+  * `average_age.py`: compute the average age of "people" stored in a JSON
+    file.
+  * `average_age_functional.py`: compute the average age of "people"
+    stored in a JSON file in functional style.
+  * `people.json`: JSON file containing personal information.
 1. XML files
   * `write_xml.py`: creates XML that has a root-level `blocks` element,
     containing `block` elements that are named (by attribue), and can
