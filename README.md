@@ -54,9 +54,12 @@ in this repository.
 ## Contributors
 
 * [Geert Jan Bex](geertjan.bex@uhasselt.be), Universiteit Hasselt/KU Leuven
-* Guillaume Jacquenot (Python 3 version of XDMF generating scripts,
-    correcting typos)
-* Arnout Standaert, VITO (Update of deprecated Pandas API)
+* Guillaume Jacquenot
+  * Python 3 version of XDMF generating scripts
+  * correcting typos in various README
+* Arnout Standaert, VITO
+  * update of deprecated Pandas API
+  * suggestions on Python OOP presentation section
 
 You are very welcome to contribute, please read
 [some guidelines](CONTRIBUTING.md) before you do.
