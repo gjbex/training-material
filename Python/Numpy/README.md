@@ -18,6 +18,8 @@ algorithms for scientific computing (Lapack, statistics,...).
     plot the latter
 1. `fft_experiments.ipynb`: notebook with some experiments on signal
     analysis using FFT.
+1. `numeexpr.ipynb`: Jupyter notebook illustrating some use cases of the
+    numexpr module.
 1. `numpy.ipynb`: Jupyter notebook illustrating some numpy aspects like
     array slicing, adding dimension to arrays, and so on.
 1. `optimization.py`: illustration of how to use the `scipy.optimize` for
