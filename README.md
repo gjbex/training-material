@@ -53,7 +53,10 @@ in this repository.
 
 ## Contributors
 
-* [Geert Jan Bex](geertjan.bex@uhasselt.be), Universiteit Hasselt/KU Leuven
+* [Geert Jan Bex](geertjan.bex@uhasselt.be), Hasselt University/University of Leuven
+* Stefan Becuwe, Antwerp University
+  * suggestions for and correction of typos in Python presentation
+  * suggestions for Python programming exercises
 * Guillaume Jacquenot
   * Python 3 version of XDMF generating scripts
   * correcting typos in various README
