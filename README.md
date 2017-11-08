@@ -1,6 +1,4 @@
-training-material
-=================
-
+# training-material
 A collection of code examples for training purposes, mostly in the
 context of data processing and parallel prgramming.
 
