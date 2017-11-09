@@ -10,6 +10,11 @@ These code samples represent a collections of control flow related bugs.
     so evaluation order is fixed, and has to be taken into account. This
     code will terminate with a segmentation fault. valgrind will catch
     this.
+1. `improper_conditionals.c`: "unexpected" behavior due to improper
+    boolean expressions in conditional statment.
+1. `run_improper_conditionals.sh`: Bash script to run the improper
+    conditionals example program, and produce the "unexpected" output.
+    boolean expressions in conditional statment.
 1. `init_proc_vars.f90`: illustrates potential bug when initializing
     variables in Fortran procedures.
 1. `unintended_global.f90`: illustration of a bug introduced by omitting
