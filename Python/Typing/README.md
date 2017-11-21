@@ -14,3 +14,8 @@ errors.
 `. `incorrect_03.py`: code that has type annotations, and the result of a
     function that returns an `int`, assigns it to a variable that is
     later used as a `str`.
+`. `dict_correct.py`: code that counts the words in a text read from
+    standard input.
+`. `dict_incorrect.py`: code that counts the words in a text read from
+    standard input.  The counts are subsequently normalized to `float`,
+    which is a type error.

@@ -1,0 +1,5 @@
+This is a text, and multipe words in
+this text occur multiple times. The
+words are treated as case-insensitive,
+so counting all in this text is an
+exercise.
