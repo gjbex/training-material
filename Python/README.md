@@ -108,6 +108,7 @@ these samples have been used for Python tutorials.
 1. `ScikitLearn`: examples using the scikit-learn machine learning
     library.
 1. `Regexes`: some material related to using regular expressions in Python.
+1. `Seaborn`: illustrations of the Seaborn plotting library.
 1. `SentenceCounter`: scripts to (naively) count sentences in natural
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
