@@ -8,3 +8,6 @@ machine learning tasks.
 1. `kaggle_data.py`: Python module to easily load various Kaggle datasets
     and preprocess the data.
 1. `keras.ipynb`: simple example of using Keras for a classification task.
+
+## References
+Excellent [tutorial](https://github.com/leriomaggio/deep-learning-keras-tensorflow).
