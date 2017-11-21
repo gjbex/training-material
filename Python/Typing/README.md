@@ -5,7 +5,7 @@ functionality was extended in Python 3.6.
 The `mypy` static type checker can use this annotation to detect type
 errors.
 
-Type checking can be done using (mypy)[http://mypy-lang.org/index.html].
+Type checking can be done using [mypy](http://mypy-lang.org/index.html).
 
 ## What is it?
 1. `correct.py`: code that has type annotations, and no type errors.
