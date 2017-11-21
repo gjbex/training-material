@@ -108,12 +108,15 @@ these samples have been used for Python tutorials.
 1. `ScikitLearn`: examples using the scikit-learn machine learning
     library.
 1. `Regexes`: some material related to using regular expressions in Python.
+1. `Seaborn`: illustrations of the Seaborn plotting library.
 1. `SentenceCounter`: scripts to (naively) count sentences in natural
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
     the field
 1. `Subprocess`: illustrates executing a shell command from a Python script
     using the `subprocess` module.
+1. `Typing`: Python type annotations can help to make code considerably
+    more robust.
 1. `Unittest`: illustration of how to use Python's standard library
     unit testing framework.
 1. `Vtk`: examples of using the KitWare VTK library (No support for Python
