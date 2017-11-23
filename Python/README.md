@@ -115,6 +115,8 @@ these samples have been used for Python tutorials.
     the field
 1. `Subprocess`: illustrates executing a shell command from a Python script
     using the `subprocess` module.
+1. `Threading`: illustrates using the `threading` module for parallel
+    programming.
 1. `Typing`: Python type annotations can help to make code considerably
     more robust.
 1. `Unittest`: illustration of how to use Python's standard library
