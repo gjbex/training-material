@@ -1,0 +1,16 @@
+#!/bin/bash -l
+#PBS -l nodes=3:ppn=4
+#PBS -l walltime=00:02:00
+#PBS -W x=nmatchpolicy:exactnode
+
+source switch_to_2015a
+module load foss/2015a
+
+cd $PBS_O_WORKDIR
+
+if [ "x${verbose}" == "x" ]
+then
+    verbose=0
+fi
+
+mpirun ./ring_c.exe ${verbose}
