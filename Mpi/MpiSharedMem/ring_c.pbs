@@ -1,0 +1,11 @@
+#!/bin/bash -l
+#PBS -l nodes=3:ppn=4
+#PBS -l walltime=00:02:00
+#PBS -W x=nmatchpolicy:exactnode
+
+module purge
+module load foss/2015a
+
+cd $PBS_O_WORKDIR
+
+mpirun ./ring__c.exe
