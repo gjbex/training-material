@@ -24,7 +24,9 @@ int main(int argc, char *argv[]) {
     MPI_Win_allocate_shared(local_win_size*disp_unit, disp_unit,
                             MPI_INFO_NULL, sm_comm, &base_ptr, &sm_win);
     MPI_Comm_split(MPI_COMM_WORLD, sm_rank == 0, key, &node_comm);
-    MPI_Comm_size(node_comm, &nr_nodes);
+    if (global_rank == 0)
+        MPI_Comm_size(node_comm, &nr_nodes);
+    MPI_Bcast(&nr_nodes, 1, MPI_INT, 0, MPI_COMM_WORLD);
     /* local store epoch */
     MPI_Win_fence(0, sm_win);
     base_ptr[0] = global_rank;
@@ -40,7 +42,6 @@ int main(int argc, char *argv[]) {
     source = (global_rank - 1 + global_size) % global_size;
     dest = (global_rank + 1) % global_size;
     for (i = 0; i < nr_nodes; i++) {
-        int k;
         if (sm_rank == sm_size - 1) {
             printf("%2d sending to %2d\n", global_rank, dest);
             MPI_Issend(&send_buffer, 1, MPI_INT, dest, tag,
@@ -54,9 +55,9 @@ int main(int argc, char *argv[]) {
         /* start local epoch */
         MPI_Win_fence(0, sm_win);
         if (sm_rank == 0) {
-            int i;
-            for (i = 0; i < sm_size; i++)
-                base_ptr[i] = recv_buffer;
+            int k;
+            for (k = 0; k < sm_size; k++)
+                base_ptr[k] = recv_buffer;
         }
         total += base_ptr[0];
         MPI_Win_fence(0, sm_win);
