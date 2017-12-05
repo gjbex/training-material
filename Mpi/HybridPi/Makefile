@@ -1,6 +1,6 @@
 CC = gcc
 MPICC = mpicc
-CFLAGS = -O2 -g
+CFLAGS = -O2 -g -Wall -Wextra
 OMP = -fopenmp
 LIBS =
 
