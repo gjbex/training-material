@@ -3,7 +3,6 @@ program hello_world
     use :: mpi
     implicit none
     integer :: size, rank, ierr
-    real(kind=dp) :: msg
 
     call MPI_Init(ierr)
     call MPI_Comm_rank(MPI_COMM_WORLD, rank, ierr)

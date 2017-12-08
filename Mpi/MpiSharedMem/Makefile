@@ -2,7 +2,7 @@ CC = mpicc
 CFLAGS = -O2 -g
 LIBS = -lm
 
-all: mpi_shared_mem_c.exe
+all: mpi_shared_mem_c.exe ring_c.exe
 
 %_c.exe: %.c
 	$(CC) $(CFLAGS) -o $@ $<

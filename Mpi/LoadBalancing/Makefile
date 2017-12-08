@@ -1,5 +1,5 @@
 CC = mpicc
-CFLAGS = -O2 -g
+CFLAGS = -O2 -g -Wall -Wextra
 F90 = mpif90
 FFLAGS = -O2 -g
 

@@ -1,5 +1,5 @@
 F90 = mpif90
-FFLAGS = -O2 -g
+FFLAGS = -O2 -g -Wall -Wextra
 LDFLAGS =
 LIBS = -lm
 
