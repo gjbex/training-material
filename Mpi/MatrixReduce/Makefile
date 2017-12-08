@@ -1,5 +1,5 @@
-MPIF90 = mpiifort
-FFLAGS = -O2 -g
+MPIF90 = mpif90
+FFLAGS = -O2 -g -Wall -Wextra -Wno-maybe-uninitialized
 LDFLAGS =
 LIBS = -lm
 
