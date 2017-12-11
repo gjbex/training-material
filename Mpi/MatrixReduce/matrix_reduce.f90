@@ -45,7 +45,7 @@ call MPI_Bcast(nr_iters, 1, MPI_INTEGER, root, MPI_COMM_WORLD, ierr)
 ! allocate matrix for each process
 allocate(matrix(nr_rows, nr_cols), stat=istat)
 if (istat /= 0) then
-    write (unit=error_unit, fmt='(A)'), 'can not allocate matrix'
+    write (unit=error_unit, fmt='(A)') 'can not allocate matrix'
     call MPI_Abort(MPI_COMM_WORLD, 1, ierr)
 end if
 
@@ -53,7 +53,7 @@ end if
 if (rank == root) then
     allocate(total_matrix(nr_rows, nr_cols), stat=istat)
     if (istat /= 0) then
-        write (unit=error_unit, fmt='(A)'), 'can not allocate total_matrix'
+        write (unit=error_unit, fmt='(A)') 'can not allocate total_matrix'
         call MPI_Abort(MPI_COMM_WORLD, 1, ierr)
     end if
 end if

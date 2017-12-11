@@ -10,7 +10,7 @@
 double compute_pi(long n, int seed);
 
 int main(int argc, char *argv[]) {
-    int rank, size, seed;
+    int rank, size;
     long n;
     double pi, global_pi;
     MPI_Init(NULL, NULL);
@@ -42,11 +42,10 @@ double compute_pi(long n, int rank) {
         long i;
         struct timeval time;
         gettimeofday(&time, NULL);
-        int seed = (int) (time.tv_usec*(17*rank + 1) +
+        unsigned int seed = (unsigned int) (time.tv_usec*(17*rank + 1) +
                               time.tv_sec/(rank + 1));
 #ifdef _OPENMP
-        int nr_threads = 1, thread_nr = 0;
-        nr_threads = omp_get_num_threads();
+        int thread_nr = 0;
         thread_nr = omp_get_thread_num();
         seed += 17*thread_nr;
 #endif

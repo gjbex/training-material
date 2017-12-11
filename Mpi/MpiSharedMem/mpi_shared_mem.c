@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <mpi.h>
 
-int main(int argc, char *argv[]) {
+int main(int argc __attribute__((unused)),
+         char *argv[] __attribute__((unused))) {
     const int disp_unit = sizeof(double);
     MPI_Aint local_win_size = 2;
     double *base_ptr;
