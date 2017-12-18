@@ -1,4 +1,4 @@
-# SparseSends
+﻿# SparseSends
 Illustrates a use case: a process receives information from a small number
 of processes which are not known in advance.
 
@@ -11,4 +11,4 @@ of processes which are not known in advance.
     proceed.
 1. `sparse_sends_reduce.f90`: a collective `MPI_Reduce` is used to inform
     the target process how many processes intend to send messages to it.
-1. `Makefile`: makefile to build the executables
+1. `Makefile`: make file to build the executables
