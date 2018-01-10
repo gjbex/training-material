@@ -21,6 +21,8 @@ Contents
 1. `IO`: illustrates Fortran's I/O mechanisms, sequential read/write of
     formatted and unformatted records, stream read/write of unformatted
     records.
+1. `Julia`: illustration of using complex arithmethic and elementary
+    functions.
 1. `Matrices`: illustrates array operations and intrinsic functions
     operating on arrays, indexing by slices,  as well as allocatable arrays.
 1. `Miscellaneous`: Dealing with command line arguments, environment
