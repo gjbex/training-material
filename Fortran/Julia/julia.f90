@@ -73,12 +73,10 @@ contains
         if (status /= 0) then
             call report_error('can not allocate z')
         end if
-        do j = 1, size(y_coords)
-            do i = 1, size(y_coords)
-                z_vals(i, j) = cmplx(x_coords(i), y_coords(j), &
-                                     kind=kind(z_vals))
-            end do
-        end do
+        forall (i = 1:size(x_coords), j = 1:size(y_coords))
+            z_vals(i, j) = cmplx(x_coords(i), y_coords(j), &
+                                 kind=kind(z_vals))
+        end forall
     end subroutine init_z_vals
 
     subroutine iterate_z_vals(z_vals, nr_iters, c, max_iters)
@@ -87,7 +85,9 @@ contains
         integer, dimension(:, :), intent(inout) :: nr_iters
         complex(kind=dp), intent(in) :: c
         integer, intent(in) :: max_iters
-        nr_iters = iterate_z_val(z_vals, c, max_iters)
+        !$omp workshare
+            nr_iters = iterate_z_val(z_vals, c, max_iters)
+        !$omp end workshare
     end subroutine iterate_z_vals
 
     elemental function iterate_z_val(z_val, c, max_iters) result(iters)
