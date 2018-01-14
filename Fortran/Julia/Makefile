@@ -1,11 +1,7 @@
 FFLAGS = -O2 -g -Wall -Wextra
-OMP = -fopenmp
 PROF = -pg
 
-all: julia.exe julia_omp.exe julia_prof.exe
-
-%_omp.exe: %.f90
-	$(FC) $(OMP) $(FFLAGS) -o $@ $<
+all: julia.exe julia_prof.exe
 
 %_prof.exe: %.f90
 	$(FC) $(FFLAGS) $(PROF) -o $@ $<

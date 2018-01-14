@@ -85,9 +85,7 @@ contains
         integer, dimension(:, :), intent(inout) :: nr_iters
         complex(kind=dp), intent(in) :: c
         integer, intent(in) :: max_iters
-        !$omp workshare
-            nr_iters = iterate_z_val(z_vals, c, max_iters)
-        !$omp end workshare
+        nr_iters = iterate_z_val(z_vals, c, max_iters)
     end subroutine iterate_z_vals
 
     elemental function iterate_z_val(z_val, c, max_iters) result(iters)
