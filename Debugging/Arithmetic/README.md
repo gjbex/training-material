@@ -21,6 +21,6 @@ Some illustrations of arithmetic bugs.
 1. `trace_nan.f90`: code to illustrate how to trace the origin of a NaN
     by enabling compiler FPE trapping.
 1. `underflow.c`: illustration of numerical underflow in floating point
-    artihmetic.
+    arithmetic.
 1. `Makefile`: make file to build the applications.
 1. `FpeOverhead`: code to measure FPE trapping overhead.

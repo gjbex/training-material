@@ -6,18 +6,18 @@ These code samples represent a collections of control flow related bugs.
     Fortran is not guaranteed, which may be problematic when using
     procedures with optional arguments.  This code doesn't seem to crash,
     so the compilers coincidentally do the right thing.
-1. `logical_order.c`: evaluation of boolean expressions in C/C++ is lazy,
+1. `logical_order.c`: evaluation of Boolean expressions in C/C++ is lazy,
     so evaluation order is fixed, and has to be taken into account. This
     code will terminate with a segmentation fault. valgrind will catch
     this.
-1. `improper_conditionals.c`: "unexpected" behavior due to improper
-    boolean expressions in conditional statment.
+1. `improper_conditionals.c`: "unexpected" behaviour due to improper
+    Boolean expressions in conditional statement.
 1. `run_improper_conditionals.sh`: Bash script to run the improper
     conditionals example program, and produce the "unexpected" output.
-    boolean expressions in conditional statment.
+    Boolean expressions in conditional statement.
 1. `init_proc_vars.f90`: illustrates potential bug when initializing
     variables in Fortran procedures.
-1. `udt_intent_out.f90`: illustration of bug caused by inappropraite use
+1. `udt_intent_out.f90`: illustration of bug caused by inappropriate use
     of intent `OUT` when partially assigning to a variable of a user
     defined type.
 1. `unintended_global.f90`: illustration of a bug introduced by omitting
