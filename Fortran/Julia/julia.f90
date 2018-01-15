@@ -119,7 +119,7 @@ contains
         end if
         write (row_fmt, '(A, I0, A)') '(', size(nr_iters, 2), 'I4)'
         do i = 1, size(nr_iters,1)
-            write (unit=file_unit, fmt=row_fmt, iostat=istat, iomsg=msg), &
+            write (unit=file_unit, fmt=row_fmt, iostat=istat, iomsg=msg) &
                 (int(255.0_dp*log(1.0_dp + nr_iters(i, j))/log(255.0_dp)), &
                  j = 1, size(nr_iters, 2))
             if (istat /= 0) then
