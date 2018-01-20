@@ -26,7 +26,8 @@ asm: $(ASMS)
 	$(CC) $(CFLAGS) $(ASMFLAGS) -c -o $@ $<
 
 check: $(CHECKS)
-	cppcheck --quiet --enable=all --language=c --std=c89 $^
+	cppcheck --quiet --enable=all --inconclusive \
+             --language=c --std=c89 --platform=unix64 $^
 
 clean:
 	$(RM) $(APPL) $(OBJS)
