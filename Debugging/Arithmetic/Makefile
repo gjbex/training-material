@@ -30,6 +30,10 @@ all: addition.exe overflow_cpp.exe float_overflow.exe \
 %.exe: %.o
 	$(CC) $(OPTFLAGS) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
+check: $(CHECKS)
+	cppcheck --quiet --enable=all --inconclusive \
+             --language=c --std=c89 --platform=unix64 $^
+
 clean:
 	$(RM) *.exe *.o *.mod
 	$(RM) core core.*
