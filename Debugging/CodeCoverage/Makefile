@@ -15,6 +15,7 @@ fac.exe: main.o funcs.o
 %.o: %.c
 	$(CC) $(CFLAGS) $(PROF_FLAGS) -c -o $@ $<
 
+check:
 clean:
 	$(RM) *.exe *.o
 	$(RM) *.gcda *.gcno *.gcov
