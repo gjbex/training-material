@@ -19,6 +19,8 @@ useful data structures.
     implementations, `queue.PriorityQueue` and `heapq`.  Note that the
     former may be overkill since it can be used from multiple processes
     simultaneously.
+1. `sets.ipynb`: jupyter notebook showing the operations defined on sets
+    through methods, and the overloaded operator counterparts.
 1. `text.txt`: text file to experiment with.
 1. `performance.ipynb`: jupyter notebook with some timings to test
     performance of operations on data structures.
