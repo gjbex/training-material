@@ -7,9 +7,10 @@ LDFLAGS = -lm
 
 APPL = leak.exe array_bounds.exe dangling_pointer.exe memory_leak.exe \
        null_pointer.exe stack_issue.exe stack_overflow_f90.exe
-SRCS = $(APPL:.exe=.c)
+SRCS = $(filter-out %_f90.c, $(APPL:.exe=.c))
 OBJS = $(SRCS:.c=.o)
 ASMS = $(SRCS:.c=.s)
+CHECKS = $(SRCS)
 
 all: $(APPL)
 
@@ -23,6 +24,10 @@ asm: $(ASMS)
 
 %.s: %.c
 	$(CC) $(CFLAGS) $(ASMFLAGS) -c -o $@ $<
+
+check: $(CHECKS)
+	cppcheck --quiet --enable=all --inconclusive \
+             --language=c --std=c89 --platform=unix64 $^
 
 clean:
 	$(RM) $(APPL) $(OBJS)
