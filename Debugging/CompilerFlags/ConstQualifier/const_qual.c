@@ -9,6 +9,6 @@ int main() {
     const int n = 5;
     printf("originally, n = %d\n", n);
     do_mischief((int *) &n);
-    printf("mischief accompished, n = %d\n", n);
+    printf("mischief accomplished, n = %d\n", n);
     return EXIT_SUCCESS;
 }
