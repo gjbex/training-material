@@ -1,10 +1,8 @@
-Fortran object-oriented programming
-===================================
+# Fortran object-oriented programming
 
 Fortran 2003 adds features to enable object-oriented programming.
 
-What is it?
------------
+## What is it?
 1. `node_mod.f90`: module defining a class representing a node in a
     binary tree.  A node has a left and a right child, and a single
     precision real value.  These attributes are private, but can be
@@ -41,6 +39,5 @@ What is it?
 1. `stats_mod.f90`: user defined type to store statistical data.
 1. `stats.f90`: main program to test the `stats_mod`.
 
-How to build?
--------------
+## How to build?
 Simply use the make file provided.
