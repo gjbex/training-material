@@ -11,10 +11,6 @@ module stats_mod
         procedure :: avg
     end type stats_type
 
-    interface stats
-        module procedure new_stats
-    end interface stats
-
 contains
 
     type(stats_type) function new_stats()

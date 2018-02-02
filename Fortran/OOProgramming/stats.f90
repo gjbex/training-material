@@ -6,7 +6,7 @@ program stats_test
     integer :: i
     real(kind=f8), dimension(n) :: data = [ ((0.5_f8*i), i = 1, n) ]
     type(stats_type) :: my_stats
-    my_stats = stats()
+    my_stats = new_stats()
     do i = 1, n
         call my_stats%add(data(i))
     end do
