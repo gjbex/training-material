@@ -8,7 +8,7 @@ integer :: nr_trees = 1000
 real(kind=sp), parameter :: init_prob = 1.0_sp, factor = 0.75_sp, &
                             root_dist = 0.0_sp
 type(node_type) :: root
-integer :: status, i
+integer :: i
 real(kind=sp) :: avg_path, avg_nodes
 character(len=20) :: buffer
 

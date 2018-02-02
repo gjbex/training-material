@@ -7,7 +7,6 @@ integer, parameter :: sp = REAL32
 real(kind=sp), parameter :: init_prob = 1.0_sp, factor = 0.75_sp, &
                             root_dist = 0.0_sp
 type(node_type) :: root
-integer :: status
 
 ! initialize the random number generator to get a unique sequence per run
 call init_random_seed()
