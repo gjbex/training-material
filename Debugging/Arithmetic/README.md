@@ -11,6 +11,7 @@ Some illustrations of arithmetic bugs.
     from various computations.
 1. `equality.c`: illustrates that testing for floating point equality is
     a bad idea.
+1. `integer_division.f90`: illustrates risk of unintended integer division.
 1. `overflow.cpp`: illustration of integer arithmetic overflow when using a
     counter. The application reads a DNA sequence from standard input,
     and counts the number of A, C, G, T nucleotides.
