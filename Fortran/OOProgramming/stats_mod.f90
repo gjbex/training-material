@@ -3,13 +3,17 @@ module stats_mod
                                               error_unit
     implicit none
 
-    type :: stats_type
+    private
+    type, public :: stats_type
+        private
         real(kind=f8) :: sum = 0.0_f8
         integer(kind=i8) :: n = 0_i8
     contains
         procedure :: add
         procedure :: avg
     end type stats_type
+
+    public :: new_stats
 
 contains
 
