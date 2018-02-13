@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -g -O2 -Wall -std=c++14
+CXXFLAGS = -std=c++14 -g -O2 -Wall -Wextra
 
 .PRECIOUS: %.o
 
@@ -12,4 +12,5 @@ all: $(APPL)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
-	rm -f $(APPL) *.o
+	$(RM) $(APPL) *.o
+	$(RM) core core.*
