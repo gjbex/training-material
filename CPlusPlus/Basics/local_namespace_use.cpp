@@ -3,7 +3,8 @@
 
 double distance(double x, double y);
 
-int main(int argc, char *argv[]) {
+int main(int argc __attribute__((unused)),
+         char *argv[] __attribute__((unused))) {
     double x {0.0};
     double y {0.0};
     while (std::cin >> x >> y) {
