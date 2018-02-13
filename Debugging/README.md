@@ -25,3 +25,5 @@ them.
 	framework for Fortran unit testing.
 1. `Qmtest`: illustration of how to use QMTest for integration testing.
 1. `Shunit2`: illustration of how to use shunit2 for integration testing.
+1. `SyntaxSemantics`: trivial examples of syntax versus semantic errors in
+    code.

@@ -27,7 +27,7 @@ contains
     type(rational) function rat_create(n, d)
         implicit none
         integer, value :: n, d
-        integer :: n_act, d_act, g
+        integer :: g
         if (d == 0) then
             write (unit=error_unit, fmt='(A)') &
                 "# error: denominator must be non-zero"

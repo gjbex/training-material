@@ -6,9 +6,13 @@ FFLAGS = -g
 LDFLAGS = 
 LIBS = -lm
 
-APPS = fib.exe crash.exe array_bounds.exe matrix.exe hello_world.exe
+APPS = fib.exe crash.exe array_bounds.exe matrix.exe hello_world.exe \
+       fib_init.exe
 
 all: $(APPS)
+
+fib_init.exe: fib_init.f90
+	$(F90) $(FFLAGS) -o $@ $<
 
 matrix.exe: matrix_mod.f90 matrix.f90
 	$(F90) $(FFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
