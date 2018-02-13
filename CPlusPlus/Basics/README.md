@@ -9,6 +9,8 @@ presentation `essential_cpp_basic.pptx`..
 1. `data.txt`: data file to be used with `talk.exe`.
 1. `gcd.cpp`: factorial function implemention, illustrating `while`..
 1. `fac.cpp`: factorial function implemention, illustrating `for`.
+1. `local_namespace_use.cpp`: example of using a namespace in the context
+    of a function only.
 1. `scope.cpp`: illustration of block scope.
 1. `swap.cpp`: illustration of call by reference.
 1.` `arrays.cpp`: illustration of arrays in C++.
