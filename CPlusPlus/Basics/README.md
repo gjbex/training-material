@@ -7,6 +7,7 @@ presentation `essential_cpp_basic.pptx`..
 1. `talk.cpp`: illustrates I/O streams.
 1. `col_dist.cpp`: another illustration of I/O streams.
 1. `data.txt`: data file to be used with `talk.exe`.
+1. `data_parser.cpp`: illustration use case for `continue` statement.
 1. `gcd.cpp`: factorial function implemention, illustrating `while`..
 1. `fac.cpp`: factorial function implemention, illustrating `for`.
 1. `local_namespace_use.cpp`: example of using a namespace in the context
