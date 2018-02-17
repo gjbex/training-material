@@ -1,4 +1,4 @@
-# `Screen`
+# Screen
 
 According to its [website](https://www.gnu.org/software/screen/), screen is a
 full-screen window manager that multiplexes a physical terminal between several processes, typically interactive shells.
