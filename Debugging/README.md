@@ -5,6 +5,7 @@ them.
 
 ## What is it?
 1. `Arithmetic`: illustrations of arithmetic bugs.
+1. `Const`: illustrates some subtleties of `const` declarations in C/C++.
 1. `ControlFlow`: illustrations of bugs in the control flow.
 1. `MemoryIssues`: sample code to illustrate various memory issues.
 1. `CodeCoverage`: illustration of how to use code coverage tools.
