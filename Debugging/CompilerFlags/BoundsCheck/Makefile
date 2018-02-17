@@ -1,3 +1,5 @@
+FFLAGS = -g -O2
+
 all: array_bounds_check.exe bounds_check_impact.exe \
      bounds_check_impact_enabled.exe allocatable_bounds_check.exe \
      allocatable_bounds_check_enabled.exe
@@ -14,7 +16,7 @@ timings: bounds_check_impact_enabled.exe bounds_check_impact.exe
 	timeble ./bounds_check_impact_enabled.exe
 
 %_enabled.exe: %.f90
-	$(FC) $(FLAGS) -fbounds-check -o $@  $<
+	$(FC) $(FFLAGS) -fbounds-check -o $@  $<
 
 %.exe: %.f90
 	$(FC) $(FFLAGS) -o $@ $<
