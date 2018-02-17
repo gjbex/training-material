@@ -13,8 +13,9 @@ in this repository.
 
 ## What is it?
 
-* `Accelerators`: some sample code and information on using accelerators.
-* `C`: presentation based "The C programming language" by Kernighan and
+* [`Accelerators`](Accelerators): some sample code and information on using
+   accelerators.
+* [`C`](C): presentation based "The C programming language" by Kernighan and
    Ritchie, as well as sample code to illustration the concepts.
 * `CPlusPlus`: presentation based on "A tour of C++" by Stroustrup, as
    well as sample code to illustrate the concepts.
