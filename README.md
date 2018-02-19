@@ -8,6 +8,8 @@ and to [contribute](CONTRIBUTING.md).  However, no support is guaranteed
 in any form.  All material is subject to the [license](LICENSE) included
 in this repository.
 
+Tips and tricks can be found on this [repository's website](http://gjbex.github.io/training-material/).
+
 [![DOI](https://www.zenodo.org/badge/18587808.svg)](https://www.zenodo.org/badge/latestdoi/18587808)
 
 
