@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -O2 -g -Wall -Wextra
 
-all: if_init.exe while_init.exe
+all: if_init.exe optional.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
