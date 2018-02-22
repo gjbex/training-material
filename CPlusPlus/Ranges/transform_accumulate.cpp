@@ -8,7 +8,7 @@ int main(int argc __attribute__((unused)),
     for (auto value: data)
         std::cout << value << " ";
     std::cout << std::endl;
-    auto times2 = [] (int n) { return 2*n; };
+    auto times2 = [] (int n) -> int { return 2*n; };
     auto sum = ranges::accumulate(data |
                                   ranges::view::transform(times2), 0);
     std::cout << "sum = " << sum << std::endl;

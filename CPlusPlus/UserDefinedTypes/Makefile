@@ -1,10 +1,14 @@
 CXX = g++
-CXXFLAGS = -O2 -g -Wall -std=c++14
+CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 LIBS = -lm
 
-APPS = struct_particles.exe class_particles.exe charged_particles.exe
+APPS = struct_particles.exe class_particles.exe charged_particles.exe \
+       stats_compute.exe
 
 all: $(APPS)
+
+stats_compute.exe: stats_compute.o stats.o stats.h
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
