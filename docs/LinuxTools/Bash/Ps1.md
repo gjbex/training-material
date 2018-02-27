@@ -18,10 +18,8 @@ one command from the next.
 
 The advantace is that even when one is very deep in a directory structure,
 prompt itself is always on a line by itself, e.g.,
-```
-gjb@ubuntu ~/Documents/Projects/training-material/docs/LinuxTools 
-$ 
-```
+![terminal view](bash_ps1.png "Bash in terminal")
+
 
 Using a different color per host allows to distinguish at a glance
 between various hosts.
