@@ -13,7 +13,7 @@ What is it?
     with all elements of a matrix can also be done in a single statement.
 1. `matrix_ops.f90`: module defining some procedure on matrices
 1. `calc_alloc_test.f90`: illustrates that procedures need not be aware
-    that they work with allcated arrays.
+    that they work with allocated arrays.
 1. `alloc_test.f90`: illustrates how to dynamically allocate a matrix with
     dimensions that can be specified on the command line.  The matrix is
     allocated, initialized, printed, and deallocated.
