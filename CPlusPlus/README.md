@@ -17,6 +17,8 @@ programming concepts and idiosyncracies particular to C++.
 1. `Regexes`: illustrations of strings and regular expressions in C++
     for the presentation.
 1. `IoStreams`: illustration of templates in C++ for the presentation.
+1. `Functional`: some illustrations of a functional programming style
+    in C++,  using higher order functions.
 1. `Containers`: illustration of containers in C++ for the presentation.
 1. `Algorithms`: illustration of classes in C++ for the presentation.
 1. `Numerics`: illustration of doing numerical computations in C++, based
