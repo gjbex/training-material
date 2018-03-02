@@ -9,3 +9,5 @@ Code illustrations for chapter 4, Classes in Stroustrup's
 1. `particle.cpp`: implementation of derived class.
 1. `main.cpp`: main program to illustrate the use of dervied class.
 1. `Makefile`: make file to build the applications.
+1. `Stats`: another example of a derived class, implements computing
+    simple statistics on a data stream.
