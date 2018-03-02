@@ -10,8 +10,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     int n {0};
-   try {
-      n = stoi(string(argv[1]));
+    try {
+        n = stoi(string(argv[1]));
     } catch (invalid_argument) {
         cerr << "# error: argument can not be converted to an integer"
              << endl;
