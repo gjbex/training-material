@@ -1,14 +1,14 @@
 VERSION = cpython-34m
-PRIMES_LIB = fac_cython.$(VERSION).so
+FAC_LIB = fac_cython.$(VERSION).so
 
-all: $(PRIMES_LIB)
+all: $(FAC_LIB)
 
-test: $(PRIMES_LIB) test_fac.py
+test: $(FAC_LIB) test_fac.py
 	pytest
 
-$(PRIMES_LIB): fac_cython.pyx
+$(FAC_LIB): fac_cython.pyx
 	python setup.py build_ext --inplace
 
 clean:
 	python setup.py clean
-	$(RM) fac_cython.c $(PRIMES_LIB)
+	$(RM) fac_cython.c $(FAC_LIB)
