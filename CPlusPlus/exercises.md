@@ -20,7 +20,8 @@ These are some exercises you can do as part of the C++ training.
       1. initialize an array of `double` with the square roots of 0.0 up
         to the array's length minus one;
       2.  print that array to standard output; and
-      3. compute the sum of the array elements.
+      3. compute the sum of the array elements, which is printed by the
+        program.
   1. Write a program that implements two functions, the first to swap
     the values of two `int` variables, the second to swap the values of
     two `double` variables.  Print the values before and after calling
