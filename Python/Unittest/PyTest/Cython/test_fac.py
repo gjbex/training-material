@@ -11,6 +11,3 @@ def test_fac_1():
 
 def test_fac_5():
     assert fac(5) == 120
-
-def test_fac_break():
-    assert fac(3) == 4
