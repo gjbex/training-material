@@ -17,10 +17,10 @@ These are some exercises you can do as part of the C++ training.
     two integers specified on the command line.
     [(Solution)](Basics/gcd.cpp)
   1. Write a program that uses three functions to
-    a. initialize an array of `double` with the square roots of 0.0 up
-      to the array's length minus one;
-    a.  print that array to standard output; and
-    a. compute the sum of the array elements.
+      a. initialize an array of `double` with the square roots of 0.0 up
+        to the array's length minus one;
+      a.  print that array to standard output; and
+      a. compute the sum of the array elements.
   1. Write a program that implements two functions, the first to swap
     the values of two `int` variables, the second to swap the values of
     two `double` variables.  Print the values before and after calling
