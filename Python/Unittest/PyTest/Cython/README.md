@@ -8,3 +8,14 @@ Testing Cython code using the `pytest` framework.
 1. `test_fac.py`: implementation of tests for `pytest`.
 1. `setup.py`: Python build script.
 1. `Makefile`: make file to build the extension.
+
+## How to use?
+To build the Cython extension:
+```bash
+$ make
+```
+
+To run the tests:
+```bash
+$ make test
+```
