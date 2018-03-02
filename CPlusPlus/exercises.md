@@ -1,7 +1,7 @@
 # Exercises
 These are some exercises you can do as part of the C++ training.
 
-## Basics (Chapter 1)
+## The basics (Chapter 1)
 
   1. Write a program that writes a greeting to standard output. When
     a command line argument is provided, e.g., `Bjarne`, the greeting
