@@ -1,4 +1,4 @@
-VERSION = cpython-34m
+VERSION = cpython-36m-x86_64-linux-gnu
 FAC_LIB = fac_cython.$(VERSION).so
 
 all: $(FAC_LIB)
