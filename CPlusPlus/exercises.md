@@ -10,7 +10,7 @@ These are some exercises you can do as part of the C++ training.
   1. Write a program that reads from standard input, and interpretes a
     string as a name.  It will write a greeting to standard output,
     unless it reads `quit`, then it will print `Bye!`.
-    [(Solution)](Basics/talk.ccp)
+    [(Solution)](Basics/talk.cpp)
   1. Write a program that computes the factorial function for a number
     specified on the command line.  [(Solution)](Basics/fac.cpp)
   1. Write a program that computes the greatest common divisor of
