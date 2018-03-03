@@ -8,4 +8,4 @@ more useful.
     in `grep` output.  Using the `--color` option will show the matches
     in red so that they catch your eye immediately.  You can add the
     following alias definition in your `.bashrc`:
-    `alias grep='grep --color'
+    `alias grep='grep --color=auto'
