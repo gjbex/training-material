@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 
 def fac(n):
-    if (n == 0 or n == 1):
+    if n == 0 or n == 1:
         return 1;
-    else:
+    elif n >= 2:
         result = 1
         for i in range(2, n + 1):
             result *= i;
         return result
+    else:
+        raise ValueError('fac argument must be positive')
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
