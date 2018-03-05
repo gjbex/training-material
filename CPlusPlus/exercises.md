@@ -34,6 +34,7 @@ These are some exercises you can do as part of the C++ training.
     the sum. It should ignore input lines that start with `#`.
     ([Solution](Basics/data_parser.cpp))
 
+
 ## User defined types (Chapter 2)
 
   1. Write a program that manipulates particles.  A particle has x, y and z
@@ -48,11 +49,51 @@ These are some exercises you can do as part of the C++ training.
     functions will be the constructor and methods respectively.
     ([Solution](UserDefinedTypes/class_particles.cpp))
   1. Extend the previous exercise so that particles can have a charge. The
-    charge is represented as an `enum class`.
+    ckharge is represented as an `enum class`.
     ([Solution](UserDefinedTypes/charged_particles.cpp))
   1. Create a class that represents statistical information for a stream of
     data.  Once an object is created, data (`double` numbers) can be added
     one at the time.  At any time, the current average can be obtained.
-    (Solution: [class definition](UserDefinedTypes/stats.h),
-     [class implementation](UserDefinedTypes/stats.cpp),
-     [main function](UserDefinedTypes/stats_compute.cpp))
+    ([Solution](UserDefinedTypes/streaming_stats.cpp))
+
+
+## Separate compilation and error handling (Chapter 3)
+
+  1. Represent particles by a class as in the previous chapter, but split
+    the code over three files, a header file with the class definition,
+    a C++ source file with the class methods' definitions, and a C++
+    source file that defines the `main` function. Write a make file to
+    build the application.
+    ([Solution](Modularity/Particles))
+  1. Create a class that represents statistical information for a stream of
+    data.  Once an object is created, data (`double` numbers) can be added
+    one at the time.  At any time, the current average can be obtained.
+    ([Solution](Modularity/Stats)),
+  1. Write a program that gets an integer from the command line, checks
+    whether it is positive, and computes the factorial function of it.
+    Do proper error handling, i.e., generate an error if no value is
+    specified on the command line, when the value specified doesn't
+    represent an integer, and when the integer is negative.
+    ([Solution](Modularity/fac.cpp))
+
+
+## Classes (chapter 4)
+
+  1. Represent static particles by a class as in the previous chapter.
+    Next, use this class as a base class for particles that have a
+    velocity. Add a `move` method to this class that overrides the one
+    in the base class, taking only a single argument, the time delta
+    during which the particle will move.
+    ([Solution](Classes/Particles))
+  1. Create a class that represents statistical information for a stream of
+    data.  Objects of this class only compute the average.  Use this as
+    a base class for a derived class that can also compute the standard 
+    deviation
+    ([Solution](Classes/Stats))
+  1. Create an abstract base class that represent algorithms for
+    computing the quadrature of functions. Create two dervied classes,
+    the first implements Simpson's method, the other the Gauss method. The
+    main function takes a command line argument specifying which method
+    to use to compute the numerical integral of a function over an
+    interval.
+    ([Solution](Classes/Quadrature))
