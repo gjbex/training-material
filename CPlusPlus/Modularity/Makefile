@@ -1,13 +1,8 @@
 CXX = g++
-CXXFLAGS = -O2 -g -Wall -std=c++14
+CXXFLAGS = -std=c++14 -g -O2 -Wall -Wextra
 LIBS = -lm
 
-APPS = particles.exe fac.exe
-
-all: $(APPS)
-
-particles.exe: particle.o particles_main.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+all: fac.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
