@@ -57,27 +57,43 @@ These are some exercises you can do as part of the C++ training.
     ([Solution](UserDefinedTypes/streaming_stats.cpp))
 
 
-## Separate compilation (Chapter 3)
+## Separate compilation and error handling (Chapter 3)
 
   1. Represent particles by a class as in the previous chapter, but split
     the code over three files, a header file with the class definition,
     a C++ source file with the class methods' definitions, and a C++
     source file that defines the `main` function. Write a make file to
     build the application.
-    (Solution: [class definition](Modularity/Particles/particle.h),
-     [class implementation](Modularity/Particles/particle.cpp),
-     [main function](Modularity/Particles/particles_main.cpp),
-     [make file function](Modularity/Particles/Makefile))
+    ([Solution](Modularity/Particles))
   1. Create a class that represents statistical information for a stream of
     data.  Once an object is created, data (`double` numbers) can be added
     one at the time.  At any time, the current average can be obtained.
-    (Solution: [class definition](Modularity/Stats/stats.h),
-     [class implementation](Modularity/Stats/stats.cpp),
-     [main function](Modularity/Stats/stats_main.cpp),
-     [make file function](Modularity/Stats/Makefile))
+    ([Solution](Modularity/Stats)),
   1. Write a program that gets an integer from the command line, checks
     whether it is positive, and computes the factorial function of it.
     Do proper error handling, i.e., generate an error if no value is
     specified on the command line, when the value specified doesn't
     represent an integer, and when the integer is negative.
     ([Solution](Modularity/fac.cpp))
+
+
+## Classes (chapter 4)
+
+  1. Represent static particles by a class as in the previous chapter.
+    Next, use this class as a base class for particles that have a
+    velocity. Add a `move` method to this class that overrides the one
+    in the base class, taking only a single argument, the time delta
+    during which the particle will move.
+    ([Solution](Classes/Particles))
+  1. Create a class that represents statistical information for a stream of
+    data.  Objects of this class only compute the average.  Use this as
+    a base class for a derived class that can also compute the standard 
+    deviation
+    ([Solution](Classes/Stats))
+  1. Create an abstract base class that represent algorithms for
+    computing the quadrature of functions. Create two dervied classes,
+    the first implements Simpson's method, the other the Gauss method. The
+    main function takes a command line argument specifying which method
+    to use to compute the numerical integral of a function over an
+    interval.
+    ([Solution](Classes/Quadrature))
