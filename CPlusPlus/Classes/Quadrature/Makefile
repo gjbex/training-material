@@ -14,5 +14,5 @@ quad.exe: simpson_quad.o gaussian_quad.o main_quad.o
 -include $(wildcard *.d)
 
 clean:
-	$(RM) $(wildcard *.exe) $(wildcard *.o) $(wildcard *>d)
+	$(RM) $(wildcard *.exe) $(wildcard *.o) $(wildcard *.d)
 	$(RM) core $(wildcard core.*)
