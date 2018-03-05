@@ -16,4 +16,5 @@ particles.exe: particle.o particles_main.o
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(APPS) *.o
+	$(RM) $(wildcard *.exe) $(wildcard *.o)
+	$(RM) core $(wildcard core.)
