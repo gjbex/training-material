@@ -34,6 +34,7 @@ These are some exercises you can do as part of the C++ training.
     the sum. It should ignore input lines that start with `#`.
     ([Solution](Basics/data_parser.cpp))
 
+
 ## User defined types (Chapter 2)
 
   1. Write a program that manipulates particles.  A particle has x, y and z
@@ -48,11 +49,35 @@ These are some exercises you can do as part of the C++ training.
     functions will be the constructor and methods respectively.
     ([Solution](UserDefinedTypes/class_particles.cpp))
   1. Extend the previous exercise so that particles can have a charge. The
-    charge is represented as an `enum class`.
+    ckharge is represented as an `enum class`.
     ([Solution](UserDefinedTypes/charged_particles.cpp))
   1. Create a class that represents statistical information for a stream of
     data.  Once an object is created, data (`double` numbers) can be added
     one at the time.  At any time, the current average can be obtained.
-    (Solution: [class definition](UserDefinedTypes/stats.h),
-     [class implementation](UserDefinedTypes/stats.cpp),
-     [main function](UserDefinedTypes/stats_compute.cpp))
+    ([Solution](UserDefinedTypes/streaming_stats.cpp))
+
+
+## Separate compilation (Chapter 3)
+
+  1. Represent particles by a class as in the previous chapter, but split
+    the code over three files, a header file with the class definition,
+    a C++ source file with the class methods' definitions, and a C++
+    source file that defines the `main` function. Write a make file to
+    build the application.
+    (Solution: [class definition](Modularity/Particles/particle.h),
+     [class implementation](Modularity/Particles/particle.cpp),
+     [main function](Modularity/Particles/particles_main.cpp),
+     [make file function](Modularity/Particles/Makefile))
+  1. Create a class that represents statistical information for a stream of
+    data.  Once an object is created, data (`double` numbers) can be added
+    one at the time.  At any time, the current average can be obtained.
+    (Solution: [class definition](Modularity/Stats/stats.h),
+     [class implementation](Modularity/Stats/stats.cpp),
+     [main function](Modularity/Stats/stats_main.cpp),
+     [make file function](Modularity/Stats/Makefile))
+  1. Write a program that gets an integer from the command line, checks
+    whether it is positive, and computes the factorial function of it.
+    Do proper error handling, i.e., generate an error if no value is
+    specified on the command line, when the value specified doesn't
+    represent an integer, and when the integer is negative.
+    ([Solution](Modularity/fac.cpp))
