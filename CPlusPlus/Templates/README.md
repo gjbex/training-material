@@ -14,4 +14,5 @@ Code illustrations for chapter 5, Temaples in Stroustrup's
     to the pendulum implementations.
 1. `pendulum_utils.cpp`: implementatinos of functions common to the
     pendulum implementations.
+1. `DuckTyping`: example of using a template for duck typing.
 1. `Makefile`: make file to build the applications.
