@@ -3,7 +3,7 @@
 
 #include "quad.h"
 
-class SimpsonQuad : public Quad{
+class SimpsonQuad : public Quad {
     private:
         unsigned _n;
     public:
