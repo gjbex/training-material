@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
         str >> data;
         ofs << data;
         char sep;
-        while ((sep = str.get()) != -1) {
+        while (std::char_traits<char>::not_eof(sep = str.get())) {
             str >> data;
             ofs << "\t" << data;
         }
