@@ -1,7 +1,17 @@
 # Exercises
-These are some exercises you can do as part of the C++ training.
+These are some exercises you can do as part of the C++ training. Chapters
+refer to Bjarne Strustroup's "A tour of C++".
 
-## The basics (Chapter 1)
+## Table of contents
+
+  * [The basics](#basics)
+  * [User defined types](#udfs)
+  * [Separate compilation and error handling](#modularity)
+  * [Classes](#classes)
+  * [Templaes and functional programming](#templates)
+  
+
+## <a name="basics">The basics (Chapter 1)</a>
 
   1. Write a program that writes a greeting to standard output. When
     a command line argument is provided, e.g., `Bjarne`, the greeting
@@ -38,7 +48,7 @@ These are some exercises you can do as part of the C++ training.
     ([Solution](Basics/data_parser.cpp))
 
 
-## User defined types (Chapter 2)
+## <a name="udfs">User defined types (Chapter 2)</a>
 
   1. Write a program that manipulates particles.  A particle has x, y and z
     coordinates, as well as mass. Write a function that returns a structure
@@ -60,7 +70,8 @@ These are some exercises you can do as part of the C++ training.
     ([Solution](UserDefinedTypes/streaming_stats.cpp))
 
 
-## Separate compilation and error handling (Chapter 3)
+## <a name="modularity">Separate compilation and error handling
+   (Chapter 3)</a>
 
   1. Represent particles by a class as in the previous chapter, but split
     the code over three files, a header file with the class definition,
@@ -80,7 +91,7 @@ These are some exercises you can do as part of the C++ training.
     ([Solution](Modularity/fac.cpp))
 
 
-## Classes (chapter 4)
+## <a name="classes">Classes (chapter 4)</a>
 
   1. Represent static particles by a class as in the previous chapter.
     Next, use this class as a base class for particles that have a
@@ -102,7 +113,8 @@ These are some exercises you can do as part of the C++ training.
     ([Solution](Classes/Quadrature))
     
 
-## Templates (and unctional programming interluddes) (chapter 5)
+## <a name="templates">Templates and unctional programming
+     interluddes (chapter 5)<a/>
 
   1. Implement a template for a functions that will swap the valuss of
     two variables passed by reference for any type (both variables have
