@@ -12,7 +12,8 @@ These are some exercises you can do as part of the C++ training.
     unless it reads `quit`, then it will print `Bye!`.
     ([Solution](Basics/talk.cpp))
   1. Write a program that computes the factorial function for a number
-    specified on the command line.  ([Solution](Basics/fac.cpp))
+    specified on the command line.
+    ([Solution](Basics/fac.cpp))
   1. Write a program that computes the greatest common divisor of
     two integers specified on the command line.
     ([Solution](Basics/gcd.cpp))
@@ -26,10 +27,12 @@ These are some exercises you can do as part of the C++ training.
   1. Write a program that implements two functions, the first to swap
     the values of two `int` variables, the second to swap the values of
     two `double` variables.  Print the values before and after calling
-    the functions.  Use function overloading. ([(Solution](Basics/swap.cpp))
+    the functions.  Use function overloading.
+    ([(Solution](Basics/swap.cpp))
   1. Write a program that reads x and y coordinates from standard input,
     it computes and writes the distance of the corresponding point with
-    respect to the origin. ([(Solution](Basics/col_dist.cpp))
+    respect to the origin.
+    ([Solution](Basics/col_dist.cpp))
   1. Write a program that reads integers from standard input, and computes
     the sum. It should ignore input lines that start with `#`.
     ([Solution](Basics/data_parser.cpp))
@@ -97,3 +100,41 @@ These are some exercises you can do as part of the C++ training.
     to use to compute the numerical integral of a function over an
     interval.
     ([Solution](Classes/Quadrature))
+    
+
+## Templates (and unctional programming interluddes) (chapter 5)
+
+  1. Implement a template for a functions that will swap the valuss of
+    two variables passed by reference for any type (both variables have
+    the same type).
+    ([Solution](Temaples/swap.cpp))
+  1. Implement a template for a function that will compute the sum of its
+    arguments, regardless of the number of arguments.
+    ([Solution](Temaples/sum.cpp))
+  1. Implement two classes for performing a quadrature algorithms on a
+    function over an interval.  Both classes are unrelated, but implement
+    a method `integrate` with the same signature. Write a template functino
+    that performs the numerical integration of a given function using
+    either algorithm for an increasing size of the integration interval
+    e.g., `[-1.0, 1.0]` to `[-5.0, 5.0]` in increments of 1.0.
+    ([Solution](Temaples/DuckTyping))
+  1. Write a function that computes the Euclidean distance between two
+    points in 3D.  The points are represented as a length 3 array. Use
+    type alliasing to make the code easier to read.
+    ([Solution](Templates/points.cpp))
+  1. Implement a class that represents a function to compute the angle
+    of a swininging pendulum as a function of time.  The constructor fixes
+    the frequency.
+    ([Solution](Templates/pendulum_func_obj.cpp))
+  1. Write a program that implements a function with two arguments to
+    compute the angle of a swininging pendulum.  The first is time, the
+    second the pendulum's frequency.  Use `std::bind` to create a new
+    function that has the time as a single argument. Print the values in
+    the range `[0.0, 20.0]`.
+    ([Solution](Templates/pendulum_bind.cpp))
+  1. Write a program that implements a function with two arguments to
+    compute the angle of a swininging pendulum.  The first is time, the
+    second the pendulum's frequency.  Write a lambda function that has
+    the time as a single argument. Print the values in the range
+    `[0.0, 20.0]`.
+    ([Solution](Templates/pendulum_bind.cpp))
