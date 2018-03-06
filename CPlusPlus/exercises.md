@@ -70,8 +70,7 @@ refer to Bjarne Strustroup's "A tour of C++".
     ([Solution](UserDefinedTypes/streaming_stats.cpp))
 
 
-## <a name="modularity">Separate compilation and error handling
-   (Chapter 3)</a>
+## <a name="modularity">Separate compilation and error handling (Chapter 3)</a>
 
   1. Represent particles by a class as in the previous chapter, but split
     the code over three files, a header file with the class definition,
@@ -113,8 +112,7 @@ refer to Bjarne Strustroup's "A tour of C++".
     ([Solution](Classes/Quadrature))
     
 
-## <a name="templates">Templates and unctional programming
-     interluddes (chapter 5)<a/>
+## <a name="templates">Templates and unctional programming interludes (chapter 5)<a/>
 
   1. Implement a template for a functions that will swap the valuss of
     two variables passed by reference for any type (both variables have
