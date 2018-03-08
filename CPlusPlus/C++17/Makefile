@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -O2 -g -Wall -Wextra
 
-all: if_init.exe optional.exe
+all: if_init.exe optional.exe structured_bindings.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
@@ -10,5 +10,5 @@ all: if_init.exe optional.exe
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	$(RM) *.o *.exe
-	$(RM) core core.*
+	$(RM) $(wildcard *.o) $(wildcard *.exe)
+	$(RM) core $(wildcard core.*)

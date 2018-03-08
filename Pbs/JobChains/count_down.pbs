@@ -1,0 +1,27 @@
+#!/bin/bash -l
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=00:01:00
+
+cd ${PBS_O_WORKDIR}
+
+submit_node='login1.hpc.kuleuven.be'
+pbs_script_name='count_down.pbs'
+pbs_file="${PBS_O_WORKDIR}/${pbs_script_name}"
+output_file="${PBS_O_WORKDIR}/${pbs_script_name}.o${jobid}" 
+error_file="${PBS_O_WORKDIR}/${pbs_script_name}.e${jobid}" 
+jobid=$(echo ${PBS_JOBID} | cut -d. -f1)
+
+if [[ $counter > 0 ]]
+then
+    ssh ${submit_node} qsub -v counter=$(( ${counter} - 1 )) \
+                            -d ${PBS_O_WORKDIR} \
+                            -o ${output_file} \
+                            -e ${error_file} \
+                            -e "${PBS_O_WORKDIR}/${pbs_script}.e${jobid}" \
+                            -l depend=afterok:${PBS_JOBID} \
+                            ${pbs_file} > /dev/null
+fi
+
+sleep 20
+echo "${PBS_JOBID} at $( date '+%Y-%m-%d %H:%M:%S' ) on $( hostname ): ${counter}" \
+    | tee --append log.txt
