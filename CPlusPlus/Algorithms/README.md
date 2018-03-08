@@ -23,4 +23,5 @@ Code illustrations for chapter 10, Algorithms in Stroustrup's
 `. `text.txt`: text file to perform search on.
 1. `distances.cpp`: illustrating a `std::back_inserter` in an
     `std::transform`.
+1. `iota.cpp`: initialize a `valarray` using `iota` and apply a function.
 1. `Makefile`: make file to build the code.
