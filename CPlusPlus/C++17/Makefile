@@ -10,5 +10,5 @@ all: if_init.exe optional.exe
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	$(RM) *.o *.exe
-	$(RM) core core.*
+	$(RM) $(wildcard *.o) $(wildcard *.exe))
+	$(RM) core $(wildcard core.*)
