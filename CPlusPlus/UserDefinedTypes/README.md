@@ -13,3 +13,4 @@ Code illustrations for chapter 2, User defined types in Stroustrup's
 1. `streamin_stats.cpp`: implementation of `Stats` class for statistics
     on streaming data..
 1. `Makefile`: make file to build the applictions.
+1. `ObjectLifeCycle`: illustration of object life cycle.
