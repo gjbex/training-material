@@ -7,7 +7,7 @@ LIBS = -lm
 APPL = cosine_similarity.exe synthesizer.exe \
        tuple.exe vector.exe list.exe set.exe \
        stats.exe dim_nrs.exe dim_nr_counts.exe split_string.exe \
-       point_distances.exe diffusion.exe
+       point_distances.exe diffusion.exe aggregate_data.exe
 
 all: $(APPL)
 
