@@ -21,7 +21,6 @@ class Particle {
                                ref(*_engine));
             _time = _time_distr();
         };
-        int id() const { return _id; };
         double mass() const { return _mass; };
         int x() const { return _x; };
         int y() const { return _y; };
@@ -33,9 +32,9 @@ class Particle {
         void update(int x, int y) {
             _time += _time_distr(); _x = x; _y = y;
         };
+        friend ostream& operator<<(ostream& out, const Particle& p);
 };
 
-ostream& operator<<(ostream& out, const Particle& p);
 
 bool cmp(const Particle& p1, const Particle& p2);
 using cmp_t = function<bool(const Particle&, const Particle&)>;
