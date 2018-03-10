@@ -27,10 +27,8 @@ int main() {
     double x {0.0};
     std::map<int,Stats> data;
     while (std::cin >> i >> x) {
-        if (data.find(i) == data.end()) {
-            Stats stats;
-            data.emplace(std::make_pair(i, stats));
-        }
+        if (data.find(i) == data.end())
+            data.emplace(std::make_pair(i, Stats()));
         data[i].add(x);
     }
     for (const auto& values: data) {
