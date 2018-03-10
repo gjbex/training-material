@@ -15,16 +15,14 @@ class Circle {
         Circle(const Circle& other) :
             Circle(other.x(), other.y(), other.radius()) {};
         double x() const { return _x; };
-        void x(double x) { _x = x; };
         double y() const { return _y; };
-        void y(double y) { _y = y; };
         double radius() const { return _radius; };
-        void radius(double radius) { _radius = radius; };
         bool has_overlap(const Circle& other) const;
         static std::vector<Circle> read_circles();
+        friend std::ostream& operator<<(std::ostream& out,
+                                        const Circle& circle);
+        friend std::istream& operator>>(std::istream& in, Circle& circle);
 };
 
-std::ostream& operator<<(std::ostream& out, const Circle& circle);
-std::istream& operator>>(std::istream& in, Circle& circle);
 
 #endif
