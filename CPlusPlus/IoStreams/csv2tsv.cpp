@@ -2,37 +2,34 @@
 #include <iostream>
 #include <sstream>
 
-using namespace std;
+void replace_sep(std::string& str, const std::string&  old_sep,
+                 const std::string new_pos) {
+    std::string::size_type pos {0};
+    while ((pos = str.find(old_sep, pos)) != std::string::npos)
+        str.replace(pos, 1, new_pos);
+}
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        cerr << "# error: two file names as arguments" << endl;
-        terminate();
+        std::cerr << "### error: two file names as arguments" << std::endl;
+        return 1;
     }
-    string i_filename(argv[1]);
-    string o_filename(argv[2]);
-    ifstream ifs(i_filename);
+    std::string i_filename(argv[1]);
+    std::ifstream ifs(i_filename);
     if (!ifs) {
-        cerr << "# error: can not open " << i_filename << endl;
-        terminate();
+        std::cerr << "### error: can not open " << i_filename << std::endl;
+        return 2;
     }
-    ofstream ofs(o_filename);
+    std::string o_filename(argv[2]);
+    std::ofstream ofs(o_filename);
     if (!ofs) {
-        cerr << "# error: can not open " << i_filename << endl;
-        terminate();
+        std::cerr << "### error: can not open " << i_filename << std::endl;
+        return 2;
     }
-    string line;
-    while (getline(ifs, line)) {
-        stringstream str(line);
-        double data {0.0};
-        str >> data;
-        ofs << data;
-        char sep;
-        while (std::char_traits<char>::not_eof(sep = str.get())) {
-            str >> data;
-            ofs << "\t" << data;
-        }
-        ofs << endl;
+    std::string line;
+    while (std::getline(ifs, line)) {
+        replace_sep(line, ",", "\t");
+        ofs << line << std::endl;
     }
     ifs.close();
     ofs.close();
