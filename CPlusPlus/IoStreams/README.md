@@ -12,5 +12,8 @@ Code illustrations for chapter 8, I/O streams in Stroustrup's
 1. formatting.cpp`: examples of I/O formatting for floating point numbers,
     width and fill for integers.
 1. `csv2tsv.cpp`: convert files from CSV to TSV format, using file and
-    string streams.
+    string methods.
+1. `aggregate.cpp`: compute the sum of each row of a CSV file, and write
+    that in the output CSV file as the first column. String streams are
+    used to parse the data.
 1. `Makefile`: make file to build the code.
