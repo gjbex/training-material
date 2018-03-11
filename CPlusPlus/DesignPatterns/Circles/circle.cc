@@ -21,9 +21,9 @@ std::ostream& operator<<(std::ostream& out, const Circle& circle) {
 std::istream& operator>>(std::istream& in, Circle& circle) {
     double x, y, radius;
     in >> x >> y >> radius;
-    circle.x(x);
-    circle.y(y);
-    circle.radius(radius);
+    circle._x = x;
+    circle._y = y;
+    circle._radius = radius;
     return in;
 }
 

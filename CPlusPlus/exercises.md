@@ -9,6 +9,7 @@ refer to Bjarne Strustroup's "A tour of C++".
   * [Separate compilation and error handling](#modularity)
   * [Classes](#classes)
   * [Templaes and functional programming](#templates)
+  * [i/O streams](#iostreams)
   
 
 ## <a name="basics">The basics (Chapter 1)</a>
@@ -148,3 +149,23 @@ refer to Bjarne Strustroup's "A tour of C++".
     the time as a single argument. Print the values in the range
     `[0.0, 20.0]`.
     ([Solution](Templates/pendulum_bind.cpp))
+
+
+## <a name="iostream">I/O streams (chapter 7)</a>
+
+  1. Write a program that reads floating point numbers (represented as
+    strings) from standard input, and when all are read, writes the sum
+    to standard output.
+  1. In the input file format, each line contains an arbitrary number
+    of floating point values, separated by commas. In the output format,
+    commas are replaced by tabs.  Write a program that takes an input
+    file name and an output file name as command line arguments, and
+    converts the input file to the new format, writing it to the output
+    file.
+  1. For the same input file format as above, compute the sum of the values
+    of each row, and write a new CSC file, where the sum is the first entry
+    in each row, followed by the values in the original file.
+  1. The data for a person is represented by a structure with the first
+    name, last name, and the person's age as fields. Overload the put-to
+    and get-from operators to serialize and deserialize these data
+    structrues to text files.

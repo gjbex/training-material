@@ -3,7 +3,7 @@
 using namespace std;
 
 ostream& operator<<(ostream& out, const Particle& p) {
-    return out << p.id() << ": (" << p.x() << ", " << p.y() << "): "
+    return out << p._id << ": (" << p.x() << ", " << p.y() << "): "
                << p.mass() << " at " << p.time();
 }
 

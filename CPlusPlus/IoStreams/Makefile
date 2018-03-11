@@ -1,12 +1,9 @@
 CXX = g++
-CXXFLAGS = -O2 -g -std=c++14 -Wall
+CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 LIBS = -lm
 
-.PRECIOUS: %.o
-
-APPL = csv2tsv.exe formatting.exe serialization.exe sum.exe
-
-all: $(APPL)
+all: csv2tsv.exe formatting.exe serialization.exe sum.exe \
+     aggregate.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
@@ -15,4 +12,5 @@ all: $(APPL)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f *.o $(APPL)
+	$(RM) $(wildcard *.o) $(wildcard *.exe)
+	$(RM) $(wildcard core.*) core

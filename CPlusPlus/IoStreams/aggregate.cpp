@@ -2,13 +2,6 @@
 #include <iostream>
 #include <sstream>
 
-void replace_sep(std::string& str, const std::string&  old_sep,
-                 const std::string new_pos) {
-    std::string::size_type pos {0};
-    while ((pos = str.find(old_sep, pos)) != std::string::npos)
-        str.replace(pos, 1, new_pos);
-}
-
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         std::cerr << "### error: two file names as arguments" << std::endl;
@@ -28,8 +21,18 @@ int main(int argc, char *argv[]) {
     }
     std::string line;
     while (std::getline(ifs, line)) {
-        replace_sep(line, ",", "\t");
-        ofs << line << std::endl;
+        double sum {0.0};
+        std::stringstream str(line);
+        double data {0.0};
+        if (str >> data) {
+            sum += data;
+            char sep;
+            while (std::char_traits<char>::not_eof(sep = str.get())) {
+                if (str >> data)
+                    sum += data;
+            }
+        }
+        ofs << sum << "," << line << std::endl;
     }
     ifs.close();
     ofs.close();

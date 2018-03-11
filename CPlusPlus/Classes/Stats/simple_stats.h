@@ -13,8 +13,8 @@ class SimpleStats {
         double sum() const { return _sum; };
         int n() const { return _n; };
         double mean() const { return sum()/n(); };
+        friend std::ostream& operator<<(std::ostream& out,
+                                        const SimpleStats& stats);
 };
-
-std::ostream& operator<<(std::ostream& out, const SimpleStats& stats);
 
 #endif

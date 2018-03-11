@@ -14,8 +14,8 @@ class Stats : public SimpleStats {
         void add(double x) { super::add(x); _sum2 += x*x; };
         double sum2() const { return _sum2; };
         double stddev() const;
+        friend std::ostream& operator<<(std::ostream&,
+                                        const Stats& stats);
 };
-
-std::ostream& operator<<(std::ostream&, const Stats& stats);
 
 #endif

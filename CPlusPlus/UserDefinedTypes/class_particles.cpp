@@ -22,9 +22,9 @@ class Particle {
         double mass() const {return _mass; }
         void move(double dx, double dy, double dz);
         double dist(const Particle& other) const;
+        friend ostream& operator<<(ostream& out, const Particle& p);
 };
 
-ostream& operator<<(ostream& out, const Particle& p);
 
 int main() {
     auto engine {mt19937_64(1234)};

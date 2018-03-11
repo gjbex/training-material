@@ -15,6 +15,6 @@ class StaticParticle {
         double mass() const {return _mass; }
         virtual double energy() const;
         double dist(const StaticParticle& other) const;
+        friend std::ostream& operator<<(std::ostream& out,
+                                        const StaticParticle& p);
 };
-
-std::ostream& operator<<(std::ostream& out, const StaticParticle& p);

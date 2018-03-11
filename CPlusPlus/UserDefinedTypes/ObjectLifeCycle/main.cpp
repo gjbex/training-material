@@ -56,17 +56,14 @@ int main() {
 
     std::cerr << "### adding to vector using push_back" << std::endl;
     std::vector<Gadget> gadgets1;
-    for (int i = 0; i < 3; i++) {
-        Gadget g(i);
-        gadgets1.push_back(g);
-    }
+    for (int i = 0; i < 3; i++)
+        gadgets1.push_back(Gadget(i));
     std::cerr << std::endl;
 
     std::cerr << "### adding to vector using emplace_back" << std::endl;
     std::vector<Gadget> gadgets2;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++)
         gadgets2.emplace_back(i);
-    }
     std::cerr << std::endl;
     
     std::cerr << "### calling get_lots_of_gadgets" << std::endl;
