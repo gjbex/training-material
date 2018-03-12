@@ -1,12 +1,12 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 CPPFLAGS = -MMD -MP
-LIBS = -lm
+LDLIBS = -lm
 
 all: gadget.exe
 
 gadget.exe: main.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<

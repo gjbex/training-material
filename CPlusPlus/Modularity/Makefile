@@ -1,11 +1,11 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -g -O2 -Wall -Wextra
-LIBS = -lm
+LDLIBS = -lm
 
 all: fac.exe
 
 %.exe: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

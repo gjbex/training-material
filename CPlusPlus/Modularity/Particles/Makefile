@@ -1,12 +1,12 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -g -O2 -Wall -Wextra
 CPPFLAGS = -MMD -MP
-LIBS = -lm
+LDLIBS = -lm
 
 all: particles.exe
 
 particles.exe: particle.o particles_main.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
