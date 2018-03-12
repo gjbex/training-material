@@ -1,6 +1,5 @@
-#define CATCH_CONFIG_MAIN
 #include <catch/catch.hpp>
-#include <exception>
+#include <stdexcept>
 
 #include "fac.h"
 
