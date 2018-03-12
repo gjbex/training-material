@@ -6,6 +6,8 @@ By default, the terminal running bash support the Emacs keybindings, e.g.,
   * `alt-b` to move back a word,
   * `alt-f` to move forward a word, and so on.
 
+A nice [cheat sheet](https://github.com/fliptheweb/bash-shortcuts-cheat-sheet) for the default keybindings can be helpful.
+
 However, this default behavior can be changed to vi keybindings, including
 a command and an insert mode.  To get this to work, you need a file
 named `.inputrc` in your home directory with the following contents.
