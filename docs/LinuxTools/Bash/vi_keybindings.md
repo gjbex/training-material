@@ -19,8 +19,12 @@ command mode, hit `ESC`. Now many of the vi commands work, e.g.,
   * `^` to move to the start of the input,
   * `$` to move to the end of the input,
   * `b` to move backward a word,
-  * `f` to move forward a word,
+  * `w` to move forward a word,
   * `\<search-string>` to search your history backward, and so on.
+
+The main time savers are of course vi's movement operators in
+command mode, e.g., `3f/` would move the cursor to the third slash,
+starting to count from its current location.
 
 A conveniet [cheat sheet](http://www.catonmat.net/download/bash-vi-editing-mode-cheat-sheet.pdf) in PDF format is available.
 
