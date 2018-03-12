@@ -13,3 +13,6 @@ Some tips and trick make using Bash a lot easier.
         label `<bookmark>`.
       * Use `cdb <bookmark>` to change the directory to `<bookmark>`.
       * Invoke the GUI for CDargs using `cv` (type `H` to get help).
+  1. If you're really hard core, you can set your terminal to support
+     [vi keybindings](vi_keybindings.md) rather than the default Emacs
+     bindings.
