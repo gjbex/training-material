@@ -1,18 +1,18 @@
 #include <iostream>
 #include <stack>
 #include <stdlib.h>
-#include <string>
 #include <sstream>
 #include <tuple>
 
-long add(std::stack<long>& stack) throw (const char *);
-long substract(std::stack<long>& stack) throw (const char *);
-long multiply(std::stack<long>& stack) throw (const char *);
-long divide(std::stack<long>& stack) throw (const char *);
+long add(std::stack<long>& stack) throw (std::string);
+long substract(std::stack<long>& stack) throw (std::string);
+long multiply(std::stack<long>& stack) throw (std::string);
+long divide(std::stack<long>& stack) throw (std::string);
 
 int main(int argc, char *argv[]) {
     std::stack<long> stack;
-    for (std::string line; std::getline(std::cin, line); ) {
+    std::string line;
+    while (std::getline(std::cin, line)) {
         if (line == "q"|| line == "quit") {
             return 0;
         } else if (line == "h" || line == "help") {
@@ -23,8 +23,8 @@ int main(int argc, char *argv[]) {
         } else {
             std::istringstream stream(line);
             try {
-                for (std::string token;
-                        std::getline(stream, token, ' '); ) {
+                std::string token;
+                while (std::getline(stream, token, ' ')) {
                     if (token.empty()) {
                         continue;
                     } else if (token == "+") {
@@ -36,21 +36,19 @@ int main(int argc, char *argv[]) {
                     } else if (token == "/") {
                         stack.push(divide(stack));
                     } else {
-                        char *end_p;
-                        long value = strtol(token.c_str(), &end_p, 10);
-                        if (*end_p == 0)
-                            stack.push(value);
-                        else
-                            std::cerr << "# error: '"
-                                << token << "' is invalid" << std::endl;
+                        try {
+                            stack.push(std::stol(token));
+                        } catch (std::invalid_argument) {
+                            throw "can't convert '" + token + "' to number";
+                        }
                     }
                 }
                 if (!stack.empty())
                     std::cout << stack.top() << std::endl;
                 else
-                    std::cerr << "# error: no result" << std::endl;
-            } catch (const char *except) {
-                std::cerr << "# error: " << except << std::endl;
+                    std::cerr << "### error: no result" << std::endl;
+            } catch (std::string except) {
+                std::cerr << "### error: " << except << std::endl;
             }
         }
     }
@@ -58,9 +56,9 @@ int main(int argc, char *argv[]) {
 }
 
 std::tuple<long, long> get_operands(std::stack<long>& stack)
-    throw (const char *) {
+    throw (std::string) {
     if (stack.size() < 2) {
-        throw "too few operands on stack";
+        throw std::string("too few operands on stack");
     } else {
         auto op1 = stack.top();
         stack.pop();
@@ -70,22 +68,24 @@ std::tuple<long, long> get_operands(std::stack<long>& stack)
     }
 }
 
-long add(std::stack<long>& stack) throw (const char *) {
+long add(std::stack<long>& stack) throw (std::string) {
     auto operands = get_operands(stack);
     return std::get<1>(operands) + std::get<0>(operands);
 }
 
-long substract(std::stack<long>& stack) throw (const char *) {
+long substract(std::stack<long>& stack) throw (std::string) {
     auto operands = get_operands(stack);
     return std::get<1>(operands) - std::get<0>(operands);
 }
 
-long multiply(std::stack<long>& stack) throw (const char *) {
+long multiply(std::stack<long>& stack) throw (std::string) {
     auto operands = get_operands(stack);
     return std::get<1>(operands)*std::get<0>(operands);
 }
 
-long divide(std::stack<long>& stack) throw (const char *) {
+long divide(std::stack<long>& stack) throw (std::string) {
     auto operands = get_operands(stack);
+    if (std::get<0>(operands) == 0)
+        throw std::string("division by zero");
     return std::get<1>(operands)/std::get<0>(operands);
 }

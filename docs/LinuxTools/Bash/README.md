@@ -13,3 +13,5 @@ Some tips and trick make using Bash a lot easier.
         label `<bookmark>`.
       * Use `cdb <bookmark>` to change the directory to `<bookmark>`.
       * Invoke the GUI for CDargs using `cv` (type `H` to get help).
+  1. If you're using the shell regularly, it pays of the familiarize with
+    the [keybindings](keybindings.md) available on the command line.
