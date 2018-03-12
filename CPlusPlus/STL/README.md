@@ -9,8 +9,5 @@ Some sample code for using the STL library.
     type.
 1. `priority_queue.cpp`: implements an example of using a priority queue
     for non-trivial items.
-1. `rpn_calc.cpp`: implementation of a simple calculater for integer
-    arithmetic expression in reverse Polish notation.  Illustrates use
-    of a stack, a tuple, tokenizaiton, and simple exceptions.
 1. `set_stl.cpp`: very basic illustration of using STL sets.
 1. `Makefile`: make file to build the sample code.
