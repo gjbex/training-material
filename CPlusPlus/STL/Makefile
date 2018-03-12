@@ -10,7 +10,7 @@ APPS = list_stl.exe map_stl.exe set_stl.exe rpn_calc.exe \
 all: $(APPS)
 
 %.exe: %.o
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $^

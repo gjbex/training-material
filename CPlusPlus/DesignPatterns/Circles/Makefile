@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -O2 -g -Wall -Wextra
 CPPFLAGS = -MMD -MP
-LIBS = -lm
+LDLIBS = -lm
 
 APPL = random_circles.exe circle_overlap.exe
 DATA = overlap_data.txt
@@ -19,10 +19,10 @@ overlap_data.txt: $(APPL)  generate_overlap_data.sh
 	./generate_overlap_data.sh > $@
 	
 random_circles.exe: circle.o circle_factory.o random_circles.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 circle_overlap.exe: circle.o circle_overlap.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
