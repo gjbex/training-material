@@ -1,4 +1,6 @@
-# vi keybindings in the termial
+# Keybindings in the termial
+
+## Default: Emacs-style keybindings
 
 By default, the terminal running bash support the Emacs keybindings, e.g.,
   * `ctrl-a` to move to the start of the input,
@@ -7,6 +9,9 @@ By default, the terminal running bash support the Emacs keybindings, e.g.,
   * `alt-f` to move forward a word, and so on.
 
 A nice [cheat sheet](https://github.com/fliptheweb/bash-shortcuts-cheat-sheet) for the default keybindings can be helpful.
+
+
+## vi-style keybindings
 
 However, this default behavior can be changed to vi keybindings, including
 a command and an insert mode.  To get this to work, you need a file
