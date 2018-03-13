@@ -6,7 +6,8 @@
 
 void test_mpi_reduce(void);
 
-int main(int argc, char *argv[]) {
+int main(int argc __attribute((unused)),
+         char *argv[] __attribute((unused))) {
     MPI_Init(NULL, NULL);
     if (CU_initialize_registry() != CUE_SUCCESS)
         errx(EXIT_FAILURE, "can't initialize test registry");
@@ -30,7 +31,7 @@ void test_mpi_reduce(void) {
     if (rank == root) {
         int size, target = 0, i;
         MPI_Comm_size(MPI_COMM_WORLD, &size);
-        for (int i = 0; i < size; i++)
+        for (i = 0; i < size; i++)
             target += i;
         CU_ASSERT_EQUAL(recv_buff, target);
     }
