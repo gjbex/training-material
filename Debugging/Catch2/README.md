@@ -4,3 +4,5 @@ Illustrations of how to use the Catch2 C++ testing framework.
 ## What is it?
 1. `Fac`: illustration of testing for expected return values and thrown
     exceptions.
+1. `FacBDD`: illustration of using Catch2 for Behavior Driven Development
+    (BDD).
