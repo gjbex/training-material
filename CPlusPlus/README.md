@@ -7,6 +7,8 @@ programming concepts and idiosyncracies particular to C++.
 1. `scientific_cpp.pptx`: Powerpoint presentation, introducing C++
     from the perspective of scientific computing, based on
     Bjarne Stroustrup's "A tour of C++", Addison Wesley, 2014.
+1. [`exercises.md`](exercises.md): exercises to familiarize yourself
+    with the material. (WIP)
 1. `Basics`: illustration of basic C++ features for the presentation.
 1. `UserDefinedTypes`: illustrations of user diefined types in C++ for
     the presentation.
