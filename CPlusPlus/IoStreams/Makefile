@@ -1,12 +1,12 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
-LIBS = -lm
+LDLIBS = -lm
 
 all: csv2tsv.exe formatting.exe serialization.exe sum.exe \
      aggregate.exe
 
 %.exe: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

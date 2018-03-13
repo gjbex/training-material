@@ -1,12 +1,12 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
-LIBS = -lm
+LDLIBS = -lm
 
 all: struct_particles.exe class_particles.exe charged_particles.exe \
      streaming_stats.exe
 
 %.exe: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

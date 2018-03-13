@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -O2 -g -Wall -std=c++14
-LIBS = -lm
+LDLIBS = -lm
 
 .PRECIOUS: %.o
 
@@ -12,10 +12,10 @@ APPL = cosine_similarity.exe synthesizer.exe \
 all: $(APPL)
 
 diffusion.exe: diffusion_system.o diffusion_main.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.exe: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $< $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
