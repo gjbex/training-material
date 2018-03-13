@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -O2 -g
-CPPFLAGS = `pkg-config --cflags cunit`
-LDFLAGS = `pkg-config --libs cunit`
+CFLAGS = -O2 -g -Wall -Wextra
+CPPFLAGS = $(shell pkg-config --cflags cunit)
+LDFLAGS = $(shell pkg-config --libs cunit)
 
 all: tests.exe
 
@@ -12,4 +12,5 @@ tests.exe: tests.o fac.o
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
 
 clean:
-	rm -f *.o *.exe
+	$(RM) $(wildcard *.o) $(wildcard *.exe)
+	$(RM) $(wildcard core.*) core
