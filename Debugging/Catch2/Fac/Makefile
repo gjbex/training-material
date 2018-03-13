@@ -4,6 +4,9 @@ CPPFLAGS = $(shell pkg-config catch --cflags)
 
 all: test_fac.exe
 
+checks: test_fac.exe
+	./$^
+
 test_fac.exe: fac.o test_fac.o test_main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
