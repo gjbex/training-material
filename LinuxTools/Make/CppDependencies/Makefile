@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -Wextra -O2 -g
 CPPFLAGS = -MMD -MP
-LDfLaGS = -lm
+LDLIBS = -lm
 
 SRCS = $(wildcard *.cc)
 OBJS = params.o statistics.o particles.o constrained_particles.o \
@@ -11,7 +11,7 @@ APPS = walk.exe distr.exe entropy.exe
 all: $(APPS)
 
 %.exe: %.o $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDfLaGS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cc
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
