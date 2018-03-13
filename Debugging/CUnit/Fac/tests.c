@@ -10,12 +10,13 @@ void test_fac_1(void);
 void test_fac_4(void);
 void test_fac_too_large(void);
 
-int main(int argc, char *argv[]) {
+int main(int argc __attribute__((unused)),
+         char *argv[] __attribute__((unused))) {
     if (CU_initialize_registry() != CUE_SUCCESS)
         errx(EXIT_FAILURE, "can't initialize test registry");
     CU_pSuite facSuite = CU_add_suite("fac", NULL, NULL);
     if (CU_get_error() != CUE_SUCCESS)
-        errx(EXIT_FAILURE, CU_get_error_msg());
+        errx(EXIT_FAILURE, "%s", CU_get_error_msg());
     CU_add_test(facSuite, "fac(0)", test_fac_0);
     CU_add_test(facSuite, "fac(1)", test_fac_1);
     CU_add_test(facSuite, "fac(4)", test_fac_4);
