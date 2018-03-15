@@ -1,4 +1,4 @@
-# Welcome ot training-material website
+# Welcome to training-material website
 
 This site provides extra information related to Geert Jan Bex's
 [training-repository](https://github.com/gjbex/training-material)
