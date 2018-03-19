@@ -1,5 +1,5 @@
 # ControlFlow
-These code samples represent a collections of control flow related bugs.
+These code samples represent a collection of control flow related bugs.
 
 ## What is it?
 1. `logical_order.f90`: order of evaluation of logical expressions in
