@@ -23,6 +23,6 @@ Fortran (2008).
 1. `ScatterGather`: simple illustration of using the scatter/gather
     subroutines of MPI.
 1. `SimplePi`: the implementation to compute pi using quadrature
-    netioned in the `mpi.pptx` slides.
+    mentioned in the `mpi.pptx` slides.
 1. `SparseSends`: how to receive messages from a small number of a-priory
     unknown processes.
