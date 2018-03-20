@@ -4,7 +4,7 @@
 #include <string.h>
 
 int main(void) {
-    char fmt[80];
+    char fmt[80] = "This is nonsense\n";
     float x = 0.0f;
     {
 #if PREC == 32
