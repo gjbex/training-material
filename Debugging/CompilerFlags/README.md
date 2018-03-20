@@ -20,3 +20,5 @@
     uninitialized stack variable.
 1. `UnspecifiedOrder`: illustration of bug introduced by unspecified
     execution order.
+1. `UnusedVariable`: illustration of how detecting unused variables may
+    help spot bugs.

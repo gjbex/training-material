@@ -15,13 +15,13 @@ The semantics of `const` in the code fragment below is different.  It
 implies that the variable `v` is constant, but the values in the array can
 in fact be modified.
 ```c
-void do_something(double * constv, int n);
+void do_something(double * const v, int n);
 ```
 
 Hence the following declaration will ensure that neither the variable `v`,
 nor the array values it points to can be modified.
 ```c
-void do_something(condst double * constv, int n);
+void do_something(const double * const v, int n);
 ```
 
 ## What is it?
