@@ -23,9 +23,9 @@ int main() {
 static int _global_id = 0;
 
 Record make_record(double value) {
-    int global_id = 0;
+    int _global_id = 0;
     Record record = {
-        .id = ++global_id,
+        .id = ++_global_id,
         .value = value
     };
     return record;
