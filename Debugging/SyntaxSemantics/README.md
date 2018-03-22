@@ -10,9 +10,12 @@ versus semantic errors.
     errors caught by the compiler.
 
 ## How to use it?
-To build the applications with semantic errors, simply run `make`.
+To build the applications with semantic errors, run
+```bash
+$ make semantic_errors
+```
 
 To compile the code with syntax explicitly specify the targets:
-```
-$ make syntax_error_f90.o
+```bash
+$ make syntax_errors
 ```

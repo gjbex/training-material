@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 double compute_avg(int n, int seed) {
-    double sum;
+    double sum = 0.0;
     int i;
     srand(seed);
     for (i = 0; i < n; i++)

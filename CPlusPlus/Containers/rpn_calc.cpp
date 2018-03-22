@@ -9,7 +9,7 @@ long substract(std::stack<long>& stack) throw (std::string);
 long multiply(std::stack<long>& stack) throw (std::string);
 long divide(std::stack<long>& stack) throw (std::string);
 
-int main(int argc, char *argv[]) {
+int main() {
     std::stack<long> stack;
     std::string line;
     while (std::getline(std::cin, line)) {
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
                     } else {
                         try {
                             stack.push(std::stol(token));
-                        } catch (std::invalid_argument) {
+                        } catch (std::invalid_argument&) {
                             throw "can't convert '" + token + "' to number";
                         }
                     }
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
                     std::cout << stack.top() << std::endl;
                 else
                     std::cerr << "### error: no result" << std::endl;
-            } catch (std::string except) {
+            } catch (std::string& except) {
                 std::cerr << "### error: " << except << std::endl;
             }
         }

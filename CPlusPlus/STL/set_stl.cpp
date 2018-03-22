@@ -13,11 +13,11 @@ int main(int argc, char *argv[]) {
     }
     std::cout << "set:" << std::endl;
     for (std::set<int>::iterator iter = int_set.begin();
-            iter != int_set.end(); iter++)
+            iter != int_set.end(); ++iter)
         std::cout << *iter << std::endl;
     std::cout << "unordered set:" << std::endl;
     for (std::unordered_set<int>::iterator iter = u_int_set.begin();
-            iter != u_int_set.end(); iter++)
+            iter != u_int_set.end(); ++iter)
         std::cout << *iter << std::endl;
     return 0;
 }
