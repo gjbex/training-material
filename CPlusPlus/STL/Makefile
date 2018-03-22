@@ -1,19 +1,17 @@
 CXX = g++
-CXXFLAGS = -O2 -g --std=c++11 -Wall
-CPPFLAGS =
-LDFLAGS =
-LDLIBS =
+CXXFLAGS = --std=c++14 -O2 -g -Wall -Wextra
 
-APPS = list_stl.exe map_stl.exe set_stl.exe rpn_calc.exe \
+APPS = list_stl.exe map_stl.exe set_stl.exe \
        map_functions.exe priority_queue_stl.exe
 
 all: $(APPS)
 
 %.exe: %.o
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) $(LDLIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $<
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $^
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(APPS) *.o
+	$(RM) $(wildcard *.o) $(wildcard *.exe)
+	$(RM) core $(wildcard core.*)
