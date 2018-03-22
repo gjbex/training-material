@@ -14,10 +14,9 @@ double compute_avg(int n, int seed) {
 int main() {
     const int seed = 123;
     const int n = 5;
-    double avg;
     int i;
     for (i = 0; i < n; i++) {
-        avg = compute_avg(n, seed);
+        double avg = compute_avg(n, seed);
         printf("avg = %lf\n", avg);
     }
     return EXIT_SUCCESS;
