@@ -8,3 +8,5 @@ flexible enough. Here you find tips and tricks in a more accessible format.
 
   1. [Linux tools](LinuxTools/README.md): various Linux tools related tips
      and tricks.
+  1. [Programming](Programming/README.md): general tips, tricks, and
+     information for programmers.
