@@ -12,7 +12,7 @@ using wave_t = pair<double, double>;
 
 vector<wave_t> read_wave_properties();
 
-int main(int argc, char *argv[]) {
+int main() {
     const double pi {acos(-1.0)};
     const size_t nr_points {1000};
     const double delta_t {10.0*pi/nr_points};
