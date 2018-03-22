@@ -11,11 +11,11 @@ int main(int argc, char *argv[]) {
     std::cout << "size 1: " << int_list1.size() << std::endl;
     std::cout << "size 2: " << int_list2->size() << std::endl;
     for (std::list<int>::iterator iter = int_list1.begin();
-            iter != int_list1.end(); iter++) {
+            iter != int_list1.end(); ++iter) {
         std::cout << "1: " << *iter << std::endl;
     }
     for (std::list<int>::iterator iter = int_list2->begin();
-            iter != int_list2->end(); iter++) {
+            iter != int_list2->end(); ++iter) {
         std::cout << "2: " << *iter << std::endl;
     }
     delete int_list2;
