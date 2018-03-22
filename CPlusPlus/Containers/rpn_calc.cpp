@@ -38,7 +38,7 @@ int main() {
                     } else {
                         try {
                             stack.push(std::stol(token));
-                        } catch (std::invalid_argument) {
+                        } catch (std::invalid_argument&) {
                             throw "can't convert '" + token + "' to number";
                         }
                     }
@@ -47,7 +47,7 @@ int main() {
                     std::cout << stack.top() << std::endl;
                 else
                     std::cerr << "### error: no result" << std::endl;
-            } catch (std::string except) {
+            } catch (std::string& except) {
                 std::cerr << "### error: " << except << std::endl;
             }
         }
