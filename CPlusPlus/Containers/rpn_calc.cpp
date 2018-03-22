@@ -9,7 +9,7 @@ long substract(std::stack<long>& stack) throw (std::string);
 long multiply(std::stack<long>& stack) throw (std::string);
 long divide(std::stack<long>& stack) throw (std::string);
 
-int main(int argc, char *argv[]) {
+int main() {
     std::stack<long> stack;
     std::string line;
     while (std::getline(std::cin, line)) {
