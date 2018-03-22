@@ -39,6 +39,8 @@ int main(int argc, char *argv[]) {
     do {
         iter_nr++;
         status = gsl_min_fminimizer_iterate(minimizer);
+        if (status != GSL_SUCCESS)
+            break;
         x = gsl_min_fminimizer_x_minimum(minimizer);
         x_min = gsl_min_fminimizer_x_lower(minimizer);
         x_max = gsl_min_fminimizer_x_upper(minimizer);
@@ -54,7 +56,6 @@ int main(int argc, char *argv[]) {
     }
     gsl_min_fminimizer_free(minimizer);
     return status;
-    return 0;
 }
 
 double func(const double x, void *params) {
