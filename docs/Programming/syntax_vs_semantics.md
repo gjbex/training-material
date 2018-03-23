@@ -43,4 +43,4 @@ END FUNCTION fac
 The code fragment above will be compiled without errors or even warnings, but the function will return zero when invoked, regardless of the argument passed to it.
 
 This illustrates an important point: syntax errors are always caught by the compiler. Although having to fix syntax errors is a nuisance, it is relatively easy.
-Most semantic errors are not caught by the compiler, so these are harder to spot, and more difficult to fix. Compilers do offer some help detecting certain classes of semantic error, as we'lll see in the next section.
+Most semantic errors are not caught by the compiler, so these are harder to spot, and more difficult to fix. Compilers do offer some help detecting certain classes of semantic error, as we'll see in the next section.
