@@ -14,6 +14,7 @@ them.
 1. `CompilerFlags`: illustration of the value of specifying maximal warnings
     when compiling, as well as trying multiple compilers.
 1. `CppAlgorithms`: illustration of C++ specific bugs.
+1. `CppCheck`: illustration of what the Cppcheck static analyzer can catch.
 1. `CUnit`: very simple illustration of how to use the CUnit testing
     framework for testing C code.
 1. `debugging.pptx`: Microsoft Powerpoint presentation on defensive
@@ -23,6 +24,8 @@ them.
 1. `fUnit`: very simple illustration of how to use the fUnit testing
     framework for Fortran unit testing.
 1. `Gdb`: some sample code to illustrate using GDB.
+1. `GitBisect`: illustration of using `git bisect` to find the first bad
+    commit.
 1. `MPI`: MPI code to illustrate using Allinea DDT.
 1. `Pfunit`: very simple illustration of how to use the pFUnit testing
 	framework for Fortran unit testing.

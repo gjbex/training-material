@@ -16,3 +16,4 @@ such as Allinea DDT.
     on VSC infrastructure).
 1. `build.sh`: sets the environment to build the executables (works on VSC
     clusters).
+1. `Must`: illustrations of using Must to detect MPI issues at runtime.

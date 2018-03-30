@@ -1,5 +1,4 @@
 #include <err.h>
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,15 +8,15 @@ int main(int argc, char *argv[] __attribute__((unused))) {
     const int old_val = 15;
     const int new_val = 42;
     int i, b, a[N];
-    ptrdiff_t shift = &b - &(a[0]);
+    long shift = &b - &(a[0]);
     b = old_val;
     if (argc > 1) {
         printf("b:    %p\n", &b);
         printf("a[0]: %p\n", &(a[0]));
         if (&b < &(a[0])) {
-            printf("b <- a[0]: %td\n", &(a[0]) - &b);
+            printf("b <- a[0]: %ld\n", &(a[0]) - &b);
         } else {
-            printf("a[N-1] -> b: %td\n", &b - &(a[N-1]));
+            printf("a[N-1] -> b: %ld\n", &b - &(a[N-1]));
         }
         if (&i == &(a[N])) {
             printf("overlap\n");
@@ -29,8 +28,8 @@ int main(int argc, char *argv[] __attribute__((unused))) {
     for (i = 0; i < N; i++)
         a[i] = i;
     a[shift] = new_val;
-    printf("setting a[%td] = %d\n", shift, new_val);
-    printf("a[%td] = %d\n", shift, a[shift]);
+    printf("setting a[%ld] = %d\n", shift, new_val);
+    printf("a[%ld] = %d\n", shift, a[shift]);
     printf("b = %d\n", b);
     return EXIT_SUCCESS;
 }
