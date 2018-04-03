@@ -4,6 +4,7 @@ can report.
 
 ## What is it?
 1. `addition.c`: scope of variable can be reduced.
+1. `array.c`: illustration of three bugs.
 1. `array.cpp`: illustration of three bugs.
 1. `array_bounds.c`: format string mismatch with `printf` arguments.
 1. `logical_order.c`: possible null pointer dereference.
