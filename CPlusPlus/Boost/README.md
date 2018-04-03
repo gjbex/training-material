@@ -5,7 +5,8 @@ ordinary differential equations).
 
 ## What is it?
 1. `Vector`: illustration of vectors and vector operations using Boost.
-1. `Odeint`: using the Boost odeint library to solve a set of ordinary
+1. `Odeint`: using the Boost `odeint` library to solve a set of ordinary
     differential equations.
-1. `ProgramOptions`: using the Boost program options library to deal with
+1. `ProgramOptions`: using the Boost `program_options` library to deal with
     command line arguments.
+1. `Units`: using the Boost `units` library to catch errors.
