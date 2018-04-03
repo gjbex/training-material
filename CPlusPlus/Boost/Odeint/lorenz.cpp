@@ -19,8 +19,7 @@ void write_lorenz(const state_type& x, const double t) {
          << endl;
 }
 
-int main(int argc, char **argv)
-{
+int main() {
     const double sigma = 10.0;
     const double R = 28.0;
     const double b = 8.0/3.0;
