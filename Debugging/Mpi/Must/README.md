@@ -1,5 +1,6 @@
 # Must
-Must is a tool to detect a number of issues in MPI code at runtime.
+[Must](https://doc.itc.rwth-aachen.de/display/CCP/Project+MUST) is a tool
+to detect a number of issues in MPI code at runtime.
 
 ## What is it?
 1. `buffer_overlap.f90`: send and receive buffer overlap.

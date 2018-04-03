@@ -18,4 +18,5 @@ What is it?
     `simpson` to pick an algorithm for quadrature.
 1. `gauss_test.f90`: computes quadrature using general Gauss-Legendre
     method.
-1. `Makefile`
+1. `Makefile`: make file to build the applications.
+1. `Makefile.fpe`: make file with floating point exception traps enabled.
