@@ -1,33 +1,36 @@
 CC = gcc
 CFLAGS = -g
-CPPFLAGS =
-F90 = gfortran
+FC = gfortran
 FFLAGS = -g
-LDFLAGS = 
-LIBS = -lm
+LDLIBS = -lm
 
-APPS = fib.exe crash.exe array_bounds.exe matrix.exe hello_world.exe \
-       fib_init.exe
-
-all: $(APPS)
+all: fib.exe crash.exe array_bounds.exe matrix.exe hello_world.exe \
+     fib_init.exe array_bounds_f90_bug.exe array_bounds_f90_no_bug.exe
 
 fib_init.exe: fib_init.f90
-	$(F90) $(FFLAGS) -o $@ $<
+	$(FC) $(FFLAGS) -o $@ $<
 
 matrix.exe: matrix_mod.f90 matrix.f90
-	$(F90) $(FFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
 
 array_bounds.exe: show.o array_bounds.o
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+
+array_bounds_f90_bug.exe: array_bounds_f90.f90
+	$(FC) -g -o $@ $<
+
+array_bounds_f90_no_bug.exe: array_bounds_f90.f90
+	$(FC) -g -O2 -o $@ $<
 
 hello_world.exe: hello_world.f90
-	$(F90) $(FFLAGS) -fopenmp -o $@ $^ $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -fopenmp -o $@ $^ $(LDLIBS)
 
 %.exe: %.o
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -f *.o *.mod core $(APPS)
+	$(RM) $(wildcard *.o) $(wildcard *.mod) $(wildcard *.exe)
+	$(RM) core $(wildcard core.*)
