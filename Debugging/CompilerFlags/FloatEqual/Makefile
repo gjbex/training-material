@@ -1,12 +1,17 @@
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -g -Wall -Wextra
+FFLAGS = -g -Wall
 
-all: float_equal.exe
+all: float_equal_c.exe float_equal_f90.exe
 
 warnings:
-	$(CC) $(CFLAGS) -Wfloat-equal -c float_equal.c
+	$(CC) -Wfloat-equal -c float_equal.c
+	$(FC) -Wcompare-reals -c float_equal.f90
 
-%.exe: %.c
+%_c.exe: %.c
 	$(CC) $(CFLAGS) -o $@ $<
+
+%_f90.exe: %.f90
+	$(FC) $(FFLAGS) -o $@ $<
 
 clean:
 	$(RM) *.o *.exe

@@ -2,6 +2,8 @@ program implicit_none
 
     integer, parameter :: n = 5
     integer, dimension(n) :: a
+    integer :: i
+    real :: k, m
 
     do i = 1, n
         a(i) = i
