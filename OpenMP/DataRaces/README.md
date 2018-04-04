@@ -14,3 +14,5 @@ They can be used to demo Intel Inspector.
 1. `pi5.f90`: version which is independent of the schedule used, and has
     no data races
 1. `Makefile`: make file to build the code.
+1. `drd_no_race_conditions.txt` and `drd_race_conditions.txt`: example DRD
+    output.

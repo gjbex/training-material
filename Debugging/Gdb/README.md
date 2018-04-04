@@ -4,6 +4,8 @@ Some examples to use while showing GDB features.
 ## What is it?
 1. `array_bounds.c`: accesses an array out of bounds, no initialization
     of variable.
+1. `array_bounds_f90.f90`: accesses an array out of bounds, also example
+    of a "heisenbug" (works with GCC 5.4).
 1. `show.h`: helper function declaration for `array_bounds.c`.
 1. `show.c`: helper function for `array_bounds.c`.
 1. `crash.c`: segmentation fault due to double `free`.
@@ -13,6 +15,6 @@ Some examples to use while showing GDB features.
     switching in GDB.
 1. `matrix.f90`: program exceeds 2D array bounds.
 1. `matrix_mod.f90`: helper function for `matrix.f90`.
-1. `fib_init.f900`: inappropriate local variable initialization makes
+1. `fib_init.f90`: inappropriate local variable initialization makes
     variable static, leading to incorrect results.
 1. `Makefile`: make file to build the code.
