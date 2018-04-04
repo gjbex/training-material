@@ -3,18 +3,18 @@ program implicit_none
     integer, parameter :: n = 5
     integer, dimension(n) :: a
     integer :: i
-    real :: p, m
+    real :: k, m
 
     do i = 1, n
         a(i) = i
     end do
 
-    p = 5.9
+    k = 5.9
     i = 5
-    do while (p >= 1.0)
-        m = p
+    do while (k >= 1.0)
+        m = k
+        k = k - 1.01
         print *, m, m*a(i)
-        p = p - 1.01
     end do
 
 end program implicit_none
