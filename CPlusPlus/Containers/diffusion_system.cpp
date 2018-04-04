@@ -1,8 +1,6 @@
 #include "diffusion_system.h"
 
-using namespace std;
-
-ostream& operator<<(ostream& out, const Particle& p) {
+std::ostream& operator<<(std::ostream& out, const Particle& p) {
     return out << p._id << ": (" << p.x() << ", " << p.y() << "): "
                << p.mass() << " at " << p.time();
 }
@@ -44,27 +42,27 @@ void System::print_queue() const {
 }
 
 void System::print_grid() const {
-    cout << "+";
+    std::cout << "+";
     for (size_t i = 0; i < _grid_size; i++)
-        cout << "-";
-    cout << "+" << endl;
+        std::cout << "-";
+    std::cout << "+" << std::endl;
     for (size_t i = 0; i < _grid_size; i++) {
-        cout << "|";
+        std::cout << "|";
         for (size_t j = 0; j < _grid_size; j++)
-            cout << (_grid[i*_grid_size + j] ? 'x' : ' ');
-        cout << "|" << endl;
+            std::cout << (_grid[i*_grid_size + j] ? 'x' : ' ');
+        std::cout << "|" << std::endl;
     }
-    cout << "+";
+    std::cout << "+";
     for (size_t i = 0; i < _grid_size; i++)
-        cout << "-";
-    cout << "+" << endl;
+        std::cout << "-";
+    std::cout << "+" << std::endl;
 }
 
 int* System::find_moves(const Particle& particle) {
-    int* pos = new int[4];
+    auto pos = new int[4];
     for (int i = 0; i < 4; i++)
         pos[i] = -1;
-    int n {(int) _grid_size};
+    int n {static_cast<int>(_grid_size)};
     int new_x, new_y;
     new_x = particle.x() - 1;
     new_y = particle.y();
