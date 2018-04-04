@@ -6,7 +6,9 @@ implicitely `real`.
 
 ## What is it?
 1. `implicit_not_none.f90`: application produces unexpected results,
-    printing `integer` values rather than `real`.
+    printing `integer` values rather than `real`, which are quite
+    incorrect.
+1. `implicit_none.f90`: application produces the expected results.
 1. `Makefile`: make file to build the application, and generate warnings
     with appropriate compiler flag.
 

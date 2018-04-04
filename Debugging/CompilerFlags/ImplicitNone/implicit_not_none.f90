@@ -1,19 +1,18 @@
-program implicit_not_none
+program implicit_none
 
     integer, parameter :: n = 5
     integer, dimension(n) :: a
-    integer :: i
-    real :: x
 
     do i = 1, n
         a(i) = i
     end do
 
-    x = 5.3
+    p = 5.9
     i = 5
-    do while (x > 1.0)
-        y = int(x)
-        print *, y, y*a(i)
-        x = x - 0.7
+    do while (p >= 1.0)
+        m = p
+        print *, m, m*a(i)
+        p = p - 1.01
     end do
-end program implicit_not_none
+
+end program implicit_none
