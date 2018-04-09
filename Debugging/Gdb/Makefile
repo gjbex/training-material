@@ -4,14 +4,21 @@ FC = gfortran
 FFLAGS = -g
 LDLIBS = -lm
 
-all: fib.exe crash.exe array_bounds.exe matrix.exe hello_world.exe \
-     fib_init.exe array_bounds_f90_bug.exe array_bounds_f90_no_bug.exe
+all: crash.exe array_bounds.exe matrix.exe hello_world.exe \
+     fib_init.exe array_bounds_f90_bug.exe array_bounds_f90_no_bug.exe \
+     fib_okay.exe fib_not_okay.exe
 
 fib_init.exe: fib_init.f90
 	$(FC) $(FFLAGS) -o $@ $<
 
 matrix.exe: matrix_mod.f90 matrix.f90
 	$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
+
+fib_not_okay.exe: fib_not_okay.o fib_main.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+
+fib_okay.exe: fib_okay.o fib_main.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 array_bounds.exe: array_bounds.o
 	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)

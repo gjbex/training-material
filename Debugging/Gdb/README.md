@@ -7,8 +7,12 @@ Some examples to use while showing GDB features.
 1. `array_bounds_f90.f90`: accesses an array out of bounds, also example
     of a "heisenbug" (works with GCC 5.4).
 1. `crash.c`: segmentation fault due to double `free`.
-1. `fib.c`: recursive Fibonacci number implementation for demonstrating
-    missing command line argument problem, and deep stack.
+1. `fib_main.c`: main program that uses incorrect Fibonacci
+    implementation without a guard condition.
+1. `fib.h`: declaration of the Fibonacci function.
+1. `fib_not_okay.c`: implementation of the Fibonacci function without
+    guard condition.
+1. `fib_okay.c`: correct implementation of the Fibonacci function.
 1. `hello_world.f90`: very simple OpenMP program to show thread
     switching in GDB.
 1. `matrix.f90`: program exceeds 2D array bounds.
