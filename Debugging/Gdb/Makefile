@@ -13,8 +13,8 @@ fib_init.exe: fib_init.f90
 matrix.exe: matrix_mod.f90 matrix.f90
 	$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
 
-array_bounds.exe: show.o array_bounds.o
-	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+array_bounds.exe: array_bounds.o
+	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
 
 array_bounds_f90_bug.exe: array_bounds_f90.f90
 	$(FC) -g -o $@ $<

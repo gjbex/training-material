@@ -6,8 +6,6 @@ Some examples to use while showing GDB features.
     of variable.
 1. `array_bounds_f90.f90`: accesses an array out of bounds, also example
     of a "heisenbug" (works with GCC 5.4).
-1. `show.h`: helper function declaration for `array_bounds.c`.
-1. `show.c`: helper function for `array_bounds.c`.
 1. `crash.c`: segmentation fault due to double `free`.
 1. `fib.c`: recursive Fibonacci number implementation for demonstrating
     missing command line argument problem, and deep stack.
