@@ -5,14 +5,13 @@
 #include "show.h"
 
 int main(int argc, char *argv[]) {
-    double sum, a[11];
-    int i;
-    for (i = 0; i <= 11; i++)
-        a[i] = sqrt(i);
-    i = 11;
+    double sum = 0.0, a[11];
+    int i = 12;
     do {
-        sum += a[--i];
+        a[--i] = sqrt(i);
     } while (i >= 0);
+    for (i = 0; i < 11; i++)
+        sum += a[i];
     printResult("sum     ", sum);
     printResult("expected", 22.468278);
     return EXIT_SUCCESS;
