@@ -10,7 +10,7 @@ as well as a method from the base class.  Illustrates defining `super`.
 1. `stats.h`: derived class definition implementing a streaming
     average computation of the standard deviation as well as the mean
     value.
-1. `stats.cpp derived class implementation implementing a streaming
+1. `stats.cpp` derived class implementation implementing a streaming
     average computation of the standard deviation as well as the mean
     value.
 1. `main_stats.cpp`: main program to illustrate the use of `SimpleStats`
