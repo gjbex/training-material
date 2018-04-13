@@ -3,7 +3,7 @@ FC = gfortran
 CFLAGS = -O1 -g -Wall -Wextra
 FFLAGS = -O1 -g -Wall -Wextra
 ASMFLAGS = -S
-LDFLAGS = -lm
+LDLIBS = -lm
 
 APPL = leak.exe array_bounds.exe dangling_pointer.exe memory_leak.exe \
        null_pointer.exe stack_issue.exe stack_overflow_f90.exe
@@ -17,10 +17,10 @@ all: $(APPL)
 asm: $(ASMS)
 
 %_f90.exe: %.f90
-	$(FC) $(FFLAGS) -o $@ $< $(LDFLAGS)
+	$(FC) $(FFLAGS) -o $@ $< $(LDLIBS)
 
 %.exe: %.o
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
 
 %.s: %.c
 	$(CC) $(CFLAGS) $(ASMFLAGS) -c -o $@ $<
