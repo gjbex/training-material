@@ -12,9 +12,13 @@ such as Valgrind or Intel Inspector.
     bounds.
 1. `bad_access.f90`: application accesses an allocatable array out of
     bounds.
+1. `deallocating.f90`: illustration of using an allocatable array that
+    has already been deallocated.
 1. `dangling_pointer.c`: simple example of using a dangling pionter,
     caught easily by valgrind. Application termintates with segmentation
     fault.
+1. `free.c`: illustration of using a pointer that has been deallocated
+    already, as well as double free.
 1. `null_pointer.c`: simple example of a non-checked, failed `malloc`,
     caught easily by valgrind. Application termintates with segmentation
     fault.
