@@ -26,6 +26,7 @@ them.
 1. `Gdb`: some sample code to illustrate using GDB.
 1. `GitBisect`: illustration of using `git bisect` to find the first bad
     commit.
+1. `MemDump`: experiment to visualize layout of variables in memory.
 1. `MPI`: MPI code to illustrate using Allinea DDT.
 1. `Pfunit`: very simple illustration of how to use the pFUnit testing
 	framework for Fortran unit testing.
