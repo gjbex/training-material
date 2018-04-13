@@ -10,6 +10,8 @@ such as Valgrind or Intel Inspector.
 1. `plot_leak.py`: Python script to plot memory usage in `leak.txt`.
 1. `array_bounds.c`: very simple, fail-sure example of exceeding array
     bounds.
+1. `bad_access.f90`: application accesses an allocatable array out of
+    bounds.
 1. `dangling_pointer.c`: simple example of using a dangling pionter,
     caught easily by valgrind. Application termintates with segmentation
     fault.

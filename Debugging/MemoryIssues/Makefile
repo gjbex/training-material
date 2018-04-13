@@ -6,7 +6,9 @@ ASMFLAGS = -S
 LDLIBS = -lm
 
 APPL = leak.exe array_bounds.exe dangling_pointer.exe memory_leak.exe \
-       null_pointer.exe stack_issue.exe stack_overflow_f90.exe
+       null_pointer.exe stack_issue.exe stack_overflow_f90.exe \
+       bad_access_f90.exe
+
 SRCS = $(filter-out %_f90.c, $(APPL:.exe=.c))
 OBJS = $(SRCS:.c=.o)
 ASMS = $(SRCS:.c=.s)
