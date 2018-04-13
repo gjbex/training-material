@@ -23,6 +23,7 @@ int main() {
     double *c = (double *) malloc(sizeof(double));
     int a[n], sum = 0;
     int *d = init_array(n);
+    int *e = init_array(n);
     int i;
     for (i = 0; i < n; i++)
         b[i] = (double) i;
@@ -40,6 +41,7 @@ int main() {
     DUMP_ARRAY(b, n);
     DUMP_PTR(c);
     DUMP_PTR_ARRAY(d, n);
+    DUMP_PTR_ARRAY(e, n);
     printf("sum = %d\n", sum);
     printf("avg = %lf\n", avg/n);
     printf("f_sum = %lf\n", compute_sum(b, n));
