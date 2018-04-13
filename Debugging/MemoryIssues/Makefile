@@ -32,5 +32,5 @@ check: $(CHECKS)
 clean:
 	$(RM) $(APPL) $(OBJS)
 	$(RM) $(ASMS)
-	$(RM) *.mod
-	$(RM) core core.*
+	$(RM) $(wildcard *.mod)
+	$(RM) core $(wildcard core.*) $(wildcard vgcore.*)
