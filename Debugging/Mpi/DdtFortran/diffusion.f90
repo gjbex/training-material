@@ -71,6 +71,9 @@ if (comm_rank == 0) then
         ' with delta = ', delta, ', average temp. = ', avg_temp
 end if
 
+deallocate(temp)
+deallocate(new_temp)
+
 ! take down MPI
 call MPI_Comm_free(cart_comm, ierr)
 call MPI_Type_free(row_type, ierr)
