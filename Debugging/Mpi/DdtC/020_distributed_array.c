@@ -33,11 +33,13 @@ int main(int argc, char *argv[]) {
     proc_col = cart_coords[1];
     fprintf(stderr, "rank %d: (%d, %d)\n", rank,
             cart_coords[0], cart_coords[1]);
-    for (row = 0; row <= local_rows; row++)
-        for (col = 0; col <= local_cols; col++) {
-            int value = proc_row*local_rows*local_cols*proc_cols + row*local_cols*proc_cols + col + proc_col*local_cols;
+    for (row = 0; row < local_rows; row++)
+        for (col = 0; col < local_cols; col++) {
+            int value = proc_row*local_rows*local_cols*proc_cols +
+                row*local_cols*proc_cols + col + proc_col*local_cols;
             data[row*local_cols + col] = value;
         }
+    MPI_Barrier(MPI_COMM_WORLD);
     free(data);
     MPI_Finalize();
     return 0;
