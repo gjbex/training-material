@@ -8,7 +8,7 @@ more useful.
     in `grep` output.  Using the `--color=auto` option will show the
     matches in red so that they catch your eye immediately.  You can
     add the following alias definition in your `.bashrc`:
-    `alias grep='grep --color=auto'
+    `alias grep='grep --color=auto'`
   1. Although you can use `grep` to search through source code, you
     probably shouldn't, since there is a better alternative:
     [ack](https://beyondgrep.com/).
