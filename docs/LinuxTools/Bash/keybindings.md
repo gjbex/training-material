@@ -33,7 +33,7 @@ The main time savers are of course vi's movement operators in
 command mode, e.g., `3f/` would move the cursor to the third slash,
 starting to count from its current location.
 
-A conveniet [cheat sheet](http://www.catonmat.net/download/bash-vi-editing-mode-cheat-sheet.pdf) in PDF format is available.
+A convenient [cheat sheet](http://www.catonmat.net/download/bash-vi-editing-mode-cheat-sheet.pdf) in PDF format is available.
 
-It takes some getting used to, but will save you quite some keystrokes
+It takes some time getting used to, but will save you quite some keystrokes
 at the end of the day.
