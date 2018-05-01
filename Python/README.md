@@ -69,6 +69,7 @@ these samples have been used for Python tutorials.
 1. `Joblib`: illustrates the use of this library for easy task parallelism
 1. `Jupyter`: A few notebooks to illustrate the Jupyter notebook GUI.
 1. `Logging`: illustration of Python's logging facilities.
+1. `Matlab`: illustrations of how to call MATLAB functions from Python.
 1. `Matplotlib`: a few illustrations of how to use the `pyplot` module.
 1. `Matrices`: a few timings of matrix-matrix multiplications using
     LoL in Python, the numpy.dot function, a Fortran matmul and DGEMM, and
