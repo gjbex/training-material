@@ -10,4 +10,6 @@ Some examples of code to debug with Arm Forge DDT.
 1. `030_distributed_array.c`: each process has a large matrix with some
     NaN values, can be found using DTD Statistics tab in the array viewer,
     and a filter.
+1. `040_distributed_array.c`: this code doesn't have bugs, but can be
+    used to illustrate how to use DDT to debug hybrid applicaitons.
 1. `Makefile`: make file to build the code.
