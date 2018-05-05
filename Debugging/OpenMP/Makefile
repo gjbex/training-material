@@ -1,7 +1,8 @@
 FC = gfortran
-FFLAGS = -g -O2 -fopenmp -Wall -Wextra
+OMPFLAGS = -fopenmp
+FFLAGS = -g -O0 $(OMPFLAGS) -Wall -Wextra
 
-all: pi.exe
+all: 010_pi.exe 020_pi.exe
 
 %.exe: %.f90
 	$(FC) $(FFLAGS) -o $@ $<
