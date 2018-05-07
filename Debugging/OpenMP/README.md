@@ -7,3 +7,5 @@ demonstrate feeatures of debuggers for handling multi-threaded code.
 1. `020.pi.f90`: Fortran code that computes pi by throwing darts, with
     OpenMP barrier added to simplify comparing thread results.
 1. `Makefile`: make file to build the code.
+1. `DataRaces`: code to illustrate data races, can be used for Intel
+    Inspector demo.
