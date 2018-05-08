@@ -1,5 +1,5 @@
 CC = mpiicc
-CFLAGS = -trace -g
+CFLAGS = -profile=vtfs -g
 
 all: shift.exe deadlock.exe
 
