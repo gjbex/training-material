@@ -8,4 +8,5 @@ all: shift.exe deadlock.exe
 
 clean:
 	$(RM) $(wildcard *.exe) $(wildcard *.o)
+	$(RM) $(wildcard *.stf) $(wildcard *.stf.*) $(wildcard *.prot)
 	$(RM) $(wildcard core.*) core
