@@ -8,3 +8,16 @@ Collector) for debugging purposes.
 1. `shift.c`: C application that is correct, but inefficient due to
     implicit serialization.
 1. `Makefile`: make file to build the applications.
+1. `setup.sh`: file to source to setup the environment for using Intel
+    compilers and ITAC.
+
+## How to use?
+First, check whether the file `setup.sh` has the correct defintions of
+the `INTEL_ROOT` and `ITAC_VERSION` to match your environment, adapt as
+required.
+
+Source the setup file, i.e.,
+```bash
+$ source setup.sh`
+
+Build as usual, using make.
