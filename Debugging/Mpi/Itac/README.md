@@ -5,6 +5,11 @@ Collector) for debugging purposes.
 ## What is it?
 1. `deadlock.c`: C application that deadlocks due to inappropriate
     order of send/receive calls.
+1. `deadlock.f90`: Fortran application that deadlocks due to a missing MPI
+    collective call. This will not be compiled with tracing enabled.
+1. `run_deadlock_f90.sh`: Bash script to show how to instrument code
+    for tracing at runtime by pre-loading the appropriate fail-safe
+    tracing library. 
 1. `shift.c`: C application that is correct, but inefficient due to
     implicit serialization.
 1. `Makefile`: make file to build the applications.

@@ -1,10 +1,15 @@
 CC = mpiicc
 CFLAGS = -profile=vtfs -g
+FC = mpiifort
+FFLAGS = -g
 
-all: shift.exe deadlock.exe
+all: shift_c.exe deadlock_c.exe deadlock_f90.exe
 
-%.exe: %.o
+%_c.exe: %.c
 	$(CC) $(CFLAGS) -o $@ $<
+
+%_f90.exe: %.f90
+	$(FC) $(FFLAGS) -o $@ $<
 
 clean:
 	$(RM) $(wildcard *.exe) $(wildcard *.o)
