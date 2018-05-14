@@ -7,7 +7,8 @@ using namespace boost::numeric::odeint;
 
 using state_type = array<double, 3>;
 
-void lorenz_param(const state_type& x, state_type& dxdt, double t,
+void lorenz_param(const state_type& x, state_type& dxdt,
+                  double t __attribute__((unused)),
                   double sigma, double R, double b) {
     dxdt[0] = sigma*(x[1] - x[0]);
     dxdt[1] = R*x[0] - x[1] - x[0]*x[2];
