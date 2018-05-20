@@ -22,3 +22,4 @@ Some examples to use while showing GDB features.
 1. `matrix_multiply.v90`: timings using `CPU_TIME` are off by an order
     of magnitude.
 1. `Makefile`: make file to build the code.
+1. `Scenarios`: scenarios for illustrating GDB features.
