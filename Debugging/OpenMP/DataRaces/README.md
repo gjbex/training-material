@@ -13,9 +13,11 @@ They can be used to demo Intel Inspector.
     the assumption will lead to errors.
 1. `pi5.f90`: version which is independent of the schedule used, and has
     no data races
+1. `pi_classic.f90`: simple race condition, suited for demo.
 1. `Makefile`: make file to build the code.
 1. `drd_no_race_conditions.txt` and `drd_race_conditions.txt`: example DRD
     output.
+1. `Scenarios`: scenarios for demonstrating Vlagrind and other tools.
 
 ## How to use?
 To use Valgrind's Data Race Detector (DRD), run with the `--tool=drd`
