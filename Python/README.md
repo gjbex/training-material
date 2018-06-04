@@ -63,6 +63,8 @@ these samples have been used for Python tutorials.
     context of exploration in notebooks.
 1. `ImageProcessing`: some Scikit-Image sample code for image processing,
     as well as OpenCV for video analysis.
+1. `Introspection`: sample code of how to implement introspection as
+    mix-in class.
 1. `Ising`: Implementation of the 2D Ising system in pure Python, as well
     as in C++ using SWIG to wrap the implementation.  Mostly intended for
     visualization purposes.

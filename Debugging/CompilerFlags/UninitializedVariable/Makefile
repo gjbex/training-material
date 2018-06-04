@@ -12,5 +12,5 @@ warnings: uninitialized_variable.c uninitialized_variable.f90
 	$(FC)  $(FFLAGS) -O3 -g -o $@ $<
 
 clean:
-	$(RM) *.o *.mod *.exe
-	$(RM) core core.*
+	$(RM) $(wildcard *.o) $(wildcard *.mod) $(wildcard *.exe)
+	$(RM) core $(wildcard core.*)
