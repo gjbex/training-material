@@ -7,3 +7,5 @@ crtl, alt, which makes it RSI friendly).
   1. The `.vimrc` file in your home directory helps making using vim a
     lot easier and convenient.  Tastes differ, but I can recommend
     [mine](vimrc.md).
+  1. vim can be used to [compare files side-by-side](sync_scroll.md),
+    scrolling synchronously.
