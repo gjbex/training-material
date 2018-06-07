@@ -1,0 +1,50 @@
+$date Thursday 2018-05-17 10:08:21 $end
+$version fpVcdWriter 0.1 $end
+$date Dumping CoolFlux DSP internal signals $end
+$timescale 20ns $end
+$scope module var $end
+$var wire 24 ! __MemoryManagement_sFrameWork_State->UseCaseSelected $end
+$var wire 24 " sHapticState->sHaptic->isBusyTG $end
+$upscope $end
+$scope module mem $end
+$var wire 24 # IOMEM@1281 $end
+$var wire 24 $ IOMEM@33024 $end
+$upscope $end
+$enddefinitions $end
+$dumpvars
+bxxxxxxxxxxxxxxxxxxxxxxxx !
+bxxxxxxxxxxxxxxxxxxxxxxxx "
+bxxxxxxxxxxxxxxxxxxxxxxxx #
+bxxxxxxxxxxxxxxxxxxxxxxxx $
+$end
+#0
+b000000000000000000000000 !
+b000000000000000000000000 "
+b000000000000000000000000 #
+b000000000000000000000001 $
+#1
+b000000000000000000000010 #
+#21
+b000000000000000000000010 "
+#12356
+b000000000000000000000000 $
+#12369
+b000000000000000000000010 $
+#12456
+b000000000000000000000001 !
+#12591
+b000000000000000000000110 $
+#1133040
+b000000000000000000100000 #
+#1133046
+b000000000000000000000001 "
+#24657036
+b000000000000000000000000 "
+#24672550
+b000000000000000000000000 !
+#24676959
+b000000000000000000000100 $
+#24703142
+b000000000000000000001000 #
+#24703158
+b000000000000000000000010 #
