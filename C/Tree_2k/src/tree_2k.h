@@ -25,7 +25,7 @@ typedef struct node_2k {
     /*! Tree this node is part of. */
     struct tree_2k *tree;
     /*! Node's bucket, contains the indices of the points stored by
-        this node, will be NULL is node is split. */
+        this node, will be NULL if node is split. */
     int *bucket;
     /*! Number of points in this node, may be zero if the node
         has regions. */
