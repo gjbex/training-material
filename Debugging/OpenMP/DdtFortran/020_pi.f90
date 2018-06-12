@@ -21,6 +21,7 @@ program compute_pi
                                  compute_partial_pi(partial_nr_tries)
             end do
         !$omp end do
+        print '(A, I2, A)', 'thread ', thread_num, ' done'
     !$omp end parallel
     print '(A, F15.8)', 'pi =', 4.0_r8*nr_success/(num_threads*nr_blocks)
 

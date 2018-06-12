@@ -1,0 +1,65 @@
+Intel(R) Memory Latency Checker - v3.5
+Measuring idle latencies (in ns)...
+		Numa node
+Numa node	     0	     1	
+       0	  81.7	 138.7	
+       1	 135.1	  80.5	
+
+Measuring Peak Injection Memory Bandwidths for the system
+Bandwidths are in MB/sec (1 MB/sec = 1,000,000 Bytes/sec)
+Using all the threads from each core if Hyper-threading is enabled
+Using traffic with the following read-write ratios
+ALL Reads        :	214070.8	
+3:1 Reads-Writes :	193785.9	
+2:1 Reads-Writes :	192831.8	
+1:1 Reads-Writes :	185078.5	
+Stream-triad like:	174210.1	
+
+Measuring Memory Bandwidths between nodes within system 
+Bandwidths are in MB/sec (1 MB/sec = 1,000,000 Bytes/sec)
+Using all the threads from each core if Hyper-threading is enabled
+Using Read-only traffic type
+		Numa node
+Numa node	     0	     1	
+       0	107714.3	34296.0	
+       1	34335.8	106946.9	
+
+Measuring Loaded Latencies for the system
+Using all the threads from each core if Hyper-threading is enabled
+Using Read-only traffic type
+Inject	Latency	Bandwidth
+Delay	(ns)	MB/sec
+==========================
+ 00000	158.98	 213853.9
+ 00002	159.23	 213136.8
+ 00008	158.80	 212548.8
+ 00015	158.82	 213148.0
+ 00050	148.20	 207473.3
+ 00100	116.89	 169119.3
+ 00200	101.80	 111879.4
+ 00300	 95.37	  80124.9
+ 00400	 92.73	  61870.6
+ 00500	 90.39	  50648.1
+ 00700	 88.17	  37060.4
+ 01000	 86.13	  26585.2
+ 01300	 85.57	  20769.8
+ 01700	 83.69	  16167.2
+ 02500	 83.13	  11305.0
+ 03500	 82.30	   8327.4
+ 05000	 82.45	   6071.2
+ 09000	 82.42	   3720.2
+ 20000	 82.30	   2106.4
+
+Measuring cache-to-cache transfer latency (in ns)...
+Local Socket L2->L2 HIT  latency	51.1
+Local Socket L2->L2 HITM latency	51.1
+Remote Socket L2->L2 HITM latency (data address homed in writer socket)
+			Reader Numa Node
+Writer Numa Node     0	     1	
+            0	     -	 115.3	
+            1	 116.3	     -	
+Remote Socket L2->L2 HITM latency (data address homed in reader socket)
+			Reader Numa Node
+Writer Numa Node     0	     1	
+            0	     -	 178.8	
+            1	 180.5	     -	
