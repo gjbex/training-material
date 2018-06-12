@@ -11,7 +11,7 @@ Contents
 1. `ControlStructures`: illustrations of how to use Fortran's control
     statements (`DO`, `DO WHILE`, `FORALL`, `WHERE`, `IF`, `SELECT CASE` and
     `BLOCK`.
-1. `Functions`: illustrates how to define procedures, interal versus
+1. `Functions`: illustrates how to define procedures, internal versus
     module procedures, pure and elemental procedures, recursion,
     interfaces for using higher order functions.  Also contains some
     code to time arithmetic operations and Fortran intrinsic math
@@ -27,7 +27,7 @@ Contents
     operating on arrays, indexing by slices,  as well as allocatable arrays.
 1. `Miscellaneous`: Dealing with command line arguments, environment
     variables.
-1. ``modern_fortran.pptx`: Microsoft Powerpoint presentation of modern
+1. `modern_fortran.pptx`: Microsoft Powerpoint presentation of modern
     Fortran features intended for those not familiar with some of the
     features introduced in Fortran 95, 2003, and 2008, or for those who
     typically program in C/C++, but want to get a flavor of Fortran's
