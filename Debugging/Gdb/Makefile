@@ -6,7 +6,8 @@ LDLIBS = -lm
 
 all: crash.exe array_bounds.exe array_bounds_O2.exe \
      matrix.exe hello_world.exe fib_init.exe array_bounds_f90_bug.exe \
-     array_bounds_f90_no_bug.exe fib_okay.exe fib_not_okay.exe
+     array_bounds_f90_no_bug.exe fib_okay.exe fib_not_okay.exe \
+     matrix_multiply.exe
 
 array_bounds_O2.exe: array_bounds.c
 	clang -O2 -Wno-unsequenced -o $@ $< $(LDLIBS)
@@ -34,6 +35,9 @@ array_bounds_f90_no_bug.exe: array_bounds_f90.f90
 
 hello_world.exe: hello_world.f90
 	$(FC) $(FFLAGS) -fopenmp -o $@ $^ $(LDLIBS)
+
+matrix_multiply.exe: matrix_multiply.f90
+	$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
 
 %.exe: %.o
 	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)

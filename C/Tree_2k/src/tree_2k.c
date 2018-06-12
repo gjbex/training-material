@@ -89,7 +89,7 @@ void tree_2k_free(tree_2k_t **tree) {
   the tree's extent.
   \param tree Address of the tree to check whether it can store the given
               point.
-  \param coords A size rank array with the coordinates to tesst.
+  \param coords A size rank array with the coordinates to test.
   \return True when the coordinates can be stored, false otherwise.
 */
 bool tree_2k_can_store(tree_2k_t *tree, double *coords) {
