@@ -5,5 +5,7 @@ demonstrate feeatures of debuggers for handling multi-threaded code.
 ## What is it?
 1. `DataRaces`: code to illustrate data races, can be used for Intel
     Inspector demo.
-1. `DdtFortran`: code to illustrate multi-threading debugging with Arm
+1. `DdtC`: C code to illustrate multi-threading debugging with Arm
     Forge DDT or GDB.
+1. `DdtFortran`: Fortran code to illustrate multi-threading debugging
+    with Arm Forge DDT or GDB.
