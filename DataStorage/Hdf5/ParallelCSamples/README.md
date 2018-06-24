@@ -49,7 +49,7 @@ Simply use run `build.sh` when working on a VSC cluster.
 
 Otherwise, use the following with appropriate options
 ```bash
-$ configur
+$ configure
 $ make
 $ make install
 ```
