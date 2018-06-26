@@ -1,8 +1,6 @@
-HDF5 parallel I/O
-=================
+# HDF5 parallel I/O
 
-What is it?
------------
+## What is it?
 1. `phdf5_test`: Short program to illustrate using parallel
    HDF5 capabilities.  It will simply write a 2D 8 x 5 integer dataset
    to 'my_data' in file 'test.h5'.  The processes are arranged in a
@@ -43,13 +41,12 @@ What is it?
   * `checkpoint.[ch]`: code that will save and read the grid and field
     to and from the HDF5 file.
 
-Building the program
---------------------
+## Building the program
 Simply use run `build.sh` when working on a VSC cluster.
 
 Otherwise, use the following with appropriate options
 ```bash
-$ configure
+$ ./configure
 $ make
 $ make install
 ```
@@ -62,8 +59,7 @@ Note:
   forget to load the appropriate module (HDF5/1.8.12-intel-2014a-gpfs on
   VSC clusters).
 
-Running the example
--------------------
+## Running the example
 Run using MPI, for `phdf5_test`, e.g.,
 ```bash
 $ mpirun -np 4 ./phdf5_test
