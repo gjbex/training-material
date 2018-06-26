@@ -11,6 +11,7 @@ Contents
 1. `ControlStructures`: illustrations of how to use Fortran's control
     statements (`DO`, `DO WHILE`, `FORALL`, `WHERE`, `IF`, `SELECT CASE` and
     `BLOCK`.
+1. `Doxygen`: illustration of documenting Fortran code using doxygen.
 1. `Functions`: illustrates how to define procedures, internal versus
     module procedures, pure and elemental procedures, recursion,
     interfaces for using higher order functions.  Also contains some

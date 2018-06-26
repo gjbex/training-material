@@ -1,0 +1,4 @@
+# Fortran module  files
+*.mod
+# generated documentation
+docs

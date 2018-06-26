@@ -1,0 +1,22 @@
+/*!
+  @mainpage
+  @brief module implementing a binary tree
+  @author Geert Jan Bex (geertjan.bex@uhasselt.be)
+  
+  This module defines a user defined type that represents a node
+  in a binary tree. A node has a single precision floating point
+  value, and, potentially, a left and right child node.
+  
+  The usual getter and setters are defined for the value and the
+  nodes children, as well as a number of function related to tree
+  properties.
+  
+  Example usage:
+  ~~~~~~~~~~~~~{.f95}
+  use node_mod
+  type(node_type) :: root
+  call root%init_random(0.75, 0.8)
+  call root%show()
+  print *, root%count_nodes()
+  ~~~~~~~~~~~~~
+*/
