@@ -69,6 +69,8 @@ Tips and tricks can be found on this [repository's website](http://gjbex.github.
 * Arnout Standaert, VITO
   * update of deprecated Pandas API
   * suggestions on Python OOP presentation section
+* Yana Maneva, KU Leuven
+  * suggestions on online C++ training material references
 
 You are very welcome to contribute, please read
 [some guidelines](CONTRIBUTING.md) before you do.
