@@ -1,6 +1,6 @@
 # DdtC
 Illustration of some bugs typical for C code using OpenMP, as well as
-code to demonstrate feeatures of debuggers for handling multi-threaded
+code to demonstrate features of debuggers for handling multi-threaded
 code.
 
 ## What is it?
