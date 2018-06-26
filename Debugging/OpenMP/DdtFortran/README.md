@@ -1,6 +1,6 @@
 # OpenMP
 Illustration of some bugs typical for OpenMP, as well as code to
-demonstrate feeatures of debuggers for handling multi-threaded code.
+demonstrate features of debuggers for handling multi-threaded code.
 
 ## What is it?
 1. `010.pi.f90`: Fortran code that computes pi by throwing darts.
