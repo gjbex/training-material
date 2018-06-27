@@ -16,9 +16,9 @@ Note that in the tips below, the commands are **case sensitive**.
     Press space to select/deselect.
   1. A few useful fields that are not shown by default, but that
     can be quite useful are:
-    * `nTH     = Number of Threads`
-    * `P       = Last Used Cpu (SMP)`
-    * `WCHAN   = Sleeping in Function`
+      * `nTH     = Number of Threads`
+      * `P       = Last Used Cpu (SMP)`
+      * `WCHAN   = Sleeping in Function`
   1. To see all threads of a process, press `H`.
   1. If you only want to see processes owned by a given user, press
     `u`, and enter the user at the prompt.  To exclude processes
@@ -27,12 +27,13 @@ Note that in the tips below, the commands are **case sensitive**.
   1. To search for a string in the screen, press `L`, and use `&`
     to find again.
   1. To filter the processes show, press either `o` or `O` (case
-    insensitive/case sensitive) and enter a search criterion, e.g.,
-    * `USER=vsc` will show the processes of users that have an ID
+    insensitive/case sensitive) and enter a search criterion. To
+    remove all filter criteria, press `=`. These are a few examples
+    of filters you can apply:
+      * `USER=vsc` will show the processes of users that have an ID
         containing the string 'vsc'.
-    * `%MEM>0.5`: show processes that consume more than 0.5 % of
+      * `%MEM>0.5`: show processes that consume more than 0.5 % of
         the available memory.
-    To remove all filter criteria, press `=`.
   1. To change the delay time, i.e., the time between screen
     refreshes, press `d` and enter the time in seconds.
   1. To see summary information for cores, rather than the whole
