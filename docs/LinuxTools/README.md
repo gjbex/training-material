@@ -9,5 +9,7 @@ This section provides tips and trick for various Linux tools.
      process multiplexer.
   1. [SSH](Ssh/README.md): client software to remotely login to Linux
      systems.
+  1. [top](Top/README.md): some less known tricks to get the most out
+     of top.
   1. [vim](Vim/README.md): vim is a nice, obiquitous and very powerful
      editor to use in a terminal.
