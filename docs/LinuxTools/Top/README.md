@@ -4,6 +4,11 @@
 processes that run on a system.  It has some rather neat features
 that are not so well known.
 
+This is not a tutorial, just a collection of tricks. You can find
+a good
+[tutorial on the basic use of top](https://www.booleanworld.com/guide-linux-top-command/)
+online.
+
 Note that in the tips below, the commands are **case sensitive**.
 
   1. To select the column on which the processes are sorted, use
