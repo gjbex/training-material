@@ -15,7 +15,7 @@ int main(void) {
     n = lround(x);
     if (fetestexcept(FE_INVALID)) {
         fprintf(stderr, "Floating point exception caught\n");
-         feclearexcept(FE_ALL_EXCEPT);
+        feclearexcept(FE_ALL_EXCEPT);
     }
     printf("%.5le -> %ld\n", x, n);
     return EXIT_SUCCESS;
