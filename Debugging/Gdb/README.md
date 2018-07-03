@@ -13,6 +13,8 @@ Some examples to use while showing GDB features.
 1. `fib_not_okay.c`: implementation of the Fibonacci function without
     guard condition.
 1. `fib_okay.c`: correct implementation of the Fibonacci function.
+1. `fib.f90`: recursive implementation of the Fibonacci function that
+    goes into infinite recursion.
 1. `hello_world.f90`: very simple OpenMP program to show thread
     switching in GDB.
 1. `matrix.f90`: program exceeds 2D array bounds.
