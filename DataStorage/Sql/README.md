@@ -11,6 +11,6 @@ learning SQL.
     schema design in third normal form.
 
 ## Requirements
-Any relational database system shuold do, though if you don't have any
+Any relational database system should do, though if you don't have any
 available, you can easily install and use SQlite, see
 https://www.sqlite.org/
