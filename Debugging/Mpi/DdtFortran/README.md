@@ -12,6 +12,8 @@ such as Arm DDT.
     be detected using memory checking (with, e.g., Arm DDT).
 1. `040_distributed_array.f90`: application to illustrate viewing a
     distributed array using DDT.
+1. `050_distributed_array.f90`: application to illustrate how useful
+    stastistics can be when verifying a distributed array using DDT.
 1. `prototype.f90`: prototype to verify correctness of halo exchange.
 1. `Makefile`: make file to build the executables.
 1. `setup.sh`: source to set up the environment for build and run (works
