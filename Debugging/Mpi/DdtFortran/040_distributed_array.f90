@@ -6,7 +6,7 @@ program distributed_array
     logical, parameter, dimension(nr_dims) :: periodic = [ .false., .false. ]
     logical, parameter :: reorder = .false.
     integer :: proc_rows, proc_cols, row, col, proc_row, proc_col
-    integer :: rank, size, ierr
+    integer :: rank, size, ierr, val
     integer, dimension(nr_dims) :: dims = [ 0, 0 ], cart_coords
     integer, dimension(local_rows, local_cols) :: data
     integer :: cart_comm
@@ -24,11 +24,12 @@ program distributed_array
     proc_col = cart_coords(2)
    do row = 1, local_rows
        do col = 1, local_cols
-           data(row, col) = proc_row*local_rows*local_cols*proc_cols + &
-                            row*local_cols*proc_cols + col + &
-                            proc_col*local_cols
+           val = proc_row*local_rows*local_cols*proc_cols + &
+                 (row - 1)*local_cols*proc_cols + &
+                 (col - 1) + proc_col*local_cols
+           data(row, col) = val
        end do
    end do
    call MPI_Barrier(MPI_COMM_WORLD, ierr)
-    call MPI_Finalize(ierr)
+   call MPI_Finalize(ierr)
 end program distributed_array
