@@ -3,6 +3,8 @@
 Some examples of code to debug with Arm Forge DDT.
 
 ## What is it?
+1. `003_deadlock.c`: illustration of an application that has a
+    deadlock.
 1. `010_distributed_array.c`: mysteriously crashing application, use DDT
     memory checking to pinpoint problem.
 1. `020_distributed_array.c`: complete example for illustrating DDT array
