@@ -1,5 +1,4 @@
 program distributed_array
-    use, intrinsic :: ieee_arithmetic
     use, intrinsic :: iso_fortran_env, only : r8 => REAL64
     use :: mpi
     implicit none
@@ -32,7 +31,8 @@ program distributed_array
                call random_number(r)
                data(row, col) = r
            else
-               data(row, col) = transfer([ Z'00000000', Z'7FF80000' ], &
+               call random_number(r)
+               data(row, col) = sqrt(-r)
                                          1.0_r8)
            end if
        end do
