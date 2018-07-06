@@ -44,3 +44,14 @@ c
 # so fac is initialized automatically with an "unexpected"
 # value; normal Fortran semantics for a procedure variable
 # that is initialized on declaration
+
+
+# edit the fac_mod.f90 from within GDB, make and run
+# edit fac_mod::factorial
+# make
+# d
+# r
+
+# now all results are correct, so quit
+
+# q
