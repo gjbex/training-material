@@ -14,9 +14,6 @@ fib_not_okay.exe: fib_not_okay.o fib_main.o
 fib_okay.exe: fib_okay.o fib_main.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
-array_bounds.exe: array_bounds.o
-	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
-
 %.exe: %.o
 	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
 
