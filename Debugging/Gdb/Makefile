@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -O0
 FC = gfortran
-FFLAGS = -g
+FFLAGS = -g -O0
 LDLIBS = -lm
 
 all: crash.exe array_bounds.exe array_bounds_O2.exe \
@@ -12,8 +12,8 @@ all: crash.exe array_bounds.exe array_bounds_O2.exe \
 array_bounds_O2.exe: array_bounds.c
 	clang -O2 -Wno-unsequenced -o $@ $< $(LDLIBS)
 
-fac_init.exe: fac_init.f90
-	$(FC) $(FFLAGS) -o $@ $<
+fac_init.exe: fac_mod.f90 fac_init.f90
+	$(FC) $(FFLAGS) -o $@ $^
 
 matrix.exe: matrix_mod.f90 matrix.f90
 	$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
