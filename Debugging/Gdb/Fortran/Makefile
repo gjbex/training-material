@@ -5,26 +5,26 @@ LDLIBS = -lm
 all: matrix.exe hello_world.exe fac_init.exe array_bounds_bug.exe \
      array_bounds_no_bug.exe matrix_multiply.exe fib.exe
 
-fac_init.exe: fac_mod.f90 fac_init.f90
+fac_init.exe: fac_mod.o fac_init.o
 	$(FC) $(FFLAGS) -o $@ $^
 
-matrix.exe: matrix_mod.f90 matrix.f90
+matrix.exe: matrix_mod.o matrix.o
 	$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
 
-array_bounds_bug.exe: array_bounds.f90
+array_bounds_bug.exe: array_bounds.o
 	$(FC) -g -o $@ $<
 
-array_bounds_no_bug.exe: array_bounds.f90
+array_bounds_no_bug.exe: array_bounds.o
 	$(FC) -g -O2 -o $@ $<
 
 hello_world.exe: hello_world.f90
-	$(FC) $(FFLAGS) -fopenmp -o $@ $^ $(LDLIBS)
+	$(FC) $(FFLAGS) -fopenmp -o $@ $<
 
-matrix_multiply.exe: matrix_multiply.f90
-	$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
+%.exe: %.o
+	$(FC) $(FFLAGS) -o $@ $< $(LDLIBS)
 
-fib.exe: fib.f90
-	$(FC) $(FFLAGS) -o $@ $<
+%.o: %.f90
+	$(FC) $(FFLAGS) -c $<
 
 clean:
 	$(RM) $(wildcard *.o) $(wildcard *.mod) $(wildcard *.exe)
