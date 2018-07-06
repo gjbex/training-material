@@ -1,1 +1,1 @@
-export PATH="$(dirname $(readlink -f $_)):$PATH"
+export PATH="$(dirname $(readlink -f ${BASH_SOURCE[0]})):$PATH"
