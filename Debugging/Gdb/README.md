@@ -19,7 +19,7 @@ Some examples to use while showing GDB features.
     switching in GDB.
 1. `matrix.f90`: program exceeds 2D array bounds.
 1. `matrix_mod.f90`: helper function for `matrix.f90`.
-1. `fib_init.f90`: inappropriate local variable initialization makes
+1. `fac_init.f90`: inappropriate local variable initialization makes
     variable static, leading to incorrect results.
 1. `matrix_multiply.v90`: timings using `CPU_TIME` are off by an order
     of magnitude.

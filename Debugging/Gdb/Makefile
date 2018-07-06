@@ -5,14 +5,14 @@ FFLAGS = -g
 LDLIBS = -lm
 
 all: crash.exe array_bounds.exe array_bounds_O2.exe \
-     matrix.exe hello_world.exe fib_init.exe array_bounds_f90_bug.exe \
+     matrix.exe hello_world.exe fac_init.exe array_bounds_f90_bug.exe \
      array_bounds_f90_no_bug.exe fib_okay.exe fib_not_okay.exe \
      matrix_multiply.exe fib_f90.exe
 
 array_bounds_O2.exe: array_bounds.c
 	clang -O2 -Wno-unsequenced -o $@ $< $(LDLIBS)
 
-fib_init.exe: fib_init.f90
+fac_init.exe: fac_init.f90
 	$(FC) $(FFLAGS) -o $@ $<
 
 matrix.exe: matrix_mod.f90 matrix.f90

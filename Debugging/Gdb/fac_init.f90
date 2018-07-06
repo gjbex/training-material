@@ -1,4 +1,4 @@
-program fib_init
+program fac_init
     implicit none
     integer :: i
     do i = 0, 5
@@ -19,4 +19,4 @@ contains
         fact = fac
     end function factorial
 
-end program fib_init
+end program fac_init
