@@ -3,7 +3,7 @@ Some examples to use while showing GDB features.
 
 ## What is it?
 1. `array_bounds.c`: accesses an array out of bounds, no initialization
-    of variable.
+    of variable (works with GCC 5.4).
 1. `array_bounds_f90.f90`: accesses an array out of bounds, also example
     of a "heisenbug" (works with GCC 5.4).
 1. `crash.c`: segmentation fault due to double `free`.
