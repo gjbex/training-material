@@ -11,5 +11,7 @@ Some C examples to use while showing GDB features.
 1. `fib_not_okay.c`: implementation of the Fibonacci function without
     guard condition.
 1. `fib_okay.c`: correct implementation of the Fibonacci function.
+1. `hello_world.c`: very simple OpenMP program to illustrate thread
+    switching.
 1. `Makefile`: make file to build the code.
 1. `Scenarios`: scenarios for illustrating GDB features.
