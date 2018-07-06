@@ -1,9 +1,6 @@
-program fib_init
+module fac_mod
     implicit none
-    integer :: i
-    do i = 0, 5
-        print '(A, I1, A, I6)', 'factorial(', i, ') =', factorial(i)
-    end do
+    public :: factorial
     
 contains
 
@@ -19,4 +16,4 @@ contains
         fact = fac
     end function factorial
 
-end program fib_init
+end module fac_mod
