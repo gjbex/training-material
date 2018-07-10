@@ -6,15 +6,15 @@ module fac_mod
 
 contains
 
-    function fac(n) result(r)
+    integer(kind=i32) function fac(n)
         implicit none
         integer(kind=i32), intent(in) :: n
-        integer(kind=i32) :: r
+        integer(kind=i32) :: r = 1_i32
         integer :: i
-        r = 1_i32
         do i = 2, n
             r = r*i
         end do
+        fac = r
     end function fac
 
 end module fac_mod
