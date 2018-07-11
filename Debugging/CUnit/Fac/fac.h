@@ -1,7 +1,6 @@
 #ifndef FAC_HDR
 #define FAC_HDR
 
-long fac(long n);
+int fac(int n);
 
 #endif
-

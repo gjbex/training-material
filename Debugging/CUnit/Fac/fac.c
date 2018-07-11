@@ -1,9 +1,8 @@
 #include "fac.h"
 
-long fac(long n) {
-    long f = 1;
-    for ( ; n > 1; n--)
-        f *= n;
+int fac(int n) {
+    int f = 1;
+    while (n > 1)
+        f *= --n;
     return f;
 }
-

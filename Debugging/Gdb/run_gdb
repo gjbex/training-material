@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+print_help ()
+{
+    cat <<EOI
+Usage: run_gdb [-h] [-s <scenario> ] <gdb-args>
+    -h | --help : print this help message
+    -s <scenario> | --scenario <scenario> : GDB script to run as
+                                         x  scenario
+    <gdb-args> : command line arguments to pass on to GDB
+EOI
+}
+
+params=''
+while (( "$#" ))
+do
+    case "$1" in
+        -h|--help)
+            shift
+            print_help
+            exit 0
+            ;;
+        -s|--scenario)
+            scenario="$2"
+            shift 2
+            ;;
+        --)
+            shift
+            break    
+            ;;
+        -*|--*)
+            echo "### error: unsupported flag '$1'" >&2
+            print_help
+            exit 1
+            ;;
+        *)
+            params="$params $1"
+            shift
+            ;;
+    esac
+done
+
+eval set -- "$params"
+
+if [[ $scenario ]]
+then
+    gdb \
+        -ex "set pagination off" \
+        -ex "source -v $scenario" \
+        "$@"
+else
+    gdb "$@"
+fi
