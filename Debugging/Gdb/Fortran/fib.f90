@@ -20,7 +20,7 @@ program fibonacci
             implicit none
             integer, intent(in) :: n
             integer :: f
-            f = fib(n - 1) + fib(n + 2)
+            f = fib(n - 1) + fib(n - 2)
         end function fib
 
 end program fibonacci
