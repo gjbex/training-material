@@ -7,7 +7,7 @@ part of the array they initialized in another parallel region.
 
 What is it?
 -----------
-1. `allocattion.c`: C program to illistrate thread allocation and
-    processing in seperate parallel regions.
+1. `allocation.c`: C program to illustrate thread allocation and
+    processing in separate parallel regions.
 1. `Makefile`: make file for GCC.
 1. `Makefile.intel`: make file for Intel.

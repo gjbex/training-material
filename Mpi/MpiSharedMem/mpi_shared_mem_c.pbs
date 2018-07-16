@@ -1,0 +1,12 @@
+#!/bin/bash -l
+#PBS -l nodes=2:ppn=4
+#PBS -l walltime=00:02:00
+#PBS -l qos=debugging
+#PBS -W x=nmatchpolicy:exactnode
+
+source switch_to_2015a
+module load foss/2015a
+
+cd $PBS_O_WORKDIR
+
+mpirun ./mpi_shared_mem_c.exe

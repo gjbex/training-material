@@ -17,4 +17,4 @@ the code is littered with direct use of `MPI_COMM_WORLD`.
     port of a server MPI application, and sending information to it using
     MPI.
 1. `run_client_server.sh`: Bash script that runs the client/server setup.
-1. `Makefile`: make file to build the applicaitons
+1. `Makefile`: make file to build the applications.

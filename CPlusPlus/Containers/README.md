@@ -32,3 +32,10 @@ Code illustrations for chapter 9, Containers in Stroustrup's
     in a file.
 1. `cosine_similarity.cpp`: illustration of `std::inner_product`,
     and when not to use it.
+1. `aggregate_data.cpp`: use a map of `int` to a statistics class to
+    aggregate data and compute average, minimum and maximum.
+1. `multi_measurement.txt`: data file to use with `aggregate_data.exe`.
+1. `rpn_calc.cpp`: implementation of a simple calculater for integer
+    arithmetic expression in reverse Polish notation.  Illustrates use
+    of a stack, a tuple, tokenizaiton, and simple exceptions.
+1. `Makefile`: make file to build the applications.

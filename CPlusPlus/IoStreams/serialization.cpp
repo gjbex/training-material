@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
         std::cin >> person;
         std::cout << "read: " << person << std::endl;
     } else {
-        std::string sep(" ");
         Person alice;
         alice.last_name = std::string("Wonderland");
         alice.first_name = std::string("Alice");

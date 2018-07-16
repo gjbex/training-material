@@ -1,0 +1,3 @@
+*.exe
+gmon.out
+julia.txt

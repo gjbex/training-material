@@ -8,4 +8,9 @@ Code illustrations for chapter 2, User defined types in Stroustrup's
 1. `class_particles.cpp`: implementation of particles as class.
 1. `charge_particles.cpp`: Illustration of an enum class, extending the
     original `Particle` class with charge.
-1. `Makefile`: make file for these examples.
+1. `stats.h`: `Stats` class definition that keeps statistics for steraming
+    data (very bare bones, just illustration).
+1. `streamin_stats.cpp`: implementation of `Stats` class for statistics
+    on streaming data..
+1. `Makefile`: make file to build the applictions.
+1. `ObjectLifeCycle`: illustration of object life cycle.

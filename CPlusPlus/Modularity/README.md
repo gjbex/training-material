@@ -3,8 +3,7 @@ Code illustrations for chapter 3, Modularity in Stroustrup's
 "A tour of C++".
 
 # What is it?
-1. `particle.h`: declaration of the `Particle` class.
-1. `particle.cpp`: implementation of the `Particle` class.
-1. `particles_main.cpp`: main function for the particles application.
+1. `Patricles`: example of separate compilation.
+1. `Stats`: example of separate compilation.
 1. `fac.cpp`: illustrates exception handling.
 1. `Makefile`: make file for these examples.

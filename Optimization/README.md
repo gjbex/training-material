@@ -5,7 +5,7 @@ A collection of code samples that illustrate opportunities for code
 optimization, or highlight potential performance bottlenecks.
 
 ## What is it?
-1. `Branching`: branching instructinos can decrease performance.
+1. `Branching`: branching instructions can decrease performance.
 1. `Fdo`: small illustration of using FDO (Feedback Directed Optimization).
 1. `GalleryProcessorCacheEffects`: C implementations of the code examples
     given in Igor Ostrovsky's interesting blog post on effects the various

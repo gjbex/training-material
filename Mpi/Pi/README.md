@@ -6,6 +6,6 @@ MPI and hybrid MPI/OpenMP.
 
 What is it?
 -----------
-1. `pi.c`: MPI appllcation code to compute an approximation of pi,
+1. `pi.c`: MPI application code to compute an approximation of pi,
     annotated with OpenMP pragmas for hybrid version.
 1. `Makefile`: make file to build the applications.

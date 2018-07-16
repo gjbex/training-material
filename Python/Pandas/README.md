@@ -20,4 +20,6 @@ easy to use.
     various algorithms and visualizations.
 1. `data`: some data sets used in the notebook above.
 1. `patients.ipynb`: runninng example used in the Python slides.
+1. `patient_data.ipynb`: extended version of therunninng example used
+    in the Python slides.
 `. `screenshots`: screenshots made for the slides.

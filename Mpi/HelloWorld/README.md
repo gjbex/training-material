@@ -9,4 +9,4 @@ What is it?
     process, and hello from rank 0.
 1. `hello_world_f08.f90`: uses the Fortran 2008 interface, currently only
     implemented by OpenMPI 1.8+, compiled with at least GCC 4.9+.  This
-    will only be build for target `f08`.
+    will only be built for target `f08`.

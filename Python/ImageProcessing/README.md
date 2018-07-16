@@ -6,6 +6,9 @@ processing with OpenCV.
 1. `denoise.py`: sharpen an image using deconvolution.
 1. `segmentation.py`: segmentation using an active cotour model, aka,
     snake.
+1. `restoration.ipynb`: Jupyter notebook illustrating analysis of a
+    problematic camera image and custum restoration.
+1. `Data`: directory containing image files for illustration purposes.
 1. `caputure.py`: capture video from a webcam using OpenCV.
 1. `analyze.py`: show a plot of the average RGB values for the frames in
     a movie using OpenCV.

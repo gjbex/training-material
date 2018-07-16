@@ -1,19 +1,17 @@
 #include <iostream>
 
-using namespace std;
-
 int main() {
-    const string question {"Who are you?"};
-    const string greeting {"Hi "};
-    const string bye {"Bye!"};
-    string name;
-    cout << "Type 'quit' or press Ctrl-d to exit" << endl;
-    cout << question << endl;
-    while (cin >> name) {
+    const std::string question {"Who are you?"};
+    const std::string greeting {"Hi "};
+    const std::string bye {"Bye!"};
+    std::string name;
+    std::cout << "Type 'quit' or press Ctrl-d to exit" << std::endl;
+    std::cout << question << std::endl;
+    while (std::cin >> name) {
         if (name == "quit")
             break;
-        cout << greeting << name << "!" << endl;
+        std::cout << greeting << name << "!" << std::endl;
     }
-    cout << bye << endl;
+    std::cout << bye << std::endl;
     return 0;
 }

@@ -11,6 +11,7 @@ Some illustrations of arithmetic bugs.
     from various computations.
 1. `equality.c`: illustrates that testing for floating point equality is
     a bad idea.
+1. `integer_division.f90`: illustrates risk of unintended integer division.
 1. `overflow.cpp`: illustration of integer arithmetic overflow when using a
     counter. The application reads a DNA sequence from standard input,
     and counts the number of A, C, G, T nucleotides.
@@ -21,6 +22,6 @@ Some illustrations of arithmetic bugs.
 1. `trace_nan.f90`: code to illustrate how to trace the origin of a NaN
     by enabling compiler FPE trapping.
 1. `underflow.c`: illustration of numerical underflow in floating point
-    artihmetic.
+    arithmetic.
 1. `Makefile`: make file to build the applications.
 1. `FpeOverhead`: code to measure FPE trapping overhead.

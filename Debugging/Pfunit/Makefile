@@ -1,5 +1,5 @@
 tests: tests.exe
-	./$<
+	- ./$<
 
 ifneq ($(BASEMK_INCLUDED),YES)
 include $(PFUNIT)/include/base.mk
@@ -23,7 +23,7 @@ testSuites.inc: $(SRCS)
 	$(PFUNIT)/bin/pFUnitParser.py $<  $@
 
 fac_mod.o: fac_mod.f90
-	$(FC) $(FPPFLAGS) -c $<
+	$(FC) $(FFLAGS) -c $<
 
 %.o: %.F90
 	$(FC) -c $(FFLAGS) $(FPPFLAGS) $<

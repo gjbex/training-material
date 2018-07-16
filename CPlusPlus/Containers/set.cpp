@@ -2,7 +2,7 @@
 #include <set>
 #include <unordered_set>
 
-int main(int argc, char *argv[]) {
+int main() {
     std::unordered_set<int> u_int_set;
     for (int i = 0; i < 10; i++) {
         u_int_set.insert(i % 7);

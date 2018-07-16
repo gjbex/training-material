@@ -14,7 +14,7 @@ void show_list(std::list<int> int_list) {
     std::cout << std::endl;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     std::list<int> int_list;
     for (int i = 0; i <= 20; i += 5) {
         int_list.push_back(i);

@@ -52,6 +52,7 @@ these samples have been used for Python tutorials.
 1. `FiniteStateParser`: illustrates how to parse a file that is structured
     as a regular language.  A `pyparsing` example is also given.
 1. `Flask`: some illustrations of using the Flask web services framework.
+1. `Functional`: some illustrations of functional programming style.
 1. `Fundamentals`: code samples that where used to extract fragments
     in the part of the presentation on core Python features.
 1. `Gis`: code samples for dealing with GIS data.
@@ -62,6 +63,8 @@ these samples have been used for Python tutorials.
     context of exploration in notebooks.
 1. `ImageProcessing`: some Scikit-Image sample code for image processing,
     as well as OpenCV for video analysis.
+1. `Introspection`: sample code of how to implement introspection as
+    mix-in class.
 1. `Ising`: Implementation of the 2D Ising system in pure Python, as well
     as in C++ using SWIG to wrap the implementation.  Mostly intended for
     visualization purposes.
@@ -70,6 +73,7 @@ these samples have been used for Python tutorials.
 1. `Keras`: illustration of using the Keras framework for machine learning
     tasks.
 1. `Logging`: illustration of Python's logging facilities.
+1. `Matlab`: illustrations of how to call MATLAB functions from Python.
 1. `Matplotlib`: a few illustrations of how to use the `pyplot` module.
 1. `Matrices`: a few timings of matrix-matrix multiplications using
     LoL in Python, the numpy.dot function, a Fortran matmul and DGEMM, and
@@ -110,12 +114,15 @@ these samples have been used for Python tutorials.
 1. `ScikitLearn`: examples using the scikit-learn machine learning
     library.
 1. `Regexes`: some material related to using regular expressions in Python.
+1. `Seaborn`: illustrations of the Seaborn plotting library.
 1. `SentenceCounter`: scripts to (naively) count sentences in natural
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
     the field
 1. `Subprocess`: illustrates executing a shell command from a Python script
     using the `subprocess` module.
+1. `Typing`: Python type annotations can help to make code considerably
+    more robust.
 1. `Unittest`: illustration of how to use Python's standard library
     unit testing framework.
 1. `Vtk`: examples of using the KitWare VTK library (No support for Python

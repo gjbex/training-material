@@ -1,16 +1,13 @@
 CC = gcc
-CFLAGS = -O2
-CPPFLAGS =
-LDFLAGS =
-LIBS = -lm
+CFLAGS = -O2 -g -Wall -Wextra
+LDLIBS = -lm
 
-APPL = write_doubles read_doubles
+all: write_doubles.exe read_doubles.exe variable_length_arrays.exe \
+     read_bin_records.exe
 
-all: $(APPL)
-
-%: %.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+%.exe: %.o
+	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
 
 clean:
-	rm -f core *.o $(APPL)
-
+	$(RM) $(wildcard *.o) $(wildcard *.exe)
+	$(RM) core $(wildcard core.*)

@@ -22,10 +22,12 @@ void free_mpi_params_type(MPI_Datatype *params_type);
 #endif
 
 int main(int argc, char *argv[]) {
+#ifdef WITH_MPI
     const int root = 0;
+#endif
     int rank = 0, size = 1;
     Params params;
-    double *limits, local_limits[2], partial_result, result = 0.0;
+    double *limits = NULL, local_limits[2], partial_result, result = 0.0;
 #ifdef WITH_MPI
 #ifdef _OPENMP
     int thread_level;

@@ -22,7 +22,7 @@ subroutine test_fac_4()
     use pfunit_mod
     implicit none
 
-    @assertEqual(20, fac(4), message='test fails on purpose')
+    @assertEqual(24, fac(4))
 end subroutine test_fac_4
 
 @test

@@ -1,16 +1,16 @@
 CXX = g++
-CXXFLAGS = -O2 -g -Wall -std=c++14
-LIBS = -lm
+CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
+LDLIBS = -lm
 
-APPS = struct_particles.exe class_particles.exe charged_particles.exe
-
-all: $(APPS)
+all: struct_particles.exe class_particles.exe charged_particles.exe \
+     streaming_stats.exe
 
 %.exe: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(APPS) *.o
+	$(RM) $(wildcard *.exe) $(wildcard *.o)
+	$(RM) core $(wildcard core.*)

@@ -1,0 +1,3 @@
+*.d
+*.exe
+.ipynb_checkpoints
