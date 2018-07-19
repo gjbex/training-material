@@ -1,5 +1,5 @@
 tests: tests.exe
-	./$<
+	- ./$<
 
 ifneq ($(BASEMK_INCLUDED),YES)
 include $(PFUNIT)/include/base.mk

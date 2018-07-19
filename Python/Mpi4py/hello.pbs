@@ -10,4 +10,4 @@ cd $PBS_O_WORKDIR
 
 export PYTHONPATH="${VSC_HOME}/python_lib/lib/python2.7/site-packages:${PYTHONPATH}"
 
-mpirun --map-by ppr:1:core:pe=1 python ./hello.py --iters 20 --sleep 5.0
+mpirun --map-by core python ./hello.py --iters 20 --sleep 5.0
