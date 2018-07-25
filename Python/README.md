@@ -70,6 +70,8 @@ these samples have been used for Python tutorials.
     visualization purposes.
 1. `Joblib`: illustrates the use of this library for easy task parallelism
 1. `Jupyter`: A few notebooks to illustrate the Jupyter notebook GUI.
+1. `Keras`: illustration of using the Keras framework for machine learning
+    tasks.
 1. `Logging`: illustration of Python's logging facilities.
 1. `Matlab`: illustrations of how to call MATLAB functions from Python.
 1. `Matplotlib`: a few illustrations of how to use the `pyplot` module.

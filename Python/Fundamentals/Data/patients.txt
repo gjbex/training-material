@@ -1,0 +1,11 @@
+name age weight
+ivy 35 59.9
+bob 33 72.4
+gitta 27 56.3
+carol 33 58.7
+elly 27 61.3
+alice 35 63.2
+freddy 33 78.9
+harry 41 65.3
+darren 35 68.5
+john 40 67.1

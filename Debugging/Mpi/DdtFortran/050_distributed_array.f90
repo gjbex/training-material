@@ -33,7 +33,6 @@ program distributed_array
            else
                call random_number(r)
                data(row, col) = sqrt(-r)
-                                         1.0_r8)
            end if
        end do
    end do
