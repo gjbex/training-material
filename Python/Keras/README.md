@@ -14,6 +14,8 @@ machine learning tasks.
     neural network models to learn the MNIST data set.
 1. `mnist_ensemble.ipynb`: jupyter notebook that implements a somewhat
     silly ensemble of three MLP networks.
+1. `mnist_cnn.ipynb`: example PBS script to exectute the `mnist_cnn.ipynb`
+    notebook in batch as a job.
 
 ## References
 Excellent [tutorial](https://github.com/leriomaggio/deep-learning-keras-tensorflow).
