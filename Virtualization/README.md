@@ -21,3 +21,10 @@ How to use Singularity, creating images/containers, and using them.
     build essentials, Mellanox infiniband drivers, IB verbs, OpenMPI and
     git.  It will subsequently clone a GitHub repository, build and
     install an MPI application that uses Scalapack in it, and clean up.
+1. `xenial_gedit.def`: Singularity recipe for `gedit` application, also
+    illustrates `%setup` and `%files`.
+1. `data`: some sample data files to add to the `xenial_gedit.def`
+    generated image.
+1. `xenial_alpino_docker.def`: Singularity image recipe file for
+    building from a docker container, also illustrates
+    `%labels` meta-information featrure.
