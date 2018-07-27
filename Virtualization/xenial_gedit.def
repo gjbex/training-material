@@ -12,6 +12,11 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 %runscript
     /usr/bin/gedit
 
+%setup
+    mkdir ${SINGULARITY_ROOTFS}/sample_data
+
+%files
+    data/*.csv sample_data
 
 %post
     sed -i 's/$/ universe/' /etc/apt/sources.list
