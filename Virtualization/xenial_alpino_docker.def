@@ -1,0 +1,8 @@
+Bootstrap: docker
+From: rugcompling/alpino:latest
+
+%labels
+    Maintainer Peter Kleiweg
+    Contriburors Gertjan van Noord
+    Institute Computational Linguistics, University of Groningen
+    GitHub https://github.com/rug-compling/alpino-docker
