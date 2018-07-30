@@ -16,6 +16,7 @@ machine learning tasks.
     silly ensemble of three MLP networks.
 1. `mnist_cnn.ipynb`: example PBS script to exectute the `mnist_cnn.ipynb`
     notebook in batch as a job.
+1. `Flatland`: machine learning adventures in Flatland.
 
 ## References
 Excellent [tutorial](https://github.com/leriomaggio/deep-learning-keras-tensorflow).
