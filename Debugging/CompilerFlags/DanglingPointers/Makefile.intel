@@ -1,0 +1,15 @@
+CC = icc
+CFLAGS = -g -Wall -Wremarks -Wchecks -w3
+
+all: dangling.exe
+
+debug: dangling.exe
+
+debug: CFLAGS += -check-pointers=rw -check-pointers-dangling=all 
+
+%.exe: %.o
+	$(CC) $(CFLAGS) -o $@ $<
+
+clean:
+	$(RM) $(wildcard *.exe) $(wildcard *.o)
+	$(RM) $(wildcard core.*) core
