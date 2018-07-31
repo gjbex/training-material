@@ -1,0 +1,14 @@
+CC = icc
+CFLAGS = -g -Wall -Wremarks -Wchecks -w3
+
+all: uninitialized_variable.exe
+
+debug: uninitialized_variable.exe
+debug: CFLAGS += -check=uninit
+
+%.exe: %.o
+	$(CC) $(CFLAGS) -o $@ $<
+
+clean:
+	$(RM) $(wildcard *.exe) $(wildcard *.o)
+	$(RM) $(wildcard core.*) core
