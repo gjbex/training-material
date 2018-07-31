@@ -8,6 +8,8 @@ The Fortran compiler allows to enable run time array bounds checking.
      beyond the array bounds.
 1. `bounds_check_impact.f90`: application that performs many array
     accesses to estimate performance impact of bounds check.
+1. `array_bounds.c`: C program that exceeds array bounds to illustrate
+    the GCC sanitizer.
 1. `Makefile`: make file to build the application, and generate warnings
     with appropriate compiler flag.
 
@@ -36,3 +38,9 @@ $ make valgrind
 ```
 Note that valgrind detects problems with allocatable arrays, not with
 stack arrays.
+
+To illustrate the sanitizer for the `gcc` compiler:
+```bash
+$ make run
+$ make clean run_sanitized
+```
