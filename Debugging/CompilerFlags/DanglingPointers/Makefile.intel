@@ -1,11 +1,11 @@
-CC = gcc
-CFLAGS = -g -Wall -Wextra
+CC = icc
+CFLAGS = -g -Wall -Wremarks -Wchecks -w3
 
 all: dangling.exe
 
 debug: dangling.exe
 
-debug: CFLAGS +=-fsanitize=address
+debug: CFLAGS += -check-pointers=rw -check-pointers-dangling=all 
 
 %.exe: %.o
 	$(CC) $(CFLAGS) -o $@ $<
