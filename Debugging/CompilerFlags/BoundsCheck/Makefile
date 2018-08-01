@@ -2,6 +2,7 @@ FC = gfortran
 FFLAGS = -g -O2
 CC = gcc
 CFLAGS = -g -Wall -Wextra
+LDLIBS = -lm
 
 all: array_bounds_check.exe bounds_check_impact.exe \
      bounds_check_impact_enabled.exe allocatable_bounds_check.exe \
@@ -44,6 +45,9 @@ pure_array.exe: pure_array.c
 
 %_enabled.exe: %.f90
 	$(FC) $(FFLAGS) -fbounds-check -o $@  $<
+
+confusing_names.exe: confusing_names.c
+	$(CC) $(CFLAGS) -fsanitize=address -o $@ $< $(LDLIBS)
 
 %.exe: %.f90
 	$(FC) $(FFLAGS) -o $@ $<
