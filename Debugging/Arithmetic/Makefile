@@ -13,6 +13,7 @@ all: addition.exe overflow_cpp.exe float_overflow.exe \
         integer_division_f90.exe
 
 
+
 %_cpp.exe: %.cpp
 	$(CXX) $(OPTFLAGS) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
@@ -42,6 +43,13 @@ check_cpp: $(wildcard *.cpp)
 	cppcheck --quiet --enable=all --inconclusive \
              --suppress=missingIncludeSystem \
              --language=c++ --std=c++14 --platform=unix64 $^
+
+sanitizer: float_divide_by_zero.exe integer_divide_by_zero.exe
+
+%.exe: %.c
+	$(CC) $(CFLAGS) -fsanitize=integer-divide-by-zero \
+                    -fsanitize=float-divide-by-zero \
+                    -o $@ $<
 
 clean:
 	$(RM) *.exe *.o *.mod
