@@ -10,6 +10,8 @@ The Fortran compiler allows to enable run time array bounds checking.
     accesses to estimate performance impact of bounds check.
 1. `array_bounds.c`: C program that exceeds array bounds to illustrate
     the GCC sanitizer.
+1. `pure_array.c`: C program that exceeds array boundaries (pure array),
+    illustrates sanitizer undefined behaviour check.
 1. `Makefile`: make file to build the application, and generate warnings
     with appropriate compiler flag.
 
@@ -43,4 +45,10 @@ To illustrate the sanitizer for the `gcc` compiler:
 ```bash
 $ make run
 $ make clean run_sanitized
+```
+
+For the undefined behaviour sanitizer, use:
+```bash
+$ make run_bounds
+$ make clean run_bounds_sanitized
 ```

@@ -29,6 +29,19 @@ run_sanitized: CFLAGS += -fsanitize=address
 array_bounds.exe: array_bounds.c
 	$(CC) $(CFLAGS) -o $@ $<
 
+run_bounds: pure_array.exe
+	./$<
+
+run_bounds_sanitized: pure_array.exe
+	./$<
+
+run_bounds_sanitized: CFLAGS += -fsanitize=undefined
+
+run_sanitized: CFLAGS += -fsanitize=address
+
+pure_array.exe: pure_array.c
+	$(CC) $(CFLAGS) -o $@ $<
+
 %_enabled.exe: %.f90
 	$(FC) $(FFLAGS) -fbounds-check -o $@  $<
 
