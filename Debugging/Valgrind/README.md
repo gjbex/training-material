@@ -28,3 +28,9 @@ To run valgrind on `local_leak.exe`, run
 ```bash
 $ make check_local_leak
 ```
+
+GCC's sanitizer is an alternative to valgrind.  To instrument
+`local_leak.c` to detect memory leaks and run the application, use:
+```bash
+$ make sanitize
+```

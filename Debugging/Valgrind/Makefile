@@ -18,6 +18,10 @@ valgrind.exe: valgrind.cpp
 local_leak.exe: local_leak.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
 
+sanitize: local_leak.exe
+	$(CC) $(CFLAGS) -fsanitize=leak -o $< local_leak.c $(LDLIBS)
+	./$<
+
 clean:
 	$(RM) $(wildcard *.o) $(wildcard *.exe)
 	$(RM) core $(wildcard core.*)
