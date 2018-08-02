@@ -25,10 +25,10 @@ class FigureTransformer:
         self.min_size = min_size
         self.max_size = max_size
         self.center_margin = center_margin
-        self.x_low = -0.5*self.width*self.center_margin
-        self.x_high = 0.5*self.width*self.center_margin
-        self.y_low = -0.5*self.height*self.center_margin
-        self.y_high = 0.5*self.height*self.center_margin
+        self.x_low = -0.5*self.width*(1.0 - self.center_margin)
+        self.x_high = 0.5*self.width*(1.0 - self.center_margin)
+        self.y_low = -0.5*self.height*(1.0 - self.center_margin)
+        self.y_high = 0.5*self.height*(1.0 - self.center_margin)
         self.blur_factor = blur_factor
 
     def scale(self, fig, scale=None):
