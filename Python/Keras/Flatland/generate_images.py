@@ -3,7 +3,7 @@
 from argparse import ArgumentParser
 import h5py
 import numpy as np
-import random
+import sys
 
 from figures import (CircleGenerator, SquareGenerator,
                      TriangleGenerator, FigureTransformer)
@@ -14,6 +14,9 @@ if __name__ == '__main__':
                                             'random geometrical objects')
     arg_parser.add_argument('--n', type=int, default=1,
                             help='number of objects to create')
+    arg_parser.add_argument('--max_objects', type=int, default=1,
+                            help='maximum number of objects per '
+                                 'image')
     arg_parser.add_argument('--width', type=int, default=100,
                             help='width of the images to create')
     arg_parser.add_argument('--height', type=int, default=100,
@@ -26,10 +29,16 @@ if __name__ == '__main__':
                             help='fraction of image width that can '
                                   'not contain the center of an '
                                   'object')
-    arg_parser.add_argument('file', help='HDF5 file with data')
     arg_parser.add_argument('--blur_factor', type=float, default=3.0,
                             help='maximum blur applied to image')
+    arg_parser.add_argument('--seed', type=int,
+                            help='seed for random number generator')
+    arg_parser.add_argument('--verbose', action='store_true',
+                            help='verbose output for debugging')
+    arg_parser.add_argument('file', help='HDF5 file with data')
     options = arg_parser.parse_args()
+    if options.seed:
+        np.random.seed(options.seed)
     generators = [
         CircleGenerator(options.width, options.height,
                         options.max_size),
@@ -44,15 +53,24 @@ if __name__ == '__main__':
                                     max_size=options.max_size,
                                     center_margin=options.center_margin,
                                     blur_factor=options.blur_factor)
+    if options.verbose:
+        print(f'starting generation of {options.n} images...',
+              file=sys.stderr)
     x_data = np.empty((options.n, options.width, options.height),
                       dtype=np.uint8)
-    y_data = np.empty(options.n, dtype=np.uint8)
+    y_data = np.zeros((options.n, len(generators)), dtype=np.uint8)
     for i in range(options.n):
-        object_id = random.randint(0, len(generators) - 1)
-        fig = generators[object_id].create()
-        transformer.transform(fig)
-        x_data[i, :, :] = (255*fig.data).astype(np.uint8)
-        y_data[i] = object_id
+        data = np.zeros((options.width, options.height))
+        nr_objects = np.random.randint(1, options.max_objects + 1)
+        for j in range(nr_objects):
+            object_id = np.random.randint(0, len(generators))
+            fig = generators[object_id].create()
+            transformer.transform(fig)
+            data += fig.data
+            y_data[i, object_id] += 1
+        x_data[i, :, :] = (255*data/nr_objects).astype(np.uint8)
+    if options.verbose:
+        print(f"writing to file '{options.file}'", file=sys.stderr)
     with h5py.File(options.file, 'w') as hdf5_file:
         hdf5_file.create_dataset('x_values', data=x_data)
         hdf5_file.create_dataset('y_values', data=y_data)
