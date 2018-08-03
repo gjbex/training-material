@@ -60,7 +60,7 @@ def config_model(input_shape, output_shape):
     model.add(Dropout(0.4))
     model.add(Flatten())
     model.add(Dense(nr_classes))
-    model.add(Activation('softmax'))
+    model.add(Activation('relu'))
     model.compile(loss='categorical_crossentropy', optimizer=Adam(),
                   metrics=['accuracy'])
     return model
