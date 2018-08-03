@@ -61,7 +61,7 @@ def config_model(input_shape, output_shape):
     model.add(Flatten())
     model.add(Dense(nr_classes))
     model.add(Activation('relu'))
-    model.compile(loss='categorical_crossentropy', optimizer=Adam(),
+    model.compile(loss='mean_squared_error', optimizer=Adam(),
                   metrics=['accuracy'])
     return model
 
