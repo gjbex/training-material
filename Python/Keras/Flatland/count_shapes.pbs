@@ -10,7 +10,7 @@ module purge
 module load conda
 source activate machine_learning
 
-./shapes.py \
+./count_shapes.py \
     --train train_multi_obj_data.h5 \
     --test test_multi_obj_data.h5 \
-    multi_object_cnn.h5
+    count_shapes.h5
