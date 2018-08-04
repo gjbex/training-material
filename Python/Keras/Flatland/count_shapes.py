@@ -25,7 +25,7 @@ def process_data(data_file):
         x_data = np.array(h5_file['x_values'])
         y_data = np.array(h5_file['y_values'])
     shape_ord = compute_input_shape(x_data)
-    x_data = x_data.reshape((x_train.shape[0], ) + shape_ord)
+    x_data = x_data.reshape((x_data.shape[0], ) + shape_ord)
     x_data = x_data.astype(np.float32)/255.0
     return x_data, y_data
 
