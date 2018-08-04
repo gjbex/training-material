@@ -20,21 +20,18 @@ def compute_input_shape(x_train):
         return (img_rows, img_cols, img_channels)
 
 
-def get_data(training_file, test_file):
-    with h5py.File('train_data.h5', 'r') as h5_file:
-        x_train = np.array(h5_file['x_values'])
-        y_train = np.array(h5_file['y_values'])
-    with h5py.File('test_data.h5', 'r') as h5_file:
-        x_test = np.array(h5_file['x_values'])
-        y_test = np.array(h5_file['y_values'])
-
+def process_data(data_file):
+    with h5py.File(data_file, 'r') as h5_file:
+        x_data = np.array(h5_file['x_values'])
+        y_data = np.array(h5_file['y_values'])
     shape_ord = compute_input_shape(x_train)
+    x_data = x_data.reshape((x_train.shape[0], ) + shape_ord)
+    x_data = x_data.astype(np.float32)/255.0
+    return x_data, y_data
 
-    x_train = x_train.reshape((x_train.shape[0], ) + shape_ord)
-    x_test = x_test.reshape((x_test.shape[0], ) + shape_ord)
-    x_train = x_train.astype(np.float32)/255.0
-    x_test = x_test.astype(np.float32)/255.0
-
+def get_data(training_file, test_file):
+    x_train, y_train = process_data(training_file)
+    x_test, y_test = process_data(test_file)
     np.random.seed(1234)
     x_train, x_val, y_train, y_val = train_test_split(x_train, y_train)
     return x_train, x_val, x_test, y_train, y_val, y_test
@@ -68,8 +65,10 @@ def config_model(input_shape, output_shape):
 
 if __name__ == '__main__':
     arg_parser = ArgumentParser(description='train network')
-    arg_parser.add_argument('--train', help='HDF5 training data')
-    arg_parser.add_argument('--test', help='HDF5 testing data')
+    arg_parser.add_argument('--train', required=True,
+                            help='HDF5 training data')
+    arg_parser.add_argument('--test', required=True,
+                            help='HDF5 testing data')
     arg_parser.add_argument('file', help='HDF5 to store network')
     options = arg_parser.parse_args()
     (x_train, x_val, x_test,
