@@ -8,6 +8,8 @@ from keras.layers import (Activation, Conv2D, Dense, Dropout,
 from keras.models import Sequential
 from keras.optimizers import Adam
 import numpy as np
+from pathlib import Path
+import pickle
 from sklearn.model_selection import train_test_split
 
 
@@ -28,6 +30,7 @@ def process_data(data_file):
     x_data = x_data.reshape((x_data.shape[0], ) + shape_ord)
     x_data = x_data.astype(np.float32)/255.0
     return x_data, y_data
+
 
 def get_data(training_file, test_file):
     x_train, y_train = process_data(training_file)
@@ -63,21 +66,36 @@ def config_model(input_shape, output_shape):
     return model
 
 
+def change_path_suffix(path_str, suffix_str):
+    path = Path(path_str)
+    dir_path = path.parent
+    file_base = path.stem
+    return str(dir_path / (file_base + suffix_str))
+
+
 if __name__ == '__main__':
     arg_parser = ArgumentParser(description='train network')
     arg_parser.add_argument('--train', required=True,
                             help='HDF5 training data')
     arg_parser.add_argument('--test', required=True,
                             help='HDF5 testing data')
+    arg_parser.add_argument('--epochs', type=int, default=100,
+                            help='epochs for the training process')
+    arg_parser.add_argument('--seed', type=int, default=1234,
+                            help='seed for the RNG')
     arg_parser.add_argument('file', help='HDF5 to store network')
     options = arg_parser.parse_args()
+    np.random.seed(options.seed)
     (x_train, x_val, x_test,
      y_train, y_val, y_test) = get_data(options.train, options.test)
     input_shape = x_train.shape[1:]
     output_shape = y_train.shape[1:]
     model = config_model(input_shape, output_shape)
-    history = model.fit(x_train, y_train, epochs=100, batch_size=64,
+    history = model.fit(x_train, y_train, epochs=options.epochs, batch_size=64,
                         validation_data=(x_val, y_val), verbose=0)
     loss, accuracy = model.evaluate(x_test, y_test, verbose=0)
     print(f'loss = {loss:.3f}, accuracy = {accuracy:.3f}')
     model.save(options.file)
+    hist_filename = change_path_suffix(options.file, '_histo.pkl')
+    with open(hist_filename, 'rb') as hist_file:
+        pickle.dump(hist_file, history)
