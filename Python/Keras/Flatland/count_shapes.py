@@ -97,5 +97,5 @@ if __name__ == '__main__':
     print(f'loss = {loss:.3f}, accuracy = {accuracy:.3f}')
     model.save(options.file)
     hist_filename = change_path_suffix(options.file, '_histo.pkl')
-    with open(hist_filename, 'rb') as hist_file:
+    with open(hist_filename, 'wb') as hist_file:
         pickle.dump(hist_file, history)
