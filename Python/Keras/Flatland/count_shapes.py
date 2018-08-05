@@ -93,9 +93,13 @@ if __name__ == '__main__':
     model = config_model(input_shape, output_shape)
     history = model.fit(x_train, y_train, epochs=options.epochs, batch_size=64,
                         validation_data=(x_val, y_val), verbose=0)
-    loss, accuracy = model.evaluate(x_test, y_test, verbose=0)
-    print(f'loss = {loss:.3f}, accuracy = {accuracy:.3f}')
     model.save(options.file)
     hist_filename = change_path_suffix(options.file, '_histo.pkl')
     with open(hist_filename, 'wb') as hist_file:
         pickle.dump(hist_file, history)
+    loss, accuracy = model.evaluate(x_train, y_train, verbose=0)
+    print(f'training: loss = {loss:.3f}, accuracy = {accuracy:.3f}')
+    loss, accuracy = model.evaluate(x_val, y_val, verbose=0)
+    print(f'validation: loss = {loss:.3f}, accuracy = {accuracy:.3f}')
+    loss, accuracy = model.evaluate(x_test, y_test, verbose=0)
+    print(f'test: loss = {loss:.3f}, accuracy = {accuracy:.3f}')
