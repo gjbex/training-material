@@ -91,12 +91,13 @@ if __name__ == '__main__':
     input_shape = x_train.shape[1:]
     output_shape = y_train.shape[1:]
     model = config_model(input_shape, output_shape)
-    history = model.fit(x_train, y_train, epochs=options.epochs, batch_size=64,
-                        validation_data=(x_val, y_val), verbose=0)
+    history = model.fit(x_train, y_train, epochs=options.epochs,
+                        batch_size=64, verbose=0,
+                        validation_data=(x_val, y_val))
     model.save(options.file)
     hist_filename = change_path_suffix(options.file, '_hist.pkl')
     with open(hist_filename, 'wb') as hist_file:
-        pickle.dump(hist_file, history)
+        pickle.dump(history, hist_file)
     loss, accuracy = model.evaluate(x_train, y_train, verbose=0)
     print(f'training: loss = {loss:.3f}, accuracy = {accuracy:.3f}')
     loss, accuracy = model.evaluate(x_val, y_val, verbose=0)
