@@ -21,10 +21,10 @@ def compute_input_shape(x_train):
 
 
 def get_data(training_file, test_file):
-    with h5py.File('train_data.h5', 'r') as h5_file:
+    with h5py.File(training_file, 'r') as h5_file:
         x_train = np.array(h5_file['x_values'])
         y_train = np.array(h5_file['y_values'])
-    with h5py.File('test_data.h5', 'r') as h5_file:
+    with h5py.File(test_file, 'r') as h5_file:
         x_test = np.array(h5_file['x_values'])
         y_test = np.array(h5_file['y_values'])
 
