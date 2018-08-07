@@ -9,8 +9,9 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 import numpy as np
 from pathlib import Path
-import pickle
 from sklearn.model_selection import train_test_split
+
+from history_utils import store_history
 
 
 def compute_input_shape(x_train):
@@ -50,12 +51,12 @@ def config_model(input_shape, output_shape):
                      input_shape=input_shape))
     model.add(LeakyReLU(0.1))
     model.add(Dropout(0.4))
-    model.add(Conv2D(nr_filters*2, (conv_x_size, conv_y_size), strides=2,
-                     padding='valid'))
+    model.add(Conv2D(nr_filters*2, (conv_x_size, conv_y_size),
+                     strides=2, padding='valid'))
     model.add(LeakyReLU(0.1))
     model.add(Dropout(0.4))
-    model.add(Conv2D(nr_filters*4, (conv_x_size, conv_y_size), strides=2,
-                     padding='valid'))
+    model.add(Conv2D(nr_filters*4, (conv_x_size, conv_y_size),
+                     strides=2, padding='valid'))
     model.add(LeakyReLU(0.1))
     model.add(Dropout(0.4))
     model.add(Flatten())
@@ -95,9 +96,8 @@ if __name__ == '__main__':
                         batch_size=64, verbose=0,
                         validation_data=(x_val, y_val))
     model.save(options.file)
-    hist_filename = change_path_suffix(options.file, '_hist.pkl')
-    with open(hist_filename, 'wb') as hist_file:
-        pickle.dump(history, hist_file)
+    hist_filename = change_path_suffix(options.file, '_hist.h5')
+    store_history(hist_filename, history)
     loss, accuracy = model.evaluate(x_train, y_train, verbose=0)
     print(f'training: loss = {loss:.3f}, accuracy = {accuracy:.3f}')
     loss, accuracy = model.evaluate(x_val, y_val, verbose=0)
