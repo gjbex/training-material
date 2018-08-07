@@ -4,6 +4,11 @@ import numpy as np
 
 
 def store_history(file_name, history):
+    '''Function to store the model training history into an HDF5 file
+
+    file_name: name for the HDF5 file
+    history: history to store
+    '''
     with h5py.File(file_name, 'w') as h5_file:
         for key, values in history.history.items():
             h5_file[key] = np.array(values)
