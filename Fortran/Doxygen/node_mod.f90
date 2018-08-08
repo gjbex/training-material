@@ -7,7 +7,7 @@ module node_mod
     implicit none
 
     private
-    !> @private
+
     !> @brief kind for the floating point value that is stored by
     !>        the node
     integer, parameter :: sp = REAL32
