@@ -12,6 +12,7 @@ This is an example for Fortran.
     documentation page.
 1. `node_mod.f90`: documented Fortran 2003 module implementing a node
     type for building binary trees, as well as some algorithms on trees.
+1. `Makefile`: make file to build the documentation.
 
 ## How to use?
 
