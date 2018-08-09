@@ -25,6 +25,5 @@ How to use Singularity, creating images/containers, and using them.
     illustrates `%setup` and `%files`.
 1. `data`: some sample data files to add to the `xenial_gedit.def`
     generated image.
-1. `xenial_alpino_docker.def`: Singularity image recipe file for
-    building from a docker container, also illustrates
-    `%labels` meta-information featrure.
+1. `Service`: example of running a Singularity image as an instance
+    to provide a server.
