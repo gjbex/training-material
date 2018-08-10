@@ -23,5 +23,15 @@ Some illustrations of arithmetic bugs.
     by enabling compiler FPE trapping.
 1. `underflow.c`: illustration of numerical underflow in floating point
     arithmetic.
+1. `float_divide_by_zero.c`: illustration of floating point division by
+    zero as captured by GCC sanitizer.
+1. `integer_divide_by_zero.c`: illustration of integer point division by
+    zero as captured by GCC sanitizer.
 1. `Makefile`: make file to build the applications.
 1. `FpeOverhead`: code to measure FPE trapping overhead.
+
+## How to use?
+To see the GCC sanitizer at work, use:
+```bash
+$ make sanitizer
+```

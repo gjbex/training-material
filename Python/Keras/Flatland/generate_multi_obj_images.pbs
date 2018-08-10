@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+#PBS -A lpt2_pilot_2018
+#PBS -l nodes=1:ppn=2
+#PBS -l pmem=10gb
+#PBS -l walltime=00:30:00
+
+cd $PBS_O_WORKDIR
+
+module purge
+module load conda
+source activate machine_learning
+
+./generate_images.py  --n 120000  --max_objects 5 \
+                      --seed 1234 \
+                       --width 100  --height 100 \
+                      --min_size 5  --max_size 10 \
+                      --center_margin 0.2 \
+                      train_multi_obj_data.h5 &
+
+./generate_images.py  --n 40000  --max_objects 5 \
+                      --seed 4321 \
+                       --width 100  --height 100 \
+                      --min_size 5  --max_size 10 \
+                      --center_margin 0.2 \
+                      test_multi_obj_data.h5 &
+
+wait
