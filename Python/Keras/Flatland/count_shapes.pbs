@@ -15,5 +15,5 @@ nvidia-smi
 ./count_shapes.py \
     --train train_multi_obj_data.h5 \
     --test test_multi_obj_data.h5 \
-    --epochs 2000 \
+    --epochs 250 --batch 256 \
     count_shapes.h5
