@@ -2,14 +2,14 @@ Bootstrap: docker
 From: rugcompling/alpino:latest
 
 %files
-    alpino.sh /etc/init.d/alpino.sh
+    alpino.sh /etc/init.d/alpino
 
 %post
-    chmod ugo+x /etc/init.d/alpino.sh
+    chmod a+rx /etc/init.d/alpino
     mkdir -p /conf
 
 %startscript
-    service alpino.sh start
+    service alpino start
 
 %labels
     Maintainer Peter Kleiweg
