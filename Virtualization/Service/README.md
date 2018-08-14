@@ -8,6 +8,9 @@ This example implements that for Alpino.
     `%labels` meta-information featrure.
 1. `alpino.sh`: `init.d` script to start and stop Alpino as a server.
 1. `conf`: directory containing a file with the port number to be used.
+1. 'alpino.pbs`: PBS script demonstrating how to run multiple
+    instances of the Alpino server using the worker framework.
+1. `text`: sample input for the PBS job.
 
 ## How to use?
 1. `Ensure that a valid and unique port number is the `port_nr` file
