@@ -4,6 +4,7 @@ program deallocating
     integer :: i, n, sum
     integer, allocatable, dimension(:) :: a
 
+    ! handle command line arguments
     if (command_argument_count() == 1) then
         block
             character(len=1024) :: buffer
@@ -14,19 +15,19 @@ program deallocating
         n = default_n
     end if
 
+    ! initialize and allocate matrix
     allocate(a(n))
     do i = 1, n
         a(i) = i
     end do
 
-    sum = 0
-    do i = n, 1, -1
-        sum = sum + a(i)
-    end do
-    print '(A, I10)', sum
+    ! compute matrix elements sum
+    print '(A, I10)', compute_sum(a)
 
+    ! deallocate array
     deallocate(a)
 
+    ! compute matrix elements sum using deallocated array
     print '(A, I10)', compute_sum(a)
 
 contains
