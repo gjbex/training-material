@@ -1,0 +1,48 @@
+@before
+subroutine setup_test()
+    use, intrinsic :: iso_fortran_env, only: error_unit
+    use data_mod
+    implicit none
+    integer, parameter :: n = 5
+    integer :: i
+    write(unit=error_unit, fmt='(A)') 'running setup_test'
+    allocate(data_array(n))
+    do i = 1, n
+        data_array(i) = i
+    end do
+end subroutine setup_test
+
+@after
+subroutine teardown_test()
+    use, intrinsic :: iso_fortran_env, only: error_unit
+    use data_mod
+    implicit none
+    write(unit=error_unit, fmt='(A)') 'running teardown_test'
+    deallocate(data_array)
+end subroutine teardown_test
+
+@test
+subroutine test_sum()
+    use data_mod
+    use pfunit_mod
+    implicit none
+    integer :: i, total
+    total = 0
+    do i = 1, size(data_array)
+        total = total + data_array(i)
+    end do
+    @assertEqual(15, total)
+end subroutine test_sum
+
+@test
+subroutine test_product()
+    use data_mod
+    use pfunit_mod
+    implicit none
+    integer :: i, total
+    total = 1
+    do i = 1, size(data_array)
+        total = total*data_array(i)
+    end do
+    @assertEqual(120, total)
+end subroutine test_product
