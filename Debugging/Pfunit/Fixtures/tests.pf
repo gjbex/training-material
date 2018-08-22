@@ -1,48 +1,62 @@
-@before
-subroutine setup_test()
-    use, intrinsic :: iso_fortran_env, only: error_unit
-    use data_mod
-    implicit none
-    integer, parameter :: n = 5
-    integer :: i
-    write(unit=error_unit, fmt='(A)') 'running setup_test'
-    allocate(data_array(n))
-    do i = 1, n
-        data_array(i) = i
-    end do
-end subroutine setup_test
-
-@after
-subroutine teardown_test()
-    use, intrinsic :: iso_fortran_env, only: error_unit
-    use data_mod
-    implicit none
-    write(unit=error_unit, fmt='(A)') 'running teardown_test'
-    deallocate(data_array)
-end subroutine teardown_test
-
-@test
-subroutine test_sum()
-    use data_mod
+module tests
     use pfunit_mod
     implicit none
-    integer :: i, total
-    total = 0
-    do i = 1, size(data_array)
-        total = total + data_array(i)
-    end do
-    @assertEqual(15, total)
-end subroutine test_sum
 
-@test
-subroutine test_product()
-    use data_mod
-    use pfunit_mod
-    implicit none
-    integer :: i, total
-    total = 1
-    do i = 1, size(data_array)
-        total = total*data_array(i)
-    end do
-    @assertEqual(120, total)
-end subroutine test_product
+    @testcase
+    type, extends(TestCase) :: tests_type
+        integer :: n = 5
+        integer, allocatable, dimension(:) :: data_array
+    contains
+        procedure :: setUp
+        procedure :: tearDown
+    end type tests_type
+
+contains
+
+    subroutine setUp(this)
+        use, intrinsic :: iso_fortran_env, only: error_unit
+        implicit none
+        class(tests_type), intent(inout) :: this
+        integer :: i
+        write(unit=error_unit, fmt='(A)') 'running setUp'
+        allocate(this%data_array(this%n))
+        do i = 1, this%n
+            this%data_array(i) = i
+        end do
+    end subroutine setUp
+
+    subroutine tearDown(this)
+        use, intrinsic :: iso_fortran_env, only: error_unit
+        implicit none
+        class(tests_type), intent(inout) :: this
+        write(unit=error_unit, fmt='(A)') 'running tearDown'
+        deallocate(this%data_array)
+    end subroutine tearDown
+
+    @test
+    subroutine test_sum(this)
+        use pfunit_mod
+        implicit none
+        class(tests_type), intent(inout) :: this
+        integer :: i, total
+        total = 0
+        do i = 1, size(this%data_array)
+            total = total + this%data_array(i)
+        end do
+        @assertEqual(15, total)
+    end subroutine test_sum
+
+    @test
+    subroutine test_product(this)
+        use pfunit_mod
+        implicit none
+        class(tests_type), intent(inout) :: this
+        integer :: i, total
+        total = 1
+        do i = 1, size(this%data_array)
+            total = total*this%data_array(i)
+        end do
+        @assertEqual(120, total)
+    end subroutine test_product
+
+end module tests
