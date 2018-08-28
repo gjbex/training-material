@@ -21,6 +21,7 @@ them.
     programming, testing and debugging techniques.
 1. `DropIn`: illustration of how to write drop-in replacements for functions
     in libraries.
+1. `ErrorHandling`: illustrations of error handling in C and Fortran.
 1. `fUnit`: very simple illustration of how to use the fUnit testing
     framework for Fortran unit testing.
 1. `Gdb`: some sample code to illustrate using GDB.
