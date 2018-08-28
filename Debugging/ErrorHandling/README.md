@@ -2,6 +2,8 @@
 A few illustration of error handling.
 
 ## What is  it?
+1. `Assert`: illustration of assertions in C, note that this
+    should never be used for error handling.
 1. `allocation_error.c`: illustration of error handling in the context
     of dynamic memory management.
 1. `command_line_args_error.c`: illustrates undefined behaviour of
