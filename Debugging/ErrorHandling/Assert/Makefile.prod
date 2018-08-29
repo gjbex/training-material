@@ -1,0 +1,16 @@
+CC = gcc
+CFLAGS = -g -O0 -Wall -Wextra
+
+release: CFLAGS += -D NDEBUG
+
+release: all
+debug: all
+
+all: assertions.exe
+
+%.exe: %.c
+	$(CC) $(CFLAGS) -o $@ $<
+
+clean:
+	$(RM) $(wildcard *.exe) $(wildcard *.o)
+	$(RM) $(wildcard core.*) core
