@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
         errx(ARG_ERR, "no file name specified");
     FILE *fp;
     char *line = NULL;
-    size_t buffer_length;
+    size_t buffer_length = 0;
     ssize_t nr_chars;
     if (!(fp = fopen(argv[1], "r")))
         err(FILE_OPEN_ERR, "can't open file '%s' for reading", argv[1]);
