@@ -3,7 +3,8 @@ CFLAGS = -O2 -g -Wall -Wextra
 
 APPL  = logical_order_f90.exe logical_order_c.exe init_proc_vars_f90.exe \
         unintended_global_f90.exe improper_conditionals_c.exe \
-        udt_intent_out_f90.exe count_nucleotides_c.exe
+        udt_intent_out_f90.exe count_nucleotides_c.exe \
+        bitwise_vs_logical_c.exe logical_control_flow_c.exe
 C_APPL = $(filter %_c.exe, $(APPL))
 CHECK = $(patsubst %_c.exe, %.c, $(C_APPL))
 
