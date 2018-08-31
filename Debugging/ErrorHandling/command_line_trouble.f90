@@ -14,8 +14,9 @@ program command_line_trouble
     call get_command_argument(2, buffer)
     read (buffer, fmt='(F25.16)', iostat=ierr, iomsg=msg) x
     if (ierr /= 0) then
-        write (unit=error_unit, fmt='(2A)') &
-            '### error: can not converto real: ', buffer
+        write (unit=error_unit, fmt='(4A)') &
+            '### error: can not convert to real: ', trim(buffer), &
+            ', ', trim(msg)
         stop 2
     end if
     print '(A, I10, F25.16)', 'read ', n, x
