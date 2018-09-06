@@ -13,6 +13,12 @@ A few illustration of error handling.
     programmer can handle it.
 1. ``file_error.c`: illustrates error handling in the context of
     file I/O.
+1. `ieee_exceptions.c`: C application to illustrate how to detect
+    IEEE floating point exceptions using `fetestexcept`.
+1. `ieee_functions.c`: C application to illustrate how to detect
+    IEEE floating point exceptions using `isnormal`.
+1. `overflow_sum.c`: C application to illustrate more real-world
+    example of detecting IEEE floating point overflow exception.
 1. `read_error_incorrect.c`: illustration of the problems caused by
     not checking the result of `fscanf`.
 1. `read_error.c`: illustration of how a check of the return value
