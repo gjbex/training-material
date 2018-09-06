@@ -1,6 +1,7 @@
 #include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 #define ARG_ERR 1
 #define FILE_OPEN_ERR 2
