@@ -25,6 +25,9 @@ A few illustration of error handling.
     not support the intrinsic `ieee_arithmetic` module.
 1. `overflow_sum.c`: C application to illustrate more real-world
     example of detecting IEEE floating point overflow exception.
+1. `overflow_sum.f90`: Fortran application to illustrate more
+    real-world example of detecting IEEE floating point overflow
+    exception.
 1. `read_error_incorrect.c`: illustration of the problems caused by
     not checking the result of `fscanf`.
 1. `read_error.c`: illustration of how a check of the return value
