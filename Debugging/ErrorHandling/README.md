@@ -17,6 +17,12 @@ A few illustration of error handling.
     IEEE floating point exceptions using `fetestexcept`.
 1. `ieee_functions.c`: C application to illustrate how to detect
     IEEE floating point exceptions using `isnormal`.
+1. `ieee_functions.f90`: Fortran to illustrate how to detect
+    IEEE floating point exceptions using `ieee_is_nan` and
+    `ieee_is_finite`.
+1. `ieee_tricks.f90`: Fortran to illustrate how to detect
+    IEEE floating point exceptions using tricks for compilers that do
+    not support the intrinsic `ieee_arithmetic` module.
 1. `overflow_sum.c`: C application to illustrate more real-world
     example of detecting IEEE floating point overflow exception.
 1. `read_error_incorrect.c`: illustration of the problems caused by

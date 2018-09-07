@@ -7,7 +7,7 @@ LDLIBS = -lm
 all: allocation_error.exe command_line_args_error.exe file_error.exe \
 	 read_error.exe read_error_incorrect.exe \
 	 command_line_trouble_f90.exe ieee_exceptions.exe overflow_sum.exe \
-	 ieee_functions.exe
+	 ieee_functions.exe ieee_tricks_f90.exe ieee_functions_f90.exe
 
 %_f90.exe: %.o
 	$(FC) $(FFLAGS) -o $@ $<
