@@ -1,7 +1,7 @@
 program deallocating
     implicit none
     integer, parameter :: default_n = 5
-    integer :: i, n, sum
+    integer :: i, n
     integer, allocatable, dimension(:) :: a
 
     ! handle command line arguments

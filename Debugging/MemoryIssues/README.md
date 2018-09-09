@@ -28,4 +28,6 @@ such as Valgrind or Intel Inspector.
     unbounded recursion.
 1. `trivial_array_bounds.c`: trivial array out of bounds problem that
     is detected by Valgrind as using an uninitialized value.
+1. `unallocated.f90`: illustration of using unallocated memory,
+    resulting in a segmentation fault.
 1. `Makefile`: make file to build using GCC.

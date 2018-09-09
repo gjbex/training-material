@@ -7,6 +7,8 @@
     Fortran code.
 1. `ConstQual`: illustrates bugs caused by type casts that drop the `const`
     qualifier of a variable.
+1. `Conversions`: illustration of using compiler flags to detect
+    suspicious data conversions.
 1. `DanglingPointers`: illustration of Intel's facilities to detect
     pointer issues at runintme.
 1. `FloatEqual`: illustration of the a compiler options to check for
