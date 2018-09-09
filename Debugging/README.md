@@ -27,6 +27,8 @@ them.
 1. `Gdb`: some sample code to illustrate using GDB.
 1. `GitBisect`: illustration of using `git bisect` to find the first bad
     commit.
+1. `Heisenbugs`: illustration of bugs that have a level of
+    non-deterministic behaviour.
 1. `MPI`: MPI code to illustrate using Allinea DDT and MUST.
 1. `OpenMP`: OpenMP multi-threaded code illustrating using GDB and DDT.
 1. `Pfunit`: very simple illustration of how to use the pFUnit testing
