@@ -14,8 +14,9 @@ program allocation_error
     end if 
     allocate(data(n), stat=istat)
     if (istat /= 0) then
-        write (unit=error_unit, fmt='(A, I10)') &
-            'can not allocate array of size ', n
+        write (unit=error_unit, fmt='(A, I3, A, I10)') &
+            '### error in ' // trim(__FILE__) // ',', __LINE__, &
+            ': can not allocate array of size ', n
         stop allocation_err
     end if
     call init_array(data)
