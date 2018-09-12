@@ -2,8 +2,7 @@ module tree_mod
     use, intrinsic :: iso_fortran_env, only : error_unit
     implicit none
 
-    private
-    type :: node_ptr_type
+    type, private :: node_ptr_type
         private
         class(node_type), pointer :: obj
     end type node_ptr_type
@@ -23,9 +22,9 @@ module tree_mod
         procedure, public :: visit
     end type node_type
 
-    integer, parameter :: allocation_err = 10, &
+    integer, protected :: allocation_err = 10, &
                           invalid_child_index_err = 11
-
+                        
 contains
 
     function new(value, nr_children) result(node)
@@ -138,5 +137,19 @@ contains
             call child%visit(transformation)
         end do
     end subroutine visit
+
+    recursive subroutine finalize(this)
+        implicit none
+        type(node_type), pointer, intent(inout) :: this
+        type(node_type), pointer :: child
+        integer :: child_nr
+        do child_nr = 1, this%get_nr_children()
+            child => this%get_child(child_nr)
+            if (associated(child)) then
+                call finalize(child)
+            end if
+        end do
+        deallocate(this)
+    end subroutine finalize
 
 end module tree_mod

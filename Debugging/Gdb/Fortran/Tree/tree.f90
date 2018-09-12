@@ -1,5 +1,5 @@
 program tree
-    use :: tree_mod
+    use :: tree_mod, only : node_type, finalize
     implicit none
     type(node_type), pointer :: root
     type(node_type), pointer :: node
@@ -27,13 +27,22 @@ program tree
     print '(A, ES15.5)', 'node 1.1.2: ', &
         node%get_value()
 
+    ! dissociate pointer
+    node => null()
+
+    ! print the tree
     print '(A)', 'tree:'
     call root%show()
 
+    ! transform the tree by adding 1 to the value of each node
     call root%visit(add_one)
 
+    ! print the transformed tree
     print '(A)', 'transformed tree:'
     call root%show()
+
+    ! deallocate memory
+    call finalize(root)
 
 contains
 
