@@ -1,10 +1,13 @@
 FC = gfortran
 FFLAGS = -g -O0 -Wall -Wextra
 
-all: tree.exe
+all: tree.exe display_demo.exe
 
 tree.exe: tree_mod.o tree.o
 	$(FC) $(FFLAGS) -o $@ $^
+
+%.exe: %.o
+	$(FC) $(FFLAGS) -o $@ $<
 
 %.o: %.f90
 	$(FC) $(FFLAGS) -c -o $@ $<
