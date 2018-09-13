@@ -5,5 +5,5 @@ concept.
 
 ## Waht is it?
 `. `heisenbug.c`: an example C application where a but manigest itself
-    based on the oder of function calls and the memory allocation.
+    based on the order of function calls and the memory allocation.
 1. `Makefile`: make file to build the software.
