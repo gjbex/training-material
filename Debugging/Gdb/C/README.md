@@ -15,4 +15,4 @@ Some C examples to use while showing GDB features.
     switching.
 1. `Makefile`: make file to build the code.
 1. `Scenarios`: scenarios for illustrating GDB features.
-1. `Vectors`: applications to illustrate GDB features.
+1. `Features`: applications to illustrate GDB features.
