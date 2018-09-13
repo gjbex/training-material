@@ -2,9 +2,9 @@ CC = gcc
 CFLAGS = -O0 -g -Wall -Wextra
 LDLIBS = -lm
 
-all: features.exe
+all: vectors.exe
 
-%.exe: vectors.o %.o
+vectors.exe: vectors.o vector_main.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.c
