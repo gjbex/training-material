@@ -24,5 +24,18 @@ int main() {
     for (int j = 0; j < nr_vectors; j++)
         free_vector(vectors[j]);
     free(vectors);
+    nr_vectors = 100;
+    Vector *vectors2[nr_vectors];
+    for (int j = 0; j < nr_vectors; j++) {
+        vectors2[j] = init_vector(vector_len);
+        fill_vector(vectors2[j], j, 0.1*(j + 1.0));
+        // print_vector(vectors2[j]);
+    }
+    double avg_length = 0.0;
+    for (int j = 0; j < nr_vectors; j++)
+        avg_length += vector_length(vectors2[j]);
+    printf("average length = %.5le\n", avg_length/nr_vectors);
+    for (int j = 0; j < nr_vectors; j++)
+        free_vector(vectors2[j]);
     return 0;
 }
