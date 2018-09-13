@@ -6,6 +6,8 @@ Some illustrations of arithmetic bugs.
     of different orders of magnitude.
 1. `addition.c`: C implementation of illustration of loss of precision
     when adding numbers of different orders of magnitude.
+1. `associativity.c`: simple illustration of violation of associativity in
+    addition.
 1. `float_overflow.c`: illustration of code that generates `inf`.
 1. `float_overflow_nan.c`: illustrates overflow and not-a-number resulting
     from various computations.
