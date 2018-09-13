@@ -6,6 +6,8 @@ Some illustrations of arithmetic bugs.
     of different orders of magnitude.
 1. `addition.c`: C implementation of illustration of loss of precision
     when adding numbers of different orders of magnitude.
+1. `associativity.c`: simple illustration of violation of associativity in
+    addition.
 1. `float_overflow.c`: illustration of code that generates `inf`.
 1. `float_overflow_nan.c`: illustrates overflow and not-a-number resulting
     from various computations.
@@ -27,6 +29,7 @@ Some illustrations of arithmetic bugs.
     zero as captured by GCC sanitizer.
 1. `integer_divide_by_zero.c`: illustration of integer point division by
     zero as captured by GCC sanitizer.
+1. `nans_infs.c`: illustration of infinity and NaNs.
 1. `Makefile`: make file to build the applications.
 1. `FpeOverhead`: code to measure FPE trapping overhead.
 
