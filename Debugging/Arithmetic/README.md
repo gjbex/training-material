@@ -29,6 +29,7 @@ Some illustrations of arithmetic bugs.
     zero as captured by GCC sanitizer.
 1. `integer_divide_by_zero.c`: illustration of integer point division by
     zero as captured by GCC sanitizer.
+1. `nans_infs.c`: illustration of infinity and NaNs.
 1. `Makefile`: make file to build the applications.
 1. `FpeOverhead`: code to measure FPE trapping overhead.
 

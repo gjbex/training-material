@@ -12,7 +12,7 @@ all: addition.exe overflow_cpp.exe float_overflow.exe \
         underflow.exe  underflow_c_fpe.exe underflow_f90_fpe.exe  \
         equality.exe float_overflow_nan.exe trace_nan_f90.exe \
         trace_nan_f90_fpe.exe trace_nan_c.exe trace_nan_c_fpe.exe \
-        integer_division_f90.exe associativity.exe
+        integer_division_f90.exe associativity.exe nans_infs.exe
 
 
 
