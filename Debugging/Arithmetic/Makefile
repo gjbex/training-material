@@ -1,5 +1,7 @@
+CC = gcc
 OPTFLAGS = -O2
 CFLAGS = -g -Wall -Wextra
+FC = gfortran
 FFLAGS = -g -Wall -Wextra
 FFPEFLAGS = -ffpe-trap=invalid,zero,overflow,underflow
 CFPEFLAGS = -O0 -D_GNU_SOURCE -DFPE_TRAP 
@@ -10,7 +12,7 @@ all: addition.exe overflow_cpp.exe float_overflow.exe \
         underflow.exe  underflow_c_fpe.exe underflow_f90_fpe.exe  \
         equality.exe float_overflow_nan.exe trace_nan_f90.exe \
         trace_nan_f90_fpe.exe trace_nan_c.exe trace_nan_c_fpe.exe \
-        integer_division_f90.exe
+        integer_division_f90.exe associativity.exe nans_infs.exe
 
 
 
@@ -49,7 +51,7 @@ sanitizer: float_divide_by_zero.exe integer_divide_by_zero.exe
 %.exe: %.c
 	$(CC) $(CFLAGS) -fsanitize=integer-divide-by-zero \
                     -fsanitize=float-divide-by-zero \
-                    -o $@ $<
+                    -o $@ $< $(LDLIBS)
 
 clean:
 	$(RM) *.exe *.o *.mod
