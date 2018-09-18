@@ -9,3 +9,6 @@ Various applications to be used to illustrate GDB featrues.
 1. `vector_main.c`: main program using the `Vector` data type,
     can be used to illustrate the difference between stack
     and heap arrays, as well as the GDB `explore` command.
+1. `infinitely_running.c`: application that runs forever
+    to illustrate GDB attaching to running applications.
+1. `Makefile`: make file to build the applications.
