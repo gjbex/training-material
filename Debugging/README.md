@@ -7,6 +7,7 @@ them.
 1. `Arithmetic`: illustrations of arithmetic bugs.
 1. `Catch2`: very simple illustrations of using Catch2 for C++ unit
     testing and BDD.
+1. `ClangTidy`: code to experiment with `clang-tidy`.
 1. `Const`: illustrates some subtleties of `const` declarations in C/C++.
 1. `ControlFlow`: illustrations of bugs in the control flow.
 1. `MemoryIssues`: sample code to illustrate various memory issues.
