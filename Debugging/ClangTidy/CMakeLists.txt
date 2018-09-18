@@ -23,3 +23,18 @@ install (TARGETS stack_issue.exe DESTINATION bin)
 
 add_executable (uninitialized_variable.exe uninitialized_variable.c)
 install (TARGETS uninitialized_variable.exe DESTINATION bin)
+
+add_executable (array_cpp.exe array_cpp.cpp)
+install (TARGETS array_cpp.exe DESTINATION bin)
+
+add_executable (minimum.exe minimum.cpp)
+install (TARGETS minimum.exe DESTINATION bin)
+
+add_executable (priority_queue_stl.exe priority_queue_stl.cpp)
+install (TARGETS priority_queue_stl.exe DESTINATION bin)
+
+add_executable (rpn_calc.exe rpn_calc.cpp)
+install (TARGETS rpn_calc.exe DESTINATION bin)
+
+add_executable (serialization.exe serialization.cpp)
+install (TARGETS serialization.exe DESTINATION bin)
