@@ -1,12 +1,11 @@
-Fortran matrices
-================
-
+# Fortran matrices
 A nice feature of Fortran is that matrices are first class citizens,
 i.e., compilers can actually exploit this for optimization, vectorization,
 and even parallelization.
 
-What is it?
------------
+## What is it?
+1. `bounds_test.f90`: illustrates array bounds are local, i.e., not passed
+    to procedures in which the array is used.
 1. `calc_test.f90`: illustrates mathematical operations with matrices such
     as addition, element-wise multiplication, division and exponentiation,
     as well as matrix product.  Adding a scalar to or multiplying a scalar
@@ -33,6 +32,5 @@ a matrix of arbitrary dimensions to a procedure, and determine those
 using the `shape` function.
 `print_matrix` also illustrates how to dynamically create a format string.
 
-How to build?
--------------
+## How to build?
 A make file is provided.

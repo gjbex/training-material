@@ -10,9 +10,12 @@ OBJS_POINTER = precision_defs_mod.o matrix_ops.o pointer_test.o
 OBJS_SUBARRAY = precision_defs_mod.o matrix_ops.o subarray_test.o
 
 APPS = alloc_test calc_test calc_alloc_test pointer_test subarray_test \
-       array_init_test failed_allocate_test
+       array_init_test failed_allocate_test bounds_test
 
 all: $(APPS)
+
+bounds_test: bounds_test.f90
+	$(F90) $(FFLAGS) -o $@ $<
 
 alloc_test: $(OBJS_ALLOC)
 	$(F90) $(FFLAGS) -o $@ $(OBJS_ALLOC) $(LDFLAGS) $(LIBS)

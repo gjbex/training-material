@@ -1,4 +1,5 @@
 alloc_test
+bounds_test
 calc_test
 calc_alloc_test
 pointer_test
