@@ -1,7 +1,6 @@
-F90 = gfortran
-FFLAGS = -O2 -g
-LDFLAGS =
-LIBS = -lm
+FC = gfortran
+FFLAGS = -O2 -g -Wall -Wextra
+LDLIBS = -lm
 
 OBJS_ALLOC = precision_defs_mod.o matrix_ops.o alloc_test.o
 OBJS_CALC = precision_defs_mod.o matrix_ops.o calc_test.o
@@ -14,32 +13,33 @@ APPS = alloc_test calc_test calc_alloc_test pointer_test subarray_test \
 
 all: $(APPS)
 
-bounds_test: bounds_test.f90
-	$(F90) $(FFLAGS) -o $@ $<
+bounds_test: bounds_test.o
+	$(FC) $(FFLAGS) -o $@ $<
 
 alloc_test: $(OBJS_ALLOC)
-	$(F90) $(FFLAGS) -o $@ $(OBJS_ALLOC) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(OBJS_ALLOC) $(LDFLAGS) $(LDLIBSS)
 
 calc_test: $(OBJS_CALC)
-	$(F90) $(FFLAGS) -o $@ $(OBJS_CALC) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(OBJS_CALC) $(LDFLAGS) $(LDLIBSS)
 
 calc_alloc_test: $(OBJS_CALC_ALLOC)
-	$(F90) $(FFLAGS) -o $@ $(OBJS_CALC_ALLOC) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(OBJS_CALC_ALLOC) $(LDFLAGS) $(LDLIBSS)
 
 pointer_test: $(OBJS_POINTER)
-	$(F90) $(FFLAGS) -o $@ $(OBJS_POINTER) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(OBJS_POINTER) $(LDFLAGS) $(LDLIBSS)
 
 subarray_test: $(OBJS_SUBARRAY)
-	$(F90) $(FFLAGS) -o $@ $(OBJS_SUBARRAY) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(OBJS_SUBARRAY) $(LDFLAGS) $(LDLIBSS)
 
 array_init_test: array_init_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBSS)
 
 failed_allocate_test: failed_allocate_test.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBSS)
 
 %.o: %.f90
-	$(F90) $(FFLAGS) -c $<
+	$(FC) $(FFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(APPS) *.o *.mod
+	$(RM) $(APPS) $(wildcard *.o) $(wildcard *.mod)
+	$(RM) core #(wildcard core.*)
