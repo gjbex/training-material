@@ -1,7 +1,7 @@
-F90 = gfortran
+FC = gfortran
 FFLAGS = -O2 -g
 LDFLAGS = 
-LIBS = -lm
+LDLIBS = -lm
 
 TIME_FUNCS_OBJS = math_func_interface.o math_func_mod.o \
                   time_func_mod.o time_funcs.o
@@ -17,22 +17,23 @@ APPS = time_funcs.exe recursion_test.exe internals_test.exe \
 all: $(APPS)
 
 time_funcs.exe: $(TIME_FUNCS_OBJS)
-	$(F90) $(FFLAGS) -o $@ $(TIME_FUNCS_OBJS) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(TIME_FUNCS_OBJS) $(LDFLAGS) $(LDLIBS)
 
 internals_test.exe: $(INTERNALS_OBJS)
-	$(F90) $(FFLAGS) -o $@ $(INTERNALS_OBJS) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(INTERNALS_OBJS) $(LDFLAGS) $(LDLIBS)
 
 quad_test.exe: $(QUAD_OBJS)
-	$(F90) $(FFLAGS) -o $@ $(QUAD_OBJS) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(QUAD_OBJS) $(LDFLAGS) $(LDLIBS)
 
 line_test.exe: $(LINE_OBJS)
-	$(F90) $(FFLAGS) -o $@ $(LINE_OBJS) $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $(LINE_OBJS) $(LDFLAGS) $(LDLIBS)
 
 %.exe: %.o
-	$(F90) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LIBS)
+	$(FC) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBS)
 
 %.o: %.f90
-	$(F90) $(FFLAGS) -c $<
+	$(FC) $(FFLAGS) -c $<
 
 clean:
-	rm -f *.o *.mod $(APPS)
+	$(RM) $(wildcard *.o) $(wildcard *.mod) $(APPS)
+	$(RM) core $(wildcard core.*)
