@@ -1,12 +1,11 @@
-Fortran functions
-=================
+# Fortran functions
 
 A number of features of Fortran procedures are illustrated.  Procedures
 can be passed to other procedures as arguments, where type information is
 provided via an interface.  Functions can be defined recursively.
 
-What is it?
------------
+## What is it?
+-
 1. `recursion_test`: the `funcs_mod` module defines the recursive function
     `factorial` that compute `n!` recursively.
 1. `time_funcs`: the program times a number of mathematical functions
@@ -26,10 +25,11 @@ What is it?
     retain their value between procedure calls when initialized in
     declaration.
 1. `quad_test`: illustrates using a function as a procedure argument
+1. `quick_sort`: illustration of a recursive subroutine.
 1. `line_test`: extra, more sensible example of internal procedures
 1. `root.f90`: compute root of a function using bisection method,
     illustrates use of an interface.
 
-How to build?
--------------
+## How to build?
+
 A make file is provided.
