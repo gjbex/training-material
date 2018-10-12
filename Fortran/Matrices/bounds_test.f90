@@ -5,6 +5,7 @@ program bounds_test
     print '("program: ", I0, " -> ", I0)', &
         lbound(values), ubound(values)
     call print_array(values)
+    print '(I0)', values
 
 contains
 
