@@ -12,21 +12,7 @@ of a VSC cluster (we'll assume you using thinking here, but the apporoach
 works for all our clusters).
 
 
-## Prerequistes
-
-Some software installation and configuration is required before you can get
-started.
-
-### NoMachine
-
-Although alternatives exist, the easiest approach is to use the
-NX login nodes, since this provides a GUI environment on a cluster login
-node.  The installation and setup of the NoMachine software on your computer
-is documented on the VSC
-[User Portal](https://www.vscentrum.be/client/multiplatform/nx-start-guide).
-Once NoMachine is installed and configured, you can connect to the cluster.
-
-### Installing Jupyter
+## Prerequiste:
 
 The most convenient way to install Jupyter, and any other Python packages
 you require is using conda.  In case you're not familiar with conda, please
@@ -36,7 +22,16 @@ assume that the conda environment's name that has Jupyter installed is
 directory is in your `PATH` variable.
 
 
-## Using a notebook
+## Using a notebook on an NX node
+
+### Prerequiste: NoMachine
+
+Although alternatives exist, the easiest approach is to use the
+NX login nodes, since this provides a GUI environment on a cluster login
+node.  The installation and setup of the NoMachine software on your computer
+is documented on the VSC
+[User Portal](https://www.vscentrum.be/client/multiplatform/nx-start-guide).
+Once NoMachine is installed and configured, you can connect to the cluster.
 
 ### Starting the server
 
@@ -85,3 +80,66 @@ ssh -L 30140:localhost:8888 -N r5i1n7
 
 Now, start firefox on the NX login node, and browse to the link the
 Jupyter notebook server displayed.  Enjoy.
+
+
+## Using a notebook by tunneling from a Windows machine to a genius GPU node
+
+See the [YouTube video tutorial](https://youtu.be/1TZ86K5KUow).
+
+
+## Using a notebook by tunneling from a Linux machine to a genius GPU node
+
+Assumptions:
+
+  1. The local machine's name is `local`.
+  1. The VSC account is vsc30140, replace with your own.
+  1. The port number is 30140, replace with the numerical part of your
+    VSC account.
+  1. The conda environment in which Jupyter notebook is installed is
+    `machine_learning`, again, replace with your own.
+  1. The GPU node the job is running on is `r23g36`, replace with the
+    hostname of the node your job runs on.
+
+
+### Start a job & a notebook
+
+First, start an interactive job on a compute node, and launch Jupyter
+notebook.
+
+
+Detailed steps:
+
+    1. Log in the the genius login node using ssh:
+        `local$ ssh vsc30140@login3-tier2.hpc.kuleuven.be`
+    1. Start an interactive job on a GPU node:
+        ```
+        login3$ qsub -I -A lpt2_pilot_2018 -l nodes=1:ppn=9:gpus=1 \
+               -l partition gpu -l walltime=03:00:00
+        ```
+    1. When the job is running on the GPU node, activate your environment:  
+        `r23g36$ source activate machine_learning`
+    1. Start the Jupyter notebook, use a unique port number:
+        `r23g36$ jupyter notebook --port 30140`
+
+### Set up SSH tunnel
+
+Next, you set up a first tunnel from your machine to the GPU node on the SSH port of the GPU node.
+
+Detailed steps:
+
+`local$ ssh -L1022:r23g36:22 -N vsc3010@login3-tier2.hpc.kuleuven.be`
+
+*Note:* this command will not exit, if you like to do everything in one
+terminal, put the process in the background using `&`.
+
+
+### Set up Jupyter notebook tunnel
+
+You can now  set up a tunnel from your local machine to the GPU note through the SSH tunnel you created in the previous step.
+
+`local$ ssh -L30140:localhost:30140 -N -p 1022 vsc30140@localhost`
+
+### Open the interface to Jupyter notebook
+
+Finally, open your web browser on your local machine, copy/paste the
+link that Jupyter notebook displays into your browser, and *presto!*
