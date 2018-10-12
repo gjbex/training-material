@@ -5,14 +5,18 @@ A few illustration of error handling.
 1. `Assert`: illustration of assertions in C, note that this
     should never be used for error handling.
 1. `allocation_error.c`: illustration of error handling in the context
-    of dynamic memory management.
+    of dynamic memory management for C.
+1. `allocation_error.f90`: illustration of error handling in the context
+    of dynamic memory management for Fortran.
 1. `command_line_args_error.c`: illustrates undefined behaviour of
 `   `atol` et al., and illustrating `strtol` alternative.
 1. `command_line_trouble.f90`: illustrates how Fortran deals with
     invalid data for string to number conversion, and how the
     programmer can handle it.
 1. ``file_error.c`: illustrates error handling in the context of
-    file I/O.
+    file I/O in C.
+1. ``file_error.f90`: illustrates error handling in the context of
+    file I/O in Fortran.
 1. `ieee_exceptions.c`: C application to illustrate how to detect
     IEEE floating point exceptions using `fetestexcept`.
 1. `ieee_functions.c`: C application to illustrate how to detect
