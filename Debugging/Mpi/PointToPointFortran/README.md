@@ -8,6 +8,8 @@ Illustration of issues involving point-to-point MPI communication.
 1. `data_race.f90`: application that has a data race.
 1. `data_race.f90`: application that avoids a data race by using
     `MPI_Wait`.
+1. `async_test.f90`: application to check whether the Fortran compiler is
+    TS-29113  compliant.
 1. `Makefile`: make file to build the code.
 
 ## How to use it?

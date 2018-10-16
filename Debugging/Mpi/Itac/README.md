@@ -15,6 +15,8 @@ Collector) for debugging purposes.
 1. `Makefile`: make file to build the applications.
 1. `setup.sh`: file to source to setup the environment for using Intel
     compilers and ITAC.
+1. `Verification`: illustration of how to use the ITAC libraries for MPI
+    verification.
 
 ## How to use?
 First, check whether the file `setup.sh` has the correct defintions of
