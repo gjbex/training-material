@@ -1,6 +1,5 @@
-# Tree
-Implementation of an n-ary tree mainly to demonstrate features of the
-GDB debugger.
+# Features
+Various applications to be used to illustrate GDB featrues.
 
 ## What is it?
 1. `channge_command.f90`: simple application to show how to use a
