@@ -1,7 +1,8 @@
 FC = mpif90
 FFLAGS = -O2 -g -Wall -Wextra
 
-all: deadlock.exe async_send.exe data_race.exe async_recv.exe
+all: deadlock.exe async_send.exe data_race.exe async_recv.exe \
+	 async_test.exe
 
 %.exe: %.o
 	$(FC) $(FFLAGS) -o $@ $<
