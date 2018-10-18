@@ -35,6 +35,8 @@ them.
 1. `Pfunit`: very simple illustration of how to use the pFUnit testing
 	framework for Fortran unit testing.
 1. `Qmtest`: illustration of how to use QMTest for integration testing.
+1. `Semantics`: illustrations of bugs caused by incorrect interpretration
+    or implementation of a programming language's semantics.
 1. `Shunit2`: illustration of how to use shunit2 for integration testing.
 1. `SyntaxSemantics`: trivial examples of syntax versus semantic errors in
     code.
