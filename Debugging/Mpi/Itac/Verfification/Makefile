@@ -10,4 +10,5 @@ all: buffer_size.exe
 
 clean:
 	$(RM) $(wildcard *.o) $(wildcard *.exe)
+	$(RM) $(wildcard *.prot)
 	$(RM) $(wildcard core.*) core
