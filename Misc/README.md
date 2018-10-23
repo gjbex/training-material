@@ -6,3 +6,4 @@ Some miscellaneous presentation for one-off trainings, or special sessions.
     VSC user day, workshop on profiling and debugging.
 1. `worker_atoos.pptx`: slides for VSC lunchbox session on the worker and
     atools frameworks for parameter exploration scenarios.
+1. `Notebooks`: material for a lunchbox session on Jupyter notebooks.
