@@ -1,7 +1,7 @@
 Integrate
 =========
 
-This illustrates the implementation by two user defined bypes of and
+This illustrates the implementation by two user defined types of and
 abstract type that declares an abstract procedure.
 
 What is it?

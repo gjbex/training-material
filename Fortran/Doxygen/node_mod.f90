@@ -1,6 +1,6 @@
 !> @brief module implementing a binary tree
 !>
-!> This module implements a user defined bype to represent nodes in
+!> This module implements a user defined type to represent nodes in
 !> a binary tree.  It also implements a few methods that work on trees.
 module node_mod
     use, intrinsic :: iso_fortran_env
