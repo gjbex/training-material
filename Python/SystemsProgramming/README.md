@@ -10,6 +10,7 @@ This is example code on how to do systems programming in Python.
   1. `system_information.ipynb`: Jupyter notebook illustrating how to
      use several standard library modules to retrieve information from
      the operating system.
+  1. `julia.ipynb`: illustration of monitoring a running process.
   1. `subprocess_environment.py`: script illustrating how to set
      environment variables for processes run via `subprocess`.
   1. `sys_info.py`: script illustrating how to retrieve information
