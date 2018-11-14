@@ -20,3 +20,9 @@ This is example code on how to do systems programming in Python.
      environment variables for processes run via `subprocess`.
   1. `sys_info.py`: script illustrating how to retrieve information
      from the operating system, the Python environment, and so on.
+  1. `config_args.py`: script illustrating how to use options in a
+     default configuration file that can be overridden by a
+     configuration file specified on the command line, that can be
+     overridden by command line arguments.
+  1. `system.conf`: default configuration file for `config_args.py`.
+  1. `user.conf`: command line configuration file for `config_args.py`.
