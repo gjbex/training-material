@@ -21,3 +21,5 @@ Type checking can be done using [mypy](http://mypy-lang.org/index.html).
 1. `dict_incorrect.py`: code that counts the words in a text read from
     standard input.  The counts are subsequently normalized to `float`,
     which is a type error.
+1. `people_incorrect.py`: code that defines a `People` class, stores some
+    in a list with mistakes.

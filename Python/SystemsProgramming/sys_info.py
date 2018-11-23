@@ -6,7 +6,7 @@ import platform
 import sys
 
 if __name__ == '__main__':
-    arg_parser = ArgumentParser('sytem and process info utility')
+    arg_parser = ArgumentParser(description='system and process info utility')
     arg_parser.add_argument('--platform', action='store_true',
                             help='show platform info')
     arg_parser.add_argument('--python', action='store_true',
