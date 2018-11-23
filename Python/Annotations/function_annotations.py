@@ -4,7 +4,6 @@ from typing import Sequence, TypeVar, Dict
 
 T = TypeVar('T')
 
-
 def count_chars(sequence: Sequence[T]) -> Dict[T, int]:
     counter = {}
     for element in sequence:
