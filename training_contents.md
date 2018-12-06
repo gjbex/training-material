@@ -71,7 +71,7 @@ Subjects:
   * control flow statements (conditional, repetition)
   * functions
   * data types
-  * file I/)
+  * file I/O
 
 Prerequisites:
 
