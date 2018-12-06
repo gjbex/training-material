@@ -6,6 +6,8 @@ offered by Jupyter notebooks.
 1. `notebook_example.ipynb`: basic notebook features illustration.
 1. `fortran_magic.ipynb`: illustration of the Fortran magic to define
     and use Fortran procedures in Python Jupyter notebooks.
+1. `fortran_omp.ipynb`: illustration of using the Fortran magic to define
+    and run a Fortran procedure that uses OpenMP.
 1. `r_python.ipynb`: illustration of how to use Python and R in the same
     notebook using `rpy2`.
 1. `example.md`: MarkDown file to execute and produce a notebook using
