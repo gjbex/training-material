@@ -57,7 +57,7 @@ Prerequisites:
   * experience in another programming language
 
 
-## Python trainings
+## Python training sessions
 
 ### Python as a second language (4 hours)
 
@@ -220,7 +220,7 @@ Prerequisites:
   * experience in C, C++ or Fortran programming
 
 
-## OpenMP (7 hours)
+### OpenMP (7 hours)
 
 OpenMP provides a very convenient programming model for scientific
 applications that run multiple threads.  It is supported by C, C++ and
@@ -316,7 +316,7 @@ Prerequisites:
   * none
 
 
-## Version control: git or SVN (4 hours)
+## Version control: git or SVN (3 hours)
 
 Version control is an essential part of the software development process
 and is crucial for scientific application to help reproducibility.
