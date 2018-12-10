@@ -7,3 +7,5 @@ Some miscellaneous presentation for one-off trainings, or special sessions.
 1. `worker_atoos.pptx`: slides for VSC lunchbox session on the worker and
     atools frameworks for parameter exploration scenarios.
 1. `Notebooks`: material for a lunchbox session on Jupyter notebooks.
+* `Spark`: some Spark-related material, also see the `Pyspark` subdirectory
+    under `Python`.

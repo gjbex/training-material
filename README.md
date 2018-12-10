@@ -48,7 +48,6 @@ Tips and tricks can be found on this [repository's website](http://gjbex.github.
     used in a tutorial on using Python for scientific data processing.
 * [`R`](R): some very simple illustrations of how to run R scripts from the
     command line, and to submit as (PBS) jobs
-* [`Spark`](Spark): some Spark-related material. (Work in progress)
 * [`Virtualization`](Virtualization): Information on how to use Singularity.
     (Work in progress)
 * [`Visualization`](Visualization): data files, XDMF files and ParaView state
