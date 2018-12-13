@@ -8,7 +8,8 @@ LDLIBS = -lm
 .PRECIOUS: %.o
 
 all: julia_abs.exe julia.exe julia_tbb.exe julia_omp.exe \
-     simple_tbb.exe simple_reduce_tbb.exe vector_reduce_tbb.exe
+     simple_tbb.exe simple_reduce_tbb.exe vector_reduce_tbb.exe \
+     julia_tasks_omp.exe
 
 %_omp.exe: %_omp.cpp
 	$(CXX) $(CXXFLAGS) $(OMPFLAGS) -o $@ $^ $(LDLIBS)
