@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#PBS -l pmem=2gb
+#PBS -l walltime=00:05:00
+
+cd $PBS_O_WORKDIR
+
+module purge
+module load foss
+
+# verify that OpenMP environment variables have been passed
+# using -v options
+if [[ -n "$OMP_SCHEDULE" ]]
+then
+    (>&2 echo "### error: OpenMP schedule not set")
+    exit 1
+fi
+
+if [[ -n "$OMP_NUM_THREADS" ]]
+then
+    (>&2 echo "### error: OpenMP number of threads not set")
+    exit 2
+fi
+
+# ensure the executable is op to date
+make all
+if [[ $? -ne 0 ]]
+then
+    (>&2 echo "### error: make failed")
+    exit 3
+fi
+
+# run application on a sufficiently large matrix, disregarding
+# output, timing information is writting to a file
+./julia_omp.exe 4096 > /dev/null 2> "julia.time${PBS_JOBID}"
