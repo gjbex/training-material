@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #PBS -l pmem=2gb
 #PBS -l walltime=00:05:00
+#PBS -j oe
 
 cd $PBS_O_WORKDIR
 
