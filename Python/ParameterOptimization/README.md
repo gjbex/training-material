@@ -21,3 +21,6 @@ values a in parameter space are explored.
   1. `Makefile`: make file to build the Julia set application.
   1. `julia.pbs`: PBS script to run the Julia set applciation
     as a job.
+  1. `julia_optimize.py`: Python script to find optimal OpenMP
+    schedule, chunk size and number of threads for the Julia set
+    application.
