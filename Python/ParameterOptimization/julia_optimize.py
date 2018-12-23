@@ -35,12 +35,12 @@ def function(params):
 
 def optimize(max_evals):
     space = hp.choice('schedule', [
-        ('static', hp.qloguniform('chunk', 2, 11, 10),
-         hp.randint('ppn', 36)),
-        ('dynamic', hp.qloguniform('chunk', 2, 11, 10),
-         hp.randint('ppn', 36)),
-        ('guided', hp.qloguniform('chunk', 2, 11, 10),
-         hp.randint('ppn', 36)),
+        ('static', hp.qloguniform('chunk_s', 2, 11, 10),
+         hp.randint('ppn_s', 36)),
+        ('dynamic', hp.qloguniform('chunk_d', 2, 11, 10),
+         hp.randint('ppn_d', 36)),
+        ('guided', hp.qloguniform('chunk_g', 2, 11, 10),
+         hp.randint('ppn_g', 36)),
     ])
     trials = Trials()
     best = fmin(function, space=space, algo=tpe.suggest,
