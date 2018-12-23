@@ -8,8 +8,6 @@ these samples have been used for Python tutorials.
 
 # What is it?
 1. `Annotations`: illustration of type annotations.
-1. `ArgParse`: illustration of how to use the argparse module to handle
-    command line arguments.
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
     implements a Monte Carlo algorithm, and allows to show evolution over
     time, autocorrelation, and to compare with target distribution.
@@ -29,6 +27,8 @@ these samples have been used for Python tutorials.
     Python code at runtime.
 1. `CodeTesting`: illustration of how to use the `unittest` framework for
     setting up and executing unit tests
+1. `CommandLineArgs`: illustration of how to use the argparse and the
+    click module to handle command line arguments.
 1. `ConfigParser`: illustrates how to use the ConfigParser module to handle
     configuration files.
 1. `ContextManager`: illustrates the concept of a context manager, a
