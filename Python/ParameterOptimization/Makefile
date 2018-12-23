@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -fopenmp -O2 -g -Wall -Wextra
+CXXFLAGS = -fopenmp -std=c++14 -O2 -g -Wall -Wextra
 LDLIBS = -lm
 
 all: julia_omp.exe
