@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#PBS -A lp_sys
 #PBS -l pmem=2gb
 #PBS -l walltime=00:05:00
 #PBS -j oe
