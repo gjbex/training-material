@@ -14,10 +14,10 @@ def function(params):
     chunk = int(chunk)
     # ppn ranges from 0 to 35 (inclusive)
     ppn = 1 + int(ppn)
+    omp_env = f'OMP_SCHEDULE={schedule},{int(chunk)},'
+              f'OMP_NUM_THREADS={ppn}'
     cmd = ['qsub', '-l', f'nodes=1:ppn={ppn}',
-           '-v', f'OMP_SCHEDULE={schedule},{int(chunk)}',
-           '-v', f'OMP_NUM_THREADS={ppn}',
-           'julia.pbs']
+           '-v', omp_env, 'julia.pbs']
     process = subprocess.run(cmd, stdout=subprocess.PIPE,
                              encoding='utf8')
     job_id, *_ = process.stdout.split('.')
