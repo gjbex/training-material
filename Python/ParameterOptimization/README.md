@@ -6,7 +6,7 @@ values a in parameter space are explored.
 ## What is it?
 
   1. `parameter_optimization.ipynb`: Jupyter notebook
-    illustrating the hyperopt module.
+    illustrating the hyperopt and the BayianOptimization module.
   1. `continuous_process.py`: Python script that takes x and y
     y values as `--x` and `--y` options, and prints the value of
     the function to optimize to standard output.
