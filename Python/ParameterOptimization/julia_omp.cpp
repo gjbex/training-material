@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     valarray<int> ns = iterate_zs(zs, c, max_iters);
     auto end_time = chrono::steady_clock::now();
     auto duration = chrono::duration_cast<my_time_t>(end_time - start_time);
-    cerr << "time: " << duration.count()*1.0e-9 << " s" << endl;
+    cerr << duration.count()*1.0e-9 << endl;
     print_results(ns);
     return 0;
 }
