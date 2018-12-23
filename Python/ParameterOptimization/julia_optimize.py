@@ -21,9 +21,11 @@ def function(params):
     process = subprocess.run(cmd, stdout=subprocess.PIPE,
                              encoding='utf8')
     job_id, *_ = process.stdout.split('.')
+    print(f'### info: submitted job {job_id}', file=sys.stderr)
     output_file = Path(f'julia.pbs.o{job_id}')
     while not output_file.exists():
         time.sleep(3)
+    print(f'### info: job {job_id} finished', file=sys.stderr)
     with open(f'julia.time{job_id}', 'r') as time_file:
         runtime = float(time_file.readline())
     return {
