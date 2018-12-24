@@ -63,18 +63,18 @@ def main():
     arg_parser.add_argument('--trials', required=True,
                             help='file to save trials')
     options = arg_parser.parse_args()
-    best, trials = optimize(options.max_evals, options.max_ppn)
-    trials_file = open(options.trials, 'w') if options.trials else sys.stdout
+    _, trials = optimize(options.max_evals, options.max_ppn)
     with open(options.trials, 'w') as trials_file:
+        print('schedule,chunk,ppn,job_id,runtime',
+              file=trials_file)
         for trial in trials.results:
             schedule = trial['schedule']
             chunk = trial['chunk']
             ppn = trial['ppn']
             job_id = trial['job_id']
             runtime = trial['loss']
-            print(f'{schedule},{chunk:d} with {ppn:d} threads '
-                  f'({job_id}): {runtime}', file=trials_file)
-    print(best)
+            print(f'{schedule},{chunk:d},{ppn:d},'
+                  f'({job_id}),{runtime}', file=trials_file)
 
 
 if __name__ == '__main__':
