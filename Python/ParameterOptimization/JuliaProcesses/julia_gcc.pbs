@@ -23,4 +23,5 @@ fi
 module load conda
 source activate hyperopt
 
-./julia_optimize.py --max-ppn 20 --max-evals 100 --trials trials.txt
+./julia_optimize.py --max-ppn 20 --max-evals 100 \
+                    --trials trials_gcc.txt
