@@ -2,8 +2,10 @@
 #PBS -A lp_sys
 #PBS -l nodes=1:ppn=24:haswell
 #PBS -l pmem=2gb
-#PBS -l walltime=00:05:00
+#PBS -l walltime=03:00:00
 #PBS -j oe
+#PBS -m ae
+#PBS -M geertjan.bex@uhasselt.be
 
 cd $PBS_O_WORKDIR
 
@@ -15,10 +17,10 @@ make all
 if [[ $? -ne 0 ]]
 then
     (>&2 echo "### error: make failed")
-    exit 3
+    exit 1
 fi
 
 module load conda
 source activate hyperopt
 
-./julia_optimize.py
+./julia_optimize.py --max-ppn 20 --max-evals 100 --trials trials.txt
