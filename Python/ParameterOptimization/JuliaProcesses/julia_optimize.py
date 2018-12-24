@@ -21,6 +21,7 @@ def function(params):
     runtimes = list()
     for _ in range(3):
         process = subprocess.run(cmd, stderr=subprocess.PIPE,
+                                 stdout=subprocess.PIPE,
                                  env=environ, shell=True,
                                  encoding='utf8')
         runtimes.append(float(process.stderr))
@@ -65,7 +66,7 @@ def main():
             chunk = trial['chunk']
             ppn = trial['ppn']
             runtime = trial['loss']
-            print(f'{schedule},{chunk:d},{ppn:d}{runtime}',
+            print(f'{schedule},{chunk:d},{ppn:d},{runtime}',
                   file=trials_file)
 
 
