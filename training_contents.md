@@ -91,10 +91,11 @@ Subjects and Python modules that will be covered:
   * interacting with the operating system: os, platform, sys, psutil
   * interacting with the filesystem: os.path, pathlib, shutil,
     fileinput, tempfile
-  * command line arguments & configuration files: argparse, configparser 
+  * command line arguments & configuration files: argparse, click, configparser 
   * compressing & decompressing files: e.g., gzip, tarfile
   * running & communicating with other processes: sh, subprocess
   * running remote commands using SSH: paramiko
+  * logging information, warnings and errors: logging
 
 Prerequisites:
 
