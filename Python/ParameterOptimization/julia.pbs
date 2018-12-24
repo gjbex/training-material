@@ -46,7 +46,7 @@ time_file="julia.pbs.time${PBS_JOBID/\.*/}"
 
 # run application on a sufficiently large matrix, disregarding
 # output, timing information is writting to a file
-for i in seq 3
+for i in $(seq 3)
 do
     ./julia_omp.exe 4096 > /dev/null 2>> "${time_file}"
 done
