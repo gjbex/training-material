@@ -13,7 +13,7 @@ source switch_to_2018a
 module load foss
 
 # ensure the executable is op to date
-make all
+make CXX=g++ CXXFLAGS='-fopenmp -std=c++14 -O2' clean all
 if [[ $? -ne 0 ]]
 then
     (>&2 echo "### error: make failed")
