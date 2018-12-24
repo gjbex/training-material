@@ -13,7 +13,7 @@ source switch_to_2018a
 module load intel
 
 # ensure the executable is op to date
-make CXX=icpc CXXFLAGS='-qopenmp -std=c++14 -O2' cleann all
+make CXX=icpc CXXFLAGS='-qopenmp -std=c++14 -O2' clean all
 if [[ $? -ne 0 ]]
 then
     (>&2 echo "### error: make failed")
