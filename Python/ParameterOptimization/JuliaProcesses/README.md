@@ -14,5 +14,7 @@ processes.
   1. `julia_optimize.py`: Python script to find optimal OpenMP
     schedule, chunk size and number of threads for the Julia set
     application.
-  1. `julia.pbs`: PBS script to optimize the Julia set
-    applciation parameters as a job.
+  1. `julia_gcc.pbs`: PBS script to optimize the Julia set
+    applciation parameters as a job (GCC compiler).
+  1. `julia_intel.pbs`: PBS script to optimize the Julia set
+    applciation parameters as a job (Intel compiler).
