@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++14 -g -O2 -Wall -Wextra
 LDLIBS = -lm
 
-all: fac.exe
+all: fac.exe memory_leak.exe memory_leak_fixed.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $< $(LDLIBS)
