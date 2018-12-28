@@ -1,12 +1,17 @@
+#include <limits>
 #include <stdexcept>
 
 #include "fac.h"
 
-long fac(long n) {
+int fac(int n) {
     if (n < 0)
-        throw std::invalid_argument(std::string("argument msut be positive"));
-    long result {1};
-    for (long i = 2; i <= n; i++)
-        result *= i;
+        throw std::domain_error {"argument must be positive"};
+    int result {1};
+    const int max_int {std::numeric_limits<int>::max()};
+    for (int i = 2; i <= n; i++)
+        if (result < max_int/i)
+            result *= i;
+        else
+            throw std::overflow_error {"argument too large"};
     return result;
 }
