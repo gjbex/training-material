@@ -2,12 +2,9 @@ CXX = g++
 CXXFLAGS = -std=c++14 -g -O2 -Wall -Wextra
 CPPFLAGS = -I/usr/local/software/catch2/2.5.0/single_include
 
-all: test_fac.exe
+all: stack_test.exe
 
-checks: test_fac.exe
-	./$^
-
-test_fac.exe: fac.o test_fac.o test_main.o
+%.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
