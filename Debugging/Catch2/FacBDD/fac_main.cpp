@@ -10,14 +10,14 @@ int main(int argc, char* argv[]) {
     int n {0};
     try {
         n = std::stoi(argv[1]);
-    } catch(std::invalid_argument) {
+    } catch(std::invalid_argument&) {
         std::cerr << "### error: argument must be integer" << std::endl;
         return 2;
     }
     int result {0};
     try {
         result = fac(n);
-    } catch(std::invalid_argument) {
+    } catch(std::invalid_argument&) {
         std::cerr << "### error: argument must be positive" << std::endl;
         return 3;
     }
