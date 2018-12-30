@@ -11,10 +11,10 @@ libfac.so: fac.o
 	$(CXX) $(CXXFLAGS) -shared -o $@ $< $(LDFLAGS)
 
 fac.exe: fac_main.o libfac.so
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ fac_main.o -L. -lfac -Wl,-rpath=.
 
 test_fac.exe: test_fac.o test_main.o libfac.so
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ test_fac.o test_main.o -L. -lfac -Wl,-rpath=.
 
 -include $(wildcard *.d)
 
