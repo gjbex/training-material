@@ -14,7 +14,7 @@ class VectorFixture {
         };
 };
 
-TEST_CASE_METHOD(VectorFixture, "sum", "[vector]") {
+TEST_CASE_METHOD(VectorFixture, "sum", "[stack]") {
     int sum {0};
     while (!data.empty()) {
         sum += data.top();
@@ -30,7 +30,7 @@ int fac(int n) {
         return n*fac(n - 1);
 }
 
-TEST_CASE_METHOD(VectorFixture, "product", "[vector]") {
+TEST_CASE_METHOD(VectorFixture, "product", "[stack]") {
     int prod {1};
     while (!data.empty()) {
         prod *= data.top();
