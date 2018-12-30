@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -g -O2 -Wall -Wextra -fPIC
-CPPFLAGS = $(shell pkg-config catch --cflags) -MMD -MP
+CPPFLAGS = -I/usr/local/software/catch2/2.5.0/single_include -MMD -MP
 
 all: fac.exe
 
