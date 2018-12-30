@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
     int n {0};
     try {
         n = std::stoi(argv[1]);
-    } catch(std::invalid_argument&) {
+    } catch(std::domain_error&) {
         std::cerr << "### error: argument must be integer" << std::endl;
         return 2;
     }

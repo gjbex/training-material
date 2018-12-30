@@ -18,7 +18,7 @@ SCENARIO( "factorial function return values and exceptions", "[fac]" ) {
         }
         WHEN( "argument < 0" ) {
             THEN( "exception thrown" ) {
-                REQUIRE_THROWS_AS( fac(-1), std::invalid_argument );
+                REQUIRE_THROWS_AS( fac(-1), std::domain_error );
             }
         }
     }
