@@ -71,13 +71,12 @@ contains
         end if
     end subroutine init_vectors
 
-    subroutine init_gen_gauss(self, n, precision, stat)
+    subroutine init_gen_gauss(self, n, precision)
         implicit none
         class(gen_gauss_type), intent(inout) :: self
         integer, intent(in) :: n
         real(kind=dp), intent(in), optional :: precision
-        integer, intent(inout), optional :: stat
-        integer :: istat, i
+        integer :: i
         real(kind=dp) :: z, z1, pp
         if (present(precision)) then
             self%precision = precision
