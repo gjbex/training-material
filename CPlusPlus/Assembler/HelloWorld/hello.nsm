@@ -1,0 +1,17 @@
+section .text
+global _start        ; for linker
+
+_start:              ; linkder entry point
+    mov edx,len      ; string length
+    mov ecx,msg      ; string to write
+    mov ebx,1        ; file descriptor
+    mov eax,4        ; sys_write
+    int 0x80         ; kernel call
+    
+    mov eax,1        ; sys_exit
+    int 0x80         ; kernel call
+
+section .data
+
+msg db 'hello, world!',0xa   ; string value
+len equ $ - msg              ; string length

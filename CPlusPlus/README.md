@@ -39,3 +39,4 @@ programming concepts and idiosyncracies particular to C++.
 1. `Ranges`: ranges are an interesting concept for working more
     conveniently with STL containers and composing algorithms.
 1. `DesignPatterns`: illustration of design patterns implemented in C++.
+1. `Assembler`: illustrations of how to use assembly functions from C++.

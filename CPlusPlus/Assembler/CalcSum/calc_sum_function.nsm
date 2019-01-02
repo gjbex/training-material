@@ -1,0 +1,13 @@
+; function that computes the sum of its three
+; integer arguments, and returns the result
+section .text
+    global calc_sum_
+
+calc_sum_:
+    push rbp
+    mov rbp,rsp
+    mov eax, edi
+    add eax, esi
+    add eax, edx
+    pop rbp
+    ret
