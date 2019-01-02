@@ -1,0 +1,25 @@
+section .text
+    global quad_
+
+    ; define the constants
+    a_val: dq 3.14
+    b_val: dq -2.4
+    c_val: dq 1.9
+
+; functions takes a double argument, and returns 3.14*x*x - 2.4*x + 1.9
+; this expression can be rewritten as (3.14*x - 2.4)*x + 1.9
+quad_:
+; since we don't use the stack, don't bother
+;    push rbp
+;    mov rbp, rsp
+
+    movapd xmm1, xmm0               ; xmm1 = xmm0
+    mulsd xmm1, [rel a_val]         ; xmm1 *= a_val
+    addsd xmm1, [rel b_val]         ; xmm1 += b_val
+    mulsd xmm0, xmm1                ; xmm0 *= xmm1
+    addsd xmm0, [rel c_val]         ; xmm0 += c_val
+
+; since we don't use the stack, don't bother
+;    mov rsp, rbp
+;    pop rbp
+    ret
