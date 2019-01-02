@@ -1,5 +1,5 @@
 F90 ?= gfortran
-FFLAGS ?= -O2 -g -Wall -Wextra
+FFLAGS ?= -O2 -g -Wall -Wextra -Wuninitialized
 LDFLAGS ?=
 LIBS ?=
 
