@@ -10,7 +10,7 @@ FC = gfortran
 FFLAGS += -g -I$(PFUNIT)/mod -I.
 LIBS = $(PFUNIT)/lib/libpfunit$(LIB_EXT)
 
-tests.exe: data_mod.o tests.o
+tests.exe: tests.o
 	$(FC) $(FFLAGS) $(FPPFLAGS) -o $@  \
         $(PFUNIT)/include/driver.F90 $^ $(LIBS)
 
@@ -27,3 +27,4 @@ testSuites.inc: tests.pf
 
 clean:
 	$(RM) $(wildcard *.exe) $(wildcard *.mod) $(wildcard *.o)
+	$(RM) tests.F90
