@@ -8,3 +8,5 @@ A collection of C++ pitfalls.
     containers..
   1. `Inheritance`: illustration of C++ bugs related to inheritance and
     other OO pitfalls.
+  1. `Pointers`: illustration of C++ bugs related to pointer and reference
+    semantics.
