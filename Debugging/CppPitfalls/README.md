@@ -10,3 +10,7 @@ A collection of C++ pitfalls.
     other OO pitfalls.
   1. `Pointers`: illustration of C++ bugs related to pointer and reference
     semantics.
+
+## Sources
+
+  * http://blog.davidecoppola.com/2013/09/cpp-pitfalls/
