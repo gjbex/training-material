@@ -20,7 +20,7 @@ struct DerivedClass : public BaseClass {
 
 int main() {
     DerivedClass d;
-    BaseClass *b_ptr = &d;
+    BaseClass *b_ptr = static_cast<BaseClass*>(&d);
     std::cout << "d.method1(): " << d.method1() << std::endl;
     std::cout << "d.method2(): " << d.method2() << std::endl;
     std::cout << "d.method2(5): " << d.method2(5) << std::endl;
