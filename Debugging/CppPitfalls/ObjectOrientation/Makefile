@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -g -Wall -Wextra
 
-all: default_argument.exe
+all: default_argument.exe member_init_order.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $<
