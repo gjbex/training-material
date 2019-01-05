@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -g -Wall -Wextra
 
-all: pointers_vs_references.exe
+all: pointers_vs_references.exe temporary_object.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $<
