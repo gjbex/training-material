@@ -1,6 +1,7 @@
-# Inheritance
+# ObjectOrientation
 
-Class inheritance in C++ may have some pitfalls, here are some illustrations.
+Object oriented programming in C++ may have some pitfalls, here are some
+illustrations.
 
 ## What is it?
 
