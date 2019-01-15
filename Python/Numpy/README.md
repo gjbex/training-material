@@ -12,6 +12,7 @@ algorithms for scientific computing (Lapack, statistics,...).
 1. `data_writer.py`: produces data for the `data_plot.py` script, linear
     with noise added
 1. `data.csv`: example data set for `data_plot.py`
+1. `diffusion.ipynb`: solving the PDE describing thermal diffusion in 2D.
 1. `fft.py`: creates a signal consisting of a sum of cosine functions
     with specified amplitudes and frequencies, adding noise; plots the
     resulting function, uses FFT to determine the frequency spectrum, and
