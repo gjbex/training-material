@@ -14,3 +14,4 @@ A collection of C++ pitfalls.
 ## Sources
 
   * http://blog.davidecoppola.com/2013/09/cpp-pitfalls/
+  * https://www.toptal.com/c-plus-plus/top-10-common-c-plus-plus-developer-mistakes
