@@ -75,7 +75,7 @@ compute node (`r5i1n7`).  As a port number, use the five digits of your
 VSC account, this should ensure that there are no conflicts, e.g., if your
 VSC account is vsc30140, use 30140 as port number:
 ```bash
-ssh -L 30140:localhost:8888 -N r5i1n7
+ssh -L 30140:localhost:8888 -N r5i1n7.genius.hpc.kuleuven.be
 ```
 
 Now, start firefox on the NX login node, and browse to the link the
