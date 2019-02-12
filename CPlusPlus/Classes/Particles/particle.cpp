@@ -10,6 +10,6 @@ double Particle::energy() const {
 }
 
 std::ostream& operator<<(std::ostream& out, const Particle& p) {
-    return out << (StaticParticle) p << ", ("
+    return out << static_cast<StaticParticle>(p) << ", ("
                << p.v_x() << ", " << p.v_y() << ")";
 }
