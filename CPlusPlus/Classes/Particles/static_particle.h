@@ -10,6 +10,9 @@ class StaticParticle {
             _x {x},
             _y {y},
             _mass {mass} {};
+        StaticParticle(StaticParticle&) = default;
+        StaticParticle(StaticParticle&&) = default;
+        ~StaticParticle() = default;
         double x() const { return _x; }
         double y() const { return _y; }
         double mass() const {return _mass; }

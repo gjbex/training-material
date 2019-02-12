@@ -33,8 +33,8 @@ following entry can be added:
 ```
 Host leibniz
     Hostname login.leibniz.antwerpen.vsc
-    User vsc30140
-    ProxyCommand ssh vsc50005@login.hpc.kuleuven.be nc %h %p 2> /dev/null
+    User vsc50005
+    ProxyJump hpc
     ForwardAgent yes
     ForwardX11 yes
 ```
