@@ -32,6 +32,16 @@ unbind %
 # tmux.conf you want to use)
 bind r source-file ~/.tmux.conf
 
+# set inactive/active window styles
+set -g window-style 'fg=colour247,bg=colour236'
+set -g window-active-style 'fg=colour250,bg=colour232'
+
+#pane border
+set -g pane-border-bg colour235
+set -g pane-border-fg colour238
+set -g pane-active-border-bg colour236
+set -g pane-active-border-fg colour51
+
 # use vi keyboard shortcuts in copy mode
 setw -g mode-keys vi
 
