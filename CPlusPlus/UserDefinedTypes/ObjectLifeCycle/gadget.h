@@ -3,50 +3,50 @@
 
 #include <iostream>
 
-static int _id_counter {0};
+static int id_counter_ {0};
 
-class Gadget {
+struct Gadget {
     private:
-        int _value;
-        int _id;
+        int value_;
+        int id_;
     public:
-        Gadget() : _value {0}, _id {++_id_counter} {
-            std::cerr << "Gadget " << _id << "()" << std::endl;
+        Gadget() : value_ {0}, id_ {++id_counter_} {
+            std::cerr << "Gadget " << id_ << "()" << std::endl;
         };
-        Gadget(int value) : _value {value}, _id {++_id_counter} {
-            std::cerr << "Gadget " << _id << "(" << _value << ")"
+        Gadget(int value) : value_ {value}, id_ {++id_counter_} {
+            std::cerr << "Gadget " << id_ << "(" << value_ << ")"
                       << std::endl;
         };
-        Gadget(const Gadget& other) : _id {++_id_counter} {
-            _value = other._value;
-            std::cerr << "copy Gadget " << other._id << "(" << _value << ")"
-                      << " to " << _id << std::endl;
+        Gadget(Gadget& other) : id_ {++id_counter_} {
+            value_ = other.value_;
+            std::cerr << "copy Gadget " << other.id_ << "(" << value_ << ")"
+                      << " to " << id_ << std::endl;
         };
         Gadget& operator=(const Gadget& other) {
-            _value = other._value;
+            value_ = other.value_;
             std::cerr << "copy assign "
-                      << "Gadget " << other._id << "(" << _value << ")"
-                      << " to " << _id << std::endl;
+                      << "Gadget " << other.id_ << "(" << value_ << ")"
+                      << " to " << id_ << std::endl;
             return *this;
         };
-        Gadget(const Gadget&& other) : _id {++_id_counter} {
-            _value = other._value;
-            std::cerr << "move Gadget " << other._id << "(" << _value << ")"
-                      << " to " << _id << std::endl;
+        Gadget(Gadget&& other) : id_ {++id_counter_} {
+            value_ = other.value_;
+            std::cerr << "move Gadget " << other.id_ << "(" << value_ << ")"
+                      << " to " << id_ << std::endl;
         };
-        Gadget& operator=(const Gadget&& other) {
-            _value = other._value;
+        Gadget& operator=(Gadget&& other) {
+            value_ = other.value_;
             std::cerr << "move assign "
-                      << "Gadget " << other._id << "(" << _value << ")"
-                      << " to " << _id << std::endl;
+                      << "Gadget " << other.id_ << "(" << value_ << ")"
+                      << " to " << id_ << std::endl;
             return *this;
         };
         ~Gadget() {
-            std::cerr << "~Gadget " << _id <<  std::endl;
+            std::cerr << "~Gadget " << id_ <<  std::endl;
         };
-        int id() const { return _id; };
+        int id() const { return id_; };
         void greet() const {
-            std::cout << "Hi from " << _id  << " with " << _value
+            std::cout << "Hi from " << id_  << " with " << value_
                       << std::endl;
         };
 };
