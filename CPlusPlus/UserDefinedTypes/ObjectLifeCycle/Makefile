@@ -5,12 +5,11 @@ LDLIBS = -lm
 
 all: gadget.exe
 
-gadget.exe: main.o
+%.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
-
 -include $(wildcard *.d)
 
 clean:
