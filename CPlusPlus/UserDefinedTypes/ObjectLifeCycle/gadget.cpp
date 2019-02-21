@@ -22,6 +22,7 @@ Gadget get_gadget(int value) {
 
 std::vector<Gadget> get_lots_of_gadgets(int n) {
     std::vector<Gadget> gadgets;
+    gadgets.reserve(n);
     for (int i = 0; i < n; ++i)
         gadgets.emplace_back(i);
     std::cerr << "vector fill done" << std::endl;
@@ -56,12 +57,14 @@ int main() {
 
     std::cerr << "### adding to vector using push_back" << std::endl;
     std::vector<Gadget> gadgets1;
+    gadgets1.reserve(3);
     for (int i = 0; i < 3; i++)
         gadgets1.push_back(Gadget(i));
     std::cerr << std::endl;
 
     std::cerr << "### adding to vector using emplace_back" << std::endl;
     std::vector<Gadget> gadgets2;
+    gadgets2.reserve(10);
     for (int i = 0; i < 3; i++)
         gadgets2.emplace_back(i);
     std::cerr << std::endl;

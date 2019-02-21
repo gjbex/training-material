@@ -10,6 +10,7 @@ struct S {
 
 int main() {
     std::vector<S> v;
+    v.reserve(10);
     for (int i = 0; i < 5; i++)
         v.emplace_back();
     return 0;
