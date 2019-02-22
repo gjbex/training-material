@@ -1,11 +1,14 @@
 # LinuxTools
+
 Illustrates the use of some useful Linux tools.  This is very
 preliminary, and the set of tools and examples will grow over time.
 
 ## Contents
+
 1. `Autotools`: examples of how to use autotools.
 1. `Checkpointing`: information on how to checkpoint applications using
     DMTCP.
+1. `CMake`: examples for the CMake build tool.
 1. `Compilers`: compiler related information.
 1. `Configurations`: sample configuration files for various Linux tools.
 1. `M4`: examples for the `m4` macro processor.
