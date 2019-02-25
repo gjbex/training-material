@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
                     print_help(std::cerr);
                     return 1;
             }
-        } catch (invalid_argument e) {
+        } catch (invalid_argument& e) {
             std::cerr << "# error: invalid argument for option -"
                       << opt << endl;
             print_help(std::cerr);
