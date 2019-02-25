@@ -1,8 +1,10 @@
 # LinuxTools
+
 Illustrates the use of some useful Linux tools.  This is very
 preliminary, and the set of tools and examples will grow over time.
 
 ## Contents
+
 1. `Autotools`: examples of how to use autotools.
 1. `Checkpointing`: information on how to checkpoint applications using
     DMTCP.
