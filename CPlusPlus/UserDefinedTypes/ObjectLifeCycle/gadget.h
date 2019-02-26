@@ -17,7 +17,7 @@ struct Gadget {
             std::cerr << "Gadget " << id_ << "(" << value_ << ")"
                       << std::endl;
         };
-        Gadget(Gadget& other) : id_ {++id_counter_} {
+        Gadget(const Gadget& other) : id_ {++id_counter_} {
             value_ = other.value_;
             std::cerr << "copy Gadget " << other.id_ << "(" << value_ << ")"
                       << " to " << id_ << std::endl;

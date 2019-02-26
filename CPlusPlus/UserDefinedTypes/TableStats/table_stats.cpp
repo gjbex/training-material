@@ -11,6 +11,6 @@ void TableStats::add(const std::vector<double>& values) {
     if (values.size() != size())
         throw std::invalid_argument("expecting " + std::to_string(size()) +
                                  ", received " + std::to_string(values.size()));
-    for (int i = 0; i < size(); ++i)
+    for (size_t i = 0; i < size(); ++i)
         (*stats_)[i].add(values[i]);
 }
