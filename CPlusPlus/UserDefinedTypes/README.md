@@ -14,4 +14,4 @@ Code illustrations for chapter 2, User defined types in Stroustrup's
     on streaming data..
 1. `Makefile`: make file to build the applictions.
 1. `ObjectLifeCycle`: illustration of object life cycle.
-1. `TableStats`: Example of using data structures and unique pointers.
+1. `TableStats`: Example of using STL data structures.

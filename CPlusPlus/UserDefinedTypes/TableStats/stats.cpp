@@ -2,7 +2,7 @@
 #include "stats.h"
 
 void Stats::add(const double value) {
-    values_->push_back(value);
+    values_.push_back(value);
     sum_ += value;
     sum2_ += value*value;
     if (value < min_)
@@ -31,14 +31,14 @@ double Stats::max() const {
     return max_;
 }
 
-double Stats::median() const {
+double Stats::median() {
     check_size(1);
-    std::sort(values_->begin(), values_->end());
-    size_t n {values_->size()};
+    std::sort(values_.begin(), values_.end());
+    size_t n {values_.size()};
     if (n % 2 == 0)
-        return ((*values_)[n/2 - 1] + (*values_)[n/2])/2.0;
+        return (values_[n/2 - 1] + values_[n/2])/2.0;
     else
-        return (*values_)[n/2];
+        return values_[n/2];
 }
 
 void Stats::check_size(size_t n) const {
