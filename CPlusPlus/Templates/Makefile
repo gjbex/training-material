@@ -5,7 +5,8 @@ LDLIBS = -lm
 .PRECIOUS: %.o
 
 APPL = swap.exe sum.exe points.exe pendulum_func_obj.exe pendulum_bind.exe \
-       pendulum_lambda.exe print_container.exe print_container_no_range_for.exe
+       pendulum_lambda.exe print_container.exe \
+       print_container_no_range_for.exe fac.exe
 
 all: $(APPL)
 

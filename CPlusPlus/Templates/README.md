@@ -4,6 +4,8 @@ Code illustrations for chapter 5, Temaples in Stroustrup's
 
 # What is it?
 1. `swap.cpp`: simple illustration of function template.
+1. `fac.cpp`: computing the factorial at compile time using template
+   meta-programming.
 1. `sum.cpp`: illustration of using a variadic template to implement a
     function that takes an arbitrary number of arguments.
 1. `points.cpp`: simple illustration of type aliasing.
