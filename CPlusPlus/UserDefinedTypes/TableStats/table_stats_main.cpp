@@ -21,18 +21,19 @@ int main() {
             }
             table_stats.add(values);
         }
-        const NameList* names = table_stats.names();
-        const StatsList* stats = table_stats.stats();
+        const NameList names = table_stats.names();
+        const StatsList stats = table_stats.stats();
         try {
-            for (size_t i = 0; i < names->size(); ++i) {
-                std::cout << (*names)[i] << ":\n";
-                std::cout << "\t" << "mean: " << (*stats)[i].mean() << "\n";
-                std::cout << "\t" << "mean: " << (*stats)[i].mean() << "\n";
-                std::cout << "\t" << "stddev: " << (*stats)[i].stddev() << "\n";
-                std::cout << "\t" << "min: " << (*stats)[i].min() << "\n";
-                std::cout << "\t" << "max: " << (*stats)[i].max() << "\n";
-                std::cout << "\t" << "median: " << (*stats)[i].median() << "\n";
-                std::cout << "\t" << "n: " << (*stats)[i].nr_values() << std::endl;
+            for (size_t i = 0; i < names.size(); ++i) {
+                std::cout << names[i] << ":\n";
+                std::cout << "\t" << "mean: " << stats[i].mean() << "\n";
+                std::cout << "\t" << "mean: " << stats[i].mean() << "\n";
+                std::cout << "\t" << "stddev: " << stats[i].stddev() << "\n";
+                std::cout << "\t" << "min: " << stats[i].min() << "\n";
+                std::cout << "\t" << "max: " << stats[i].max() << "\n";
+                std::cout << "\t" << "median: "
+                          << static_cast<Stats>(stats[i]).median() << "\n";
+                std::cout << "\t" << "n: " << stats[i].nr_values() << std::endl;
             }
         } catch (std::out_of_range& e) {
             std::cerr << "### error: " << e.what() << std::endl;

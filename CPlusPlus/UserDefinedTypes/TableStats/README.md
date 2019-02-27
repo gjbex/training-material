@@ -1,6 +1,6 @@
 # TableStats
 
-Example of using data structures and unique pointers.
+Example of using STL data structures.
 
 ## What is it?
 
