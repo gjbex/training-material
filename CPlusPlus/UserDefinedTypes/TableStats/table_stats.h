@@ -11,7 +11,7 @@ class TableStats {
         NameList names_;
         StatsList stats_;
     public:
-        TableStats(const NameList& names);
+        explicit TableStats(const NameList& names);
         const NameList& names() const { return names_; }
         size_t size() const { return names_.size(); }
         void add(const ValueList& values);
