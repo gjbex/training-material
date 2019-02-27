@@ -1,11 +1,12 @@
 CXX = g++
-CXXFLAGS = -O2 -g -Wall -std=c++14
+CXXFLAGS = -O2 -g -Wall -Wextra -std=c++14
 LDLIBS = -lm
 
 .PRECIOUS: %.o
 
 APPL = swap.exe sum.exe points.exe pendulum_func_obj.exe pendulum_bind.exe \
-       pendulum_lambda.exe
+       pendulum_lambda.exe print_container.exe \
+       print_container_no_range_for.exe fac.exe
 
 all: $(APPL)
 
