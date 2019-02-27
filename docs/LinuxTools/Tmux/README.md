@@ -6,8 +6,8 @@ screen session to each task, and you can resume at the point you left off
 each time you switch context. tmux is an alternative to screen that has a
 number of extra features.
 
-A good introduction to tmux can be found at:
-https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340
+A good introduction to tmux can be found on
+[HackerNoon](https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340)
 
 ## tmux configuration
 
