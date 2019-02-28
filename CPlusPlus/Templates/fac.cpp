@@ -2,12 +2,12 @@
 
 template<int N>
 struct Fac {
-    enum { value = N*Fac<N-1>::value };
+    static constexpr int value = N*Fac<N-1>::value;
 };
 
 template<>
 struct Fac<0> {
-    enum { value = 1 };
+    static const int value = 1;
 };
 
 int main() {
