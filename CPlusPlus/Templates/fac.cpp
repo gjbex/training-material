@@ -1,13 +1,13 @@
 #include <iostream>
 
-template<int N>
+template<unsigned long N>
 struct Fac {
-    static constexpr int value = N*Fac<N-1>::value;
+    static constexpr unsigned long value = N*Fac<N-1>::value;
 };
 
 template<>
 struct Fac<0> {
-    static const int value = 1;
+    static const unsigned long value = 1;
 };
 
 int main() {
