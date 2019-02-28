@@ -1,13 +1,13 @@
 #include <iostream>
 
-template<int N>
+template<unsigned long N>
 struct Fac {
-    enum { value = N*Fac<N-1>::value };
+    static constexpr unsigned long value = N*Fac<N-1>::value;
 };
 
 template<>
 struct Fac<0> {
-    enum { value = 1 };
+    static const unsigned long value = 1;
 };
 
 int main() {
