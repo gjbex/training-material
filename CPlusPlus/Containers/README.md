@@ -39,3 +39,5 @@ Code illustrations for chapter 9, Containers in Stroustrup's
     arithmetic expression in reverse Polish notation.  Illustrates use
     of a stack, a tuple, tokenizaiton, and simple exceptions.
 1. `Makefile`: make file to build the applications.
+1. `SlidingWindow`: class template that uses a list to compute averages over a
+   slidign window.
