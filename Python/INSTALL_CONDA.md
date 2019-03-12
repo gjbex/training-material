@@ -6,14 +6,20 @@ Here, we describe how to install Python packages using conda.
 If you have Miniconda already installed, you can skip ahead to the next
 section, if Miniconda is not installed, we start with that. Download the
 Bash script that will install it from
-[conda.io](https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh) using, e.g., `wget`:
+[conda.io](https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh)
+using, e.g., `wget`:
 ```bash
 $ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ```
+
 Once downloaded, run the script:
 ```bash
 $ bash Miniconda3-latest-Linux-x86_64.sh -b -p $VSC_DATA/miniconda3
 ```
+
+Note that it is important to chose the Miniconda installation direcotry
+wisely, i.e., on a file system where your quota are large enough.  Environments
+may take considerable disk space.
 
 Optionally, you can add the path to the   Miniconda installation to the
 `PATH` environment variable in your `.bashrc` file.  This is convenient,

@@ -82,17 +82,13 @@ Now, start firefox on the NX login node, and browse to the link the
 Jupyter notebook server displayed.  Enjoy.
 
 
-## Using a notebook by tunneling from a Windows machine to a genius GPU node
-
-See the [YouTube video tutorial](https://youtu.be/1TZ86K5KUow).
-
-
 ## Using a notebook by tunneling from a Linux machine to a genius GPU node
 
 Assumptions:
 
   1. The local machine's name is `local`.
   1. The VSC account is vsc30140, replace with your own.
+  1. The project to charge is `lp_my_project`, replace with your own.
   1. The port number is 30140, replace with the numerical part of your
     VSC account.
   1. The conda environment in which Jupyter notebook is installed is
@@ -113,11 +109,12 @@ Detailed steps:
         `local$ ssh vsc30140@login3-tier2.hpc.kuleuven.be`
     1. Start an interactive job on a GPU node:
         ```
-        login3$ qsub -I -A lpt2_pilot_2018 -l nodes=1:ppn=9:gpus=1 \
+        login3$ qsub -I -A lp_my_project -l nodes=1:ppn=9:gpus=1 \
                -l partition gpu -l walltime=03:00:00
         ```
     1. When the job is running on the GPU node, activate your environment:  
         `r23g36$ source activate machine_learning`
+    1. Go to the relevant directory, e.g., `$VSC_DATA`.
     1. Start the Jupyter notebook, use a unique port number:
         `r23g36$ jupyter notebook --port 30140`
 
@@ -127,17 +124,15 @@ Next, you set up a first tunnel from your machine to the GPU node on the SSH por
 
 Detailed steps:
 
-`local$ ssh -L1022:r23g36:22 -N vsc3010@login3-tier2.hpc.kuleuven.be`
+```
+local$ ssh -J vsc30140@login1-tier2.hpc.kuleuven.be \
+           -L 30140:localhost:30140                 \
+           vsc30140@r23g36
+```
 
 *Note:* this command will not exit, if you like to do everything in one
 terminal, put the process in the background using `&`.
 
-
-### Set up Jupyter notebook tunnel
-
-You can now  set up a tunnel from your local machine to the GPU note through the SSH tunnel you created in the previous step.
-
-`local$ ssh -L30140:localhost:30140 -N -p 1022 vsc30140@localhost`
 
 ### Open the interface to Jupyter notebook
 
