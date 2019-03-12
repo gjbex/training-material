@@ -1,0 +1,16 @@
+#!/bin/bash -l
+#PBS -A lp_sys
+#PBS -l nodes=1:ppn=36
+#PBS -l walltime=00:45:00
+
+module purge
+module load conda
+source activate machine_learning_no_gpu
+
+cd $PBS_O_WORKDIR
+
+jupyter nbconvert \
+    --to=notebook \
+    --ExecutePreprocessor.timeout=3600 \
+    --execute \
+    imdb_rnn_no_gpu.ipynb
