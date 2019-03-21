@@ -2,7 +2,7 @@
 
 if [[ $# -lt 1 ]]
 then
-    echo "### error: no notebook specified"
+    (>2& echo "### error: no notebook specified" )
     exit 1
 fi
 
