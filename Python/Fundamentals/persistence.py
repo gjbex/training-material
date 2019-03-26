@@ -35,7 +35,7 @@ def main(n, verbose):
         print('Error: n should be positive', file=sys.stderr)
         sys.exit(1)
     numbers = compute_persistance(n)
-    if  verbose:
+    if verbose:
         print(' -> '.join(str(number) for number in numbers))
     print(len(numbers))
 
