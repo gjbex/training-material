@@ -37,7 +37,7 @@ def main(n, verbose):
     numbers = compute_persistance(n)
     if verbose:
         print(' -> '.join(str(number) for number in numbers))
-    print(f'{n} {len(numbers)} {numbers[-1]}')
+    print(f'{n} {len(numbers) - 1} {numbers[-1]}')
 
 
 if __name__ == '__main__':
