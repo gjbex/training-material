@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     args::ValueFlag<double> mu_flag(parser, "mu", "mean value", {'m', "mu"});
     args::ValueFlag<double> sigma_flag(parser, "sigma", "standard deviation",
                                        {'s', "sigma"});
-    args::Group group(parser, "flags", args::Group::Validators::Xor);
+    args::Group group(parser, "flags", args::Group::Validators::DontCare);
     args::Flag display_idx(group, "index", "display index", {'i', "index"});
     args::Positional<std::size_t> n_value(parser, "n", "number of values");
     try
