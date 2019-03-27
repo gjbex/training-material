@@ -18,10 +18,6 @@ def check_valid(n):
         sys.exit(2)
 
 
-def compute_sorted(n, reverse=True):
-    return int(''.join(sorted(str(n), reverse=reverse)))
-
-
 @click.command(context_settings=CONTEXT_SETTINGS)
 @click.argument('n', type=int)
 def compute_kaprekar(n):
@@ -32,8 +28,9 @@ def compute_kaprekar(n):
     print(n, end='')
     while True:
         prev_n = n
-        small = compute_sorted(n, reverse=False)
-        large = compute_sorted(n, reverse=True)
+        digits = sorted(str(n))
+        small = int(''.join(digits))
+        large = int(''.join(reversed(digits)))
         n = large - small
         if n != prev_n:
             print(f' -> {n}', end='')
