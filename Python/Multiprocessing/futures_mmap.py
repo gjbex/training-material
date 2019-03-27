@@ -2,7 +2,7 @@
 
 import click
 from collections import Counter
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 import mmap
 
 
@@ -33,7 +33,7 @@ def compute(mem_map_name, chunk_size=2**16, max_workers=4):
             nr_chunks = mem_map.size()//chunk_size
     args = [(mem_map_name, i*chunk_size, chunk_size)
                 for i in range(nr_chunks)]
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+    with ProcessPoolExecutor(max_workers=max_workers) as executor:
         results = executor.map(count_nucl, args)
     return aggregate(results)
 
