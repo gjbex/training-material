@@ -2,28 +2,38 @@
 
 import click
 from collections import Counter
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 import mmap
 
-def count_nucl(mem_map, start, size):
-    mem_map.seek(start)
-    counter = Counter()
-    for nucl in mem_map.read(size):
-        counter[nucl] += 1
-    return counter
+
+def count_nucl(args):
+    mem_map_name, start, size = args
+    with open(mem_map_name, 'r+b') as mem_map_file:
+        with mmap.mmap(mem_map_file.fileno(), 0,
+                       access=mmap.ACCESS_READ) as mem_map:
+            mem_map.seek(start)
+            counter = Counter()
+            for nucl in mem_map.read(size):
+                counter[nucl] += 1
+            return counter
 
 
 def aggregate(results):
     counter = Counter()
     for result in results:
-        counter += result
+        for nucl, count in result.items():
+            counter[nucl] += count
     return counter
 
 
-def compute(mem_map, chunk_size=2**16, max_workers=4):
-    nr_chunks = mem_map.size()//chunk_size
-    args = [(mem_map, i*chunk_size) for i in range(nr_chunks)]
-    with ProcessPoolExecutor(max_workers=max_workers) as executor:
+def compute(mem_map_name, chunk_size=2**16, max_workers=4):
+    with open(mem_map_name, 'r+b') as mem_map_file:
+        with mmap.mmap(mem_map_file.fileno(), 0,
+                       access=mmap.ACCESS_READ) as mem_map:
+            nr_chunks = mem_map.size()//chunk_size
+    args = [(mem_map_name, i*chunk_size, chunk_size)
+                for i in range(nr_chunks)]
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
         results = executor.map(count_nucl, args)
     return aggregate(results)
 
@@ -41,11 +51,13 @@ CONTEXT_SETTINGS = {
 def main(file, chunk_size, max_workers):
     '''Count the number of nucleotides in the given FILE
     '''
-    with open(file, 'r+b') as nucl_file:
-        with mmap.mmap(nucl_file.fileno(), 0) as mem_map:
-            results = compute(mem_map, chunk_size, max_workers)
-            for nucl, count in results:
-                print(f'{nucl}: {count}')
+    results = compute(file, chunk_size, max_workers)
+    total = 0
+    for nucl, count in results.items():
+        total += count
+        print(f'{nucl}: {count}')
+    print(f'total = {total}')
+
 
 if __name__ == '__main__':
     main()
