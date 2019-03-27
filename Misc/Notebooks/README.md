@@ -12,7 +12,13 @@ data exploration, explorative programming and teaching.
 1. `slides.ipynb`: simple presentation using Jupyter notebooks, can be
     used with `nbconvert` or RISE.
 1. `widgets.ipynb`: notebooks can be made interactive by using
-    `ipywidgets`.
+    `ipywidgets`, `altair` and `qgrid`.
 1. `bash_notebook.ipynb`: notebook to use with a Bash kernel.
 1. `r_notebook.ipynb`: notebook to use with an R kernel.
 1. `show_slides.sh`: Bash shell command to present `slides.ipynb`.        
+1. `paired_notebook,ipynb`: simple notebook to demonstrate synchronization
+   with a markdown file.
+1. `paired_notebook.md`: markdown file that is synced with the
+   `paired_notebook.ipynb` notebook.
+1. `pair_notebook.sh`: Bash shell script to pair a Jupyter notebook with a
+   markdown file.
