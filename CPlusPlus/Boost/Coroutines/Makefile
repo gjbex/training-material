@@ -10,4 +10,4 @@ all: range.exe
 
 clean:
 	$(RM) $(wildcard *.o) $(wildcard *.exe)
-	$(RM) $(wildcard core.*) $(wildcard core)
+	$(RM) core $(wildcard core.*)
