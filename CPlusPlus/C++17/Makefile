@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -O2 -g -Wall -Wextra
+CXXFLAGS = -std=c++17 -O2 -g -Wall -Wextra -Wpedantic
 
 all: if_init.exe optional.exe structured_bindings.exe variant_visit.exe
 
