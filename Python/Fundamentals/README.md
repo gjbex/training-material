@@ -22,5 +22,7 @@ Some fundamentals about Python and object oriented programming.
     classes.
   * `avoiding_class_hierarchies.ipynb`: illustration of duck typing
     and mix-in.
+  * `overloading.ipynb`: illustration of function overloading using
+    single dispatch.
   * `decorator_design_pattern.ipynb`: illustration of the decorator
     design pattern.
