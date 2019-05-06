@@ -4,6 +4,7 @@
 a.out
 *.swp
 *.pyc
+tags
 R/Conda/~$conda.pptx
 Spark/~$pyspark.pptx
 C/Tree_2k/~$tree_2k.pptx
