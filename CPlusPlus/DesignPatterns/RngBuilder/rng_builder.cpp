@@ -1,7 +1,7 @@
 #include "rng_builder.h"
 
 Rng_builder& Rng_builder::reset() {
-    _a = _a_default;
-    _b = _b_default;
+    a_ = a_default_;
+    b_ = b_default_;
     return *this;
 }
