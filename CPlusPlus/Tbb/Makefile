@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 OMPFLAGS = -fopenmp
-CPPFLAGS =
+CPPFLAGS = -I/usr/include/x86_64-linux-gnu/c++/8/
 LDFLAGS =
 LDLIBS = -lm
 
@@ -12,7 +12,7 @@ all: julia_abs.exe julia.exe julia_tbb.exe julia_omp.exe \
      julia_tasks_omp.exe
 
 %_omp.exe: %_omp.cpp
-	$(CXX) $(CXXFLAGS) $(OMPFLAGS) -o $@ $^ $(LDLIBS)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OMPFLAGS) -o $@ $^ $(LDLIBS)
 
 %_tbb.exe: %_tbb.o
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) -ltbb $(LDLIBS)
