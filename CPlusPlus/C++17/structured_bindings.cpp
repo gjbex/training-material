@@ -17,11 +17,7 @@ Stats compute_stats(std::vector<double> data) {
         sum += value;
         sum2 += value*value;
     }
-    Stats stats {
-        .mean = sum/n,
-        .stddev = sqrt((sum2 - sum*sum/n)/(n - 1)),
-        .n = n
-    };
+    Stats stats { sum/n, sqrt((sum2 - sum*sum/n)/(n - 1)), n };
     return stats;
 }
 

@@ -1,7 +1,7 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -O2 -g -Wall -Wextra
+CXXFLAGS = -std=c++17 -O2 -g -Wall -Wextra -Wpedantic
 
-all: if_init.exe optional.exe structured_bindings.exe
+all: if_init.exe optional.exe structured_bindings.exe variant_visit.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^

@@ -6,4 +6,5 @@ A few illustrations of features added in the C++17 standard.
 1. `optional.cpp`: illustrations the use of `std::optional`.
 1. `structured_bindings.cpp`: illustrates structured binding of a
     `struct` to individual variables.
+1. `variant_visit.cpp`: illustration of how to use `std::variant` and `std::visit`.
 1. `Makefile`: make file to build the applications.

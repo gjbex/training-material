@@ -5,6 +5,6 @@ Rng::Rng(const double a, const double b, size_t seed, const bool seeded) {
         std::random_device device;
         seed = device();
     }
-    _engine = std::mt19937_64(seed);
-    _distr = std::uniform_real_distribution<double>(a, b);
+    engine_ = std::mt19937_64(seed);
+    distr_ = std::uniform_real_distribution<double>(a, b);
 }
