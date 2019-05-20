@@ -8,28 +8,28 @@
 using namespace std;
 using my_time_t = chrono::nanoseconds;
 
-using cmplx = complex<float>;
+using cmplx = complex<double>;
 
-valarray<float> coordinates(float min_coord, float max_coord,
+valarray<double> coordinates(double min_coord, double max_coord,
                              size_t steps);
-valarray<cmplx> z_values(const valarray<float>& x_coords,
-                         const valarray<float>& y_coords);
-valarray<int> iterate_zs(valarray<cmplx>& zs, const complex<float>& c,
+valarray<cmplx> z_values(const valarray<double>& x_coords,
+                         const valarray<double>& y_coords);
+valarray<int> iterate_zs(valarray<cmplx>& zs, const complex<double>& c,
                          size_t max_iters);
 void print_results(const valarray<int>& ns);
 
 int main(int argc, char *argv[]) {
     const cmplx c(-0.62772, - 0.42193);
-    const float x1 {-1.8};
-    const float x2 {1.8};
-    const float y1 {-1.8};
-    const float y2 {1.8};
+    const double x1 {-1.8};
+    const double x2 {1.8};
+    const double y1 {-1.8};
+    const double y2 {1.8};
     const size_t max_iters {255};
     size_t steps {100};
     if (argc > 1)
         steps = stoi(argv[1]);
-    valarray<float> x_coords = coordinates(x1, x2, steps);
-    valarray<float> y_coords = coordinates(y1, y2, steps);
+    valarray<double> x_coords = coordinates(x1, x2, steps);
+    valarray<double> y_coords = coordinates(y1, y2, steps);
     valarray<cmplx> zs = z_values(x_coords, y_coords);
     auto start_time = chrono::steady_clock::now();
     valarray<int> ns = iterate_zs(zs, c, max_iters);
@@ -40,11 +40,11 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-valarray<float> coordinates(float min_coord, float max_coord,
+valarray<double> coordinates(double min_coord, double max_coord,
                              size_t steps) {
-    valarray<float> coords(steps);
-    const float step {(max_coord - min_coord)/steps};
-    float value {min_coord};
+    valarray<double> coords(steps);
+    const double step {(max_coord - min_coord)/steps};
+    double value {min_coord};
     for (size_t i = 0; i < steps; i++) {
         coords[i] = value;
         value += step;
@@ -52,13 +52,13 @@ valarray<float> coordinates(float min_coord, float max_coord,
     return coords;
 }
 
-valarray<cmplx> z_values(const valarray<float>& x_coords,
-                         const valarray<float>& y_coords) {
+valarray<cmplx> z_values(const valarray<double>& x_coords,
+                         const valarray<double>& y_coords) {
     valarray<cmplx> zs(x_coords.size()*y_coords.size());
     size_t i {0};
     for (auto y: y_coords)
         for (auto x: x_coords) {
-            complex<float> z(x, y);
+            complex<double> z(x, y);
             zs[i++] = z;
         }
     return zs;
@@ -66,22 +66,22 @@ valarray<cmplx> z_values(const valarray<float>& x_coords,
 
 int iterate_z(cmplx z, const cmplx& c, size_t max_iters) {
     size_t n {0};
-    const complex<float> z_in {z};
-    while (abs(z) < 2.0 && n++ < max_iters)
+    while (real(z)*real(z) + imag(z)*imag(z) < 4.0 && n++ < max_iters)
         z = z*z + c;
     return n;
 }
 
-valarray<int> iterate_zs(valarray<cmplx>& zs, const complex<float>& c,
+valarray<int> iterate_zs(valarray<cmplx>& zs, const complex<double>& c,
                          size_t max_iters) {
     valarray<int> ns(zs.size());
-#pragma omp parallel default(none) shared(ns, zs, c, max_iters)
+#pragma omp parallel default(none) shared(zs, c, max_iters, ns)
     {
 #pragma omp single
         {
-#pragma omp taskloop
-            for (size_t i = 0; i < zs.size(); i++)
+#pragma omp taskloop default(none) shared(zs, c, max_iters, ns)
+            for (size_t i = 0; i < zs.size(); i++) {
                 ns[i] = iterate_z(zs[i], c, max_iters);
+            }
         } // and single
     } // end parallel
     return ns;
