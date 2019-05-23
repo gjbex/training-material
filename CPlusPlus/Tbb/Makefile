@@ -6,7 +6,8 @@ LDLIBS = -lm
 
 .PRECIOUS: %.o
 
-all: simplest_tbb.exe simple_tbb.exe simple_reduce_tbb.exe vector_reduce_tbb.exe
+all: simplest_tbb.exe simple_tbb.exe simple_reduce_tbb.exe vector_reduce_tbb.exe \
+	 stats_tbb.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) -ltbb $(LDLIBS)

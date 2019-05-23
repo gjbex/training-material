@@ -12,6 +12,7 @@ programming in C++.
 1. `vector_reduce_tbb.cpp`: simple application illustraing a
     `tbb::parallel_reduce` over a `std::vector`, using `std::accumulate`,
     rather than an explicit loop for the reduction.
+1. `stats_tbb.cpp`: reduction example using a class rather than lambda functions.
 1. `Makefile`: make file to build the applications.
 1. `build.sh`: bash script to conveniently build the application on
     the VSC cluster.
