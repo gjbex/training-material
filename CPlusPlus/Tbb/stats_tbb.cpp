@@ -62,15 +62,18 @@ void init_data(Vector& data, const Seed_t seed) {
 
 int main(int argc, char* argv[]) {
     std::size_t n {100};
+    std::size_t grain_size {5000};
     Seed_t seed {1234};
     if (argc > 1)
         n = std::stoul(argv[1]);
     if (argc > 2)
-        seed = std::stoul(argv[2]);
+        grain_size = std::stoul(argv[2]);
+    if (argc > 3)
+        seed = std::stoul(argv[3]);
     Vector data(n);
     init_data(data, seed);
     Stats stats(&data);
-    tbb::parallel_reduce(tbb::blocked_range<std::size_t>(0, data.size()), stats);
+    tbb::parallel_reduce(tbb::blocked_range<std::size_t>(0, data.size(), grain_size), stats);
     std::cout << "mean = " << stats.mean() << "\n"
               << "stddev = " << stats.stddev() << "\n"
               << "min = " << stats.min() << "\n"
