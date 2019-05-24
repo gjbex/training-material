@@ -9,8 +9,8 @@ using Vector = std::valarray<double>;
 
 class Stats {
     private:
-        Vector* data_;
-        std::size_t n_;
+        Vector* const data_;
+        const std::size_t n_;
         double sum_;
         double sum2_;
         double min_;
