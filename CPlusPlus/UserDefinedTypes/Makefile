@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
+CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra -Wpedantic
 LDLIBS = -lm
 
 all: struct_particles.exe class_particles.exe charged_particles.exe \
@@ -7,9 +7,6 @@ all: struct_particles.exe class_particles.exe charged_particles.exe \
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
-
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
 	$(RM) $(wildcard *.exe) $(wildcard *.o)
