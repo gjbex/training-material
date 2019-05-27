@@ -9,12 +9,12 @@ class Job {
         int _priority;
     public:
         Job(std::string const& name, const int priority) :
-            _name {name}, _priority {priority} {};
-        std::string name() const { return _name; };
-        int priority() const { return _priority; };
+            _name {name}, _priority {priority} {}
+        std::string name() const { return _name; }
+        int priority() const { return _priority; }
         friend bool operator<(const Job& job1, const Job& job2) {
             return job1.priority() < job2.priority();
-        };
+        }
         friend std::ostream& operator<<(std::ostream& out, const Job& job);
 };
 
@@ -24,7 +24,7 @@ std::ostream& operator<<(std::ostream& out, const Job& job) {
 
 bool cmp(const Job& job1, const Job& job2) {
     return job1 < job2;
-};
+}
 
 using job_cmp = std::function<bool(const Job&, const Job&)>;
 using job_queue = std::priority_queue<Job,std::vector<Job>,job_cmp>;

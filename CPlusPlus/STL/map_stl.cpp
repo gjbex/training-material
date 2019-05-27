@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-int main(int argc, char *argv[]) {
+int main() {
     std::list<std::string> keys = {"a", "b", "c"};
     std::map<std::string, int> si_map;
     std::unordered_map<std::string, int> usi_map;

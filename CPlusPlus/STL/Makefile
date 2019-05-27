@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = --std=c++14 -O2 -g -Wall -Wextra
+CXXFLAGS = --std=c++14 -O2 -g -Wall -Wextra -Wpedantic
 
 APPS = list_stl.exe map_stl.exe set_stl.exe \
        map_functions.exe priority_queue_stl.exe \
