@@ -27,4 +27,17 @@ class Node {
         }
 };
 
+template<typename T>
+void print_tree(std::ostream& out, Node<T>* node, const std::size_t level = 0) {
+    if (node) {
+        if (level > 0)
+            out << "\n";
+        for (std::size_t i = 0; i < level; ++i)
+            out << "  ";
+        out << level << ": " << (*node);
+        print_tree(out, node->left(), level + 1);
+        print_tree(out, node->right(), level + 1);
+    }
+}
+
 #endif
