@@ -10,4 +10,8 @@ Some sample code for using the STL library.
 1. `priority_queue.cpp`: implements an example of using a priority queue
     for non-trivial items.
 1. `set_stl.cpp`: very basic illustration of using STL sets.
+1. `vector_stl.cpp`: very basic illustration of using STL vectors with
+    iterators.
+1. `valarray_stl.cpp`: very basic illustration of using STL valarrays with
+    iterators.
 1. `Makefile`: make file to build the sample code.
