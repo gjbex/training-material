@@ -9,6 +9,7 @@ programming in C++.
     loop over a `std::valarray`.
 1. `simple_tbb.cpp`: simple application illustrating a `tbb::parallel_for`
     loop over a `std::valarray` using blocked ranges.
+1. `trivial_reduce.cpp`: comparing `std::valarray::sum` and `tbb::parallel_reduce`.
 1. `simple_reduce_tbb.cpp`: simple application illustraing a
     `tbb::parallel_reduce` over a `std::valarray`.
 1. `vector_reduce_tbb.cpp`: simple application illustraing a
