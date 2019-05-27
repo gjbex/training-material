@@ -24,7 +24,7 @@ std::valarray<int> init_values(size_t n) {
 int sum_values(const std::valarray<int>& v) {
     int sum = tbb::parallel_reduce(
                   tbb::blocked_range<size_t>(0, v.size()),
-                  0.0,
+                  0,
                   [&](const tbb::blocked_range<size_t>& r, int init) {
                       for (std::size_t i = r.begin(); i < r.end(); i++)
                           init += v[i];
