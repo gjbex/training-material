@@ -3,6 +3,8 @@ Intel Threading Building Blocks (TBB) is a library for multithreaded
 programming in C++.
 
 ## What is it?
+1. `trivial_for.cpp`: comparing `std::for_each` and `tbb::parallel_for` syntax
+    and semantics.
 1. `simplest_tbb.cpp`: simple application illustrating a `tbb::parallel_for`
     loop over a `std::valarray`.
 1. `simple_tbb.cpp`: simple application illustrating a `tbb::parallel_for`
