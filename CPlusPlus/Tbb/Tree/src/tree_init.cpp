@@ -24,23 +24,25 @@ class ChildrenDistritution {
         bool operator()() { return distr_(engine_) < child_prob_; }
 };
 
-void add_children(Node_t* node, const std::size_t max_depth, std::size_t depth,
-                  ChildrenDistritution& child_distr,
-                  ValueDistribution& value_distr) {
+std::size_t add_children(Node_t* node, const std::size_t max_depth, std::size_t depth,
+                         ChildrenDistritution& child_distr,
+                         ValueDistribution& value_distr) {
+    std::size_t nr_descendants {0};
     if (depth < max_depth) {
         if (child_distr()) {
             double value = value_distr();
             node->set_left(std::make_unique<Node_t>(value));
-            add_children(node->left(), max_depth, depth + 1,
-                         child_distr, value_distr);
+            nr_descendants += 1 + add_children(node->left(), max_depth, depth + 1,
+                                               child_distr, value_distr);
         }
         if (child_distr()) {
             double value = value_distr();
             node->set_right(std::make_unique<Node_t>(value));
-            add_children(node->right(), max_depth, depth + 1,
-                         child_distr, value_distr);
+            nr_descendants += 1 + add_children(node->right(), max_depth, depth + 1,
+                                               child_distr, value_distr);
         }
     }
+    return nr_descendants;
 }
 
 std::unique_ptr<Node_t> gen_random_tree(const double child_prob,
