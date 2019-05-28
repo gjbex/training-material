@@ -4,6 +4,8 @@
 #include <iostream>
 #include <memory>
 
+class TreeInit;
+
 template<typename T>
 class Node {
     private:
@@ -30,6 +32,7 @@ class Node {
             out << node.data_;
             return out;
         }
+        friend TreeInit;
 };
 
 template<typename T>

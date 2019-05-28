@@ -17,7 +17,8 @@ int main(int argc, char* argv[]) {
         child_prob = std::stod(argv[1]);
     if (argc > 2)
         seed = std::stoul(argv[2]);
-    std::unique_ptr<Node_t> tree = gen_random_tree(child_prob, max_depth, seed);
+    TreeInit tree_init(child_prob, max_depth, seed);
+    std::unique_ptr<Node_t> tree = tree_init.gen_random_tree();
     print_tree<double>(std::cout, tree.get());
     std::cout << std::endl;
     double sum {0.0};
