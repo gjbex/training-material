@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#PBS -A lp_sys
+#PBS -l nodes=1:ppn=36
+#PBS -l walltime=00:05:00
+#PBS -joe
+
+cd $PBS_O_WORKDIR
+
+module load intel
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/apps/leuven/skylake/2018a/software/icc/2018.1.163-GCC-6.4.0-2.28/tbb/lib/intel64/gcc4.7/"
+
+child_prob="0.9"
+seed="495845"
+for nr_threads in 1 2 4 8 16 18 24 32 36
+do
+    echo "threads = ${nr_threads}"
+    TBB_NUM_THREADS=${nr_threads} ./build/src/tree_test.exe \
+        "${child_prob}" "${seed}"
+done
