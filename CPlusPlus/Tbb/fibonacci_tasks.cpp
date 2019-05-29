@@ -1,3 +1,4 @@
+#include <chrono>
 #include <iostream>
 #include <tbb/tbb.h>
 
@@ -35,6 +36,8 @@ class FibTask : public tbb::task {
         }
 };
 
+using my_time_t = std::chrono::nanoseconds;
+
 int main(int argc, char* argv[]) {
     if (argc != 2) {
         std::cerr << "Error: expecting positive integer as argument" << std::endl;
@@ -46,8 +49,12 @@ int main(int argc, char* argv[]) {
         std::exit(1);
     }
     long result;
+    auto start_time = std::chrono::steady_clock::now();
     auto task = new(tbb::task::allocate_root()) FibTask(n, &result);
     tbb::task::spawn_root_and_wait(*task);
+    auto end_time = std::chrono::steady_clock::now();
+    auto duration = std::chrono::duration_cast<my_time_t>(end_time - start_time);
     std::cout << "fib(" << n << ") = " << result << std::endl;
+    std::cout << "time: " << duration.count()*1.0e-9 << " s" << std::endl;
     return 0;
 }
