@@ -1,7 +1,7 @@
 #include <list>
 #include <iostream>
 
-int main(int argc, char *argv[]) {
+int main() {
     std::list<int> int_list1;
     std::list<int> *int_list2 = new std::list<int>();
     for (int i = 0; i < 10; i++) {

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#PBS -A lp_sys
+#PBS -l nodes=1:ppn=36
+#PBS -l walltime=00:10:00
+#PBS -l pmem=5gb
+#PBS -j oe
+
+module load intel
+cd "${PBS_O_WORKDIR}"
+
+DATA_SIZE=500000000
+
+(>&2 echo "# parallel_for, no blocked ranges")
+time ./simplest_tbb.exe "${DATA_SIZE}" > /dev/null
+
+(>&2 echo "# parallel_for, blocked ranges")
+time ./simple_tbb.exe "${DATA_SIZE}" > /dev/null

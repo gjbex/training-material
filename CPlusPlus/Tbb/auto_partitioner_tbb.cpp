@@ -8,8 +8,9 @@
 using my_time_t = std::chrono::nanoseconds;
 using Vector = std::valarray<double>;
 using std::log;
-using std::sqrt;
 using std::sin;
+using std::sqrt;
+
 
 Vector init_values(size_t n) {
     Vector v(n);
@@ -17,7 +18,7 @@ Vector init_values(size_t n) {
             [&] (const tbb::blocked_range<size_t>& r) {
                 for (std::size_t i = r.begin(); i < r.end(); i++)
                     v[i] = sqrt(log(i + 1.0)) + sin(3.14*i/17.23);
-            });
+            }, tbb::auto_partitioner());
     return v;
 }
 
