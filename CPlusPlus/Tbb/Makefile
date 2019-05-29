@@ -1,8 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
 CPPFLAGS = -I/usr/include/x86_64-linux-gnu/c++/8/
-LDFLAGS =
-LDLIBS = -lm
+LDFLAGS = -L/apps/leuven/skylake/2018a/software/icc/2018.1.163-GCC-6.4.0-2.28/tbb/lib/intel64/gcc4.7/
+LDLIBS = -ltbb -lm
 
 .PRECIOUS: %.o
 
