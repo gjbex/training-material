@@ -19,12 +19,14 @@ std::size_t TreeInit::add_children(Node_t* node, const std::size_t depth) {
         if (child_distr_()) {
             double value = value_distr_();
             node->set_left(std::make_unique<Node_t>(value));
-            nr_descendants += 1 + add_children(node->left(), depth + 1);
+            node->left()->nr_descendants_ = add_children(node->left(), depth + 1);
+            nr_descendants += 1 + node->left()->nr_descendants_;
         }
         if (child_distr_()) {
             double value = value_distr_();
             node->set_right(std::make_unique<Node_t>(value));
-            nr_descendants += 1 + add_children(node->right(), depth + 1);
+            node->right()->nr_descendants_ = add_children(node->right(), depth + 2);
+            nr_descendants += 1 + node->right()->nr_descendants_;
         }
     }
     return nr_descendants;
@@ -32,6 +34,6 @@ std::size_t TreeInit::add_children(Node_t* node, const std::size_t depth) {
 
 std::unique_ptr<Node_t> TreeInit::gen_random_tree() {
     auto root = std::make_unique<Node_t>(value_distr_());
-    add_children(root.get(), 0);
+    root->nr_descendants_ = add_children(root.get(), 0);
     return root;
 }

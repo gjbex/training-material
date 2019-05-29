@@ -13,10 +13,12 @@ class Node {
         std::unique_ptr<Node<T>> left_child_;
         std::unique_ptr<Node<T>> right_child_;
         Node<T>* parent_;
+        std::size_t nr_descendants_;
         void set_parent(Node<T>* parent) { parent_ = parent; }
     public:
         Node(T data) : data_ {data}, left_child_ {nullptr}, right_child_ {nullptr},
            parent_ {nullptr} {}
+        std::size_t nr_descendants() const { return nr_descendants_; }
         T& operator()() { return data_; }
         Node<T>* left() { return left_child_.get(); }
         Node<T>* right() { return right_child_.get(); }
@@ -42,7 +44,7 @@ void print_tree(std::ostream& out, Node<T>* node, const std::size_t level = 0) {
             out << "\n";
         for (std::size_t i = 0; i < level; ++i)
             out << "  ";
-        out << level << ": " << (*node);
+        out << level << " (" << node->nr_descendants() << "): " << (*node);
         print_tree(out, node->left(), level + 1);
         print_tree(out, node->right(), level + 1);
     }
