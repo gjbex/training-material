@@ -160,14 +160,40 @@ preparation, analyzing data, visualization, and machine learning.
 
 Subject and Python modules that will be covered:
 
+  * using Jpyter notebooks for data science projects
   * representing, transforming & querying data: pandas
   * visualization: seaborn
   * parsing/cleaning data & regular expressions
-  * machine learning: scikit-learn, keras
 
 Prerequisites:
 
   * experience in Python programming
+
+
+### Python for machine learning (4 hours)
+
+Python is one of the dominant languages in the area of machine learning
+and AI.  This training will provide an introduction to machine learning
+methodology for data preparation and machine learning, as well as some
+machine learning algorithms.
+
+subjects and Python modules that will be covered:
+
+  * what is machine learning, and what is AI?
+  * pipelines for data ingestion, training and testing: scikit-learn
+  * examples of classic algorithms: scikit-learn
+    * principal component analysis
+    * Ridge regression
+    * Naive Bayes classifier
+    * k-means clustering
+  * examples of (deep) neural networks: Keras
+    * multi-layer perceptron for image classification
+    * convolutional neural network for image classification
+    * recurrent neural networks for sentiment analysis
+
+Prerequisites:
+
+  * experience in Python programming, visualization
 
 
 ### Python for HPC (4 hours)
@@ -189,6 +215,28 @@ Prerequisites:
 
   * experience in Python programming
   * for some subjects, experience in programming C, C++ or Fortran
+
+
+## Jupyter notebooks (2 hours)
+
+Jupyter notebooks are a versatile tools for data exploration and
+exploratory programming in a wide variety of programming languages. In this
+session you will learn how to use Jupyter Notebooks effectively.
+
+Subjects:
+
+  * formatted text using MarkDown and LaTeX formulas
+  * using Python/R code cells
+  * mixing Python and R in a single notebook
+  * interactive visualizations in notebooks
+  * interactive data in notebooks
+  * turning notebooks into slides
+  * batch execution of notebooks
+  * notebooks and version control
+
+Prerequisites:
+
+  * Familiarity with Python or R (note that most examples will be given in Python)
 
 
 ## Parallel programming
@@ -243,6 +291,28 @@ Subjects:
 Prerequisites:
 
   * experience in C, C++ or Fortran programming
+
+
+### Threading Building Blocks (4 hours)
+
+Threading Building Blocks (TBB) is a C++ template library for developing
+shared memory applications.  It integrates well with the C++ Standard
+Template Library (STL) and can be used with any modern C++ compiler.
+TBB is especially suited for nested parallelism, and pipelining when
+part of the application can use accelerator hardware.
+
+Subjects:
+
+  * programming and execution model
+  * recap of required C++ features
+  * algorithms: `parallel_for`, `parallel_reduce`, `parallel_do`
+  * task based programming
+  * dataflow programming, task graphs
+  * pitfalls and best practices
+
+Prerequisites:
+
+  * experience in C++ programming
 
 
 ## Defensive programming and debugging (4 hours + 2 hours optional)
@@ -338,3 +408,26 @@ Subjects:
 Prerequisites:
 
   * familiarity with the bash command line
+
+
+## Using Singularity for reproducible research (2 hours)
+
+Singularity can be viewed as the Docker for HPC, i.e., a Singularity
+image contains all the operating system/software components for your
+application and can be deployed and run on HPC infrastructure, as well
+as on your own laptop.
+
+Subjects:
+
+  * motivation: benefits of using images
+  * how to build images
+  * defining you own specification file
+  * tips and tricks
+  * images for shared memory applications
+  * images for distributed applications
+  * images as services
+  * deployment
+
+Prerequisites:
+
+  * Familiarity with HPC infrastructure and middleware
