@@ -15,7 +15,7 @@ int main() {
     for (const auto& val: data)
         std::cout << val << " ";
     std::cout << std::endl;
-    tbb::parallel_for(static_cast<std::size_t>(0), data.size(),
+    tbb::parallel_for(0ul, data.size(),
                       [&data] (std::size_t i) { data[i] = data[i]*data[i]; });
     for (const auto& val: data)
         std::cout << val << " ";
