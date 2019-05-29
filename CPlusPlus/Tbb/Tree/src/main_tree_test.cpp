@@ -1,4 +1,5 @@
 #include <chrono>
+#include <cstdlib>
 #include <iostream>
 #include <memory>
 #include <random>
@@ -16,11 +17,20 @@ int main(int argc, char* argv[]) {
     if (argc > 1)
         child_prob = std::stod(argv[1]);
     if (argc > 2)
-        seed = std::stoul(argv[2]);
+        max_depth = std::stoul(argv[2]);
+    if (argc > 3)
+        seed = std::stoul(argv[3]);
+    if (const char* tbb_num_threads = std::getenv("TBB_NUM_THREADS")) {
+        int nr_threads = std::stoi(tbb_num_threads);
+        std::cout << "nr. threads = " << nr_threads << std::endl;
+        tbb::task_scheduler_init(std::stoi(tbb_num_threads));
+    }
     TreeInit tree_init(child_prob, max_depth, seed);
     std::unique_ptr<Node_t> tree = tree_init.gen_random_tree();
-    print_tree<double>(std::cout, tree.get());
-    std::cout << std::endl;
+    // print_tree<double>(std::cout, tree.get());
+    // std::cout << std::endl;
+    std::cout << "nr. nodes = " << 1 + tree->nr_descendants()
+              << std::endl;
     double sum {0.0};
     auto start_time = std::chrono::steady_clock::now();
     auto task = new(tbb::task::allocate_root()) SumTask<double>(tree.get(), &sum);
