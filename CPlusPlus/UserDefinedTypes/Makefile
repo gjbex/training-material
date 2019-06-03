@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra -Wpedantic
 LDLIBS = -lm
 
 all: struct_particles.exe class_particles.exe charged_particles.exe \
-     streaming_stats.exe function_objects.exe
+     streaming_stats.exe function_objects.exe placement_new.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
