@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
+CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra -Wpedantic
 OMPFLAGS = -fopenmp
 CPPFLAGS = -I/apps/leuven/skylake/2018a/software/tbb/2018_U5-GCCcore-6.4.0/include
 LDFLAGS = -L/apps/leuven/skylake/2018a/software/tbb/2018_U5-GCCcore-6.4.0/build/linux_intel64_gcc_cc6.4.0_libc2.17_kernel3.10.0_release/
