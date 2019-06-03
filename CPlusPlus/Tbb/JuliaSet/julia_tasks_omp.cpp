@@ -73,7 +73,7 @@ int iterate_z(cmplx z, const cmplx& c, size_t max_iters) {
 
 valarray<int> iterate_zs(valarray<cmplx>& zs, const complex<double>& c,
                          size_t max_iters) {
-    valarray<int> ns(zs.size());
+    valarray<int> ns(0, zs.size());
 #pragma omp parallel default(none) shared(zs, c, max_iters, ns)
     {
 #pragma omp single
