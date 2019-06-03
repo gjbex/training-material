@@ -6,10 +6,10 @@ LDLIBS = -ltbb -lm
 
 .PRECIOUS: %.o
 
-all: simplest_tbb.exe simple_tbb.exe simple_reduce_tbb.exe \
-     vector_reduce_tbb.exe grain_size_tbb.exe \
-     auto_partitioner_tbb.exe stats_tbb.exe trivial_for.exe \
-     trivial_reduce.exe fibonacci_tasks.exe
+all: simplest_parallel_for.exe simple_parallel_for.exe simple_parallel_reduce.exe \
+     vector_parallel_reduce.exe grain_size_parallel_for.exe \
+     stats_parallel_reduce.exe trivial_parallel_for.exe trivial_parallel_reduce.exe \
+	 fibonacci_tasks.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) -ltbb $(LDLIBS)
