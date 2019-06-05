@@ -1,28 +1,19 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -O2 -g -Wall -Wextra
-OMPFLAGS = -fopenmp
-CPPFLAGS =
-LDFLAGS =
-LDLIBS = -lm
+CPPFLAGS = -I/usr/include/x86_64-linux-gnu/c++/8/
+LDFLAGS = -L/apps/leuven/skylake/2018a/software/icc/2018.1.163-GCC-6.4.0-2.28/tbb/lib/intel64/gcc4.7/
+LDLIBS = -ltbb -lm
 
 .PRECIOUS: %.o
 
-all: julia_abs.exe julia.exe julia_tbb.exe julia_omp.exe \
-     simple_tbb.exe simple_reduce_tbb.exe vector_reduce_tbb.exe \
-     julia_tasks_omp.exe
-
-%_omp.exe: %_omp.cpp
-	$(CXX) $(CXXFLAGS) $(OMPFLAGS) -o $@ $^ $(LDLIBS)
-
-%_tbb.exe: %_tbb.o
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) -ltbb $(LDLIBS)
+all: simplest_parallel_for.exe simple_parallel_for.exe simple_parallel_reduce.exe \
+     vector_parallel_reduce.exe grain_size_parallel_for.exe \
+     stats_parallel_reduce.exe trivial_parallel_for.exe \
+	 trivial_parallel_reduce.exe fibonacci_tasks.exe flow_graph.exe
 
 %.exe: %.o
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) $(LDLIBS)
-
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) -ltbb $(LDLIBS)
 
 clean:
-	$(RM) *.o *.exe
-	$(RM) core core.*
+	$(RM) $(wildcard *.o) $(wildcard *.exe)
+	$(RM) core $(wildcard core.*)

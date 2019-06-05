@@ -41,11 +41,7 @@ vector<Particle> init_particles(size_t n) {
     auto mass_distr = bind(uniform_real_distribution<double>(0.1, 1.0),
                            ref(engine));
     for (size_t i = 0; i < n; i++) {
-        Particle particle {
-            .x = pos_distr(),
-            .y = pos_distr(),
-            .mass = mass_distr(),
-        };
+        Particle particle {pos_distr(), pos_distr(), mass_distr()};
         particles.push_back(particle);
     }
     return particles;

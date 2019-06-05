@@ -31,6 +31,7 @@ programming concepts and idiosyncracies particular to C++.
 1. `Pointers`: illustration of pointer usage in C++.
 1. `Armadillo`: some illustrations of using the Armadillo linear algebra
     library.
+1. `Eigen`: some illustrations of using the Eigen linear algebra library.
 1. `Xtensor`: some illustrations of using the Xtensor multi-dimensional array
     library that resembles numpy.
 1. `Boost`: some illustrations of using the Boost C++ library,

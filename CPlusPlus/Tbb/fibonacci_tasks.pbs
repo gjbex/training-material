@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#PBS -A lp_sys
+#PBS -l nodes=1:ppn=36
+#PBS -l walltime=00:05:00
+#PBS -joe
+
+cd $PBS_O_WORKDIR
+
+module load intel
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/apps/leuven/skylake/2018a/software/icc/2018.1.163-GCC-6.4.0-2.28/tbb/lib/intel64/gcc4.7/"
+
+n="50"
+echo "# n = ${n}"
+
+for run_nr in 1 2 3
+do
+    echo "run nr. = ${run_nr}"
+    ./fibonacci_tasks.exe "${n}"
+done

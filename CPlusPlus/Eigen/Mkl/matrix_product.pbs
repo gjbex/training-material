@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#PBS -A lp_sys
+#PBS -l nodes=1:ppn=36
+#PBS -l pmem=5gb
+#PBS -lwalltime=00:05:00
+#PBS -joe
+
+cd $PBS_O_WORKDIR
+
+module load intel Eigen
+
+./matrix_product.exe 5

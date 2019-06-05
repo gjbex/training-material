@@ -13,7 +13,7 @@ void fill_map(Map_type& map, const List& list);
 template <typename Map_type>
 void print_map(const Map_type& map, const std::string& label);
 
-int main(int argc, char *argv[]) {
+int main() {
     List keys = {"a", "b", "c"};
     Map si_map;
     Unordered_map usi_map;

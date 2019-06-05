@@ -10,6 +10,9 @@ Code illustrations for chapter 2, User defined types in Stroustrup's
     original `Particle` class with charge.
 1. `stats.h`: `Stats` class definition that keeps statistics for steraming
     data (very bare bones, just illustration).
+1. `function_objects.cpp`: illustration of overloading the `operator()` to
+    create function objects.
+1. `placement_new.cpp`: illustration of placement new with timing.
 1. `streamin_stats.cpp`: implementation of `Stats` class for statistics
     on streaming data..
 1. `Makefile`: make file to build the applictions.
