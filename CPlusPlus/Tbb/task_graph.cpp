@@ -1,32 +1,31 @@
 #include <cstdio>
 #include <tbb/tbb.h>
-
-using namespace tbb::flow;
+#include <tuple>
 
 int main() {
     int result = 0;
-    graph g;
-    broadcast_node<int> input(g);
-    function_node<int,int> squarer(g, unlimited,
+    tbb::flow::graph graph;
+    tbb::flow::broadcast_node<int> input(graph);
+    tbb::flow::function_node<int,int> squarer(graph, tbb::flow::unlimited,
             [] (int v) -> int { return v*v; });
-    function_node<int,int> cuber(g, unlimited,
+    tbb::flow::function_node<int,int> cuber(graph, tbb::flow::unlimited,
             [] (int v) -> int { return v*v*v; });
-    join_node< tuple<int,int>, queueing> join( g );
-    function_node<tuple<int,int>,int> sum(g, serial,
-            [&result] (tuple<int,int> v) -> int {
-                result += get<0>(v) + get<1>(v);
+    tbb::flow::join_node< std::tuple<int,int>, tbb::flow::queueing> join(graph);
+    tbb::flow::function_node<std::tuple<int,int>,int> sum(graph, tbb::flow::serial,
+            [&result] (std::tuple<int,int> v) -> int {
+                result += std::get<0>(v) + std::get<1>(v);
                 return result;
             }
     );
     make_edge(input, squarer);
     make_edge(input, cuber);
-    make_edge(squarer, get<0>(join.input_ports()));
-    make_edge(cuber, get<1>( join.input_ports()));
+    make_edge(squarer, std::get<0>(join.input_ports()));
+    make_edge(cuber, std::get<1>( join.input_ports()));
     make_edge(join, sum);
 
     for (int i = 1; i <= 10; ++i)
         input.try_put(i);
-    g.wait_for_all();
+    graph.wait_for_all();
 
     printf("Final result is %d\n", result);
     return 0;
