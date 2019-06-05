@@ -8,8 +8,8 @@ LDLIBS = -ltbb -lm
 
 all: simplest_parallel_for.exe simple_parallel_for.exe simple_parallel_reduce.exe \
      vector_parallel_reduce.exe grain_size_parallel_for.exe \
-     stats_parallel_reduce.exe trivial_parallel_for.exe trivial_parallel_reduce.exe \
-	 fibonacci_tasks.exe
+     stats_parallel_reduce.exe trivial_parallel_for.exe \
+	 trivial_parallel_reduce.exe fibonacci_tasks.exe task_graph.exe
 
 %.exe: %.o
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -o $@ $^ $(LDFLAGS) -ltbb $(LDLIBS)
