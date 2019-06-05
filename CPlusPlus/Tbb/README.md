@@ -23,6 +23,7 @@ programming in C++.
 1. `fibonacci_tasks.cpp`: implementation of the Fibonacci function using TBB
     tasks.
 1. `Makefile`: make file to build the applications.
+1. `task_graph.cpp`: simple flow graph example.
 1. `build.sh`: bash script to conveniently build the application on
     the VSC cluster.
 1. `run.sh`: bash script to conveniently run the application on
