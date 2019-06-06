@@ -30,6 +30,8 @@ algorithms for scientific computing (Lapack, statistics,...).
     target function in `optimization.py`
 1. `pendulum_ode.py`: solves the ODE of a damped, driven pendulum that is
     optionally anharmonic. Optionally plots results.
+1. `dynamic_programming.ipynb`: example of string alignment using
+    dynamic programming.
 1. `vector_write.py`: script to create a file containing a specified number
     of floating point values, either in text or binary format to test I/O
     performance characteristics.
