@@ -11,3 +11,5 @@ String alignment algorithm using dynamic programming.
 1. `main.cpp`: application that takes two DNA strings as input, and prints
     the aligned strings to standard output.
 1. `Makefile`: make file to build the applications.
+1. `test_alignment.py`: Python script to test the application.
+1. `alignment_data.txt`: data to test the application.
