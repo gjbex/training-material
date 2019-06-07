@@ -1,6 +1,10 @@
 #ifndef STRING_ALIGNER_HDR
 #define STRING_ALIGNER_HDR
 
+/*
+ * Based on: http://www.biorecipes.com/DynProgBasic/code.html
+ */
+
 #include <Eigen/Dense>
 #include <map>
 #include <memory>
