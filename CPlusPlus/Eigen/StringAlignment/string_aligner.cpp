@@ -1,4 +1,3 @@
-#include <iostream>
 #include "string_aligner.h"
 
 StringAligner::StringAligner(const std::string& alphabet,
@@ -48,7 +47,6 @@ Alignment_t StringAligner::align(const std::string& s1, const std::string& s2) {
             dists(i, j) = max(match, gap1, gap2);
         }
     }
-    std::cout << str1_ << ":" << str2_ << std::endl;
     std::string a1("");
     std::string a2("");
     long i {dists.rows() - 1};
