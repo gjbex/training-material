@@ -6,4 +6,4 @@ tagging, named entiry recognition, and comes with word vector representations.
 
 ## What is it?
 
-1. `specy.ipynb`: jupyter notebook illustrating some spaCy functionality.
+1. `spacy.ipynb`: jupyter notebook illustrating some spaCy functionality.
