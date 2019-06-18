@@ -8,7 +8,7 @@ refer to Bjarne Strustroup's "A tour of C++".
   * [User defined types](#udfs)
   * [Separate compilation and error handling](#modularity)
   * [Classes](#classes)
-  * [Templaes and functional programming](#templates)
+  * [Templates and functional programming](#templates)
   * [i/O streams](#iostreams)
   
 
@@ -18,7 +18,7 @@ refer to Bjarne Strustroup's "A tour of C++".
     a command line argument is provided, e.g., `Bjarne`, the greeting
     should be `hello Bjarne!`, otherwise `hello world!`.
     ([Solution](Basics/hello.cpp))
-  1. Write a program that reads from standard input, and interpretes a
+  1. Write a program that reads from standard input, and interprets a
     string as a name.  It will write a greeting to standard output,
     unless it reads `quit`, then it will print `Bye!`.
     ([Solution](Basics/talk.cpp))
@@ -55,7 +55,7 @@ refer to Bjarne Strustroup's "A tour of C++".
     coordinates, as well as mass. Write a function that returns a structure
     initialized to given coordinates and mass, i.e., "creates" a particle.
     Write a function that moves a particle a given distance in the x, y and
-    z directions. Write a fnction that comnputes the Euclidean distance
+    z directions. Write a function that computes the Euclidean distance
     between two given particles. Overload the `<<` operator to generate
     a representation of a particle as `(<x>, <y>, <z>), mass = <mass>`.
     ([Solution](UserDefinedTypes/struct_particles.cpp))
@@ -63,7 +63,7 @@ refer to Bjarne Strustroup's "A tour of C++".
     functions will be the constructor and methods respectively.
     ([Solution](UserDefinedTypes/class_particles.cpp))
   1. Extend the previous exercise so that particles can have a charge. The
-    ckharge is represented as an `enum class`.
+    charge is represented as an `enum class`.
     ([Solution](UserDefinedTypes/charged_particles.cpp))
   1. Create a class that represents statistical information for a stream of
     data.  Once an object is created, data (`double` numbers) can be added
@@ -105,7 +105,7 @@ refer to Bjarne Strustroup's "A tour of C++".
     deviation
     ([Solution](Classes/Stats))
   1. Create an abstract base class that represent algorithms for
-    computing the quadrature of functions. Create two dervied classes,
+    computing the quadrature of functions. Create two derived classes,
     the first implements Simpson's method, the other the Gauss method. The
     main function takes a command line argument specifying which method
     to use to compute the numerical integral of a function over an
@@ -113,38 +113,38 @@ refer to Bjarne Strustroup's "A tour of C++".
     ([Solution](Classes/Quadrature))
     
 
-## <a name="templates">Templates and unctional programming interludes (chapter 5)<a/>
+## <a name="templates">Templates and functional programming interludes (chapter 5)<a/>
 
-  1. Implement a template for a functions that will swap the valuss of
+  1. Implement a template for a functions that will swap the values of
     two variables passed by reference for any type (both variables have
     the same type).
-    ([Solution](Temaples/swap.cpp))
+    ([Solution](Templates/swap.cpp))
   1. Implement a template for a function that will compute the sum of its
     arguments, regardless of the number of arguments.
-    ([Solution](Temaples/sum.cpp))
+    ([Solution](Templates/sum.cpp))
   1. Implement two classes for performing a quadrature algorithms on a
     function over an interval.  Both classes are unrelated, but implement
-    a method `integrate` with the same signature. Write a template functino
+    a method `integrate` with the same signature. Write a template functions
     that performs the numerical integration of a given function using
     either algorithm for an increasing size of the integration interval
     e.g., `[-1.0, 1.0]` to `[-5.0, 5.0]` in increments of 1.0.
-    ([Solution](Temaples/DuckTyping))
+    ([Solution](Templates/DuckTyping))
   1. Write a function that computes the Euclidean distance between two
     points in 3D.  The points are represented as a length 3 array. Use
-    type alliasing to make the code easier to read.
+    type aliasing to make the code easier to read.
     ([Solution](Templates/points.cpp))
   1. Implement a class that represents a function to compute the angle
-    of a swininging pendulum as a function of time.  The constructor fixes
+    of a swinging pendulum as a function of time.  The constructor fixes
     the frequency.
     ([Solution](Templates/pendulum_func_obj.cpp))
   1. Write a program that implements a function with two arguments to
-    compute the angle of a swininging pendulum.  The first is time, the
+    compute the angle of a swinging pendulum.  The first is time, the
     second the pendulum's frequency.  Use `std::bind` to create a new
     function that has the time as a single argument. Print the values in
     the range `[0.0, 20.0]`.
     ([Solution](Templates/pendulum_bind.cpp))
   1. Write a program that implements a function with two arguments to
-    compute the angle of a swininging pendulum.  The first is time, the
+    compute the angle of a swinging pendulum.  The first is time, the
     second the pendulum's frequency.  Write a lambda function that has
     the time as a single argument. Print the values in the range
     `[0.0, 20.0]`.
@@ -163,9 +163,9 @@ refer to Bjarne Strustroup's "A tour of C++".
     converts the input file to the new format, writing it to the output
     file.
   1. For the same input file format as above, compute the sum of the values
-    of each row, and write a new CSC file, where the sum is the first entry
+    of each row, and write a new CSV file, where the sum is the first entry
     in each row, followed by the values in the original file.
   1. The data for a person is represented by a structure with the first
     name, last name, and the person's age as fields. Overload the put-to
     and get-from operators to serialize and deserialize these data
-    structrues to text files.
+    structures to text files.

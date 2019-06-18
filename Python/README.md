@@ -121,6 +121,7 @@ these samples have been used for Python tutorials.
     language text, both serial and parallel implementations.
 1. `style.md`: some style tips based on code reviews and observations in
     the field
+1. `SpaCy`: illustrations of using the spaCy natural language processing library.
 1. `Subprocess`: illustrates executing a shell command from a Python script
     using the `subprocess` module.
 1. `Typing`: Python type annotations can help to make code considerably
