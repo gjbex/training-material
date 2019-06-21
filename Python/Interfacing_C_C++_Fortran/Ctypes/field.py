@@ -7,7 +7,7 @@ import sys
 
 def get_log_map():
     lib = cdll.LoadLibrary(os.path.join(os.getcwd(), 'liblog_map.so'))
-    log_map = lib.log_map
+    log_map = lib.logistic_map
     log_map.argtypes = [c_double, c_double, c_int]
     log_map.restype = c_double
     return log_map

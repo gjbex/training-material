@@ -20,8 +20,6 @@ these samples have been used for Python tutorials.
     filter.
 1. `Bokeh`: illustrations of how to use the Bokeh plotting library for,
     e.g., interactive graphs.
-1. `CLibsFromPython`: illustrate how to use a C library from a Python
-    script.
 1. `CodeCoverage`: illustration f how to use a code coverage tool.
 1. `CodeEvaluation`: illustrates how to evaluate a string containing
     Python code at runtime.
@@ -65,6 +63,8 @@ these samples have been used for Python tutorials.
     context of exploration in notebooks.
 1. `ImageProcessing`: some Scikit-Image sample code for image processing,
     as well as OpenCV for video analysis.
+1. `Interfacing_C_C++_Fortran`: illustrations of how to interface with
+    C, C++ and Fortran code using ctypes, SWIG or f2py.
 1. `Introspection`: sample code of how to implement introspection as
     mix-in class.
 1. `Ising`: Implementation of the 2D Ising system in pure Python, as well
