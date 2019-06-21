@@ -5,6 +5,6 @@ SWIG.  For Fortran code, `f2py` is used.
 
 ## What is it?
 
-* `Ctypes`: example of using functions defined in a shared library.
+* `Ctypes`: examples of using functions defined in a shared library.
 * `F2py`: examples of binding Fortran code using f2py.
 * `Swig`: examples of binding C and C++ code using SWIG.
