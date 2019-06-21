@@ -5,13 +5,8 @@ LDLIBS = -lm
 
 PYBIND_SUFFIX = $(shell python3-config --extension-suffix)
 
-all: libstats.so
-
-libstats.so: statistics.o
-	$(CXX) $(CXXFLAGS) -shared -o $@ $< $(LDFLAGS) $(LDLIBS)
-
-bindings: statistics_bind.cpp libstats.so
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -shared -o stats$(PYBIND_SUFFIX) $^
+bindings: spectrum.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -shared -o spectrum$(PYBIND_SUFFIX) $^
 
 clean:
 	$(RM) $(wildcard *.so) $(wildcard *.o)
