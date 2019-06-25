@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(GameOfLife LANGUAGES CXX)
+project(ProgramOptions LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
@@ -13,9 +13,9 @@ if (NOT Boost_FOUND)
 endif (NOT Boost_FOUND)
 
 add_executable(random.exe random.cpp)
-target_include_directories(random.exe PRIVATE "${Boost_INCLUDE_DIR}")
-target_link_libraries(random.exe LINK_PRIVATE "${Boost_LIBRARIES}")
+target_include_directories(random.exe PRIVATE ${Boost_INCLUDE_DIR})
+target_link_libraries(random.exe LINK_PRIVATE ${Boost_LIBRARIES})
 
 add_executable(random_default.exe random_default.cpp)
-target_include_directories(random_default.exe PRIVATE "${Boost_INCLUDE_DIR}")
-target_link_libraries(random_default.exe LINK_PRIVATE "${Boost_LIBRARIES}")
+target_include_directories(random_default.exe PRIVATE ${Boost_INCLUDE_DIR})
+target_link_libraries(random_default.exe LINK_PRIVATE ${Boost_LIBRARIES})
