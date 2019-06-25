@@ -30,7 +30,7 @@ Although alternatives exist, the easiest approach is to use the
 NX login nodes, since this provides a GUI environment on a cluster login
 node.  The installation and setup of the NoMachine software on your computer
 is documented on the VSC
-[User Portal](https://www.vscentrum.be/client/multiplatform/nx-start-guide).
+[User Portal](https://vlaams-supercomputing-centrum-vscdocumentation.readthedocs-hosted.com/en/latest/access/nx_start_guide.html?highlight=nomachine).
 Once NoMachine is installed and configured, you can connect to the cluster.
 
 ### Starting the server
