@@ -133,6 +133,7 @@ these samples have been used for Python tutorials.
 1. `WebScraping`: illustration of web scraping using Beautiful Soup.
 1. `WxPython`: some illustrations of GUI developlement using the Python
     bindings for Wx (No support for Python 3 as yet).
+1. `Xarray`: illustration of using xarray to represent numerical data.
 1. `XmlGenerator`: code to generate a random XML documents.
 
 
