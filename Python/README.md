@@ -102,6 +102,7 @@ these samples have been used for Python tutorials.
     non-trivial semantics.
 1. `PhraseIndexer`: parses a text file to find the line number on which a
     given eet of phrases occurs.
+1. `PyCuda`: Jupyter notebooks illustrating PyCUDA.
 1. `Profiling`: a few examples of how to use profilers for Python.
 1. `python_development_practices.pptx`: Powerpoint presentation on some
     development good practices.
