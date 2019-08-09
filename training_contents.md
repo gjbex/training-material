@@ -160,7 +160,7 @@ preparation, analyzing data, visualization, and machine learning.
 
 Subject and Python modules that will be covered:
 
-  * using Jpyter notebooks for data science projects
+  * using Jupyter notebooks for data science projects
   * representing, transforming & querying data: pandas
   * visualization: seaborn
   * parsing/cleaning data & regular expressions

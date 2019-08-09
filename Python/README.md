@@ -102,6 +102,7 @@ these samples have been used for Python tutorials.
     non-trivial semantics.
 1. `PhraseIndexer`: parses a text file to find the line number on which a
     given eet of phrases occurs.
+1. `PyCuda`: Jupyter notebooks illustrating PyCUDA.
 1. `Profiling`: a few examples of how to use profilers for Python.
 1. `python_development_practices.pptx`: Powerpoint presentation on some
     development good practices.
@@ -133,6 +134,7 @@ these samples have been used for Python tutorials.
 1. `WebScraping`: illustration of web scraping using Beautiful Soup.
 1. `WxPython`: some illustrations of GUI developlement using the Python
     bindings for Wx (No support for Python 3 as yet).
+1. `Xarray`: illustration of using xarray to represent numerical data.
 1. `XmlGenerator`: code to generate a random XML documents.
 
 
