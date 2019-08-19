@@ -32,3 +32,5 @@ consider the LAPACK SVD as implemented in Intel's MKL.
    OpenMP MKL.   
 1. `small_test_*.h5`: sample input HDF5 files containing a 3 by 4
    double precision matrix.
+1. `performance.xlsx`: Performance numbers for various configurations
+   on four 10,000 by 10,000 double precision matrices.
