@@ -9,4 +9,6 @@ Some sample code illustrating OpenMP concepts and techniques.
 1. `FortranBlock`: using a Fortran block construct in an OpenMP block (don't!!!)
 1. `Iterators`: illustrates how to use an OpenMP `for` with C++ random
     access iterators, and the `linear` clause on that directive.
+`. `MultiLevel`: illustration of nested OpenMP in the context of Intel's
+   MKL library (SVD).
 1. `Tasks`: some examples of using OpenMP tasks
