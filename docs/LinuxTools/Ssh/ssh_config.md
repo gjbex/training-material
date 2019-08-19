@@ -41,10 +41,9 @@ Host leibniz
 
 In this example, `login.leibniz.antwerpen.vsc` is the host you actually
 want to log in to, and `login.hpc.kuleuven.be` is the host you are using
-as a proxy, i.e., you will log in to that one, but all you send to it will
-be forwarded to leibniz using the netcat (`nc`) command.
+as a proxy jump hosts.
 
-If you access many hosts, your `.ssh/config` file can grow very long.  In
+If you access many hosts, your `.ssh/config` file can grow very long.  In that
 case, it might be convenient to group hosts into distinct files, and include
 those into your main `.ssh/config` file, e.g.,
 ```
