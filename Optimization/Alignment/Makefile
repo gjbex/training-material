@@ -1,0 +1,13 @@
+CXX = g++
+CXXFLAGS = -O4 -march=skylake -Wall -Wextra
+
+all: aos_soa_foss.exe
+
+aos_soa_foss.exe: aos_soa.o
+	$(CXX) $(CXXFLAGS) -o $@ $<
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+clean:
+	$(RM) $(wildcard *.o) aos_soa_foss.exe

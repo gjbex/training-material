@@ -1,0 +1,14 @@
+CXX = icpc
+CXXFLAGS = -O2 -xHost -Wall
+CPPFLAGS = -I/usr/include/x86_64-linux-gnu/c++/8
+
+all: aos_soa_intel.exe
+
+aos_soa_intel.exe: aos_soa.o
+	$(CXX) $(CXXFLAGS) -o $@ $<
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
+
+clean:
+	$(RM) $(wildcard *.o) aos_soa_intel.exe

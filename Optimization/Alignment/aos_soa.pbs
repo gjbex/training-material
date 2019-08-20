@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#PBS -A lp_sys
+#PBS -l nodes=1:ppn=1
+#PBS -l pmem=50gb
+#PBS -l walltime=00:15:00
+#PBS -j oe
+#PBS -m ae
+#PBS -M geertjan.bex@uhasselt.be
+
+module load intel
+
+cd $PBS_O_WORKDIR
+
+# make and run intel version
+make -f Makefile.intel clean all
+for i in $(seq 1 10)
+do
+    echo "Intel run $i:"
+    ./aos_soa_intel.exe 500000000
+done
+
+# make and run gcc version
+make -f Makefile.foss clean all
+for i in $(seq 1 10)
+do
+    echo "GCC run $i:"
+    ./aos_soa_foss.exe 500000000
+done

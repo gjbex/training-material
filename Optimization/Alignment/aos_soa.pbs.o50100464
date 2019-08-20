@@ -1,0 +1,311 @@
+time: 900
+nodes: 1
+procs: 1
+account string: lp_sys
+queue: q1h
+========================================================================
+rm -f aos_soa.o aos_soa_intel.exe
+icpc -O2 -xHost -c -o aos_soa.o aos_soa.cpp
+icpc -O2 -xHost -o aos_soa_intel.exe aos_soa.o
+Intel run 1:
+data size: 500000000
+array of structures:
+  initialization: 4.00102
+  aggregation: 0.97371
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88734
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.37957
+  aggregation: 0.81317
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.960599
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 2:
+data size: 500000000
+array of structures:
+  initialization: 4.00519
+  aggregation: 0.971335
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88589
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.42752
+  aggregation: 0.810626
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.962136
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 3:
+data size: 500000000
+array of structures:
+  initialization: 3.98168
+  aggregation: 0.973147
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88432
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.40836
+  aggregation: 0.817021
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.958539
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 4:
+data size: 500000000
+array of structures:
+  initialization: 3.98511
+  aggregation: 0.972618
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.8887
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.42639
+  aggregation: 0.808737
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.959059
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 5:
+data size: 500000000
+array of structures:
+  initialization: 3.98584
+  aggregation: 0.970785
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88901
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.37001
+  aggregation: 0.808272
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.959189
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 6:
+data size: 500000000
+array of structures:
+  initialization: 3.98956
+  aggregation: 0.971682
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88702
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.41319
+  aggregation: 0.807784
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.963762
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 7:
+data size: 500000000
+array of structures:
+  initialization: 3.98937
+  aggregation: 0.972718
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88504
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.42624
+  aggregation: 0.808292
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.959657
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 8:
+data size: 500000000
+array of structures:
+  initialization: 3.98984
+  aggregation: 0.973402
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88872
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.4381
+  aggregation: 0.811003
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.96098
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 9:
+data size: 500000000
+array of structures:
+  initialization: 4.0083
+  aggregation: 0.97173
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.8867
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.42753
+  aggregation: 0.811905
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.962792
+  result: 1.25e+17 1.25e+17 1.25e+17
+Intel run 10:
+data size: 500000000
+array of structures:
+  initialization: 4.00475
+  aggregation: 0.972539
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88983
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.40328
+  aggregation: 0.809707
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 0.960311
+  result: 1.25e+17 1.25e+17 1.25e+17
+rm -f aos_soa.o aos_soa_foss.exe
+g++ -O4 -march=skylake-avx512 -c -o aos_soa.o aos_soa.cpp
+g++ -O4 -march=skylake-avx512 -o aos_soa_foss.exe aos_soa.o
+GCC run 1:
+data size: 500000000
+array of structures:
+  initialization: 3.83945
+  aggregation: 0.997581
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.89238
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.78692
+  aggregation: 0.842996
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.89494
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 2:
+data size: 500000000
+array of structures:
+  initialization: 3.86141
+  aggregation: 0.99841
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.89375
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.75043
+  aggregation: 0.836559
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.83602
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 3:
+data size: 500000000
+array of structures:
+  initialization: 3.82393
+  aggregation: 0.994239
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.89336
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.74361
+  aggregation: 0.834298
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.85703
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 4:
+data size: 500000000
+array of structures:
+  initialization: 3.83861
+  aggregation: 0.993003
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.89527
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.75733
+  aggregation: 0.833588
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.85173
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 5:
+data size: 500000000
+array of structures:
+  initialization: 3.8021
+  aggregation: 0.995344
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88945
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.67622
+  aggregation: 0.833178
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.87467
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 6:
+data size: 500000000
+array of structures:
+  initialization: 3.82873
+  aggregation: 0.993892
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.89156
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.7764
+  aggregation: 0.835136
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.85422
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 7:
+data size: 500000000
+array of structures:
+  initialization: 3.81867
+  aggregation: 0.994076
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88943
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.76845
+  aggregation: 0.834245
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.88213
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 8:
+data size: 500000000
+array of structures:
+  initialization: 3.8001
+  aggregation: 0.995428
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.88898
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.81018
+  aggregation: 0.832805
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.86189
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 9:
+data size: 500000000
+array of structures:
+  initialization: 3.86452
+  aggregation: 0.993338
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.89117
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.70148
+  aggregation: 0.833995
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.86417
+  result: 1.25e+17 1.25e+17 1.25e+17
+GCC run 10:
+data size: 500000000
+array of structures:
+  initialization: 3.82544
+  aggregation: 0.99672
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 2.8919
+  result: 1.25e+17 1.25e+17 1.25e+17
+structure of arrays:
+  initialization: 4.71266
+  aggregation: 0.834259
+  result: 1.25e+17 1.25e+17 1.25e+17
+  aggregation: 1.89441
+  result: 1.25e+17 1.25e+17 1.25e+17
+========================================================================
+Epilogue args:
+Date: Tue Aug 20 14:36:39 CEST 2019
+Allocated nodes:
+r23i27n03
+Job ID: 50100464.tier2-p-moab-2.tier2.hpc.kuleuven.be
+User ID: vsc30140
+Group ID: vsc30140
+Job Name: aos_soa.pbs
+Session ID: 15229
+Resource List: nodes=1:ppn=1,pmem=50gb,walltime=00:15:00,neednodes=1:ppn=1
+Resources Used: cput=00:04:54,vmem=23688160kb,walltime=00:04:58,mem=23438788kb,energy_used=0
+Queue Name: q1h
+Account String: lp_sys
+-------------------------------------------------------------------------
+time: 298
+nodes: 1
+procs: 1
+account: lp_sys
