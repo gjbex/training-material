@@ -18,11 +18,7 @@ svd.exe: libsvd.so svd.o
 	$(FC) $(FFLAGS) $(SERIAL_FPPFLAGS) -o $@ svd.o \
 	       -L. -lsvd $(MATH_LIBS) $(HDF5_SERIAL_LIBS)
 
-svd_threaded.exe: libsvd.so svd.f90
-	$(FC) $(FFLAGS) $(OMP) $(SERIAL_FPPFLAGS) -o $@ svd.f90 \
-	       $(THREADED_MATH_LIBS) $(HDF5_SERIAL_LIBS)
-
-svd_threaded.exe: libsvd.so multi_svd.f90
+multi_svd.exe: libsvd.so multi_svd.f90
 	$(FC) $(FFLAGS) $(OMP) $(SERIAL_FPPFLAGS) -o $@ multi_svd.f90 \
 	       $(THREADED_MATH_LIBS) $(HDF5_SERIAL_LIBS)
 
