@@ -17,10 +17,12 @@ consider the LAPACK SVD as implemented in Intel's MKL.
    matrix in an HDF5 file, and writes out the relative difference between the
    original and the recomputed matrix.
 1. `Makefile`: make file for GCC gfortran compiler, OpenBLAS and Lapack,
-   multi-level parallelism has not been implemented for OpenBLAS since the
-   thread count can not be tuned using environment variables.
+   This should work on desktop Linux systems (tested with Ubuntu 19.04).
 1. `Makefile.intel`: make file to the Intel ifort compiler, and MKL's
    BLAS and Lapack implementations.  This version can be used to explore
+   multi-level parallelism.
+1. `Makefile.foss`: make file to the GCC gfortran compiler, and OpenBLAS
+   Lapack implementations.  This version can be used to explore
    multi-level parallelism.
 1. `serial.pbs`: job script to run the sequential application with
    sequential MKL.   

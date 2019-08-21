@@ -1,0 +1,46 @@
+HDF5_SERIAL_INC_DIR = $(HDF5_DIR)/include
+HDF5_SERIAL_LIB_DIR = $(HDF5_DIR)/lib
+BLAS_DIR = /usr
+FC = gfortran
+FFLAGS = -O3 -g -Wall -Wextra -fPIC
+OMP = -fopenmp
+SERIAL_FPPFLAGS = -I$(HDF5_SERIAL_INC_DIR)
+HDF5_SERIAL_LIBS = -L$(HDF5_SERIAL_LIB_DIR)/lib -lhdf5_fortran
+MATH_LIBS = -L$(BLAS_DIR) -lopenblas -lm
+
+all: libsvd.so libsvd_threaded.so \
+     svd.exe svd_threaded.exe multi_svd.exe multi_svd_threaded.exe
+
+libsvd.so: utils_mod.o matrix_mod.o
+	$(FC) $(FFLAGS) $(SERIAL_FPPFLAGS) -shared -o $@ $^ \
+	      $(MATH_LIBS) $(HDF5_SERIAL_LIBS)
+
+libsvd_threaded.so: utils_mod_threaded.o matrix_mod_threaded.o
+	$(FC) $(FFLAGS) $(OMP) $(SERIAL_FPPFLAGS) -shared -o $@ $^ \
+	      $(MATH_LIBS) $(HDF5_SERIAL_LIBS)
+
+svd.exe: libsvd.so svd.f90
+	$(FC) $(FFLAGS) $(SERIAL_FPPFLAGS) -o $@ svd.f90 \
+	       -L. -lsvd $(MATH_LIBS) $(HDF5_SERIAL_LIBS)
+
+multi_svd.exe: libsvd.so multi_svd.f90
+	$(FC) $(FFLAGS) $(OMP) $(SERIAL_FPPFLAGS) -o $@ multi_svd.f90 \
+	       -L. -lsvd $(MATH_LIBS) $(HDF5_SERIAL_LIBS)
+
+svd_threaded.exe: libsvd_threaded.so svd.f90
+	$(FC) $(FFLAGS) $(OMP) $(SERIAL_FPPFLAGS) -o $@ svd.f90 \
+	       -L. -lsvd_threaded $(THREADED_MATH_LIBS) $(HDF5_SERIAL_LIBS)
+
+multi_svd_threaded.exe: libsvd_threaded.so multi_svd.f90
+	$(FC) $(FFLAGS) $(OMP) $(SERIAL_FPPFLAGS) -o $@ multi_svd.f90 \
+	       -L. -lsvd_threaded $(THREADED_MATH_LIBS) $(HDF5_SERIAL_LIBS)
+
+%_threaded.o: %.f90
+	$(FC) $(FFLAGS) $(OMP) $(SERIAL_FPPFLAGS) -c -o $@ $<
+
+%.o: %.f90
+	$(FC) $(FFLAGS) $(SERIAL_FPPFLAGS) -c -o $@ $<
+
+clean:
+	$(RM) *.exe *.o *.mod *.so
+
