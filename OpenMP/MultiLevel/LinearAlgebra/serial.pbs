@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#PBS -A lp_sys
+#PBS -l nodes=1:ppn=1
+#PBS -l pmem=10gb
+#PBS -l walltime=02:00:00
+#PBS -j oe
+
+module purge
+module load HDF5/1.10.1-intel-2018a
+
+cd ${PBS_O_WORKDIR}
+
+RUN_DIR="${PBS_O_WORKDIR}/${PBS_JOBID}_run"
+DATA_DIR="${PBS_O_WORKDIR}/data"
+EXEC="svd.exe"
+
+cp -r src "${RUN_DIR}"
+pushd "${RUN_DIR}"
+make -f Makefile.intel clean $EXEC
+
+export LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH"
+
+for file in $(ls ${DATA_DIR}/test_*.h5)
+do
+    time "./$EXEC" "${file}" matrix
+done
+
+popd
+rm -r "${RUN_DIR}"
