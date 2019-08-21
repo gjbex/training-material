@@ -9,3 +9,5 @@ crtl, alt, which makes it RSI friendly).
     [mine](vimrc.md).
   1. vim can be used to [compare files side-by-side](sync_scroll.md),
     scrolling synchronously.
+  1. By default, vim creates backup and swap files, which can be
+    a [problem for large files](swap_file.md).
