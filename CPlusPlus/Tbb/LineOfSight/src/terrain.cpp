@@ -1,4 +1,5 @@
 #include <cmath>
+#include <iomanip>
 #include "terrain.h"
 
 Terrain::Terrain(const size_t n, const double distance,
@@ -17,4 +18,21 @@ Terrain::Terrain(const size_t n, const double distance,
         distance_.push_back(i*dx);
         altitude_.push_back(distr(engine) + altitude_[i - 1]);
     }
+}
+
+std::ostream& operator<<(std::ostream& out, Terrain& terrain) {
+    out << std::setprecision(5) << std::fixed;
+    for (size_t i = 0; i < terrain.n(); ++i)
+        out << terrain.distance(i) << " " << terrain.altitude(i) << "\n";
+    return out;
+}
+
+std::istream& operator>>(std::istream& in, Terrain& terrain) {
+    double distance {0.0};
+    double altitude {0.0};
+    while (in >> distance >> altitude) {
+        terrain.distance_.push_back(distance);
+        terrain.altitude_.push_back(altitude);
+    }
+    return in;
 }

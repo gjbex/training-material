@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <iostream>
 
 #include "terrain.h"
@@ -22,7 +23,6 @@ int main(int argc, char* argv[]) {
     if (argc > 6)
         seed = std::stoul(argv[6]);
     Terrain terrain(n, distance, delta_mean, delta_stddev, flat_fraction, seed);
-    for (size_t i = 0; i < terrain.n(); ++i)
-        std::cout << terrain.distance(i) << " " << terrain.altitude(i) << std::endl;
+    std::cout << terrain;
     return 0;
 }
