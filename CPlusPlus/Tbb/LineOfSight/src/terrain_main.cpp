@@ -1,27 +1,62 @@
+#include <boost/program_options.hpp>
 #include <iomanip>
 #include <iostream>
 
 #include "terrain.h"
 
-int main(int argc, char* argv[]) {
+namespace po = boost::program_options;
+
+auto get_arguments(int argc, char* argv[]) {
     size_t n {20};
-    if (argc > 1)
-        n = std::stoul(argv[1]);
     double distance {30.0};
-    if (argc > 2)
-        distance = std::stof(argv[2]);
     double delta_mean {0.02};
-    if (argc > 3)
-        delta_mean = std::stof(argv[3]);
     double delta_stddev {0.05};
-    if (argc > 4)
-        delta_stddev = std::stof(argv[4]);
     double flat_fraction {0.2};
-    if (argc > 5)
-        flat_fraction = std::stof(argv[5]);
     Seed_t seed {1234};
-    if (argc > 6)
-        seed = std::stoul(argv[6]);
+
+    po::options_description desc("Create random terrain");
+    desc.add_options()
+        ("help", "show help message")
+        ("n", po::value<size_t>(), "number of points in terrain")
+        ("distance", po::value<double>(), "distance of the terrain")
+        ("delta_mean", po::value<double>(), "mean altitude change per point")
+        ("delta_stddev", po::value<double>(), "standard deviation altitude change per point")
+        ("flat_fraction", po::value<double>(), "fraction of the terrain that is flat")
+        ("seed", po::value<Seed_t>(), "seed for the random number generator")
+    ;
+    try {
+        po::variables_map vm;
+        po::store(po::parse_command_line(argc, argv, desc), vm);
+        po::notify(vm);
+
+        if (vm.count("help")) {
+            std::cout << desc << std::endl;
+            std::exit(0);
+        }
+        if (vm.count("n"))
+            n = vm["n"].as<size_t>();
+        if (vm.count("distance"))
+            distance = vm["distance"].as<double>();
+        if (vm.count("delta_mean"))
+            delta_mean = vm["delta_mean"].as<double>();
+        if (vm.count("delta_stddev"))
+            delta_stddev = vm["delta_stddev"].as<double>();
+        if (vm.count("flat_fraction"))
+            flat_fraction = vm["flat_fraction"].as<double>();
+        if (vm.count("seed"))
+            seed = vm["seed"].as<Seed_t>();
+    } catch(std::exception& e) {
+        std::cerr << "error: " << e.what() << std::endl;
+        std::exit(1);
+    }
+
+    return std::make_tuple(n, distance, delta_mean, delta_stddev,
+                           flat_fraction, seed);
+}
+
+int main(int argc, char* argv[]) {
+    auto [n, distance, delta_mean, delta_stddev,
+          flat_fraction, seed] = get_arguments(argc, argv);
     Terrain terrain(n, distance, delta_mean, delta_stddev, flat_fraction, seed);
     std::cout << terrain;
     return 0;
