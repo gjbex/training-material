@@ -29,4 +29,5 @@ programming in C++.
 1. `run.sh`: bash script to conveniently run the application on
     the VSC cluster.
 1. `Julia`: Julia set implementation using TBB and OpenMP.
+1. `LineOfSight`: illustration of `tbb::parallel_scan`.
 1. `Tree`: illustration of parallel tree traversal.
