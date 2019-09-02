@@ -3,6 +3,8 @@ How to use Singularity, creating images/containers, and using them.
 
 ## What is it?
 1. `singularity.pptx`: Powerpoint presentation on singularity.
+1. `disco_wine.def`: Singularity definition file that will install wine32
+   and wine in a Disco Dingo (19.04) Ubunto OS.  
 1. `xenial_grace.def`: Singularity definition file that will install the
     `grace` application in a Xenial Xerus (16.04) Ubunto OS.
 1. `xenial_openmp.def`: Singularity definition file that will install
