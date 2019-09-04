@@ -3,6 +3,7 @@
 
 #include <list>
 #include <numeric>
+#include <stdexcept>
 
 template<typename T>
 class SlidingWindow {
