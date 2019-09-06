@@ -32,6 +32,7 @@ class LinkedList {
         };
         Element<T>* first_;
         Element<T>* last_;
+        size_t size_;
     public:
         class iterator {
             friend class LinkedList;
@@ -61,14 +62,15 @@ class LinkedList {
         iterator begin() const { return iterator(first_); }
         iterator end() const { return iterator(nullptr); }
 
-        LinkedList() : first_ {nullptr}, last_ {nullptr} {}
-        bool is_empty() const { return first_ == nullptr; }
+        LinkedList() : first_ {nullptr}, last_ {nullptr}, size_ {0} {}
+        bool is_empty() const { return size() == 0; }
         const T front() const {return first_->value(); }
         const T back() const { return last_->value(); }
+        size_t size() const { return size_; }
         void push_back(T value);
         void push_front(T value);
-        T pop_back();
-        T pop_front();
+        void pop_back();
+        void pop_front();
 };
 
 template<typename T>
@@ -80,6 +82,7 @@ void LinkedList<T>::push_back(T value) {
         first_ = element;
     }
     last_ = element;
+    ++size_;
 }
 
 template<typename T>
@@ -91,37 +94,40 @@ void LinkedList<T>::push_front(T value) {
         last_ = element;
     }
     first_ = element;
+    ++size_;
 }
 
 template<typename T>
-T LinkedList<T>::pop_back() {
-    Element<T>* element = last_;
-    last_ = last_->ptr_diff();
-    if (last_ != nullptr) {
-        auto new_prev = addr_xor(last_->ptr_diff(), element);
-        last_->set_ptr_diff(new_prev, nullptr);
-    } else {
-        first_ = nullptr;
+void LinkedList<T>::pop_back() {
+    if (size() > 0) {
+        Element<T>* element = last_;
+        last_ = last_->ptr_diff();
+        if (last_ != nullptr) {
+            auto new_prev = addr_xor(last_->ptr_diff(), element);
+            last_->set_ptr_diff(new_prev, nullptr);
+        } else {
+            first_ = nullptr;
+        }
+        delete element;
+        --size_;
     }
-    T value = element->value();
-    delete element;
-    return value;
 }
 
 template<typename T>
-T LinkedList<T>::pop_front() {
-    Element<T>* element = first_;
-    first_ = first_->ptr_diff();
-    // first_->set_ptr_diff(nullptr, first_->ptr_diff() ^ element);
-    if (first_ != nullptr) {
-        auto new_next = addr_xor(element, first_->ptr_diff());
-        first_->set_ptr_diff(nullptr, new_next);
-    } else {
-        last_ = nullptr;
+void LinkedList<T>::pop_front() {
+    if (size() > 0) {
+        Element<T>* element = first_;
+        first_ = first_->ptr_diff();
+        // first_->set_ptr_diff(nullptr, first_->ptr_diff() ^ element);
+        if (first_ != nullptr) {
+            auto new_next = addr_xor(element, first_->ptr_diff());
+            first_->set_ptr_diff(nullptr, new_next);
+        } else {
+            last_ = nullptr;
+        }
+        delete element;
+        --size_;
     }
-    T value = element->value();
-    delete element;
-    return value;
 }
 
 #endif

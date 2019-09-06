@@ -14,7 +14,8 @@ int main() {
         std::cout << " " << value;
     std::cout << std::endl;
     while (!list.is_empty()) {
-        auto value = list.pop_back();
+        auto value = list.back();
+        list.pop_back();
         std::cout << "popped " << value << ", list: ";
         for (const auto& value: list)
             std::cout << " " << value;
@@ -27,7 +28,8 @@ int main() {
         std::cout << " " << value;
     std::cout << std::endl;
     while (!list.is_empty()) {
-        auto value = list.pop_front();
+        auto value = list.front();
+        list.pop_front();
         std::cout << "popped " << value << ", list: ";
         for (const auto& value: list)
             std::cout << " " << value;
