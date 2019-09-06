@@ -1,0 +1,30 @@
+BootStrap: docker
+From: ubuntu:disco
+
+%setup
+    mkdir -p "${SINGULARITY_ROOTFS}/opt/AOCC"
+
+%files
+   aocc-compiler-2.0.0.tar /opt/AOCC/
+
+%environment
+    PATH=/opt/AOCC/2.0.0/bin:$PATH
+    LIBRARY_PATH=/opt/AOCC/2.0.0/lib:/opt/AOCC/2.0.0/lib32:$LIBRARY_PATH
+    LD_LIBRARY_PATH=/opt/AOCC/2.0.0/lib:/opt/AOCC/2.0.0/lib32:$LD_LIBRARY_PATH
+    C_INCLUDE_PATH=$C_INCLUDE_PATH:/opt/AOCC/2.0.0/include
+    CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/opt/AOCC/2.0.0/include
+    LIBRARY_PATH=/usr/lib:/usr/lib64:$LIBRARY_PATH
+    LD_LIBRARY_PATH=/usr/lib:/usr/lib64:$LD_LIBRARY_PATH
+
+%post
+    apt update
+    apt install -y binutils
+    apt install -y gcc g++ gfortran
+    apt install -y xz-utils
+    apt install -y tar
+    apt install -y libxml2
+    cd /opt/AOCC
+    tar xf aocc-compiler-2.0.0.tar
+    mv aocc-compiler-2.0.0 2.0.0
+    cd 2.0.0
+    ./install.sh
