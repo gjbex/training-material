@@ -10,26 +10,26 @@ T addr_xor(T prev, T next) {
 }
 
 template<typename T>
-class Element {
-    private:
-        T value_;
-        Element<T>* ptr_diff_;
-    public:
-        Element<T>(T value, Element<T>* prev, Element<T>* next) {
-            value_ = value;
-            this->set_ptr_diff(prev, next);
-        }
-        T value() const { return value_; }
-        void set_value(const T value) { value_ = value; }
-        Element<T>* ptr_diff() { return ptr_diff_; }
-        void set_ptr_diff(Element<T>* prev, Element<T>* next) {
-            ptr_diff_ = addr_xor(prev, next);
-        }
-};
-
-template<typename T>
 class LinkedList {
     private:
+        template<typename E_T>
+        class Element {
+            friend class LinkedList;
+            private:
+                E_T value_;
+                Element<E_T>* ptr_diff_;
+            public:
+                Element<E_T>(E_T value, Element<E_T>* prev, Element<E_T>* next) {
+                    value_ = value;
+                    this->set_ptr_diff(prev, next);
+                }
+                E_T value() const { return value_; }
+                void set_value(const E_T value) { value_ = value; }
+                Element<E_T>* ptr_diff() { return ptr_diff_; }
+                void set_ptr_diff(Element<E_T>* prev, Element<E_T>* next) {
+                    ptr_diff_ = addr_xor(prev, next);
+                }
+        };
         Element<T>* first_;
         Element<T>* last_;
     public:
@@ -73,7 +73,7 @@ class LinkedList {
 
 template<typename T>
 void LinkedList<T>::push_back(T value) {
-    Element<T>* element = new Element<T>(value, last_, nullptr);
+    LinkedList::Element<T>* element = new Element<T>(value, last_, nullptr);
     if (last_ != nullptr) {
         last_->set_ptr_diff(last_->ptr_diff(), element);
     } else {
