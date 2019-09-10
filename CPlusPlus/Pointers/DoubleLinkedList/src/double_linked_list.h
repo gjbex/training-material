@@ -1,6 +1,7 @@
 #ifndef DOUBLE_LINKED_LIST_HDR
 #define DOUBLE_LINKED_LIST_HDR
 
+#include <assert.h>
 #include <cstdint>
 
 template<typename T>
@@ -19,10 +20,12 @@ class LinkedList {
                 E_T value_;
                 Element<E_T>* ptr_diff_;
             public:
-                Element<E_T>(E_T value, Element<E_T>* prev, Element<E_T>* next) {
+                Element<E_T>(const E_T& value, Element<E_T>* prev, Element<E_T>* next) {
                     value_ = value;
-                    this->set_ptr_diff(prev, next);
+                    set_ptr_diff(prev, next);
                 }
+                Element<E_T>(E_T&& value, Element<E_T>* prev, Element<E_T>* next) :
+                    Element<E_T>(std::move(value), prev, next) {}
                 E_T value() const { return value_; }
                 void set_value(const E_T value) { value_ = value; }
                 Element<E_T>* ptr_diff() { return ptr_diff_; }
@@ -55,6 +58,7 @@ class LinkedList {
                 bool operator!=(const iterator& other) const { return curr_ != other.curr_; }
             protected:
                 iterator(Element<T>* ptr) : prev_ {nullptr}, curr_ {ptr} {}
+                iterator(Element<T>* prev, Element<T>* curr) : prev_ {prev}, curr_ {curr} {}
             private:
                 Element<T>* prev_;
                 Element<T>* curr_;
@@ -63,18 +67,33 @@ class LinkedList {
         iterator end() const { return iterator(nullptr); }
 
         LinkedList() : first_ {nullptr}, last_ {nullptr}, size_ {0} {}
+        ~LinkedList() { clear(); }
+        void clear() {
+            while (!is_empty())
+                pop_front();
+        }
         bool is_empty() const { return size() == 0; }
         const T front() const {return first_->value(); }
         const T back() const { return last_->value(); }
         size_t size() const { return size_; }
-        void push_back(T value);
-        void push_front(T value);
+        iterator insert(iterator pos, const T& value) {
+            // insert doesn't handle edge cases such as empty lists
+            assert(pos.curr_ != nullptr);
+            auto next = addr_xor(pos.prev_, pos.curr_->ptr_diff());
+            Element<T>* element = new Element<T>(value, pos.curr_, next);
+            pos.curr_->set_ptr_diff(pos.prev_, element);
+            next->set_ptr_diff(element, addr_xor(pos.curr_, next->ptr_diff()));
+            ++size_;
+            return iterator(pos.curr_, element);
+        }
+        void push_back(const T& value);
+        void push_front(const T& value);
         void pop_back();
         void pop_front();
 };
 
 template<typename T>
-void LinkedList<T>::push_back(T value) {
+void LinkedList<T>::push_back(const T& value) {
     LinkedList::Element<T>* element = new Element<T>(value, last_, nullptr);
     if (last_ != nullptr) {
         last_->set_ptr_diff(last_->ptr_diff(), element);
@@ -86,7 +105,7 @@ void LinkedList<T>::push_back(T value) {
 }
 
 template<typename T>
-void LinkedList<T>::push_front(T value) {
+void LinkedList<T>::push_front(const T& value) {
     Element<T>* element = new Element<T>(value, nullptr, first_);
     if (first_ != nullptr) {
         first_->set_ptr_diff(element, first_->ptr_diff());
