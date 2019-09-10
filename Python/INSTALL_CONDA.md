@@ -17,18 +17,19 @@ Once downloaded, run the script:
 $ bash Miniconda3-latest-Linux-x86_64.sh -b -p $VSC_DATA/miniconda3
 ```
 
-Note that it is important to chose the Miniconda installation direcotry
+Note that it is important to choose the Miniconda installation directory
 wisely, i.e., on a file system where your quota are large enough.  Environments
 may take considerable disk space.
 
-Optionally, you can add the path to the   Miniconda installation to the
-`PATH` environment variable in your `.bashrc` file.  This is convenient,
-but may lead to conflicts when working with the module system, so make
-sure that you know what you are doing in either case.
-The line to add to your `.bashrc` file would be:
+## Configuring Miniconda
+
+To use Miniconda, we must add the path to the Miniconda installation to the `PATH` environment variable:
 ```bash
-export PATH="${VSC_DATA}/miniconda3/bin:${PATH}
+export PATH="${VSC_DATA}/miniconda3/bin:${PATH}"
 ```
+Optionally, you can add that path in your `.bashrc` file.  This is convenient,
+but may lead to conflicts when working with the module system.
+
 
 ## Creating an environment
 First, ensure that the Miniconda installation is in your `PATH` environment
@@ -47,7 +48,7 @@ be loaded when using the environment you are about to create.
 
 Creating a new conda environment is straightforward:
 ```bash
-$ conda create  -n science  numpy scipy matplotlib
+$ conda create  -n science  numpy scipy matplotlib jupyter
 ```
 This command creates a new conda environment called `science`, and
 installs a number of Python packages that you will probably want to have
@@ -58,7 +59,7 @@ personal taste.
 This will default to the latest Python 3 version, if you need a specific version,
 e.g., Python 2.7.x, this can be specified as follows:
 ```
-$ conda create -n science  python=2.7  numpy scipy matplotlib
+$ conda create -n science  python=2.7  numpy scipy matplotlib jupyter
 ```
 
 
@@ -72,7 +73,7 @@ Here, `science` is the name of the environment you want to work in.
 
 
 ## Install an additional package
-To install an additional package, e.g., `pandas`, first ensure that the
+To install an additional package, e.g., `tensorflow-gpu`, first ensure that the
 environment you want to work in is activated.
 ```bash
 $ source activate science
@@ -107,4 +108,4 @@ $ source deactivate
 ```
 
 ## More information
-Additional information on conda can be found on its [documentation site)[https://conda.readthedocs.io/en/latest/].
+Additional information on conda can be found on its [documentation site](https://conda.readthedocs.io/en/latest/).
