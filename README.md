@@ -56,7 +56,8 @@ Tips and tricks can be found on this [repository's website](http://gjbex.github.
 
 ## Contributors
 
-* [Geert Jan Bex](mailto:geertjan.bex@uhasselt.be), Hasselt University/University of Leuven
+* Geert Jan Bex [geertjan.bex@uhasselt.be](mailto:geertjan.bex@uhasselt.be),
+  Hasselt University/University of Leuven
 * Stefan Becuwe, University of Antwerp
   * suggestions for and correction of typos in Python presentation
   * suggestions for Python programming exercises
