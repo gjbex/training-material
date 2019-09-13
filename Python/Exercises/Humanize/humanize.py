@@ -38,6 +38,8 @@ def humanize(n, base=10, digits=1, unit=''):
     '1.2 KB'
     >>> humanize('1234.56', digits=4, unit='B')
     '1.2346 KB'
+    >>> humanize(0.0123)
+    '12.3 m'
     '''
     import math
     if base != 2 and base != 10:
@@ -55,7 +57,8 @@ def humanize(n, base=10, digits=1, unit=''):
         5: 'P',
     }
     fmt_str = '{{0:.{}f}} {{1:s}}{{2:s}}'.format(digits)
-    exp = int(math.log(math.fabs(float(n)), base**thousands))
+    exp = math.log(math.fabs(float(n)), base**thousands)
+    exp = int(exp - (1 if exp < 0 else 0))
     number = float(n)/base**(exp*thousands)
     return fmt_str.format(number, orders[exp], unit)
 
