@@ -8,7 +8,7 @@ my terminal window fairly uncluttered.
 This is the defintion for `PS``` in my `.bashrc`, the other prompt
 definitions I leave unaltered from their defaults.
 ```
-PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\n\$ '
+PS1='\n\[\e[0m\]\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$ '
 ```
 
 The prompt shows the user ID and hostname, followed by the current working
