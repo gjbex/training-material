@@ -16,10 +16,9 @@ directory. This information is colored green, so it is easily
 distinguishable from commands and their output, hence clearly separating
 one command from the next.
 
-The advantace is that even when one is very deep in a directory structure,
+The advantage is that even when one is very deep in a directory structure,
 prompt itself is always on a line by itself, e.g.,
 ![terminal view](bash_ps1.png "Bash in terminal")
-
 
 Using a different color per host allows to distinguish at a glance
 between various hosts.

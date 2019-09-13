@@ -14,3 +14,5 @@ Some illustrations of using pointers in C++.
   * `node_uptr.h`: definition of a template class for nodes in a tree data
       structure.
   * `tree_uptr.cpp`: main file to test node implementation.
+* `DoubleLinkedList`: implementation of a double linked list
+  that requires using raw pointers.
