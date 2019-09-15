@@ -5,17 +5,17 @@
 #include <cstdint>
 
 template<typename T>
-uintptr_t addr_xor(T prev, T next) {
+static uintptr_t addr_xor(T prev, T next) {
     return reinterpret_cast<uintptr_t>(prev) ^ reinterpret_cast<uintptr_t>(next);
 }
 
 template<typename T>
-T addr_xor(T prev, uintptr_t next) {
+static T addr_xor(T prev, uintptr_t next) {
     return reinterpret_cast<T>(reinterpret_cast<uintptr_t>(prev) ^ next);
 }
 
 template<typename T>
-T addr_xor(uintptr_t prev, T next) {
+static T addr_xor(uintptr_t prev, T next) {
     return reinterpret_cast<T>(prev ^ reinterpret_cast<uintptr_t>(next));
 }
 
