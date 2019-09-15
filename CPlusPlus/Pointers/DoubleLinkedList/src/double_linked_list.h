@@ -5,9 +5,18 @@
 #include <cstdint>
 
 template<typename T>
-T addr_xor(T prev, T next) {
-    return reinterpret_cast<T>(reinterpret_cast<uintptr_t>(prev) ^
-                               reinterpret_cast<uintptr_t>(next));
+uintptr_t addr_xor(T prev, T next) {
+    return reinterpret_cast<uintptr_t>(prev) ^ reinterpret_cast<uintptr_t>(next);
+}
+
+template<typename T>
+T addr_xor(T prev, uintptr_t next) {
+    return reinterpret_cast<T>(reinterpret_cast<uintptr_t>(prev) ^ next);
+}
+
+template<typename T>
+T addr_xor(uintptr_t prev, T next) {
+    return reinterpret_cast<T>(prev ^ reinterpret_cast<uintptr_t>(next));
 }
 
 template<typename T>
@@ -18,7 +27,7 @@ class LinkedList {
             friend class LinkedList;
             private:
                 E_T value_;
-                Element<E_T>* ptr_diff_;
+                uintptr_t ptr_diff_;
             public:
                 Element<E_T>(const E_T& value, Element<E_T>* prev, Element<E_T>* next) {
                     value_ = value;
@@ -28,7 +37,7 @@ class LinkedList {
                     Element<E_T>(std::move(value), prev, next) {}
                 E_T value() const { return value_; }
                 void set_value(const E_T value) { value_ = value; }
-                Element<E_T>* ptr_diff() { return ptr_diff_; }
+                uintptr_t ptr_diff() { return ptr_diff_; }
                 void set_ptr_diff(Element<E_T>* prev, Element<E_T>* next) {
                     ptr_diff_ = addr_xor(prev, next);
                 }
@@ -50,7 +59,7 @@ class LinkedList {
                 iterator operator++(int) {
                     iterator copy(*this);
                     Element<T>* tmp = curr_;
-                    curr_ = addr_xor(prev_, curr_);
+                    curr_ = addr_xor(prev_, curr_->ptr_diff());
                     prev_ = tmp;
                     return copy;
                 }
@@ -79,7 +88,7 @@ class LinkedList {
         iterator insert(iterator pos, const T& value) {
             // insert doesn't handle edge cases such as empty lists
             assert(pos.curr_ != nullptr);
-            auto next = addr_xor(pos.prev_, pos.curr_->ptr_diff());
+            Element<T>* next = addr_xor(pos.prev_, pos.curr_->ptr_diff());
             Element<T>* element = new Element<T>(value, pos.curr_, next);
             pos.curr_->set_ptr_diff(pos.prev_, element);
             next->set_ptr_diff(element, addr_xor(pos.curr_, next->ptr_diff()));
@@ -96,7 +105,7 @@ template<typename T>
 void LinkedList<T>::push_back(const T& value) {
     LinkedList::Element<T>* element = new Element<T>(value, last_, nullptr);
     if (last_ != nullptr) {
-        last_->set_ptr_diff(last_->ptr_diff(), element);
+        last_->set_ptr_diff(reinterpret_cast<Element<T>*>(last_->ptr_diff()), element);
     } else {
         first_ = element;
     }
@@ -108,7 +117,7 @@ template<typename T>
 void LinkedList<T>::push_front(const T& value) {
     Element<T>* element = new Element<T>(value, nullptr, first_);
     if (first_ != nullptr) {
-        first_->set_ptr_diff(element, first_->ptr_diff());
+        first_->set_ptr_diff(element, reinterpret_cast<Element<T>*>(first_->ptr_diff()));
     } else {
         last_ = element;
     }
@@ -120,7 +129,7 @@ template<typename T>
 void LinkedList<T>::pop_back() {
     if (size() > 0) {
         Element<T>* element = last_;
-        last_ = last_->ptr_diff();
+        last_ = reinterpret_cast<Element<T>*>(last_->ptr_diff());
         if (last_ != nullptr) {
             auto new_prev = addr_xor(last_->ptr_diff(), element);
             last_->set_ptr_diff(new_prev, nullptr);
@@ -136,8 +145,7 @@ template<typename T>
 void LinkedList<T>::pop_front() {
     if (size() > 0) {
         Element<T>* element = first_;
-        first_ = first_->ptr_diff();
-        // first_->set_ptr_diff(nullptr, first_->ptr_diff() ^ element);
+        first_ = reinterpret_cast<Element<T>*>(first_->ptr_diff());
         if (first_ != nullptr) {
             auto new_next = addr_xor(element, first_->ptr_diff());
             first_->set_ptr_diff(nullptr, new_next);
