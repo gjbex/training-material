@@ -52,14 +52,14 @@ class LinkedList {
             public:
                 T operator *() const { return curr_->value(); }
                 const iterator& operator++() {
-                    E_ptr_t tmp = curr_;
+                    auto tmp = curr_;
                     curr_ = addr_xor(prev_, curr_->ptr_diff());
                     prev_ = tmp;
                     return *this;
                 }
                 iterator operator++(int) {
                     iterator copy(*this);
-                    E_ptr_t tmp = curr_;
+                    auto tmp = curr_;
                     curr_ = addr_xor(prev_, curr_->ptr_diff());
                     prev_ = tmp;
                     return copy;
@@ -89,8 +89,8 @@ class LinkedList {
         iterator insert(iterator pos, const T& value) {
             // insert doesn't handle edge cases such as empty lists
             assert(pos.curr_ != nullptr);
-            E_ptr_t next = addr_xor(pos.prev_, pos.curr_->ptr_diff());
-            E_ptr_t element = new Element<T>(value, pos.curr_, next);
+            auto next = addr_xor(pos.prev_, pos.curr_->ptr_diff());
+            auto element = new Element<T>(value, pos.curr_, next);
             pos.curr_->set_ptr_diff(pos.prev_, element);
             next->set_ptr_diff(element, addr_xor(pos.curr_, next->ptr_diff()));
             ++size_;
@@ -104,7 +104,7 @@ class LinkedList {
 
 template<typename T>
 void LinkedList<T>::push_back(const T& value) {
-    LinkedList::E_ptr_t element = new Element<T>(value, last_, nullptr);
+    auto element = new Element<T>(value, last_, nullptr);
     if (last_ != nullptr) {
         last_->set_ptr_diff(reinterpret_cast<E_ptr_t>(last_->ptr_diff()), element);
     } else {
@@ -116,7 +116,7 @@ void LinkedList<T>::push_back(const T& value) {
 
 template<typename T>
 void LinkedList<T>::push_front(const T& value) {
-    E_ptr_t element = new Element<T>(value, nullptr, first_);
+    auto element = new Element<T>(value, nullptr, first_);
     if (first_ != nullptr) {
         first_->set_ptr_diff(element, reinterpret_cast<E_ptr_t>(first_->ptr_diff()));
     } else {
