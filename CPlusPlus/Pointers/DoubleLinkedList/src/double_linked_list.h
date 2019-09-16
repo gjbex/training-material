@@ -87,14 +87,18 @@ class LinkedList {
         const T back() const { return last_->value(); }
         size_t size() const { return size_; }
         iterator insert(iterator pos, const T& value) {
-            // insert doesn't handle edge cases such as empty lists
-            assert(pos.curr_ != nullptr);
-            auto next = addr_xor(pos.prev_, pos.curr_->ptr_diff());
-            auto element = new Element<T>(value, pos.curr_, next);
-            pos.curr_->set_ptr_diff(pos.prev_, element);
-            next->set_ptr_diff(element, addr_xor(pos.curr_, next->ptr_diff()));
-            ++size_;
-            return iterator(pos.curr_, element);
+            if (pos.curr_ == nullptr) {
+                push_back(value);
+                return iterator(pos.curr_, last_);
+            } else {
+                auto next = addr_xor(pos.prev_, pos.curr_->ptr_diff());
+                auto element = new Element<T>(value, pos.curr_, next);
+                pos.curr_->set_ptr_diff(pos.prev_, element);
+                if (next != nullptr)
+                    next->set_ptr_diff(element, addr_xor(pos.curr_, next->ptr_diff()));
+                ++size_;
+                return iterator(pos.curr_, element);
+            }
         }
         void push_back(const T& value);
         void push_front(const T& value);
