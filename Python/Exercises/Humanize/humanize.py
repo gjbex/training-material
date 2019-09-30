@@ -63,16 +63,34 @@ def humanize(n, base=10, digits=1, unit=''):
     return fmt_str.format(number, orders[exp], unit)
 
 
+def check_line(line):
+    try:
+        _ = float(line)
+        return True
+    except:
+        return False
+
+
 if __name__ == '__main__':
     from argparse import ArgumentParser
+    import sys
     arg_parser = ArgumentParser(description='convert numbers to '
                                             'human-readable format')
-    arg_parser.add_argument('n', type=float,
+    arg_parser.add_argument('n', type=float, nargs='?',
                             help='number to convert')
-    arg_parser.add_argument('-d', type=int,
+    arg_parser.add_argument('-d', type=int, default=1,
                             help='number of significant digits')
     arg_parser.add_argument('-b', action='store_true',
                             help='use base 2')
+    arg_parser.add_argument('-u', default='', help='unit to display')
     options = arg_parser.parse_args()
     base = 2 if options.b else 10
-    print('{0:f} -> {1:s}'.format(options.n, humanize(options.n, base)))
+    if options.n:
+        print('{0:s}'.format(humanize(options.n, base=base, digits=options.d,
+                                      unit=options.u)))
+    else:
+        for line in sys.stdin:
+            if check_line(line):
+                print('{0:s}'.format(humanize(line.strip(), base=base,
+                                              digits=options.d,
+                                              unit=options.u)))

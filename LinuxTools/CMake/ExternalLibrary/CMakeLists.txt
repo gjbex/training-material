@@ -5,7 +5,6 @@ cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
 project(minimum LANGUAGES CXX)
 
 # C++ compiler and C++ standard to use
-set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS NO)
