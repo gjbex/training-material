@@ -13,5 +13,6 @@ preliminary, and the set of tools and examples will grow over time.
 1. `Configurations`: sample configuration files for various Linux tools.
 1. `M4`: examples for the `m4` macro processor.
 1. `Make`: examples for the Gnu Make build tool.
+1. `Patch`: examples of using the `diff` and `patch` commands.
 1. `Rpath`: example of using the `-rpath` linker option.
 1. `VersionControl`: slides on version control using svn/git.
