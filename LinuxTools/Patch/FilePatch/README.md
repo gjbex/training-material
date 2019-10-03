@@ -9,8 +9,9 @@ Illustrationn of how to use patch on a single file.
    ```bash
    $ cp orig_src.c orig.c
    ```
-1. Create a modified version by editing the file `orig.c`.  For illustration,
-   this can be copied from `orig_target.c`, so
+1. Create a modified version by copying `orig.c` and editing it.
+   For illustration purposes this can be copied from `orig_target.c`,
+   so
    ```bash
    $ cp orig_target.c orig_mod.c
    ```
