@@ -1,0 +1,78 @@
+diff -ura orig/README.md orig_mod/README.md
+--- orig/README.md	2019-10-03 10:54:52.832159381 +0200
++++ orig_mod/README.md	2019-10-03 10:50:37.929755602 +0200
+@@ -1,3 +1,24 @@
+ # Greetings application
+ 
+-This is a greetings application.  It will say hello to you.
++This is a greetings application.  It will greet you.
++
++## How to use it?
++
++You can be greeted by either "hello" or "bye", depending on the command line
++option, if non is specifed, it defaults to hello.
++
++* Default:
++  ```bash
++  $ ./greetings John
++  Hello John!
++  ```
++* With `-h`:
++  ```bash
++  $ ./greetings -h John
++  Hello John!
++  ```
++* With `-b`:
++  ```bash
++  $ ./greetings -b John
++  Bye John!
++  ```
+diff -ura orig/src/CMakeLists.txt orig_mod/src/CMakeLists.txt
+--- orig/src/CMakeLists.txt	2019-10-03 10:54:52.832159381 +0200
++++ orig_mod/src/CMakeLists.txt	2019-10-03 10:50:37.929755602 +0200
+@@ -1 +1,11 @@
+ add_executable(greetings greetings.c)
++target_include_directories(greetings PUBLIC Funcs)
++target_link_libraries(greetings funcs)
++
++add_subdirectory(Funcs)
++
++install(TARGETS greetings
++    RUNTIME
++        DESTINATION bin
++        COMPONENT runtime
++)
+diff -ura orig/src/greetings.c orig_mod/src/greetings.c
+--- orig/src/greetings.c	2019-10-03 10:54:52.832159381 +0200
++++ orig_mod/src/greetings.c	2019-10-03 10:50:37.929755602 +0200
+@@ -1,6 +1,29 @@
+ #include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <funcs.h>
+ 
+ int main(int argc, char *argv[]) {
+-    printf("hello %s!\n", argv[1]);
++    switch (argc) {
++        case 1:
++            say_hello("Nobody");
++            break;
++        case 2:
++            say_hello(argv[1]);
++            break;
++        case 3:
++            if (strcmp(argv[1], "-h") == 0)
++                say_hello(argv[2]);
++            else if (strcmp(argv[1], "-b") == 0)
++                say_bye(argv[2]);
++            else {
++                fprintf(stderr, "unknown option %s\n", argv[1]);
++                exit(1);
++            }
++            break;
++        default:
++            fprintf(stderr, "too many options\n");
++            exit(2);
++    }
+     return 0;
+ }

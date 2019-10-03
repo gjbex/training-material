@@ -1,0 +1,28 @@
+--- README.md	2019-10-03 10:38:46.293061646 +0200
++++ README.md	2019-10-03 10:38:57.497426141 +0200
+@@ -1,3 +1,24 @@
+ # Greetings application
+ 
+-This is a greetings application.  It will say hello to you.
++This is a greetings application.  It will greet you.
++
++## How to use it?
++
++You can be greeted by either "hello" or "bye", depending on the command line
++option, if non is specifed, it defaults to hello.
++
++* Default:
++  ```bash
++  $ ./greetings John
++  Hello John!
++  ```
++* With `-h`:
++  ```bash
++  $ ./greetings -h John
++  Hello John!
++  ```
++* With `-b`:
++  ```bash
++  $ ./greetings -b John
++  Bye John!
++  ```
