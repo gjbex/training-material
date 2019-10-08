@@ -7,12 +7,12 @@ each time you switch context. tmux is an alternative to screen that has a
 number of extra features.
 
 A good introduction to tmux can be found on
-[HackerNoon](https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340)
+[Medium](https://medium.com/hackernoon/a-gentle-introduction-to-tmux-8d784c404340)
 
 ## tmux configuration
 
 Below is a sample tmxu configuration file.   By default, tmux
-will read `~/tmux.conf`, although you can specify an alternative when starting
+will read `~/.tmux.conf`, although you can specify an alternative when starting
 tmux using the `-f` flag.
 
 ```
