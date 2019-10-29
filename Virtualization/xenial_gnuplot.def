@@ -1,0 +1,24 @@
+# Copyright (c) 2015-2016, Gregory M. Kurtzer. All rights reserved.
+# 
+# "Singularity" Copyright (c) 2016, The Regents of the University of California,
+# through Lawrence Berkeley National Laboratory (subject to receipt of any
+# required approvals from the U.S. Dept. of Energy).  All rights reserved.
+
+BootStrap: debootstrap
+OSVersion: xenial
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+
+%runscript
+    /usr/bin/gnuplot
+
+%post
+    sed -i 's/$/ universe/' /etc/apt/sources.list
+    apt-get update
+    apt-get -y install dbus-x11
+    apt-get -y install unity-gtk3-module
+    apt-get -y install libcanberra-gtk3-module
+    apt-get -y install gnuplot
+    apt-get -y install gnuplot-x11
+    apt-get -y install gnuplot-data
+    apt-get -y install gnuplot-doc

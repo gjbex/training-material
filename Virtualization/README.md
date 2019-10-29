@@ -6,8 +6,10 @@ How to use Singularity, creating images/containers, and using them.
 1. `centos_base.def`: Singularity definition file for CentOS 7.6.
 1. `disco_wine.def`: Singularity definition file that will install wine32
    and wine in a Disco Dingo (19.04) Ubunto OS.  
+1. `xenial_gnuplot.def`: Singularity definition file that will install the
+   `gnuplot` application in a Xenial Xerus (16.04) Ubuntu OS.
 1. `xenial_grace.def`: Singularity definition file that will install the
-    `grace` application in a Xenial Xerus (16.04) Ubunto OS.
+   `grace` application in a Xenial Xerus (16.04) Ubuntu OS.
 1. `xenial_openmp.def`: Singularity definition file that will install
     build essentials, git.  It will subsequently clone a GitHub repository,
     build and install an OpenMP application in it, and clean up.

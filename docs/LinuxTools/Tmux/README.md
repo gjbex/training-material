@@ -7,12 +7,12 @@ each time you switch context. tmux is an alternative to screen that has a
 number of extra features.
 
 A good introduction to tmux can be found on
-[HackerNoon](https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340)
+[Medium](https://medium.com/hackernoon/a-gentle-introduction-to-tmux-8d784c404340)
 
 ## tmux configuration
 
 Below is a sample tmxu configuration file.   By default, tmux
-will read `~/tmux.conf`, although you can specify an alternative when starting
+will read `~/.tmux.conf`, although you can specify an alternative when starting
 tmux using the `-f` flag.
 
 ```
@@ -23,8 +23,8 @@ bind C-a send-prefix
 unbind C-b
 
 # split panes using | and -
-bind | split-window -h
-bind _ split-window -v
+bind | split-window -h -c "#{pane_current_path}"
+bind _ split-window -v -c "#{pane_current_path}"
 unbind '"'
 unbind %
 
@@ -50,9 +50,11 @@ set -g mouse on
 ```
 It sets the prefix to `C-a` which makes switching between tmux and screen less
 of an issue.  It also redefines the default bindings for splitting a pane
-vertically or horizontally since these are easier to remember.
+vertically or horizontally since these are easier to remember. In addition,
+new panes are opened in the same directory the pane is in when you split
+it, rather than in the directory tmux was started in.
 
-# tmuxp: a tmux session manager
+## tmuxp: a tmux session manager
 
 The tmuxp session manager lets you specify tmux sessions in YAML or JSON files
 so you can easily start a session with one or more windows and your
