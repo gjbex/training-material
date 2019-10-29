@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#PBS -A 'my_project name'
+#PBS -N 'my job name' -l nodes=1:ppn=10 -q q72h -l pmem=5gb -j oe
+
+echo 'hello world'
