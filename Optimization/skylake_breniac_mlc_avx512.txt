@@ -1,0 +1,65 @@
+Intel(R) Memory Latency Checker - v3.5
+Measuring idle latencies (in ns)...
+		Numa node
+Numa node	     0	     1	
+       0	  79.8	 131.4	
+       1	 130.6	  77.4	
+
+Measuring Peak Injection Memory Bandwidths for the system
+Bandwidths are in MB/sec (1 MB/sec = 1,000,000 Bytes/sec)
+Using all the threads from each core if Hyper-threading is enabled
+Using traffic with the following read-write ratios
+ALL Reads        :	221550.1	
+3:1 Reads-Writes :	191572.6	
+2:1 Reads-Writes :	188084.9	
+1:1 Reads-Writes :	181321.7	
+Stream-triad like:	168425.4	
+
+Measuring Memory Bandwidths between nodes within system 
+Bandwidths are in MB/sec (1 MB/sec = 1,000,000 Bytes/sec)
+Using all the threads from each core if Hyper-threading is enabled
+Using Read-only traffic type
+		Numa node
+Numa node	     0	     1	
+       0	111180.9	34369.0	
+       1	34380.0	110908.4	
+
+Measuring Loaded Latencies for the system
+Using all the threads from each core if Hyper-threading is enabled
+Using Read-only traffic type
+Inject	Latency	Bandwidth
+Delay	(ns)	MB/sec
+==========================
+ 00000	147.22	 221598.3
+ 00002	150.03	 221530.8
+ 00008	146.98	 221641.0
+ 00015	146.20	 221253.5
+ 00050	134.65	 214083.3
+ 00100	109.19	 148517.0
+ 00200	 95.20	  95575.8
+ 00300	 91.28	  68113.2
+ 00400	 89.16	  53086.4
+ 00500	 87.85	  42872.3
+ 00700	 85.61	  31657.3
+ 01000	 83.95	  22734.5
+ 01300	 83.71	  17786.4
+ 01700	 83.31	  13849.3
+ 02500	 84.12	   9699.3
+ 03500	 82.46	   7183.2
+ 05000	 82.13	   5268.8
+ 09000	 81.33	   3273.9
+ 20000	 79.21	   1936.2
+
+Measuring cache-to-cache transfer latency (in ns)...
+Local Socket L2->L2 HIT  latency	49.4
+Local Socket L2->L2 HITM latency	49.7
+Remote Socket L2->L2 HITM latency (data address homed in writer socket)
+			Reader Numa Node
+Writer Numa Node     0	     1	
+            0	     -	 110.8	
+            1	 111.2	     -	
+Remote Socket L2->L2 HITM latency (data address homed in reader socket)
+			Reader Numa Node
+Writer Numa Node     0	     1	
+            0	     -	 177.1	
+            1	 178.1	     -	

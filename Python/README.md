@@ -61,6 +61,7 @@ these samples have been used for Python tutorials.
     using SWIG.
 1. `HoloViews`: data visualization library examples, especially in the
     context of exploration in notebooks.
+1. `Hydra`: Facebook Hydra application framework illustration.
 1. `ImageProcessing`: some Scikit-Image sample code for image processing,
     as well as OpenCV for video analysis.
 1. `Interfacing_C_C++_Fortran`: illustrations of how to interface with
