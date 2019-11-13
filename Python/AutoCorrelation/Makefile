@@ -1,16 +1,11 @@
 CC = gcc
-CFLAGS = -O2 -g
-CPPFLaGS =
-LDFLAGS =
-LIBS = -lm
+CFLAGS = -O2 -g -Wall -Wextra
+LDLIBS = -lm
 
 all: bin_values.exe
 
 %.exe: %.o
-	$(CC) $(CFLAGS) $(CPPFLaGS) -o $@ $< $(LDFLAGS) $(LIBS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLaGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
 
 clean:
-	rm -f *.exe *.o core
+	$(RM) $(wildcard *.exe) $(wildcard *.o) core
