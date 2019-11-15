@@ -5,14 +5,12 @@ import math
 
 
 def autocorrelation(iterator, max_distance):
-    x_hist = [x for x in itertools.islice(iterator, max_distance + 1)]
+    x_hist = list(itertools.islice(iterator, max_distance + 1))
     x_hist.reverse()
-    prod_sum = [0.0 for _ in range(max_distance + 1)]
-    n = 0
+    prod_sum = [0.0]*(max_distance + 1)
     sum_value = 0.0
     sum2_value = 0.0
-    for x in iterator:
-        n += 1
+    for n, x in enumerate(iterator):
         x_hist.pop()
         x_hist.insert(0, x)
         sum_value += x

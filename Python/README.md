@@ -7,7 +7,6 @@ and programming techniques, or how to use Python iibraries.  Many of
 these samples have been used for Python tutorials.
 
 # What is it?
-1. `Annotations`: illustration of type annotations.
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
     implements a Monte Carlo algorithm, and allows to show evolution over
     time, autocorrelation, and to compare with target distribution.
