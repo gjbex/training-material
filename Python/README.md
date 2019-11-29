@@ -7,7 +7,6 @@ and programming techniques, or how to use Python iibraries.  Many of
 these samples have been used for Python tutorials.
 
 # What is it?
-1. `Annotations`: illustration of type annotations.
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
     implements a Monte Carlo algorithm, and allows to show evolution over
     time, autocorrelation, and to compare with target distribution.
@@ -61,6 +60,7 @@ these samples have been used for Python tutorials.
     using SWIG.
 1. `HoloViews`: data visualization library examples, especially in the
     context of exploration in notebooks.
+1. `Hydra`: Facebook Hydra application framework illustration.
 1. `ImageProcessing`: some Scikit-Image sample code for image processing,
     as well as OpenCV for video analysis.
 1. `Interfacing_C_C++_Fortran`: illustrations of how to interface with

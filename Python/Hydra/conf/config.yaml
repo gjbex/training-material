@@ -1,0 +1,4 @@
+verbose: False
+n: 1
+defaults:
+    - distr: gauss

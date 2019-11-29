@@ -1,0 +1,4 @@
+distr:
+    name: gauss
+    mu: 0.0
+    sigma: 1.0

@@ -16,7 +16,7 @@ What is it?
 1. `autocorrelation.py`: reads a list of x-values from standard input,
     and writes the autocorrelaiton up to a specified distance to standard
     output
-1. `bin_values.py`: reads x-vales from standard input, and bins those
+1. `bin_values.py`: reads x-values from standard input, and bins those
     in the specified number of bins (with given minimum and maximum
     values), the results are written to standard output, optionally
     with the weight function values added.
