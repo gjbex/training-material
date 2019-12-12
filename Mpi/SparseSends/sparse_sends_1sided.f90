@@ -50,8 +50,6 @@ do iter = 1, nr_iters
     if (rank == target_rank) then
         nr_recvs = 0
         call MPI_Win_post(win_group, 0, window)
-    else
-        call MPI_Win_start(win_group, 0, window)
     end if
 
 
@@ -59,6 +57,7 @@ do iter = 1, nr_iters
     if (.not. MPI_ASYNC_PROTECTS_NONBLOCKING) &
         call MPI_F_SYNC_REG(nr_recvs)
     if (rank /= target_rank) then
+        call MPI_Win_start(win_group, 0, window)
         call random_number(r)
         will_send = r < prob 
         if (will_send) then
@@ -69,11 +68,10 @@ do iter = 1, nr_iters
                                 target_disp, 1, MPI_INTEGER, &
                                 MPI_SUM, window)
         end if
+        call MPI_Win_complete(window)
     end if
     if (rank == target_rank) then
         call MPI_Win_wait(window)
-    else
-        call MPI_Win_complete(window)
     end if
     if (.not. MPI_ASYNC_PROTECTS_NONBLOCKING) &
         call MPI_F_SYNC_REG(nr_recvs)
