@@ -12,6 +12,7 @@ integer, dimension(:), allocatable :: seed
 integer, parameter :: tag = 17, target_rank = 0
 real(kind=sp) :: r, prob
 logical :: will_send
+type(MPI_Group) :: win_group
 type(MPI_Status) :: status
 
 ! setup MPI and determine rank & size
@@ -43,16 +44,20 @@ disp_unit = integer_size
 ! receive buffer
 call MPI_Win_create(nr_recvs, recv_buff_size, disp_unit, MPI_INFO_NULL, &
                     MPI_COMM_WORLD, window)
+call MPI_Win_get_group(window, win_group)
 
 do iter = 1, nr_iters
-    if (rank == 0) &
+    if (rank == target_rank) then
         nr_recvs = 0
+        call MPI_Win_post(win_group, 0, window)
+    end if
+
 
     ! start RMA epoch, only processes intending to send add 1 to nr_recvs
     if (.not. MPI_ASYNC_PROTECTS_NONBLOCKING) &
         call MPI_F_SYNC_REG(nr_recvs)
-    call MPI_Win_fence(0, window)
     if (rank /= target_rank) then
+        call MPI_Win_start(win_group, 0, window)
         call random_number(r)
         will_send = r < prob 
         if (will_send) then
@@ -63,8 +68,11 @@ do iter = 1, nr_iters
                                 target_disp, 1, MPI_INTEGER, &
                                 MPI_SUM, window)
         end if
+        call MPI_Win_complete(window)
     end if
-    call MPI_Win_fence(0, window)
+    if (rank == target_rank) then
+        call MPI_Win_wait(window)
+    end if
     if (.not. MPI_ASYNC_PROTECTS_NONBLOCKING) &
         call MPI_F_SYNC_REG(nr_recvs)
 

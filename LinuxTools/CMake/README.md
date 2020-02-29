@@ -11,3 +11,4 @@ various subdirectories.
 1. `ExternalLibrary`: example of building and installing an application that is
    linked to a third-party library (GSL).
 1. `Sort`: example of a project that requires Catch2.
+1. `Testing`: example of using CTest.
