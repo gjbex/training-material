@@ -32,3 +32,5 @@ How to use Singularity, creating images/containers, and using them.
     generated image.
 1. `Service`: example of running a Singularity image as an instance
     to provide a server.
+1. `disco_openbugs.def`: Singularity recipe for installing OpenBUGS, a
+   32-bit application.
