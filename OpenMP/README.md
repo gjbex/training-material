@@ -11,4 +11,6 @@ Some sample code illustrating OpenMP concepts and techniques.
     access iterators, and the `linear` clause on that directive.
 `. `MultiLevel`: illustration of nested OpenMP in the context of Intel's
    MKL library (SVD).
+1. `ReentrantFunctions`: illustration of reentrant versus non-reentrant
+   functions.
 1. `Tasks`: some examples of using OpenMP tasks

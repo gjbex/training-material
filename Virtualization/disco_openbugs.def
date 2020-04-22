@@ -1,0 +1,13 @@
+BootStrap: docker
+From: ubuntu:disco
+
+%post
+    dpkg --add-architecture i386
+    apt-get update
+    apt-get install -y wget
+    wget http://pj.freefaculty.org/Ubuntu/15.04/amd64/openbugs/openbugs_3.2.3-1_amd64.deb
+    apt-get install -y /openbugs_3.2.3-1_amd64.deb
+    rm /openbugs_3.2.3-1_amd64.deb
+
+%runscript
+    /usr/bin/OpenBUGS

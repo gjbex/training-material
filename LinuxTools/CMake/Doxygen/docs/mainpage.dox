@@ -1,0 +1,17 @@
+/*!
+  @mainpage
+  @brief program that computes the Minkowski dimension of a 2D fractal
+  @author Geert Jan Bex (geertjan.bex@uhasselt.be)
+  
+  This program computes the Minkowski fractal dimension for two dimensional objects
+  using box counting.  It has the number of edges as a command line parameter.
+  If the number of edges is $n$, a total of $n^2$ boxes is used to count the points.
+
+  Points of the 2D objects are read from standard input in text representation
+  as x-y coordinates.
+
+  Example usage if the points are read from file `data.txt`:
+  ~~~~~~~~~~~~~
+  $ ./box_counting 1024 < data.txt
+  ~~~~~~~~~~~~~
+*/
