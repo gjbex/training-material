@@ -12,3 +12,4 @@ various subdirectories.
    linked to a third-party library (GSL).
 1. `Sort`: example of a project that requires Catch2.
 1. `Testing`: example of using CTest.
+1. `Doxygen`: example of generating doxygen documentation.
