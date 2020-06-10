@@ -28,3 +28,4 @@ What is it?
     `MPI_Sendrecv' for halo exchange.
 1. `one_sided.f90`: each process puts a value into its right neighbour,
     and gets a message from that neighbour using one-sided communication.
+1. `bidirectional_request_array.c`: illustration of using `MPI_Waitall`.
