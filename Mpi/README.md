@@ -26,3 +26,4 @@ Fortran (2008).
     mentioned in the `mpi.pptx` slides.
 1. `SparseSends`: how to receive messages from a small number of a-priory
     unknown processes.
+1. `Communicators`: sample code relating to communicators and groups.
