@@ -1,18 +1,24 @@
-F90 = mpif90
-FFLAGS = -O2 -g
+FCC = mpifort
+CC = mpicc
+FFLAGS = -Wall -O2 -g
+CFLAGS = -Wall -O2 -g
 LDFLAGS =
-LIBS = -lm
+LDLIBS = -lm
 
 all: unidirectional.exe nonblocking.exe deadlock.exe bidirectional.exe \
-     sendrecv.exe cart_sendrecv.exe torus.exe one_sided.exe
+     sendrecv.exe cart_sendrecv.exe torus.exe one_sided.exe \
+	 bidirectional_request_array.exe
 
 f08: nonblocking_f08.exe cart_sendrecv_f08.exe
 
+bidirectional_request_array.exe: bidirectional_request_array.c
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBS)
+
 %.exe: %.o
-	$(F90) $(FFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
+	$(FCC) $(FFLAGS) -o $@ $< $(LDFLAGS) $(LDLIBS)
 
 %.o: %.f90
-	$(F90) $(FFLAGS) -c -o $@ $<
+	$(FCC) $(FFLAGS) -c -o $@ $<
 
 clean:
-	rm -f *.o *.mod *.exe core
+	$(RM) $(wildcard *.o) $(wildcard *.mod) $(wildcard *.exe) core

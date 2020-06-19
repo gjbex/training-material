@@ -10,3 +10,4 @@ supporting team work.
 1. `version_control_svn.pptx`: Microsoft Powerpoint presentation on
     version control using subversion.  The introduction compares svn and
     git
+1. `Rebase`: scenario to illustrate git rebase to squash multiple commits.

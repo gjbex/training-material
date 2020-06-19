@@ -6,7 +6,7 @@ integer, parameter :: nr_buffer_elems = 2
 integer :: rank, size, right, left, disp_int
 real(kind=dp) :: val
 real(kind=dp), asynchronous, dimension(nr_buffer_elems) :: buffer
-integer(kind=MPI_ADDRESS_KIND) :: buffer_size, dp_size, lb, disp_aint
+integer(kind=MPI_ADDRESS_KIND) :: dp_size, lb, disp_aint
 
 type(MPI_Win) :: window
 
@@ -30,7 +30,7 @@ print '(A, F5.1, A, I0, A, I0)', 'will put ', val, ' from ', rank, &
     ' into ', right
 print '(I0, A, F5.1, A, I0)', left, ' will take ', buffer(2), ' from ', rank
 call MPI_Type_get_extent(MPI_DOUBLE_PRECISION, lb, dp_size)
-disp_int = dp_size
+disp_int = int(dp_size, kind=kind(disp_int))
 if (.not. MPI_ASYNC_PROTECTS_NONBLOCKING) &
     call MPI_F_sync_reg(buffer)
 call MPI_Win_create(buffer, nr_buffer_elems*dp_size, disp_int, &

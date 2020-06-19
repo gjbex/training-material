@@ -1,0 +1,4 @@
+This is a text
+to illustrate
+come concepts
+of using git.
