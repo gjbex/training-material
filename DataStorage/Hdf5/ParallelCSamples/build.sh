@@ -1,7 +1,7 @@
 #!/bin/bash -l
 
 module purge
-module load HDF5/1.8.12-intel-2014a-gpfs
+module load HDF5/1.10.1-intel-2018a-lustre
 
 HDF5="${EBROOTHDF5}"
 
