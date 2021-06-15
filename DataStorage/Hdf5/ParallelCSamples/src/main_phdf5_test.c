@@ -4,7 +4,8 @@
 #include <hdf5.h>
 
 int main(int argc, char *argv[]) {
-    const int data_rank = 2, n_x = 8, n_y = 5;
+    int data_rank = 2;
+    long n_x = 8, n_y = 5;
     int rank, size;
     MPI_Info info = MPI_INFO_NULL;
     hid_t file_id, plist_id, dset_id, filespace, memspace;
@@ -18,6 +19,18 @@ int main(int argc, char *argv[]) {
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    /* get the command line arguments and broadcast */
+    if (rank == 0) {
+        if (argc == 3) {
+            n_x = atol(argv[1]);
+            n_y = atol(argv[2]);
+        }
+    }
+    MPI_Bcast(&n_x, 1, MPI_LONG, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&n_y, 1, MPI_LONG, 0, MPI_COMM_WORLD);
+    data_dims[0] = n_x;
+    data_dims[1] = n_y;
 
     /* setup hyperslab parameters */
     count[0] = data_dims[0]/size;
