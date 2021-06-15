@@ -34,7 +34,7 @@ contains
           if (low < high) then
               pivot = find_pivot(values, low, high)
               call qsort_r(values, low, pivot - 1)
-              call qsort_r(values, pivot, high)
+              call qsort_r(values, pivot + 1, high)
           end if
       end subroutine qsort_r
 
