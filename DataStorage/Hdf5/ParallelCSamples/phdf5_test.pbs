@@ -20,10 +20,9 @@ fi
 
 if [ -z "$nr_rows_pp" ]
 then
-    nr_rows=$(( 1000*$nr_procs ))
-else
-    nr_rows=$(( $nr_procs*$nr_rows_pp ))
+    nr_rows_pp=1000
 fi
+nr_rows=$(( $nr_procs*$nr_rows_pp ))
 
 if [ -z "$nr_cols" ]
 then
