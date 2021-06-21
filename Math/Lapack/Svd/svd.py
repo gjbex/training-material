@@ -12,7 +12,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('file', help='HDF5 file containingn matrix')
     arg_parser.add_argument('dataset', help='name of data set')
     options = arg_parser.parse_args()
-    with tables.openFile(options.file, mode='r') as h5file:
+    with tables.open_file(options.file, mode='r') as h5file:
         start = datetime.now()
         matrix = h5file.get_node(h5file.root, name=options.dataset)
         m, n = matrix.shape
