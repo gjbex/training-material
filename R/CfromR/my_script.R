@@ -2,4 +2,6 @@
 
 source("myRLib.R")
 
-mySum(c(1, 3, 8));
+values <- c(1, 3, 8);
+mySum(values)
+myMult(values, 3)
