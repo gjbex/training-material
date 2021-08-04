@@ -11,3 +11,4 @@ Some R sample code.
     this in a parameter exploration scenario using the worker framework
     to perform such computations in parallel with minimal effort for
     the user.
+1. `CfromR`: illustration of using C functions from R.
