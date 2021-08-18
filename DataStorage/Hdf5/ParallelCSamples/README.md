@@ -56,8 +56,7 @@ Note:
   it requires a parallel file system to run.  It will be installed in
   `${VSC_SCRATCH/phdf5`.
 * The parallel version of the HDF5 library is required, hence don't
-  forget to load the appropriate module (HDF5/1.8.12-intel-2014a-gpfs on
-  VSC clusters).
+  forget to load the appropriate module.
 
 ## Running the example
 Run using MPI, for `phdf5_test`, e.g.,

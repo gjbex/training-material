@@ -14,4 +14,5 @@ f08: hello_world_f08.exe
 	$(F90) $(FFLAGS) -c -o $@ $<
 
 clean:
-	rm -f *.o *.mod *.exe core
+	$(RM) $(wildcard *.o) $(wildcard *.mod) $(wildcard *.exe)
+	$(RM) core $(wildcard core.*)

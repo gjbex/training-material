@@ -20,5 +20,4 @@ if __name__ == '__main__':
                 diff = fabs(field[i, j, k] - exp(-(x**2 + y**2 + z**2)))
                 if diff > max_diff:
                     max_diff = diff
-    print 'maximum difference = {0:.4e}'.format(max_diff)
-
+    print('maximum difference = {0:.4e}'.format(max_diff))

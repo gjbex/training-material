@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#PBS -A lp_sys
+#PBS -l nodes=2:ppn=9
+#PBS -l pmem=20gb
+#PBS -l walltime=00:15:00
+
+module purge
+module load HDF5/1.10.1-intel-2018a-lustre
+
+if [ -z "$PBS_O_WORKDIR" ]
+then
+    PBS_O_WORKDIR=$(pwd)
+fi
+cd $PBS_O_WORKDIR
+
+if [ -z "$nr_procs" ]
+then
+    nr_procs=$(wc -l $PBS_NODEFILE | cut -f 1 -d ' ')
+fi
+
+if [ -z "$nr_rows_pp" ]
+then
+    nr_rows_pp=1000
+fi
+nr_rows=$(( $nr_procs*$nr_rows_pp ))
+
+if [ -z "$nr_cols" ]
+then
+    nr_cols=1000
+fi
+
+echo "running with $nr_procs processes, $nr_rows_pp rows per process, $nr_cols columns"
+
+start_time=$(date +%s.%N)
+mpirun --np $nr_procs bin/phdf5_test "$nr_rows" "$nr_cols"
+end_time=$(date +%s.%N)
+
+echo "time: $(bc <<< "$end_time - $start_time" )"
