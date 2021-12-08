@@ -5,7 +5,8 @@ program nonblocking
     integer :: size, rank, tag = 11, left, right
     type(MPI_Request) :: request
     type(MPI_Status)  :: status
-    real(kind=dp) :: send_msg, recv_msg
+    real(kind=dp), asynchronous :: send_msg
+    real(kind=dp) :: recv_msg
 
     call MPI_Init()
     call MPI_Comm_rank(MPI_COMM_WORLD, rank)
@@ -18,6 +19,10 @@ program nonblocking
                   MPI_COMM_WORLD, status)
     print '(I0, A, F10.2)', rank, ' received ', recv_msg
     call MPI_Wait(request, MPI_STATUS_IGNORE)
+    ! not strictly necessary in this case since we won't use
+    ! send_msg, but just to make the point
+    if (.not. MPI_ASYNC_PROTECTS_NONBLOCKING) &
+        call MPI_F_sync_reg(send_msg)
     call MPI_Finalize()
 
 contains
