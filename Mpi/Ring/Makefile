@@ -7,7 +7,7 @@ LDLIBS = -lm
 
 all: unidirectional.exe nonblocking.exe deadlock.exe bidirectional.exe \
      sendrecv.exe cart_sendrecv.exe torus.exe one_sided.exe \
-	 bidirectional_request_array.exe
+	 bidirectional_request_array.exe nonblocking_f08.exe
 
 f08: nonblocking_f08.exe cart_sendrecv_f08.exe
 
