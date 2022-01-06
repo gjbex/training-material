@@ -8,4 +8,6 @@ in MPI.
 
 1. `multi_group.c`: application illustrating using multiple ranges when creating
    groups using `MPI_Group_range_incl`.
+1. `intercomm.c`: illustration of an intercommunicator and broadcast and
+    reduction operations on them.
 1. `Makefile`: make file to build the applications.

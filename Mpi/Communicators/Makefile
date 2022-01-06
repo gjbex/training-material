@@ -1,7 +1,7 @@
 CC = mpicc
 CFLAGS = -Wall -Wextra -g
 
-all: multi_group.exe
+all: multi_group.exe intercomm.exe
 
 %.exe: %.o
 	$(CC) $(CFLAGS) -o $@ $<
