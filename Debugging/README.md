@@ -3,6 +3,11 @@ Some sample code to illustrate the use of debugging tools.  Also some unit
 testing code is shown, since trying to prevent bugs is better than fixing
 them.
 
+This part of the repository is
+supplemented by the following repository:
+* [Defenesive programming and debugging](https://github.com/gjbex/DPD-online-book)
+
+
 ## What is it?
 1. `Arithmetic`: illustrations of arithmetic bugs.
 1. `Catch2`: very simple illustrations of using Catch2 for C++ unit
