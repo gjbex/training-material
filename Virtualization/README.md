@@ -1,6 +1,12 @@
 # Virtualization
 How to use Singularity, creating images/containers, and using them.
 
+This part of the repository has been superceeded by a training repository
+on using containers for HPC.
+* [website](https://gjbex.github.io/Containers-for-HPC/)
+* [repository](https://github.com/gjbex/Containers-for-HPC)
+
+
 ## What is it?
 1. `singularity.pptx`: Powerpoint presentation on singularity.
 1. `centos_base.def`: Singularity definition file for CentOS 7.6.
