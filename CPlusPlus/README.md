@@ -3,6 +3,12 @@ This is some sample code written in C++, with no or little bearing on
 non-standard libraries.  It is mainly intended to illustrate some
 programming concepts and idiosyncracies particular to C++.
 
+This part of the repository
+is considered obsolete and has been replaced by another repository for a C++ for
+scientific programming training.  See
+* [training website](https://gjbex.github.io/Scientific-C-plus-plus/)
+* [repository](https://github.com/gjbex/Scientific-C-plus-plus)
+
 ## What is it?
 1. `scientific_cpp.pptx`: Powerpoint presentation, introducing C++
     from the perspective of scientific computing, based on

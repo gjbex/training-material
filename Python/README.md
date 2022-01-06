@@ -6,6 +6,31 @@ This directory contains code samples that illustrate particular features
 and programming techniques, or how to use Python iibraries.  Many of
 these samples have been used for Python tutorials.
 
+This part of
+the repository has in large part been superceeded by various training 
+repositories dedicated to specific Python-related topics.
+* Python for programmers
+  * [repository](https://github.com/gjbex/Python-for-programmers)
+* Scientific Python
+  * [website](https://gjbex.github.io/Scientific-Python/)
+  * [repository](https://github.com/gjbex/Scientific-Python)
+* Python for data science
+  * [website](https://gjbex.github.io/Python-for-data-science/)
+  * [repository](https://github.com/gjbex/Python-for-data-science)
+* Python for machine learning
+  * [website](https://gjbex.github.io/Python-for-machine-learning/)
+  * [repository](https://github.com/gjbex/Python-for-machine-learning)
+* Python for HPC
+  * [website](https://gjbex.github.io/Python-for-HPC/)
+  * [repository](https://github.com/gjbex/Python-for-HPC)
+* Python for systems programming
+  * [website](https://gjbex.github.io/Python-for-systems-programming/)
+  * [repository](https://github.com/gjbex/Python-for-systems-programming)
+* Python software engineering
+  * [website](https://gjbex.github.io/Python-software-engineering/)
+  * [repository](https://github.com/gjbex/Python-software-engineering)
+
+
 # What is it?
 1. `Autocorrelation`: illustration of autocorrelation in a Markov process,
     implements a Monte Carlo algorithm, and allows to show evolution over

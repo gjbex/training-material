@@ -4,7 +4,14 @@ Fortran
 This is work in progress for an information session on modern Fortran
 (95, 2003, 2008).  Prior knowledge of Fortran 77/90 is assumed.
 
-This may grow over time to become a full-fledged Fortran course.
+This section
+of the repository has been superceeded by two other repositories:
+* Fortran for programmers
+  * [website](https://gjbex.github.io/Fortran-for-programmers/)
+  * [repository](https://github.com/gjbex/Fortran-for-programmers)
+* Fortran MOOC
+  * [website](https://www.futurelearn.com/courses/fortran-for-scientific-computing)
+  * [repository](https://github.com/gjbex/Fortran-MOOC)
 
 Contents
 --------
