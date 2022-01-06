@@ -4,6 +4,12 @@ Needless to say that optimization is a rather important topic in HPC.
 A collection of code samples that illustrate opportunities for code
 optimization, or highlight potential performance bottlenecks.
 
+This section of the repository has been superceeded by a
+training repository on code optimization.
+* [website](https://gjbex.github.io/Code-optimization/)
+* [repository](https://github.com/gjbex/Code-optimization)
+
+
 ## What is it?
 1. `Branching`: branching instructions can decrease performance.
 1. `Fdo`: small illustration of using FDO (Feedback Directed Optimization).
