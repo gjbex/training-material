@@ -1,0 +1,5 @@
+This is a file with a number of
+parameters such as
+  * ${name}
+  * ${number}
+  * ${date}
