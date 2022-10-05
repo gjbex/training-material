@@ -18,7 +18,7 @@ def compute_particles(hrfile, centers, nr_particles=10, avg_dist=10.0,
                       min_mass=0.01, max_mass=10.0):
     '''compute nr_particles around the given center of gravity,
        with average distane avg_dist and average velocity avg_vel'''
-    particles = h5file.createGroup(h5file.root, 'particles')
+    particles = h5file.create_group(h5file.root, 'particles')
     position = h5file.create_earray(particles, 'position',
                                     tables.Float64Atom(),
                                     (0, 3), 'particle positions')
@@ -44,7 +44,7 @@ def compute_grid(h5file, group='grid', extent=750.0, points=1000,
     y = np.linspace(-extent, extent, points, endpoint=True)
     z = np.linspace(-extent, extent, points, endpoint=True)
     if add_grid:
-        grid = h5file.createGroup(h5file.root, group, 'grid coordinates')
+        grid = h5file.create_group(h5file.root, group, 'grid coordinates')
         h5file.create_array(grid, 'x', x, 'x coordinates')
         h5file.create_array(grid, 'y', y, 'y coordinates')
         h5file.create_array(grid, 'z', z, 'z coordinates')
@@ -73,7 +73,7 @@ def compute_vector_field(h5file, centers, xs, ys, zs, max_field=50.0,
                          group='vector'):
     '''compute a vector field that decreases quadratically with the
        distance to the center'''
-    vector = h5file.createGroup(h5file.root, group)
+    vector = h5file.create_group(h5file.root, group)
     dims = ['x', 'y', 'z']
     for i, dim in enumerate(dims):
         comp = h5file.create_earray(vector, dim, tables.Float64Atom(),
@@ -128,13 +128,13 @@ if __name__ == '__main__':
                             help='verbose output for debugging')
     arg_parser.add_argument('file', help='HDF5 file to store the data in')
     options = arg_parser.parse_args()
-    h5file = tables.openFile(options.file, mode='w',
-                             title='synthetic data set')
+    h5file = tables.open_file(options.file, mode='w',
+                              title='synthetic data set')
     centers = compute_centers(h5file, options.centers,
                               options.avg_center_dist)
     if options.verbose:
-        print 'center positions'
-        print centers
+        print('center positions')
+        print(centers)
     if options.particle_data:
         compute_particles(h5file, centers, options.particles,
                           options.avg_part_radial_vel,
@@ -143,12 +143,12 @@ if __name__ == '__main__':
         x, y, z = compute_grid(h5file, extent=options.extent,
                                points=options.points)
         if options.verbose:
-            print 'grid x'
-            print x
-            print 'grid y'
-            print y
-            print 'grid z'
-            print z
+            print('grid x')
+            print(x)
+            print('grid y')
+            print(y)
+            print('grid z')
+            print(z)
     if options.scalar_field_data:
         compute_scalar_field(h5file, centers, x, y, z, options.max_scalar)
     if options.vector_field_data:
