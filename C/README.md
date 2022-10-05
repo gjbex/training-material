@@ -12,3 +12,4 @@ and idiosyncracies particular to C.
     features, and Doxygen documentation.
 1. `c_intro.pptx`: Powerpoint presentation based on Kernighan and
     Ritchie's "The C programming language".
+1. `Stdarg`: example of functions with variadic arguments using `stdarg.h`.
