@@ -25,15 +25,14 @@ if __name__ == '__main__':
     try:
         while True:
             status, frame = capture.read()
-            if status:
-                counter += 1
-                # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                if options.output:
-                    output.write(frame)
-                cv2.imshow('frame', frame)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
-            else:
+            if not status:
+                break
+            counter += 1
+            # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            if options.output:
+                output.write(frame)
+            cv2.imshow('frame', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
     except KeyboardInterrupt:
         capture.release()

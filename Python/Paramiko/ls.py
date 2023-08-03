@@ -24,7 +24,7 @@ if __name__ == '__main__':
     ssh = connect(options.host, options.user)
     cmd = 'ls -l'
     if options.dir:
-        cmd += ' ' + options.dir
+        cmd += f' {options.dir}'
     _, stdout, stderr = ssh.exec_command(cmd)
     for line in stdout:
         print(line.rstrip())

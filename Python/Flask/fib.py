@@ -14,16 +14,15 @@ def reset():
     
 @app.route('/')
 def start():
-    if 'number' in session:
-        session['number'] += 1
-        fib = session['fib']
-        session['fib'] += session['fib_prev']
-        session['fib_prev'] = fib
-        return render_template('fib.html',
-                               number=session['number'],
-                               fibonacci=session['fib'])
-    else:
+    if 'number' not in session:
         return reset()
+    session['number'] += 1
+    fib = session['fib']
+    session['fib'] += session['fib_prev']
+    session['fib_prev'] = fib
+    return render_template('fib.html',
+                           number=session['number'],
+                           fibonacci=session['fib'])
 
 if __name__ == '__main__':
     app.run(threaded=True)

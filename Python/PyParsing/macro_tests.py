@@ -13,7 +13,7 @@ class MacroExapnderTest(unittest.TestCase):
         self._expander.add_macro('lower', lambda x: x.lower())
         self._expander.add_macro('gjb', lambda: 'Geert Jan Bex')
         self._expander.add_macro('repeat', lambda x, n: int(n)*x)
-        self._expander.add_macro('cat', lambda x, y: x + '-' + y)
+        self._expander.add_macro('cat', lambda x, y: f'{x}-{y}')
         self._expander.add_macro('add', lambda x, y: str(int(x) + int(y)))
 
     def test_upper(self):

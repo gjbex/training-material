@@ -9,7 +9,7 @@ def init_matrix(n, value=None):
     m = []
     for i in range(n):
         m.append([])
-        for j in range(n):
+        for _ in range(n):
             if value is not None:
                 m[i].append(value)
             else:

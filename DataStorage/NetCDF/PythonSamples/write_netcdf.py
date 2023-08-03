@@ -17,10 +17,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('-v', dest='version', choices=['3', '4'],
                             default='3', help='NetCDF version to create')
     options = arg_parser.parse_args()
-    if options.version == '3':
-        version = 'NETCDF3_CLASSIC'
-    else:
-        version = 'NETCDF4'
+    version = 'NETCDF3_CLASSIC' if options.version == '3' else 'NETCDF4'
     rootgrp = Dataset(options.file, 'w', format='NETCDF3_CLASSIC')
     x_dim = rootgrp.createDimension('x', options.x)
     y_dim = rootgrp.createDimension('y', options.y)

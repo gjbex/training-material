@@ -23,12 +23,11 @@ class CountDown(object):
     def __next__(self):
         '''Returns the next value, and changes state, called in each
         iteration'''
-        if self._current >= 0:
-            value = self._current
-            self._current -= 1
-            return value
-        else:
+        if self._current < 0:
             raise StopIteration()
+        value = self._current
+        self._current -= 1
+        return value
 
     def __str__(self):
         return 'count down at {c:d} from {n:d}'.format(self._current,

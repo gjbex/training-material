@@ -39,7 +39,7 @@ if __name__ == '__main__':
     if options.verbose:
         print('task placement:')
         print('\t' + '\n\t'.join(process_locations))
-    count = dict()
+    count = {}
     for process_location in process_locations:
         _, _, hostname = process_location.split()
         if hostname not in count:

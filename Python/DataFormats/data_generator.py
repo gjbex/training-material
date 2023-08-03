@@ -47,11 +47,10 @@ class Distribution(object):
         return self
 
     def __next__(self):
-        if self._current < self.n:
-            self._current += 1
-            return self._distr(*self._params)
-        else:
+        if self._current >= self.n:
             raise StopIteration()
+        self._current += 1
+        return self._distr(*self._params)
 
 
 class DistributionCreator(object):
@@ -108,9 +107,9 @@ class Hdf5Writer(object):
         self._row = self._table.row
 
     def _create_table(self, table_name, col_defs):
-        description = {}
-        for col_def in col_defs:
-            description[col_def['name']] = self._typemap[col_def['type']]
+        description = {
+            col_def['name']: self._typemap[col_def['type']] for col_def in col_defs
+        }
         return self._file.create_table('/', table_name, description)
 
     def set_headers(self, headers):

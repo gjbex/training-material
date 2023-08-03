@@ -24,23 +24,16 @@ class Mapper(object):
     def read_dict(self, dict_file_name):
         dictionary = []
         with open(dict_file_name) as dict_file:
-            for line in dict_file.readlines():
+            for line in dict_file:
                 word = line.strip()
                 if word.isalpha():
                     dictionary.append(word.lower())
         return dictionary
 
     def map(self, phone_number):
-        regex_str = r''
-        for digit in phone_number:
-            regex_str += self._mapping[digit]
-        regex_str += r'\w*$'
+        regex_str = r''.join(self._mapping[digit] for digit in phone_number) + r'\w*$'
         regex = re.compile(regex_str)
-        words = []
-        for word in self._dictionary:
-            if regex.match(word) is not None:
-                    words.append(word)
-        return words
+        return [word for word in self._dictionary if regex.match(word) is not None]
 
 
 def main():

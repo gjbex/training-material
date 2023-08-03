@@ -22,9 +22,8 @@ def main():
                 if not is_header_written:
                     output_file.write(line)
                     is_header_written = True
-            else:
-                if line.strip():
-                    output_file.write(line)
+            elif line.strip():
+                output_file.write(line)
     return 0
 
 if __name__ == '__main__':

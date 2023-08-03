@@ -28,19 +28,15 @@ class Point(object):
         return math.sqrt((self.x - p.x)**2 + (self.y - p.y)**2)
 
     def on_line(self, p, q, tol=1.0e-6):
-        if not math.isclose(p.x, q.x, tol):
-            a = (q.y - p.y)/(q.x - p.x)
-            b = p.y - a*p.x
-            return math.isclose(self.y, a*self.x + b, tol)
-        else:
+        if math.isclose(p.x, q.x, tol):
             return math.isclose(self.x, p.x, tol)
+        a = (q.y - p.y)/(q.x - p.x)
+        b = p.y - a*p.x
+        return math.isclose(self.y, a*self.x + b, tol)
 
     @staticmethod
     def all_on_line(p, q, *points):
-        for r in points:
-            if not r.on_line(p, q):
-                return False
-        return True
+        return all(r.on_line(p, q) for r in points)
 
     def __str__(self):
         return '({x}, {y})'.format(x=self.x, y=self.y)
@@ -52,10 +48,7 @@ class PointMass(Point):
 
     def __init__(self, x, y, mass=None):
         super().__init__(x, y)
-        if mass:
-            self._mass = float(mass)
-        else:
-            self._mass = self.__class__.get_default_mass()
+        self._mass = float(mass) if mass else self.__class__.get_default_mass()
 
     @property
     def mass(self):

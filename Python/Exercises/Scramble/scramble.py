@@ -7,8 +7,7 @@ import sys
 
 
 def tokenize(line):
-    tokens = re.split(r'([A-Za-z]+)', line)
-    return tokens
+    return re.split(r'([A-Za-z]+)', line)
 
 
 def neighbour_positions(length, nr_swaps):

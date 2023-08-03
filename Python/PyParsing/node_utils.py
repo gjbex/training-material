@@ -17,26 +17,23 @@ def depth(node):
 
 def depth_first_iterator(node):
     '''returns an depth-first itreator over the node and its children'''
-    if node is not None:
-        node_stack = [(node, -1)]
-        while len(node_stack) > 0:
-            node, child_index = node_stack.pop()
-            if child_index == -1:
-                if not node.is_leaf():
-                    node_stack.append((node, child_index + 1))
-                yield node
-            elif child_index < node.nr_children():
+    if node is None:
+        return
+    node_stack = [(node, -1)]
+    while node_stack:
+        node, child_index = node_stack.pop()
+        if child_index == -1:
+            if not node.is_leaf():
                 node_stack.append((node, child_index + 1))
-                node_stack.append((node.child(child_index), -1))
+            yield node
+        elif child_index < node.nr_children():
+            node_stack.append((node, child_index + 1))
+            node_stack.append((node.child(child_index), -1))
 
 
 def nr_leaf_nodes(start_node):
     '''returns the number of leaf nodes starting form the given node'''
-    nr = 0
-    for node in depth_first_iterator(start_node):
-        if node.is_leaf():
-            nr += 1
-    return nr
+    return sum(1 for node in depth_first_iterator(start_node) if node.is_leaf())
 
 
 class DepthTest(unittest.TestCase):
@@ -72,36 +69,28 @@ class DepthFirstIteratorTest(unittest.TestCase):
         parser = NodeParser()
         parser.parse('()')
         tree = parser.node()
-        nodes = []
-        for node in depth_first_iterator(tree):
-            nodes.append(node.name)
+        nodes = [node.name for node in depth_first_iterator(tree)]
         self.assertEqual(nodes, [])
 
     def test_single_node(self):
         parser = NodeParser()
         parser.parse('(c1)')
         tree = parser.node()
-        nodes = []
-        for node in depth_first_iterator(tree):
-            nodes.append(node.name)
+        nodes = [node.name for node in depth_first_iterator(tree)]
         self.assertEqual(nodes, ['c1'])
 
     def test_tree(self):
         parser = NodeParser()
         parser.parse('(c1 ((c2) (c3 ((c4) (c5))) (c6)))')
         tree = parser.node()
-        nodes = []
-        for node in depth_first_iterator(tree):
-            nodes.append(node.name)
+        nodes = [node.name for node in depth_first_iterator(tree)]
         self.assertEqual(nodes, ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'])
 
     def test_deep_tree(self):
         parser = NodeParser()
         parser.parse('(c1 ((c2 ((c3 ((c4)))))))')
         tree = parser.node()
-        nodes = []
-        for node in depth_first_iterator(tree):
-            nodes.append(node.name)
+        nodes = [node.name for node in depth_first_iterator(tree)]
         self.assertEqual(nodes, ['c1', 'c2', 'c3', 'c4'])
 
 

@@ -106,7 +106,7 @@ class AgtParser(object):
         if not match:
             msg = "line {0:d}: invalid number of measurements '{1}'"
             raise AgtDataError(msg.format(self._current_line, nr_lines_str))
-        nr_lines = int(match.group(1))
+        nr_lines = int(match[1])
         self._current_line += 1
 # ignore header line
         agt_file.readline()

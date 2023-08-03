@@ -18,8 +18,8 @@ if __name__ == '__main__':
             record = Entrez.read(handle)
             db_info = record['DbInfo']
             print(db_info['Description'])
-            print('Count: {}'.format(db_info['Count']))
-            print('Last update: {}'.format(db_info['LastUpdate']))
+            print(f"Count: {db_info['Count']}")
+            print(f"Last update: {db_info['LastUpdate']}")
             if options.fields:
                 print('Fields:')
                 fmt_str = '{Name} ({FullName}): {Description}'

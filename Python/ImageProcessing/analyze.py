@@ -13,22 +13,21 @@ if __name__ == '__main__':
     counter = 0
     try:
         densities = []
-        while (True):
+        while True:
             status, frame = capture.read()
-            if status:
-                counter += 1
-                nr_pixels = frame.shape[0]*frame.shape[1]
-                red_channel = frame[:, :, 0]
-                green_channel = frame[:, :, 1]
-                blue_channel = frame[:, :, 2]
-                densities.append((counter,
-                                  red_channel.sum()/nr_pixels,
-                                  green_channel.sum()/nr_pixels,
-                                  blue_channel.sum()/nr_pixels))
-                cv2.imshow('frame', frame)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
-            else:
+            if not status:
+                break
+            counter += 1
+            nr_pixels = frame.shape[0]*frame.shape[1]
+            red_channel = frame[:, :, 0]
+            green_channel = frame[:, :, 1]
+            blue_channel = frame[:, :, 2]
+            densities.append((counter,
+                              red_channel.sum()/nr_pixels,
+                              green_channel.sum()/nr_pixels,
+                              blue_channel.sum()/nr_pixels))
+            cv2.imshow('frame', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
         capture.release()
         cv2.destroyAllWindows()

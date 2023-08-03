@@ -54,10 +54,7 @@ class Docs(object):
         for _ in range(self._size):
             tag = self._tags.random()
             element = doc.createElement(tag)
-            if node_list:
-                parent = random.choice(node_list)
-            else:
-                parent = doc
+            parent = random.choice(node_list) if node_list else doc
             parent.appendChild(element)
             node_list.append(element)
         for element in node_list:

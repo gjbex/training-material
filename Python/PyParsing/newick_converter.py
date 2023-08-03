@@ -38,15 +38,10 @@ class RelationalNewickWriter(RelationalWriter):
 
     def node_attr(self, node):
         '''formats node attributes, if any'''
-        attr = ''
-        if node.label is not None:
-            attr += '\t{0}'.format(node.label)
-        else:
-            attr += '\tNone'
-        if node.length is not None:
-            attr += '\t{0}'.format(node.length)
-        else:
-            attr += '\tNone'
+        attr = '' + (
+            '\t{0}'.format(node.label) if node.label is not None else '\tNone'
+        )
+        attr += '\t{0}'.format(node.length) if node.length is not None else '\tNone'
         return attr
 
 

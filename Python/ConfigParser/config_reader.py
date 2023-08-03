@@ -5,10 +5,7 @@ import sys
 
 
 def main():
-    if len(sys.argv) > 1:
-        cfg_file = sys.argv[1]
-    else:
-        cfg_file = 'defaults.conf'
+    cfg_file = sys.argv[1] if len(sys.argv) > 1 else 'defaults.conf'
     cfg_parser = SafeConfigParser()
     cfg_parser.read(cfg_file)
     print('Sections:')

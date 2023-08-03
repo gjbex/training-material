@@ -42,19 +42,19 @@ class Child(Parent):
         return self.__new_obj_var
 
     def __str__(self):
-        return super().__str__() + ' ' + str(self.child_var)
+        return f'{super().__str__()} {str(self.child_var)}'
 
 
 if __name__ == '__main__':
     p = Parent('abc')
     c = Child('bde', 'efg')
-    print('Parent: {}'.format(Parent.get_class_var()))
-    print('Child: {}'.format(Child.get_class_var()))
+    print(f'Parent: {Parent.get_class_var()}')
+    print(f'Child: {Child.get_class_var()}')
     print('setting Child class variable')
     Child.set_class_var(15)
-    print('Parent: {}'.format(Parent.get_class_var()))
-    print('Child: {}'.format(Child.get_class_var()))
+    print(f'Parent: {Parent.get_class_var()}')
+    print(f'Child: {Child.get_class_var()}')
     print('setting Parent class variable')
     Parent.set_class_var(25)
-    print('Parent: {}'.format(Parent.get_class_var()))
-    print('Child: {}'.format(Child.get_class_var()))
+    print(f'Parent: {Parent.get_class_var()}')
+    print(f'Child: {Child.get_class_var()}')

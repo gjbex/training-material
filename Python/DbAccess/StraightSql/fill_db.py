@@ -8,11 +8,10 @@ import string
 
 
 def generate_city_codes(nr_cities, code_length=4):
-    cities = []
-    for city_nr in range(nr_cities):
-        cities.append(''.join([random.choice(string.letters)
-                               for i in range(code_length)]))
-    return cities
+    return [
+        ''.join([random.choice(string.letters) for _ in range(code_length)])
+        for _ in range(nr_cities)
+    ]
 
 
 def convert_date(date_str):

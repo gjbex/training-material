@@ -10,7 +10,7 @@ def main():
     idx = 0
     while total_seconds > 0:
         parts[idx] = total_seconds//units[idx]
-        total_seconds = total_seconds % units[idx]
+        total_seconds %= units[idx]
         idx += 1
     print(':'.join('{:02d}'.format(x) for x in parts))
     return 0
