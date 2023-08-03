@@ -10,8 +10,7 @@ def available_nucl(nucl_left):
 
 def get_nucl(nucl_left):
     while True:
-        avail_nucls = available_nucl(nucl_left)
-        if avail_nucls:
+        if avail_nucls := available_nucl(nucl_left):
             nucl = random.choice(avail_nucls)
             nucl_left[nucl] -= 1
             yield nucl

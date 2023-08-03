@@ -25,7 +25,7 @@ if __name__ == '__main__':
     for func in [array_sum, np.sum, py_sum]:
         total = 0.0
         start_time = timeit.default_timer()
-        for iter_nr in range(options.iter):
+        for _ in range(options.iter):
             total += func(a)
         total_time = timeit.default_timer() - start_time
         print('{0:s}: {1:.6f} s ({2})'.format(func.__name__, total_time,

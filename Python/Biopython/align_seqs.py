@@ -17,9 +17,10 @@ if __name__ == '__main__':
     arg_parser.add_argument('--show', action='store_true',
                             help='show MUSCLE output')
     options = arg_parser.parse_args()
-    seqs = {}
-    for seq_record in SeqIO.parse(options.file, options.format):
-        seqs[seq_record.id] = seq_record.seq
+    seqs = {
+        seq_record.id: seq_record.seq
+        for seq_record in SeqIO.parse(options.file, options.format)
+    }
     if options.alignment:
         with open(options.alignment, 'r') as alignment_file:
             stdout = alignment_file.read()

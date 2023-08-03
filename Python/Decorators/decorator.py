@@ -37,10 +37,7 @@ def check_max(f):
 @check_min
 def fact(n):
     '''compute factorial of given number'''
-    if n == 0:
-        return 1
-    else:
-        return n*fact(n - 1)
+    return 1 if n == 0 else n*fact(n - 1)
 
 if __name__ == '__main__':
     import sys

@@ -21,7 +21,7 @@ def main():
             print('{name} --- {weight}'.format(name=row['name'],
                                                weight=row['weight']))
             sum += float(row['weight'])
-        print('sum = {}'.format(sum))
+        print(f'sum = {sum}')
 
 if __name__ == '__main__':
     main()

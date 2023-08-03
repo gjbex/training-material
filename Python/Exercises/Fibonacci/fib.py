@@ -8,7 +8,7 @@ def all_fibonacci():
     n_2 = 1
     n_1 = 1
     for n in itertools.count(1):
-        if n == 1 or n == 2:
+        if n in [1, 2]:
             yield 1
         else:
             value = n_1 + n_2
@@ -19,9 +19,7 @@ def all_fibonacci():
 
 def main():
     nr_fib = 0
-    max_nr_fib = None
-    if len(sys.argv) > 1:
-        max_nr_fib = int(sys.argv[1])
+    max_nr_fib = int(sys.argv[1]) if len(sys.argv) > 1 else None
     for n in all_fibonacci():
         if max_nr_fib and nr_fib >= max_nr_fib:
             break

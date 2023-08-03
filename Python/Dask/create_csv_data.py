@@ -10,8 +10,10 @@ import sys
 
 def write_file(args):
     file_name, rows, curr_time, delta_time, curr_vals, delta_val = args
-    fieldnames = ['timestamp']
-    fieldnames.extend(['C{0:d}'.format(i + 1) for i in range(len(curr_vals))])
+    fieldnames = [
+        'timestamp',
+        *['C{0:d}'.format(i + 1) for i in range(len(curr_vals))],
+    ]
     with open(file_name, 'w', newline='') as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()

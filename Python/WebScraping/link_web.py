@@ -12,33 +12,33 @@ def show_links(soup, out=sys.stderr):
     print("Opened start page '{0}'".format(soup.title.string), file=out)
     links = soup.find_all("a")
     for link in links:
-        href = link.get('href')
-        if href:
+        if href := link.get('href'):
             print('\t{0}'.format(href), file=out)
 
 def process_page(pages_to_do, pages_done, max_level, graph, verbose=False):
-    if pages_to_do:
-        page_url, level = pages_to_do.popleft()
-        if level <= max_level:
-            if verbose:
-                print('{0}: {1}'.format(page_url, level))
-            pages_done.add(page_url)
-            try:
-                page = urllib.request.urlopen(page_url)
-                soup = BeautifulSoup(page, 'html5lib')
-                links = soup.find_all("a")
-                for link in links:
-                    href = link.get('href')
-                    if href and href.startswith('http'):
-                        if href not in pages_done:
-                            pages_to_do.append((href, level + 1))
-                        graph.add_edge(page_url, href)
-            except urllib.error.HTTPError:
-                print('# warning: can not handle {0}'.format(page_url),
-                      file=sys.stderr)
-            except urllib.error.URLError:
-                print('# warning: can not handle {0}'.format(page_url),
-                      file=sys.stderr)
+    if not pages_to_do:
+        return
+    page_url, level = pages_to_do.popleft()
+    if level <= max_level:
+        if verbose:
+            print('{0}: {1}'.format(page_url, level))
+        pages_done.add(page_url)
+        try:
+            page = urllib.request.urlopen(page_url)
+            soup = BeautifulSoup(page, 'html5lib')
+            links = soup.find_all("a")
+            for link in links:
+                href = link.get('href')
+                if href and href.startswith('http'):
+                    if href not in pages_done:
+                        pages_to_do.append((href, level + 1))
+                    graph.add_edge(page_url, href)
+        except urllib.error.HTTPError:
+            print('# warning: can not handle {0}'.format(page_url),
+                  file=sys.stderr)
+        except urllib.error.URLError:
+            print('# warning: can not handle {0}'.format(page_url),
+                  file=sys.stderr)
 
 if __name__ == '__main__':
     arg_parser = ArgumentParser(description='create graph of hyperlinks')

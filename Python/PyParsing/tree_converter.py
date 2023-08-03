@@ -55,7 +55,7 @@ class RelationalWriter:
         repr = '{0}\t{1}\t{2}'.format(id_dict[node], None, node.name)
         repr += self.node_attr(node) + '\n'
         queue = [node]
-        while len(queue) > 0:
+        while queue:
             current = queue.pop(0)
             for child in current.children():
                 current_id += 1

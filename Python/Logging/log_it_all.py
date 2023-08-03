@@ -30,14 +30,8 @@ def main():
                             help='number of times to do stuff')
     options = arg_parser.parse_args()
     format_str = '%(asctime)s:%(levelname)s:%(message)s'
-    if options.info:
-        level = logging.INFO
-    else:
-        level = logging.WARNING
-    if options.new_log:
-        filemode = 'w'
-    else:
-        filemode = 'a'
+    level = logging.INFO if options.info else logging.WARNING
+    filemode = 'w' if options.new_log else 'a'
     if options.log_file:
         exists = os.path.exists(options.log_file)
         logging.basicConfig(level=level, filename=options.log_file,

@@ -17,7 +17,7 @@ def random_subtree(G, root, max_branch, max_height):
         if root:
             nr_branches = random.randrange(0, max_branch + 1)
             for i in range(1, nr_branches + 1):
-                node = root + '.' + str(i)
+                node = f'{root}.{str(i)}'
                 G.add_edge(root, node)
                 random_subtree(G, node, max_branch, max_height - 1)
         else:

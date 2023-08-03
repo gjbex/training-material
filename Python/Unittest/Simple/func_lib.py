@@ -39,12 +39,7 @@ def is_prime(n):
     '''returns True when the given number of prime, false otherwise'''
     if n < 0:
         raise InvalidArgumentException('number should be positive')
-    factor = 2
-    while factor <= int(math.sqrt(n)):
-        if n % factor == 0:
-            return False
-        factor += 1
-    return True
+    return all(n % factor != 0 for factor in range(2, int(math.sqrt(n)) + 1))
 # correct implementation for n >= 0
 #    return n > 1
 # for n < 0, an exception might be thrown
@@ -52,11 +47,7 @@ def is_prime(n):
 
 def primes(n):
     '''returns a list of primes less than or equal to the given nuber'''
-    prime_list = []
-    for i in range(n + 1):
-        if is_prime(i):
-            prime_list.append(i)
-    return prime_list
+    return [i for i in range(n + 1) if is_prime(i)]
 
 
 if __name__ == '__main__':

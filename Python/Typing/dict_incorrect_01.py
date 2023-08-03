@@ -6,7 +6,7 @@ from typing import Dict
 
 
 def word_count(text: str) -> Dict[str, int]:
-    counts = dict() # type: Dict[str, int]
+    counts = {}
     words = re.split(r'\W+', text)
     nr_words = 0
     for word in words:
@@ -16,8 +16,8 @@ def word_count(text: str) -> Dict[str, int]:
         counts[word] += 1
         nr_words += 1
     nr_words -= counts.pop('')
-    for word, count in counts.items():
-        counts[word] /= nr_words
+    for value in counts.values():
+        value /= nr_words
     return counts
 
 if __name__ == '__main__':

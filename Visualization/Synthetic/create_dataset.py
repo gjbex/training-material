@@ -158,7 +158,7 @@ if __name__ == '__main__':
                 options.file)
     xdmf.create_centers()
     base_name, _ = os.path.splitext(options.file)
-    xdmf_file_name = base_name + '_centers.xdmf'
+    xdmf_file_name = f'{base_name}_centers.xdmf'
     xdmf.to_xml(xdmf_file_name)
     xdmf.to_xml(xdmf_file_name)
     if options.particle_data:
@@ -166,7 +166,7 @@ if __name__ == '__main__':
                     options.file)
         xdmf.create_particles()
         base_name, _ = os.path.splitext(options.file)
-        xdmf_file_name = base_name + '_particles.xdmf'
+        xdmf_file_name = f'{base_name}_particles.xdmf'
         xdmf.to_xml(xdmf_file_name)
     if options.scalar_field_data:
         xdmf = Xdmf(options.centers, options.particles, options.points,
@@ -174,7 +174,7 @@ if __name__ == '__main__':
         xdmf.create_field_geometry()
         xdmf.create_scalar_field()
         base_name, _ = os.path.splitext(options.file)
-        xdmf_file_name = base_name + '_scalar_field.xdmf'
+        xdmf_file_name = f'{base_name}_scalar_field.xdmf'
         xdmf.to_xml(xdmf_file_name)
     if options.vector_field_data:
         xdmf = Xdmf(options.centers, options.particles, options.points,
@@ -182,5 +182,5 @@ if __name__ == '__main__':
         xdmf.create_field_geometry()
         xdmf.create_vector_field()
         base_name, _ = os.path.splitext(options.file)
-        xdmf_file_name = base_name + '_vector_field.xdmf'
+        xdmf_file_name = f'{base_name}_vector_field.xdmf'
         xdmf.to_xml(xdmf_file_name)

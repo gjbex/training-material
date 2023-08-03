@@ -7,7 +7,7 @@ import sys
 
 
 def parse_job_script(file_name):
-    args = list()
+    args = []
     with open(file_name) as file:
         for line in file:
             if line.lstrip().startswith('#PBS '):

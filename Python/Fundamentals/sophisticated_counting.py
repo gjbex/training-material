@@ -8,12 +8,10 @@ def main():
     threshold = 1.0e-7
     categories = {
         'negative': lambda x: x < -threshold,
-        'zero': lambda x: -threshold <= x and x <= threshold,
+        'zero': lambda x: -threshold <= x <= threshold,
         'positive': lambda x: threshold < x,
     }
-    counter = {}
-    for name in categories.keys():
-        counter[name] = 0
+    counter = {name: 0 for name in categories}
     for line in sys.stdin:
         value = float(line.rstrip('\r\n').split()[2])
         for name, cond in categories.items():

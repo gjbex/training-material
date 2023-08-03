@@ -26,9 +26,9 @@ if __name__ == '__main__':
         if options.summary:
             handle = Entrez.esummary(db='nucleotide', id=seq_id)
             summary = Entrez.read(handle)
-            print('ID {}:'.format(seq_id))
-            print('  {}'.format(summary[0]['Title']))
-            print('  Updated: {}'.format(summary[0]['UpdateDate']))
+            print(f'ID {seq_id}:')
+            print(f"  {summary[0]['Title']}")
+            print(f"  Updated: {summary[0]['UpdateDate']}")
         else:
             file_name = os.path.join('Data', '{0}.gbk'.format(seq_id))
             if not os.path.isfile(file_name):

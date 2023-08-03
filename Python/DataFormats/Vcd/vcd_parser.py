@@ -15,7 +15,7 @@ def parse_config_line(meta_data, line):
         meta_data[symbol] = demangle_name(name)
 
 def parse_config(vcd_file):
-    meta_data = dict()
+    meta_data = {}
     for line in vcd_file:
         line = line.strip()
         if line == '$end':
@@ -37,16 +37,15 @@ def update_buffer(buffer, line, meta_data):
     buffer[key] = value
 
 def init_data(meta_data):
-    data = dict()
-    data['time'] = list()
+    data = {'time': []}
     for var in meta_data:
-        data[meta_data[var]] = list()
+        data[meta_data[var]] = []
     return data
 
 def parse_data(vcd_file, meta_data):
     data = init_data(meta_data)
     time_stamp = None
-    buffer = dict()
+    buffer = {}
     for line in vcd_file:
         line = line.strip()
         if line.startswith('#'):
@@ -68,9 +67,7 @@ def write_vcd_data_structure(out_file, data, sep=' '):
     columns = list(data.keys())
     out_file.write(sep.join(columns) + '\n')
     for time_step in range(len(data['time'])):
-        data_line = list()
-        for var in columns:
-            data_line.append(data[var][time_step])
+        data_line = [data[var][time_step] for var in columns]
         out_file.write(sep.join(str(data_item) for data_item in data_line))
         out_file.write('\n')
 

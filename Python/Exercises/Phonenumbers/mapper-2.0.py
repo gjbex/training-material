@@ -21,7 +21,7 @@ class Mapper(object):
     def read_dict(self, dict_file_name):
         dictionary = []
         with open(dict_file_name) as dict_file:
-            for line in dict_file.readlines():
+            for line in dict_file:
                 word = line.strip()
                 if word.isalpha():
                     dictionary.append(word.lower())

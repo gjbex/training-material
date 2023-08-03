@@ -39,8 +39,8 @@ if __name__ == '__main__':
     if rank == 0:
         print('# core-level placement')
     comm.Barrier()
+    msg = 'rank {0:02d} running on core(s) {1:s} of {2:d}'
     for _ in range(nr_iters):
         cores = process.cpu_affinity()
-        msg = 'rank {0:02d} running on core(s) {1:s} of {2:d}'
         print(msg.format(rank, '.'.join(str(c) for c in cores), nr_cores))
         time.sleep(sleep_time)

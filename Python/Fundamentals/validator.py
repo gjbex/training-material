@@ -4,11 +4,10 @@ import sys
 
 
 def validate(case_nr, dim_nr, temp):
-    if dim_nr == 3 and temp < 0.0:
-        sys.stderr.write('# error in case {0}\n'.format(case_nr))
-        return False
-    else:
+    if dim_nr != 3 or temp >= 0.0:
         return True
+    sys.stderr.write('# error in case {0}\n'.format(case_nr))
+    return False
 
 
 def parse_line(line):

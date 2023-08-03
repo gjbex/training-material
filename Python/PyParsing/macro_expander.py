@@ -83,10 +83,10 @@ def main():
                 expander.add_macro(macro_def.__name__, macro_def)
         print(expander.expand(text))
     except UndefinedMacroError as error:
-        sys.stderr.write('### error: ' + str(error) + '\n')
+        sys.stderr.write(f'### error: {str(error)}' + '\n')
         sys.exit(2)
     except Exception as error:
-        sys.stderr.write('### error: ' + str(error) + '\n')
+        sys.stderr.write(f'### error: {str(error)}' + '\n')
         sys.exit(1)
 
 if __name__ == '__main__':

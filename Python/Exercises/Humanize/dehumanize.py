@@ -43,9 +43,24 @@ def dehumanize(str_value, base=10, digits=1):
     '1024.00'
     '''
     import re
-    if base != 2 and base != 10:
+    if base not in [2, 10]:
         raise ValueError('base should be 2 or 10, not {:d}'.format(base))
     thousands = 10**3 if base == 10 else 2**10
+    if not (
+        match := re.match(
+            r'^\s*((?:\+|-)?(?:\d+\.?\d*)|(?:\d*\.\d+))\s*([ \w]*)$', str_value
+        )
+    ):
+        raise ValueError("'{0:s}' is not a valid quantity".format(str_value))
+    n = float(match.group(1))
+    if match.group(2):
+        order = match.group(2)[0].lower()
+        units = match.group(2)[1:] if len(match.group(2)) > 1 else ''
+        if units and not units.startswith(' '):
+            units = f' {units}'
+    else:
+        order, units = '', ''
+    fmt_str = '{{0:.{}f}}{{1:s}}'.format(digits)
     orders = {
         '': 0,
         'k': 1,
@@ -54,21 +69,7 @@ def dehumanize(str_value, base=10, digits=1):
         't': 4,
         'p': 5,
     }
-    match = re.match(r'^\s*((?:\+|-)?(?:\d+\.?\d*)|(?:\d*\.\d+))\s*([ \w]*)$',
-                     str_value)
-    if match:
-        n = float(match.group(1))
-        if match.group(2):
-            order = match.group(2)[0].lower()
-            units = match.group(2)[1:] if len(match.group(2)) > 1 else ''
-            if units and not units.startswith(' '):
-                units = ' ' + units
-        else:
-            order, units = '', ''
-        fmt_str = '{{0:.{}f}}{{1:s}}'.format(digits)
-        return fmt_str.format(n*thousands**orders[order], units)
-    else:
-        raise ValueError("'{0:s}' is not a valid quantity".format(str_value))
+    return fmt_str.format(n*thousands**orders[order], units)
 
 
 if __name__ == '__main__':

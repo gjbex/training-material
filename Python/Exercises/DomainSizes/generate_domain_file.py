@@ -5,10 +5,7 @@ import sys
 
 
 def main():
-    if len(sys.argv) > 1:
-        n = int(sys.argv[1])
-    else:
-        n = 10
+    n = int(sys.argv[1]) if len(sys.argv) > 1 else 10
     for _ in range(n):
         for _ in range(n):
             c = random.choice(['0', '1'])

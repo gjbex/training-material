@@ -41,11 +41,10 @@ class ConstantDb(object):
                               WHERE name = ?''', (name, ))
         rows = cursor.fetchall()
         cursor.close()
-        if not rows:
-            msg = "constant '{0}' is undefined".format(name)
-            raise UnknownConstantError(msg)
-        else:
+        if rows:
             return rows[0][0]
+        msg = "constant '{0}' is undefined".format(name)
+        raise UnknownConstantError(msg)
 
     def get_names(self):
         cursor = self._conn.cursor()

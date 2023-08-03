@@ -20,9 +20,8 @@ def main():
     parser.set_verbosity(args.verbosity)
     print('verbosity: {0}'.format(parser._verbose))
     try:
-        block_file = open(args.file[0], 'r')
-        blocks = parser.parse(block_file)
-        block_file.close()
+        with open(args.file[0], 'r') as block_file:
+            blocks = parser.parse(block_file)
     except IOError as exception:
         print('### error: {0}'.format(exception))
         exit(2)

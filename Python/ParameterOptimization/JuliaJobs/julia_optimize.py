@@ -14,8 +14,7 @@ def function(params):
     chunk = int(chunk)
     # ppn ranges from 0 to 35 (inclusive)
     ppn = 1 + int(ppn)
-    omp_env = (f'schedule={schedule},chunk={int(chunk)},' +
-               f'OMP_NUM_THREADS={ppn}')
+    omp_env = (f'schedule={schedule},chunk={chunk},' + f'OMP_NUM_THREADS={ppn}')
     cmd = ['qsub', '-l', f'nodes=1:ppn={ppn}:haswell',
            '-v', omp_env, 'julia.pbs']
     process = subprocess.run(cmd, stdout=subprocess.PIPE,
@@ -26,10 +25,9 @@ def function(params):
     while not output_file.exists():
         time.sleep(3)
     print(f'### info: job {job_id} finished', file=sys.stderr)
-    runtimes = list()
+    runtimes = []
     with open(f'julia.pbs.time{job_id}', 'r') as time_file:
-        for line in time_file:
-            runtimes.append(float(time_file.readline()))
+        runtimes.extend(float(time_file.readline()) for _ in time_file)
     runtime = sum(runtimes)/len(runtimes)
     return {
         'loss': runtime, 'schedule': schedule, 'chunk': chunk,

@@ -43,22 +43,21 @@ class Averager(object):
         return self._quantities.keys()
 
     def get(self, quantity):
-        if quantity in self._quantities:
-            result = {}
-            if type(self._quantities[quantity][0]) == dict:
-                for dictionary in self._quantities[quantity]:
-                    for key in dictionary:
-                        if key not in result:
-                            result[key] = 0
-                        result[key] += dictionary[key]
-                for key in result:
-                    result[key] /= float(len(self._quantities[quantity]))
-            else:
-                result['mean'] = np.mean(self._quantities[quantity])
-                result['std'] = np.std(self._quantities[quantity])
-                result['min'] = np.min(self._quantities[quantity])
-                result['max'] = np.max(self._quantities[quantity])
-                result['N'] = len(self._quantities[quantity])
-            return result
-        else:
+        if quantity not in self._quantities:
             raise UnknownQuantityError(quantity)
+        result = {}
+        if type(self._quantities[quantity][0]) == dict:
+            for dictionary in self._quantities[quantity]:
+                for key in dictionary:
+                    if key not in result:
+                        result[key] = 0
+                    result[key] += dictionary[key]
+            for key in result:
+                result[key] /= float(len(self._quantities[quantity]))
+        else:
+            result['mean'] = np.mean(self._quantities[quantity])
+            result['std'] = np.std(self._quantities[quantity])
+            result['min'] = np.min(self._quantities[quantity])
+            result['max'] = np.max(self._quantities[quantity])
+            result['N'] = len(self._quantities[quantity])
+        return result

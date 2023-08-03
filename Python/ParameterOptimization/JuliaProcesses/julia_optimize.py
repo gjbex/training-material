@@ -18,7 +18,7 @@ def function(params):
     environ['OMP_SCHEDULE'] = f'{schedule},{chunk}'
     environ['OMP_NUM_THREADS'] = f'{ppn}'
     cmd = ['./julia_omp.exe 4096']
-    runtimes = list()
+    runtimes = []
     for _ in range(3):
         process = subprocess.run(cmd, stderr=subprocess.PIPE,
                                  stdout=subprocess.PIPE,

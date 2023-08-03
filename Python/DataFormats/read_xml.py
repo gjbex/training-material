@@ -55,9 +55,7 @@ class BlocksHandler(ContentHandler):
     def startElement(self, name, attrs):
         if name == 'block':
             logging.info('start of {0}'.format(attrs.getValue('name')))
-            parent_name = ''
-            if self._stack:
-                parent_name = self._stack[-1].name + '/'
+            parent_name = f'{self._stack[-1].name}/' if self._stack else ''
             block = Block(parent_name + attrs.getValue('name'))
             self._stack.append(block)
         elif name == 'item':
@@ -65,8 +63,7 @@ class BlocksHandler(ContentHandler):
 
     def characters(self, contents):
         if self.in_item:
-            contents = contents.strip()
-            if contents:
+            if contents := contents.strip():
                 data = float(contents.strip())
                 logging.info("found '{0}'".format(data))
                 self._stack[-1].add_data(data)

@@ -4,19 +4,16 @@ import sys
 
 
 def read_lattice():
-    lattice = []
-    for line in sys.stdin:
-        lattice.append(line.strip())
-    return lattice
+    return [line.strip() for line in sys.stdin]
 
 
 def compute_neighbouts(coord, size):
     neighbours = []
-    if coord[0] - 1 >= 0:
+    if coord[0] >= 1:
         neighbours.append((coord[0] - 1, coord[1]))
     if coord[0] + 1 < size:
         neighbours.append((coord[0] + 1, coord[1]))
-    if coord[1] - 1 >= 0:
+    if coord[1] >= 1:
         neighbours.append((coord[0], coord[1] - 1))
     if coord[1] + 1 < size:
         neighbours.append((coord[0], coord[1] + 1))
@@ -26,7 +23,7 @@ def compute_neighbouts(coord, size):
 def find_domain(lattice, domains, cd, domain_nr):
     queue = [cd]
     domains[cd[0]][cd[1]] = domain_nr
-    while len(queue) > 0:
+    while queue:
         cd = queue.pop()
         for nb in compute_neighbouts(cd, len(lattice)):
             if (domains[nb[0]][nb[1]] == -1 and
@@ -36,9 +33,7 @@ def find_domain(lattice, domains, cd, domain_nr):
 
 
 def identify_domains(lattice):
-    domains = []
-    for _ in range(len(lattice)):
-        domains.append([-1] * len(lattice))
+    domains = [[-1] * len(lattice) for _ in range(len(lattice))]
     domain_nr = 0
     for i in range(len(lattice)):
         for j in range(len(lattice)):
