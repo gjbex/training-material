@@ -46,10 +46,13 @@ call MPI_Win_create(nr_recvs, recv_buff_size, disp_unit, MPI_INFO_NULL, &
                     MPI_COMM_WORLD, window)
 call MPI_Win_get_group(window, win_group)
 
+print '(A, I0)', 'group created by ', rank
+
 do iter = 1, nr_iters
     if (rank == target_rank) then
         nr_recvs = 0
         call MPI_Win_post(win_group, 0, window)
+        print "(A)", "Win post done"
     end if
 
 
@@ -58,6 +61,7 @@ do iter = 1, nr_iters
         call MPI_F_SYNC_REG(nr_recvs)
     if (rank /= target_rank) then
         call MPI_Win_start(win_group, 0, window)
+        print "(A, I0)", "Win start done by ", rank
         call random_number(r)
         will_send = r < prob 
         if (will_send) then
@@ -97,6 +101,9 @@ do iter = 1, nr_iters
         end if
     end if
 end do
+
+! free the window
+call MPI_Win_free(window)
 
 ! finalize MPI
 call MPI_Finalize()
