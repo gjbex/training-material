@@ -1,3 +1,11 @@
+# Deprecation note
+
+This material has been moved to other repositories:
+
+1. [Scientific C++](https://github.com/gjbex/Scientific-C-plus-plus)
+1. [C++ software engineering](https://github.com/gjbex/C-plus-plus-software-engineering)
+
+
 # CPlusPlus
 This is some sample code written in C++, with no or little bearing on
 non-standard libraries.  It is mainly intended to illustrate some
@@ -51,3 +59,5 @@ scientific programming training.  See
    line argument handling library.
 1. `DesignPatterns`: illustration of design patterns implemented in C++.
 1. `Assembler`: illustrations of how to use assembly functions from C++.
+
+
