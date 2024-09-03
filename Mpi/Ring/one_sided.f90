@@ -51,6 +51,8 @@ print '(A, F5.1, A, I0, A, I0)', 'got ', val, ' into ', rank, &
 print '(F5.1, A, I0, A, I0)', buffer(1), ' was put by ', left, &
     ' into ', rank
 
+call MPI_Win_free(window)
+
 call MPI_Finalize()
 
 end program one_sided

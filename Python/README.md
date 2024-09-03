@@ -1,10 +1,4 @@
-# Python
-Python is an excellent programming language for data processing,
-prototyping and writing glue code for C/C++/Fortran libraries.
-
-This directory contains code samples that illustrate particular features
-and programming techniques, or how to use Python iibraries.  Many of
-these samples have been used for Python tutorials.
+# Deprecation notice
 
 This part of
 the repository has in large part been superceeded by various training 
@@ -29,6 +23,15 @@ repositories dedicated to specific Python-related topics.
 * Python software engineering
   * [website](https://gjbex.github.io/Python-software-engineering/)
   * [repository](https://github.com/gjbex/Python-software-engineering)
+
+
+# Python
+Python is an excellent programming language for data processing,
+prototyping and writing glue code for C/C++/Fortran libraries.
+
+This directory contains code samples that illustrate particular features
+and programming techniques, or how to use Python iibraries.  Many of
+these samples have been used for Python tutorials.
 
 
 # What is it?

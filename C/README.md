@@ -1,3 +1,9 @@
+# Deprecation note
+
+The material in this section has moved to a separate repository:
+[Scientific-C](https://github.com/gjbex/Scientific-C)
+
+
 # C
 This is some sample code written in C, with no or little bearing on
 libraries.  It is mainly intended to illustrate some programming concepts
@@ -13,3 +19,5 @@ and idiosyncracies particular to C.
 1. `c_intro.pptx`: Powerpoint presentation based on Kernighan and
     Ritchie's "The C programming language".
 1. `Stdarg`: example of functions with variadic arguments using `stdarg.h`.
+
+
