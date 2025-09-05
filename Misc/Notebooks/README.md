@@ -1,5 +1,9 @@
 # Notebooks
 
+**Please note**: This section of the repository is no longer actively
+maintained. For up-to-date training materials on Jupyter notebooks, please
+refer to the [dedicated repository](https://github.com/gjbex/Jupyter-notebooks).
+
 Jupyter notebooks provide a nice user interface for interactive work,
 data exploration, explorative programming and teaching.
 
