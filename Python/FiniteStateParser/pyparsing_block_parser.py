@@ -55,7 +55,7 @@ class BlockPyParser:
         data_value = Combine(OneOrMore(CharsNotIn('#\n\r')))
         data_line = (LineStart() + white + Optional(data_value) +
                      Optional(comment) + eol)
-        block_name = Word(alphas, alphanums + '_')
+        block_name = Word(alphas, f'{alphanums}_')
         begin_block = (LineStart() + begin + block_name +
                        Optional(comment) + eol)
         end_block = LineStart() + end + block_name + Optional(comment) + eol

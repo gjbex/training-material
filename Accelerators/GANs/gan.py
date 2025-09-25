@@ -122,7 +122,7 @@ def train(output_path, max_epoch, to_restore):
 
         for i in range(sess.run(global_step), max_epoch):
             for j in range(int(60000 // batch_size)):
-                print("epoch:%s, iter:%s" % (i, j))
+                print(f"epoch:{i}, iter:{j}")
                 x_value, _ = mnist.train.next_batch(batch_size)
                 x_value = 2 * x_value.astype(np.float32) - 1
                 z_value = generate_prior(batch_size, z_size)

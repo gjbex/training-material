@@ -5,7 +5,7 @@ from Bio import SeqIO
 import textwrap
 
 def print_seq_record(seq_record, indent_with='  ', indent=''):
-    print('Sequence ID: {}'.format(seq_record.id))
+    print(f'Sequence ID: {seq_record.id}')
     indent += indent_with
     print('{0}Name: {1}'.format(indent, seq_record.name))
     print('{0}Description: {1}'.format(indent, seq_record.description))

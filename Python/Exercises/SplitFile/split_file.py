@@ -15,8 +15,7 @@ def main():
             continue
         match = re.match(r'\s*size\s*=\s*(\d+)', line)
         if match is not None:
-            out_file = open('{0}_{1}.txt'.format(out_file_name_prefix,
-                                                 match.group(1)), 'w')
+            out_file = open('{0}_{1}.txt'.format(out_file_name_prefix, match[1]), 'w')
             continue
         if out_file is None:
             sys.stderr.write('### error: no size in file before first data\n')

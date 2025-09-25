@@ -13,7 +13,7 @@ def compute_segments(line):
     if len(data) != 4:
         print("### error: can only plot 2D data", file=sys.stderr)
         sys.exit(1)
-    center = data[0:2]
+    center = data[:2]
     extent = data[2:4]
     ur = (center[0] + extent[0], center[1] + extent[1])
     ul = (center[0] - extent[0], center[1] + extent[1])

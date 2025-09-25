@@ -27,9 +27,7 @@ def average_age(people: List[Person]) -> float:
 
 
 if __name__ == '__main__':
-    people: List[Person] = list()
-    people.append(Person('alice', 43))
-    people.append('bob')
+    people: List[Person] = [Person('alice', 43), 'bob']
     people.append(Person('carol', '17'))
     for person in people:
         print(person)

@@ -6,13 +6,11 @@ import sys
 
 def main():
     names_str = sys.stdin.readline().rstrip()
-    names = []
-    for name in names_str.split(','):
-        names.append(name.strip())
+    names = [name.strip() for name in names_str.split(',')]
     nr_cols = len(names)
     sums = []
     sums2 = []
-    for i in range(nr_cols):
+    for _ in range(nr_cols):
         sums.append(0.0)
         sums2.append(0.0)
     nr_rows = 0

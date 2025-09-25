@@ -75,10 +75,7 @@ class Dataset(object):
     @property
     def column_defs(self):
         '''retrieve the column definitions of the dataset'''
-        col_defs = []
-        for header in self._headers:
-            col_defs.append(ColumnDef(header, self._type_map[header]))
-        return col_defs
+        return [ColumnDef(header, self._type_map[header]) for header in self._headers]
 
     def __len__(self):
         '''retrieve the length of the data set'''

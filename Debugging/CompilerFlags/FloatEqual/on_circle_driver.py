@@ -13,8 +13,8 @@ cases = [
     [0.0, 0.0,  2.0,  1.0,       compute_y(1.0, 2.0)],
 ]
 
+cmd = './on_circle_c.exe'
 for case in cases:
-    cmd = './on_circle_c.exe'
     args = ['{0:.15f}'.format(x) for x in case]
     print(cmd, ' '.join(args))
     output = check_output([cmd, *args])

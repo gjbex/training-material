@@ -66,11 +66,11 @@ if __name__ == '__main__':
     x_data = np.empty((options.n, options.width, options.height),
                       dtype=np.uint8)
     y_data = np.zeros((options.n, len(generators)), dtype=np.uint8)
-    labels = list()
+    labels = []
     for i in range(options.n):
         data = np.zeros((options.width, options.height))
         nr_objects = np.random.randint(1, options.max_objects + 1)
-        for j in range(nr_objects):
+        for _ in range(nr_objects):
             object_id = np.random.randint(0, len(generators))
             fig = generators[object_id].create()
             transformer.transform(fig)

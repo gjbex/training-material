@@ -10,10 +10,7 @@ if __name__ == '__main__':
     str_io = StringIO()
     for line in ['abc', 'def', 'ghi']:
         str_io.write(line + '\n')
-    if options.output:
-        output = open(options.output, 'w')
-    else:
-        output = sys.stdout
+    output = open(options.output, 'w') if options.output else sys.stdout
     output.write(str_io.getvalue())
     if options.output:
         output.close()

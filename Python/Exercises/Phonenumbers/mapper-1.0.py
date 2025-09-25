@@ -31,23 +31,17 @@ class Mapper(object):
         words = ['']
         for digit in phone_number:
             words = self.extend(words, digit)
-        real_words = []
-        for word_candidate in words:
-            if self.is_word(word_candidate):
-                real_words.append(word_candidate)
-        return real_words
+        return [
+            word_candidate
+            for word_candidate in words
+            if self.is_word(word_candidate)
+        ]
 
     def is_prefix(self, word_prefix):
-        for word in self._dictionary:
-            if word.startswith(word_prefix):
-                return True
-        return False
+        return any(word.startswith(word_prefix) for word in self._dictionary)
 
     def is_word(self, word_candidate):
-        for word in self._dictionary:
-            if word == word_candidate:
-                return True
-        return False
+        return any(word == word_candidate for word in self._dictionary)
 
     def extend(self, words, digit):
         new_words = []

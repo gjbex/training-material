@@ -19,5 +19,5 @@ if __name__ == '__main__':
                                         options.resoure_specs))
         print('resources: ' + ', '.join(specs))
     if options.account:
-        print('account: ' + options.account)
+        print(f'account: {options.account}')
     print('unparsed: ' + ', '.join(unparsed))

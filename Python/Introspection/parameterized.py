@@ -22,10 +22,10 @@ class Parameter:
         not of the specified type.
         '''
         if type(name) is not str:
-            raise TypeError(f'name should be a str')
+            raise TypeError('name should be a str')
         self._name = name
         if type(ptype) is not type:
-            raise TypeError(f'type should be a Python type')
+            raise TypeError('type should be a Python type')
         self._type = ptype
         self._value = self._type(value)
 
@@ -148,7 +148,7 @@ class Parameterized:
             parameter: Parameter object
         '''
         if '__parameters' not in self.__dict__:
-            self.__dict__['__parameters'] = dict()
+            self.__dict__['__parameters'] = {}
         self.__dict__['__parameters'][parameter.name] = parameter
 
     def __getattr__(self, name):
@@ -198,4 +198,4 @@ class Parameterized:
         if hasattr(self, '__parameters'):
             return list(self.__dict__['__parameters'].keys())
         else:
-            return list()
+            return []

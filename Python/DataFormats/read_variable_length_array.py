@@ -13,10 +13,8 @@ if __name__ == '__main__':
     arg_parser.add_argument('file', help='binary file to read')
     options = arg_parser.parse_args()
     with open(options.file, 'rb') as data_file:
-        buffer = data_file.read(4);
-        while buffer:
+        while buffer := data_file.read(4):
             length = unpack('I', buffer)[0]
             values = read_array(data_file, length)
             value_str = ' '.join(f'{x:.2f}' for x in values)
             print(f'{length:d}: {value_str:s}')
-            buffer = data_file.read(4)

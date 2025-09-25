@@ -7,10 +7,7 @@ import random
 
 def create_jobs():
     names = ['beast', 'fluent', 'beast', 'gromacs', 'amrvac']
-    jobs = []
-    for name in names:
-        jobs.append((random.random(), name))
-    return jobs
+    return [(random.random(), name) for name in names]
 
 if __name__ == '__main__':
     random.seed(143545)

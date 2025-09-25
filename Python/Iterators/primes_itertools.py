@@ -11,10 +11,7 @@ def is_prime(n):
         return False
     elif n == 2:
         return True
-    for i in range(2, 1 + int(math.sqrt(n))):
-        if n % i == 0:
-            return False
-    return True
+    return all(n % i != 0 for i in range(2, 1 + int(math.sqrt(n))))
 
 
 def main():

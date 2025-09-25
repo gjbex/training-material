@@ -88,10 +88,7 @@ class TypedBlockGenerator(BlockGenerator):
         elif data_block.get_type() == 'int':
             return random.randint(-1000, 1000)
         else:
-            rand_str = ''
-            for char_nr in range(0, 5):
-                rand_str += chr(random.randint(ord('A'), ord('Z')))
-            return rand_str
+            return ''.join(chr(random.randint(ord('A'), ord('Z'))) for _ in range(0, 5))
 
     def _create_block(self):
         '''Create a new Block object'''

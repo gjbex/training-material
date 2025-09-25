@@ -42,7 +42,7 @@ def humanize(n, base=10, digits=1, unit=''):
     '12.3 m'
     '''
     import math
-    if base != 2 and base != 10:
+    if base not in [2, 10]:
         raise ValueError('base should be 2 or 10, not {:d}'.format(base))
     thousands = 3 if base == 10 else 10
     orders = {

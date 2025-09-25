@@ -16,18 +16,15 @@ def is_tree_ok(tree):
             break
     if nr_open_brackets == 0 and nr_characters < len(tree):
         return False
-    if nr_open_brackets != 0:
-        return False
-    return True
+    return nr_open_brackets == 0
 
 
 def main():
     tree = ''.join([line.strip() for line in sys.stdin.readlines()])
-    if not is_tree_ok(tree):
-        print('### error in tree')
-        return 1
-    else:
+    if is_tree_ok(tree):
         return 0
+    print('### error in tree')
+    return 1
 
 if __name__ == '__main__':
     status = main()

@@ -5,11 +5,12 @@ of natural language features, so it should be considered an example only
 in a tehcnical sense.
 """
 
+
 from argparse import ArgumentParser
 import os.path
 import sys
 
-terminators = set(['.', '?', '!'])
+terminators = {'.', '?', '!'}
 
 
 def extract_prefix(file_name, start_pos, end_pos):
@@ -44,11 +45,10 @@ def extract_suffix(file_name, start_pos, end_pos):
                     c = file.read(1)
                     if c in terminators:
                         break
-                    else:
-                        suffix_str = c + suffix_str
-                        current_pos = file.tell()
-                        file.seek(current_pos - 2)
-                        end_pos -= 1
+                    suffix_str = c + suffix_str
+                    current_pos = file.tell()
+                    file.seek(current_pos - 2)
+                    end_pos -= 1
         return (suffix_str, end_pos)
 
 

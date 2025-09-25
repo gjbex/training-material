@@ -154,11 +154,10 @@ class BlockParser:
                     raise err.DanglingEndBlockError(self)
             elif self._is_in_state('in_block'):
                 if self._is_end_block(line):
-                    if self._end_matches_begin():
-                        yield self._finish_block()
-                        self._set_state('not_in_block')
-                    else:
+                    if not self._end_matches_begin():
                         raise err.NonMatchingBlockDelimitersError(self)
+                    yield self._finish_block()
+                    self._set_state('not_in_block')
                 elif self._is_begin_block(line):
                     raise err.NestedBlocksError(self)
                 elif self._is_data(line):
@@ -403,11 +402,9 @@ class TypedParserTest(unittest.TestCase):
         parser = TypedBlockParser()
         blocks = parser.parse(block_file)
         block_file.seek(0)
-        block_nr = 0
-        for parsed_block in parser.parse_iter(block_file):
+        for block_nr, parsed_block in enumerate(parser.parse_iter(block_file)):
             self.assertEqual(str(blocks[block_nr]),
                              str(parsed_block))
-            block_nr += 1
 
 
 if __name__ == '__main__':

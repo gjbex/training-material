@@ -27,8 +27,9 @@ if __name__ == '__main__':
     arg_parser.add_argument('-p', dest='nr_packets', type=int, default=5,
                             help='number of work packets')
     options = arg_parser.parse_args()
-    Parallel(n_jobs=-1)(delayed(try_hits)(options.nr_trials)
-                        for i in range(options.nr_packets))
+    Parallel(n_jobs=-1)(
+        delayed(try_hits)(options.nr_trials) for _ in range(options.nr_packets)
+    )
     pi = 4.0*float(nr_hits)/(options.nr_trials*options.nr_packets)
     print('{0:.10f}'.format(pi))
     sys.exit(0)

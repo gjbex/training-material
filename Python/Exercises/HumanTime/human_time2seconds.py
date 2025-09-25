@@ -12,12 +12,12 @@ def convert2seconds(time_str):
     match = re.match(h_expr + r'\s*' + m_expr + r'\s*' + s_expr + r'\s*$',
                      time_str, re.I)
     if match is not None:
-        if match.group(1) is not None:
-            hours = int(match.group(1))
-        if match.group(2) is not None:
-            minutes = int(match.group(2))
-        if match.group(3) is not None:
-            seconds = int(match.group(3))
+        if match[1] is not None:
+            hours = int(match[1])
+        if match[2] is not None:
+            minutes = int(match[2])
+        if match[3] is not None:
+            seconds = int(match[3])
     else:
         sys.stderr.write('### error: invalid time string\n')
         sys.exit(2)

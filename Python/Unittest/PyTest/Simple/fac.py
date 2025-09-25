@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 
 def bad_fac(n):
-    if n < 2:
-        return 1
-    else:
-        return n*fac(n - 1)
+    return 1 if n < 2 else n*fac(n - 1)
 
 
 def fac(n):
-    if n == 0 or n == 1:
+    if n in [0, 1]:
         return 1;
     elif n >= 2:
         result = 1

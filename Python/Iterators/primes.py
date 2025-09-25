@@ -5,10 +5,7 @@ import sys
 
 
 def is_prime(n):
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
-            return False
-    return True
+    return all(n % i != 0 for i in range(2, int(math.sqrt(n)) + 1))
 
 
 def next_prime():
@@ -21,10 +18,7 @@ def next_prime():
 
 
 def main():
-    if len(sys.argv) > 1:
-        max_nr = int(sys.argv[1])
-    else:
-        max_nr = None
+    max_nr = int(sys.argv[1]) if len(sys.argv) > 1 else None
     for n in next_prime():
         if max_nr and n > max_nr:
             break

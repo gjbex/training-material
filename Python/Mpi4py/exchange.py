@@ -37,23 +37,17 @@ def send_right(comm, msg, is_verbose=False):
 def isend_right(comm, msg, is_verbose=False):
     rank = comm.rank
     size = comm.size
-    left_msg = None
     if rank < size - 1:
         comm.isend(msg, dest=rank + 1)
-    if rank > 0:
-        left_msg = comm.recv(source=rank - 1)
-    return left_msg
+    return comm.recv(source=rank - 1) if rank > 0 else None
 
 
 def isend_left(comm, msg, is_verbose=False):
     rank = comm.rank
     size = comm.size
-    right_msg = None
     if rank > 0:
         comm.isend(msg, dest=rank - 1)
-    if rank < size - 1:
-        right_msg = comm.recv(source=rank + 1)
-    return right_msg
+    return comm.recv(source=rank + 1) if rank < size - 1 else None
 
 
 def main():
@@ -81,12 +75,10 @@ def main():
     comm.barrier()
     msg_in = None
     if rank == 0:
-        msg_out = 'hello from 0'
-        msg_in = comm.sendrecv(sendobj=msg_out, dest=1, source=1)
+        msg_in = comm.sendrecv(sendobj='hello from 0', dest=1, source=1)
         print('rank {0}: {1}'.format(rank, msg_in))
-    if rank == 1:
-        msg_out = 'hello from 1'
-        msg_in = comm.sendrecv(sendobj=msg_out, dest=0, source=0)
+    elif rank == 1:
+        msg_in = comm.sendrecv(sendobj='hello from 1', dest=0, source=0)
         print('rank {0}: {1}'.format(rank, msg_in))
     return 0
 

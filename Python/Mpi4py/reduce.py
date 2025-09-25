@@ -12,10 +12,7 @@ if __name__ == '__main__':
     root = 0
 
     send_buffer = (rank + 1)*np.linspace(0.0, 1.0, nr_points)
-    if rank == root:
-        recv_buffer = np.zeros(nr_points)
-    else:
-        recv_buffer = None
+    recv_buffer = np.zeros(nr_points) if rank == root else None
     comm.Reduce(send_buffer, recv_buffer,
                 op=MPI.SUM, root=root)
     if rank == root:

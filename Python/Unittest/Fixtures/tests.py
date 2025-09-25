@@ -110,9 +110,7 @@ class ContentsTest(unittest.TestCase):
                   ORDER BY project_name ASC;''',
             ('2014-11-01', )
         )
-        projects = []
-        for row in self._cursor:
-            projects.append(row['project_name'])
+        projects = [row['project_name'] for row in self._cursor]
         self.assertListEqual(expected_projects, projects)
 
     def test_unassigned_researchers(self):
@@ -127,9 +125,7 @@ class ContentsTest(unittest.TestCase):
                        EXCEPT SELECT researcher_id
                                FROM staff_assignments);'''
         )
-        researchers = []
-        for row in self._cursor:
-            researchers.append(row['first_name'])
+        researchers = [row['first_name'] for row in self._cursor]
         self.assertListEqual(expected_researchers, researchers)
 
     def test_assigned_projects(self):
@@ -160,7 +156,7 @@ class ContentsTest(unittest.TestCase):
         for row in self._cursor:
             self.assertEqual(len(expected_samples[row['project_name']]),
                              row['nr_samples'])
-        for project_name in expected_samples:
+        for project_name, value in expected_samples.items():
             self._cursor.execute(
                 '''SELECT s.organism AS organism
                        FROM projects AS p, samples AS s
@@ -168,10 +164,8 @@ class ContentsTest(unittest.TestCase):
                              p.project_id = s.project_id;''',
                 (project_name, )
             )
-            samples = set()
-            for row in self._cursor:
-                samples.add(row['organism'])
-            self.assertSetEqual(expected_samples[project_name], samples)
+            samples = {row['organism'] for row in self._cursor}
+            self.assertSetEqual(value, samples)
 
 
 class ConstraintsTest(unittest.TestCase):
@@ -256,16 +250,12 @@ class ConstraintsTest(unittest.TestCase):
         self._cursor.execute(
             '''SELECT COUNT(*) FROM staff_assignments;'''
         )
-        nr_rows = 0
-        for row in self._cursor:
-            nr_rows += 1
+        nr_rows = sum(1 for _ in self._cursor)
         self.assertEqual(expected_nr_rows, nr_rows)
         self._cursor.execute(
             '''SELECT COUNT(*) FROM project_staffing;'''
         )
-        nr_rows = 0
-        for row in self._cursor:
-            nr_rows += 1
+        nr_rows = sum(1 for _ in self._cursor)
         self.assertEqual(expected_nr_rows, nr_rows)
 
     def test_project_delete_trigger(self):
@@ -283,9 +273,7 @@ class ConstraintsTest(unittest.TestCase):
                    FROM projects AS p, staff_assignments AS s
                    WHERE p.project_id = s.project_id;'''
         )
-        staffed_projects = set()
-        for row in self._cursor:
-            staffed_projects.add(row['project_name'])
+        staffed_projects = {row['project_name'] for row in self._cursor}
         self.assertSetEqual(expected_staffed_projects, staffed_projects)
 
     def test_sample_update_trigger(self):

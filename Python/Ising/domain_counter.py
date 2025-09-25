@@ -5,11 +5,11 @@ import numpy as np
 
 def compute_neighbouts(coord, size):
     neighbours = []
-    if coord[0] - 1 >= 0:
+    if coord[0] >= 1:
         neighbours.append((coord[0] - 1, coord[1]))
     if coord[0] + 1 < size:
         neighbours.append((coord[0] + 1, coord[1]))
-    if coord[1] - 1 >= 0:
+    if coord[1] >= 1:
         neighbours.append((coord[0], coord[1] - 1))
     if coord[1] + 1 < size:
         neighbours.append((coord[0], coord[1] + 1))
@@ -19,7 +19,7 @@ def compute_neighbouts(coord, size):
 def find_domain(ising, domains, cd, domain_nr):
     queue = [cd]
     domains[cd] = domain_nr
-    while len(queue) > 0:
+    while queue:
         cd = queue.pop()
         for nb in compute_neighbouts(cd, ising.N()):
             if domains[nb] == -1 and ising.s(*cd) == ising.s(*nb):

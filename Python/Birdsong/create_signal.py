@@ -42,9 +42,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--out', action='store_true',
                             help='print signal to standard output')
     options = arg_parser.parse_args()
-    if options.specs_file:
-        pass
-    else:
+    if not options.specs_file:
         if len(options.freqs) != len(options.ampls):
             msg = '# error: {0:d} frequencies for {1:d} amplitudes\n'
             sys.stderr.write(msg.format(len(options.freqs),

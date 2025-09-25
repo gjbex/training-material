@@ -35,7 +35,7 @@ class ExperimentShell(cmd.Cmd):
             'samples': Sample
         }
         args = shlex.split(arg_str)
-        if len(args) != 1 and len(args) != 3:
+        if len(args) not in [1, 3]:
             msg = 'Expecting show <table> [ for <id> ]'
             raise SyntaxException(msg)
         cls_str = args[0]
@@ -68,19 +68,18 @@ class ExperimentShell(cmd.Cmd):
             return
         if not item_id:
             items = self._db_session.query(cls).all()
-        else:
-            if cls == Experiment:
-                items = self._db_session.\
+        elif cls == Experiment:
+            items = self._db_session.\
                              query(Experiment).\
                              join(staff_assignments).\
                              filter_by(researcher_id=item_id).all()
-            elif cls == Researcher:
-                items = self._db_session.\
+        elif cls == Researcher:
+            items = self._db_session.\
                              query(Researcher).\
                              join(staff_assignments).\
                              filter_by(experiment_id=item_id).all()
-            elif cls == Sample:
-                items = self._db_session.\
+        elif cls == Sample:
+            items = self._db_session.\
                              query(Sample).\
                              filter_by(experiment_id=item_id).all()
         for item in items:

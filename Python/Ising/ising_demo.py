@@ -38,10 +38,7 @@ if __name__ == '__main__':
                             help='show progress information')
     options = arg_parser.parse_args()
     ising = IsingSystem(options.N, options.J, options.H, options.T)
-    if options.seed:
-        seed = options.seed
-    else:
-        seed = random.randint(0, 1000000000)
+    seed = options.seed if options.seed else random.randint(0, 1000000000)
     ising.init_random(seed)
     if options.mode == 'single_run':
         runner = SingleRunner(ising, is_verbose=options.verbose)

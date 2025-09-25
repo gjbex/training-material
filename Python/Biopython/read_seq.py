@@ -23,9 +23,10 @@ if __name__ == '__main__':
     arg_parser.add_argument('file', help='sequence file to parse')
     arg_parser.add_argument('--format', default='fasta', help='file format')
     options = arg_parser.parse_args()
-    seqs = {}
-    for seq_record in SeqIO.parse(options.file, options.format):
-        seqs[seq_record.id] = seq_record.seq
+    seqs = {
+        seq_record.id: seq_record.seq
+        for seq_record in SeqIO.parse(options.file, options.format)
+    }
     fmt_str = ('id: {id}\n\t'
                'length: {stats.length}\n\t'
                'gc: {stats.gc}\n\t'

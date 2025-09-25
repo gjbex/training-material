@@ -11,10 +11,7 @@ def is_leaf(tree, node):
 
 def leaf_path_lengths(tree):
     path_lengths = nx.shortest_path_length(tree, '1', weight='weight')
-    remove = []
-    for node in path_lengths:
-        if not is_leaf(tree, node):
-            remove.append(node)
+    remove = [node for node in path_lengths if not is_leaf(tree, node)]
     for node in remove:
         del path_lengths[node]
     return path_lengths

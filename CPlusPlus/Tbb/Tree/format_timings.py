@@ -17,10 +17,10 @@ if __name__ == '__main__':
             for line in file:
                 match = re.match(r'^time: ([^s]+)\s+s$', line)
                 if match is not None:
-                    time_avg = float(match.group(1))
+                    time_avg = float(match[1])
                     nr_timings += 1
                     continue
                 match = re.match('^procs: (\d+)$', line)
                 if match is not None:
-                    nr_procs = int(match.group(1))
+                    nr_procs = int(match[1])
             print('{0:d} {1:.6f}'.format(nr_procs, time_avg/nr_timings))

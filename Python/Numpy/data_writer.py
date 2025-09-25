@@ -28,10 +28,7 @@ x = np.linspace(options.x_min, options.x_max, options.n)
 f = np.vectorize(linear)
 y = f(x, options.a, options.b) + options.sigma*np.random.randn(len(x))
 
-if options.out:
-    out = open(options.out, 'w')
-else:
-    out = sys.stdout
+out = open(options.out, 'w') if options.out else sys.stdout
 out.write(names + '\n')
 for i in range(len(x)):
     out.write('{x:.7e},{y:.7e}\n'.format(x=x[i], y=y[i]))

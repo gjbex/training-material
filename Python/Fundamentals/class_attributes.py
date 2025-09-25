@@ -21,12 +21,11 @@ class Point(object):
         return math.sqrt((self.x - p.x)**2 + (self.y - p.y)**2)
 
     def on_line(self, p, q, tol=1.0e-6):
-        if math.fabs(p.x - q.x) > tol:
-            a = (q.x - p.x)/(q.y - p.y)
-            b = p.y - a*p.x
-            return math.fabs(self.y - a*self.x - b) < tol
-        else:
+        if math.fabs(p.x - q.x) <= tol:
             return math.fabs(self.x - p.x) < tol
+        a = (q.x - p.x)/(q.y - p.y)
+        b = p.y - a*p.x
+        return math.fabs(self.y - a*self.x - b) < tol
 
     def __str__(self):
         return '({x}, {y})'.format(x=self.x, y=self.y)

@@ -15,18 +15,18 @@ def _leaf_path_lengths(tree, node):
     global pool
     if _is_leaf(tree, node):
         return {node: 0.0}
-    else:
-        path_lengths = {}
-        results = {}
-        for child in tree.neighbors_iter(node):
-            results[child] = _leaf_path_lengths(tree, child)
-        for child in tree.neighbors_iter(node):
-            weight = tree[node][child]['weight']
+    path_lengths = {}
+    results = {
+        child: _leaf_path_lengths(tree, child)
+        for child in tree.neighbors_iter(node)
+    }
+    for child in tree.neighbors_iter(node):
+        weight = tree[node][child]['weight']
 #            lengths = results[child].get()
-            lengths = results[child]
-            for leaf in lengths:
-                path_lengths[leaf] = lengths[leaf] + weight
-        return path_lengths
+        lengths = results[child]
+        for leaf in lengths:
+            path_lengths[leaf] = lengths[leaf] + weight
+    return path_lengths
 
 
 def leaf_path_lengths(tree):

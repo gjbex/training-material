@@ -5,12 +5,13 @@ of natural language features, so it should be considered an example only
 in a technical sense.
 """
 
+
 from argparse import ArgumentParser
 import os.path
 import sys
 from mpi4py import MPI
 
-terminators = set(['.', '?', '!'])
+terminators = {'.', '?', '!'}
 
 
 def extract_prefix(file_name, start_pos, end_pos):
@@ -45,11 +46,10 @@ def extract_suffix(file_name, start_pos, end_pos):
                     c = file.read(1)
                     if c in terminators:
                         break
-                    else:
-                        suffix_str = c + suffix_str
-                        current_pos = file.tell()
-                        file.seek(current_pos - 2)
-                        end_pos -= 1
+                    suffix_str = c + suffix_str
+                    current_pos = file.tell()
+                    file.seek(current_pos - 2)
+                    end_pos -= 1
         return (suffix_str, end_pos)
 
 
@@ -82,10 +82,7 @@ def main():
     file_size = os.path.getsize(options.file)
     chunck_size = file_size//size
     start_pos = chunck_size*rank
-    if rank + 1 < size:
-        end_pos = start_pos + chunck_size - 1
-    else:
-        end_pos = file_size - 1
+    end_pos = start_pos + chunck_size - 1 if rank + 1 < size else file_size - 1
     if options.is_verbose:
         msg = "rank {0} reading '{1}' from {2} to {3}\n"
         sys.stderr.write(msg.format(rank, options.file, start_pos, end_pos))

@@ -1,8 +1,5 @@
 def fac_r(n):
-    if n < 2:
-        return 1
-    else:
-        return n*fac_r(n - 1)
+    return 1 if n < 2 else n*fac_r(n - 1)
 
 def fac_i(n):
     result = 1

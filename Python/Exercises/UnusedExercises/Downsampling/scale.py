@@ -14,17 +14,14 @@ def read_info(img_file):
 
 
 def get_properties(img_file):
-    prop = {}
-    prop['type'] = read_info(img_file)
+    prop = {'type': read_info(img_file)}
     prop['width'] = int(read_info(img_file))
     prop['height'] = int(read_info(img_file))
     return prop
 
 
 def get_image(img_file, width, height):
-    img = []
-    for _ in range(height):
-        img.append([0] * width)
+    img = [[0] * width for _ in range(height)]
     bytes = width//8
     if width % 8 != 0:
         bytes += 1
@@ -43,9 +40,7 @@ def get_image(img_file, width, height):
 
 
 def compute_black_fraction(img):
-    nr_blacks = 0
-    for row in img:
-        nr_blacks += sum(row)
+    nr_blacks = sum(sum(row) for row in img)
     return nr_blacks/(len(img)*len(img[0]))
 
 
@@ -78,9 +73,7 @@ def scale_image(img, threshold=2):
     height = len(img)
     new_width = width//2
     new_height = height//2
-    new_img = []
-    for _ in range(new_height):
-        new_img.append([0] * new_width)
+    new_img = [[0] * new_width for _ in range(new_height)]
     for i in range(new_height):
         for j in range(new_width):
             avg = (img[2*i][2*j] + img[2*i][2*j + 1] +

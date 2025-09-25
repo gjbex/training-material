@@ -149,11 +149,10 @@ class BlockParser:
                 if self._is_begin_block(line):
                     raise err.NestedBlocksError(self)
                 elif self._is_end_block(line):
-                    if self._end_matches_begin():
-                        self._finish_block()
-                        self._set_state('not_in_block')
-                    else:
+                    if not self._end_matches_begin():
                         raise err.NonMatchingBlockDelimitersError(self)
+                    self._finish_block()
+                    self._set_state('not_in_block')
                 elif self._is_data(line):
                     self._add_data(line)
             elif self._is_in_state('not_in_block'):

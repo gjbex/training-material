@@ -16,8 +16,7 @@ if __name__ == '__main__':
     options = arg_parser.parse_args()
     for directory, _, files in os.walk(options.dir):
         if options.verbose:
-            print("### checking directory '{}'".format(directory),
-                  file=sys.stderr)
+            print(f"### checking directory '{directory}'", file=sys.stderr)
         for file_name in files:
             _, ext = os.path.splitext(file_name)
             if ext == options.ext:

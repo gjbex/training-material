@@ -51,10 +51,10 @@ def check_tree(tree):
                 bracket_positions.pop()
             else:
                 raise MissingLBError(position)
-        if len(bracket_positions) == 0:
+        if not bracket_positions:
             break
         position += 1
-    if len(bracket_positions) == 0 and position < len(tree) - 1:
+    if not bracket_positions and position < len(tree) - 1:
         raise TrailingCharsError(position + 1)
     elif len(bracket_positions) > 0:
         raise MissingRBError(bracket_positions.pop())

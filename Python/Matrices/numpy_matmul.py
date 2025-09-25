@@ -6,11 +6,11 @@ import time
 
 
 def init_matrix(n, value=None):
-    if value is None:
-        m = np.random.uniform(0.0, 1.0, (n, n))
-    else:
-        m = np.fromfunction(lambda i, j: value, (n, n))
-    return m
+    return (
+        np.random.uniform(0.0, 1.0, (n, n))
+        if value is None
+        else np.fromfunction(lambda i, j: value, (n, n))
+    )
 
 
 def main():

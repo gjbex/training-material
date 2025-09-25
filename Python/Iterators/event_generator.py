@@ -58,10 +58,7 @@ class EventIter(object):
 
 
 def event_key(event):
-    if event[2] == 'on':
-        return (event[0], event[1], 0)
-    else:
-        return (event[0], event[1], 1)
+    return (event[0], event[1], 0) if event[2] == 'on' else (event[0], event[1], 1)
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -81,12 +78,11 @@ if __name__ == '__main__':
         event_list = []
         for event_type in options.events:
             for event in EventIter(event_type, start):
-                if event.start < stop:
-                    event_list.append(event.begin())
-                    if event.stop < stop:
-                        event_list.append(event.end())
-                else:
+                if event.start >= stop:
                     break
+                event_list.append(event.begin())
+                if event.stop < stop:
+                    event_list.append(event.end())
         event_list.sort(key=event_key)
         for event in event_list:
             print('{0};{1} {2}'.format(str(event[0]), event[1], event[2]))

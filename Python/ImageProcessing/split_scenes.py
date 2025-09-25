@@ -49,27 +49,26 @@ if __name__ == '__main__':
             prev_rgb = avg_rgb(frame)
             scene_nr = 1
             saved_scenes = 0
-            while (True):
+            while True:
                 status, frame = capture.read()
-                if status:
-                    counter += 1
-                    cv2.imshow('frame', frame)
-                    rgb = avg_rgb(frame)
-                    if is_new_scene(prev_rgb, rgb, options.threshold):
-                        if len(frames) >= options.min_frames:
-                            saved_scenes += 1
-                            write_movie(base_name, extension, saved_scenes,
-                                        frames, options.fps)
-                        print(f'scene {scene_nr}: {len(frames)} frames')
-                        scene_nr += 1
-                        counter = 1
-                        frames = [frame]
-                    else:
-                        frames.append(frame)
-                    prev_rgb = rgb
-                    if cv2.waitKey(1) & 0xFF == ord('q'):
-                        break
+                if not status:
+                    break
+                counter += 1
+                cv2.imshow('frame', frame)
+                rgb = avg_rgb(frame)
+                if is_new_scene(prev_rgb, rgb, options.threshold):
+                    if len(frames) >= options.min_frames:
+                        saved_scenes += 1
+                        write_movie(base_name, extension, saved_scenes,
+                                    frames, options.fps)
+                    print(f'scene {scene_nr}: {len(frames)} frames')
+                    scene_nr += 1
+                    counter = 1
+                    frames = [frame]
                 else:
+                    frames.append(frame)
+                prev_rgb = rgb
+                if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             if frames:
                 if len(frames) >= options.min_frames:

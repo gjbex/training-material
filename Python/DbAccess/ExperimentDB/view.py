@@ -17,7 +17,7 @@ if __name__ == '__main__':
             print('\t{0}, {1}'.format(researcher.last_name,
                                       researcher.first_name))
         for sample in experiment.samples:
-            print('\t{}'.format(sample.description))
+            print(f'\t{sample.description}')
     samples = db_session.query(Sample).all()
     for sample in samples:
         print(sample.description)
@@ -26,4 +26,4 @@ if __name__ == '__main__':
     for researcher in researchers:
         print(researcher)
         for experiment in researcher.experiments:
-            print('\t{}'.format(experiment.description))
+            print(f'\t{experiment.description}')

@@ -9,13 +9,13 @@ def dump_options(settings):
         print(f'{key} = {value}')
 
 if __name__ == '__main__':
-    config_parser  = ConfigParser() 
+    config_parser  = ConfigParser()
     sys_conf_path = Path('system.conf')
     if sys_conf_path.exists():
         config_parser.read('system.conf')
         options = dict(config_parser.items('DEFAULT'))
     else:
-        options = dict()
+        options = {}
     arg_parser = ArgumentParser(description='experiment with '
                                             'configuration files and '
                                             'command line arguments')
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     if argv.conf:
         config_parser = ConfigParser()
         config_parser.read(argv.conf)
-        options.update(dict(config_parser.items('DEFAULT')))
+        options |= dict(config_parser.items('DEFAULT'))
     arg_parser.set_defaults(**options)
     arg_parser.add_argument('--action', help='action to do')
     arg_parser.add_argument('--name', help='name for action')

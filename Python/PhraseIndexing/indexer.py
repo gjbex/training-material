@@ -37,8 +37,7 @@ class Indexer(object):
         self._phrases = phrases
         with open(text_file_name, 'r', newline='') as text_file:
             word = ''
-            buffer = text_file.read(self._read_length)
-            while buffer:
+            while buffer := text_file.read(self._read_length):
                 for character in buffer:
                     if character.isalpha():
                         word += character
@@ -55,7 +54,6 @@ class Indexer(object):
                                 self._line_nr % self._progress_line_nr == 0):
                                 msg = 'parsing line {0:d}\n'
                                 sys.stderr.write(msg.format(self._line_nr))
-                buffer = text_file.read(self._read_length)
         return self._phrases
 
 if __name__ == '__main__':
@@ -79,8 +77,7 @@ if __name__ == '__main__':
     max_phrase_len = 0
     with open(options.phrases, 'r') as phrases_file:
         for line in phrases_file:
-            phrase = line.strip()
-            if phrase:
+            if phrase := line.strip():
                 phrases[line.strip()] = []
                 max_phrase_len = max(len(line.split(' ')), max_phrase_len)
     if options.verbose:

@@ -39,7 +39,7 @@ if __name__ == '__main__':
                                  (frame.shape[1], frame.shape[0]))
     else:
         output = None
-                                 
+
     track_window = (options.col, options.row, options.width, options.height)
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv_frame,
@@ -52,24 +52,23 @@ if __name__ == '__main__':
     nr_frames = 1
     while True:
         status, frame = capture.read()
-        if status == True:
-            nr_frames += 1
-            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            dst = cv2.calcBackProject([hsv], [0], roi_hist, [0, 50], 1)
-            status, track_window = cv2.meanShift(dst, track_window,
-                                                 termination_cond)
-            if not status:
-                continue
-            x, y, w, h = track_window
-            img = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
-            cv2.imshow('image', img)
-            if output:
-                output.write(img)
-            if cv2.waitKey(1) % 0xFF == ord('q'):
-                break
-        else:
+        if status != True:
             break
 
+        nr_frames += 1
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        dst = cv2.calcBackProject([hsv], [0], roi_hist, [0, 50], 1)
+        status, track_window = cv2.meanShift(dst, track_window,
+                                             termination_cond)
+        if not status:
+            continue
+        x, y, w, h = track_window
+        img = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
+        cv2.imshow('image', img)
+        if output:
+            output.write(img)
+        if cv2.waitKey(1) % 0xFF == ord('q'):
+            break
     print(f'{nr_frames} frames processed')
     cv2.destroyAllWindows()
     if output:

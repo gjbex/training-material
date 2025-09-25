@@ -126,10 +126,7 @@ class SingleRunner(BaseRunner):
                             self._is_verbose)
 
     def _prologue(self):
-        if self._file_name:
-            self._file = open(self._file_name, 'w')
-        else:
-            self._file = sys.stdout
+        self._file = open(self._file_name, 'w') if self._file_name else sys.stdout
         self._file.write('t M E\n')
         self._file.write('# T = {0:.3f}\n'.format(self._ising.T()))
         self._file.write('# N = {0:d}\n'.format(self._ising.N()))

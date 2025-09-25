@@ -70,8 +70,7 @@ def parse(file_name):
     def check_end_matches_begin():
         global current_block, last_match
         if last_match.group(1) != current_block:
-            msg = "block %s is closed with %s" % \
-               (last_match.group(1), current_block)
+            msg = f"block {last_match.group(1)} is closed with {current_block}"
             raise ParseError(msg)
 
     def store_data(line):
@@ -82,22 +81,20 @@ def parse(file_name):
         global block_content
         for key in list(block_content.keys()):
             block_content[key].sort()
-# open file, specified on command line
-    block_file = open(file_name, 'r')
+
+    with open(file_name, 'r') as block_file:
 # iterate over the lines in the file and process
-    for line in block_file:
-        line = filter_line(line)
-        if not is_blank(line):
-            if is_block_begin(line):
-                check_is_not_in_block()
-                set_current_block()
-            elif is_block_end(line):
-                check_end_matches_begin()
-                current_block = None
-            elif is_in_block():
-                store_data(line)
-# close the file
-    block_file.close()
+        for line in block_file:
+            line = filter_line(line)
+            if not is_blank(line):
+                if is_block_begin(line):
+                    check_is_not_in_block()
+                    set_current_block()
+                elif is_block_end(line):
+                    check_end_matches_begin()
+                    current_block = None
+                elif is_in_block():
+                    store_data(line)
     sort_block_data()
     return block_content
 
@@ -112,7 +109,7 @@ def main():
     content = parse(sys.argv[1])
     for block_name in list(content.keys()):
         for value in content[block_name]:
-            print("%s: '%s'" % (block_name, value))
+            print(f"{block_name}: '{value}'")
 
 if __name__ == "__main__":
     main()

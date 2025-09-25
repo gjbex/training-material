@@ -26,15 +26,12 @@ def process_line(line, mode=float):
     if not line:
         return None
     items = [item.strip() for item in line.split(',')]
-    if mode == float:
-        return [float(item) for item in items]
-    else:
-        return items
+    return [float(item) for item in items] if mode == float else items
 
 if __name__ == '__main__':
     line = sys.stdin.readline()
     names = process_line(line, mode='text')
-    averagers = [stats() for name in names]
+    averagers = [stats() for _ in names]
     for averager in averagers:
         next(averager)
     for line in sys.stdin:
